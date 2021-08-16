@@ -1,16 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axios } from "utils/axios";
+import { Roles } from "utils/constants/roles";
 
 interface loginCredentials {
   username: string;
   password: string;
 }
 
+type RoleTypes = Roles.ADMIN | Roles.DEALER;
 interface authState {
   loading: boolean;
   loginSuccess: boolean;
   error: string | null;
-  role: "admin" | "dealer" | null;
+  role: RoleTypes| null;
 }
 
 const initialState: authState = {

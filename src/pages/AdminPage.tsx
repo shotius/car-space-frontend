@@ -4,6 +4,6 @@ interface AdminProps {
 
 }
 
-export const Admin: React.FC<AdminProps> = () => {
+export const AdminPage: React.FC<AdminProps> = () => {
         return <div>Admin Page</div>;
 }
