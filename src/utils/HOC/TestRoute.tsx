@@ -11,13 +11,11 @@ export const TestRoute: React.FC<TestRouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  const loginSuccess = useAppSelector(
-    (state) => state.authReducer.loginSuccess
-  );
+  const { loginSuccess } = useAppSelector((state) => state.authReducer);
+
   return (
-    <Route
-      {...rest}
-      render={() => (loginSuccess ? <Component /> : <Redirect to="/login" />)}
-    />
+    <Route {...rest}>
+      {loginSuccess ? <Component /> : <Redirect to="/login" />}
+    </Route>
   );
 };

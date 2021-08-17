@@ -9,11 +9,11 @@ interface UnauthorizedRouteProps {
 
 export const UnauthorizedRoute: React.FC<UnauthorizedRouteProps> = (props) => {
   const { component: Component, ...rest } = props;
-  const { loginSuccess } = useAppSelector((state) => state.authReducer);
+  const { loginSuccess, role } = useAppSelector((state) => state.authReducer);
 
   return (
     <Route {...rest}>
-      {!loginSuccess ? <Component /> : <Redirect to="/home" />}
+      {loginSuccess ? <Redirect to={`/${role}/dashboard`} /> : <Component />}
     </Route>
   );
 };

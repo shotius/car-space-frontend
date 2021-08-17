@@ -12,7 +12,7 @@ interface authState {
   loading: boolean;
   loginSuccess: boolean;
   error: string | null;
-  role: RoleTypes| null;
+  role: RoleTypes | null;
 }
 
 const initialState: authState = {
@@ -42,6 +42,22 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const logoutUser = createAsyncThunk(
+  "auth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+       await axios.get("/api/logout");
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response);
+        return rejectWithValue(error.response);
+      } else {
+        return rejectWithValue(error.message)
+      }
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -56,6 +72,15 @@ const authSlice = createSlice({
     builder.addCase(loginUser.rejected, (state, action) => {
       state.error = String(action.payload);
     });
+    /** logout */
+    builder.addCase(logoutUser.fulfilled, (state, action) => {
+      localStorage.removeItem("USER_ROLE")
+      state.loginSuccess = false
+      state.role = null
+    })
+    builder.addCase(logoutUser.rejected, (state, action) => {
+      state.error = String(action.payload)
+    })
   },
 });
 

@@ -81,7 +81,8 @@ function App() {
           </Route> */}
           {/* {generateRoutes()} */}
           {/* <PrivateRoute path='/login' component={Component} exact={true} /> */}
-          <TestRoute component={Component} path='/login' exact={true} />
+          <PrivateRoute component={AdminPage} path='/admin/dashboard' exact={true} />
+          <UnauthorizedRoute component={Login} path='/login' exact={true} />
           <Route>
             error
           </Route>
