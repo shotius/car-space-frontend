@@ -8,8 +8,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
-import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "redux/app/hook";
 import { loginUser } from "redux/features/auth/authSlice";
 
@@ -28,18 +26,11 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const history = useHistory()
-
   const classes = useStyles();
 
   const dispatch = useAppDispatch();
-  const {error, role} = useAppSelector(state => state.authReducer)
+  const {error} = useAppSelector(state => state.authReducer)
 
-  useEffect(() => {
-    if (role) {
-      history.push(`/${role}/dashboard`)
-    } 
-  }, [role, history])
 
   const handleLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();

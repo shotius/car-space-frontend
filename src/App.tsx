@@ -1,29 +1,37 @@
 import { ThemeProvider } from "@material-ui/core";
-import { DealerDashboard } from "pages/DealerDashboard";
-import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
-import { useAppSelector } from "redux/app/hook";
+import { useAppDispatch, useAppSelector } from "redux/app/hook";
 import theme from "theme";
-import { AdminPage } from "./pages/AdminPage";
-import { Home } from "./pages/HomePage";
-import { Login } from "./pages/LoginPage";
 import AppRoutes from "utils/constants/app-routes";
 import * as views from "./pages";
 import { PrivateRoute } from "utils/HOC/PrivateRoute";
-import { UnauthorizedRoute } from "utils/HOC/UnauthorizedRoute";
-import { TestRoute } from "utils/HOC/TestRoute";
+import { AuthRoutes } from "utils/HOC/AuthRoutes";
+import { useEffect } from "react";
+import { autoLogin } from "redux/features/auth/authSlice";
+import { PublicRoute } from "utils/HOC/PublicRoute";
 
 function App() {
-  const { role: MyRole } = useAppSelector((state) => state.authReducer);
+  const { role: MyRole, loading } = useAppSelector(
+    (state) => state.authReducer
+  );
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(autoLogin());
+  }, [dispatch]);
+
+  if (loading) {
+    return <h1>...loading</h1>;
+  }
 
   const getAllowedRoutes = () => {
     return AppRoutes.filter(({ roles }) => {
-      // if route has no roles or there is my role and this role in routes' role
+      // if route has no roles or there is my role and this role in routes' roles
       if ((roles && roles.length === 0) || (MyRole && roles.includes(MyRole))) {
         return true;
       }
@@ -31,35 +39,44 @@ function App() {
     });
   };
 
-  const Component = views.AdminPage
+  // generate only routes where user has permissions
   const generateRoutes = () => {
     const allowedRoutes = getAllowedRoutes();
-    // console.log(allowedRoutes);
+    console.log(allowedRoutes);
     return allowedRoutes.map((route) => {
-      const { path, view, isPrivate, exact } = route;
+      const { path, view, isPrivate, exact, isAuth } = route;
 
       const component = views[view];
       if (isPrivate) {
         return (
           <PrivateRoute
             key={path}
-            path={`/${path}`}
+            path={path}
+            component={component}
+            exact={exact}
+          />
+        );
+      } else if (isAuth) {
+        return (
+          <AuthRoutes
+            key={path}
+            path={path}
             component={component}
             exact={exact}
           />
         );
       }
       return (
-        <UnauthorizedRoute
+        <PublicRoute
           key={path}
-          path={`/${path}`}
+          path={path}
           component={component}
           exact={exact}
         />
       );
     });
   };
-  console.log(generateRoutes())
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -67,25 +84,8 @@ function App() {
           <Route path="/" exact>
             <Redirect to="/home" />
           </Route>
-          {/* <Route path="/home" exact>
-            <Home />
-          </Route> */}
-          {/* <Route path="/login" exact> */}
-            {/* <Component /> */}
-          {/* </Route> */}
-          {/* <Route path="/admin/dashboard" exact>
-            <AdminPage />
-          </Route>
-          <Route path="/dealer/dashboard" exact>
-            <DealerDashboard />
-          </Route> */}
-          {/* {generateRoutes()} */}
-          {/* <PrivateRoute path='/login' component={Component} exact={true} /> */}
-          <PrivateRoute component={AdminPage} path='/admin/dashboard' exact={true} />
-          <UnauthorizedRoute component={Login} path='/login' exact={true} />
-          <Route>
-            error
-          </Route>
+          {generateRoutes()}
+          <Route>error</Route>
         </Switch>
       </Router>
     </ThemeProvider>

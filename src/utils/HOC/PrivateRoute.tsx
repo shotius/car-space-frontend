@@ -9,11 +9,11 @@ interface PrivateRouteProps {
 
 export const PrivateRoute: React.FC<PrivateRouteProps> = (props) => {
   const { component: Component, ...rest } = props;
-  const { loginSuccess } = useAppSelector((state) => state.authReducer);
+  const { isAuthenticated } = useAppSelector((state) => state.authReducer);
 
   return (
     <Route {...rest}>
-      {loginSuccess ? <Component /> : <Redirect to="/login" />}
+      {isAuthenticated ? <Component /> : <Redirect to="/login" />}
     </Route>
   );
 };

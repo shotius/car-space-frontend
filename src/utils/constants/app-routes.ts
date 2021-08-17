@@ -10,6 +10,7 @@ interface AppRouteObj {
   path: string;
   isPrivate: boolean;
   exact: boolean;
+  isAuth?: boolean
 }
 
 const AppRoutes: Array<AppRouteObj> = [
@@ -39,6 +40,7 @@ const AppRoutes: Array<AppRouteObj> = [
     view: "Login",
     path: "/login",
     isPrivate: false,
+    isAuth: true,
     exact: true,
   },
 ];
