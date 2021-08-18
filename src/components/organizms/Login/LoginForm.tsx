@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "redux/app/hook";
 import { loginUser } from "redux/features/auth/authSlice";
 
@@ -29,8 +30,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
   const classes = useStyles();
 
   const dispatch = useAppDispatch();
-  const {error} = useAppSelector(state => state.authReducer)
-
+  const { error } = useAppSelector((state) => state.authReducer);
 
   const handleLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -38,7 +38,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
       username,
       password,
     };
-    dispatch(loginUser(credentials))
+    dispatch(loginUser(credentials));
   };
 
   return (
@@ -81,6 +81,9 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
           Login
         </Button>
       </form>
+      <Button>
+          <Link to="/home">Home</Link>
+      </Button>
     </Container>
   );
 };
