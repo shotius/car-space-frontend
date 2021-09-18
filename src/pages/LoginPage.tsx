@@ -1,5 +1,5 @@
+import { LoginTemplate } from "components/templates/Login";
 import React from "react";
-import { LoginTemplate } from "../components/templates/Login";
 
 interface LoginProps {}
 

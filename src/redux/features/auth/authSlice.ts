@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authService from "services/authService";
 import { axios } from "utils/axios";
-import { Roles } from "utils/constants/roles";
+import { Roles } from "constants/roles";
 
 interface loginCredentials {
   username: string;
@@ -33,7 +33,7 @@ export const loginUser = createAsyncThunk(
         withCredentials: true,
       });
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response) {
         console.log(error.response);
         return rejectWithValue(error.response.data.error);
@@ -50,7 +50,7 @@ export const logoutUser = createAsyncThunk(
     console.log('pressed logout')
     try {
       await axios.get("/api/logout");
-    } catch (error) {
+    } catch (error: any) {
       if (error.response) {
         console.log(error.response);
         return rejectWithValue(error.response);

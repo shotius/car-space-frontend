@@ -1,4 +1,3 @@
-import { Button } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useAppDispatch } from "redux/app/hook";
@@ -21,8 +20,8 @@ export const AdminPage: React.FC<AdminProps> = () => {
 
   return (
     <div>
-      <Button onClick={handleLogout}>logout</Button>
-      <Button onClick={handleMe}>Me</Button>
+      {/* <Button onClick={handleLogout}>logout</Button> */}
+      {/* <Button onClick={handleMe}>Me</Button> */}
       <h1 style={{textAlign: "center"}}>Admin page</h1>
     </div>
   );

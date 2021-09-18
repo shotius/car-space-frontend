@@ -1,5 +1,5 @@
 import { Roles } from "./roles";
-import * as views from "../../pages";
+import * as views from "../pages";
 
 type RoleTypes = Roles.ADMIN | Roles.DEALER;
 type componentType = keyof typeof views;
@@ -43,6 +43,14 @@ const AppRoutes: Array<AppRouteObj> = [
     isAuth: true,
     exact: true,
   },
+  {
+    roles: [],
+    view: "CatalogPage",
+    exact: true,
+    isPrivate: false,
+    isAuth: false,
+    path: "/catalog"
+  }
 ];
 
 export default AppRoutes;

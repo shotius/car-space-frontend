@@ -1,21 +1,19 @@
-import { ThemeProvider } from "@material-ui/core";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-} from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "redux/app/hook";
-import theme from "theme";
-import AppRoutes from "utils/constants/app-routes";
-import * as views from "./pages";
-import { PrivateRoute } from "utils/HOC/PrivateRoute";
-import { AuthRoutes } from "utils/HOC/AuthRoutes";
-import { useEffect } from "react";
-import { autoLogin } from "redux/features/auth/authSlice";
-import { PublicRoute } from "utils/HOC/PublicRoute";
-import "App.css";
-import { ErrorPage } from "pages/ErrorPage";
+} from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'redux/app/hook';
+import AppRoutes from 'constants/app-routes';
+import * as views from './pages';
+import { PrivateRoute } from 'utils/HOC/PrivateRoute';
+import { AuthRoutes } from 'utils/HOC/AuthRoutes';
+import { useEffect } from 'react';
+import { autoLogin } from 'redux/features/auth/authSlice';
+import { PublicRoute } from 'utils/HOC/PublicRoute';
+import 'App.css';
+import { ErrorPage } from 'pages/ErrorPage';
 
 function App() {
   const { role: MyRole, loading } = useAppSelector(
@@ -44,7 +42,6 @@ function App() {
   // generate only routes where user has permissions
   const generateRoutes = () => {
     const allowedRoutes = getAllowedRoutes();
-    console.log(allowedRoutes);
     return allowedRoutes.map((route) => {
       const { path, view, isPrivate, exact, isAuth } = route;
 
@@ -80,7 +77,6 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Router>
         <Switch>
           <Route path="/" exact>
@@ -92,7 +88,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
-    </ThemeProvider>
   );
 }
 
