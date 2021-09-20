@@ -9,7 +9,7 @@ import React, { InputHTMLAttributes } from 'react';
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
-  label: string;
+  label?: string;
 };
 
 export const FormikInput: React.FC<InputFieldProps> = ({

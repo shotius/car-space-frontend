@@ -23,7 +23,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
         dispatch(loginUser(credentials));
       }}
     >
-      {(props) => (
+      {() => (
         <Form>
           <Heading w="full" textAlign="center" mb={4}>
             Login

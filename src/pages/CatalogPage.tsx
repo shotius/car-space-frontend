@@ -1,4 +1,4 @@
-import { CatalogTemplate } from 'components/templates/Catalog';
+import { CatalogTemplate } from 'components/templates/CatalogTemplate';
 import React from 'react';
 
 interface CatalogPageProps {}
