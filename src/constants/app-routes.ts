@@ -1,4 +1,4 @@
-import { Roles } from "./roles";
+import { Roles } from ".";
 import * as views from "../pages";
 
 type RoleTypes = Roles.ADMIN | Roles.DEALER;

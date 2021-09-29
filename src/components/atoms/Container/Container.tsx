@@ -11,7 +11,7 @@ const CustomContainer: React.FC<Props & ContainerProps> = ({
   ...rest
 }) => {
   return (
-    <Container maxW={variant === 'regular' ? '700px' : '400px'} {...rest}>
+    <Container maxW={variant === 'regular' ? '700px' : '350px'} {...rest}>
       {children}
     </Container>
   );

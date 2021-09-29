@@ -1,4 +1,4 @@
-import { Container, Flex } from '@chakra-ui/layout';
+import { Container } from '@chakra-ui/layout';
 import { Box } from '@chakra-ui/react';
 import { Footer } from 'components/organizms/Footer/Footer';
 import { Header } from 'components/organizms/Header';
@@ -17,9 +17,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
         zIndex="10"
         boxShadow="md"
       >
-        <Container boxShadow="md" maxW="8xl" zIndex="13">
-          <Header />
-        </Container>
+        <Header />
       </Box>
       <Container maxW="8xl" bg="gray.300" minH="200vh">
         {children}
