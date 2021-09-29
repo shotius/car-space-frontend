@@ -38,7 +38,7 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
           {currency}
         </Text>
       </PopoverTrigger>
-      <PopoverContent w="80px" outline="none">
+      <PopoverContent w="78px" outline="none">
         <PopoverArrow />
         <PopoverBody>
           <VStack spacing={1}>

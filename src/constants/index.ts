@@ -4,12 +4,12 @@ export enum Roles {
 }
 
 export enum Currencies {
-    GEL="L gel",
-    USD="$ usd",
-    EUR="€ eur"
+    GEL="L Gel",
+    USD="$ Usd",
+    EUR="€ Eur"
 }
 
 export enum Languages {
     ENG="Eng",
-    GE="Ge"
+    GE="Geo"
 }

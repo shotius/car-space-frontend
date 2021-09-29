@@ -1,4 +1,5 @@
 import { Heading, VStack } from '@chakra-ui/layout';
+import { HomeCarousel } from 'components/molecules/MainSlider/HomeCarousel';
 import { Search } from 'components/molecules/Search/Search';
 import { PublicLayout } from 'components/templates/Layouts/PublicLayout';
 import React from 'react';
@@ -9,9 +10,7 @@ export const Home: React.FC<HomeProps> = () => {
   return (
     <PublicLayout>
       <VStack w="full">
-        <Heading size="2xl" textAlign="center" p={6}>
-          HomePage
-        </Heading>
+        <HomeCarousel />
       </VStack>
         <Search />
         <Heading size="md">Mini Catalog</Heading>

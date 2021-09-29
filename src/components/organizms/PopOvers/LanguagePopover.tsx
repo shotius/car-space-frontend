@@ -34,7 +34,7 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
           <Icon /> {lang}
         </Text>
       </PopoverTrigger>
-      <PopoverContent w="80px" outline="none">
+      <PopoverContent w="70px" outline="none">
         <PopoverArrow />
         <PopoverBody>
           <VStack spacing={1}>
