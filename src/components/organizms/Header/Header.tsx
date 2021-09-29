@@ -2,6 +2,7 @@ import { Button } from '@chakra-ui/button';
 import Icon from '@chakra-ui/icon';
 import { Divider, Flex, HStack, VStack } from '@chakra-ui/layout';
 import { IconButton } from 'components/molecules/IconButton';
+import { NavMenuLink } from 'components/molecules/NavMenuLink/NavMenuLink';
 import * as React from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { BsPerson } from 'react-icons/bs';
@@ -14,20 +15,15 @@ export const Header: React.FC<HeaderProps> = () => {
 
   return (
     <Flex direction="column" h={['50px', '60px']}>
-      <Flex
-        bg={'white'}
-        p={1}
-        boxShadow="md"
-        h="100%"
-        alignItems="center"
-        zIndex="11"
-      >
+      {/* desktop view */}
+      <Flex w="full" h="full" alignItems="center">
         Logo
         <HStack ml="auto" display={['none', 'block']}>
           <Link to="/home">Home</Link>
           <Link to="/catalog">Catalog</Link>
           <Link to="/login">login</Link>
         </HStack>
+        {/* mobile view */}
         <HStack ml="auto" display={['flex', 'none']}>
           <IconButton icon={BsPerson} />
           <IconButton
@@ -50,46 +46,17 @@ export const Header: React.FC<HeaderProps> = () => {
         top="50px"
         left="0"
         bg="white"
-        zIndex="10"
         px="4"
         pt="3"
+        zIndex="-2"
       >
-        <Flex justifyContent="space-between" alignContent="center" px="4">
-          <Link to="/catalog">Catalog</Link>
-          {/* <Icon as={FaGreaterThan} fontWeight="100"/> */}
-          &gt;
-        </Flex>
-        <Divider />
-        <Flex justifyContent="space-between" alignContent="center" px="4">
-          <Link to="/services">Services</Link>
-          &gt;
-        </Flex>
-        <Divider />
-        <Flex justifyContent="space-between" alignContent="center" px="4">
-          <Link to="/blog">Blog</Link>
-          &gt;
-        </Flex>
-        <Divider />
-        <Flex justifyContent="space-between" alignContent="center" px="4">
-          <Link to="/minicategory">Mini Category</Link>
-          &gt;
-        </Flex>
-        <Divider />
-        <Flex justifyContent="space-between" alignContent="center" px="4">
-          <Link to="/topbrands">Top Brands</Link>
-          &gt;
-        </Flex>
-        <Divider />
-        <Flex justifyContent="space-between" alignContent="center" px="4">
-          <Link to="/dealers">Dealers</Link>
-          &gt;
-        </Flex>
-        <Divider />
-        <Flex justifyContent="space-between" alignContent="center" px="4">
-          <Link to="/contact">Contact</Link>
-          &gt;
-        </Flex>
-        <Divider />
+        <NavMenuLink heading="Catalog" to="/catalog"/>
+        <NavMenuLink heading="Services" to="/services"/>
+        <NavMenuLink heading="Blog" to="/blog"/>
+        <NavMenuLink heading="MiniCategory" to="/miniCategory"/>
+        <NavMenuLink heading="Top Brands" to="/topBrands"/>
+        <NavMenuLink heading="Dealers" to="/dealers"/>
+        <NavMenuLink heading="Contact" to="/contact"/>
         <HStack justifyContent="space-around" pt="4" spacing="2">
           <Button w="40%">
             <Icon />
