@@ -6,12 +6,15 @@ interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = () => {
   return (
-    <Flex bg={'tan'} p={4}>
+    <Flex bg={'white'} p={4}>
       Logo
-      <HStack ml="auto">
+      <HStack ml="auto" display={ ['none', "block"]}>
         <Link to="/home">Home</Link>
         <Link to="/catalog">Catalog</Link>
         <Link to="/login">login</Link>
+      </HStack>
+      <HStack>
+
       </HStack>
     </Flex>
   );
