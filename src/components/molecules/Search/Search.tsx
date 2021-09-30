@@ -14,9 +14,10 @@ interface SearchProps {}
 export const Search: React.FC<SearchProps> = () => {
   return (
     <Center mt="-50px" zIndex="modal" position="relative">
-      <Container maxW="2xl" bg="blue.800" px="8" py="6" mb="4">
+      <Container maxW="2xl" bg="blue.800" px="8" py="6" mb="4" borderRadius="15px">
         <InputGroup size="lg">
           <Input placeholder="Search..." bg="white"/>
+
           <InputRightElement width="6rem">
             <Button
               variant="solid"

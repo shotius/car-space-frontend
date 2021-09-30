@@ -34,11 +34,11 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
       placement="bottom"
     >
       <PopoverTrigger>
-        <Text cursor="pointer" w="40px">
+        <Text cursor="pointer" w="50px">
           {currency}
         </Text>
       </PopoverTrigger>
-      <PopoverContent w="78px" outline="none">
+      <PopoverContent w="80px" outline="none">
         <PopoverArrow />
         <PopoverBody>
           <VStack spacing={1}>
