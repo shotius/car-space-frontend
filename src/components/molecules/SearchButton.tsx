@@ -10,9 +10,17 @@ export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
   return (
     <Button
       variant="solid"
-      colorScheme="orange"
+      bg="autoOrange.500"
+      h={["44px","40px", '50px', "62px"]}
+      color="#fff"
       flex="1"
       fontWeight="light"
+      _hover={{
+        bg: "autoOrange.400"
+      }}
+      _active={{
+        bg: "autoOrange.200"
+      }}
       {...rest}
     >
       <Icon as={BsSearch} mr="1.5" /> Search

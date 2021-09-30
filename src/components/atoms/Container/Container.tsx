@@ -1,9 +1,9 @@
 import { Container, ContainerProps } from '@chakra-ui/layout';
 import React from 'react';
 
-interface Props {
-  variant: 'regular' | 'small';
-}
+type Props = {
+  variant: 'full' | 'regular' | 'small';
+};
 
 const CustomContainer: React.FC<Props & ContainerProps> = ({
   variant,
@@ -11,10 +11,19 @@ const CustomContainer: React.FC<Props & ContainerProps> = ({
   ...rest
 }) => {
   return (
-    <Container maxW={variant === 'regular' ? '700px' : '350px'} {...rest}>
+    <Container
+      maxW={
+        variant === 'full'
+          ? '1640px'
+          : variant === 'regular'
+          ? '860px'
+          : '350px'
+      }
+      {...rest}
+    >
       {children}
     </Container>
   );
 };
 
-export default CustomContainer
+export default CustomContainer;

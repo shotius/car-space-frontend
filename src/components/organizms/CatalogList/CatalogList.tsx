@@ -22,10 +22,11 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
   return (
     <>
       <Search />
-      {cars.map((car) => (
+      {cars.map((car: ICar) => (
         <Box key={car._id}>
-          <Text>{car.make}</Text>
-          <img src={`https://${car.imgThumb}`} alt="car" />
+          <Text>{car.m}</Text>
+          <img src={`https://${car.imgT}`} alt="car" />
+          <Text>{}</Text>
         </Box>
       ))}
     </>

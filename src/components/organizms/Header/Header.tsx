@@ -1,8 +1,10 @@
 import { Button } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
 import Icon from '@chakra-ui/icon';
-import { Box, Container, Flex, HStack, VStack } from '@chakra-ui/layout';
+import { Box, Flex, Heading, HStack, VStack } from '@chakra-ui/layout';
+import { Container } from '@chakra-ui/react';
 import Divider from 'components/atoms/Divider/DividerVertical';
+import { Text } from 'components/atoms/Text';
 import { IconButton } from 'components/molecules/IconButton';
 import { NavMenuLink } from 'components/molecules/NavMenuLink/NavMenuLink';
 import { Currencies, Languages } from 'constants/index';
@@ -33,20 +35,26 @@ export const Header: React.FC<HeaderProps> = () => {
   } = useDisclosure();
   return (
     <Container
-      maxW="8xl"
+      maxW="1640px"
       zIndex="13"
       boxShadow={menuOpen ? 'md' : 'none'}
       h="full"
     >
       {/* desktop view */}
       <Flex h="full" alignItems="center" zIndex="10">
-        <Box cursor="pointer">
+        <Heading cursor="pointer">
           <Link to="/home">Logo</Link>
-        </Box>
+        </Heading>
         <HStack ml="auto" display={['none', 'none', 'flex']} spacing="4">
-          <Link to="/catalog">Catalog</Link>
-          <Link to="/services">Services</Link>
-          <Link to="/blog">Blog</Link>
+          <Text fontSize="18px">
+            <Link to="/catalog">Catalog</Link>
+          </Text>
+          <Text fontSize="18px">
+            <Link to="/services">Services</Link>
+          </Text>
+          <Text fontSize="18px">
+            <Link to="/blog">Blog</Link>
+          </Text>
           <Divider height="35px" borderColor="gray.500" />
           {/* choose currency */}
           <CurrencyPopover
@@ -64,9 +72,9 @@ export const Header: React.FC<HeaderProps> = () => {
             lang={lang}
             setLanguage={(lang) => setLang(lang)}
           />
-          
+
           <Divider height="35px" borderColor="gray.500" />
-          <Button variant="ghost" fontWeight="light">
+          <Button variant="ghost" fontWeight="light" fontSize="16px">
             <Link to="/login">Log in</Link>
           </Button>
           <Button variant="outline" fontWeight="light">
