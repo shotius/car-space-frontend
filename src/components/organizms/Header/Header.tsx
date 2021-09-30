@@ -2,7 +2,7 @@ import { Button } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
 import Icon from '@chakra-ui/icon';
 import { Box, Container, Flex, HStack, VStack } from '@chakra-ui/layout';
-import Divider from 'components/atoms/Divider/Divider';
+import Divider from 'components/atoms/Divider/DividerVertical';
 import { IconButton } from 'components/molecules/IconButton';
 import { NavMenuLink } from 'components/molecules/NavMenuLink/NavMenuLink';
 import { Currencies, Languages } from 'constants/index';
