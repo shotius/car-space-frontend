@@ -2,11 +2,8 @@ import {
   Center,
   Container,
   Divider,
-  Flex,
-  HStack,
-  Select,
+  Flex, Select
 } from '@chakra-ui/react';
-// import { Container } from 'components/atoms/Container';
 import { DividerVertical } from 'components/atoms/Divider';
 import React from 'react';
 import { SearchButton } from '../SearchButton';
@@ -15,68 +12,60 @@ interface SearchProps {}
 
 export const Search: React.FC<SearchProps> = () => {
   return (
-    <Center mt={['-35px', '-50px', '-90px']} position="relative">
+    <Center mt={['-69px', '-65px', null, '-80px']} position="relative" zIndex="1">
       <Container
-        // maxW={{sm: "600px", md: "700px"}}
-        maxW={{sm: "550px", md: "1361px"}}
+        maxW={{ sm: '550px', md: '600px', lg: '1361px' }}
         bg="autoBlue.400"
-        p={['16px', '30px', '35px','48px']}
+        p={['4', '6', '7', '10']}
         mb="4"
-        borderRadius='18px'
+        borderRadius="lg"
       >
-        <HStack
-          size="lg"
-          bg="white"
-          borderRadius="8px"
-          flexWrap={['wrap', 'wrap', "nowrap"]}
-          p={['1', '3']}
-          spacing={['0']}
+        <Flex
+          padding={['1', '1.5', null, '2']}
+          bg="#fff"
+          borderRadius="lg"
+          alignItems="center"
+          spacingX={2}
+          flexWrap={{ base: 'wrap', sm: 'nowrap' }}
+          justifyContent="space-between"
         >
-          <Select
-            placeholder="Brand"
-            border="none"
-            flex="1"
-          >
+          <Select placeholder="Brand" border="none" color="autoGrey.900">
             <option value="value">brand</option>
             <option value="value">brand</option>
             <option value="value">brand</option>
           </Select>
           <DividerVertical
             height="40px"
-            display={['none', 'none', 'block']}
+            display={['none', 'block']}
             borderColor="gray.300"
           />
-          {/* <Divider
-            display={['block', 'block', 'none']}
-            borderColor="gray.300"
-          /> */}
-          <Select
-            placeholder="Model"
-            border="none"
-            flex="1"
-          >
+          <Divider display={['block', 'none', 'none']} borderColor="gray.300" />
+
+          <Select placeholder="Model" border="none" color="autoGrey.900">
             <option value="value">model</option>
             <option value="value">model</option>
             <option value="value">model</option>
           </Select>
           <DividerVertical
             height="40px"
-            display={['none', 'none', 'block']}
+            display={['none', 'block']}
             borderColor="gray.300"
           />
-          {/* <Divider
-            display={['block', 'block', 'none']}
-            borderColor="gray.300"
-          /> */}
-          <Select placeholder="Year" border="none" flexBasis={{ sm: '26%' }}>
+          <Divider display={['block', 'none']} borderColor="gray.300" />
+
+          <Select placeholder="Year" border="none" color="autoGrey.900">
             <option value="value">year</option>
             <option value="value">year</option>
             <option value="value">year</option>
           </Select>
-          <SearchButton display={['none', 'none', 'block']} />
-        </HStack>
+          <SearchButton
+            display={['none', 'block', 'block']}
+            flexBasis={['100%']}
+            ml="2"
+          />
+        </Flex>
         <SearchButton
-          display={['block', 'block', 'none']}
+          display={['block', 'none', 'none']}
           w="full"
           mt={['2', '3']}
         />

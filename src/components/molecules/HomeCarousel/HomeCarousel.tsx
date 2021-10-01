@@ -48,20 +48,19 @@ export const HomeCarousel = () => {
     // autoplaySpeed: 50000,
   };
   return (
-    <Box w="full" mt={['-20px', '-10px']}>
+    
+    <Box mt={['-20px', '-10px']}>
       <Slider {...settings}>
         <Box
           bgImage="https://media.wired.com/photos/5d09594a62bcb0c9752779d9/master/pass/Transpo_G70_TA-518126.jpg"
           bgPosition="center"
           bgRepeat="no-repeat"
           objectFit="cover"
-          h={['273px', '300px', '470px']}
-          zIndex="1"
-          w="full"
+          h={['273px', '400px', '400px','470px']}
           borderRadius={['18px', '50px', '60px','67px']}
         ></Box>
         <Box
-          h={['273px', '300px', '470px']}
+          h={['273px', '400px', '400px','470px']}
           // bgImage="https://i.insider.com/550cbf03ecad04de2c7c008a?width=1200&format=jpeg"
           // bgPosition="center"
           // bgRepeat="no-repeat"

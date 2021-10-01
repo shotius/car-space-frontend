@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
 import Icon from '@chakra-ui/icon';
-import { Box, Flex, Heading, HStack, VStack } from '@chakra-ui/layout';
+import { Flex, Heading, HStack, VStack } from '@chakra-ui/layout';
 import { Container } from '@chakra-ui/react';
 import Divider from 'components/atoms/Divider/DividerVertical';
 import { Text } from 'components/atoms/Text';

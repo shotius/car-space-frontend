@@ -11,7 +11,7 @@ export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
     <Button
       variant="solid"
       bg="autoOrange.500"
-      h={["44px","40px", '50px', "62px"]}
+      h={["44px",null, null, "62px"]}
       color="#fff"
       flex="1"
       fontWeight="light"
