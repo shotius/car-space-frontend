@@ -1,6 +1,8 @@
 import { Divider, Flex } from '@chakra-ui/layout';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import { ArrowIcon } from 'components/atoms/Icons/ArrowIcon';
+import { Text } from 'components/atoms/Text';
 
 interface NavMenuLinkProps {
   heading: string;
@@ -8,12 +10,24 @@ interface NavMenuLinkProps {
   onClick?: () => void;
 }
 
-export const NavMenuLink: React.FC<NavMenuLinkProps> = ({ heading, to, onClick }) => {
+export const NavMenuLink: React.FC<NavMenuLinkProps> = ({
+  heading,
+  to,
+  onClick,
+}) => {
   return (
     <>
-      <Flex justifyContent="space-between" alignContent="center" px="4" onClick={onClick}>
-        <Link to={to}>{heading}</Link>
-        &gt;
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        px="35px"
+        py="2"
+        onClick={onClick}
+      >
+        <Text fontSize="16px" m="0">
+          <Link to={to}>{heading}</Link>
+        </Text>
+        <ArrowIcon />
       </Flex>
       <Divider />
     </>

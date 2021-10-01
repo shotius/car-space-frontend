@@ -3,7 +3,7 @@ import React from 'react';
 import { IconType } from 'react-icons';
 
 interface IconButtonProps {
-  icon: IconType;
+  icon: IconType | React.FC;
   boxSize?: number;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined
 }

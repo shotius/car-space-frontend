@@ -4,16 +4,18 @@ import Icon from '@chakra-ui/icon';
 import { Flex, Heading, HStack, VStack } from '@chakra-ui/layout';
 import { Container } from '@chakra-ui/react';
 import Divider from 'components/atoms/Divider/DividerVertical';
+import { PersonIcon } from 'components/atoms/Icons/PersonIcon';
 import { Text } from 'components/atoms/Text';
 import { IconButton } from 'components/molecules/IconButton';
 import { NavMenuLink } from 'components/molecules/NavMenuLink/NavMenuLink';
 import { Currencies, Languages } from 'constants/index';
-import React, { useState } from 'react';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { BsPerson } from 'react-icons/bs';
+import React, { useEffect, useState } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
+import { UKIcon } from 'components/atoms/Icons/UKIcon';
+import { BurgerIcon } from 'components/atoms/Icons/BurgerIcon';
 
 interface HeaderProps {}
 
@@ -22,17 +24,29 @@ export const Header: React.FC<HeaderProps> = () => {
   const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
   const [lang, setLang] = useState<Languages>(Languages.ENG);
 
+  // if menu is open stop body to scroll
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'scroll';
+    }
+  }, [menuOpen]);
+
+  // curency popover
   const {
     onOpen: openCurr,
     onClose: closeCurr,
     isOpen: isCurrOpen,
   } = useDisclosure();
 
+  // langugage change popover
   const {
     onOpen: openLang,
     onClose: closeLang,
     isOpen: isLangOpen,
   } = useDisclosure();
+
   return (
     <Container
       maxW="1640px"
@@ -78,14 +92,15 @@ export const Header: React.FC<HeaderProps> = () => {
             <Link to="/login">Log in</Link>
           </Button>
           <Button variant="outline" fontWeight="light">
-            <Icon as={BsPerson} mr="1" /> Register
+            <Icon mr="2" as={PersonIcon} />
+            <Text ml="2">Register</Text>
           </Button>
         </HStack>
         {/* mobile view */}
         <HStack ml="auto" display={['flex', 'flex', 'none']}>
-          <IconButton icon={BsPerson} />
+          <IconButton icon={PersonIcon} />
           <IconButton
-            icon={AiOutlineMenu}
+            icon={BurgerIcon}
             onClick={() => setMenuOpen(true)}
             display={menuOpen ? 'none' : 'inline-block'}
           />
@@ -101,13 +116,14 @@ export const Header: React.FC<HeaderProps> = () => {
         position="fixed"
         display={menuOpen ? 'block' : 'none'}
         h="100vh"
-        w="100vw"
         top="50px"
         left="0"
+        bottom="0"
+        right="0"
         bg="white"
-        px="4"
         pt="3"
         zIndex="-1"
+        overflowY="scroll"
       >
         <NavMenuLink
           heading="Catalog"
@@ -120,9 +136,10 @@ export const Header: React.FC<HeaderProps> = () => {
         <NavMenuLink heading="Top Brands" to="/topBrands" />
         <NavMenuLink heading="Dealers" to="/dealers" />
         <NavMenuLink heading="Contact" to="/contact" />
+
         <HStack justifyContent="space-around" pt="4" spacing="2">
           <Button w="40%">
-            <Icon />
+            <Icon as={UKIcon}/>
           </Button>
           <Button w="40%"> GEL</Button>
         </HStack>
