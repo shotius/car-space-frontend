@@ -12,7 +12,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
         position="sticky"
         h={['50px', '60px', '80px']}
         top="0"
-        bg="white"Roboto
+        bg="white"
         zIndex="10"
         boxShadow="md"
       >

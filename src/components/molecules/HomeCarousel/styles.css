@@ -2,3 +2,7 @@
   background-color: gray;
   position: absolute;
 }
+
+.slick-slider {
+  padding: 10px;
+}

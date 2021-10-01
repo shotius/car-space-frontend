@@ -1,9 +1,4 @@
-import {
-  Center,
-  Container,
-  Divider,
-  Flex, Select
-} from '@chakra-ui/react';
+import { Center, Container, Divider, Flex, Select } from '@chakra-ui/react';
 import { DividerVertical } from 'components/atoms/Divider';
 import React from 'react';
 import { SearchButton } from '../SearchButton';
@@ -12,7 +7,12 @@ interface SearchProps {}
 
 export const Search: React.FC<SearchProps> = () => {
   return (
-    <Center mt={['-69px', '-65px', null, '-80px']} position="relative" zIndex="1">
+    <Center
+      mt={['-69px', '-65px', null, '-80px']}
+      mb={{base: "16", md: "20"}}
+      position="relative"
+      zIndex="1"
+    >
       <Container
         maxW={{ sm: '550px', md: '600px', lg: '1361px' }}
         bg="autoBlue.400"
@@ -25,7 +25,6 @@ export const Search: React.FC<SearchProps> = () => {
           bg="#fff"
           borderRadius="lg"
           alignItems="center"
-          spacingX={2}
           flexWrap={{ base: 'wrap', sm: 'nowrap' }}
           justifyContent="space-between"
         >

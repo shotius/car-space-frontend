@@ -13,3 +13,6 @@ export enum Languages {
     ENG="Eng",
     GE="Geo"
 }
+
+export const MOBILE_SCREEN_SIZE = 510
+export const TABLET_SCREEN_SIZE = 780

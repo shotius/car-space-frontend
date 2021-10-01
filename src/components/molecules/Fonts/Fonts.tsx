@@ -13,6 +13,9 @@ export const Fonts = () => (
       /* latin */
       @font-face {
         font-family: 'Roboto Medium';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
         src: url(${RobotoMedium}) format('truetype');
       }
       `}

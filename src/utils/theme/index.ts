@@ -25,7 +25,7 @@ const theme = extendTheme({
     },
     autoBlue: {
       '400': "#3D405B"
-    }
+    },
   },
   fonts: {
     heading: `Roboto Medium, ${base.fonts.heading}`,

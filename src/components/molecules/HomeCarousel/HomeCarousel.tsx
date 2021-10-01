@@ -80,6 +80,7 @@ export const HomeCarousel = () => {
             />
           </Center>
         </Box>
+        
       </Slider>
     </Box>
   );
