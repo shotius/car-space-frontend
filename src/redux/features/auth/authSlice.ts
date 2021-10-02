@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import authService from "services/authService";
-import { axios } from "utils/axios";
-import { Roles } from "constants/index";
+import authService from "src/services/authService";
+import { axios } from "src/utils/axios";
+import { Roles } from "src/constants/index";
 
 interface loginCredentials {
   username: string;

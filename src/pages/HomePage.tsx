@@ -1,10 +1,10 @@
 import { Heading, VStack } from '@chakra-ui/layout';
 import { Box, Container } from '@chakra-ui/react';
-import { HomeCarousel } from 'components/molecules/HomeCarousel/HomeCarousel';
-import { Search } from 'components/molecules/Search/Search';
-import { HomeCategory } from 'components/organizms/HomeCategory';
-import { MiniCategory } from 'components/organizms/MiniCategory/MiniCategory';
-import { PublicLayout } from 'components/templates/Layouts/PublicLayout';
+import { HomeCarousel } from 'src/components/molecules/HomeCarousel/HomeCarousel';
+import { Search } from 'src/components/molecules/Search/Search';
+import { HomeCategory } from 'src/components/organizms/HomeCategory';
+import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
+import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import React from 'react';
 
 interface HomeProps {}

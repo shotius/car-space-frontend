@@ -8,7 +8,7 @@ import {
   PopoverBody,
   Button,
 } from '@chakra-ui/react';
-import { Currencies } from 'constants/index';
+import { Currencies } from 'src/constants/index';
 import React from 'react';
 
 interface CurrencyPopoverProps {

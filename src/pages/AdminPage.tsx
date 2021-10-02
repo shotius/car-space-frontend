@@ -1,9 +1,9 @@
 import { Button } from "@chakra-ui/react";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { useAppDispatch } from "redux/app/hook";
-import { logoutUser } from "redux/features/auth/authSlice";
-import { axios } from "utils/axios";
+import { useAppDispatch } from "src/redux/app/hook";
+import { logoutUser } from "src/redux/features/auth/authSlice";
+import { axios } from "src/utils/axios";
 
 interface AdminProps {}
 

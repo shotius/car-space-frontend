@@ -1,6 +1,5 @@
 import { Button, Icon, ButtonProps } from '@chakra-ui/react';
 import React from 'react';
-import { BsSearch } from 'react-icons/bs';
 
 interface SearchButtonProps {}
 
@@ -23,7 +22,7 @@ export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
       }}
       {...rest}
     >
-      <Icon as={BsSearch} mr="1.5" /> Search
+      {/* <Icon as={BsSearch} mr="1.5" /> Search */}
     </Button>
   );
 };

@@ -1,11 +1,11 @@
 import { Button } from '@chakra-ui/button';
 import { Flex, Heading, Text, VStack } from '@chakra-ui/layout';
-import { FormikInput } from 'components/molecules/FormikInput/FormikInput';
+import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { Link as RouteLink } from 'react-router-dom';
-import { useAppDispatch } from "redux/app/hook";
-import { loginUser } from "redux/features/auth/authSlice";
+import { useAppDispatch } from "src/redux/app/hook";
+import { loginUser } from "src/redux/features/auth/authSlice";
 
 interface LoginFormProps {}
 

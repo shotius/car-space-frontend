@@ -1,9 +1,9 @@
 import { Box } from '@chakra-ui/layout';
-import { Text } from 'components/atoms/Text';
-import { Search } from 'components/molecules/Search/Search';
+import { Text } from 'src/components/atoms/Text';
+import { Search } from 'src/components/molecules/Search/Search';
 import React, { useEffect, useState } from 'react';
-import { ICar } from 'redux/features/auth/types';
-import { axios } from 'utils/axios';
+import { ICar } from 'src/redux/features/auth/types';
+import { axios } from 'src/utils/axios';
 
 interface CatalogLIstProps {}
 

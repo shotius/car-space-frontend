@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, VStack } from '@chakra-ui/layout';
-import { Text } from 'components/atoms/Text';
+import { Text } from 'src/components/atoms/Text';
 import React from 'react';
 import { Link } from 'react-router-dom';
 

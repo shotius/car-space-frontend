@@ -1,6 +1,6 @@
 import { Box, Heading, Image, VStack } from '@chakra-ui/react';
-import CarSmall from 'assets/png/car with bg-1.png';
-import { Text } from 'components/atoms/Text';
+import CarSmall from 'src/assets/png/car with bg-1.png';
+import { Text } from 'src/components/atoms/Text';
 import React from 'react';
 
 interface MiniCategoryCardProps {}

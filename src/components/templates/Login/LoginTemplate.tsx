@@ -1,6 +1,6 @@
 import { Center } from '@chakra-ui/layout';
-import { Container } from 'components/atoms/Container';
-import { LoginForm } from 'components/organizms/LoginForm';
+import { Container } from 'src/components/atoms/Container';
+import { LoginForm } from 'src/components/organizms/LoginForm';
 import React from 'react';
 
 interface LoginTemplateProps {}

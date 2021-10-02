@@ -1,8 +1,8 @@
 import { Divider, Flex } from '@chakra-ui/layout';
 import { Link } from 'react-router-dom';
 import React from 'react';
-import { ArrowIcon } from 'components/atoms/Icons/ArrowIcon';
-import { Text } from 'components/atoms/Text';
+import { ArrowIcon } from 'src/components/atoms/Icons/ArrowIcon';
+import { Text } from 'src/components/atoms/Text';
 
 interface NavMenuLinkProps {
   heading: string;

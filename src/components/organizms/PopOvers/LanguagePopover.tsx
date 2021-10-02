@@ -4,7 +4,7 @@ import {
   Icon, Popover, PopoverArrow,
   PopoverBody, PopoverContent, PopoverTrigger, Text
 } from '@chakra-ui/react';
-import { Languages } from 'constants/index';
+import { Languages } from 'src/constants/index';
 import React from 'react';
 
 interface LanguagePopoverProps {

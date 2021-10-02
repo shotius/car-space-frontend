@@ -2,9 +2,8 @@ import {
   AspectRatio, Box, Heading,
   HStack, Image, SimpleGrid, StackDivider, VStack
 } from '@chakra-ui/react';
-import { Text } from 'components/atoms/Text';
+import { Text } from 'src/components/atoms/Text';
 import React from 'react';
-import { FiHeart } from 'react-icons/fi';
 import { IconButton } from './IconButton';
 
 interface CarCardProps {}
@@ -30,7 +29,7 @@ export const CarCard: React.FC<CarCardProps> = () => {
               2018
             </Text>
           </VStack>
-          <IconButton icon={FiHeart} boxSize={6} />
+          {/* <IconButton icon={FiHeart} boxSize={6} /> */}
         </HStack>
         {/* picture */}
         <AspectRatio ratio={311 / 192} w="full">

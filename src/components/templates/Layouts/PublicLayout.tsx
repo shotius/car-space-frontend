@@ -1,6 +1,6 @@
 import { Box, Container } from '@chakra-ui/react';
-import { Footer } from 'components/organizms/Footer/Footer';
-import { Header } from 'components/organizms/Header';
+import { Footer } from 'src/components/organizms/Footer/Footer';
+import { Header } from 'src/components/organizms/Header';
 import React from 'react';
 
 interface PublicLayoutProps {}

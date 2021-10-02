@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
-import { CarCard } from 'components/molecules/CarCard';
-import { SectionHeader } from 'components/molecules/SectionHeader/SectionHeader';
+import { CarCard } from 'src/components/molecules/CarCard';
+import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import React from 'react';
 import Slider from 'react-slick';
 import { breakpoints } from './breakpoints';

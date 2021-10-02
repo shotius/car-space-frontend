@@ -1,19 +1,20 @@
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from 'redux/app/hook';
-import AppRoutes from 'constants/app-routes';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import AppRoutes from 'src/constants/app-routes';
 import * as views from './pages';
-import { PrivateRoute } from 'utils/HOC/PrivateRoute';
-import { AuthRoutes } from 'utils/HOC/AuthRoutes';
+import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
+import { AuthRoutes } from 'src/utils/HOC/AuthRoutes';
 import { useEffect } from 'react';
-import { autoLogin } from 'redux/features/auth/authSlice';
-import { PublicRoute } from 'utils/HOC/PublicRoute';
-import 'App.css';
-import { ErrorPage } from 'pages/ErrorPage';
+import { autoLogin } from 'src/redux/features/auth/authSlice';
+import { PublicRoute } from 'src/utils/HOC/PublicRoute';
+import 'src/App.css';
+import { ErrorPage } from 'src/pages/ErrorPage';
 
 function App() {
   const { role: MyRole, loading } = useAppSelector(
