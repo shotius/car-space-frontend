@@ -56,11 +56,11 @@ export const HomeCarousel = () => {
           bgPosition="center"
           bgRepeat="no-repeat"
           objectFit="cover"
-          h={['273px', '400px', '400px','470px']}
+          h={['273px', '350px', '400px','470px']}
           borderRadius={['18px', '50px', '60px','67px']}
         ></Box>
         <Box
-          h={['273px', '400px', '400px','470px']}
+          h={['273px', '350px', '400px','470px']}
           // bgImage="https://i.insider.com/550cbf03ecad04de2c7c008a?width=1200&format=jpeg"
           // bgPosition="center"
           // bgRepeat="no-repeat"

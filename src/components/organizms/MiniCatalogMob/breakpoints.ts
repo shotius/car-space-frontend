@@ -37,6 +37,7 @@ export const breakpoint = [
       slidesToShow: 3.7,
       slidesToScroll: 2,
       initialSlide: 2,
+      draggable: true
     },
   },
   {
@@ -73,7 +74,14 @@ export const breakpoint = [
   {
     breakpoint: 390,
     settings: {
-      slidesToShow: 2.2,
+      slidesToShow: 2.1,
+      slidesToScroll: 2,
+    },
+  },
+  {
+    breakpoint: 340,
+    settings: {
+      slidesToShow: 1.8,
       slidesToScroll: 2,
     },
   },

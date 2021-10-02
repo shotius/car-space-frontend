@@ -2,7 +2,7 @@ import { Heading, VStack } from '@chakra-ui/layout';
 import { Box, Container } from '@chakra-ui/react';
 import { HomeCarousel } from 'components/molecules/HomeCarousel/HomeCarousel';
 import { Search } from 'components/molecules/Search/Search';
-import { MiniCatalogMob } from 'components/organizms/MiniCatalogMob/MiniCatalogMob';
+import { MiniCategory } from 'components/organizms/MiniCatalogMob/MiniCategory';
 import { PublicLayout } from 'components/templates/Layouts/PublicLayout';
 import React from 'react';
 
@@ -15,7 +15,7 @@ export const Home: React.FC<HomeProps> = () => {
         <HomeCarousel />
         <Search />
         <VStack alignItems="flex-start" w="full" spacing="64px">
-          <MiniCatalogMob />
+          <MiniCategory />
           <Box h="sm" my="3" bg="yellow" w="full">
             <Heading size="md">Catalog</Heading>
           </Box>
