@@ -4,18 +4,18 @@ import Icon from '@chakra-ui/icon';
 import { Flex, Heading, HStack, VStack } from '@chakra-ui/layout';
 import { Container } from '@chakra-ui/react';
 import Divider from 'components/atoms/Divider/DividerVertical';
+import { BurgerIcon } from 'components/atoms/Icons/BurgerIcon';
+import { CloseIcon } from 'components/atoms/Icons/CloseIcon';
 import { PersonIcon } from 'components/atoms/Icons/PersonIcon';
+import { UKIcon } from 'components/atoms/Icons/UKIcon';
 import { Text } from 'components/atoms/Text';
 import { IconButton } from 'components/molecules/IconButton';
 import { NavMenuLink } from 'components/molecules/NavMenuLink/NavMenuLink';
 import { Currencies, Languages } from 'constants/index';
 import React, { useEffect, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
-import { UKIcon } from 'components/atoms/Icons/UKIcon';
-import { BurgerIcon } from 'components/atoms/Icons/BurgerIcon';
 
 interface HeaderProps {}
 
@@ -105,7 +105,7 @@ export const Header: React.FC<HeaderProps> = () => {
             display={menuOpen ? 'none' : 'inline-block'}
           />
           <IconButton
-            icon={AiOutlineClose}
+            icon={CloseIcon}
             display={menuOpen ? 'block' : 'none'}
             onClick={() => setMenuOpen(false)}
           />
@@ -121,7 +121,7 @@ export const Header: React.FC<HeaderProps> = () => {
         bottom="0"
         right="0"
         bg="white"
-        pt="3"
+        pt={["3", "5"]}
         zIndex="-1"
         overflowY="scroll"
       >

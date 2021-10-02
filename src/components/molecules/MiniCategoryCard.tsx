@@ -7,7 +7,17 @@ interface MiniCategoryCardProps {}
 
 export const MiniCategoryCard: React.FC<MiniCategoryCardProps> = () => {
   return (
-    <Box w={["140px","166px"]} h={["115px", "130px"]} bg="white" p="2.5" borderRadius="md">
+    <Box
+      w={['140px', '166px']}
+      h={['115px', '130px']}
+      bg="white"
+      p="2.5"
+      borderRadius="md"
+      cursor="pointer"
+      _active={{
+        bg: "autoGrey.500"
+      }}
+    >
       <VStack spacing="0">
         <Image src={CarSmall} w="55px" h="55px" />
         <Heading fontSize="16px" fontWeight="400">

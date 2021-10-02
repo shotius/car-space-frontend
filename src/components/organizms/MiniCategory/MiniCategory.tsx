@@ -9,15 +9,22 @@ import './styles.css';
 interface MiniCategoryProps {}
 
 export const MiniCategory: React.FC<MiniCategoryProps> = () => {
-
-
   const settings = {
-    infinite: false,
+     // speed: 500,
+    // slidesToScroll: 3,
+    touchThreshold: 800,
+    // infinite: false,
+    slidesToShow: 8,
     speed: 500,
-    slidesToScroll: 2,
-    responsive: breakpoint
+    infinite: false,
+    // slidesToShow: 4,
+    responsive: breakpoint,
+    swipeToSlide: true,
+    // slidesToScroll: 1,
+    // autoplay: true,
+    // autoplaySpeed: 4000,
   };
-  
+
   return (
     <Box w="full">
       <SectionHeader mainText="Mini Category" secondaryText="See all" />
@@ -34,7 +41,6 @@ export const MiniCategory: React.FC<MiniCategoryProps> = () => {
           <MiniCategoryCard />
           <MiniCategoryCard />
           <MiniCategoryCard />
-          
         </Slider>
       </Box>
     </Box>

@@ -15,7 +15,7 @@ function SampleNextArrow(props) {
         position: 'absolute',
         right: '20px',
       }}
-      top={["160px", "150px","250px"]}
+      top={["168px", "165px","250px"]}
       onClick={onClick}
     >
       Next
