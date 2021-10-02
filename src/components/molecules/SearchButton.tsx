@@ -12,8 +12,8 @@ export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
       variant="solid"
       bg="autoOrange.500"
       h={["44px",null, null, "62px"]}
+      w="100%"
       color="#fff"
-      flex="1"
       fontWeight="light"
       _hover={{
         bg: "autoOrange.400"

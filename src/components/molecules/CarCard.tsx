@@ -1,17 +1,11 @@
 import {
-  Box,
-  Image,
-  Heading,
-  HStack,
-  VStack,
-  Flex,
-  Divider,
-  AspectRatio,
+  AspectRatio, Box, Heading,
+  HStack, Image, SimpleGrid, StackDivider, VStack
 } from '@chakra-ui/react';
 import { Text } from 'components/atoms/Text';
 import React from 'react';
-import { IconButton } from './IconButton';
 import { FiHeart } from 'react-icons/fi';
+import { IconButton } from './IconButton';
 
 interface CarCardProps {}
 
@@ -22,7 +16,7 @@ export const CarCard: React.FC<CarCardProps> = () => {
       bg="white"
       borderRadius="8px"
       p="19px"
-      maxW={['295px', '343px', null, "388px"]}
+      maxW={['295px', '343px', null, '388px']}
       cursor="pointer"
     >
       <VStack w="full" spacing="19px">
@@ -36,10 +30,10 @@ export const CarCard: React.FC<CarCardProps> = () => {
               2018
             </Text>
           </VStack>
-          <IconButton icon={FiHeart} boxSize={6} bg="autoGrey.400" />
+          <IconButton icon={FiHeart} boxSize={6} />
         </HStack>
         {/* picture */}
-        <AspectRatio ratio={311/192} w="full">
+        <AspectRatio ratio={311 / 192} w="full">
           <Image
             src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"
             alt="car white"
@@ -47,8 +41,8 @@ export const CarCard: React.FC<CarCardProps> = () => {
           />
         </AspectRatio>
         {/* description */}
-        <VStack spacing="2" w="full">
-          <Flex justifyContent="space-between" w="full">
+        <VStack w="full" divider={<StackDivider />}>
+          <SimpleGrid columns={[1, 2]} mb="4"  w="full" templateColumns={["1fr", "2fr 1fr"]}>
             <HStack>
               <Text color="autoGrey.900">Damage: </Text>
               <Heading fontWeight="400" fontSize="16px">
@@ -61,12 +55,10 @@ export const CarCard: React.FC<CarCardProps> = () => {
                 USA
               </Heading>
             </HStack>
-          </Flex>
-          <Flex justifyContent="space-between" w="full">
             <HStack>
               <Text color="autoGrey.900">Odometer:</Text>
               <Heading fontWeight="400" fontSize="16px">
-                122 432 km
+                40 000 km
               </Heading>
             </HStack>
             <HStack>
@@ -75,10 +67,7 @@ export const CarCard: React.FC<CarCardProps> = () => {
                 5.5
               </Heading>
             </HStack>
-          </Flex>
-        </VStack>
-        <VStack w="full">
-          <Divider borderColor="autoGrey.800" />
+          </SimpleGrid>
           <HStack justifyContent="space-between" w="full">
             <Text color="autoGrey.900" fontSize="16px">
               Estimate Price
@@ -87,7 +76,6 @@ export const CarCard: React.FC<CarCardProps> = () => {
               $ 20 000
             </Heading>
           </HStack>
-          <Divider borderColor="autoGrey.800" />
           <HStack justifyContent="space-between" w="full">
             <Text color="autoGrey.900" fontSize="16px">
               Estimate Price
