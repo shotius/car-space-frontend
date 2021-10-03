@@ -12,7 +12,6 @@ import { AuthRoutes } from 'utils/HOC/AuthRoutes';
 import { useEffect } from 'react';
 import { autoLogin } from 'redux/features/auth/authSlice';
 import { PublicRoute } from 'utils/HOC/PublicRoute';
-import 'App.css';
 import { ErrorPage } from 'pages/ErrorPage';
 
 function App() {

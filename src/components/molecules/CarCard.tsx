@@ -1,10 +1,17 @@
 import {
-  AspectRatio, Box, Heading,
-  HStack, Image, SimpleGrid, StackDivider, VStack
+  AspectRatio,
+  Box,
+  Heading,
+  HStack,
+  Image,
+  SimpleGrid,
+  StackDivider,
+  VStack,
 } from '@chakra-ui/react';
 import { Text } from 'components/atoms/Text';
 import React from 'react';
 import { FiHeart } from 'react-icons/fi';
+import { TextMain } from '../atoms/Texts/TextMain';
 import { IconButton } from './IconButton';
 
 interface CarCardProps {}
@@ -26,9 +33,9 @@ export const CarCard: React.FC<CarCardProps> = () => {
             <Heading fontSize="16px" fontWeight="400">
               Certified car
             </Heading>
-            <Text fontSize="14px" color="autoGrey.900">
+            <TextMain opacity="50%">
               2018
-            </Text>
+            </TextMain>
           </VStack>
           <IconButton icon={FiHeart} boxSize={6} />
         </HStack>
@@ -42,45 +49,46 @@ export const CarCard: React.FC<CarCardProps> = () => {
         </AspectRatio>
         {/* description */}
         <VStack w="full" divider={<StackDivider />}>
-          <SimpleGrid columns={[1, 2]} mb="4"  w="full" templateColumns={["1fr", "2fr 1fr"]}>
+          <SimpleGrid
+            columns={[1, 2]}
+            mb="4"
+            w="full"
+            templateColumns={['1fr', '2fr 1fr']}
+          >
             <HStack>
-              <Text color="autoGrey.900">Damage: </Text>
+              <TextMain>Damage: </TextMain>
               <Heading fontWeight="400" fontSize="16px">
                 Front end
               </Heading>
             </HStack>
             <HStack>
-              <Text color="autoGrey.900">Location: </Text>
+              <TextMain>Location: </TextMain>
               <Heading fontWeight="400" fontSize="16px">
                 USA
               </Heading>
             </HStack>
             <HStack>
-              <Text color="autoGrey.900">Odometer:</Text>
+              <TextMain>Odometer:</TextMain>
               <Heading fontWeight="400" fontSize="16px">
                 40 000 km
               </Heading>
             </HStack>
             <HStack>
-              <Text color="autoGrey.900">Engine: </Text>
+              <TextMain>Engine: </TextMain>
               <Heading fontWeight="400" fontSize="16px">
                 5.5
               </Heading>
             </HStack>
           </SimpleGrid>
           <HStack justifyContent="space-between" w="full">
-            <Text color="autoGrey.900" fontSize="16px">
-              Estimate Price
-            </Text>
+            <TextMain>Estimate Price</TextMain>
             <Heading fontSize="20px" color="autoOrange.500" pr="4">
               $ 20 000
             </Heading>
           </HStack>
           <HStack justifyContent="space-between" w="full">
-            <Text color="autoGrey.900" fontSize="16px">
-              Estimate Price
-            </Text>
-            <Heading fontSize="20px" color="autoOrange.500" pr="4">
+            <TextMain>Estimate Price</TextMain>
+            <Heading fontSize="20px" pr="4">
               $ 20 000
             </Heading>
           </HStack>

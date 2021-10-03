@@ -1,7 +1,7 @@
 import { Box, Heading, Image, VStack } from '@chakra-ui/react';
 import CarSmall from 'assets/png/car with bg-1.png';
-import { Text } from 'components/atoms/Text';
 import React from 'react';
+import { TextMain } from '../atoms/Texts/TextMain';
 
 interface MiniCategoryCardProps {}
 
@@ -23,7 +23,7 @@ export const MiniCategoryCard: React.FC<MiniCategoryCardProps> = () => {
         <Heading fontSize="16px" fontWeight="400">
           Sertified Car
         </Heading>
-        <Text color="autoGrey.900">500 cars</Text>
+        <TextMain opacity="50%">500 cars</TextMain>
       </VStack>
     </Box>
   );
