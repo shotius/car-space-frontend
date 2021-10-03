@@ -18,7 +18,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
   return (
     <VStack
       position="fixed"
-      transition="all .7s ease-in-out"
+      transition="all .6s ease-in-out"
       h="100vh"
       top="50px"
       left={menuOpen ? "0" : "100%"} 

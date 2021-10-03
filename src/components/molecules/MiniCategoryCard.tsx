@@ -8,7 +8,7 @@ interface MiniCategoryCardProps {}
 export const MiniCategoryCard: React.FC<MiniCategoryCardProps> = () => {
   return (
     <Box
-      w={['140px', '166px']}
+      minW={['140px', '166px']}
       h={['115px', '130px']}
       bg="white"
       p="2.5"

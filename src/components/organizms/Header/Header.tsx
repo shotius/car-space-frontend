@@ -23,7 +23,7 @@ export const Header: React.FC<HeaderProps> = () => {
   const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
   const [lang, setLang] = useState<Languages>(Languages.ENG);
 
-  // if menu is open stop body to scroll
+  // if menu open stop body scroll
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
@@ -32,14 +32,14 @@ export const Header: React.FC<HeaderProps> = () => {
     }
   }, [menuOpen]);
 
-  // curency popover
+  // curency change popover
   const {
     onOpen: openCurr,
     onClose: closeCurr,
     isOpen: isCurrOpen,
   } = useDisclosure();
 
-  // langugage change popover
+  // language change popover
   const {
     onOpen: openLang,
     onClose: closeLang,
@@ -95,7 +95,7 @@ export const Header: React.FC<HeaderProps> = () => {
             <Text ml="2">Register</Text>
           </Button>
         </HStack>
-        {/* mobile view */}
+        {/* mobile view profile and menu hamburger*/}
         <HStack ml="auto" display={['flex', 'flex', 'none']}>
           <IconButton icon={PersonIcon} />
           <IconButton
@@ -110,7 +110,7 @@ export const Header: React.FC<HeaderProps> = () => {
           />
         </HStack>
       </Flex>
-      {/* menu navigation */}
+      {/* menu navigation menu*/}
       <MenuMobile menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
     </Container>
   );

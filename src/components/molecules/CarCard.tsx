@@ -6,9 +6,8 @@ import {
   Image,
   SimpleGrid,
   StackDivider,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
-import { Text } from 'components/atoms/Text';
 import React from 'react';
 import { FiHeart } from 'react-icons/fi';
 import { TextMain } from '../atoms/Texts/TextMain';

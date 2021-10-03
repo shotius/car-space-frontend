@@ -1,4 +1,4 @@
-import { Box, Flex, VStack } from '@chakra-ui/layout';
+import { VStack } from '@chakra-ui/layout';
 import { Container } from '@chakra-ui/react';
 import { HomeCarousel } from 'components/molecules/HomeCarousel/HomeCarousel';
 import { Search } from 'components/molecules/Search/Search';
@@ -21,28 +21,7 @@ export const Home: React.FC<HomeProps> = () => {
           <HomeCategory />
           <CustomperReview />
         </VStack>
-        <Flex
-          w="full"
-          overflow="auto"
-          css={{
-            '&::-webkit-scrollbar': {
-              display: 'none',
-            },
-          }}
-        >
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-          <Box minW="100px" h="100px" bg="red" mr="10px"></Box>
-        </Flex>
+        
       </Container>
     </PublicLayout>
   );

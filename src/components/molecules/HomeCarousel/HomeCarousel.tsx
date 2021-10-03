@@ -3,6 +3,7 @@ import { Button, Image } from '@chakra-ui/react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+// import './styles.css';
 import './styles.css';
 
 function SampleNextArrow(props) {
@@ -44,6 +45,7 @@ export const HomeCarousel = () => {
     infinite: true,
     slidesToScroll: 1,
     fade: true,
+    dots: true
     // autoplay: true,
     // autoplaySpeed: 50000,
   };

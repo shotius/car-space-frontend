@@ -10,18 +10,15 @@ interface HomeCategoryProps {}
 
 export const HomeCategory: React.FC<HomeCategoryProps> = () => {
   const settings = {
-    // speed: 500,
-    // slidesToScroll: 2,
-    touchThreshold: 1000,
+    touchThreshold: 200,
     responsive: breakpoints,
-    // infinite: false,
-    // slidesToShow: 2.1,
     speed: 500,
     infinite: false,
     slidesToShow: 4,
     swipeToSlide: true,
-    // slidesToScroll: 1,
     // autoplay: true,
+    // infinite: false,
+    // slidesToScroll: 1,
     // autoplaySpeed: 4000,
   };
 
