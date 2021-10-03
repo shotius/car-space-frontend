@@ -1,19 +1,22 @@
+import { Center } from '@chakra-ui/layout';
+import { Spinner } from '@chakra-ui/spinner';
+import 'App.css';
+import { StyledApp } from 'components/organizms/StyledApp';
+import AppRoutes from 'constants/app-routes';
+import { ErrorPage } from 'pages/ErrorPage';
+import { useEffect } from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Redirect,
+  Route,
+  Switch,
 } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/app/hook';
-import AppRoutes from 'constants/app-routes';
-import * as views from './pages';
-import { PrivateRoute } from 'utils/HOC/PrivateRoute';
-import { AuthRoutes } from 'utils/HOC/AuthRoutes';
-import { useEffect } from 'react';
 import { autoLogin } from 'redux/features/auth/authSlice';
+import { AuthRoutes } from 'utils/HOC/AuthRoutes';
+import { PrivateRoute } from 'utils/HOC/PrivateRoute';
 import { PublicRoute } from 'utils/HOC/PublicRoute';
-import 'App.css';
-import { ErrorPage } from 'pages/ErrorPage';
+import * as views from './pages';
 
 function App() {
   const { role: MyRole, loading } = useAppSelector(
@@ -26,7 +29,11 @@ function App() {
   }, [dispatch]);
 
   if (loading) {
-    return <h1>...loading</h1>;
+    return (
+      <Center>
+        <Spinner />
+      </Center>
+    );
   }
 
   const getAllowedRoutes = () => {
@@ -77,6 +84,7 @@ function App() {
   };
 
   return (
+    <StyledApp>
       <Router>
         <Switch>
           <Route path="/" exact>
@@ -88,6 +96,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+    </StyledApp>
   );
 }
 

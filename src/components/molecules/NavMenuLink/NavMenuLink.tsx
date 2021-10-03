@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/layout';
-import { ArrowIcon } from 'components/atoms/Icons/ArrowIcon';
+import { GTArrow } from 'components/atoms/Icons/GTArrow';
 import { TextMain } from 'components/atoms/Texts/TextMain';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -27,7 +27,7 @@ export const NavMenuLink: React.FC<NavMenuLinkProps> = ({
       <TextMain opacity="100%" color="black">
         <Link to={to}>{heading}</Link>
       </TextMain>
-      <ArrowIcon />
+      <GTArrow />
     </Flex>
   );
 };
