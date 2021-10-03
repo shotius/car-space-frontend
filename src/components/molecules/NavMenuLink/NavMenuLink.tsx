@@ -17,20 +17,18 @@ export const NavMenuLink: React.FC<NavMenuLinkProps> = ({
   onClick,
 }) => {
   return (
-    <>
-      <Flex
-        justifyContent="space-between"
-        alignItems="center"
-        px="35px"
-        py="2"
-        onClick={onClick}
-      >
-        <TextMain opacity="100%" color="black">
-          <Link to={to}>{heading}</Link>
-        </TextMain>
-        <ArrowIcon />
-      </Flex>
-      <Divider />
-    </>
+    <Flex
+      justifyContent="space-between"
+      alignItems="center"
+      px="35px"
+      py="2"
+      onClick={onClick}
+      w="full"
+    >
+      <TextMain opacity="100%" color="black">
+        <Link to={to}>{heading}</Link>
+      </TextMain>
+      <ArrowIcon />
+    </Flex>
   );
 };

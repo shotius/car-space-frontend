@@ -1,6 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import Icon from '@chakra-ui/icon';
 import { VStack, HStack } from '@chakra-ui/layout';
+import { StackDivider } from '@chakra-ui/react';
 import { UKIcon } from 'components/atoms/Icons/UKIcon';
 import { NavMenuLink } from 'components/molecules/NavMenuLink/NavMenuLink';
 import React from 'react';
@@ -17,16 +18,18 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
   return (
     <VStack
       position="fixed"
-      display={menuOpen ? 'block' : 'none'}
+      transition="all .7s ease-in-out"
       h="100vh"
       top="50px"
-      left="0"
+      left={menuOpen ? "0" : "100%"} 
       bottom="0"
       right="0"
       bg="white"
       pt={['3', '5']}
       zIndex="-1"
       overflowY="scroll"
+      divider={<StackDivider />}
+      pb="200px" // padding added because the last row was not visible
     >
       <NavMenuLink
         heading="Catalog"
@@ -41,7 +44,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
       <NavMenuLink heading="Dealers" to="/dealers" />
       <NavMenuLink heading="Contact" to="/contact" />
 
-      <HStack justifyContent="space-around" pt="4" spacing="2">
+      <HStack justifyContent="space-around" pt="4" spacing="2" w="full">
         <Button w="40%">
           <Icon as={UKIcon} />
         </Button>

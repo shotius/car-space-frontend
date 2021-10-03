@@ -1,19 +1,18 @@
 import { Button } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
 import Icon from '@chakra-ui/icon';
-import { Flex, Heading, HStack, VStack } from '@chakra-ui/layout';
+import { Flex, Heading, HStack } from '@chakra-ui/layout';
 import { Container } from '@chakra-ui/react';
 import Divider from 'components/atoms/Divider/DividerVertical';
 import { BurgerIcon } from 'components/atoms/Icons/BurgerIcon';
 import { CloseIcon } from 'components/atoms/Icons/CloseIcon';
 import { PersonIcon } from 'components/atoms/Icons/PersonIcon';
-import { UKIcon } from 'components/atoms/Icons/UKIcon';
 import { Text } from 'components/atoms/Text';
 import { IconButton } from 'components/molecules/IconButton';
-import { NavMenuLink } from 'components/molecules/NavMenuLink/NavMenuLink';
 import { Currencies, Languages } from 'constants/index';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { MenuMobile } from '../MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 
@@ -112,38 +111,7 @@ export const Header: React.FC<HeaderProps> = () => {
         </HStack>
       </Flex>
       {/* menu navigation */}
-      <VStack
-        position="fixed"
-        display={menuOpen ? 'block' : 'none'}
-        h="100vh"
-        top="50px"
-        left="0"
-        bottom="0"
-        right="0"
-        bg="white"
-        pt={["3", "5"]}
-        zIndex="-1"
-        overflowY="scroll"
-      >
-        <NavMenuLink
-          heading="Catalog"
-          to="/catalog"
-          onClick={() => setMenuOpen(false)}
-        />
-        <NavMenuLink heading="Services" to="/services" />
-        <NavMenuLink heading="Blog" to="/blog" />
-        <NavMenuLink heading="MiniCategory" to="/miniCategory" />
-        <NavMenuLink heading="Top Brands" to="/topBrands" />
-        <NavMenuLink heading="Dealers" to="/dealers" />
-        <NavMenuLink heading="Contact" to="/contact" />
-
-        <HStack justifyContent="space-around" pt="4" spacing="2">
-          <Button w="40%">
-            <Icon as={UKIcon}/>
-          </Button>
-          <Button w="40%"> GEL</Button>
-        </HStack>
-      </VStack>
+      <MenuMobile menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
     </Container>
   );
 };
