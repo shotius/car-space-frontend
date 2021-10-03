@@ -52,6 +52,7 @@ export const Header: React.FC<HeaderProps> = () => {
       zIndex="13"
       boxShadow={menuOpen ? 'md' : 'none'}
       h="full"
+      bg="white"
     >
       {/* desktop view */}
       <Flex h="full" alignItems="center" zIndex="10">
