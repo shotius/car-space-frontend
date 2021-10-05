@@ -13,7 +13,8 @@ export const MiniCategoryCard: React.FC<MiniCategoryCardProps> = () => {
       bg="white"
       p="2.5"
       borderRadius="md"
-      cursor="pointer"
+      // cursor="pointer"
+      cursor="grabbing"
       _active={{
         bg: "autoGrey.500"
       }}
