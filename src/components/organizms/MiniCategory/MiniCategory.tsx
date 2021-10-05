@@ -1,30 +1,17 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { MiniCategoryCard } from 'components/molecules/MiniCategoryCard';
+import { ScrollableDiv } from 'components/molecules/ScrollableDiv';
 import { SectionHeader } from 'components/molecules/SectionHeader/SectionHeader';
-import React, { useRef } from 'react';
-import useDraggableScroll from 'use-draggable-scroll';
+import React from 'react';
 import './styles.css';
 
 interface MiniCategoryProps {}
 
 export const MiniCategory: React.FC<MiniCategoryProps> = () => {
-  const ref = useRef(null);
-  const { onMouseDown } = useDraggableScroll(ref);
-
   return (
     <Box w="full">
       <SectionHeader mainText="Mini Category" secondaryText="See all" />
-      <HStack
-        ref={ref}
-        onMouseDown={onMouseDown}
-        w="full"
-        overflow="auto"
-        css={{
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-        }}
-      >
+      <ScrollableDiv>
         <MiniCategoryCard />
         <MiniCategoryCard />
         <MiniCategoryCard />
@@ -35,7 +22,7 @@ export const MiniCategory: React.FC<MiniCategoryProps> = () => {
         <MiniCategoryCard />
         <MiniCategoryCard />
         <MiniCategoryCard />
-      </HStack>
+      </ScrollableDiv>
     </Box>
   );
 };

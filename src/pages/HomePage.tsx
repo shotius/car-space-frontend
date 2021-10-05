@@ -5,6 +5,7 @@ import { Search } from 'components/molecules/Search/Search';
 import { CustomperReview } from 'components/organizms/CustomperReview';
 import { HomeCategory } from 'components/organizms/HomeCategory';
 import { MiniCategory } from 'components/organizms/MiniCategory/MiniCategory';
+import { TopBrands } from 'components/organizms/TopBrands';
 import { PublicLayout } from 'components/templates/Layouts/PublicLayout';
 import React from 'react';
 
@@ -20,6 +21,7 @@ export const Home: React.FC<HomeProps> = () => {
           <MiniCategory />
           <HomeCategory />
           <CustomperReview />
+          <TopBrands />
         </VStack>
         
       </Container>

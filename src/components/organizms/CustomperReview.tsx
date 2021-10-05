@@ -39,7 +39,7 @@ function SamplePrevArrow(props) {
       visibility={visibility}
       color="red"
       _active={{
-        bg: 'red',
+        bg: 'white',
       }}
       _focus={{
         bg: 'white',
