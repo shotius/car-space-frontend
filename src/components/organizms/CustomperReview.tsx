@@ -35,9 +35,10 @@ function SamplePrevArrow(props) {
       onClick={onClick}
       aria-label="previous slide"
       icon={<ArrowPrevIcon />}
-      bg="white"
+      // bg="white"
+      // colorScheme="red"
       visibility={visibility}
-      color="red"
+      // color="red"
       _active={{
         bg: 'white',
       }}
@@ -61,7 +62,7 @@ export const CustomperReview: React.FC<CustomperReviewProps> = () => {
   const settings = {
     dots: true,
     speed: 500,
-    infinit: false,
+    infinite: false,
     slidesToShow: 1,
     slidesToScroll: 1,
     beforeChange,
