@@ -4,6 +4,7 @@ import {
   Icon, Popover, PopoverArrow,
   PopoverBody, PopoverContent, PopoverTrigger, Text
 } from '@chakra-ui/react';
+import { TextRegular } from 'components/molecules/Texts/TextRegular';
 import { Languages } from 'constants/index';
 import React from 'react';
 
@@ -30,7 +31,7 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
       placement="bottom"
     >
       <PopoverTrigger>
-        <Text cursor="pointer" w="60px">
+        <Text cursor="pointer" w="60px" fontSize={[null, null, "14px", "16px"]}>
           <Icon /> {lang}
         </Text>
       </PopoverTrigger>
@@ -46,7 +47,7 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
                 onClose();
               }}
             >
-              {Languages.ENG}
+              <TextRegular fontWeight="light">{Languages.ENG}</TextRegular>
             </Button>
             <Button
               borderRadius="none"
@@ -56,7 +57,7 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
                 onClose();
               }}
             >
-              {Languages.GE}
+              <TextRegular fontWeight="light">{Languages.GE}</TextRegular>
             </Button>
           </VStack>
         </PopoverBody>

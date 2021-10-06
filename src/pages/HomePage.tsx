@@ -2,6 +2,7 @@ import { VStack } from '@chakra-ui/layout';
 import { Container } from '@chakra-ui/react';
 import { HomeCarousel } from 'components/molecules/HomeCarousel/HomeCarousel';
 import { Search } from 'components/molecules/Search/Search';
+import { Calculator } from 'components/organizms/Calculator';
 import { CustomperReview } from 'components/organizms/CustomperReview';
 import { DealersSection } from 'components/organizms/DealersSection';
 import { HomeCategory } from 'components/organizms/HomeCategory';
@@ -15,17 +16,22 @@ interface HomeProps {}
 export const Home: React.FC<HomeProps> = () => {
   return (
     <PublicLayout>
-      <Container maxW={{base: "1004px",xl: "1640px"}} overflowX="hidden">
+      <Container maxW={{ base: '1004px', xl: '1640px' }} overflowX="hidden">
         <HomeCarousel />
         <Search />
-        <VStack alignItems="flex-start" w="full" spacing="64px" mb="72">
+        <VStack
+          w="full"
+          alignItems="flex-start"
+          spacing={['64px', '85px', '101px', '138px']}
+          mb={['64px', '85px', '101px', '138px']}
+        >
           <MiniCategory />
           <HomeCategory />
           <CustomperReview />
           <TopBrands />
           <DealersSection />
+          <Calculator />
         </VStack>
-        
       </Container>
     </PublicLayout>
   );

@@ -1,13 +1,15 @@
 import React from 'react';
 
-interface PersonIconProps {}
+interface PersonIconProps {
+  viewBox: string;
+}
 
-export const PersonIcon: React.FC<PersonIconProps> = () => {
+export const PersonIcon: React.FC<PersonIconProps> = ({viewBox}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width={viewBox}
+      height={viewBox}
       viewBox="0 0 20 20"
     >
       <path

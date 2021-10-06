@@ -1,14 +1,12 @@
 import { Button } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
-import Icon from '@chakra-ui/icon';
-import { Flex, Heading, HStack } from '@chakra-ui/layout';
-import { Container } from '@chakra-ui/react';
-import Divider from 'components/atoms/Divider/DividerVertical';
+import { Flex, Heading, HStack, StackDivider } from '@chakra-ui/layout';
+import { IconButton } from 'components/molecules/IconButton';
+import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
 import { BurgerIcon } from 'components/atoms/Icons/BurgerIcon';
 import { CloseIcon } from 'components/atoms/Icons/CloseIcon';
 import { PersonIcon } from 'components/atoms/Icons/PersonIcon';
-import { Text } from 'components/atoms/Text';
-import { IconButton } from 'components/molecules/IconButton';
+import { TextRegular } from 'components/molecules/Texts/TextRegular';
 import { Currencies, Languages } from 'constants/index';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -47,8 +45,7 @@ export const Header: React.FC<HeaderProps> = () => {
   } = useDisclosure();
 
   return (
-    <Container
-      maxW="1640px"
+    <ContainerOuter
       zIndex="13"
       boxShadow={menuOpen ? 'md' : 'none'}
       h="full"
@@ -56,49 +53,65 @@ export const Header: React.FC<HeaderProps> = () => {
     >
       {/* desktop view */}
       <Flex h="full" alignItems="center" zIndex="10">
-        <Heading cursor="pointer">
+        <Heading cursor="pointer" fontSize="20px">
           <Link to="/home">Logo</Link>
         </Heading>
-        <HStack ml="auto" display={['none', 'none', 'flex']} spacing="4">
-          <Text fontSize="18px">
-            <Link to="/catalog">Catalog</Link>
-          </Text>
-          <Text fontSize="18px">
-            <Link to="/services">Services</Link>
-          </Text>
-          <Text fontSize="18px">
-            <Link to="/blog">Blog</Link>
-          </Text>
-          <Divider height="35px" borderColor="gray.500" />
-          {/* choose currency */}
-          <CurrencyPopover
-            isOpen={isCurrOpen}
-            onClose={closeCurr}
-            onOpen={openCurr}
-            currency={currency}
-            setCurrency={(currency) => setCurrency(currency)}
-          />
-          {/* choose languages */}
-          <LanguagePopover
-            isOpen={isLangOpen}
-            onClose={closeLang}
-            onOpen={openLang}
-            lang={lang}
-            setLanguage={(lang) => setLang(lang)}
-          />
-
-          <Divider height="35px" borderColor="gray.500" />
-          <Button variant="ghost" fontWeight="light" fontSize="16px">
-            <Link to="/login">Log in</Link>
-          </Button>
-          <Button variant="outline" fontWeight="light">
-            <Icon mr="2" as={PersonIcon} />
-            <Text ml="2">Register</Text>
-          </Button>
+        <HStack
+          ml="auto"
+          display={['none', 'none', 'flex']}
+          spacing={[null, null, "16px", "24px"]}
+          divider={<StackDivider />}
+        >
+          <HStack spacing={[null, null, "16px", "24px", "32px"]}>
+            <TextRegular>
+              <Link to="/catalog">Catalog</Link>
+            </TextRegular>
+            <TextRegular>
+              <Link to="/services">Services</Link>
+            </TextRegular>
+            <TextRegular>
+              <Link to="/blog">Blog</Link>
+            </TextRegular>
+          </HStack>
+          <HStack spacing={[null, null, "0px",  "8px"]} mr={[null, null, "-20px", "-15px"]}>
+            {/* choose currency */}
+            <CurrencyPopover
+              isOpen={isCurrOpen}
+              onClose={closeCurr}
+              onOpen={openCurr}
+              currency={currency}
+              setCurrency={(currency) => setCurrency(currency)}
+            />
+            {/* choose languages */}
+            <LanguagePopover
+              isOpen={isLangOpen}
+              onClose={closeLang}
+              onOpen={openLang}
+              lang={lang}
+              setLanguage={(lang) => setLang(lang)}
+            />
+          </HStack>
+          {/* <Divider height="35px" borderColor="gray.500" /> */}
+          <HStack spacing="4" ml="-15px">
+            <Button variant="ghost" fontWeight="light" fontSize="16px">
+              <TextRegular>
+                <Link to="/login">Log in</Link>
+              </TextRegular>
+            </Button>
+            <Button
+              backgroundColor="white"
+              fontWeight="light"
+              borderColor="#565656"
+              borderWidth="1px"
+            >
+              <PersonIcon viewBox="15" />
+              <TextRegular ml="1">Register</TextRegular>
+            </Button>
+          </HStack>
         </HStack>
         {/* mobile view profile and menu hamburger*/}
         <HStack ml="auto" display={['flex', 'flex', 'none']}>
-          <IconButton icon={PersonIcon} />
+          <PersonIcon viewBox="18" />
           <IconButton
             icon={BurgerIcon}
             onClick={() => setMenuOpen(true)}
@@ -113,6 +126,6 @@ export const Header: React.FC<HeaderProps> = () => {
       </Flex>
       {/* menu navigation menu*/}
       <MenuMobile menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-    </Container>
+    </ContainerOuter>
   );
 };

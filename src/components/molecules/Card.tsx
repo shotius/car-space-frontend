@@ -12,18 +12,18 @@ interface CardProps {
 
 export const Card: React.FC<CardProps & BoxProps> = ({
   minW = ['140px', '166px'],
-  h = ['115px', '130px'],
+  minH = ['115px', '130px'],
   bg = 'white',
   p = '2.5',
   borderRadius = 'md',
-  bgActive = 'autoGrey.500',
+  bgActive = 'autoBlue.400',
   children,
   ...rest
 }) => {
   return (
     <Box
       minW={minW}
-      h={h}
+      minh={minH}
       bg={bg}
       p={p}
       borderRadius={borderRadius}

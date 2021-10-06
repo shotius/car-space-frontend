@@ -10,13 +10,17 @@ export const DealerCard: React.FC<DealerCardProps> = () => {
   return (
     <Card
       w="full"
-      // maxW={[null, '305px', '139px', '139px']}
       p="4"
       h="auto"
-      m="2"
+      cursor="pointer"
+      _hover={{
+        boxShadow: "0 0.7rem 1.5rem rgba(0, 0, 0, 0.082)",
+        transform: "translateY(-2px)",
+        transition: "all .2s"
+      }}
     >
       <VStack w="full" spacing="14px">
-        <SectionHeader
+        <SectionHeader  
           mainText="Shop's name"
           secondaryText="125 vehicles"
           mainFontSize="14px"

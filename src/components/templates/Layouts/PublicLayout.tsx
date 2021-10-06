@@ -10,7 +10,13 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
     <Box w="full" direction="column" minH="100vh">
       <Box
         position="sticky"
-        h={['50px', '60px', '80px']}
+        h={[
+          '50px', // < 480px sm mobile
+          '60px', // < 768px md miniTablet
+          '70px', // < 992px lg bigTablt
+          null,   // < 1280px xl laptop
+          '80px', // < 1536px 2xl HFD
+        ]}
         top="0"
         bg="white"
         zIndex="10"
@@ -18,7 +24,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
       >
         <Header />
       </Box>
-      <Container maxW="1920" bg="#f4f4f5" minH="200vh" p='0'>
+      <Container maxW="1920" bg="#f4f4f5" minH="200vh" p="0">
         {children}
       </Container>
       <Footer />

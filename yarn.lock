@@ -72,11 +72,11 @@
     "source-map" "^0.5.0"
 
 "@babel/generator@^7.12.1", "@babel/generator@^7.12.17":
-  "integrity" "sha512-DSA7ruZrY4WI8VxuS1jWSRezFnghEoYEFrZcw9BizQRmOZiUsiHl59+qEARGPqPikwA/GPTyRCi7isuCK/oyqg=="
-  "resolved" "https://registry.npmjs.org/@babel/generator/-/generator-7.12.17.tgz"
-  "version" "7.12.17"
+  "integrity" "sha512-eKl4XdMrbpYvuB505KTta4AV9g+wWzmVBW69tX0H2NwKVKd2YJbKgyK6M8j/rgLbmHOYJn6rUklV677nOyJrEQ=="
+  "resolved" "https://registry.npmjs.org/@babel/generator/-/generator-7.15.0.tgz"
+  "version" "7.15.0"
   dependencies:
-    "@babel/types" "^7.12.17"
+    "@babel/types" "^7.15.0"
     "jsesc" "^2.5.1"
     "source-map" "^0.5.0"
 
@@ -235,10 +235,10 @@
   dependencies:
     "@babel/types" "^7.12.13"
 
-"@babel/helper-validator-identifier@^7.12.11":
-  "integrity" "sha512-np/lG3uARFybkoHokJUmf1QfEvRVCPbmQeUQpKow5cQ3xWrV9i3rUHodKDJPQfTVX61qKi+UdYk8kik84n7XOw=="
-  "resolved" "https://registry.npmjs.org/@babel/helper-validator-identifier/-/helper-validator-identifier-7.12.11.tgz"
-  "version" "7.12.11"
+"@babel/helper-validator-identifier@^7.12.11", "@babel/helper-validator-identifier@^7.14.9":
+  "integrity" "sha512-K4JvCtQqad9OY2+yTU8w+E82ywk/fe+ELNlt1G8z3bVGlZfn/hOcQQsUhGhW/N+tb3fxK800wLtKOE/aM0m72w=="
+  "resolved" "https://registry.npmjs.org/@babel/helper-validator-identifier/-/helper-validator-identifier-7.15.7.tgz"
+  "version" "7.15.7"
 
 "@babel/helper-validator-option@^7.12.1", "@babel/helper-validator-option@^7.12.17":
   "integrity" "sha512-TopkMDmLzq8ngChwRlyjR6raKD6gMSae4JdYDB8bByKreQgG0RBTuKe9LRxW3wFtUnjxOPRKBDwEH6Mg5KeDfw=="
@@ -1204,13 +1204,12 @@
     "globals" "^11.1.0"
     "lodash" "^4.17.19"
 
-"@babel/types@^7.0.0", "@babel/types@^7.12.1", "@babel/types@^7.12.13", "@babel/types@^7.12.17", "@babel/types@^7.12.6", "@babel/types@^7.3.0", "@babel/types@^7.3.3", "@babel/types@^7.4.4", "@babel/types@^7.7.0":
-  "integrity" "sha512-tNMDjcv/4DIcHxErTgwB9q2ZcYyN0sUfgGKUK/mm1FJK7Wz+KstoEekxrl/tBiNDgLK1HGi+sppj1An/1DR4fQ=="
-  "resolved" "https://registry.npmjs.org/@babel/types/-/types-7.12.17.tgz"
-  "version" "7.12.17"
+"@babel/types@^7.0.0", "@babel/types@^7.12.1", "@babel/types@^7.12.13", "@babel/types@^7.12.17", "@babel/types@^7.12.6", "@babel/types@^7.15.0", "@babel/types@^7.3.0", "@babel/types@^7.3.3", "@babel/types@^7.4.4", "@babel/types@^7.7.0":
+  "integrity" "sha512-OBvfqnllOIdX4ojTHpwZbpvz4j3EWyjkZEdmjH0/cgsd6QOdSgU8rLSk6ard/pcW7rlmjdVSX/AWOaORR1uNOQ=="
+  "resolved" "https://registry.npmjs.org/@babel/types/-/types-7.15.0.tgz"
+  "version" "7.15.0"
   dependencies:
-    "@babel/helper-validator-identifier" "^7.12.11"
-    "lodash" "^4.17.19"
+    "@babel/helper-validator-identifier" "^7.14.9"
     "to-fast-properties" "^2.0.0"
 
 "@bcoe/v8-coverage@^0.2.3":
@@ -1376,6 +1375,14 @@
   "version" "1.1.11"
   dependencies:
     "@chakra-ui/utils" "1.8.2"
+
+"@chakra-ui/icons@^1.0.15":
+  "integrity" "sha512-MMuPwmeCil9vAXceIN/Fxn6CNHbhkLofFQaKUfs+UaBsviiU2tvS0nqGaxm/9FNzLr5ithPVWpbz3uV7DXc77g=="
+  "resolved" "https://registry.npmjs.org/@chakra-ui/icons/-/icons-1.0.15.tgz"
+  "version" "1.0.15"
+  dependencies:
+    "@chakra-ui/icon" "1.1.11"
+    "@types/react" "^17.0.0"
 
 "@chakra-ui/image@1.0.19":
   "integrity" "sha512-nsGPyLAARveyfi6vSZeRUGxuVuon7np1IKhZ4BC8j4La35GfRw7/UvszvmbuBQdjPjw5EIzEWzCLe/SGtjIdAQ=="
