@@ -16,7 +16,7 @@ interface HomeProps {}
 export const Home: React.FC<HomeProps> = () => {
   return (
     <PublicLayout>
-      <Container maxW={{ base: '1004px', xl: '1640px' }} overflowX="hidden">
+      <Container maxW={{ base: '1004px', xl: '1640px' }} >
         <HomeCarousel />
         <Search />
         <VStack

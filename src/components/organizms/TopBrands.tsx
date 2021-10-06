@@ -10,7 +10,7 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
   return (
     <Box w="full">
       <SectionHeader mainText="Top Brands" secondaryText="See all" />
-      <ScrollableDiv>
+      <ScrollableDiv cardCount={16}>
         <TopBrandCard image="https://logos-world.net/wp-content/uploads/2020/04/BMW-Logo.png" />
         <TopBrandCard image="https://logos-world.net/wp-content/uploads/2020/04/BMW-Logo.png" />
         <TopBrandCard image="https://logos-world.net/wp-content/uploads/2020/04/BMW-Logo.png" />

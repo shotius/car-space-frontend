@@ -15,15 +15,15 @@ export const Search: React.FC<SearchProps> = () => {
       
     >
       <Container
-        maxW={{ sm: '550px', md: '600px', lg: '1361px' }}
+        maxW={{ sm: '550px', md: '600px', lg: '844px', xl: "82%" }}
         bg="autoBlue.400"
-        p={['4', '6', '7', '10']}
-        mb="4"
+        p={['4', '6', '7', '32px', "48px"]}
+        mb="0"
         borderRadius="lg"
         w={['100%', '90%', "100%"]}
       >
         <Flex
-          padding={['1', '1.5', null, '2']}
+        padding={['1', '1.5', null, '16px', '17px']}
           bg="#fff"
           borderRadius="lg"
           alignItems="center"
@@ -61,7 +61,7 @@ export const Search: React.FC<SearchProps> = () => {
           </Select>
           <SearchButton
             display={['none', 'none', 'block']}
-            flexBasis={['100%']}
+            flexBasis={['100%', null, null, "70%", "80%"]}
             ml="2"
           />
         </Flex>

@@ -7,6 +7,7 @@ interface SectionHeaderProps {
   mainText: string;
   secondaryText?: string;
   mainFontSize?: string[] | string;
+  mainlineHeight?: string[] | string;
   secondaryFontSize?: string;
   secondaryTextOpacity?: string;
   mb?: string[] | string;
@@ -14,19 +15,28 @@ interface SectionHeaderProps {
 
 export const SectionHeader: React.FC<SectionHeaderProps & FlexProps> = ({
   mainText,
+  mainFontSize = { lg: '18px', xl: '20px' },
+  mainlineHeight = { lg: '24px', xl: '26px' },
   secondaryText,
-  mainFontSize = '20px',
   secondaryFontSize = '16px',
   secondaryTextOpacity = '50%',
-  mb = "24px",
+  mb = '24px',
   ...rest
 }) => {
   return (
     <Flex justifyContent="space-between" mb={mb} {...rest} w="full">
-      <Heading fontSize={mainFontSize} lineHeight="26px" fontWeight="400">
+      <Heading
+        fontSize={mainFontSize}
+        lineHeight={mainlineHeight}
+        fontWeight="400"
+      >
         {mainText}
       </Heading>
-      <TextMain opacity={secondaryTextOpacity} fontSize={secondaryFontSize} color="#000">
+      <TextMain
+        opacity={secondaryTextOpacity}
+        fontSize={secondaryFontSize}
+        color="#000"
+      >
         <Link to="#">{secondaryText}</Link>
       </TextMain>
     </Flex>

@@ -1,20 +1,17 @@
-import { HStack } from '@chakra-ui/layout';
-import React, { useRef } from 'react';
-import useDraggableScroll from 'use-draggable-scroll';
+import { SimpleGrid } from '@chakra-ui/layout';
+import React from 'react';
 
+interface ScrollableDivProps {
+  cardCount: number
+}
 
-interface ScrollableDivProps {}
-
-export const ScrollableDiv: React.FC<ScrollableDivProps> = ({ children }) => {
-  const ref = useRef(null);
-  const { onMouseDown } = useDraggableScroll(ref);
+export const ScrollableDiv: React.FC<ScrollableDivProps> = ({ cardCount,  children }) => {
 
   return (
-    <HStack
-      ref={ref}
-      onMouseDown={onMouseDown}
-      w="full"
+    <SimpleGrid
       overflow="auto"
+      gap="4"
+      gridTemplateColumns={[`repeat(${cardCount}, 1fr)`, null,null, 'repeat(6, 1fr)']}
       css={{
         '&::-webkit-scrollbar': {
           display: 'none',
@@ -22,6 +19,6 @@ export const ScrollableDiv: React.FC<ScrollableDivProps> = ({ children }) => {
       }}
     >
       {children}
-    </HStack>
+    </SimpleGrid>
   );
 };
