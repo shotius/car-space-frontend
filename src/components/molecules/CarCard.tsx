@@ -22,7 +22,7 @@ export const CarCard: React.FC<CarCardProps> = () => {
       bg="white"
       borderRadius="8px"
       p="19px"
-      maxW={['295px', '343px', null, '388px']}
+      maxW={['295px', '343px', null, '314px', "388px"]}
       cursor="pointer"
     >
       <VStack w="full" spacing="19px">

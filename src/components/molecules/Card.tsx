@@ -5,7 +5,6 @@ interface CardProps {
   minW?: Array<string> | string;
   h?: Array<string> | string;
   bg?: string;
-  p?: Array<string> | string;
   borderRadius?: Array<string> | string;
   bgActive?: string;
 }
@@ -16,12 +15,14 @@ export const Card: React.FC<CardProps & BoxProps> = ({
   bg = 'white',
   p = '2.5',
   borderRadius = 'md',
-  bgActive = 'autoGrey.400',
+   bgActive ,
+  cursor="pointer",
   children,
   ...rest
 }) => {
   return (
     <Box
+      cursor={cursor}
       minW={minW}
       minH={minH}
       bg={bg}

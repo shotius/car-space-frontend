@@ -12,7 +12,8 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
 
   useEffect(() => {
     axios.get('/api/cars').then(({ data }) => {
-      setCars(data);
+      setCars(data.cars);
+      console.log(data.cars)
     });
     return () => {
       setCars([]);

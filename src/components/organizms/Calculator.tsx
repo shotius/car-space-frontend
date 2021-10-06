@@ -19,8 +19,8 @@ interface CalculatorProps {}
 export const Calculator: React.FC<CalculatorProps> = () => {
   return (
     <Box w="full">
-      <Container maxW={{ base: '664px', xl: '1079px' }}>
-        <Card bg="autoBlue.400" p="32px">
+      <Container maxW={{ base: '664px', xl: '970px' }}>
+        <Card bg="autoBlue.400" p={{lg: "32px", xl: "48px"}}>
           <SectionHeader mainText="Calculator" color="white" />
           <Stack spacing="4">
             <HStack

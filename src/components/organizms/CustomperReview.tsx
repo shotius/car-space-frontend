@@ -65,6 +65,8 @@ export const CustomperReview: React.FC<CustomperReviewProps> = () => {
     infinite: false,
     slidesToShow: 1,
     slidesToScroll: 1,
+    swipe: false,
+    // fade: true,
     beforeChange,
   };
 

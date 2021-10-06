@@ -23,7 +23,6 @@ export const Home: React.FC<HomeProps> = () => {
           w="full"
           alignItems="flex-start"
           spacing={['64px', '85px', '101px', '138px']}
-          mb={['64px', '85px', '101px', '138px']}
         >
           <MiniCategory />
           <HomeCategory />

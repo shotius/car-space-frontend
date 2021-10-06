@@ -11,7 +11,7 @@ export const ArrowNextIcon: React.FC<ArrowNextProps> = () => {
       height="24"
       viewBox="0 0 24 24"
     >
-      <path id="Path_457" data-name="Path 457" d="M0,0H24V24H0Z" fill="none" />
+      <path id="Path_457" data-name="Path 457" d="M0,0H24V24H0Z" fill="transparent" />
       <path
         id="Path_458"
         data-name="Path 458"
