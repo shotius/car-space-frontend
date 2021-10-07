@@ -26,8 +26,8 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
   }, []);
 
   return (
-    <ContainerOuter>
-      <VStack w="full">
+    <ContainerOuter pt={['4', '6', null, '8', '16']}>
+      <VStack w="full" spacing={['66px']}>
         <Card bg="autoBlue.400" p="4" w="full">
           <Stack>
             <Select placeholder="Brand"></Select>
@@ -48,7 +48,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
             </Collapse>
             <HStack w="full" justify="space-between" alignItems="stretch">
               <SearchButton flexBasis="50%" />
-              <Button flexBasis="50%" onClick={toggleFilters}>
+              <Button flexBasis="50%" onClick={toggleFilters} display={['block', null , "none"]}>
                 See more filter
               </Button>
             </HStack>
