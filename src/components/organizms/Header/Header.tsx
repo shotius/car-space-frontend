@@ -9,7 +9,7 @@ import { PersonIcon } from 'components/atoms/Icons/PersonIcon';
 import { TextRegular } from 'components/molecules/Texts/TextRegular';
 import { Currencies, Languages } from 'constants/index';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { MenuMobile } from '../MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
@@ -20,6 +20,7 @@ export const Header: React.FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
   const [lang, setLang] = useState<Languages>(Languages.ENG);
+  const history = useHistory();
 
   // if menu open stop body scroll
   useEffect(() => {
@@ -59,10 +60,10 @@ export const Header: React.FC<HeaderProps> = () => {
         <HStack
           ml="auto"
           display={['none', 'none', 'flex']}
-          spacing={[null, null, "16px", "24px"]}
+          spacing={[null, null, '16px', '24px']}
           divider={<StackDivider />}
         >
-          <HStack spacing={[null, null, "16px", "24px", "32px"]}>
+          <HStack spacing={[null, null, '16px', '24px', '32px']}>
             <TextRegular>
               <Link to="/catalog">Catalog</Link>
             </TextRegular>
@@ -73,7 +74,10 @@ export const Header: React.FC<HeaderProps> = () => {
               <Link to="/blog">Blog</Link>
             </TextRegular>
           </HStack>
-          <HStack spacing={[null, null, "0px",  "8px"]} mr={[null, null, "-20px", "-15px"]}>
+          <HStack
+            spacing={[null, null, '0px', '8px']}
+            mr={[null, null, '-20px', '-15px']}
+          >
             {/* choose currency */}
             <CurrencyPopover
               isOpen={isCurrOpen}
@@ -93,16 +97,15 @@ export const Header: React.FC<HeaderProps> = () => {
           </HStack>
           {/* <Divider height="35px" borderColor="gray.500" /> */}
           <HStack spacing="4" ml="-15px">
-            <Button variant="ghost" fontWeight="light" fontSize="16px">
-              <TextRegular>
-                <Link to="/login">Log in</Link>
-              </TextRegular>
+            <Button variant="ghost" fontWeight="light" fontSize="16px" onClick={() => history.push("/login")}>
+              <TextRegular>Log in</TextRegular>
             </Button>
             <Button
               backgroundColor="white"
               fontWeight="light"
               borderColor="#565656"
               borderWidth="1px"
+              onClick={() => history.push('/register')}
             >
               <PersonIcon viewBox="15" />
               <TextRegular ml="1">Register</TextRegular>

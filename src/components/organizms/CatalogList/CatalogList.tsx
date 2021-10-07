@@ -1,5 +1,7 @@
-import { Box } from '@chakra-ui/layout';
+import { Box, SimpleGrid } from '@chakra-ui/layout';
+import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
 import { Text } from 'components/atoms/Text';
+import { CarCard } from 'components/molecules/CarCard';
 import { Search } from 'components/molecules/Search/Search';
 import React, { useEffect, useState } from 'react';
 import { ICar } from 'redux/features/auth/types';
@@ -21,19 +23,16 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
     return () => {
       setCars([]);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <>
+    <ContainerOuter>
       <Search />
+       <SimpleGrid gridTemplateColumns={['1fr', "1fr 1fr",null,  "repeat(3, 1fr)", "repeat(4, 1fr)"]} spacing="4">
       {cars.map((car: ICar, i) => (
-        <Box key={car._id}>
-          <Text>{i}.{car.m}</Text>
-          <Text>{car.lN}</Text>
-          <img src={`https://${car.imgT}`} alt="car" />
-        </Box>
-      ))}
-    </>
+        <CarCard car={car} key={i}/>
+         ))}
+       </SimpleGrid>
+    </ContainerOuter>
   );
 };

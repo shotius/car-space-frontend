@@ -1,5 +1,6 @@
 import { VStack } from '@chakra-ui/layout';
 import { Container } from '@chakra-ui/react';
+import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
 import { HomeCarousel } from 'components/molecules/HomeCarousel/HomeCarousel';
 import { Search } from 'components/molecules/Search/Search';
 import { Calculator } from 'components/organizms/Calculator';
@@ -16,7 +17,7 @@ interface HomeProps {}
 export const Home: React.FC<HomeProps> = () => {
   return (
     <PublicLayout>
-      <Container maxW={{ base: '1004px', xl: '1640px' }} >
+      <ContainerOuter>
         <HomeCarousel />
         <Search />
         <VStack
@@ -31,7 +32,7 @@ export const Home: React.FC<HomeProps> = () => {
           <DealersSection />
           <Calculator />
         </VStack>
-      </Container>
+      </ContainerOuter>
     </PublicLayout>
   );
 };

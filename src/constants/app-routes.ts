@@ -45,11 +45,27 @@ const AppRoutes: Array<AppRouteObj> = [
   },
   {
     roles: [],
+    view: "RegisterPage",
+    path: "/register",
+    isPrivate: false,
+    isAuth: true,
+    exact: true,
+  },
+  {
+    roles: [],
     view: "CatalogPage",
     exact: true,
     isPrivate: false,
     isAuth: false,
     path: "/catalog"
+  },
+  {
+    roles: [],
+    view: "BlogPage",
+    exact: true,
+    isPrivate: false,
+    isAuth: false,
+    path: "/blog"
   }
 ];
 

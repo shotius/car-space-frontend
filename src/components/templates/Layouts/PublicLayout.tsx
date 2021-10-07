@@ -1,6 +1,8 @@
 import { Box, Container } from '@chakra-ui/react';
 import { Footer } from 'components/organizms/Footer/Footer';
 import { Header } from 'components/organizms/Header';
+import { HEADER_HEIGHT } from 'constants/index';
+
 import React from 'react';
 
 interface PublicLayoutProps {}
@@ -10,13 +12,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
     <Box w="full" direction="column" minH="100vh">
       <Box
         position="sticky"
-        h={[
-          '50px', // < 480px sm mobile
-          '60px', // < 768px md miniTablet
-          '70px', // < 992px lg bigTablt
-          null,   // < 1280px xl laptop
-          '80px', // < 1536px 2xl HFD
-        ]}
+        h={HEADER_HEIGHT}
         top="0"
         bg="white"
         zIndex="10"
@@ -24,7 +20,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
       >
         <Header />
       </Box>
-      <Container maxW="1920" bg="#f4f4f5" minH="200vh" pb={['64px', '85px', '101px', '138px']} >
+      <Container maxW="1920" bg="#f4f4f5" minH="100vh" pb={['64px', '85px', '101px', '138px']}>
         {children}
       </Container>
       <Footer />
