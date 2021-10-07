@@ -62,8 +62,6 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
           borderRadius="md"
         >
           <Image
-            // src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"
-            // src="https://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX405/88b9d90d-7274-4ce7-a632-62f73f109f15.JPG"
             src={
               car
                 ? `https://${car?.imgT}`
@@ -71,7 +69,9 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
             }
             alt="car white"
             filter="auto"
-            blur="10px"
+            blur={
+              car? "10px": 'none'
+            }
             saturation={0.9}
           />
         </AspectRatio>
