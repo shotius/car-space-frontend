@@ -1,5 +1,4 @@
 import { VStack } from '@chakra-ui/layout';
-import { Container } from '@chakra-ui/react';
 import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
 import { HomeCarousel } from 'components/molecules/HomeCarousel/HomeCarousel';
 import { Search } from 'components/molecules/Search/Search';

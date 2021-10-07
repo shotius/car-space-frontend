@@ -20,7 +20,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
       >
         <Header />
       </Box>
-      <Container maxW="1920" bg="#f4f4f5" minH="100vh" pb={['64px', '85px', '101px', '138px']}>
+      <Container maxW="1920" bg="#f4f4f5" minH="100vh" pb={['64px', '85px', '101px', '138px']} pl="0" pr="0">
         {children}
       </Container>
       <Footer />

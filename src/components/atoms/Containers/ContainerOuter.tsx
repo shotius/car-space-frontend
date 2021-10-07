@@ -4,11 +4,12 @@ import React from 'react';
 interface ContainerOuterProps {}
 
 export const ContainerOuter: React.FC<ContainerOuterProps & ContainerProps> = ({
+  maxW={ base: '1004px', xl: '1640px' },
   children,
   ...rest
 }) => {
   return (
-    <Container maxW={{ base: '1004px', xl: '1640px' }} {...rest}>
+    <Container maxW={maxW} {...rest}>
       {children}
     </Container>
   );

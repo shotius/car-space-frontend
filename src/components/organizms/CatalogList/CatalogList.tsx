@@ -1,6 +1,5 @@
-import { Box, SimpleGrid } from '@chakra-ui/layout';
+import { SimpleGrid } from '@chakra-ui/layout';
 import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
-import { Text } from 'components/atoms/Text';
 import { CarCard } from 'components/molecules/CarCard';
 import { Search } from 'components/molecules/Search/Search';
 import React, { useEffect, useState } from 'react';
@@ -13,13 +12,9 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
   const [cars, setCars] = useState<ICar[] | []>([]);
 
   useEffect(() => {
-    if (cars.length === 0) {
-        console.log('axios')
-        axios.get('/api/cars').then(({ data }) => {
-          setCars(data.cars);
-          console.log('data, in effect');
-        });
-    }
+    axios.get('/api/cars').then(({ data }) => {
+      setCars(data.cars);
+    });
     return () => {
       setCars([]);
     };
@@ -28,11 +23,20 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
   return (
     <ContainerOuter>
       <Search />
-       <SimpleGrid gridTemplateColumns={['1fr', "1fr 1fr",null,  "repeat(3, 1fr)", "repeat(4, 1fr)"]} spacing="4">
-      {cars.map((car: ICar, i) => (
-        <CarCard car={car} key={i}/>
-         ))}
-       </SimpleGrid>
+      <SimpleGrid
+        gridTemplateColumns={[
+          '1fr',
+          '1fr 1fr',
+          null,
+          'repeat(3, 1fr)',
+          'repeat(4, 1fr)',
+        ]}
+        spacing="4"
+      >
+        {cars.map((car: ICar, i) => (
+          <CarCard car={car} key={i} />
+        ))}
+      </SimpleGrid>
     </ContainerOuter>
   );
 };
