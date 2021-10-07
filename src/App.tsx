@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     dispatch(autoLogin());
   }, [dispatch]);
-
+  
   if (loading) {
     return (
       <Center>
@@ -36,7 +36,9 @@ function App() {
     );
   }
 
+
   const getAllowedRoutes = () => {
+    // console.log('get Allowed routes')
     return AppRoutes.filter(({ roles }) => {
       // if route has no roles or there is my role and this role in routes' roles
       if ((roles && roles.length === 0) || (MyRole && roles.includes(MyRole))) {
@@ -48,6 +50,7 @@ function App() {
 
   // generate only routes where user has permissions
   const generateRoutes = () => {
+    // console.log('generating routes')
     const allowedRoutes = getAllowedRoutes();
     return allowedRoutes.map((route) => {
       const { path, view, isPrivate, exact, isAuth } = route;
@@ -83,6 +86,7 @@ function App() {
     });
   };
 
+  console.log('app')
   return (
     <StyledApp>
       <Router>
@@ -96,7 +100,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-    </StyledApp>
+     </StyledApp>
   );
 }
 

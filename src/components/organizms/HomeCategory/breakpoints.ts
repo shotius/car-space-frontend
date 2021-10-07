@@ -21,19 +21,31 @@ export const breakpoints = [
   {
     breakpoint: 1340,
     settings: {
-      slidesToShow: 3.1,
+      slidesToShow: 3,
+    },
+  },
+  {
+    breakpoint: 1240,
+    settings: {
+      slidesToShow: 3,
     },
   },
   {
     breakpoint: 1140,
     settings: {
-      slidesToShow: 3,
+      slidesToShow: 2.8,
     },
   },
   {
     breakpoint: 1040,
     settings: {
       slidesToShow: 3.1,
+    },
+  },
+  {
+    breakpoint: 1030,
+    settings: {
+      slidesToShow: 2.8,
     },
   },
   {

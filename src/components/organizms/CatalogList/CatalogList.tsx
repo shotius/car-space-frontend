@@ -11,23 +11,27 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
   const [cars, setCars] = useState<ICar[] | []>([]);
 
   useEffect(() => {
-    axios.get('/api/cars').then(({ data }) => {
-      setCars(data.cars);
-      console.log(data.cars)
-    });
+    if (cars.length === 0) {
+        console.log('axios')
+        axios.get('/api/cars').then(({ data }) => {
+          setCars(data.cars);
+          console.log('data, in effect');
+        });
+    }
     return () => {
       setCars([]);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <Search />
-      {cars.map((car: ICar) => (
+      {cars.map((car: ICar, i) => (
         <Box key={car._id}>
-          <Text>{car.m}</Text>
+          <Text>{i}.{car.m}</Text>
+          <Text>{car.lN}</Text>
           <img src={`https://${car.imgT}`} alt="car" />
-          <Text>{}</Text>
         </Box>
       ))}
     </>

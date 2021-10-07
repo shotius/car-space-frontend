@@ -6,23 +6,36 @@ import {
   Image,
   SimpleGrid,
   StackDivider,
-  VStack
+  VStack,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FiHeart } from 'react-icons/fi';
+import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
 import { TextMain } from '../atoms/Texts/TextMain';
 import { IconButton } from './IconButton';
 
 interface CarCardProps {}
 
 export const CarCard: React.FC<CarCardProps> = () => {
+  const ref = useRef(null);
+  const entry = useIntersectionObserver(ref, {});
+  const isVisible = !!entry?.isIntersecting;
+
+  if (isVisible) {
+    console.log('appeard');
+  }
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Box
+      ref={ref}
       w="full"
       bg="white"
       borderRadius="8px"
       p="19px"
-      maxW={['295px', '343px', null, '314px', "388px"]}
+      maxW={['295px', '343px', null, '314px', '388px']}
       cursor="pointer"
     >
       <VStack w="full" spacing="19px">
@@ -32,18 +45,20 @@ export const CarCard: React.FC<CarCardProps> = () => {
             <Heading fontSize="16px" fontWeight="400">
               Certified car
             </Heading>
-            <TextMain opacity="50%">
-              2018
-            </TextMain>
+            <TextMain opacity="50%">2018</TextMain>
           </VStack>
           <IconButton icon={FiHeart} boxSize={6} />
         </HStack>
         {/* picture */}
-        <AspectRatio ratio={311 / 192} w="full">
+        <AspectRatio ratio={311 / 192} w="full" overflow="hidden" borderRadius="md">
           <Image
-            src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"
+            // src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"
+            src="https://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX405/88b9d90d-7274-4ce7-a632-62f73f109f15.JPG"
             alt="car white"
-            borderRadius="md"
+            
+            filter="auto"
+            blur="10px"
+            saturation={0.1}
           />
         </AspectRatio>
         {/* description */}

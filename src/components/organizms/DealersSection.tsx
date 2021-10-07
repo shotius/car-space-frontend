@@ -14,7 +14,6 @@ export const DealersSection: React.FC<DealersSectionProps> = () => {
         <DealerCard />
         <DealerCard />
         <DealerCard />
-        <DealerCard />
       </SimpleGrid>
     </Box>
   );
