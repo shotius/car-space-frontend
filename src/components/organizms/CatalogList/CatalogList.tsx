@@ -43,6 +43,10 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
             <CarCard car={car} key={i} />
           ))}
         </SimpleGrid>
+        {/* <Box>
+          <Icon as={FiltersIcon} boxSize="20"/>
+          <Icon as={PersonIcon} boxSize="10" bg="red"/>
+        </Box> */}
       </VStack>
     </ContainerOuter>
   );

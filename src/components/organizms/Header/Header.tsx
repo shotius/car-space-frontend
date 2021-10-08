@@ -13,6 +13,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { MenuMobile } from '../MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
+import Icon from '@chakra-ui/icon';
 
 interface HeaderProps {}
 
@@ -107,14 +108,14 @@ export const Header: React.FC<HeaderProps> = () => {
               borderWidth="1px"
               onClick={() => history.push('/register')}
             >
-              <PersonIcon viewBox="15" />
+              <Icon as={PersonIcon} boxSize="4"/>
               <TextRegular ml="1">Register</TextRegular>
             </Button>
           </HStack>
         </HStack>
         {/* mobile view profile and menu hamburger*/}
         <HStack ml="auto" display={['flex', 'flex', 'none']}>
-          <PersonIcon viewBox="18" />
+          <IconWithButton icon={PersonIcon} boxSize="17px" mr="-4" pt="0px"/>
           <IconWithButton
             icon={BurgerIcon}
             onClick={() => setMenuOpen(true)}

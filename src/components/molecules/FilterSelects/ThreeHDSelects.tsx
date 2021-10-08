@@ -1,7 +1,5 @@
 import {
-  Button,
-  HStack,
-  Icon, Stack,
+  HStack, Stack,
   StackProps
 } from '@chakra-ui/react';
 import { DividerVertical } from 'components/atoms/Divider';
