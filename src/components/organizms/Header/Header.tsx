@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = () => {
         <Heading cursor="pointer" fontSize="20px">
           <IconWithButton
             icon={LogoIcon}
-            boxSize="100px"
+            boxSize={["100px", null, "150px"]}
             bg="transparent"
             p="0"
             onClick={() => history.push('/home')}
