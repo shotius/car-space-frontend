@@ -10,7 +10,7 @@ interface HomeCategoryProps {}
 
 export const HomeCategory: React.FC<HomeCategoryProps> = () => {
   const settings = {
-    touchThreshold: 10,
+    touchThreshold: 200,
     responsive: breakpoints,
     speed: 500,
     infinite: false,
