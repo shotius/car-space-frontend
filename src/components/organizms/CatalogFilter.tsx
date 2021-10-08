@@ -59,6 +59,7 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
           fontWeight="light"
           flexBasis="50%"
           h = {['44px', null, '50px', null , '62px']}
+          borderRadius="8px"
           onClick={onToggle}
           _hover={{
             bg: 'transparent',

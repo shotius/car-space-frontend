@@ -56,15 +56,14 @@ export const Header: React.FC<HeaderProps> = () => {
     >
       {/* desktop view */}
       <Flex h="full" alignItems="center" zIndex="10">
-        <Heading cursor="pointer" fontSize="20px">
-          <IconWithButton
-            icon={LogoIcon}
-            boxSize={["100px", null, "150px"]}
-            bg="transparent"
-            p="0"
-            onClick={() => history.push('/home')}
-          />
-        </Heading>
+        <IconWithButton
+          icon={LogoIcon}
+          boxSize={['100px', null, '150px']}
+          bg="transparent"
+          p="0"
+          onClick={() => history.push('/home')}
+          cursor="pointer"
+        />
         <HStack
           ml="auto"
           display={['none', 'none', 'flex']}

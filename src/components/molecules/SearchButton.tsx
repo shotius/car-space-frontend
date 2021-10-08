@@ -5,10 +5,9 @@ import { BsSearch } from 'react-icons/bs';
 interface SearchButtonProps {}
 
 export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
-  // h=["44px",null, null,"50px",  "62px"],
-
-  h = ['44px', null, '50px', null, '62px'],
+  h = ['44px', null, '50px', null , '62px'],
   bg = 'autoOrange.500',
+  borderRadius="8px",
   w = 'full',
   variant = 'solid',
   color = '#fff',
@@ -23,6 +22,7 @@ export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
       w={w}
       color={color}
       fontWeight={fontWeight}
+      borderRadius={borderRadius}
       _hover={{
         bg: 'autoOrange.400',
       }}
