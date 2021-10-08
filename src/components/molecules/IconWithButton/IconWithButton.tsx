@@ -17,6 +17,7 @@ export const IconWithButton: React.FC<IconButtonProps & ButtonProps> = ({
   h = { md: '40px', lg: '50px', xl: '62px' },
   icon,
   boxSize,
+  children, 
   ...rest
 }) => {
   return (
@@ -29,6 +30,7 @@ export const IconWithButton: React.FC<IconButtonProps & ButtonProps> = ({
       {...rest}
     >
       <Icon as={icon} boxSize={boxSize} />
+      {children}
     </Button>
   );
 };

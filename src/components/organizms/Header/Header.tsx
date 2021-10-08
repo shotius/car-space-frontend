@@ -14,6 +14,7 @@ import { MenuMobile } from '../MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 import Icon from '@chakra-ui/icon';
+import { LogoIcon } from 'components/atoms/Icons/LogoIcon';
 
 interface HeaderProps {}
 
@@ -56,7 +57,13 @@ export const Header: React.FC<HeaderProps> = () => {
       {/* desktop view */}
       <Flex h="full" alignItems="center" zIndex="10">
         <Heading cursor="pointer" fontSize="20px">
-          <Link to="/home">Logo</Link>
+          <IconWithButton
+            icon={LogoIcon}
+            boxSize="100px"
+            bg="transparent"
+            p="0"
+            onClick={() => history.push('/home')}
+          />
         </Heading>
         <HStack
           ml="auto"
@@ -98,7 +105,12 @@ export const Header: React.FC<HeaderProps> = () => {
           </HStack>
           {/* <Divider height="35px" borderColor="gray.500" /> */}
           <HStack spacing="4" ml="-15px">
-            <Button variant="ghost" fontWeight="light" fontSize="16px" onClick={() => history.push("/login")}>
+            <Button
+              variant="ghost"
+              fontWeight="light"
+              fontSize="16px"
+              onClick={() => history.push('/login')}
+            >
               <TextRegular>Log in</TextRegular>
             </Button>
             <Button
@@ -108,14 +120,14 @@ export const Header: React.FC<HeaderProps> = () => {
               borderWidth="1px"
               onClick={() => history.push('/register')}
             >
-              <Icon as={PersonIcon} boxSize="4"/>
+              <Icon as={PersonIcon} boxSize="4" />
               <TextRegular ml="1">Register</TextRegular>
             </Button>
           </HStack>
         </HStack>
         {/* mobile view profile and menu hamburger*/}
         <HStack ml="auto" display={['flex', 'flex', 'none']}>
-          <IconWithButton icon={PersonIcon} boxSize="17px" mr="-4" pt="0px"/>
+          <IconWithButton icon={PersonIcon} boxSize="17px" mr="-4" pt="0px" />
           <IconWithButton
             icon={BurgerIcon}
             onClick={() => setMenuOpen(true)}
