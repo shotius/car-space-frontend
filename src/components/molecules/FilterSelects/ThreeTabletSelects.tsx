@@ -11,7 +11,7 @@ export const ThreeTabletSelects: React.FC<
   bg = 'white',
   direction = 'row',
   borderRadius = 'md',
-  display=['none', 'flex', null, null, 'none'],
+  display=['none', 'flex',  'none'],
   ...rest
 }) => {
   return (

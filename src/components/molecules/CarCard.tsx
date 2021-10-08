@@ -13,7 +13,7 @@ import { FiHeart } from 'react-icons/fi';
 import { ICar } from 'redux/features/auth/types';
 import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
 import { TextMain } from '../atoms/Texts/TextMain';
-import { IconButton } from './IconButton';
+import { IconWithButton } from './IconWithButton';
 import { TextRegular } from 'components/molecules/Texts/TextRegular';
 
 interface CarCardProps {
@@ -52,7 +52,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
             </Heading>
             <TextMain opacity="50%">2018</TextMain>
           </VStack>
-          <IconButton icon={FiHeart} boxSize={6} />
+          <IconWithButton icon={FiHeart} boxSize={6} />
         </HStack>
         {/* picture */}
         <AspectRatio

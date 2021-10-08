@@ -26,12 +26,8 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
   return (
     <ContainerOuter pt={['4', '6', null, '8', '16']}>
       <VStack w="full" spacing={['66px']}>
-        <Card bg="autoBlue.400" p="4" w="full">
-          <CatalogFilter
-            isOpen={isFilterOpen}
-            onToggle={toggleFilters}
-            display={{ md: 'none' }}
-          />
+        <Card bg="autoBlue.400" p={['4', '6', '6', "8", '12']} w="full" minH="auto">
+          <CatalogFilter isOpen={isFilterOpen} onToggle={toggleFilters} />
         </Card>
         <SimpleGrid
           gridTemplateColumns={[

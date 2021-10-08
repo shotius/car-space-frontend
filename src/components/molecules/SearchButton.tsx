@@ -8,8 +8,9 @@ interface SearchButtonProps {
 export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
   // h=["44px",null, null,"50px",  "62px"],
 
-  h=[null,null, null,"50px",  "62px"],
+  // h=["auto",null, null,"50px",  "62px"],
   bg="autoOrange.500",
+  w="full",
   variant="solid",
   color="#fff",
   fontWeight="light",
@@ -19,7 +20,8 @@ export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
     <Button
       variant={variant}
       bg={bg}
-      h={h}
+      // h={h}
+      w={w}
       color={color}
       fontWeight={fontWeight}
       _hover={{

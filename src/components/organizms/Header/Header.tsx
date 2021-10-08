@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Flex, Heading, HStack, StackDivider } from '@chakra-ui/layout';
-import { IconButton } from 'components/molecules/IconButton';
+import { IconWithButton } from 'components/molecules/IconWithButton';
 import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
 import { BurgerIcon } from 'components/atoms/Icons/BurgerIcon';
 import { CloseIcon } from 'components/atoms/Icons/CloseIcon';
@@ -115,12 +115,12 @@ export const Header: React.FC<HeaderProps> = () => {
         {/* mobile view profile and menu hamburger*/}
         <HStack ml="auto" display={['flex', 'flex', 'none']}>
           <PersonIcon viewBox="18" />
-          <IconButton
+          <IconWithButton
             icon={BurgerIcon}
             onClick={() => setMenuOpen(true)}
             display={menuOpen ? 'none' : 'inline-block'}
           />
-          <IconButton
+          <IconWithButton
             icon={CloseIcon}
             display={menuOpen ? 'block' : 'none'}
             onClick={() => setMenuOpen(false)}
