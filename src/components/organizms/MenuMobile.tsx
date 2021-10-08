@@ -36,13 +36,13 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
         to="/catalog"
         onClick={() => setMenuOpen(false)}
       />
-      <NavMenuLink heading="Services" to="/services" />
+      <NavMenuLink heading="Services" to="/services"  onClick={() => setMenuOpen(false)}/>
 
-      <NavMenuLink heading="Blog" to="/blog" />
-      <NavMenuLink heading="MiniCategory" to="/miniCategory" />
-      <NavMenuLink heading="Top Brands" to="/topBrands" />
-      <NavMenuLink heading="Dealers" to="/dealers" />
-      <NavMenuLink heading="Contact" to="/contact" />
+      <NavMenuLink heading="Blog" to="/blog"onClick={() => setMenuOpen(false)}/>
+      <NavMenuLink heading="MiniCategory" to="/miniCategory" onClick={() => setMenuOpen(false)}/>
+      <NavMenuLink heading="Top Brands" to="/topBrands" onClick={() => setMenuOpen(false)}/>
+      <NavMenuLink heading="Dealers" to="/dealers" onClick={() => setMenuOpen(false)}/>
+      <NavMenuLink heading="Contact" to="/contact" onClick={() => setMenuOpen(false)}/>
 
       <HStack justifyContent="space-around" pt="4" spacing="2" w="full">
         <Button w="40%">

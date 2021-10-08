@@ -1,6 +1,6 @@
 import { Button } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
-import { Flex, Heading, HStack, StackDivider } from '@chakra-ui/layout';
+import { Flex, HStack, StackDivider } from '@chakra-ui/layout';
 import { IconWithButton } from 'components/molecules/IconWithButton';
 import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
 import { BurgerIcon } from 'components/atoms/Icons/BurgerIcon';
@@ -61,7 +61,10 @@ export const Header: React.FC<HeaderProps> = () => {
           boxSize={['100px', null, '150px']}
           bg="transparent"
           p="0"
-          onClick={() => history.push('/home')}
+          onClick={() => {
+            setMenuOpen(false)
+            history.push('/home')
+          }}
           cursor="pointer"
         />
         <HStack
