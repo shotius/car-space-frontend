@@ -49,7 +49,7 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
         w="full"
         justify="space-between"
         alignItems="stretch"
-        pt={['2', null, '4']}
+        pt={['2', "3", '4']}
         display={['flex', null, 'none']}
       >
         <SearchButton flexBasis="50%" />
@@ -58,6 +58,7 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
           color="white"
           fontWeight="light"
           flexBasis="50%"
+          h = {['44px', null, '50px', null , '62px']}
           onClick={onToggle}
           _hover={{
             bg: 'transparent',

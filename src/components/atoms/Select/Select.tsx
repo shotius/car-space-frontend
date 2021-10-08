@@ -8,7 +8,7 @@ const CustomSelect: React.FC<CustomSelectProps & SelectProps> = ({
   bg = 'white',
   border = 'none',
   fontSize = ['16px', null, null, '18px', '24px'],
-  h = ['50px', null, null, '60px'],
+  h = ['50px', null, null, '50px', '60px'],
   children,
   ...rest
 }) => {

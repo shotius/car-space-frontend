@@ -63,6 +63,7 @@ export const Search: React.FC<SearchProps> = () => {
             display={['none', 'none', 'block']}
             flexBasis={['100%', null, null, '70%', '80%']}
             ml="2"
+            
           />
         </Flex>
           <SearchButton
