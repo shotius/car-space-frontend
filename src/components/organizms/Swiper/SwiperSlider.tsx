@@ -20,22 +20,22 @@ export default function App() {
   return (
     <>
       <Swiper
-        slidesPerView={3}
+        slidesPerView={1.1}
         spaceBetween={30}
         pagination={{
           clickable: true,
         }}
         className="mySwiper"
       >
-        <SwiperSlide><Box h="200px" >Slide 1</Box></SwiperSlide>
-        <SwiperSlide><Box h="200px" >Slide 2</Box></SwiperSlide>
-        <SwiperSlide><Box h="200px" >Slide 3</Box></SwiperSlide>
-        <SwiperSlide><Box h="200px" >Slide 4</Box></SwiperSlide>
-        <SwiperSlide><Box h="200px" >Slide 5</Box></SwiperSlide>
-        <SwiperSlide><Box h="200px" >Slide 6</Box></SwiperSlide>
-        <SwiperSlide><Box h="200px" >Slide 7</Box></SwiperSlide>
-        <SwiperSlide><Box h="200px" >Slide 8</Box></SwiperSlide>
-        <SwiperSlide><Box h="200px" >Slide 9</Box></SwiperSlide>
+        <SwiperSlide><Box h="400px" w="400px" bg="red" >Slide 1</Box></SwiperSlide>
+        <SwiperSlide><Box h="400px" w="400px" bg="red" >Slide 2</Box></SwiperSlide>
+        <SwiperSlide><Box h="400px" w="400px" bg="red" >Slide 3</Box></SwiperSlide>
+        <SwiperSlide><Box h="400px" w="400px" bg="red" >Slide 4</Box></SwiperSlide>
+        <SwiperSlide><Box h="400px" w="400px" bg="red" >Slide 5</Box></SwiperSlide>
+        <SwiperSlide><Box h="400px" w="400px" bg="red" >Slide 6</Box></SwiperSlide>
+        <SwiperSlide><Box h="400px" w="400px" bg="red" >Slide 7</Box></SwiperSlide>
+        <SwiperSlide><Box h="400px" w="400px" bg="red" >Slide 8</Box></SwiperSlide>
+        <SwiperSlide><Box h="400px" w="400px" bg="red" >Slide 9</Box></SwiperSlide>
       </Swiper>
     </>
   );

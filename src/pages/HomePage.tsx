@@ -19,9 +19,6 @@ export const Home: React.FC<HomeProps> = () => {
         <VStack alignItems="flex-start" w="full" spacing="64px">
           <MiniCategory />
           <HomeCategory />
-          <Box h="xs" bg="gray.400" my="3">
-            <Heading size="md">Customer Reviews</Heading>
-          </Box>
             <SwiperSlider />
         </VStack>
       </Container>
