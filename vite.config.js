@@ -5,8 +5,8 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   server: {
     proxy: {
-      "/": "http://localhost:3001"
+      "/api": "http://192.162.100.10:3001"
     },
-    host: true
+    host:true
   }
 })
