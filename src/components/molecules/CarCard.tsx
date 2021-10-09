@@ -42,6 +42,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
       // maxW={['295px', '343px', null, '314px', '388px']}
       maxW={['343px', null, null, '314px', '388px']}
       cursor="pointer"
+      minW={["300px", '340px']}
     >
       <VStack w="full" spacing="19px">
         {/* header */}

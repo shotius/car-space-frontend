@@ -1,5 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import { CarCard } from 'components/molecules/CarCard';
+// import { ScrollableDiv } from 'components/molecules/ScrollableDiv';
 import { SectionHeader } from 'components/molecules/SectionHeader/SectionHeader';
 import React from 'react';
 import Slider from 'react-slick';
@@ -27,6 +28,7 @@ export const HomeCategory: React.FC<HomeCategoryProps> = () => {
       <SectionHeader mainText="Category" secondaryText="See all" />
       <Box>
         <Slider {...settings}>
+        {/* <ScrollableDiv cardCount={8} columnsLaptop={3} columnsHD={4}> */}
           <CarCard />
           <CarCard />
           <CarCard />
@@ -35,10 +37,7 @@ export const HomeCategory: React.FC<HomeCategoryProps> = () => {
           <CarCard />
           <CarCard />
           <CarCard />
-          <CarCard />
-          <CarCard />
-          <CarCard />
-          <CarCard />
+          {/* </ScrollableDiv> */}
         </Slider>
       </Box>
     </Box>

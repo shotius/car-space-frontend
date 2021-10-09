@@ -23,7 +23,7 @@ export const Search: React.FC<SearchProps> = () => {
         w={['100%', '90%', '100%']}
       >
         <Flex
-          padding={['1', '1.5', null, '16px', '17px']}
+          padding={['1', '1.5', null, '16px']}
           bg="#fff"
           borderRadius="lg"
           alignItems="center"
