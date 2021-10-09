@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/button';
+import { Button, IconButton } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Flex, HStack, StackDivider } from '@chakra-ui/layout';
 import { IconWithButton } from 'components/molecules/IconWithButton';
@@ -125,17 +125,27 @@ export const Header: React.FC<HeaderProps> = () => {
           </HStack>
         </HStack>
         {/* mobile view profile and menu hamburger*/}
-        <HStack ml="auto" display={['flex', 'flex', 'none']}>
-          <IconWithButton icon={PersonIcon} boxSize="17px" mr="-4" pt="0px" />
-          <IconWithButton
-            icon={BurgerIcon}
+        <HStack ml="auto" display={['flex', 'flex', 'none']} spacing={0}>
+          {/* <IconWithButton icon={PersonIcon} boxSize="17px" mr="-4" pt="0px" /> */}
+          <IconButton
+            aria-label="profile"
+          icon={<PersonIcon boxSize="5" />}
+            bg="transparent"
+          />
+          <IconButton
+            aria-label="menu"
+            icon={<BurgerIcon boxSize="6" />}
+            bg="transparent"
             onClick={() => setMenuOpen(true)}
             display={menuOpen ? 'none' : 'inline-block'}
           />
-          <IconWithButton
-            icon={CloseIcon}
+         
+          <IconButton
+            aria-label="close menu"
+            icon={<CloseIcon boxSize="6"/>}
             display={menuOpen ? 'block' : 'none'}
             onClick={() => setMenuOpen(false)}
+            bg="transparent"
           />
         </HStack>
       </Flex>

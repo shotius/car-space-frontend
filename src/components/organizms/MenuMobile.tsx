@@ -46,7 +46,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
 
       <HStack justifyContent="space-around" pt="4" spacing="2" w="full">
         <Button w="40%">
-          <Icon as={UKIcon} />
+          <Icon as={UKIcon} boxSize="6" />
         </Button>
         <Button w="40%"> GEL</Button>
       </HStack>

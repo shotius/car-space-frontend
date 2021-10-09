@@ -1,16 +1,10 @@
 import { createIcon } from '@chakra-ui/icon';
-import React from 'react';
 
-interface CloseIconProps {}
-
-export const CloseIcon: React.FC<CloseIconProps> = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-    >
+export const CloseIcon = createIcon({
+  displayName: 'CloseIcon',
+  viewBox: '0 0 24 24',
+  path: (
+    <>
       <g
         id="close_icon"
         data-name="close icon"
@@ -31,18 +25,6 @@ export const CloseIcon: React.FC<CloseIconProps> = () => {
           transform="translate(1165.477 271.477)"
         />
       </g>
-    </svg>
-  );
-};
-
-export const TestIcon = createIcon({
-  displayName: 'TestIcon',
-  viewBox: '0 0 48 1',
-  path: <path d="M0 0h48v1H0z" fill="currentColor" fillRule="evenodd" />,
+    </>
+  ),
 });
-
-export const SVGR = (props) => (
-  <svg width="1em" height="1em" viewBox="0 0 48 1" {...props}>
-    <path d="M0 0h48v1H0z" fill="currentColor" fillRule="evenodd" />
-  </svg>
-);
