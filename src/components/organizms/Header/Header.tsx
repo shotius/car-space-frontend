@@ -15,6 +15,7 @@ import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 import Icon from '@chakra-ui/icon';
 import { LogoIcon } from 'components/atoms/Icons/LogoIcon';
+import { Logo } from 'components/atoms/Logo';
 
 interface HeaderProps {}
 
@@ -56,16 +57,12 @@ export const Header: React.FC<HeaderProps> = () => {
     >
       {/* desktop view */}
       <Flex h="full" alignItems="center" zIndex="10">
-        <IconWithButton
+        <Logo
           icon={LogoIcon}
-          boxSize={['100px', null, '150px']}
-          bg="transparent"
-          p="0"
           onClick={() => {
-            setMenuOpen(false)
-            history.push('/home')
+            setMenuOpen(false);
+            history.push('/home');
           }}
-          cursor="pointer"
         />
         <HStack
           ml="auto"

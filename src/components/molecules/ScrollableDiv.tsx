@@ -9,7 +9,7 @@ interface ScrollableDivProps {
 
 export const ScrollableDiv: React.FC<ScrollableDivProps> = ({
   cardCount,
-  columnsLaptop = 4,
+  columnsLaptop = 6,
   columnsHD = 6,
   children,
 }) => {
