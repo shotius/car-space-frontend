@@ -1,7 +1,7 @@
 import { Flex, FlexProps, Heading } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TextMain } from 'components/atoms/Texts/TextMain';
+import { TextMain } from 'src/components/atoms/Texts/TextMain';
 
 interface SectionHeaderProps {
   mainText: string;

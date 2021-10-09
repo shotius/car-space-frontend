@@ -8,8 +8,8 @@ import {
   PopoverBody,
   Button,
 } from '@chakra-ui/react';
-import { TextRegular } from 'components/molecules/Texts/TextRegular';
-import { Currencies } from 'constants/index';
+import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { Currencies } from 'src/constants/index';
 import React from 'react';
 
 interface CurrencyPopoverProps {

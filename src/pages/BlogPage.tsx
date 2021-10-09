@@ -1,8 +1,8 @@
 import { Image } from '@chakra-ui/image';
 import { Box, SimpleGrid } from '@chakra-ui/layout';
-import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
-import { BlogCard } from 'components/molecules/BlogCard';
-import { PublicLayout } from 'components/templates/Layouts/PublicLayout';
+import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
+import { BlogCard } from 'src/components/molecules/BlogCard';
+import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import React from 'react';
 
 interface BlogPageProps {}

@@ -10,11 +10,11 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useRef } from 'react';
 import { FiHeart } from 'react-icons/fi';
-import { ICar } from 'redux/features/auth/types';
-import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
+import { ICar } from 'src/redux/features/auth/types';
+import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
 import { TextMain } from '../atoms/Texts/TextMain';
 import { IconWithButton } from './IconWithButton';
-import { TextRegular } from 'components/molecules/Texts/TextRegular';
+import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 
 interface CarCardProps {
   car?: ICar;

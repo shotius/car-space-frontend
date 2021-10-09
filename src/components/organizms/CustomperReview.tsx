@@ -1,8 +1,8 @@
 import { Box, IconButton } from '@chakra-ui/react';
-import { ArrowNextIcon } from 'components/atoms/Icons/Arrows/ArrowNextIcon';
-import { ArrowPrevIcon } from 'components/atoms/Icons/Arrows/ArrowPrevIcon';
-import { CustomerReviewCard } from 'components/molecules/CustomerReviewCard';
-import { SectionHeader } from 'components/molecules/SectionHeader/SectionHeader';
+import { ArrowNextIcon } from 'src/components/atoms/Icons/Arrows/ArrowNextIcon';
+import { ArrowPrevIcon } from 'src/components/atoms/Icons/Arrows/ArrowPrevIcon';
+import { CustomerReviewCard } from 'src/components/molecules/CustomerReviewCard';
+import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import React, { useRef, useState } from 'react';
 import Slider from 'react-slick';
 

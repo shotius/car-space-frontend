@@ -1,9 +1,9 @@
 import { Center } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
-import 'App.css';
-import { StyledApp } from 'components/organizms/StyledApp';
-import AppRoutes from 'constants/app-routes';
-import { ErrorPage } from 'pages/ErrorPage';
+import 'src/App.css';
+import { StyledApp } from 'src/components/organizms/StyledApp';
+import AppRoutes from 'src/constants/app-routes';
+import { ErrorPage } from 'src/pages/ErrorPage';
 import { useEffect } from 'react';
 import {
   BrowserRouter as Router,
@@ -11,12 +11,13 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from 'redux/app/hook';
-import { autoLogin } from 'redux/features/auth/authSlice';
-import { AuthRoutes } from 'utils/HOC/AuthRoutes';
-import { PrivateRoute } from 'utils/HOC/PrivateRoute';
-import { PublicRoute } from 'utils/HOC/PublicRoute';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { autoLogin } from 'src/redux/features/auth/authSlice';
+import { AuthRoutes } from 'src/utils/HOC/AuthRoutes';
+import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
+import { PublicRoute } from 'src/utils/HOC/PublicRoute';
 import * as views from './pages';
+import React from 'react'
 
 function App() {
   const { role: MyRole, loading } = useAppSelector(

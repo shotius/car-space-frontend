@@ -2,8 +2,8 @@ import { Button } from '@chakra-ui/button';
 import Icon from '@chakra-ui/icon';
 import { VStack, HStack } from '@chakra-ui/layout';
 import { StackDivider } from '@chakra-ui/react';
-import { UKIcon } from 'components/atoms/Icons/UKIcon';
-import { NavMenuLink } from 'components/molecules/NavMenuLink/NavMenuLink';
+import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
+import { NavMenuLink } from 'src/components/molecules/NavMenuLink/NavMenuLink';
 import React from 'react';
 
 interface MenuMobileProps {

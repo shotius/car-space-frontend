@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
-import { MiniCategoryCard } from 'components/molecules/MiniCategoryCard';
-import { ScrollableDiv } from 'components/molecules/ScrollableDiv';
-import { SectionHeader } from 'components/molecules/SectionHeader/SectionHeader';
+import { MiniCategoryCard } from 'src/components/molecules/MiniCategoryCard';
+import { ScrollableDiv } from 'src/components/molecules/ScrollableDiv';
+import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import React from 'react';
 import './styles.css';
 

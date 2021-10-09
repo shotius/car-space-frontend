@@ -1,11 +1,11 @@
 import { SimpleGrid, VStack } from '@chakra-ui/layout';
 import { useDisclosure } from '@chakra-ui/react';
-import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
-import { CarCard } from 'components/molecules/CarCard';
-import { Card } from 'components/molecules/Card';
+import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
+import { CarCard } from 'src/components/molecules/CarCard';
+import { Card } from 'src/components/molecules/Card';
 import React, { useEffect, useState } from 'react';
-import { ICar } from 'redux/features/auth/types';
-import { axios } from 'utils/axios';
+import { ICar } from 'src/redux/features/auth/types';
+import { axios } from 'src/utils/axios';
 import { CatalogFilter } from '../CatalogFilter';
 
 interface CatalogLIstProps {}

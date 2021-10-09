@@ -9,9 +9,9 @@ import {
   PopoverTrigger,
   Text,
 } from '@chakra-ui/react';
-import { UKIcon } from 'components/atoms/Icons/UKIcon';
-import { TextRegular } from 'components/molecules/Texts/TextRegular';
-import { Languages } from 'constants/index';
+import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
+import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { Languages } from 'src/constants/index';
 import React from 'react';
 
 interface LanguagePopoverProps {

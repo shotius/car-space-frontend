@@ -1,8 +1,8 @@
 import { HStack, Stack, StackProps } from '@chakra-ui/react';
-import { DividerVertical } from 'components/atoms/Divider';
-import { CloseOutlineIcon } from 'components/atoms/Icons/CloseOutline';
-import { FiltersIcon } from 'components/atoms/Icons/FiltersIcon';
-import { Select } from 'components/atoms/Select';
+import { DividerVertical } from 'src/components/atoms/Divider';
+import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
+import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
+import { Select } from 'src/components/atoms/Select';
 import React from 'react';
 import { IconWithButton } from '../IconWithButton';
 import { SearchButton } from '../SearchButton';

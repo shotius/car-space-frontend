@@ -1,8 +1,8 @@
 import { HStack, StackProps } from '@chakra-ui/layout';
 import { IconButton } from '@chakra-ui/react';
-import { FbIcon } from 'components/atoms/Icons/FacebookIcon';
-import { InstagramIcon } from 'components/atoms/Icons/InsagramIcon';
-import { TwitterIcon } from 'components/atoms/Icons/TwitterIcon';
+import { FbIcon } from 'src/components/atoms/Icons/FacebookIcon';
+import { InstagramIcon } from 'src/components/atoms/Icons/InsagramIcon';
+import { TwitterIcon } from 'src/components/atoms/Icons/TwitterIcon';
 import React from 'react';
 
 interface SocialLinksProps {}

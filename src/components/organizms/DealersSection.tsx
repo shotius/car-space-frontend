@@ -1,6 +1,6 @@
 import { Box, SimpleGrid } from '@chakra-ui/layout';
-import { DealerCard } from 'components/molecules/DealerCard';
-import { SectionHeader } from 'components/molecules/SectionHeader/SectionHeader';
+import { DealerCard } from 'src/components/molecules/DealerCard';
+import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import React from 'react';
 
 interface DealersSectionProps {}

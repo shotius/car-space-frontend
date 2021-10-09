@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import { Flex } from '@chakra-ui/layout';
-import { GTArrow } from 'components/atoms/Icons/GTArrow';
-import { TextMain } from 'components/atoms/Texts/TextMain';
+import { GTArrow } from 'src/components/atoms/Icons/GTArrow';
+import { TextMain } from 'src/components/atoms/Texts/TextMain';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 

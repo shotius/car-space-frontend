@@ -1,5 +1,5 @@
 import { Stack } from '@chakra-ui/layout';
-import { Select } from 'components/atoms/Select';
+import { Select } from 'src/components/atoms/Select';
 import React from 'react';
 
 interface ThreeMobileSelectsProps {}

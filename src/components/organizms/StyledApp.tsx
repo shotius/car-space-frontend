@@ -1,9 +1,9 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { Global, css } from '@emotion/react';
 
-import { Fonts } from 'components/molecules/Fonts';
+import { Fonts } from 'src/components/molecules/Fonts';
 import React from 'react';
-import theme from 'utils/theme';
+import theme from 'src/utils/theme';
 
 interface StylesAppProps {}
 

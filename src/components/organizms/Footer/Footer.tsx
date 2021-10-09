@@ -3,11 +3,11 @@ import { useDisclosure } from '@chakra-ui/hooks';
 import { Stack, VStack } from '@chakra-ui/layout';
 import { useMediaQuery } from '@chakra-ui/media-query';
 import { Collapse } from '@chakra-ui/transition';
-import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
-import { LogoIcon } from 'components/atoms/Icons/LogoIcon';
-import { Logo } from 'components/atoms/Logo';
-import { Text } from 'components/atoms/Text';
-import { SocialLinks } from 'components/molecules/SocialLinks';
+import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
+import { LogoIcon } from 'src/components/atoms/Icons/LogoIcon';
+import { Logo } from 'src/components/atoms/Logo';
+import { Text } from 'src/components/atoms/Text';
+import { SocialLinks } from 'src/components/molecules/SocialLinks';
 import React from 'react';
 import { Link } from 'react-router-dom';
 

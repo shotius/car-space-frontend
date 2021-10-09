@@ -8,10 +8,10 @@ import {
   StackDivider
 } from '@chakra-ui/layout';
 import { Select } from '@chakra-ui/select';
-import { DividerVertical } from 'components/atoms/Divider';
-import { Card } from 'components/molecules/Card';
-import { SearchButton } from 'components/molecules/SearchButton';
-import { SectionHeader } from 'components/molecules/SectionHeader/SectionHeader';
+import { DividerVertical } from 'src/components/atoms/Divider';
+import { Card } from 'src/components/molecules/Card';
+import { SearchButton } from 'src/components/molecules/SearchButton';
+import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import React from 'react';
 
 interface CalculatorProps {}

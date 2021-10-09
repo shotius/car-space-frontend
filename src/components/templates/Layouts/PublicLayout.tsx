@@ -1,7 +1,7 @@
 import { Box, Container } from '@chakra-ui/react';
-import { Footer } from 'components/organizms/Footer/Footer';
-import { Header } from 'components/organizms/Header';
-import { HEADER_HEIGHT } from 'constants/index';
+import { Footer } from 'src/components/organizms/Footer/Footer';
+import { Header } from 'src/components/organizms/Header';
+import { HEADER_HEIGHT } from 'src/constants/index';
 
 import React from 'react';
 

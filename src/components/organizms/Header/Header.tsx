@@ -1,20 +1,20 @@
 import { Button, IconButton } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Flex, HStack, StackDivider } from '@chakra-ui/layout';
-import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
-import { BurgerIcon } from 'components/atoms/Icons/BurgerIcon';
-import { CloseIcon } from 'components/atoms/Icons/CloseIcon';
-import { PersonIcon } from 'components/atoms/Icons/PersonIcon';
-import { TextRegular } from 'components/molecules/Texts/TextRegular';
-import { Currencies, Languages } from 'constants/index';
+import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
+import { BurgerIcon } from 'src/components/atoms/Icons/BurgerIcon';
+import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
+import { PersonIcon } from 'src/components/atoms/Icons/PersonIcon';
+import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { Currencies, Languages } from 'src/constants/index';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { MenuMobile } from '../MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 import Icon from '@chakra-ui/icon';
-import { LogoIcon } from 'components/atoms/Icons/LogoIcon';
-import { Logo } from 'components/atoms/Logo';
+import { LogoIcon } from 'src/components/atoms/Icons/LogoIcon';
+import { Logo } from 'src/components/atoms/Logo';
 
 interface HeaderProps {}
 

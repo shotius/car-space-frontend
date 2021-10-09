@@ -1,5 +1,5 @@
 import { Center, Heading, Image, VStack } from '@chakra-ui/react';
-import CarSmall from 'assets/png/car with bg-1.png';
+import CarSmall from 'src/assets/png/car with bg-1.png';
 import React from 'react';
 import { TextMain } from '../atoms/Texts/TextMain';
 import { Card } from './Card';
