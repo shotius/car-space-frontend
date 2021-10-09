@@ -18,8 +18,8 @@ export const NavMenuLink: React.FC<NavMenuLinkProps> = ({
 }) => {
   const history = useHistory()
   const handleClick = () => {
-    history.push(to)
     onClick()
+    history.push(to)
   }
   return (
     <Button onClick={handleClick} w="full" bg="white" p='0'>

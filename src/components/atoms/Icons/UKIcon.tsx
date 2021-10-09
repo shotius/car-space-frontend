@@ -1,17 +1,10 @@
-import React from 'react';
+import { createIcon } from '@chakra-ui/icon';
 
-interface UKIconProps {}
-
-export const UKIcon: React.FC<UKIconProps> = () => {
-  return (
-    <svg
-      id="united-kingdom_2_"
-      data-name="united-kingdom (2)"
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-    >
+export const UKIcon = createIcon({
+  displayName: 'UKIcon',
+  viewBox: '0 0 20 20',
+  path: (
+    <>
       <circle
         id="Ellipse_2"
         data-name="Ellipse 2"
@@ -114,6 +107,6 @@ export const UKIcon: React.FC<UKIconProps> = () => {
           fill="#d80027"
         />
       </g>
-    </svg>
-  );
-};
+    </>
+  ),
+});

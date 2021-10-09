@@ -1,9 +1,15 @@
-import { VStack } from '@chakra-ui/layout';
+import { HStack, VStack } from '@chakra-ui/layout';
 import {
   Button,
-  Icon, Popover, PopoverArrow,
-  PopoverBody, PopoverContent, PopoverTrigger, Text
+  Icon,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Text,
 } from '@chakra-ui/react';
+import { UKIcon } from 'components/atoms/Icons/UKIcon';
 import { TextRegular } from 'components/molecules/Texts/TextRegular';
 import { Languages } from 'constants/index';
 import React from 'react';
@@ -32,9 +38,16 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
     >
       <PopoverTrigger>
         {/* here <Text /> is given instead of <TextRegular /> because of ref error */}
-        <Text cursor="pointer" w="60px" fontSize={["16px", null, null, "14px", "16px"]}>
-          <Icon /> {lang}
-        </Text>
+        <HStack spacing="2">
+          <Icon as={UKIcon} boxSize="20px" />
+          <Text
+            cursor="pointer"
+            w="40px"
+            fontSize={['16px', null, null, '14px', '16px']}
+          >
+            {lang}
+          </Text>
+        </HStack>
       </PopoverTrigger>
       <PopoverContent w="70px" outline="none">
         <PopoverArrow />

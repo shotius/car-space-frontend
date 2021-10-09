@@ -44,7 +44,7 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
       />
       <Select placeholder="Year"></Select>
       <HStack spacing={{ md: '0', xl: '2' }}>
-        <SearchButton w={{ lg: '148px', xl: '211px' }} />
+        <SearchButton w={{ md: "140px", lg: '148px', xl: '211px' }} />
         {!isOpen ? (
           <IconWithButton
             icon={FiltersIcon}
