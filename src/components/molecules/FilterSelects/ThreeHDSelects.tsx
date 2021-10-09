@@ -1,5 +1,6 @@
 import { HStack, Stack, StackProps } from '@chakra-ui/react';
 import { DividerVertical } from 'components/atoms/Divider';
+import { CloseOutlineIcon } from 'components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'components/atoms/Icons/FiltersIcon';
 import { Select } from 'components/atoms/Select';
 import React from 'react';
@@ -16,7 +17,6 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
   onToggle,
   p = { md: '2', lg: '4', xl: '4' },
   bg = '#fff',
-  // bg="red",
   direction = 'row',
   borderRadius = 'md',
   display = { base: 'none', md: 'flex' },
@@ -44,16 +44,24 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
       />
       <Select placeholder="Year"></Select>
       <HStack spacing={{ md: '0', xl: '2' }}>
-        <SearchButton
-          w={{ lg: '148px', xl: '211px' }}
-        />
-        <IconWithButton
-          icon={FiltersIcon}
-          boxSize={[null, null, '12', '12', '16']}
-          onClick={onToggle}
-          pr={[null, null, '0', "-2", "-4"]}
-          pl={[null, null, '2', "4", "2"]}
-        />
+        <SearchButton w={{ lg: '148px', xl: '211px' }} />
+        {!isOpen ? (
+          <IconWithButton
+            icon={FiltersIcon}
+            boxSize={[null, null, '12', '12', '16']}
+            onClick={onToggle}
+            pr={[null, null, '0', '-2', '-4']}
+            pl={[null, null, '2', '4', '2']}
+          />
+        ) : (
+          <IconWithButton
+            icon={CloseOutlineIcon}
+            boxSize={[null, null, '12', '12', '16']}
+            onClick={onToggle}
+            pr={[null, null, '0', '-2', '-4']}
+            pl={[null, null, '2', '4', '2']}
+          />
+        )}
       </HStack>
     </Stack>
   );

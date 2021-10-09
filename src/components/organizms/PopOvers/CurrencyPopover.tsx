@@ -35,7 +35,8 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
       placement="bottom"
     >
       <PopoverTrigger>
-        <Text cursor="pointer" w="50px" fontSize={[null, null, "14px", "16px"]}>
+        {/* here <Text /> is given instead of <TextRegular /> because of ref error */}
+        <Text fontSize={["16px", null, null, "14px", "16px"]} mr="4" cursor="pointer" w="41px" >
           {currency}
         </Text>
       </PopoverTrigger>

@@ -31,7 +31,8 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
       placement="bottom"
     >
       <PopoverTrigger>
-        <Text cursor="pointer" w="60px" fontSize={[null, null, "14px", "16px"]}>
+        {/* here <Text /> is given instead of <TextRegular /> because of ref error */}
+        <Text cursor="pointer" w="60px" fontSize={["16px", null, null, "14px", "16px"]}>
           <Icon /> {lang}
         </Text>
       </PopoverTrigger>
