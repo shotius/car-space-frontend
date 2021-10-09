@@ -6,6 +6,7 @@ import { HomeCategory } from 'src/components/organizms/HomeCategory';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import React from 'react';
+import SwiperSlider from 'src/components/organizms/Swiper/SwiperSlider';
 
 interface HomeProps {}
 
@@ -21,6 +22,7 @@ export const Home: React.FC<HomeProps> = () => {
           <Box h="xs" bg="gray.400" my="3">
             <Heading size="md">Customer Reviews</Heading>
           </Box>
+            <SwiperSlider />
         </VStack>
       </Container>
     </PublicLayout>
