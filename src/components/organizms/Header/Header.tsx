@@ -1,7 +1,6 @@
 import { Button, IconButton } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Flex, HStack, StackDivider } from '@chakra-ui/layout';
-import { IconWithButton } from 'components/molecules/IconWithButton';
 import { ContainerOuter } from 'components/atoms/Containers/ContainerOuter';
 import { BurgerIcon } from 'components/atoms/Icons/BurgerIcon';
 import { CloseIcon } from 'components/atoms/Icons/CloseIcon';
