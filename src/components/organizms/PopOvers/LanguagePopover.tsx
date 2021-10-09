@@ -38,7 +38,7 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
     >
       <PopoverTrigger>
         {/* here <Text /> is given instead of <TextRegular /> because of ref error */}
-        <HStack spacing="2">
+        <HStack spacing="2" cursor="pointer">
           <Icon as={UKIcon} boxSize="20px" />
           <Text
             cursor="pointer"

@@ -32,7 +32,7 @@ function App() {
   if (loading) {
     return (
       <Center>
-        <Spinner />
+        <Spinner size="lg"/>
       </Center>
     );
   }

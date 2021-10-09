@@ -15,6 +15,7 @@ import { LanguagePopover } from '../PopOvers/LanguagePopover';
 import Icon from '@chakra-ui/icon';
 import { LogoIcon } from 'src/components/atoms/Icons/LogoIcon';
 import { Logo } from 'src/components/atoms/Logo';
+import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 
 interface HeaderProps {}
 
@@ -128,7 +129,7 @@ export const Header: React.FC<HeaderProps> = () => {
           {/* <IconWithButton icon={PersonIcon} boxSize="17px" mr="-4" pt="0px" /> */}
           <IconButton
             aria-label="profile"
-          icon={<PersonIcon boxSize="5" />}
+            icon={<PersonIcon boxSize="5" />}
             bg="transparent"
           />
           <IconButton
@@ -138,10 +139,10 @@ export const Header: React.FC<HeaderProps> = () => {
             onClick={() => setMenuOpen(true)}
             display={menuOpen ? 'none' : 'inline-block'}
           />
-         
+
           <IconButton
             aria-label="close menu"
-            icon={<CloseIcon boxSize="6"/>}
+            icon={<CloseIcon boxSize="6" />}
             display={menuOpen ? 'block' : 'none'}
             onClick={() => setMenuOpen(false)}
             bg="transparent"

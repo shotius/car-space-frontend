@@ -1,4 +1,13 @@
 import { extendTheme, theme as base } from '@chakra-ui/react';
+import { createBreakpoints } from "@chakra-ui/theme-tools"
+
+const breakpoints = createBreakpoints({
+  sm: "30em",
+  md: "48em",
+  lg: "62em",
+  xl: "81em",
+  "2xl": "96em",
+})
 
 const theme = extendTheme({
   colors: {
@@ -31,6 +40,7 @@ const theme = extendTheme({
     heading: `Roboto Medium, ${base.fonts.heading}`,
     body: `Roboto Regular, ${base.fonts.body}`,
   },
+  breakpoints
 });
 
 export default theme;

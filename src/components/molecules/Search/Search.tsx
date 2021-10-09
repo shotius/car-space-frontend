@@ -30,7 +30,7 @@ export const Search: React.FC<SearchProps> = () => {
           flexWrap={{ base: 'wrap', md: 'nowrap' }}
           justifyContent="space-between"
         >
-          <Select placeholder="Brand" w={['100%', '30%', '100%']}>
+          <Select placeholder="Brand" w={['100%', '30%', '100%']} arrowColor="#848484">
             <option value="value">brand</option>
             <option value="value">brand</option>
             <option value="value">brand</option>
@@ -38,11 +38,12 @@ export const Search: React.FC<SearchProps> = () => {
           <DividerVertical
             height="40px"
             display={['none', 'block']}
-            borderColor="gray.300"
+            borderColor="#848484"
+            m="4"
           />
           <Divider display={['block', 'none', 'none']} borderColor="gray.300" />
 
-          <Select placeholder="Model" w={['100%', '30%', '100%']}>
+          <Select placeholder="Model" w={['100%', '30%', '100%']} arrowColor="#848484" >
             <option value="value">model</option>
             <option value="value">model</option>
             <option value="value">model</option>
@@ -51,10 +52,11 @@ export const Search: React.FC<SearchProps> = () => {
             height="40px"
             display={['none', 'block']}
             borderColor="gray.300"
+            m="4"
           />
           <Divider display={['block', 'none']} borderColor="gray.300" />
 
-          <Select placeholder="Year" w={['100%', '30%', '100%']}>
+          <Select placeholder="Year" w={['100%', '30%', '100%']} arrowColor="#848484">
             <option value="value">year</option>
             <option value="value">year</option>
             <option value="value">year</option>
@@ -62,7 +64,7 @@ export const Search: React.FC<SearchProps> = () => {
           <SearchButton
             display={['none', 'none', 'block']}
             flexBasis={['100%', null, null, '70%', '80%']}
-            ml="2"
+            ml={[null, null, null, "24px", '44px']}
             
           />
         </Flex>
@@ -71,6 +73,7 @@ export const Search: React.FC<SearchProps> = () => {
             w="full"
             h={["44px",null, null,"50px",  "62px"]}
             mt={['2', '3']}
+            // pl={[null, null, '4']}
           />
       </Container>
     </Center>
