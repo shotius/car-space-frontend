@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react';
-import { CarCard } from 'src/components/molecules/CarCard';
-import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
+import { CarCard } from 'components/molecules/CarCard';
+// import { ScrollableDiv } from 'components/molecules/ScrollableDiv';
+import { SectionHeader } from 'components/molecules/SectionHeader/SectionHeader';
 import React from 'react';
 import Slider from 'react-slick';
 import { breakpoints } from './breakpoints';
@@ -10,18 +11,15 @@ interface HomeCategoryProps {}
 
 export const HomeCategory: React.FC<HomeCategoryProps> = () => {
   const settings = {
-    // speed: 500,
-    // slidesToScroll: 2,
-    touchThreshold: 1000,
+    touchThreshold: 100,
     responsive: breakpoints,
-    // infinite: false,
-    // slidesToShow: 2.1,
-    speed: 500,
+    speed: 400,
     infinite: false,
     slidesToShow: 4,
     swipeToSlide: true,
-    // slidesToScroll: 1,
     // autoplay: true,
+    // infinite: false,
+    // slidesToScroll: 1,
     // autoplaySpeed: 4000,
   };
 
@@ -30,6 +28,7 @@ export const HomeCategory: React.FC<HomeCategoryProps> = () => {
       <SectionHeader mainText="Category" secondaryText="See all" />
       <Box>
         <Slider {...settings}>
+        {/* <ScrollableDiv cardCount={8} columnsLaptop={3} columnsHD={4}> */}
           <CarCard />
           <CarCard />
           <CarCard />
@@ -38,10 +37,7 @@ export const HomeCategory: React.FC<HomeCategoryProps> = () => {
           <CarCard />
           <CarCard />
           <CarCard />
-          <CarCard />
-          <CarCard />
-          <CarCard />
-          <CarCard />
+          {/* </ScrollableDiv> */}
         </Slider>
       </Box>
     </Box>

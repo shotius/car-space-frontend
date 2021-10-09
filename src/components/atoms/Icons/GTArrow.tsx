@@ -1,8 +1,8 @@
 import React from 'react';
 
-interface ArrowIconProps {}
+interface GTArrowProps {}
 
-export const ArrowIcon: React.FC<ArrowIconProps> = () => {
+export const GTArrow: React.FC<GTArrowProps> = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

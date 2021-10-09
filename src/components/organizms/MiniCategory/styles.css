@@ -1,11 +1,5 @@
-
 /* the parent */
 .slick-list {
   margin: 0 -10px;
 }
 
-.slick-slider {
-  overflow: hidden;
-  /* background-color: red; */
-  /* box-sizing: border-box; */
-}

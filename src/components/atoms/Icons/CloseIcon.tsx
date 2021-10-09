@@ -1,15 +1,10 @@
-import React from 'react';
+import { createIcon } from '@chakra-ui/icon';
 
-interface CloseIconProps {}
-
-export const CloseIcon: React.FC<CloseIconProps> = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-    >
+export const CloseIcon = createIcon({
+  displayName: 'CloseIcon',
+  viewBox: '0 0 24 24',
+  path: (
+    <>
       <g
         id="close_icon"
         data-name="close icon"
@@ -30,6 +25,6 @@ export const CloseIcon: React.FC<CloseIconProps> = () => {
           transform="translate(1165.477 271.477)"
         />
       </g>
-    </svg>
-  );
-};
+    </>
+  ),
+});

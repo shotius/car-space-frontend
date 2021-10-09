@@ -1,13 +1,14 @@
-import { Divider, Flex } from '@chakra-ui/layout';
-import { Link } from 'react-router-dom';
+import { Button } from '@chakra-ui/button';
+import { Flex } from '@chakra-ui/layout';
+import { GTArrow } from 'components/atoms/Icons/GTArrow';
+import { TextMain } from 'components/atoms/Texts/TextMain';
 import React from 'react';
-import { ArrowIcon } from 'src/components/atoms/Icons/ArrowIcon';
-import { Text } from 'src/components/atoms/Text';
+import { useHistory } from 'react-router-dom';
 
 interface NavMenuLinkProps {
   heading: string;
   to: string;
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 export const NavMenuLink: React.FC<NavMenuLinkProps> = ({
@@ -15,21 +16,19 @@ export const NavMenuLink: React.FC<NavMenuLinkProps> = ({
   to,
   onClick,
 }) => {
+  const history = useHistory()
+  const handleClick = () => {
+    onClick()
+    history.push(to)
+  }
   return (
-    <>
-      <Flex
-        justifyContent="space-between"
-        alignItems="center"
-        px="35px"
-        py="2"
-        onClick={onClick}
-      >
-        <Text fontSize="16px" m="0">
-          <Link to={to}>{heading}</Link>
-        </Text>
-        <ArrowIcon />
+    <Button onClick={handleClick} w="full" bg="white" p='0'>
+      <Flex justifyContent="space-between" alignItems="center" px="35px" py="2" w="full">
+        <TextMain opacity="100%" color="black" fontWeight="light">
+          {heading}
+        </TextMain>
+        <GTArrow />
       </Flex>
-      <Divider />
-    </>
+    </Button>
   );
 };

@@ -4,21 +4,29 @@ import React from 'react';
 interface SearchButtonProps {}
 
 export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
+  h = ['44px', null, '50px', null , '62px'],
+  bg = 'autoOrange.500',
+  borderRadius="8px",
+  w = 'full',
+  variant = 'solid',
+  color = '#fff',
+  fontWeight = 'light',
   ...rest
 }) => {
   return (
     <Button
-      variant="solid"
-      bg="autoOrange.500"
-      h={["44px",null, null, "62px"]}
-      w="100%"
-      color="#fff"
-      fontWeight="light"
+      variant={variant}
+      bg={bg}
+      h={h}
+      w={w}
+      color={color}
+      fontWeight={fontWeight}
+      borderRadius={borderRadius}
       _hover={{
-        bg: "autoOrange.400"
+        bg: 'autoOrange.400',
       }}
       _active={{
-        bg: "autoOrange.200"
+        bg: 'autoOrange.200',
       }}
       {...rest}
     >

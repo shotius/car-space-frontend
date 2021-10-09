@@ -1,8 +1,20 @@
 .slick-dots {
-  background-color: gray;
-  position: absolute;
+  background-color: "red";
+  /* position: absolute; */
+  margin-top: 100px;
+  z-index: 999;
 }
 
 .slick-slider {
+  overflow: hidden;
   padding: 10px;
+}
+
+.slick-list {
+  margin: 0 -10px;
+}
+
+/* the parent */
+.slick-list {
+  margin: 0 -10px;
 }

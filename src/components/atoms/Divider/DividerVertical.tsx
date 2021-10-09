@@ -1,8 +1,8 @@
-import { Center, Divider, DividerProps } from '@chakra-ui/layout';
+import { BoxProps, Center, Divider, DividerProps } from '@chakra-ui/layout';
 import React from 'react';
 
 interface Props {
-  height: string;
+  height: BoxProps['h'];
 }
 
 const CustomDivider: React.FC<Props & DividerProps> = ({ height, ...rest }) => {

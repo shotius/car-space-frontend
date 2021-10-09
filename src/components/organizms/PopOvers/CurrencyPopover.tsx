@@ -8,7 +8,8 @@ import {
   PopoverBody,
   Button,
 } from '@chakra-ui/react';
-import { Currencies } from 'src/constants/index';
+import { TextRegular } from 'components/molecules/Texts/TextRegular';
+import { Currencies } from 'constants/index';
 import React from 'react';
 
 interface CurrencyPopoverProps {
@@ -34,7 +35,8 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
       placement="bottom"
     >
       <PopoverTrigger>
-        <Text cursor="pointer" w="50px">
+        {/* here <Text /> is given instead of <TextRegular /> because of ref error */}
+        <Text fontSize={["16px", null, null, "14px", "16px"]} mr="4" cursor="pointer" w="41px" >
           {currency}
         </Text>
       </PopoverTrigger>
@@ -50,7 +52,7 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
                 onClose();
               }}
             >
-              {Currencies.EUR}
+              <TextRegular fontWeight="light">{Currencies.EUR}</TextRegular>
             </Button>
             <Button
               borderRadius="none"
@@ -60,7 +62,7 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
                 onClose();
               }}
             >
-              {Currencies.USD}
+              <TextRegular fontWeight="light">{Currencies.USD}</TextRegular>
             </Button>
             <Button
               borderRadius="none"
@@ -70,7 +72,7 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
                 onClose();
               }}
             >
-              {Currencies.GEL}
+              <TextRegular fontWeight="light">{Currencies.GEL}</TextRegular>
             </Button>
           </VStack>
         </PopoverBody>

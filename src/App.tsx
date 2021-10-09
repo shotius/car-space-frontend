@@ -1,20 +1,22 @@
-import React from 'react';
+import { Center } from '@chakra-ui/layout';
+import { Spinner } from '@chakra-ui/spinner';
+import 'App.css';
+import { StyledApp } from 'components/organizms/StyledApp';
+import AppRoutes from 'constants/app-routes';
+import { ErrorPage } from 'pages/ErrorPage';
+import { useEffect } from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Redirect,
+  Route,
+  Switch,
 } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import AppRoutes from 'src/constants/app-routes';
+import { useAppDispatch, useAppSelector } from 'redux/app/hook';
+import { autoLogin } from 'redux/features/auth/authSlice';
+import { AuthRoutes } from 'utils/HOC/AuthRoutes';
+import { PrivateRoute } from 'utils/HOC/PrivateRoute';
+import { PublicRoute } from 'utils/HOC/PublicRoute';
 import * as views from './pages';
-import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
-import { AuthRoutes } from 'src/utils/HOC/AuthRoutes';
-import { useEffect } from 'react';
-import { autoLogin } from 'src/redux/features/auth/authSlice';
-import { PublicRoute } from 'src/utils/HOC/PublicRoute';
-import 'src/App.css';
-import { ErrorPage } from 'src/pages/ErrorPage';
 
 function App() {
   const { role: MyRole, loading } = useAppSelector(
@@ -25,12 +27,18 @@ function App() {
   useEffect(() => {
     dispatch(autoLogin());
   }, [dispatch]);
-
+  
   if (loading) {
-    return <h1>...loading</h1>;
+    return (
+      <Center>
+        <Spinner />
+      </Center>
+    );
   }
 
+
   const getAllowedRoutes = () => {
+    // console.log('get Allowed routes')
     return AppRoutes.filter(({ roles }) => {
       // if route has no roles or there is my role and this role in routes' roles
       if ((roles && roles.length === 0) || (MyRole && roles.includes(MyRole))) {
@@ -42,6 +50,7 @@ function App() {
 
   // generate only routes where user has permissions
   const generateRoutes = () => {
+    // console.log('generating routes')
     const allowedRoutes = getAllowedRoutes();
     return allowedRoutes.map((route) => {
       const { path, view, isPrivate, exact, isAuth } = route;
@@ -77,7 +86,9 @@ function App() {
     });
   };
 
+  console.log('app')
   return (
+    <StyledApp>
       <Router>
         <Switch>
           <Route path="/" exact>
@@ -89,6 +100,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+     </StyledApp>
   );
 }
 

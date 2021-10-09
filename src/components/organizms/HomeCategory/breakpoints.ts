@@ -1,27 +1,71 @@
 export const breakpoints = [
-  // {
-  //   breakpoint: 1024,
-  //   settings: {
-  //     slidesToShow: 5,
-  //     // slidesToScroll: 3,
-  //   },
-  // },
-  // {
-  //   breakpoint: 990,
-  //   settings: {
-  //     slidesToShow: 4.5,
-  //     // slidesToScroll: 2,
-  //     // initialSlide: 2,
-  //   },
-  // },
-  // {
-  //   breakpoint: 900,
-  //   settings: {
-  //     slidesToShow: 3,
-  //     // slidesToScroll: 2,
-  //     // initialSlide: 2,
-  //   },
-  // },
+  
+  {
+    breakpoint: 1640,
+    settings: {
+      slidesToShow: 3.7,
+    },
+  },
+  {
+    breakpoint: 1540,
+    settings: {
+      slidesToShow: 3.3,
+    },
+  },
+  {
+    breakpoint: 1480,
+    settings: {
+      slidesToShow: 3.1,
+    },
+  },
+  {
+    breakpoint: 1340,
+    settings: {
+      slidesToShow: 3,
+    },
+  },
+  {
+    breakpoint: 1240,
+    settings: {
+      slidesToShow: 3,
+    },
+  },
+  {
+    breakpoint: 1140,
+    settings: {
+      slidesToShow: 2.8,
+    },
+  },
+  {
+    breakpoint: 1040,
+    settings: {
+      slidesToShow: 3.1,
+    },
+  },
+  {
+    breakpoint: 1030,
+    settings: {
+      slidesToShow: 2.8,
+    },
+  },
+  {
+    breakpoint: 992,
+    settings: {
+      slidesToShow: 2.5,
+    },
+  },
+  {
+    breakpoint: 950,
+    settings: {
+      slidesToShow: 2.3,
+    },
+  },
+  {
+    breakpoint: 900,
+    settings: {
+      slidesToShow: 2.1,
+    },
+  },
   {
     breakpoint: 863,
     settings: {
@@ -41,7 +85,7 @@ export const breakpoints = [
   {
     breakpoint: 757,
     settings: {
-      slidesToShow: 1.9,
+      slidesToShow: 1.7,
       // slidesToScroll: 2,
       initialSlide: 2,
       draggable: true,
