@@ -39,10 +39,11 @@ export const Search: React.FC<SearchProps> = () => {
             height="40px"
             display={['none', 'block']}
             borderColor="gray.300"
+            margin="4"
           />
           <Divider display={['block', 'none', 'none']} borderColor="gray.300" />
 
-          <Select placeholder="Model" w={['100%', '30%', '100%']}>
+          <Select placeholder="Model" w={['100%', '30%', '100%']} arrowColor="">
             <option value="value">model</option>
             <option value="value">model</option>
             <option value="value">model</option>
@@ -51,6 +52,7 @@ export const Search: React.FC<SearchProps> = () => {
             height="40px"
             display={['none', 'block']}
             borderColor="gray.300"
+            margin="4"
           />
           <Divider display={['block', 'none']} borderColor="gray.300" />
 
@@ -62,8 +64,7 @@ export const Search: React.FC<SearchProps> = () => {
           <SearchButton
             display={['none', 'none', 'block']}
             flexBasis={['100%', null, null, '70%', '80%']}
-            ml="2"
-            
+            ml={[null, null, null, '24px', '44px']}
           />
         </Flex>
           <SearchButton
