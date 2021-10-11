@@ -27,6 +27,7 @@ export const Home: React.FC<HomeProps> = () => {
         >
           <MiniCategory />
           <HomeCategory />
+          <SwiperSlider />
           <CustomperReview />
           <TopBrands />
           <DealersSection />
