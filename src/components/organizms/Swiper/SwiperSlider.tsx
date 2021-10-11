@@ -17,6 +17,7 @@ import { IconButton } from '@chakra-ui/button';
 import { ArrowNextIcon } from 'src/components/atoms/Icons/Arrows/ArrowNextIcon';
 import { ArrowPrevIcon } from 'src/components/atoms/Icons/Arrows/ArrowPrevIcon';
 import useSwiperRef from 'src/utils/hooks/useSwiperRef';
+import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
@@ -26,12 +27,13 @@ export default function App() {
   const nextRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <>
-      <Box>
+    <Box w="full" position="relative">
+      <Box position="absolute" top="0" right="0" zIndex="10" display="none">
         <IconButton
           aria-label="previous slide"
           icon={<ArrowPrevIcon />}
           ref={prevRef}
+          mr="2"
         >
           Prev
         </IconButton>
@@ -44,99 +46,69 @@ export default function App() {
         </IconButton>
       </Box>
       <Swiper
+      // centeredSlides={true}
+      spaceBetween={15}
+      slidesPerView= {2.1}
         navigation={{
           prevEl: prevRef.current ? prevRef.current : undefined,
           nextEl: nextRef.current ? nextRef.current : undefined,
         }}
         onBeforeInit={(swiper) => {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          // eslint-disable-next-line no-param-reassign
           swiper.params.navigation.prevEl = prevRef.current;
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          // eslint-disable-next-line no-param-reassign
           swiper.params.navigation.nextEl = nextRef.current;
           swiper.navigation.destroy()
           swiper.navigation.init();
           swiper.navigation.update();
         }}
-        // }}
-        // slidesPerView={1.1}
-        // spaceBetween={30}
-        // navigation={{
-        //   prevEl: prevRef.current ? prevRef.current : undefined,
-        //   nextEl: nextRef.current ? nextRef.current : undefined,
-        // }}
-        // onInit={(swiper) => {
-        //   //@ts-ignore
-        //   swiper.params.navigation.prevEl = prevRef.current;
-        //   //@ts-ignore
-        //   swiper.params.navigation.nextEl = nextRef.current;
-        //   swiper.navigation.destroy();
-        //   swiper.navigation.init();
-        //   swiper.navigation.update();
-        // }}
-        // onInit={(swiper) => {
-        //   swiper.params.navigation.prevEl = prevRef.current;
-        //   swiper.params.navigation.nextEl = nextRef.current;
-        //   swiper.navigation.init();
-        //   swiper.navigation.update();
-        // }}
-        // pagination={{
-        //   clickable: true,
-        // }}
-        // navigation={true  }
-        // hashNavigation={{
-        //   watchState: true,
-        // }}
-        // className="mySwiper"
         breakpoints={{
           // when window width is >= 640px
           300: {
             slidesPerView: 1.2,
           },
-          640: {
-            slidesPerView: 1.5,
+          540: {
+            // slidesPerView: "auto",
           },
           // when window width is >= 768px
-          768: {
-            slidesPerView: 2.3,
-          },
+          // 768: {
+          //   slidesPerView: 2.3,
+          // },
         }}
+        
       >
         <SwiperSlide>
-          <Box>
+          <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-          <Box>
+        <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-          <Box>
+        <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-          <Box>
+        <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-          <Box>
+        <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-          <Box>
+        <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-          <Box>
+        <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
@@ -151,6 +123,6 @@ export default function App() {
           </Box>
         </SwiperSlide>
       </Swiper>
-    </>
+    </Box>
   );
 }

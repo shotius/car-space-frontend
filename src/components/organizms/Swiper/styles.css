@@ -20,9 +20,11 @@ body {
 }
 
 .swiper-slide {
-  text-align: center;
+  /* text-align: center; */
   font-size: 18px;
   background:#f4f4f5;
+  /* width: 330px !important; */
+  /* background-color: darkblue; */
 
   /* Center slide text vertically */
   display: -webkit-box;
@@ -32,7 +34,7 @@ body {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   -webkit-justify-content: center;
-  justify-content: center;
+  justify-content: flex-start;
   -webkit-box-align: center;
   -ms-flex-align: center;
   -webkit-align-items: center;

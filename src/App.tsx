@@ -31,8 +31,8 @@ function App() {
   
   if (loading) {
     return (
-      <Center>
-        <Spinner size="lg"/>
+      <Center w="full" bg="white" h="100vh">
+         <Spinner h="80px" w="80px" />
       </Center>
     );
   }
