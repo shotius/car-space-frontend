@@ -29,7 +29,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
         <Card bg="autoBlue.400" p={['4', '6', '6', "8", '12']} w="full" minH="auto">
           <CatalogFilter isOpen={isFilterOpen} onToggle={toggleFilters} />
         </Card>
-        {/* <SimpleGrid
+        <SimpleGrid
           gridTemplateColumns={[
             '1fr',
             '1fr 1fr',
@@ -42,7 +42,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
           {cars.map((car: ICar, i) => (
             <CarCard car={car} key={i} />
           ))}
-        </SimpleGrid> */}
+        </SimpleGrid>
       </VStack>
     </ContainerOuter>
   );

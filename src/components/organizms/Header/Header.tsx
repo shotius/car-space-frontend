@@ -1,21 +1,21 @@
 import { Button, IconButton } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
+import Icon from '@chakra-ui/icon';
 import { Flex, HStack, StackDivider } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BurgerIcon } from 'src/components/atoms/Icons/BurgerIcon';
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
+import { LogoIcon } from 'src/components/atoms/Icons/LogoIcon';
 import { PersonIcon } from 'src/components/atoms/Icons/PersonIcon';
+import { Logo } from 'src/components/atoms/Logo';
+import { MenuLink } from 'src/components/molecules/MenuLink';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Currencies, Languages } from 'src/constants/index';
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { MenuMobile } from '../MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
-import Icon from '@chakra-ui/icon';
-import { LogoIcon } from 'src/components/atoms/Icons/LogoIcon';
-import { Logo } from 'src/components/atoms/Logo';
-import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 
 interface HeaderProps {}
 
@@ -64,6 +64,7 @@ export const Header: React.FC<HeaderProps> = () => {
             history.push('/home');
           }}
         />
+        {/* menu links */}
         <HStack
           ml="auto"
           display={['none', 'none', 'flex']}
@@ -71,16 +72,11 @@ export const Header: React.FC<HeaderProps> = () => {
           divider={<StackDivider />}
         >
           <HStack spacing={[null, null, '16px', '24px', '32px']}>
-            <TextRegular>
-              <Link to="/catalog">Catalog</Link>
-            </TextRegular>
-            <TextRegular>
-              <Link to="/services">Services</Link>
-            </TextRegular>
-            <TextRegular>
-              <Link to="/blog">Blog</Link>
-            </TextRegular>
+            <MenuLink to="/catalog" label="Catalog"/>
+            <MenuLink to="/services" label="Services"/>
+            <MenuLink to="/blog" label="Blog"/>
           </HStack>
+          {/* popovers */}
           <HStack
             spacing={[null, null, '0px', '8px']}
             mr={[null, null, '-20px', '-15px']}
@@ -126,7 +122,6 @@ export const Header: React.FC<HeaderProps> = () => {
         </HStack>
         {/* mobile view profile and menu hamburger*/}
         <HStack ml="auto" display={['flex', 'flex', 'none']} spacing={0}>
-          {/* <IconWithButton icon={PersonIcon} boxSize="17px" mr="-4" pt="0px" /> */}
           <IconButton
             aria-label="profile"
             icon={<PersonIcon boxSize="5" />}

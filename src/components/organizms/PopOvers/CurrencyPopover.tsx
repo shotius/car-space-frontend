@@ -38,7 +38,7 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
         {/* here <Text /> is given instead of <TextRegular /> because of ref error */}
         <Text
           fontSize={['16px', null, null, '14px', '16px']}
-          mr={["2", null, null, '4']}
+          mr={[null, null, null, '2', '4']}
           cursor="pointer"
         >
           {currency}

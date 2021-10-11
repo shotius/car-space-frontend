@@ -37,17 +37,20 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
       <DividerVertical
         height={['40px', null, null, '50px']}
         borderColor="gray.300"
-        m="4"
+        margin="4"
       />
       <Select placeholder="Model"></Select>
       <DividerVertical
         height={['40px', null, null, '50px']}
         borderColor="gray.300"
-        m="4"
+        margin="4"
       />
       <Select placeholder="Year"></Select>
       <HStack spacing={{ md: '0', xl: '2' }}>
-        <SearchButton w={{ md: "140px", lg: '148px', xl: '211px' }} ml={[null, null, null, '24px', '44px']}/>
+        <SearchButton
+          w={{ md: '140px', lg: '148px', xl: '211px' }}
+          ml={[null, null, null, '24px', '44px']}
+        />
         {!isOpen ? (
           <IconWithButton
             icon={FiltersIcon}
