@@ -10,7 +10,6 @@ interface SlideWrapProps {
 export const SlideWrap: React.FC<SlideWrapProps> = ({
   height,
   Slide,
-  children,
 }) => {
   return (
     <Container h="full">

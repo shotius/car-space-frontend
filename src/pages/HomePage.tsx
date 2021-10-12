@@ -5,13 +5,11 @@ import { Search } from 'src/components/molecules/Search/Search';
 import { Calculator } from 'src/components/organizms/Calculator';
 import { CustomperReview } from 'src/components/organizms/CustomperReview';
 import { DealersSection } from 'src/components/organizms/DealersSection';
-import { HomeCategory } from 'src/components/organizms/HomeCategory';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
 import { TopBrands } from 'src/components/organizms/TopBrands';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
  ;
 import SwiperSlider from 'src/components/organizms/Swiper/SwiperSlider';
-import { CarImageCarousel } from 'src/components/molecules/CarImageCarousel/CarImageCarousel';
 
 interface HomeProps {}
 

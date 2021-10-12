@@ -77,7 +77,7 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     /** login */
-    builder.addCase(loginUser.pending, (state, action) => {
+    builder.addCase(loginUser.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
@@ -92,7 +92,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false
     });
     /** logout */
-    builder.addCase(logoutUser.fulfilled, (state, action) => {
+    builder.addCase(logoutUser.fulfilled, (state) => {
       console.log('logout fullfilled')
       localStorage.removeItem("USER_ROLE");
       state.role = null;

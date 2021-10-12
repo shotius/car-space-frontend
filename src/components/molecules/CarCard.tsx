@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   HStack,
-  Image,
   StackDivider,
   VStack,
 } from '@chakra-ui/react';
@@ -21,7 +20,7 @@ interface CarCardProps {
   car?: ICar;
 }
 
-export const CarCard: React.FC<CarCardProps> = ({ car }) => {
+export const CarCard: React.FC<CarCardProps> = () => {
   const ref = useRef(null);
   const entry = useIntersectionObserver(ref, {});
   const isVisible = !!entry?.isIntersecting;

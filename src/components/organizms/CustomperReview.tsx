@@ -54,7 +54,7 @@ export const CustomperReview: React.FC<CustomperReviewProps> = () => {
   const [showNextArrow, setShowNextArrow] = useState(true);
   const slider = useRef<Slider | null>(null);
 
-  const beforeChange = (prev: number, next: number) => {
+  const beforeChange = ( next: number) => {
     setShowPrevArrow(next > 0);
     setShowNextArrow(next < 3);
   };
