@@ -9,7 +9,7 @@ interface TopBrandCardProps {
 
 export const TopBrandCard: React.FC<TopBrandCardProps> = ({ image }) => {
   return (
-    <Card bg="autoGrey.400" >
+    <Card bg="autoGrey.600" >
       <Center h="full" w="full">
         <AspectRatio ratio={1 / 1} w="57px">
           <Image src={image} />

@@ -4,7 +4,7 @@ import { Container, ContainerProps } from '@chakra-ui/layout';
 interface ContainerOuterProps {}
 
 export const ContainerOuter: React.FC<ContainerOuterProps & ContainerProps> = ({
-  maxW={ base: '1004px', xl: '1640px' },
+  maxW={ md: '78%', xl: "85%" },
   children,
   ...rest
 }) => {

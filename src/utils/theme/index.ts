@@ -5,7 +5,7 @@ const breakpoints = createBreakpoints({
   sm: "30em",
   md: "48em",
   lg: "62em",
-  xl: "81em",
+  xl: "86em",
   "2xl": "96em",
 })
 
