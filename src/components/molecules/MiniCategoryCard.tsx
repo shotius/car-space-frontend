@@ -7,16 +7,18 @@ interface MiniCategoryCardProps {}
 
 export const MiniCategoryCard: React.FC<MiniCategoryCardProps> = () => {
   return (
-    
-    <Card w={["55px", null, null, '154px', '260px']}>
+    <Card
+      w={['55px', null, null, '154px', "190px", '240px']}
+      h={['130px', null, null, '132px', "152px", '189px']}
+    >
       <Center h="100%">
-        <VStack spacing={['0', null, '4']}>
+        <VStack spacing={['0', null, '0']}>
           <Image
             src={CarSmall}
-            w={['55px', null, null, '52px', '82px']}
-            h={['55px', null, null, '52px', '82px']}
+            w={['55px', null, null, '52px', null, '82px']}
+            h={['55px', null, null, '52px', null, '82px']}
           />
-          <VStack spacing="0">
+          <VStack spacing="0" pt="2">
             <Heading fontSize="16px" fontWeight="400">
               Sertified Car
             </Heading>

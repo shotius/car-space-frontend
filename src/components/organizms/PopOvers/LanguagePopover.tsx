@@ -43,7 +43,7 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
           <Text
             cursor="pointer"
             w="40px"
-            fontSize={['16px', null, null, '14px', '16px']}
+            fontSize={['14px', null, null, null , null, '16px']}
           >
             {lang}
           </Text>

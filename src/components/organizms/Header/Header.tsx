@@ -11,7 +11,7 @@ import { Logo } from 'src/components/atoms/Logo';
 import { MenuLink } from 'src/components/molecules/MenuLink';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Currencies, Languages } from 'src/constants/index';
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { MenuMobile } from '../MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
@@ -68,7 +68,7 @@ export const Header: React.FC<HeaderProps> = () => {
         <HStack
           ml="auto"
           display={['none', 'none', 'flex']}
-          spacing={[null, null, '16px', '24px']}
+          spacing={[null, null, '16px',null, '18px',  '24px']}
           divider={<StackDivider />}
         >
           <HStack spacing={[null, null, '16px', '24px', '32px']}>
@@ -99,7 +99,7 @@ export const Header: React.FC<HeaderProps> = () => {
             />
           </HStack>
           {/* <Divider height="35px" borderColor="gray.500" /> */}
-          <HStack spacing="4" ml="-15px">
+          <HStack spacing={[null, null, '0', '2',null,  "4"]} ml="-15px">
             <Button
               variant="ghost"
               fontWeight="light"
