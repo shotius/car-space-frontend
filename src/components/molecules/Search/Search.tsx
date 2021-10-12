@@ -9,7 +9,7 @@ interface SearchProps {}
 export const Search: React.FC<SearchProps> = () => {
   return (
     <Center
-      mt={['-69px', '-80px', '-65px', '-80px']}
+      mt={['-69px', '-80px', '-65px', '-60px']}
       mb={{ base: '16', md: '20' }}
       position="relative"
       zIndex="1"
@@ -17,13 +17,13 @@ export const Search: React.FC<SearchProps> = () => {
       <Container
         maxW={{ sm: '550px', md: '600px', lg: '844px', xl: '82%' }}
         bg="autoBlue.400"
-        p={['4', '6', '7', '32px', '48px']}
+        p={['4', '6', null, '16px', null,  '48px']}
         mb="0"
         borderRadius="lg"
         w={['100%', '90%', '100%']}
       >
         <Flex
-          padding={['1', '1.5', null, '16px']}
+          padding={['1', '1.5', null, null, null,  '16px']}
           bg="#fff"
           borderRadius="lg"
           alignItems="center"

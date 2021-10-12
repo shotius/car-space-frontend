@@ -1,7 +1,6 @@
 import {
   AspectRatio,
   Box,
-  Flex,
   Heading,
   HStack,
   StackDivider,
@@ -39,7 +38,7 @@ export const CarCard: React.FC<CarCardProps> = () => {
       bg="white"
       borderRadius="8px"
       p="19px"
-      maxW={['295px', '343px', null, '314px', '388px']}
+      maxW={['295px', '343px', null, '324px', '388px']}
       // maxW={['343px', null, null, '314px', '388px']}
       // cursor="pointer"
       // w="330px"
@@ -81,8 +80,7 @@ export const CarCard: React.FC<CarCardProps> = () => {
         </AspectRatio>
         {/* description */}
         <VStack w="full" divider={<StackDivider />}>
-          <Flex w="full" flexWrap="wrap" mb="2" justifyContent="space-between">
-            <VStack flex="1" alignItems="flex-start" minW="150px" mb="2">
+            <VStack flex="1" alignItems="flex-start" minW="150px" mb="2" w="full">
               <HStack>
                 <TextRegular opacity="63%">Damage: </TextRegular>
                 <Heading fontWeight="400" fontSize="16px">
@@ -90,27 +88,12 @@ export const CarCard: React.FC<CarCardProps> = () => {
                 </Heading>
               </HStack>
               <HStack>
-                <TextRegular opacity="63%">Location: </TextRegular>
-                <Heading fontWeight="400" fontSize="16px" mb="40px">
-                  USA
-                </Heading>
-              </HStack>
-            </VStack>
-            <VStack alignItems="flex-start" minW="124px">
-              <HStack>
-                <TextRegular opacity="63%">Drive:</TextRegular>
+                <TextRegular opacity="63%">Mileage:</TextRegular>
                 <Heading fontWeight="400" fontSize="16px">
                   40 000 km
                 </Heading>
               </HStack>
-              <HStack>
-                <TextRegular opacity="63%">Engine: </TextRegular>
-                <Heading fontWeight="400" fontSize="16px">
-                  5.5
-                </Heading>
-              </HStack>
             </VStack>
-          </Flex>
           <HStack justifyContent="space-between" w="full">
             <TextRegular opacity="63%">Estimate Price</TextRegular>
             <Heading

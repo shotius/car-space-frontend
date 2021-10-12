@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <Box w="full" position="relative">
-      <SectionHeader mainText="Category" secondaryText="See all" />
+      <SectionHeader mainText="Catalog" secondaryText="See all" />
       <Box position="absolute" top="0" right="0" zIndex="10" display="none">
         <IconButton
           aria-label="previous slide"
@@ -75,8 +75,8 @@ export default function App() {
           768: {
             slidesPerView: 2.5,
           },
-          1000: {
-            slidesPerView: 3.5,
+          992: {
+            slidesPerView: 3,
           },
           1200: {
             slidesPerView: 4,
