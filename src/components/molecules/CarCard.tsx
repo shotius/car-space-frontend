@@ -8,7 +8,7 @@ import {
   StackDivider,
   VStack,
 } from '@chakra-ui/react';
-import React, { useEffect, useRef } from 'react';
+import  { useEffect, useRef } from 'react';
 import { FiHeart } from 'react-icons/fi';
 import { ICar } from 'src/redux/features/auth/types';
 import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';

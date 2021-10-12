@@ -9,7 +9,7 @@ import { HomeCategory } from 'src/components/organizms/HomeCategory';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
 import { TopBrands } from 'src/components/organizms/TopBrands';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
-import React from 'react';
+ ;
 import SwiperSlider from 'src/components/organizms/Swiper/SwiperSlider';
 import { CarImageCarousel } from 'src/components/molecules/CarImageCarousel/CarImageCarousel';
 
@@ -27,7 +27,7 @@ export const Home: React.FC<HomeProps> = () => {
           spacing={['64px', '85px', '101px', '138px']}
         >
           <MiniCategory />
-          <HomeCategory />
+          {/* <HomeCategory /> */}
           <SwiperSlider />
           <CustomperReview />
           <TopBrands />

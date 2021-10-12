@@ -1,5 +1,5 @@
 import { Box, BoxProps } from '@chakra-ui/layout';
-import React from 'react';
+ ;
 
 interface CardProps {
   bgActive?: string;

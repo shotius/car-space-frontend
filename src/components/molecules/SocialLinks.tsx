@@ -3,7 +3,7 @@ import { IconButton } from '@chakra-ui/react';
 import { FbIcon } from 'src/components/atoms/Icons/FacebookIcon';
 import { InstagramIcon } from 'src/components/atoms/Icons/InsagramIcon';
 import { TwitterIcon } from 'src/components/atoms/Icons/TwitterIcon';
-import React from 'react';
+ ;
 
 interface SocialLinksProps {}
 

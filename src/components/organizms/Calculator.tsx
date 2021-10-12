@@ -12,7 +12,7 @@ import { DividerVertical } from 'src/components/atoms/Divider';
 import { Card } from 'src/components/molecules/Card';
 import { SearchButton } from 'src/components/molecules/SearchButton';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
-import React from 'react';
+ ;
 
 interface CalculatorProps {}
 

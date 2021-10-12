@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Currencies } from 'src/constants/index';
-import React from 'react';
+ ;
 
 interface CurrencyPopoverProps {
   isOpen: boolean;

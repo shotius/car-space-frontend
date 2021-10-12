@@ -1,5 +1,5 @@
 import { Container, ContainerProps } from '@chakra-ui/layout';
-import React from 'react';
+ ;
 
 interface ContainerOuterProps {}
 

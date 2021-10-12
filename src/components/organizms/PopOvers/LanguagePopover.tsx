@@ -12,7 +12,7 @@ import {
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Languages } from 'src/constants/index';
-import React from 'react';
+ ;
 
 interface LanguagePopoverProps {
   isOpen: boolean;

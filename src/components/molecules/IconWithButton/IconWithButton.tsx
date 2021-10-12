@@ -1,5 +1,5 @@
 import { Button, Icon, ButtonProps, IconProps } from '@chakra-ui/react';
-import React from 'react';
+ ;
 import { IconType } from 'react-icons';
 
 interface IconButtonProps {

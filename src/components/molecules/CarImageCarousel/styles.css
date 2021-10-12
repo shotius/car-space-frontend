@@ -88,8 +88,8 @@ body {
   font-weight: bold;
 }
 .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
-  opacity: .25 !important;
-  background-color: gray;
+  opacity: .2 !important;
+  /* background-color: gray; */
   cursor: auto;
   pointer-events: none;
 }

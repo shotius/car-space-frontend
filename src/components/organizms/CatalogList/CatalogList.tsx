@@ -3,7 +3,7 @@ import { useDisclosure } from '@chakra-ui/react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CarCard } from 'src/components/molecules/CarCard';
 import { Card } from 'src/components/molecules/Card';
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { ICar } from 'src/redux/features/auth/types';
 import { axios } from 'src/utils/axios';
 import { CatalogFilter } from '../CatalogFilter';

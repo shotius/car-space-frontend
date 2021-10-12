@@ -1,5 +1,5 @@
 import { BoxProps, Center, Divider, DividerProps } from '@chakra-ui/layout';
-import React from 'react';
+ ;
 
 interface Props {
   height: BoxProps['h'];

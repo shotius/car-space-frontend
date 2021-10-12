@@ -17,7 +17,7 @@ import { AuthRoutes } from 'src/utils/HOC/AuthRoutes';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
 import * as views from './pages';
-import React from 'react'
+ 
 
 function App() {
   const { role: MyRole, loading } = useAppSelector(

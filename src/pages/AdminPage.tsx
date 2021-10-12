@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/react";
-import React from "react";
+;
 import { useHistory } from "react-router-dom";
 import { useAppDispatch } from "src/redux/app/hook";
 import { logoutUser } from "src/redux/features/auth/authSlice";

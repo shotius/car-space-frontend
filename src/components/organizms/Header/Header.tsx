@@ -11,7 +11,7 @@ import { Logo } from 'src/components/atoms/Logo';
 import { MenuLink } from 'src/components/molecules/MenuLink';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Currencies, Languages } from 'src/constants/index';
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { MenuMobile } from '../MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';

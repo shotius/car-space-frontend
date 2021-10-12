@@ -1,5 +1,5 @@
 import { createIcon } from '@chakra-ui/icon';
-import React from 'react';
+ ;
 
 export const DropdownIcon = createIcon({
   displayName: 'DropdownIcon',

@@ -1,6 +1,6 @@
 import { IconProps } from '@chakra-ui/icon';
 import { Select, SelectProps } from '@chakra-ui/select';
-import React from 'react';
+ ;
 import { DropdownIcon } from '../Icons/DropdownIcon';
 
 interface CustomSelectProps {

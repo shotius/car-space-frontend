@@ -3,7 +3,7 @@ import { Box, SimpleGrid } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BlogCard } from 'src/components/molecules/BlogCard';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
-import React from 'react';
+ ;
 
 interface BlogPageProps {}
 

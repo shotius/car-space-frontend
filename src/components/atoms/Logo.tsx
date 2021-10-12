@@ -1,5 +1,5 @@
 import { IconWithButton } from 'src/components/molecules/IconWithButton';
-import React from 'react';
+ ;
 import { LogoIcon } from './Icons/LogoIcon';
 
 type LogoProps = React.ComponentProps<typeof IconWithButton>;

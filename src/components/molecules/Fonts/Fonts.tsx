@@ -1,4 +1,4 @@
-import React from 'react'
+ 
 import { Global } from '@emotion/react';
 import RobotoRegular from 'src/utils/fonts/Roboto-Regular.ttf';
 import RobotoMedium from 'src/utils/fonts/Roboto-Medium.ttf';

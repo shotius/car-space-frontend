@@ -1,4 +1,4 @@
-import React from 'react';
+ ;
 import { TextRegular } from './Texts/TextRegular';
 import { useRouteMatch, Link } from 'react-router-dom';
 

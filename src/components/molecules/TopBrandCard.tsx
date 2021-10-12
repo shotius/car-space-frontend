@@ -1,6 +1,6 @@
 import { Image } from '@chakra-ui/image';
 import { AspectRatio, Center } from '@chakra-ui/layout';
-import React from 'react';
+ ;
 import { Card } from './Card';
 
 interface TopBrandCardProps {

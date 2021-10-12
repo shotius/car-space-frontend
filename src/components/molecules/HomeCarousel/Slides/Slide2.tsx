@@ -1,5 +1,5 @@
 import { AspectRatio, Image } from '@chakra-ui/react';
-import React from 'react';
+ ;
 
 interface Slide2Props {}
 

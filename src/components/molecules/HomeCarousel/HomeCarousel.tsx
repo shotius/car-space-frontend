@@ -1,4 +1,4 @@
-import React from 'react';
+ ;
 import { Box, Center } from '@chakra-ui/layout';
 import { Button, Image } from '@chakra-ui/react';
 import Slider from 'react-slick';

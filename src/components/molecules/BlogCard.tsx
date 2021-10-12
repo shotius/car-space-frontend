@@ -1,5 +1,5 @@
 import { VStack, Image, Heading } from '@chakra-ui/react';
-import React from 'react';
+ ;
 import { Card } from './Card';
 import { TextRegular } from './Texts/TextRegular';
 

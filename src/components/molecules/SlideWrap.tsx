@@ -1,5 +1,5 @@
 import { Center, Container } from '@chakra-ui/react';
-import React from 'react';
+ ;
 
 interface SlideWrapProps {
   height: string;

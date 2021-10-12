@@ -8,7 +8,7 @@ import { LogoIcon } from 'src/components/atoms/Icons/LogoIcon';
 import { Logo } from 'src/components/atoms/Logo';
 import { Text } from 'src/components/atoms/Text';
 import { SocialLinks } from 'src/components/molecules/SocialLinks';
-import React from 'react';
+ ;
 import { Link } from 'react-router-dom';
 
 interface FooterProps {}

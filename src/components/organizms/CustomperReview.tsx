@@ -3,7 +3,7 @@ import { ArrowNextIcon } from 'src/components/atoms/Icons/Arrows/ArrowNextIcon';
 import { ArrowPrevIcon } from 'src/components/atoms/Icons/Arrows/ArrowPrevIcon';
 import { CustomerReviewCard } from 'src/components/molecules/CustomerReviewCard';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
-import React, { useRef, useState } from 'react';
+import  { useRef, useState } from 'react';
 import Slider from 'react-slick';
 
 interface CustomperReviewProps {}

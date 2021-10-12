@@ -1,6 +1,6 @@
 import { Button, ButtonProps, Icon } from '@chakra-ui/react';
 import { SearchIcon } from 'src/components/atoms/Icons/SearchIcon';
-import React from 'react';
+ ;
 
 interface SearchButtonProps {}
 

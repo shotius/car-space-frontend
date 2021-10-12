@@ -4,6 +4,9 @@ import reactRefresh from "@vitejs/plugin-react-refresh";
 import checker from 'vite-plugin-checker'
 
 export default defineConfig({
+  esbuild: {
+    jsxInject: `import React from 'react'`
+  },
   plugins: [reactRefresh(), tsconfigPaths(), checker({ typescript: true })],
   server: {
     proxy: {

@@ -6,7 +6,7 @@ import { ThreeMobileSelects } from 'src/components/molecules/FilterSelects/Three
 import { ThreeTabletSelects } from 'src/components/molecules/FilterSelects/ThreeTabletSelects';
 import { SearchButton } from 'src/components/molecules/SearchButton';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import React from 'react';
+ ;
 
 interface FilterMobileProps {
   isOpen: boolean;

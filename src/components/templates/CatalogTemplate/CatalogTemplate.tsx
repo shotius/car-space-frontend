@@ -1,5 +1,5 @@
 import { CatalogList } from 'src/components/organizms/CatalogList';
-import React from 'react';
+ ;
 import { PublicLayout } from '../Layouts/PublicLayout';
 
 interface CatalogTemplateProps {}

@@ -1,7 +1,7 @@
 import { Center, Heading } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
-import React from 'react'
+ 
 
 interface ServicesPageProps {
 

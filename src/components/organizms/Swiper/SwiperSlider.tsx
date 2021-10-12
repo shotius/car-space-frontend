@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import  { useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle';
@@ -16,6 +16,7 @@ import { CarCard } from 'src/components/molecules/CarCard';
 import { IconButton } from '@chakra-ui/button';
 import { ArrowNextIcon } from 'src/components/atoms/Icons/Arrows/ArrowNextIcon';
 import { ArrowPrevIcon } from 'src/components/atoms/Icons/Arrows/ArrowPrevIcon';
+import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
@@ -26,6 +27,7 @@ export default function App() {
 
   return (
     <Box w="full" position="relative">
+      <SectionHeader mainText="Category" secondaryText="See all" />
       <Box position="absolute" top="0" right="0" zIndex="10" display="none">
         <IconButton
           aria-label="previous slide"
@@ -64,7 +66,7 @@ export default function App() {
         breakpoints={{
           // when window width is >= 640px
           300: {
-            slidesPerView: 1.2,
+            slidesPerView: 1.71,
           },
           540: {
             slidesPerView: 2.2,
