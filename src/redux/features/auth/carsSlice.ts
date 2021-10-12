@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import carsService from "services/carsService";
+import carsService from "src/services/carsService";
 import { CarsSliceState } from "./types";
 
 const initialState: CarsSliceState = {

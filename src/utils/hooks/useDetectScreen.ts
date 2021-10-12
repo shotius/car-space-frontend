@@ -1,5 +1,5 @@
 import { MOBILE_SCREEN_SIZE, TABLET_SCREEN_SIZE } from '../../constants/index';
-import { useViewPortWidth } from 'utils/hooks/useViewPortWidth';
+import { useViewPortWidth } from 'src/utils/hooks/useViewPortWidth';
 import { useEffect, useState } from 'react';
 
 export const useDetectScreen = ()=> {
