@@ -23,7 +23,7 @@ export const DealerCard: React.FC<DealerCardProps> = () => {
         <SectionHeader  
           mainText="Shop's name"
           secondaryText="125 vehicles"
-          mainFontSize={["19px", null, null, '16px', '18px', '24px']}
+          mainFontSize={["19px", '16px', null, null, '18px', '24px']}
           secondaryTextOpacity="63%"
           secondaryFontSize={{base: "14px", "2xl": "16px"}}
           mt={{base: '-2px', "2xl": "-8px"}}
