@@ -4,8 +4,8 @@ import { createBreakpoints } from "@chakra-ui/theme-tools"
 const breakpoints = createBreakpoints({
   sm: "30em",     // 480px   mobile     [0, 480)
   md: "48em",     // 768px   tablet     [480, 768)
-  lg: "64em",     // 992px   big tablet [768, 992)
-  xl: "81em",     // 1296px  laptop     [992, 1296)
+  lg: "64em",     // 1024px   big tablet [768, 1024)
+  xl: "81em",     // 1296px  laptop     [1024, 1296)
   "2xl": "102em", // 1632px  big laptop [1296, 1632)
   "4xl": "108em", // 1740px  HD         [1740, ...)
 })

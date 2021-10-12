@@ -10,7 +10,7 @@ export const DealerCard: React.FC<DealerCardProps> = () => {
   return (
     <Card
       w="full"
-      p="4"
+      p={{base: "4",  "2xl": '8'}}
       h="auto"
       cursor="pointer"
       _hover={{
@@ -19,20 +19,21 @@ export const DealerCard: React.FC<DealerCardProps> = () => {
         transition: "all .2s"
       }}
     >
-      <VStack w="full" spacing="14px">
+      <VStack w="full" spacing={{base: "14px", "2xl": '31px'}}>
         <SectionHeader  
           mainText="Shop's name"
           secondaryText="125 vehicles"
-          mainFontSize="14px"
+          mainFontSize={["19px", null, null, '16px', '18px', '24px']}
           secondaryTextOpacity="63%"
-          secondaryFontSize="14px"
+          secondaryFontSize={{base: "14px", "2xl": "16px"}}
+          mt={{base: '-2px', "2xl": "-8px"}}
           mb="0"
         />
         <Flex w="full">
           <AspectRatio
             ratio={198 / 118}
             w="70%"
-            mr="8px"
+            mr={["8px","4px", null, null, "6px", "8px"]}
           >
             <Image
               src="https://images.pexels.com/photos/3786092/pexels-photo-3786092.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
@@ -46,7 +47,7 @@ export const DealerCard: React.FC<DealerCardProps> = () => {
               borderRadius="3px"
               backgroundSize="cover"
               backgroundPosition="center"
-              mb="2"
+              mb={["8px","4px", null, null, "6px", "8px"]}
             />
             <Box
               flexBasis="50%"

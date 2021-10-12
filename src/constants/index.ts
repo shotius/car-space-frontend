@@ -4,7 +4,7 @@ export enum Roles {
 }
 
 export enum Currencies {
-    GEL="L Gel",
+    GEL="₾ Gel",
     USD="$ Usd",
     EUR="€ Eur"
 }

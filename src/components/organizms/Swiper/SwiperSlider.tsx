@@ -17,6 +17,7 @@ import { IconButton } from '@chakra-ui/button';
 import { ArrowNextIcon } from 'src/components/atoms/Icons/Arrows/ArrowNextIcon';
 import { ArrowPrevIcon } from 'src/components/atoms/Icons/Arrows/ArrowPrevIcon';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
+import { useMediaQuery } from '@chakra-ui/media-query';
 
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
@@ -24,10 +25,13 @@ SwiperCore.use([Pagination, Navigation]);
 export default function App() {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
+  const [isLaptopScreen] = useMediaQuery("(min-width: 1024px)")
+  console.log(isLaptopScreen)
 
   return (
     <Box w="full" position="relative">
       <SectionHeader mainText="Catalog" secondaryText="See all" />
+      {/* arrows */}
       <Box position="absolute" top="0" right="0" zIndex="10" display="none">
         <IconButton
           aria-label="previous slide"
@@ -45,9 +49,10 @@ export default function App() {
           Next
         </IconButton>
       </Box>
+      {/* Swiper */}
       <Swiper
         className="carCardSwiper"
-        // centeredSlides={true}
+        allowTouchMove={!isLaptopScreen} // disable slider on laptop screen
         spaceBetween={15}
         slidesPerView={2.1}
         navigation={{
@@ -79,6 +84,9 @@ export default function App() {
             slidesPerView: 3,
           },
           1200: {
+            slidesPerView: 3,
+          },
+          1296: {
             slidesPerView: 4,
           },
         }}

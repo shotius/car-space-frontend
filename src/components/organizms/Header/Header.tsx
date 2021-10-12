@@ -114,6 +114,7 @@ export const Header: React.FC<HeaderProps> = () => {
               borderColor="#565656"
               borderWidth="1px"
               onClick={() => history.push('/register')}
+              borderRadius="8px"
             >
               <Icon as={PersonIcon} boxSize="4" />
               <TextRegular ml="1">Register</TextRegular>
