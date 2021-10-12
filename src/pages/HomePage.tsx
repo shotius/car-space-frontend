@@ -11,6 +11,7 @@ import { TopBrands } from 'src/components/organizms/TopBrands';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import React from 'react';
 import SwiperSlider from 'src/components/organizms/Swiper/SwiperSlider';
+import { CarImageCarousel } from 'src/components/molecules/CarImageCarousel/CarImageCarousel';
 
 interface HomeProps {}
 

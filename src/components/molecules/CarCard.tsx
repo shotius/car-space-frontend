@@ -15,6 +15,7 @@ import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
 import { TextMain } from '../atoms/Texts/TextMain';
 import { IconWithButton } from './IconWithButton';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { CarImageCarousel } from './CarImageCarousel/CarImageCarousel';
 
 interface CarCardProps {
   car?: ICar;
@@ -41,7 +42,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
       p="19px"
       maxW={['295px', '343px', null, '314px', '388px']}
       // maxW={['343px', null, null, '314px', '388px']}
-      cursor="pointer"
+      // cursor="pointer"
       // w="330px"
       // minW={["300px", '340px']}
     >
@@ -62,8 +63,9 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
           w="full"
           overflow="hidden"
           borderRadius="md"
+          maxH="200px"
         >
-          <Image
+          {/* <Image
             src={
               car
                 ? `https://${car?.imgT}`
@@ -75,7 +77,8 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
               car? "10px": 'none'
             }
             saturation={0.9}
-          />
+          /> */}
+        <CarImageCarousel />
         </AspectRatio>
         {/* description */}
         <VStack w="full" divider={<StackDivider />}>

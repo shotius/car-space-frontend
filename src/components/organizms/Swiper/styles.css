@@ -1,4 +1,4 @@
-#app { height: 100% }
+/* #app { height: 100% }
 html,
 body {
   position: relative;
@@ -20,13 +20,9 @@ body {
 }
 
 .swiper-slide {
-  /* text-align: center; */
   font-size: 18px;
   background:#f4f4f5;
-  /* width: 330px !important; */
-  /* background-color: darkblue; */
 
-  /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -48,11 +44,11 @@ body {
   object-fit: cover;
 }
 
-
-.swiper-button-prev {
+*/
+.carCardSwiper > div.swiper-button-next {
   display: none;
 }
 
-.swiper-button-next {
+.carCardSwiper > div.swiper-button-prev {
   display: none;
 }

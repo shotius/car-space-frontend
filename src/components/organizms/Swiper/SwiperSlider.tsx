@@ -16,8 +16,6 @@ import { CarCard } from 'src/components/molecules/CarCard';
 import { IconButton } from '@chakra-ui/button';
 import { ArrowNextIcon } from 'src/components/atoms/Icons/Arrows/ArrowNextIcon';
 import { ArrowPrevIcon } from 'src/components/atoms/Icons/Arrows/ArrowPrevIcon';
-import useSwiperRef from 'src/utils/hooks/useSwiperRef';
-import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
@@ -46,9 +44,10 @@ export default function App() {
         </IconButton>
       </Box>
       <Swiper
-      // centeredSlides={true}
-      spaceBetween={15}
-      slidesPerView= {2.1}
+        className="carCardSwiper"
+        // centeredSlides={true}
+        spaceBetween={15}
+        slidesPerView={2.1}
         navigation={{
           prevEl: prevRef.current ? prevRef.current : undefined,
           nextEl: nextRef.current ? nextRef.current : undefined,
@@ -58,7 +57,7 @@ export default function App() {
           swiper.params.navigation.prevEl = prevRef.current;
           // @ts-ignore
           swiper.params.navigation.nextEl = nextRef.current;
-          swiper.navigation.destroy()
+          swiper.navigation.destroy();
           swiper.navigation.init();
           swiper.navigation.update();
         }}
@@ -68,14 +67,19 @@ export default function App() {
             slidesPerView: 1.2,
           },
           540: {
-            // slidesPerView: "auto",
+            slidesPerView: 2.2,
           },
           // when window width is >= 768px
-          // 768: {
-          //   slidesPerView: 2.3,
-          // },
+          768: {
+            slidesPerView: 2.5,
+          },
+          1000: {
+            slidesPerView: 3.5,
+          },
+          1200: {
+            slidesPerView: 4.5,
+          },
         }}
-        
       >
         <SwiperSlide>
           <Box w="full">
@@ -83,32 +87,32 @@ export default function App() {
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-        <Box w="full">
+          <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-        <Box w="full">
+          <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-        <Box w="full">
+          <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-        <Box w="full">
+          <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-        <Box w="full">
+          <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
-        <Box w="full">
+          <Box w="full">
             <CarCard />
           </Box>
         </SwiperSlide>
