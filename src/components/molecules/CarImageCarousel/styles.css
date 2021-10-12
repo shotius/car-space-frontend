@@ -54,7 +54,7 @@ body {
 
 .swiper-button-prev {
   display: flex;
-  margin-left: -15px;
+  margin-left: -13px;
   background-color: black;
   width: 30px !important;
   transform: scale(1.4);
@@ -72,7 +72,7 @@ body {
 
 .swiper-button-next {
   display: flex;
-  margin-right: -15px;
+  margin-right: -13px;
   background-color: black;
   width: 30px !important;
   transform: scale(1.4);
@@ -80,6 +80,14 @@ body {
   border-top-left-radius: 100px;
   border-bottom-left-radius: 100px;
 }
+
+.swiper-button-prev:active,
+.swiper-button-next:active {
+  transform: scale(1.3);
+
+  transition: all 0.1s;
+}
+
 .swiper-button-next::after {
   /* display: none; */
   color: white;
@@ -89,7 +97,6 @@ body {
 }
 .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
   opacity: .2 !important;
-  /* background-color: gray; */
   cursor: auto;
   pointer-events: none;
 }

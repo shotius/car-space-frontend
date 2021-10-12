@@ -66,7 +66,7 @@ export default function App() {
         breakpoints={{
           // when window width is >= 640px
           300: {
-            slidesPerView: 1.71,
+            slidesPerView: 1.071,
           },
           540: {
             slidesPerView: 2.2,

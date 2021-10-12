@@ -2,7 +2,6 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { Global, css } from '@emotion/react';
 
 import { Fonts } from 'src/components/molecules/Fonts';
- ;
 import theme from 'src/utils/theme';
 
 interface StylesAppProps {}
@@ -16,6 +15,9 @@ const GlobalStyles = css`
   .js-focus-visible :focus:not([data-focus-visible-added]) {
     outline: none;
     box-shadow: none;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
 `;
 

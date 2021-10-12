@@ -21,7 +21,7 @@ interface CarImageCarouselProps {}
 export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
   return (
     <>
-      <Swiper navigation={true} className="CarImagesSwiper">
+      <Swiper navigation={true} className="CarImagesSwiper"spaceBetween={30}>
         <SwiperSlide>
           <Box
             backgroundImage="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"

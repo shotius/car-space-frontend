@@ -7,7 +7,7 @@ export default defineConfig({
   esbuild: {
     jsxInject: `import React from 'react'`
   },
-  plugins: [reactRefresh(), tsconfigPaths(), checker({ typescript: true })],
+  plugins: [reactRefresh(), tsconfigPaths(), checker({ typescript: true})],
   server: {
     proxy: {
       "/api": {
