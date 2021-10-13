@@ -1,9 +1,7 @@
 // Import Swiper React components
-import { IconButton } from '@chakra-ui/button';
 import { AspectRatio, Box } from '@chakra-ui/layout';
 import { useMediaQuery } from '@chakra-ui/media-query';
 import { useRef, useState } from 'react';
-import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 // import styles from './styles.module.css';
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Pagination } from 'swiper';
@@ -12,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperButton } from '../Buttons/SwiperButton';
 import './styles.css';
 
 // install Swiper modules
@@ -97,52 +96,17 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
             h="full"
           />
         </SwiperSlide>
-        <IconButton
-          aria-label="next slide"
-          zIndex="2"
-          right="0"
-          position="absolute"
+        <SwiperButton
+          isVisible={buttonsVisible}
           ref={nextRef}
-          icon={<DropdownIcon fill="white" boxSize="5" ml="5px" />}
-          borderRadius="none"
-          transform="rotate(-90deg)"
-          bg="black"
-          w={{ md: '50px', '2xl': '70px' }}
-          mr={{ md: '-10px', '2xl': '-15px' }}
-          borderTopRadius="100px"
-          opacity=".65"
-          display={buttonsVisible ? 'block' : 'none'}
-          // transition="all 0.2s"
-          _hover={{
-            bg: 'black',
-          }}
-          _active={{
-            bg: 'black',
-            opacity: '.9',
-          }}
+          side="right"
+          aria-label="next slide"
         />
-        <IconButton
-          zIndex="2"
-          left="0"
-          display={buttonsVisible ? 'block' : 'none'}
-          icon={<DropdownIcon fill="white" boxSize="5" ml="5px" />}
-          borderRadius="none"
-          position="absolute"
+        <SwiperButton
+          isVisible={buttonsVisible}
           ref={prevRef}
-          bg="black"
-          w={{ md: '50px', '2xl': '70px' }}
-          ml={{ md: '-10px', '2xl': '-15px' }}
+          side="left"
           aria-label="previous slide"
-          transform="rotate(90deg)"
-          borderTopRadius="100px"
-          opacity=".65"
-          _hover={{
-            bg: 'black',
-          }}
-          _active={{
-            bg: 'balck',
-            opacity: '.9',
-          }}
         />
       </Swiper>
     </AspectRatio>
