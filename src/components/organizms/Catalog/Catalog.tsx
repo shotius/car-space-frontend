@@ -22,11 +22,10 @@ import { useMediaQuery } from '@chakra-ui/media-query';
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
-export default function App() {
+const  Catalog = () =>  {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const [isLaptopScreen] = useMediaQuery("(min-width: 1024px)")
-  console.log(isLaptopScreen)
 
   return (
     <Box w="full" position="relative">
@@ -140,3 +139,4 @@ export default function App() {
     </Box>
   );
 }
+export default Catalog

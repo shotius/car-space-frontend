@@ -1,0 +1,89 @@
+
+/* prev arrow*/
+
+.swiper-button-prev {
+  /* display: flex; */
+  display: none;
+  /* visibility: hidden; */
+  margin-left: -13px;
+  background-color: black;
+  width: 30px !important;
+  transform: scale(1.4);
+  opacity: 0.5;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-prev:hover {
+  /* visibility: hidden; */
+}
+
+div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-prev:hover {
+  /* display: none; */
+  display: flex;
+}
+
+/** prev button arrow*/
+.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-prev::after {
+  /* display: none; */
+  color: white;
+  opacity: 1;
+  transform: scale(0.3);
+  font-weight: bold;
+}
+
+
+/** next button*/
+
+.swiper-button-next {
+  /* display: flex; */
+  display: none;
+  margin-right: -13px;
+  background-color: black;
+  width: 30px !important;
+  transform: scale(1.4);
+  opacity: 0.5;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+}
+
+/** active buttons*/
+div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-prev:active,
+div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-next:active {
+  transform: scale(1.3);
+  transition: all 0.1s;
+}
+
+/** next button arrow*/
+div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-next::after {
+  /* display: none; */
+  color: white;
+  opacity: 1;
+  transform: scale(0.3);
+  font-weight: bold;
+}
+
+/** disabled button*/
+.swiper-button-next.swiper-button-disabled, .carCardSwiper > div.swiper-wrapper > div.swiper-slide.swiper-slide-active > div > div > div > div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-prev.swiper-button-disabled {
+  opacity: .2 !important;
+  cursor: auto;
+  pointer-events: none;
+}
+/** pagination*/
+
+/** active pagination button*/
+.swiper-pagination-bullet-active {
+  background-color: black;
+  border-radius: 0px !important;
+  width: 35px;
+  height: 2px;
+  opacity: .7;
+}
+
+/** general pagination style*/ 
+ .swiper-pagination-bullet  {
+  background-color: black;
+  width: 20px;
+  border-radius: 0px !important;
+  height: 2px;
+}

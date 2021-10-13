@@ -1,19 +1,18 @@
 import {
-  AspectRatio,
   Box,
   Heading,
   HStack,
   StackDivider,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
-import  { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { FiHeart } from 'react-icons/fi';
+import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { ICar } from 'src/redux/features/auth/types';
 import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
 import { TextMain } from '../atoms/Texts/TextMain';
-import { IconWithButton } from './IconWithButton';
-import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { CarImageCarousel } from './CarImageCarousel/CarImageCarousel';
+import { IconWithButton } from './IconWithButton';
 
 interface CarCardProps {
   car?: ICar;
@@ -44,26 +43,28 @@ export const CarCard: React.FC<CarCardProps> = () => {
       // w="330px"
       // minW={["300px", '340px']}
     >
-      <VStack w="full" spacing={["19px", null, null, "19px", '15px']}>
+      <VStack w="full" spacing={['19px', null, null, '19px', '15px']}>
         {/* header */}
         <HStack justifyContent="space-between" w="full">
           <VStack alignItems="flex-start" spacing="0">
-            <Heading fontSize={["16px", null, null, '18px', null, '24px']} fontWeight="400">
+            <Heading
+              fontSize={['16px', null, null, '18px', null, '24px']}
+              fontWeight="400"
+            >
               Certified car
             </Heading>
             <TextMain opacity="50%">2018</TextMain>
           </VStack>
-          <IconWithButton icon={FiHeart} boxSize={6} bg="autoGrey.100" p="0" h="40px"/>
+          <IconWithButton
+            icon={FiHeart}
+            boxSize={6}
+            bg="autoGrey.100"
+            p="0"
+            h="40px"
+          />
         </HStack>
-        {/* picture */}
-        <AspectRatio
-          ratio={311 / 192}
-          w="full"
-          overflow="hidden"
-          borderRadius="md"
-          maxH="200px"
-        >
-          {/* <Image
+        {/* picture swiper */}
+        {/* <Image
             src={
               car
                 ? `https://${car?.imgT}`
@@ -77,23 +78,22 @@ export const CarCard: React.FC<CarCardProps> = () => {
             saturation={0.9}
           /> */}
         <CarImageCarousel />
-        </AspectRatio>
         {/* description */}
         <VStack w="full" divider={<StackDivider />}>
-            <VStack flex="1" alignItems="flex-start" minW="150px" mb="2" w="full">
-              <HStack>
-                <TextRegular opacity="63%">Damage: </TextRegular>
-                <Heading fontWeight="400" fontSize="16px">
-                  Front end
-                </Heading>
-              </HStack>
-              <HStack>
-                <TextRegular opacity="63%">Mileage:</TextRegular>
-                <Heading fontWeight="400" fontSize="16px">
-                  40 000 km
-                </Heading>
-              </HStack>
-            </VStack>
+          <VStack flex="1" alignItems="flex-start" minW="150px" mb="2" w="full">
+            <HStack>
+              <TextRegular opacity="63%">Damage: </TextRegular>
+              <Heading fontWeight="400" fontSize="16px">
+                Front end
+              </Heading>
+            </HStack>
+            <HStack>
+              <TextRegular opacity="63%">Mileage:</TextRegular>
+              <Heading fontWeight="400" fontSize="16px">
+                40 000 km
+              </Heading>
+            </HStack>
+          </VStack>
           <HStack justifyContent="space-between" w="full">
             <TextRegular opacity="63%">Estimate Price</TextRegular>
             <Heading
@@ -107,7 +107,11 @@ export const CarCard: React.FC<CarCardProps> = () => {
           </HStack>
           <HStack justifyContent="space-between" w="full">
             <TextRegular opacity="63%">Estimate Price</TextRegular>
-            <Heading fontSize={['20px', null, null, '18px', '24px']} pr="4" fontWeight="400">
+            <Heading
+              fontSize={['20px', null, null, '18px', '24px']}
+              pr="4"
+              fontWeight="400"
+            >
               $ 20 000
             </Heading>
           </HStack>

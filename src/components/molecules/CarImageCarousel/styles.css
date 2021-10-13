@@ -52,86 +52,25 @@ body {
   display: none;
 } */
 
+/* .swiper-button-next {
+  display: none;
+}
 
+.swiper-button-prev {
+  display: none;
+} */
 
 /** navigation buttons*/
-
-/* prev arrow*/
-
-div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-prev {
-  /* display: flex; */
-  display: none;
-  margin-left: -13px;
-  background-color: black;
-  width: 30px !important;
-  transform: scale(1.4);
-  opacity: 0.5;
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
-}
-div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-prev:hover {
-  /* display: none; */
-  display: flex;
-}
-
-/** prev button arrow*/
-div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-prev::after {
-  /* display: none; */
-  color: white;
-  opacity: 1;
-  transform: scale(0.3);
-  font-weight: bold;
-}
-
-
-/** next button*/
-
-div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-next {
-  display: flex;
-  margin-right: -13px;
-  background-color: black;
-  width: 30px !important;
-  transform: scale(1.4);
-  opacity: 0.5;
-  border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
-}
-
-/** active buttons*/
-div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-prev:active,
-div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-next:active {
-  transform: scale(1.3);
-  transition: all 0.1s;
-}
-
-/** next button arrow*/
-div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-next::after {
-  /* display: none; */
-  color: white;
-  opacity: 1;
-  transform: scale(0.3);
-  font-weight: bold;
-}
-
-/** disabled button*/
-.swiper-button-next.swiper-button-disabled, .carCardSwiper > div.swiper-wrapper > div.swiper-slide.swiper-slide-active > div > div > div > div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-button-prev.swiper-button-disabled {
-  opacity: .2 !important;
-  cursor: auto;
-  pointer-events: none;
-}
-/** pagination*/
-
-/** active pagination button*/
-div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-pagination.swiper-pagination-bullets.swiper-pagination-horizontal > span.swiper-pagination-bullet.swiper-pagination-bullet-active {
-  background-color: black;
+.swiper-pagination-bullet-active {
+  background-color: red;
   border-radius: 0px !important;
   width: 35px;
   height: 2px;
-  opacity: .7;
+  opacity: 0.7;
 }
 
-/** general pagination style*/ 
- div.chakra-aspect-ratio.css-1f3mynk > div > div.swiper-pagination.swiper-pagination-bullets.swiper-pagination-horizontal > .swiper-pagination-bullet  {
+/** general pagination style*/
+.swiper-pagination-bullet {
   background-color: black;
   width: 20px;
   border-radius: 0px !important;

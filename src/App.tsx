@@ -1,5 +1,5 @@
-import Icon from '@chakra-ui/icon';
 import { Center, VStack } from '@chakra-ui/layout';
+import { Icon } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
 import { useEffect } from 'react';
 import {
@@ -34,7 +34,7 @@ function App() {
     return (
       <Center w="full" bg="white" h="100vh">
         <VStack spacing="0">
-          <Icon as={LogoIcon} boxSize={['150px', null, null, '200px']} b />
+          <Icon as={LogoIcon} boxSize={['150px', null, null, '200px']} />
           <Spinner h="30px" w="30px" thickness="1px"/>
         </VStack>
       </Center>
@@ -90,7 +90,6 @@ function App() {
     });
   };
 
-  console.log('app');
   return (
     <StyledApp>
       <Router>
