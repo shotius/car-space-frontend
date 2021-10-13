@@ -11,10 +11,10 @@ export const CloseOutlineIcon = createIcon({
         data-name="Rectangle 160"
         fill="#fff"
         stroke="#000"
-        strokeWidth="2"
+        strokeWidth="1.5"
       >
         <rect width="49" height="50" rx="8" stroke="none" />
-        <rect x="1" y="1" width="47" height="48" rx="7" fill="none" />
+        <rect x="1" y="1" width="47" height="48" rx="5" fill="none" />
       </g>
       <path
         id="close_icon"

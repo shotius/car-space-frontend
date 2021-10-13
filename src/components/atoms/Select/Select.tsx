@@ -13,7 +13,7 @@ const CustomSelect: React.FC<CustomSelectProps & SelectProps> = ({
   border = 'none',
   fontSize = ['16px', null, null, '18px',null,  '24px'],
   h = ['44px', null, '40px', null,null,  '62px'],
-  arrowColor , 
+  arrowColor = "#848484" , 
   children,
   ...rest
 }) => {

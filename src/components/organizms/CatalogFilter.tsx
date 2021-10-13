@@ -32,7 +32,7 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
             'repeat(5, 1fr)',
           ]}
           spacing="2"
-          mt={['2', '4', null, '32px']}
+          mt={['2', '4', null, '4']}
         >
           <Select placeholder="Condition" display={['none', 'block']}></Select>
           <Select placeholder="Type"></Select>

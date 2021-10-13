@@ -28,7 +28,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
       <VStack w="full" spacing={['66px']}>
         <Card
           bg="autoBlue.400"
-          p={['4', '6', '6', '8', '12']}
+          p={{md: "4", xl: "16px", "2xl": "24px"}}
           w="full"
           minH="auto"
         >

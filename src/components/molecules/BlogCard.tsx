@@ -20,15 +20,32 @@ export const BlogCard: React.FC<BlogCardProps> = () => {
         h={['186px', null, null, '177px', '200px', '296px']}
         w="full"
       />
-      <VStack p={['4', null, null, '8', null, '48px']} pt={{"2xl": "32px"}} alignItems="flex-start" >
+      <VStack
+        p={['4', null, null, '24px', null, '48px']}
+        pt={{ '2xl': '32px' }}
+        spacing={["2", null, null, '1.5']}
+        alignItems="flex-start"
+      >
         <Heading
           fontSize={['16px', null, null, '18px', '24px']}
           lineHeight={['21px', null, null, '28px', '35px']}
+          noOfLines={2}
         >
           Title
         </Heading>
-        <TextRegular lineHeight={['21px', null, null, '26px', null, '28px']}>
+        <TextRegular
+          lineHeight={['21px', null, null, '26px', null, '28px']}
+          w="full"
+          noOfLines={[3, null, null, 2]}
+        >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          AssumendaLorem ipsum dolor sit amet consectetur adipisicing elit.
+          AssumendaLorem ipsum dolor sit amet consectetur adipisicing elit.
+          Assumenda
         </TextRegular>
       </VStack>
     </Card>
