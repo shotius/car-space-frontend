@@ -62,17 +62,16 @@ body {
 
 /** navigation buttons*/
 .swiper-pagination-bullet-active {
-  background-color: red;
   border-radius: 0px !important;
-  width: 35px;
-  height: 2px;
+  width: 40px !important;
+  height: 1px;
   opacity: 0.7;
 }
 
 /** general pagination style*/
 .swiper-pagination-bullet {
-  background-color: black;
+  background-color:black !important;
   width: 20px;
   border-radius: 0px !important;
-  height: 2px;
+  height: 1px;
 }

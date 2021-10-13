@@ -37,7 +37,7 @@ export const CarCard: React.FC<CarCardProps> = () => {
       bg="white"
       borderRadius="8px"
       p="19px"
-      maxW={['295px', '343px', null, '324px', '388px', '398px']}
+      maxW={['388px', '343px', null, '324px', '388px', '398px']}
       // maxW={['343px', null, null, '314px', '388px']}
       // cursor="pointer"
       // w="330px"

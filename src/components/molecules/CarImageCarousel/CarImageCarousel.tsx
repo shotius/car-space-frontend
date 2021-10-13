@@ -30,7 +30,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
       w="full"
       overflow="hidden"
       borderRadius="md"
-      maxH={['192px', null, null, '160px', null, '218px']}
+      maxH={['192px', null, null, '160px', '190px', '218px']}
       onMouseEnter={() => {
         isLaptopScreen ? setButtonsVisible(true) : null;
       }}
@@ -58,7 +58,6 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
             w="full"
             h="full"
           />
-          {/* <Image src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg" /> */}
         </SwiperSlide>
         <SwiperSlide>
           <Box

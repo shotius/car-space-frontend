@@ -33,7 +33,7 @@ export const Footer: React.FC<FooterProps> = () => {
   });
 
   return (
-    <ContainerOuter p={12} pb="40" minH="100px" bg="#e8e8e8" mt="auto">
+    <ContainerOuter p={12} pb="24" minH="100px" bg="#e8e8e8" mt="auto">
       <Stack
         alignItems={['center', null, 'flex-start']}
         direction={['column', null, 'row']}

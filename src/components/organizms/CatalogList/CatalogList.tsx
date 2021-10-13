@@ -1,9 +1,9 @@
-import { SimpleGrid, VStack } from '@chakra-ui/layout';
+import { Flex, SimpleGrid, VStack } from '@chakra-ui/layout';
 import { useDisclosure } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CarCard } from 'src/components/molecules/CarCard';
 import { Card } from 'src/components/molecules/Card';
-import  { useEffect, useState } from 'react';
 import { ICar } from 'src/redux/features/auth/types';
 import { axios } from 'src/utils/axios';
 import { CatalogFilter } from '../CatalogFilter';
@@ -26,21 +26,29 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
   return (
     <ContainerOuter pt={['4', '6', null, '8', '16']}>
       <VStack w="full" spacing={['66px']}>
-        <Card bg="autoBlue.400" p={['4', '6', '6', "8", '12']} w="full" minH="auto">
+        <Card
+          bg="autoBlue.400"
+          p={['4', '6', '6', '8', '12']}
+          w="full"
+          minH="auto"
+        >
           <CatalogFilter isOpen={isFilterOpen} onToggle={toggleFilters} />
         </Card>
         <SimpleGrid
           gridTemplateColumns={[
             '1fr',
-            '1fr 1fr',
-            null,
+            'repeat(2, 1fr)',
             'repeat(3, 1fr)',
+            null, 
             'repeat(4, 1fr)',
           ]}
           spacing="4"
+          w="full"
         >
           {cars.map((car: ICar, i) => (
-            <CarCard car={car} key={i} />
+            <Flex justify="center">
+              <CarCard car={car} key={i} />
+            </Flex>
           ))}
         </SimpleGrid>
       </VStack>

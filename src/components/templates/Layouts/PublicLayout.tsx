@@ -3,8 +3,6 @@ import { Footer } from 'src/components/organizms/Footer/Footer';
 import { Header } from 'src/components/organizms/Header';
 import { HEADER_HEIGHT } from 'src/constants/index';
 
- ;
-
 interface PublicLayoutProps {}
 
 export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
