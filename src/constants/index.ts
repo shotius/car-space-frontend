@@ -9,6 +9,8 @@ export enum Currencies {
     EUR="€ Eur"
 }
 
+export type CurentyType = 'USD' | 'EUR' | 'LARI'
+
 export enum Languages {
     ENG="Eng",
     GE="Geo"
