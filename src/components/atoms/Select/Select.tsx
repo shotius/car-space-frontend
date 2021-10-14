@@ -8,12 +8,13 @@ interface CustomSelectProps {
 }
 
 const CustomSelect: React.FC<CustomSelectProps & SelectProps> = ({
-  color = '#848484',
+  color = '#a6a6a6',
   bg = 'white',
+  opacity="0.5",
   border = 'none',
   fontSize = ['16px', null, null, '18px',null,  '24px'],
   h = ['44px', null, '40px', null,null,  '62px'],
-  arrowColor = "#848484" , 
+  arrowColor = "#a6a6a6" , 
   children,
   ...rest
 }) => {

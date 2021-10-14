@@ -1,11 +1,10 @@
-import { Button } from '@chakra-ui/button';
-import { Input } from '@chakra-ui/input';
 import { HStack, Stack } from '@chakra-ui/layout';
 import { useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { Select } from 'src/components/atoms/Select';
 import { CurentyType } from 'src/constants';
 import { CurrencyButton } from '../Buttons/CurrencyButton';
+import { InputRegular } from '../Inputs/InputRegular';
 interface ThreeMobileSelectsProps {}
 
 export const ThreeMobileSelects: React.FC<ThreeMobileSelectsProps> = () => {
@@ -13,28 +12,24 @@ export const ThreeMobileSelects: React.FC<ThreeMobileSelectsProps> = () => {
 
   return (
     <Stack display={['flex', 'none']}>
-      <Select placeholder="Brand"></Select>
+      <Select placeholder="Brand">
+        <option>Brand1</option>
+        <option>Brand2</option>
+        <option>Brand3</option>
+      </Select>
       <Select placeholder="Model"></Select>
-      <Select placeholder="Year"></Select>
+      {/* year */}
+      <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
+        <InputRegular pr="2" placeholder="Year from" type="number" />
+        <DividerVertical height="30px" />
+        <InputRegular placeholder="Year to" type="number" />
+      </HStack>
+      {/* price */}
       <HStack justify="space-between">
         <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
-          <Input
-            outline="none"
-            border="none"
-            placeholder="Price from"
-            type="number"
-            opacity="0.7"
-            _placeholder={{ fontSize: '16px', color: '#000', opacity: '.5' }}
-          />
+          <InputRegular pr="2" placeholder="Price from" type="number" />
           <DividerVertical height="30px" />
-          <Input
-            outline="none"
-            border="none"
-            placeholder="Price to"
-            type="number"
-            opacity="0.7"
-            _placeholder={{ fontSize: '16px', color: '#000', opacity: '.5' }}
-          />
+          <InputRegular placeholder="Price to" type="number" />
         </HStack>
         <HStack
           borderRadius="8px"
