@@ -1,6 +1,6 @@
 import { Center, Container, Divider, Flex } from '@chakra-ui/react';
 import { DividerVertical } from 'src/components/atoms/Divider';
-import { Select } from 'src/components/atoms/Select';
+import { Select } from 'src/components/atoms/Selects';
  ;
 import { SearchButton } from '../SearchButton';
 

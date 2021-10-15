@@ -13,7 +13,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
         h={HEADER_HEIGHT}
         top="0"
         bg="white"
-        zIndex="10"
+        zIndex="modal"
         boxShadow="md"
       >
         <Header />

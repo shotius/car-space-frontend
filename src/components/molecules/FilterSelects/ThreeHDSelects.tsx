@@ -2,7 +2,7 @@ import { HStack, Stack, StackProps } from '@chakra-ui/react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
-import { Select } from 'src/components/atoms/Select';
+import { Select } from 'src/components/atoms/Selects';
 import { IconWithButton } from '../IconWithButton';
 import { SearchButton } from '../SearchButton';
 interface ThreeHDSelectsProps {

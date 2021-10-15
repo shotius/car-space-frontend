@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/layout';
 import { Button, Collapse } from '@chakra-ui/react';
 import { useState } from 'react';
-import { Select } from 'src/components/atoms/Select';
+import { Select } from 'src/components/atoms/Selects';
 import { ThreeHDSelects } from 'src/components/molecules/FilterSelects/ThreeHDSelects';
 import { ThreeMobileSelects } from 'src/components/molecules/FilterSelects/ThreeMobileSelects';
 import { ThreeTabletSelects } from 'src/components/molecules/FilterSelects/ThreeTabletSelects';
@@ -26,7 +26,7 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false)
 
   return (
-    <Stack {...rest} spacing="0" >
+    <Stack {...rest} spacing="0">
       <ThreeMobileSelects setIsInputFocused={setIsInputFocused}/>
       <ThreeTabletSelects />
       <ThreeHDSelects isOpen={isOpen} onToggle={onToggle} />

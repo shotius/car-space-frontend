@@ -1,5 +1,5 @@
 import { Stack, StackDivider, StackProps } from '@chakra-ui/react';
-import { Select } from 'src/components/atoms/Select';
+import { Select } from 'src/components/atoms/Selects';
  ;
 
 interface ThreeTabletSelectsProps {}

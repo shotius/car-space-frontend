@@ -1,4 +1,4 @@
-import { SimpleGrid } from '@chakra-ui/layout';
+import { SimpleGrid, SimpleGridProps } from '@chakra-ui/layout';
  ;
 
 interface ScrollableDivProps {
@@ -7,11 +7,12 @@ interface ScrollableDivProps {
   columnsHD?: number;
 }
 
-export const ScrollableDiv: React.FC<ScrollableDivProps> = ({
+export const ScrollableDiv: React.FC<ScrollableDivProps & SimpleGridProps> = ({
   cardCount,
   columnsLaptop = 6,
   columnsHD = 6,
   children,
+  ...rest
 }) => {
   return (
     <SimpleGrid
@@ -29,6 +30,7 @@ export const ScrollableDiv: React.FC<ScrollableDivProps> = ({
           display: 'none',
         },
       }}
+      {...rest}
     >
       {children}
     </SimpleGrid>

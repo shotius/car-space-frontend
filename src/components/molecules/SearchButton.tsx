@@ -36,6 +36,7 @@ export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
         as={SearchIcon}
         mr={['1', null, null, '1.5']}
         boxSize={['4', null, null, null, '4', '6']}
+        fill="white"
       />{' '}
       Search
     </Button>
