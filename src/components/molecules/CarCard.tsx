@@ -18,7 +18,7 @@ interface CarCardProps {
   car?: ICar;
 }
 
-export const CarCard: React.FC<CarCardProps> = () => {
+export const CarCard: React.FC<CarCardProps> = ({car}) => {
   const ref = useRef(null);
   const entry = useIntersectionObserver(ref, {});
   const isVisible = !!entry?.isIntersecting;
@@ -51,9 +51,9 @@ export const CarCard: React.FC<CarCardProps> = () => {
               fontSize={['16px', null, null, '18px', null, '24px']}
               fontWeight="400"
             >
-              Certified car
+              {car?.m} {car?.mG}
             </Heading>
-            <TextMain opacity="50%">2018</TextMain>
+            <TextMain opacity="50%">{car?.y}</TextMain>
           </VStack>
           <IconWithButton
             icon={FiHeart}
@@ -84,13 +84,13 @@ export const CarCard: React.FC<CarCardProps> = () => {
             <HStack>
               <TextRegular opacity="63%">Damage: </TextRegular>
               <Heading fontWeight="400" fontSize="16px">
-                Front end
+                {car?.dmg}
               </Heading>
             </HStack>
             <HStack>
               <TextRegular opacity="63%">Mileage:</TextRegular>
               <Heading fontWeight="400" fontSize="16px">
-                40 000 km
+                {car?.od} km
               </Heading>
             </HStack>
           </VStack>

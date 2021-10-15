@@ -27,5 +27,6 @@ export interface ICar {
 }
 
 export interface CarsSliceState {
-  cars: ICar[]
+  cars: ICar[],
+  brands: string[]
 }
