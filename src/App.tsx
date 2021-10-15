@@ -28,6 +28,7 @@ function App() {
 
   useEffect(() => {
     dispatch(autoLogin());
+    localStorage.setItem('windowHeight', String(window.innerHeight))
   }, [dispatch]);
 
   if (loading) {

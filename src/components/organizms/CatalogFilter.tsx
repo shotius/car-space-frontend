@@ -1,17 +1,18 @@
 import {
-  HStack,
   SimpleGrid,
   Stack,
   StackProps,
-  VStack,
+  VStack
 } from '@chakra-ui/layout';
 import { Button, Collapse } from '@chakra-ui/react';
+import { useState } from 'react';
 import { Select } from 'src/components/atoms/Select';
 import { ThreeHDSelects } from 'src/components/molecules/FilterSelects/ThreeHDSelects';
 import { ThreeMobileSelects } from 'src/components/molecules/FilterSelects/ThreeMobileSelects';
 import { ThreeTabletSelects } from 'src/components/molecules/FilterSelects/ThreeTabletSelects';
 import { SearchButton } from 'src/components/molecules/SearchButton';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { WithMobileKeyboard } from '../molecules/WithMobileKeyboard';
 interface FilterMobileProps {
   isOpen: boolean;
   onToggle: () => void;
@@ -22,9 +23,11 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
   onToggle,
   ...rest
 }) => {
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false)
+
   return (
-    <Stack {...rest} spacing="0">
-      <ThreeMobileSelects />
+    <Stack {...rest} spacing="0" >
+      <ThreeMobileSelects setIsInputFocused={setIsInputFocused}/>
       <ThreeTabletSelects />
       <ThreeHDSelects isOpen={isOpen} onToggle={onToggle} />
       <Collapse in={isOpen}>
@@ -50,9 +53,11 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
         </SimpleGrid>
       </Collapse>
       <VStack pt="2" spacing="2.5" display={['flex', null, 'none']}>
-        <SearchButton w="full" />
+        <WithMobileKeyboard isKeyboardActive={isInputFocused}>
+          <SearchButton w="full" />
+        </WithMobileKeyboard>
         <Button variant="link" onClick={onToggle} bg="transparent">
-          <TextRegular color={"#000"}>
+          <TextRegular color={'#000'}>
             {isOpen ? 'See less filter' : 'See more filter'}
           </TextRegular>
         </Button>

@@ -46,8 +46,8 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
           w="full"
         >
           {cars.map((car: ICar, i) => (
-            <Flex justify="center">
-              <CarCard car={car} key={i} />
+            <Flex justify="center" key={i}>
+              <CarCard car={car} />
             </Flex>
           ))}
         </SimpleGrid>

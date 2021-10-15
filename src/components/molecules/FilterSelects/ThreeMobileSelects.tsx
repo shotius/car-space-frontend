@@ -5,9 +5,14 @@ import { Select } from 'src/components/atoms/Select';
 import { CurentyType } from 'src/constants';
 import { CurrencyButton } from '../Buttons/CurrencyButton';
 import { InputRegular } from '../Inputs/InputRegular';
-interface ThreeMobileSelectsProps {}
 
-export const ThreeMobileSelects: React.FC<ThreeMobileSelectsProps> = () => {
+interface ThreeMobileSelectsProps {
+  setIsInputFocused: (a: boolean) => void;
+}
+
+export const ThreeMobileSelects: React.FC<ThreeMobileSelectsProps> = ({
+  setIsInputFocused: setKeyboardActive,
+}) => {
   const [chosenCurrency, setChosenCurrency] = useState<CurentyType>('LARI');
 
   return (
@@ -20,16 +25,38 @@ export const ThreeMobileSelects: React.FC<ThreeMobileSelectsProps> = () => {
       <Select placeholder="Model"></Select>
       {/* year */}
       <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
-        <InputRegular pr="2" placeholder="Year from" type="number" />
+        <InputRegular
+          pr="2"
+          placeholder="Year from"
+          type="number"
+          onFocus={() => setKeyboardActive(true)}
+          onBlur={() => setKeyboardActive(false)}
+        />
         <DividerVertical height="30px" />
-        <InputRegular placeholder="Year to" type="number" />
+        <InputRegular
+          placeholder="Year to"
+          type="number"
+          onFocus={() => setKeyboardActive(true)}
+          onBlur={() => setKeyboardActive(false)}
+        />
       </HStack>
       {/* price */}
       <HStack justify="space-between">
         <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
-          <InputRegular pr="2" placeholder="Price from" type="number" />
+          <InputRegular
+            pr="2"
+            placeholder="Price from"
+            type="number"
+            onFocus={() => setKeyboardActive(true)}
+            onBlur={() => setKeyboardActive(false)}
+          />
           <DividerVertical height="30px" />
-          <InputRegular placeholder="Price to" type="number" />
+          <InputRegular
+            placeholder="Price to"
+            type="number"
+            onFocus={() => setKeyboardActive(true)}
+            onBlur={() => setKeyboardActive(false)}
+          />
         </HStack>
         <HStack
           borderRadius="8px"
