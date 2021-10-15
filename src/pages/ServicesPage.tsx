@@ -1,7 +1,6 @@
 import { Input } from '@chakra-ui/input';
 import { Box, Center, Flex, Heading, VStack } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
-import { DrawerExample } from 'src/components/molecules/SimpleDrawer';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 
@@ -25,7 +24,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                   <TextRegular>Lorem</TextRegular>
 
 
-              <DrawerExample />
               </VStack>
             </Flex>
           </VStack>
