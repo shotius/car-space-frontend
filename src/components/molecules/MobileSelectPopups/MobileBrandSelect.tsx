@@ -1,21 +1,22 @@
 import {
-  Button,
+  Box,
+  Divider,
   Drawer,
   DrawerBody,
-  DrawerCloseButton,
   DrawerContent,
   DrawerOverlay,
+  Heading,
   InputGroup,
   InputLeftElement,
-  SimpleGrid,
   VStack,
 } from '@chakra-ui/react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { SearchIcon } from 'src/components/atoms/Icons/SearchIcon';
 import { ButtonRegular } from '../Buttons/ButtonRegular';
+import { TextButton } from '../Buttons/TextButton';
 import { InputRegular } from '../Inputs/InputRegular';
+import { ScrollableDiv } from '../ScrollableDiv';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
-import { TextRegular } from '../Texts/TextRegular';
 import { TopBrandCard } from '../TopBrandCard';
 
 interface BrandSelectProps {
@@ -24,12 +25,35 @@ interface BrandSelectProps {
   onClose: () => void;
 }
 
-export const MobileBrandSelect: React.FC<BrandSelectProps> = ({
+export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
   brands,
   isOpen,
   onClose,
 }) => {
   const initialRef = useRef<HTMLButtonElement | null>(null);
+  const [topBrandsVisible, setTopBrandsVisible] = useState(true);
+  const [searchWord, setSearchWord] = useState<string>('');
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(brands[0]);
+
+  // brands already is sorted, Here I add first letter of alphabet
+  const brandsWithAlphabet = brands.reduce<string[]>((prev, curr) => {
+    // on first iteration, prev is empty
+    if (prev.length === 0) {
+      return prev.concat(curr[0]).concat(curr);
+    }
+    // first letter of the next word has changed
+    if (prev[prev.length - 1][0] !== curr[0]) {
+      return prev.concat(curr[0]).concat(curr);
+    } else {
+      // else append word
+      return prev.concat(curr);
+    }
+  }, []);
+
+  // filter brands when searchWord is specified
+  const brandsToShow = brandsWithAlphabet.filter((brand) => {
+    return brand.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
+  });
 
   return (
     <Drawer
@@ -41,10 +65,11 @@ export const MobileBrandSelect: React.FC<BrandSelectProps> = ({
       <DrawerOverlay />
       <DrawerContent h="80%" borderTopRadius="16px">
         <DrawerBody p="32px 48px 10px">
-          <VStack w="full" h="full" spacing="4">
+          <VStack w="full" h="full" spacing="4" direction="column">
             <VStack spacing="4" pb="4" bg="white" zIndex="10" w="full">
-              <InputGroup w="full" >
-                <InputLeftElement 
+              {/* search input */}
+              <InputGroup w="full">
+                <InputLeftElement
                   children={<SearchIcon fill="autoGrey.400" />}
                 />
                 <InputRegular
@@ -52,21 +77,29 @@ export const MobileBrandSelect: React.FC<BrandSelectProps> = ({
                   borderRadius="8px"
                   variant="filled"
                   pl="40px"
+                  value={searchWord}
+                  onChange={(e) => setSearchWord(e.target.value)}
+                  onFocus={() => {
+                    setTopBrandsVisible(false);
+                  }}
+                  onBlur={() => {
+                    setTopBrandsVisible(true);
+                  }}
                 />
               </InputGroup>
-              <SectionHeader mainText="Top Brands" mainFontSize="16px" />
 
-              <SimpleGrid
-                templateColumns="repeat(5, 1fr)"
+              {/* top brands */}
+              <SectionHeader
+                mainText="Top Brands"
+                mainFontSize="16px"
+                display={topBrandsVisible ? 'block' : 'none'}
+              />
+
+              {/* top brand icons */}
+              <ScrollableDiv
+                cardCount={5}
                 w="full"
-                gap="10px"
-                overflowX="auto"
-                css={{
-                  '&::-webkit-scrollbar': {
-                    display: 'none',
-                  },
-                }}
-                
+                display={topBrandsVisible ? 'grid' : 'none'}
               >
                 <TopBrandCard
                   image="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png"
@@ -98,15 +131,43 @@ export const MobileBrandSelect: React.FC<BrandSelectProps> = ({
                   minH="38px"
                   imageWidth="20px"
                 />
-              </SimpleGrid>
+              </ScrollableDiv>
             </VStack>
-            <VStack alignItems="flex-start" w="full" overflowY="scroll">
-              {brands.map((brand) => (
-                <TextRegular key={brand}>{brand}</TextRegular>
+
+            {/* list of car brands */}
+            <VStack
+              alignItems="flex-start"
+              w="full"
+              overflowY="scroll"
+              spacing="2"
+            >
+              {brandsToShow.map((brand) => (
+                <Box key={brand} p="0">
+                  {brand.length === 1 ? (
+                    <Heading fontSize="16px" fontWeight="light">
+                      {brand}
+                      <Divider w="40px" mt="6px" borderColor="autoGrey.400" />
+                    </Heading>
+                  ) : (
+                    <TextButton
+                      onClick={() => setSelectedBrand(brand)}
+                      color={
+                        selectedBrand === brand ? 'autoOrange.500' : '#000'
+                      }
+                      fontSize="16px"
+                    >
+                      {brand}
+                    </TextButton>
+                  )}
+                </Box>
               ))}
             </VStack>
-            <VStack w="full">
-              <ButtonRegular ref={initialRef} color="white">Apply</ButtonRegular>
+
+            {/* submit button */}
+            <VStack w="full" flex="1" justify="flex-end">
+              <ButtonRegular ref={initialRef} onClick={onClose}>
+                Apply
+              </ButtonRegular>
             </VStack>
           </VStack>
         </DrawerBody>

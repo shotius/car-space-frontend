@@ -7,7 +7,7 @@ import { useAppSelector } from 'src/redux/app/hook';
 import { CurrencyButton } from '../Buttons/CurrencyButton';
 import { InputRegular } from '../Inputs/InputRegular';
 import { MobileSelect } from '../MobileSelect';
-import { MobileBrandSelect } from '../MobileSelectPopups/MobileBrandSelect';
+import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
 
 interface ThreeMobileSelectsProps {
   setIsInputFocused: (a: boolean) => void;
@@ -24,7 +24,7 @@ export const ThreeMobileSelects: React.FC<ThreeMobileSelectsProps> = ({
   return (
     <Stack display={['flex', 'none']}>
       <MobileSelect onClick={onOpen} label="Brand" />
-      <MobileBrandSelect brands={brands} isOpen={isOpen} onClose={onClose} />
+      <MobileBrandPopup brands={brands} isOpen={isOpen} onClose={onClose} />
 
       <MobileSelect onClick={onOpen} label="Models" />
       {/* year */}

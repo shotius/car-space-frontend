@@ -36,7 +36,7 @@ export const ButtonRegular = forwardRef<
           bg: bg,
         }}
         _active={{
-          bg,
+          bg : "autoOrange.400",
         }}
         ref={ref}
         {...rest}
