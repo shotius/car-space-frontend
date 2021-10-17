@@ -6,29 +6,41 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom';
 import 'src/App.css';
 import { StyledApp } from 'src/components/organizms/StyledApp';
-import AppRoutes from 'src/constants/app-routes';
+// import AppRoutes from 'src/constants/app-routes';
 import { ErrorPage } from 'src/pages/ErrorPage';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
-import { AuthRoutes } from 'src/utils/HOC/AuthRoutes';
+import { AuthRoute } from 'src/utils/HOC/AuthRoutes';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
 import { LogoIcon } from './components/atoms/Icons/LogoIcon';
-import * as views from './pages';
+// import * as views from './pages';
+import {
+  AdminPage,
+  BlogPage,
+  CatalogPage,
+  DealerDashboard,
+  Home,
+  Login,
+  RegisterPage,
+  ServicesPage,
+} from './pages';
 
 function App() {
   const { role: MyRole, loading } = useAppSelector(
     (state) => state.authReducer
   );
+  
   const dispatch = useAppDispatch();
+  console.log(MyRole);
 
   useEffect(() => {
     dispatch(autoLogin());
-    localStorage.setItem('windowHeight', String(window.innerHeight))
+    localStorage.setItem('windowHeight', String(window.innerHeight));
   }, [dispatch]);
 
   if (loading) {
@@ -36,60 +48,11 @@ function App() {
       <Center w="full" bg="white" h="100vh">
         <VStack spacing="0">
           <Icon as={LogoIcon} boxSize={['150px', null, null, '200px']} />
-          <Spinner h="30px" w="30px" thickness="1px"/>
+          <Spinner h="30px" w="30px" thickness="1px" />
         </VStack>
       </Center>
     );
   }
-
-  const getAllowedRoutes = () => {
-    // console.log('get Allowed routes')
-    return AppRoutes.filter(({ roles }) => {
-      // if route has no roles or there is my role and this role in routes' roles
-      if ((roles && roles.length === 0) || (MyRole && roles.includes(MyRole))) {
-        return true;
-      }
-      return false;
-    });
-  };
-
-  // generate only routes where user has permissions
-  const generateRoutes = () => {
-    // console.log('generating routes')
-    const allowedRoutes = getAllowedRoutes();
-    return allowedRoutes.map((route) => {
-      const { path, view, isPrivate, exact, isAuth } = route;
-
-      const component = views[view];
-      if (isPrivate) {
-        return (
-          <PrivateRoute
-            key={path}
-            path={path}
-            component={component}
-            exact={exact}
-          />
-        );
-      } else if (isAuth) {
-        return (
-          <AuthRoutes
-            key={path}
-            path={path}
-            component={component}
-            exact={exact}
-          />
-        );
-      }
-      return (
-        <PublicRoute
-          key={path}
-          path={path}
-          component={component}
-          exact={exact}
-        />
-      );
-    });
-  };
 
   return (
     <StyledApp>
@@ -98,10 +61,15 @@ function App() {
           <Route path="/" exact>
             <Redirect to="/home" />
           </Route>
-          {generateRoutes()}
-          <Route>
-            <ErrorPage />
-          </Route>
+          <PublicRoute path="/home" component={Home} />
+          <PublicRoute path="/catalog" component={CatalogPage} />
+          <PublicRoute path="/services" component={ServicesPage} />
+          <PublicRoute path="/blog" component={BlogPage} />
+          <PrivateRoute path="/admin/dashboard" component={AdminPage} />
+          <PrivateRoute path="/dealer/dashboard" component={DealerDashboard} />
+          <AuthRoute path="/login" component={Login} />
+          <AuthRoute path="/register" component={RegisterPage} />
+          <Route path="*" render={() => <ErrorPage />} />
         </Switch>
       </Router>
     </StyledApp>

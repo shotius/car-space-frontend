@@ -1,18 +1,10 @@
-;
-import { Route } from "react-router-dom";
-
+import { Route, RouteProps } from 'react-router-dom';
 interface PublicRouteProps {
   component: React.FC;
-  [x: string]: any;
 }
 
-export const PublicRoute: React.FC<PublicRouteProps> = ({
+export const PublicRoute: React.FC<PublicRouteProps & RouteProps> = ({
   component: Component,
+  exact = true,
   ...rest
-}) => {
-  return (
-    <Route {...rest}>
-      <Component />
-    </Route>
-  );
-};
+}) => <Route exact {...rest} render={() => <Component />} />;

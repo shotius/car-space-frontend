@@ -1,19 +1,20 @@
-;
-import { Redirect, Route } from "react-router-dom";
-import { useAppSelector } from "src/redux/app/hook";
+import { Redirect, Route, RouteProps } from 'react-router-dom';
+import { useAppSelector } from 'src/redux/app/hook';
 
 interface PrivateRouteProps {
   component: React.FC;
-  [x: string]: any;
 }
 
-export const PrivateRoute: React.FC<PrivateRouteProps> = (props) => {
-  const { component: Component, ...rest } = props;
+export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
+  component: Component,
+  exact = true,
+  ...rest
+}) => {
   const { isAuthenticated } = useAppSelector((state) => state.authReducer);
 
-  return (
-    <Route {...rest}>
-      {isAuthenticated ? <Component /> : <Redirect to="/login" />}
-    </Route>
-  );
+  if (!isAuthenticated) {
+    return <Redirect to="/login" />;
+  }
+
+  return <Route exact {...rest} render={() => <Component />} />;
 };
