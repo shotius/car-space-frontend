@@ -39,14 +39,15 @@ export const Header: React.FC<HeaderProps> = () => {
 
   // curency change popover
   const {
-    onOpen: openCurr,
+    // onOpen: openCurr,
     onClose: closeCurr,
+    onToggle: toggleCurr, 
     isOpen: isCurrOpen,
   } = useDisclosure();
 
   // language change popover
   const {
-    onOpen: openLang,
+    onToggle: toggleLang,
     onClose: closeLang,
     isOpen: isLangOpen,
   } = useDisclosure();
@@ -88,16 +89,17 @@ export const Header: React.FC<HeaderProps> = () => {
               {/* choose currency */}
               <CurrencyPopover
                 isOpen={isCurrOpen}
-                onClose={closeCurr}
-                onOpen={openCurr}
+                closeCurrency={closeCurr}
+                toggleCurrency={toggleCurr}
+                // onOpen={openCurr}
                 currency={currency}
                 setCurrency={(currency) => setCurrency(currency)}
               />
               {/* choose languages */}
               <LanguagePopover
                 isOpen={isLangOpen}
-                onClose={closeLang}
-                onOpen={openLang}
+                closePopover={closeLang}
+                togglePopover={toggleLang}
                 lang={lang}
                 setLanguage={(lang) => setLang(lang)}
               />
@@ -119,6 +121,12 @@ export const Header: React.FC<HeaderProps> = () => {
                 borderWidth="1px"
                 onClick={() => history.push('/register')}
                 borderRadius="8px"
+                w="100px"
+                transition="all 0.5s"
+                _hover={{
+                  bg: "autoGrey.200",
+                  border: "white"
+                }}
               >
                 <Icon as={PersonIcon} boxSize="4" />
                 <TextRegular ml="1">Register</TextRegular>
@@ -140,7 +148,9 @@ export const Header: React.FC<HeaderProps> = () => {
               icon={<BurgerIcon boxSize="6" />}
               bg="transparent"
               onClick={() => setMenuOpen(true)}
-              display={menuOpen ? 'none' : 'inline-block'}
+              // display={menuOpen ? 'none' : 'inline-block'}
+              opacity={menuOpen ? '0' : '1'}
+              transition="all ease .2"
             />
 
             <IconButton
@@ -149,6 +159,8 @@ export const Header: React.FC<HeaderProps> = () => {
               display={menuOpen ? 'block' : 'none'}
               onClick={() => setMenuOpen(false)}
               bg="transparent"
+              opacity={menuOpen ? '1' : '0'}
+              transition="all ease .2"
             />
             <MenuMobile menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
           </HStack>

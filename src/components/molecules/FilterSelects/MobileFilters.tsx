@@ -157,13 +157,13 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
         </VStack>
       </Collapse>
       {/* apply button */}
-      <VStack pt="2" spacing="2.5">
+      <VStack pt="2" spacing="3">
         {/* this mobile input sticks button to the keyboard */}
         <WithMobileKeyboard isKeyboardActive={keyboardActive}>
           <SearchButton w="full" />
         </WithMobileKeyboard>
         <Button variant="link" onClick={toggleFilters} bg="transparent">
-          <TextRegular color={'#000'}>
+          <TextRegular color={'#000'} display={keyboardActive ? 'none' : 'block'} lineHeight="19px">
             {isFiltersOpen ? 'See less filter' : 'See more filter'}
           </TextRegular>
         </Button>

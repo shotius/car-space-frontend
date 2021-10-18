@@ -5,6 +5,7 @@ import { ThreeHDSelects } from 'src/components/molecules/FilterSelects/ThreeHDSe
 import { ThreeTabletSelects } from 'src/components/molecules/FilterSelects/ThreeTabletSelects';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { MobileFilters } from '../molecules/FilterSelects/MobileFilters';
+import SelectSecondary from '../molecules/SelectSecondary';
 
 interface FilterMobileProps {
   isOpen: boolean;
@@ -39,21 +40,18 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
               'repeat(3, 1fr)',
               'repeat(5, 1fr)',
             ]}
-            spacing="2"
-            mt={['2', '4', null, '4']}
+            spacing={[null, null, null, "4", null, '24px']}
+            mt={['2', '4', null, '4', null, '24px']}
           >
-            <Select placeholder="Engine"></Select>
-            <Select placeholder="Mileage"></Select>
-            <Select
-              placeholder="Condition"
-              display={['none', 'block']}
-            ></Select>
-            <Select placeholder="Type"></Select>
-            <Select placeholder="Location"></Select>
-            <Select placeholder="Transmission"></Select>
-            <Select placeholder="Drive"></Select>
-            <Select placeholder="Fuel"></Select>
-            <Select placeholder="Cylinder"></Select>
+            <SelectSecondary placeholder="Engine"></SelectSecondary>
+            <SelectSecondary placeholder="Mileage"></SelectSecondary>
+            <SelectSecondary placeholder="Condition"></SelectSecondary>
+            <SelectSecondary placeholder="Type"></SelectSecondary>
+            <SelectSecondary placeholder="Location"></SelectSecondary>
+            <SelectSecondary placeholder="Transmission"></SelectSecondary>
+            <SelectSecondary placeholder="Drive"></SelectSecondary>
+            <SelectSecondary placeholder="Fuel"></SelectSecondary>
+            <SelectSecondary placeholder="Cylinder"></SelectSecondary>
           </SimpleGrid>
         </Collapse>
       )}

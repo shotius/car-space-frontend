@@ -6,8 +6,7 @@ import {
   PopoverArrow,
   PopoverBody,
   PopoverContent,
-  PopoverTrigger,
-  Text,
+  PopoverTrigger
 } from '@chakra-ui/react';
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
@@ -16,37 +15,48 @@ import { Languages } from 'src/constants/index';
 
 interface LanguagePopoverProps {
   isOpen: boolean;
-  onOpen: () => void;
-  onClose: () => void;
+  closePopover: () => void;
+  togglePopover: () => void;
   lang: string;
   setLanguage: (Currencies: Languages) => void;
 }
 
 export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
   isOpen,
-  onClose,
-  onOpen,
+  closePopover,
+  togglePopover,
   lang,
   setLanguage,
 }) => {
   return (
     <Popover
       isOpen={isOpen}
-      onOpen={onOpen}
-      onClose={onClose}
       placement="bottom"
     >
       <PopoverTrigger>
         {/* here <Text /> is given instead of <TextRegular /> because of ref error */}
         <HStack spacing="2" cursor="pointer">
           <Icon as={UKIcon} boxSize="20px" />
-          <Text
-            cursor="pointer"
-            w="40px"
-            fontSize={['14px', null, null, null , null, '16px']}
-          >
-            {lang}
-          </Text>
+          <Button
+          fontSize={['14px', null, null, null , null, '16px']}
+          // mr={['2', null, null, null, '4']}
+          pr={[null, null, '4']}
+          cursor="pointer"
+          onClick={togglePopover}
+          variant="ghost"
+          fontWeight="light"
+          _hover={{
+            bg: "transparent"
+          }}
+          _active={{
+            bg: "transparent"
+          }}
+          minW="0px"
+          w="auto"
+          p="0"
+        >
+          {lang}
+        </Button>
         </HStack>
       </PopoverTrigger>
       <PopoverContent w="70px" outline="none">
@@ -58,7 +68,7 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
               bg="white"
               onClick={() => {
                 setLanguage(Languages.ENG);
-                onClose();
+                closePopover();
               }}
             >
               <TextRegular fontWeight="light">{Languages.ENG}</TextRegular>
@@ -68,7 +78,7 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
               bg="white"
               onClick={() => {
                 setLanguage(Languages.GE);
-                onClose();
+                closePopover();
               }}
             >
               <TextRegular fontWeight="light">{Languages.GE}</TextRegular>

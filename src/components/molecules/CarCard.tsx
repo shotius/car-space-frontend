@@ -58,9 +58,12 @@ export const CarCard: React.FC<CarCardProps> = ({car}) => {
           <IconWithButton
             icon={FiHeart}
             boxSize={6}
-            bg="autoGrey.100"
+            bg="autoGrey.600"
             p="0"
             h="40px"
+            _hover={{
+              bg: "autoGrey.700"
+            }}
           />
         </HStack>
         {/* picture swiper */}
