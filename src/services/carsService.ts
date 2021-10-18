@@ -23,7 +23,7 @@ const getAllBrands = async () => {
 const getCars = async () => {
   try {
     const {data} = await axios.get('/api/cars')
-    return data.cars  as ICar[]
+    return data.cars as ICar[]
   } catch (error) {
     throw error
   }

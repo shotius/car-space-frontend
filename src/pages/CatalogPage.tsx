@@ -7,3 +7,4 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
   return <CatalogTemplate />;
 };
 
+export default CatalogPage

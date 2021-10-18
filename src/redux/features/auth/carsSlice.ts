@@ -57,6 +57,7 @@ const carsSlice = createSlice({
     });
     builder.addCase(getCars.fulfilled, (state, action) => {
       if (action.payload) {
+        //@ts-ignore
         state.cars = action.payload;
       }
     });

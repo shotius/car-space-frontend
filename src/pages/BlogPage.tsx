@@ -41,3 +41,5 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
     </PublicLayout>
   );
 };
+
+export default BlogPage

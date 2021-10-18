@@ -10,3 +10,5 @@ export const RegisterPage: React.FC<RegisterProps> = () => {
       <Heading>Register</Heading>
     </Box>);
 }
+
+export default RegisterPage

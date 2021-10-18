@@ -9,7 +9,6 @@ import { DealersSection } from 'src/components/organizms/DealersSection';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
 import { TopBrands } from 'src/components/organizms/TopBrands';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
- ;
 
 interface HomeProps {}
 
@@ -35,3 +34,5 @@ export const Home: React.FC<HomeProps> = () => {
     </PublicLayout>
   );
 };
+
+export default Home

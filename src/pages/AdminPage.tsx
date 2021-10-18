@@ -27,3 +27,5 @@ export const AdminPage: React.FC<AdminProps> = () => {
     </div>
   );
 };
+
+export default AdminPage

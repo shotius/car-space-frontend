@@ -1,16 +1,15 @@
 import { Center, VStack } from '@chakra-ui/layout';
 import { Icon } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch,
+  Switch
 } from 'react-router-dom';
 import 'src/App.css';
 import { StyledApp } from 'src/components/organizms/StyledApp';
-// import AppRoutes from 'src/constants/app-routes';
 import { ErrorPage } from 'src/pages/ErrorPage';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
@@ -18,23 +17,29 @@ import { AuthRoute } from 'src/utils/HOC/AuthRoutes';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
 import { LogoIcon } from './components/atoms/Icons/LogoIcon';
-// import * as views from './pages';
-import {
-  AdminPage,
-  BlogPage,
-  CatalogPage,
-  DealerDashboard,
-  Home,
-  Login,
-  RegisterPage,
-  ServicesPage,
-} from './pages';
+// import AdminPage from './pages/AdminPage';
+// import BlogPage from './pages/BlogPage';
+// import CatalogPage from './pages/CatalogPage';
+// import DealerDashboard from './pages/DealerDashboard';
+// import Home from './pages/HomePage';
+// import Login from './pages/LoginPage';
+// import RegisterPage from './pages/RegisterPage';
+// import ServicesPage from './pages/ServicesPage';
+// const AdminPage = lazy(() => import('./pages/AdminPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const CatalogPage = lazy(() => import('./pages/CatalogPage'));
+const AdminPage = lazy(() => import('./pages/AdminPage'))
+const DealerDashboard = lazy(() => import('./pages/DealerDashboard'));
+const Home = lazy(() => import('./pages/HomePage'));
+const Login = lazy(() => import('./pages/LoginPage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 
 function App() {
   const { role: MyRole, loading } = useAppSelector(
     (state) => state.authReducer
   );
-  
+
   const dispatch = useAppDispatch();
   console.log(MyRole);
 
@@ -61,10 +66,10 @@ function App() {
           <Route path="/" exact>
             <Redirect to="/home" />
           </Route>
+          <PublicRoute path="/blog" component={BlogPage} />
           <PublicRoute path="/home" component={Home} />
           <PublicRoute path="/catalog" component={CatalogPage} />
           <PublicRoute path="/services" component={ServicesPage} />
-          <PublicRoute path="/blog" component={BlogPage} />
           <PrivateRoute path="/admin/dashboard" component={AdminPage} />
           <PrivateRoute path="/dealer/dashboard" component={DealerDashboard} />
           <AuthRoute path="/login" component={Login} />

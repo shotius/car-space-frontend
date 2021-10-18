@@ -32,3 +32,5 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
     </PublicLayout>
   );
 };
+
+export default ServicesPage
