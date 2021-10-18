@@ -1,4 +1,4 @@
-import { HStack, Icon, TextProps } from '@chakra-ui/react';
+import { HStack, Icon, StackProps, TextProps } from '@chakra-ui/react';
 import { DropdownIcon } from '../atoms/Icons/DropdownIcon';
 import { TextRegular } from './Texts/TextRegular';
 
@@ -11,15 +11,15 @@ interface MobileSelectProps {
 
 // in mobile version, select field is fake one, because we need to pop up
 // custom select box, so I use regular div for select
-export const MobileSelect: React.FC<MobileSelectProps> = ({
+export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
   onClick,
   label,
-  textOpacity = "0.5",
+  textOpacity = '0.5',
   // arrowOpacity = '0.5'
+  ...rest
 }) => {
   return (
     <HStack
-      
       h={['44px', null, '40px', null, null, '62px']}
       w="full"
       bg="white"
@@ -28,6 +28,7 @@ export const MobileSelect: React.FC<MobileSelectProps> = ({
       pl="4"
       pr="2"
       justify="space-between"
+      {...rest}
     >
       <TextRegular
         opacity={textOpacity}

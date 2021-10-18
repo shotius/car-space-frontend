@@ -1,6 +1,3 @@
-import { Center, VStack } from '@chakra-ui/layout';
-import { Icon } from '@chakra-ui/react';
-import { Spinner } from '@chakra-ui/spinner';
 import { lazy, useEffect } from 'react';
 import {
   BrowserRouter as Router,
@@ -11,12 +8,11 @@ import {
 import 'src/App.css';
 import { StyledApp } from 'src/components/organizms/StyledApp';
 import { ErrorPage } from 'src/pages/ErrorPage';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { useAppDispatch } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
 import { AuthRoute } from 'src/utils/HOC/AuthRoutes';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
-import { LogoIcon } from './components/atoms/Icons/LogoIcon';
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const CatalogPage = lazy(() => import('./pages/CatalogPage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'))
@@ -27,28 +23,24 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 
 function App() {
-  const { role: MyRole, loading } = useAppSelector(
-    (state) => state.authReducer
-  );
 
   const dispatch = useAppDispatch();
-  console.log(MyRole);
 
   useEffect(() => {
     dispatch(autoLogin());
     localStorage.setItem('windowHeight', String(window.innerHeight));
   }, [dispatch]);
 
-  if (loading) {
-    return (
-      <Center w="full" bg="white" h="100vh">
-        <VStack spacing="0">
-          <Icon as={LogoIcon} boxSize={['150px', null, null, '200px']} />
-          <Spinner h="30px" w="30px" thickness="1px" />
-        </VStack>
-      </Center>
-    );
-  }
+  // if (loading) {
+  //   return (
+      // <Center w="full" bg="white" h="100vh">
+      //   <VStack spacing="0">
+      //     <Icon as={LogoIcon} boxSize={['150px', null, null, '200px']} />
+      //     <Spinner h="30px" w="30px" thickness="1px" />
+      //   </VStack>
+      // </Center>
+  //   );
+  // }
 
   return (
     <StyledApp>

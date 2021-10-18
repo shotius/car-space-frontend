@@ -4,8 +4,6 @@ import { store } from 'src/redux/app/store';
 import App from './App';
 import 'focus-visible/dist/focus-visible'; // for keyboard users
 
-console.log('main')
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

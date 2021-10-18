@@ -44,10 +44,10 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
       <NavMenuLink heading="Contact" to="/contact" onClick={() => setMenuOpen(false)}/>
 
       <HStack justifyContent="space-around" pt="4" spacing="2" w="full">
-        <Button w="40%">
+        <Button w="40%" bg="autoGrey.200">
           <Icon as={UKIcon} boxSize="6" />
         </Button>
-        <Button w="40%"> GEL</Button>
+        <Button w="40%" bg="autoGrey.200"> GEL</Button>
       </HStack>
     </VStack>
   );

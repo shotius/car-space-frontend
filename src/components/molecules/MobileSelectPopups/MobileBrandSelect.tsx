@@ -1,16 +1,11 @@
 import {
   Box,
   Center,
-  Divider,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerOverlay,
-  Heading,
+  Divider, Heading,
   InputGroup,
   InputLeftElement,
   InputRightElement,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
