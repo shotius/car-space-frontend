@@ -18,15 +18,26 @@ export const ThreeMobileSelects: React.FC<ThreeMobileSelectsProps> = ({
 }) => {
   const [chosenCurrency, setChosenCurrency] = useState<CurentyType>('LARI');
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const { models } = useAppSelector((state) => state.carsReducer);
 
   const { brands } = useAppSelector((state) => state.carsReducer);
+
+  const handleModelSelect = () => {
+    if (models.length !== 0) {
+      onOpen();
+    }
+  }
 
   return (
     <Stack display={['flex', 'none']}>
       <MobileSelect onClick={onOpen} label="Brand" />
       <MobileBrandPopup brands={brands} isOpen={isOpen} onClose={onClose} />
 
-      <MobileSelect onClick={onOpen} label="Models" />
+      <MobileSelect
+        onClick={handleModelSelect}
+        label="Models"
+        textOpacity={models.length !== 0 ? '0.5' : '0.2'}
+      />
       {/* year */}
       <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
         <InputRegular
@@ -94,4 +105,4 @@ export const ThreeMobileSelects: React.FC<ThreeMobileSelectsProps> = ({
   );
 };
 
-export default ThreeMobileSelects
+export default ThreeMobileSelects;
