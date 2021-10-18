@@ -13,13 +13,6 @@ function renderChunks(deps) {
         'react',
         'react-router-dom',
         'react-dom',
-        '@testing-library/jest-dom',
-        '@testing-library/react',
-        '@testing-library/user-event',
-        '@types/node',
-        '@types/react',
-        '@types/react-dom',
-        '@types/react-swipe'
       ].includes(key)
     )
       return;
