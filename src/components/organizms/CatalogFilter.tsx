@@ -1,9 +1,4 @@
-import {
-  SimpleGrid,
-  Stack,
-  StackProps,
-  VStack
-} from '@chakra-ui/layout';
+import { SimpleGrid, Stack, StackProps, VStack } from '@chakra-ui/layout';
 import { Button, Collapse } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Select } from 'src/components/atoms/Selects';
@@ -12,6 +7,7 @@ import { ThreeMobileSelects } from 'src/components/molecules/FilterSelects/Three
 import { ThreeTabletSelects } from 'src/components/molecules/FilterSelects/ThreeTabletSelects';
 import { SearchButton } from 'src/components/molecules/SearchButton';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { WithMobileKeyboard } from '../molecules/WithMobileKeyboard';
 interface FilterMobileProps {
   isOpen: boolean;
@@ -23,13 +19,24 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
   onToggle,
   ...rest
 }) => {
-  const [isInputFocused, setIsInputFocused] = useState<boolean>(false)
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
+  const { isDesktop, isTablet, isMobile } = useDetectScreen();
 
   return (
     <Stack {...rest} spacing="0">
-      <ThreeMobileSelects setIsInputFocused={setIsInputFocused}/>
-      <ThreeTabletSelects />
-      <ThreeHDSelects isOpen={isOpen} onToggle={onToggle} />
+      {/* mobile selects */}
+      {isMobile ? (
+        <ThreeMobileSelects setIsInputFocused={setIsInputFocused} />
+      ) : null}
+
+      {/* tablet selects */}
+      {isTablet ? <ThreeTabletSelects /> : null}
+      
+      {/* desktop selects */}
+      {isDesktop ? (
+        <ThreeHDSelects isOpen={isOpen} onToggle={onToggle} />
+      ) : null}
+
       <Collapse in={isOpen}>
         <SimpleGrid
           templateColumns={[

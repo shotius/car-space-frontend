@@ -12,27 +12,24 @@ import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 
 interface HomeProps {}
 
-export const Home: React.FC<HomeProps> = () => {
-  return (
-    <PublicLayout>
-      <ContainerOuter>
-        <HomeCarousel />
-        <Search />
-        <VStack
-          w="full"
-          alignItems="flex-start"
-          spacing={['64px', '85px', '101px', '138px']}
-        >
-          <MiniCategory />
-          <Catalog />
-          <CustomperReview />
-          <TopBrands />
-          <DealersSection />
-          <Calculator />
-        </VStack>
-      </ContainerOuter>
-    </PublicLayout>
-  );
-};
-
-export default Home
+export const Home: React.FC<HomeProps> = () => (
+  <PublicLayout>
+    <ContainerOuter>
+      <HomeCarousel />
+      <Search />
+      <VStack
+        w="full"
+        alignItems="flex-start"
+        spacing={['64px', '85px', '101px', '138px']}
+      >
+        <MiniCategory />
+        <Catalog />
+        <CustomperReview />
+        <TopBrands />
+        <DealersSection />
+        <Calculator />
+      </VStack>
+    </ContainerOuter>
+  </PublicLayout>
+);
+export default Home;

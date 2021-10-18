@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
+import ErrorBoundary from 'src/components/molecules/ErrorBoundary';
 import { useAppSelector } from 'src/redux/app/hook';
 
 interface AuthRoutesProps {
@@ -21,8 +22,10 @@ export const AuthRoute: React.FC<AuthRoutesProps & RouteProps> = ({
   }
 
   return (
-    <Suspense fallback={<h1>Loading AuthPage...</h1>}>
-      <Route exact {...rest} render={() => <Component />} />
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense fallback={<h1>Loading AuthPage...</h1>}>
+        <Route exact {...rest} render={() => <Component />} />
+      </Suspense>
+    </ErrorBoundary>
   );
 };

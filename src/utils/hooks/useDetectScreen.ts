@@ -11,7 +11,6 @@ export const useDetectScreen = () => {
 
   useLayoutEffect(() => {
     if (window?.width) {
-      console.log('isMobile', isMobile)
       const { width } = window;
       if (width > 0 && width < MOBILE_SCREEN_SIZE) {
         // mobile screen
