@@ -1,5 +1,4 @@
-import { carsService } from 'src/services/carsService';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { CarFilters } from './types';
 
 const initialState: CarFilters = {
