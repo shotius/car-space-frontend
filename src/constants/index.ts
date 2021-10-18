@@ -17,7 +17,7 @@ export enum Languages {
 }
 
 export const MOBILE_SCREEN_SIZE = 510
-export const TABLET_SCREEN_SIZE = 780
+export const TABLET_SCREEN_SIZE = 768
 
 export const HEADER_HEIGHT =[
     '50px', // < 480px sm mobile

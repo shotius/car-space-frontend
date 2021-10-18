@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 import { MenuMobile } from '../MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
+import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 
 interface HeaderProps {}
 
@@ -23,7 +24,9 @@ export const Header: React.FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
   const [lang, setLang] = useState<Languages>(Languages.ENG);
+  const { isDesktop, isMobile, isTablet } = useDetectScreen();
   const history = useHistory();
+
 
   // if menu open stop body scroll
   useEffect(() => {
@@ -64,89 +67,94 @@ export const Header: React.FC<HeaderProps> = () => {
             history.push('/home');
           }}
         />
-        {/* menu links */}
-        <HStack
-          ml="auto"
-          display={['none', 'none', 'flex']}
-          spacing={[null, null, '16px',null, '18px',  '24px']}
-          divider={<StackDivider />}
-        >
-          <HStack spacing={[null, null, '16px', '24px', '32px']}>
-            <MenuLink to="/catalog" label="Catalog"/>
-            <MenuLink to="/services" label="Services"/>
-            <MenuLink to="/blog" label="Blog"/>
-          </HStack>
-          {/* popovers */}
+        {/* menu links Desktop*/}
+        {isDesktop ? (
           <HStack
-            spacing={[null, null, '0px', '8px']}
-            mr={[null, null, '-20px', '-15px']}
+            ml="auto"
+            display={['none', 'none', 'flex']}
+            spacing={[null, null, '16px', null, '18px', '24px']}
+            divider={<StackDivider />}
           >
-            {/* choose currency */}
-            <CurrencyPopover
-              isOpen={isCurrOpen}
-              onClose={closeCurr}
-              onOpen={openCurr}
-              currency={currency}
-              setCurrency={(currency) => setCurrency(currency)}
-            />
-            {/* choose languages */}
-            <LanguagePopover
-              isOpen={isLangOpen}
-              onClose={closeLang}
-              onOpen={openLang}
-              lang={lang}
-              setLanguage={(lang) => setLang(lang)}
-            />
-          </HStack>
-          {/* <Divider height="35px" borderColor="gray.500" /> */}
-          <HStack spacing={[null, null, '0', '2',null,  "4"]} ml="-15px">
-            <Button
-              variant="ghost"
-              fontWeight="light"
-              fontSize="16px"
-              onClick={() => history.push('/login')}
+            <HStack spacing={[null, null, '16px', '24px', '32px']}>
+              <MenuLink to="/catalog" label="Catalog" />
+              <MenuLink to="/services" label="Services" />
+              <MenuLink to="/blog" label="Blog" />
+            </HStack>
+            {/* popovers */}
+            <HStack
+              spacing={[null, null, '0px', '8px']}
+              mr={[null, null, '-20px', '-15px']}
             >
-              <TextRegular>Log in</TextRegular>
-            </Button>
-            <Button
-              backgroundColor="white"
-              fontWeight="light"
-              borderColor="#565656"
-              borderWidth="1px"
-              onClick={() => history.push('/register')}
-              borderRadius="8px"
-            >
-              <Icon as={PersonIcon} boxSize="4" />
-              <TextRegular ml="1">Register</TextRegular>
-            </Button>
+              {/* choose currency */}
+              <CurrencyPopover
+                isOpen={isCurrOpen}
+                onClose={closeCurr}
+                onOpen={openCurr}
+                currency={currency}
+                setCurrency={(currency) => setCurrency(currency)}
+              />
+              {/* choose languages */}
+              <LanguagePopover
+                isOpen={isLangOpen}
+                onClose={closeLang}
+                onOpen={openLang}
+                lang={lang}
+                setLanguage={(lang) => setLang(lang)}
+              />
+            </HStack>
+            {/* <Divider height="35px" borderColor="gray.500" /> */}
+            <HStack spacing={[null, null, '0', '2', null, '4']} ml="-15px">
+              <Button
+                variant="ghost"
+                fontWeight="light"
+                fontSize="16px"
+                onClick={() => history.push('/login')}
+              >
+                <TextRegular>Log in</TextRegular>
+              </Button>
+              <Button
+                backgroundColor="white"
+                fontWeight="light"
+                borderColor="#565656"
+                borderWidth="1px"
+                onClick={() => history.push('/register')}
+                borderRadius="8px"
+              >
+                <Icon as={PersonIcon} boxSize="4" />
+                <TextRegular ml="1">Register</TextRegular>
+              </Button>
+            </HStack>
           </HStack>
-        </HStack>
-        {/* mobile view profile and menu hamburger*/}
-        <HStack ml="auto" display={['flex', 'flex', 'none']} spacing={0}>
-          <IconButton
-            aria-label="profile"
-            icon={<PersonIcon boxSize="5" />}
-            bg="transparent"
-          />
-          <IconButton
-            aria-label="menu"
-            icon={<BurgerIcon boxSize="6" />}
-            bg="transparent"
-            onClick={() => setMenuOpen(true)}
-            display={menuOpen ? 'none' : 'inline-block'}
-          />
+        ) : null}
 
-          <IconButton
-            aria-label="close menu"
-            icon={<CloseIcon boxSize="6" />}
-            display={menuOpen ? 'block' : 'none'}
-            onClick={() => setMenuOpen(false)}
-            bg="transparent"
-          />
-        </HStack>
+        {/* mobile view profile and menu hamburger*/}
+        {isMobile || isTablet ? (
+          <HStack ml="auto" display={['flex', 'flex', 'none']} spacing={0}>
+            <IconButton
+              aria-label="profile"
+              icon={<PersonIcon boxSize="5" />}
+              bg="transparent"
+            />
+            <IconButton
+              aria-label="menu"
+              icon={<BurgerIcon boxSize="6" />}
+              bg="transparent"
+              onClick={() => setMenuOpen(true)}
+              display={menuOpen ? 'none' : 'inline-block'}
+            />
+
+            <IconButton
+              aria-label="close menu"
+              icon={<CloseIcon boxSize="6" />}
+              display={menuOpen ? 'block' : 'none'}
+              onClick={() => setMenuOpen(false)}
+              bg="transparent"
+            />
+            <MenuMobile menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+          </HStack>
+        ) : null}
       </Flex>
       {/* menu navigation menu*/}
-      <MenuMobile menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
     </ContainerOuter>
   );
 };

@@ -4,18 +4,11 @@ import reactRefresh from '@vitejs/plugin-react-refresh';
 import checker from 'vite-plugin-checker';
 import { dependencies } from './package.json';
 
-console.log(dependencies);
+// this is for vendor chunk spliting
 function renderChunks(deps) {
   var chunks = {};
   Object.keys(deps).forEach((key) => {
-    if (
-      [
-        'react',
-        'react-router-dom',
-        'react-dom',
-      ].includes(key)
-    )
-      return;
+    if (['react', 'react-router-dom', 'react-dom'].includes(key)) return;
     chunks[key] = [key];
   });
   return chunks;
@@ -34,6 +27,7 @@ export default defineConfig({
     },
     host: true,
   },
+  // during build vendor chunk will be split
   build: {
     sourcemap: false,
     rollupOptions: {
