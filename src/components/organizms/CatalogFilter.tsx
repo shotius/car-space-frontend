@@ -1,14 +1,17 @@
 import { SimpleGrid, Stack, StackProps, VStack } from '@chakra-ui/layout';
 import { Button, Collapse } from '@chakra-ui/react';
-import { useState } from 'react';
+import { lazy, useState } from 'react';
 import { Select } from 'src/components/atoms/Selects';
 import { ThreeHDSelects } from 'src/components/molecules/FilterSelects/ThreeHDSelects';
-import { ThreeMobileSelects } from 'src/components/molecules/FilterSelects/ThreeMobileSelects';
 import { ThreeTabletSelects } from 'src/components/molecules/FilterSelects/ThreeTabletSelects';
 import { SearchButton } from 'src/components/molecules/SearchButton';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { WithMobileKeyboard } from '../molecules/WithMobileKeyboard';
+const ThreeMobileSelects = lazy(
+  () => import('src/components/molecules/FilterSelects/ThreeMobileSelects')
+);
+
 interface FilterMobileProps {
   isOpen: boolean;
   onToggle: () => void;
@@ -31,7 +34,7 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
 
       {/* tablet selects */}
       {isTablet ? <ThreeTabletSelects /> : null}
-      
+
       {/* desktop selects */}
       {isDesktop ? (
         <ThreeHDSelects isOpen={isOpen} onToggle={onToggle} />

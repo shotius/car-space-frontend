@@ -5,6 +5,7 @@ import { CarsSliceState } from './types';
 const initialState: CarsSliceState = {
   cars: [],
   brands: [],
+  models: []
 };
 
 export const searchCars = createAsyncThunk('cars/searchCars', async () => {
@@ -40,6 +41,17 @@ export const getCars = createAsyncThunk(
   }
 );
 
+
+export const getModels = createAsyncThunk('carFilter/getModels', async (brand: string, {rejectWithValue}) => {
+  try {
+    const result = await carsService.getModels(brand)
+    return result
+  } catch (error) {
+    console.log(error)
+    rejectWithValue(error)
+  }
+})
+
 const carsSlice = createSlice({
   name: 'cars',
   initialState,
@@ -61,6 +73,11 @@ const carsSlice = createSlice({
         state.cars = action.payload;
       }
     });
+
+    // get models
+    builder.addCase(getModels.fulfilled, (state, action) => {
+      state.models = action.payload
+    })
   },
 });
 

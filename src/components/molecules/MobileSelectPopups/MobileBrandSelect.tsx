@@ -1,5 +1,6 @@
 import {
   Box,
+  Center,
   Divider,
   Drawer,
   DrawerBody,
@@ -8,12 +9,18 @@ import {
   Heading,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   VStack,
 } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
+import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
 import { SearchIcon } from 'src/components/atoms/Icons/SearchIcon';
+import { useAppDispatch } from 'src/redux/app/hook';
+import { selectBrand } from 'src/redux/features/auth/carFilterSlice';
+import { getModels } from 'src/redux/features/auth/carsSlice';
 import { ButtonRegular } from '../Buttons/ButtonRegular';
 import { TextButton } from '../Buttons/TextButton';
+import { IconWithButton } from '../IconWithButton';
 import { InputRegular } from '../Inputs/InputRegular';
 import { ScrollableDiv } from '../ScrollableDiv';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
@@ -33,7 +40,8 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
   const initialRef = useRef<HTMLButtonElement | null>(null);
   const [topBrandsVisible, setTopBrandsVisible] = useState(true);
   const [searchWord, setSearchWord] = useState<string>('');
-  const [selectedBrand, setSelectedBrand] = useState<string | null>(brands[0]);
+  const [selectedBrand, setSelectedBrand] = useState<string>(brands[0]);
+  const dispatch = useAppDispatch();
 
   // brands already is sorted, Here I add first letter of alphabet
   const brandsWithAlphabet = brands.reduce<string[]>((prev, curr) => {
@@ -71,6 +79,20 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
               <InputGroup w="full">
                 <InputLeftElement
                   children={<SearchIcon fill="autoGrey.400" />}
+                />
+                <InputRightElement
+                  children={
+                    <Center w="full" h="full">
+                      <IconWithButton
+                        icon={CloseIcon}
+                        onClick={() => {
+                          setSearchWord('');
+                        }}
+                        bg="transparent"
+                      />
+                    </Center>
+                  }
+                  display={!!searchWord ? 'block' : 'none'}
                 />
                 <InputRegular
                   placeholder="Search"
@@ -165,7 +187,14 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
 
             {/* submit button */}
             <VStack w="full" flex="1" justify="flex-end">
-              <ButtonRegular ref={initialRef} onClick={onClose}>
+              <ButtonRegular
+                ref={initialRef}
+                onClick={() => {
+                  dispatch(selectBrand(selectedBrand));
+                  dispatch(getModels(selectedBrand))
+                  onClose();
+                }}
+              >
                 Apply
               </ButtonRegular>
             </VStack>

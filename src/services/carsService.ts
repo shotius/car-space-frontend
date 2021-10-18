@@ -29,9 +29,20 @@ const getCars = async () => {
   }
 }
 
+const getModels = async (brand: string) => {
+  try {
+    const {data} = await axios.get(`/api/cars/models?brand=${brand}`)
+    console.log(data)
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
 const carsService = {
   searchCars,
   getAllBrands,
-  getCars
+  getCars,
+  getModels
 };
 export default carsService;

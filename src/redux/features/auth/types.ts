@@ -29,4 +29,14 @@ export interface ICar {
 export interface CarsSliceState {
   cars: ICar[],
   brands: string[]
+  models: string[]
+}
+
+export interface CarFilters {
+  brand: string | null,
+  model: string | null, 
+  yearFrom: string | null, 
+  yearTo: string | null, 
+  priceFrom: string | null, 
+  priceTo: string | null,
 }

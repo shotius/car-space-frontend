@@ -93,3 +93,5 @@ export const ThreeMobileSelects: React.FC<ThreeMobileSelectsProps> = ({
     </Stack>
   );
 };
+
+export default ThreeMobileSelects

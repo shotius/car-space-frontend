@@ -17,15 +17,6 @@ import { AuthRoute } from 'src/utils/HOC/AuthRoutes';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
 import { LogoIcon } from './components/atoms/Icons/LogoIcon';
-// import AdminPage from './pages/AdminPage';
-// import BlogPage from './pages/BlogPage';
-// import CatalogPage from './pages/CatalogPage';
-// import DealerDashboard from './pages/DealerDashboard';
-// import Home from './pages/HomePage';
-// import Login from './pages/LoginPage';
-// import RegisterPage from './pages/RegisterPage';
-// import ServicesPage from './pages/ServicesPage';
-// const AdminPage = lazy(() => import('./pages/AdminPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const CatalogPage = lazy(() => import('./pages/CatalogPage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'))
