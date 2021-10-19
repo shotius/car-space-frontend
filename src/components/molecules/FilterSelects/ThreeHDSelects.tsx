@@ -14,7 +14,7 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
   isOpen,
   onToggle,
   // p = { md: '2', lg: '4', xl: '4' },
-  p = { base: '0', md: '2' },
+  p = { base: '0', md: '8px 8px 8px 0px' },
   bg = '#fff',
   direction = 'row',
   borderRadius = 'md',
@@ -29,6 +29,7 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
       direction={direction}
       borderRadius={borderRadius}
       alignItems="center"
+      pl="0px"
       {...rest}
     >
       <Select placeholder="Brand"></Select>

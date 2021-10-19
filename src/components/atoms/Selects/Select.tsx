@@ -9,7 +9,7 @@ interface CustomSelectProps {
 
 const CustomSelect: React.FC<CustomSelectProps & SelectProps> = ({
   color = '#a6a6a6',
-  bg = 'white',
+  bg = '#fff',
   opacity="0.5",
   border = 'none',
   fontSize = ['16px', null, null, '18px',null,  '24px'],

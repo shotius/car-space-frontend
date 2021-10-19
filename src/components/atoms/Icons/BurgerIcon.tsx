@@ -1,5 +1,4 @@
 import { createIcon } from '@chakra-ui/icon';
- 
 
 export const BurgerIcon = createIcon({
   displayName: 'BurgerIcon',

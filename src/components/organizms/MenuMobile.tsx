@@ -38,8 +38,8 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
       <NavMenuLink heading="Services" to="/services"  onClick={() => setMenuOpen(false)}/>
 
       <NavMenuLink heading="Blog" to="/blog"onClick={() => setMenuOpen(false)}/>
-      <NavMenuLink heading="MiniCategory" to="/miniCategory" onClick={() => setMenuOpen(false)}/>
-      <NavMenuLink heading="Top Brands" to="/topBrands" onClick={() => setMenuOpen(false)}/>
+      <NavMenuLink heading="Mini category" to="/miniCategory" onClick={() => setMenuOpen(false)}/>
+      <NavMenuLink heading="Top brands" to="/topBrands" onClick={() => setMenuOpen(false)}/>
       <NavMenuLink heading="Dealers" to="/dealers" onClick={() => setMenuOpen(false)}/>
       <NavMenuLink heading="Contact" to="/contact" onClick={() => setMenuOpen(false)}/>
 

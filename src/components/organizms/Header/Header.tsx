@@ -148,9 +148,7 @@ export const Header: React.FC<HeaderProps> = () => {
               icon={<BurgerIcon boxSize="6" />}
               bg="transparent"
               onClick={() => setMenuOpen(true)}
-              // display={menuOpen ? 'none' : 'inline-block'}
-              opacity={menuOpen ? '0' : '1'}
-              transition="all ease .2"
+              display={menuOpen ? 'none' : 'inline-block'}
             />
 
             <IconButton

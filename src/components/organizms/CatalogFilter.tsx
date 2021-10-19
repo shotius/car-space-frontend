@@ -1,6 +1,5 @@
 import { SimpleGrid, Stack, StackProps } from '@chakra-ui/layout';
 import { Collapse } from '@chakra-ui/react';
-import { Select } from 'src/components/atoms/Selects';
 import { ThreeHDSelects } from 'src/components/molecules/FilterSelects/ThreeHDSelects';
 import { ThreeTabletSelects } from 'src/components/molecules/FilterSelects/ThreeTabletSelects';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
@@ -40,7 +39,7 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
               'repeat(3, 1fr)',
               'repeat(5, 1fr)',
             ]}
-            spacing={[null, null, null, "4", null, '24px']}
+            gap={['4', null, null, '16px', null, '24px']}
             mt={['2', '4', null, '4', null, '24px']}
           >
             <SelectSecondary placeholder="Engine"></SelectSecondary>

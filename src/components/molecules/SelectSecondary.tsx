@@ -20,6 +20,7 @@ const SelectSecondary: React.FC<CustomSelectProps & SelectProps> = ({
   return (
     <Select
       color={color}
+      // pl="16px"
       bg={bg}
       border={border}
       fontSize={fontSize}
