@@ -1,8 +1,9 @@
-import { Center, Container, Divider, Flex } from '@chakra-ui/react';
+import { Center, Divider, Flex } from '@chakra-ui/react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { Select } from 'src/components/atoms/Selects';
- ;
+import { Card } from '../Card';
 import { SearchButton } from '../SearchButton';
+
 
 interface SearchProps {}
 
@@ -14,16 +15,16 @@ export const Search: React.FC<SearchProps> = () => {
       position="relative"
       zIndex="1"
     >
-      <Container
+      <Card
         maxW={{ sm: '550px', md: '600px', lg: '844px', xl: '82%' }}
         bg="autoBlue.400"
-        p={['4', '6', null, '16px', null,  '48px']}
+        p={{ md: '4', xl: '16px', '2xl': '24px' }}
         mb="0"
-        borderRadius="lg"
+        minH="auto"
         w={['100%', '90%', '100%']}
       >
         <Flex
-          padding={['1', '1.5', null, null, null,  '16px']}
+          padding={['1', '1.5', null, '8px']}
           bg="#fff"
           borderRadius="lg"
           alignItems="center"
@@ -49,7 +50,7 @@ export const Search: React.FC<SearchProps> = () => {
             <option value="value">model</option>
           </Select>
           <DividerVertical
-            height="40px"
+            height = {['44px', null, '40px', null,null,  '50px']}
             display={['none', 'block']}
             borderColor="gray.300"
             margin={[null, null, "4"]}
@@ -64,7 +65,9 @@ export const Search: React.FC<SearchProps> = () => {
           <SearchButton
             display={['none', 'none', 'block']}
             flexBasis={['100%', null, null, '70%', '80%']}
-            ml={[null, null, "8px", '24px', '44px']}
+            ml={[null, null, "8px", '24px']}
+            w={{xl: "144px", "2xl": "55px"}}
+            // h="60px"
           />
         </Flex>
           <SearchButton
@@ -74,7 +77,7 @@ export const Search: React.FC<SearchProps> = () => {
             mt={['2', '3']}
             // pl={[null, null, '4']}
           />
-      </Container>
+      </Card>
     </Center>
   );
 };

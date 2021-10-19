@@ -1,7 +1,7 @@
 import { Center } from '@chakra-ui/layout';
 import { Container } from 'src/components/atoms/Container';
 import { LoginForm } from 'src/components/organizms/LoginForm';
- ;
+
 
 interface LoginTemplateProps {}
 

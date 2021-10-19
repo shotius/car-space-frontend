@@ -2,7 +2,7 @@ import { Button } from '@chakra-ui/button';
 import { Flex } from '@chakra-ui/layout';
 import { GTArrow } from 'src/components/atoms/Icons/GTArrow';
 import { TextMain } from 'src/components/atoms/Texts/TextMain';
- ;
+
 import { useHistory } from 'react-router-dom';
 
 interface NavMenuLinkProps {

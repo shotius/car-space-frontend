@@ -1,5 +1,5 @@
 import { Container, ContainerProps } from '@chakra-ui/layout';
- ;
+
 
 type Props = {
   variant: 'full' | 'regular' | 'small';

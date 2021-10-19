@@ -13,7 +13,7 @@ export const PublicRoute: React.FC<PublicRouteProps & RouteProps> = ({
 }) => (
   <ErrorBoundary>
     <Suspense fallback={<h1>Loading...</h1>}>
-      <Route exact {...rest} render={() => <Component />} />;
+      <Route exact {...rest} render={() => <Component />} />
     </Suspense>
   </ErrorBoundary>
 );

@@ -1,6 +1,6 @@
 import { Image } from '@chakra-ui/image';
 import { AspectRatio, Box, Flex, VStack } from '@chakra-ui/layout';
- ;
+
 import { Card } from './Card';
 import { SectionHeader } from './SectionHeader/SectionHeader';
 

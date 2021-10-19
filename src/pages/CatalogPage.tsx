@@ -1,5 +1,5 @@
 import { CatalogTemplate } from 'src/components/templates/CatalogTemplate';
- ;
+
 
 interface CatalogPageProps {}
 

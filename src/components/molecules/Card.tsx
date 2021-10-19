@@ -1,5 +1,5 @@
 import { Box, BoxProps } from '@chakra-ui/layout';
- ;
+
 
 interface CardProps {
   bgActive?: string;
@@ -12,7 +12,7 @@ export const Card: React.FC<CardProps & BoxProps> = ({
   // minH, 
   bg = 'white',
   p = '2.5',
-  borderRadius = 'md',
+  borderRadius = '8px',
   bgActive,
   children,
   ...rest

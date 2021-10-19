@@ -1,5 +1,5 @@
 import { SimpleGrid, SimpleGridProps } from '@chakra-ui/layout';
- ;
+
 
 interface ScrollableDivProps {
   cardCount: number;

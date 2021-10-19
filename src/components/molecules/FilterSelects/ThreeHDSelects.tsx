@@ -53,7 +53,7 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
         {!isOpen ? (
           <IconWithButton
             icon={FiltersIcon}
-            boxSize={[null, null, '10',null,  '10', '16']}
+            boxSize={[null, null, '10',null,  '10', '12']}
             onClick={onToggle}
             pr={[null, null, '0', '0', '-4']}
             pl={[null, null, '2', '12px', '0']}
@@ -61,7 +61,7 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
         ) : (
           <IconWithButton
             icon={CloseOutlineIcon}
-            boxSize={[null, null, '10',null,  '10', '16']}
+            boxSize={[null, null, '10',null,  '10', '12']}
             onClick={onToggle}
             p="0"
             pr={[null, null, '0', '0', '-4']}

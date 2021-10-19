@@ -8,7 +8,7 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 import { TextMain } from 'src/components/atoms/Texts/TextMain';
- ;
+
 
 interface CustomerReviewCardProps {}
 

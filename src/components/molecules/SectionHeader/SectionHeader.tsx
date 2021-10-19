@@ -1,5 +1,5 @@
 import { Flex, FlexProps, Heading, HeadingProps } from '@chakra-ui/react';
- ;
+
 import { Link } from 'react-router-dom';
 import { TextMain } from 'src/components/atoms/Texts/TextMain';
 

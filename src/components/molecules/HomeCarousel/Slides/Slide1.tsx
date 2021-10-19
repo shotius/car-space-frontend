@@ -1,5 +1,5 @@
 import { Heading } from '@chakra-ui/layout';
- ;
+
 
 interface Slide1Props {}
 

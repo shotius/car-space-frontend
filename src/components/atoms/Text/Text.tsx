@@ -1,5 +1,5 @@
 import { Text, TextProps } from '@chakra-ui/layout';
- ;
+
 
 interface Props {}
 

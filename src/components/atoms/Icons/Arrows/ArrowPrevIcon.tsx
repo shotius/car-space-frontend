@@ -1,5 +1,5 @@
 import { createIcon } from '@chakra-ui/icon';
- ;
+
 
 export const ArrowPrevIcon = createIcon({
   displayName: "ArrowPrevIcon", 

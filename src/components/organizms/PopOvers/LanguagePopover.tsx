@@ -11,7 +11,7 @@ import {
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Languages } from 'src/constants/index';
- ;
+
 
 interface LanguagePopoverProps {
   isOpen: boolean;

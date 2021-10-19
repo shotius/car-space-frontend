@@ -39,9 +39,10 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
               'repeat(3, 1fr)',
               'repeat(5, 1fr)',
             ]}
-            gap={['4', null, null, '16px', null, '24px']}
+            gap={['4', null, null, '16px', null]}
             mt={['2', '4', null, '4', null, '24px']}
           >
+            <SelectSecondary placeholder="Engine"></SelectSecondary>
             <SelectSecondary placeholder="Engine"></SelectSecondary>
             <SelectSecondary placeholder="Mileage"></SelectSecondary>
             <SelectSecondary placeholder="Condition"></SelectSecondary>

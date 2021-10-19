@@ -9,16 +9,18 @@ interface InputRegularProps {
 
 export const InputRegular: React.FC<InputRegularProps & InputProps> = ({
   opacity = '0.7',
+  h = '40px',
   outline = 'none',
   border = 'none',
   focusBoxShadow = 'none',
   placeholderColor = '#000',
-  placeholderFontSize = "16px",
-  placeholderOpacity = "0.5",
+  placeholderFontSize = '16px',
+  placeholderOpacity = '0.5',
   ...rest
 }) => {
   return (
     <Input
+      h={h}
       outline={outline}
       border={border}
       opacity={opacity}
