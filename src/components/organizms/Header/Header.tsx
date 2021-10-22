@@ -111,6 +111,9 @@ export const Header: React.FC<HeaderProps> = () => {
                 fontWeight="light"
                 fontSize="16px"
                 onClick={() => history.push('/login')}
+                _hover={{
+                  bg: "autoGrey.200"
+                }}
               >
                 <TextRegular>Log in</TextRegular>
               </Button>

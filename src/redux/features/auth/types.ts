@@ -39,4 +39,6 @@ export interface CarFilters {
   yearTo: string | null, 
   priceFrom: string | null, 
   priceTo: string | null,
+  engineFrom: number | null, 
+  engineTo: number | null
 }
