@@ -39,7 +39,7 @@ export const MobileEnginePopup: React.FC<MobileEnginePopupProps> = ({
     <Drawer isOpen={isOpen} onClose={onClose} placement="bottom">
       <DrawerOverlay />
       <DrawerContent h="80%" borderTopRadius="16px">
-        <DrawerBody pt="27px" maxH="100%">
+        <DrawerBody p="32px 48px 0px 48px" maxH="100%">
           <HStack
             h="full"
             divider={<StackDivider borderColor="autoGrey.400" />}
@@ -94,7 +94,7 @@ export const MobileEnginePopup: React.FC<MobileEnginePopupProps> = ({
             </VStack>
           </HStack>
         </DrawerBody>
-        <DrawerFooter>
+        <DrawerFooter p="16px 48px">
           <ButtonRegular
             onClick={() => {
               dispatch(selectEngineFrom(engineFrom))

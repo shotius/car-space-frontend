@@ -32,6 +32,8 @@ export interface CarsSliceState {
   models: string[]
 }
 
+export type Transmission = 'Manual' | 'Automatic' | 'CVT';
+
 export interface CarFilters {
   brand: string | null,
   model: string | null, 
@@ -41,4 +43,5 @@ export interface CarFilters {
   priceTo: string | null,
   engineFrom: number | null, 
   engineTo: number | null
+  transsmision: Transmission[]
 }

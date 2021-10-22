@@ -10,6 +10,7 @@ const initialState: CarFilters = {
   priceTo: null,
   engineFrom: null,
   engineTo: null,
+  transsmision: [],
 };
 
 const carFilterSlice = createSlice({
@@ -25,9 +26,16 @@ const carFilterSlice = createSlice({
     selectEnginTo: (state, action) => {
       state.engineTo = action.payload;
     },
+    selectTranssmision: (state, action) => {
+      state.transsmision = action.payload;
+    },
   },
 });
 
-export const { selectBrand, selectEngineFrom, selectEnginTo } =
-  carFilterSlice.actions;
+export const {
+  selectBrand,
+  selectEngineFrom,
+  selectEnginTo,
+  selectTranssmision,
+} = carFilterSlice.actions;
 export const { reducer: carFilterReducer } = carFilterSlice;

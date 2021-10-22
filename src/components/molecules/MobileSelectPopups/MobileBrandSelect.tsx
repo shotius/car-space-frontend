@@ -87,7 +87,7 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
     >
       <DrawerOverlay />
           
-      <DrawerContent h="80%" borderTopRadius="16px" p="32px 48px 10px">
+      <DrawerContent h="80%" borderTopRadius="16px" p="32px 48px 16px 48px">
         {/* drawer header */}
         <DrawerHeader
           {...swipeHandlers}
@@ -212,10 +212,11 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
           </VStack>
         </DrawerBody>
         {/* footer */}
-        <DrawerFooter>
+        <DrawerFooter p="16px 0">
           {' '}
           <ButtonRegular
             ref={initialRef}
+            p="0.5"
             onClick={() => {
               dispatch(selectBrand(selectedBrand));
               dispatch(getModels(selectedBrand));

@@ -9,6 +9,9 @@ import { CurrencyButton } from '../Buttons/CurrencyButton';
 import { InputRegular } from '../Inputs/InputRegular';
 import { MobileSelect } from '../MobileSelect';
 import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
+import {
+  MobileTransmissionPopup,
+} from '../MobileSelectPopups/MobileTransmissionPopup';
 import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
 import { SearchButton } from '../SearchButton';
 import { TextRegular } from '../Texts/TextRegular';
@@ -30,6 +33,19 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
     isOpen: isEngineOpen,
     onClose: closeEngine,
     onOpen: openEngine,
+  } = useDisclosure();
+
+  // // cylinders
+  // const {
+  //   isOpen: isCylindersOpen,
+  //   onClose: closeCylinders,
+  //   onOpen: openCylinders,
+  // } = useDisclosure();
+
+  const {
+    isOpen: isTransmOpen,
+    onClose: closeTransm,
+    onOpen: openTransm,
   } = useDisclosure();
 
   // additial filters
@@ -131,7 +147,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
       <Collapse in={isFiltersOpen}>
         <VStack>
           <MobileSelect onClick={openEngine} label="Engine"></MobileSelect>
-          <MobileEnginePopup onClose={closeEngine} isOpen={isEngineOpen}/>
+          <MobileEnginePopup onClose={closeEngine} isOpen={isEngineOpen} />
 
           <MobileSelect
             onClick={() => console.log('cliecked')}
@@ -149,10 +165,16 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
             onClick={() => console.log('cliecked')}
             label="Location"
           ></MobileSelect>
+          {/* transmission */}
           <MobileSelect
-            onClick={() => console.log('cl')}
+            onClick={openTransm}
             label="Transmission"
           ></MobileSelect>
+          <MobileTransmissionPopup
+            isOpen={isTransmOpen}
+            onClose={closeTransm}
+          />
+          {/* drive */}
           <MobileSelect
             onClick={() => console.log('cliecked')}
             label="Drive"
@@ -161,10 +183,10 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
             onClick={() => console.log('cliecked')}
             label="Fuel"
           ></MobileSelect>
-          <MobileSelect
-            onClick={() => console.log('cliecked')}
-            label="Cylinder"
-          ></MobileSelect>
+
+          {/* <MobileSelect onClick={openCylinders} label="Cylinder"></MobileSelect> */}
+
+
         </VStack>
       </Collapse>
       {/* apply button */}
