@@ -20,6 +20,7 @@ import { WithMobileKeyboard } from '../WithMobileKeyboard';
 interface ThreeMobileSelectsProps {}
 
 export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
+  const {brand} = useAppSelector(state => state.carFilterReducer)
   const [chosenCurrency, setChosenCurrency] = useState<CurentyType>('LARI');
   // brand drawer
   const {
@@ -65,7 +66,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
   return (
     <Stack>
       {/* mobile select **fake** and its drawer */}
-      <MobileSelect onClick={openBrand} label="Brand" />
+      <MobileSelect onClick={openBrand} label={brand || "Brand"} />
       <MobileBrandPopup
         brands={brands}
         isOpen={isBrandOpen}

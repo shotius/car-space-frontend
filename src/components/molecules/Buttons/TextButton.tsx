@@ -15,6 +15,7 @@ export const TextButton: React.FC<TextButtonProps & ButtonProps> = ({
   bgFocus="transparent",
   bgHover="transparent",
   fontWeight="light",
+  fontSize,
   children,
   ...rest
 }) => {
@@ -37,7 +38,7 @@ export const TextButton: React.FC<TextButtonProps & ButtonProps> = ({
       h="auto"
       {...rest}
     >
-      <TextRegular>{children}</TextRegular>
+      <TextRegular fontSize={fontSize}>{children}</TextRegular>
     </Button>
   );
 };
