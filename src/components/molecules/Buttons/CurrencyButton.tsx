@@ -1,10 +1,10 @@
 import { Button, ButtonProps } from '@chakra-ui/button';
 
-interface CurrencyButtonProps {
+interface ButtonRoundProps {
   active?: boolean;
 }
 
-export const CurrencyButton: React.FC<CurrencyButtonProps & ButtonProps> = ({
+export const ButtonRound: React.FC<ButtonRoundProps & ButtonProps> = ({
   active = false,
   minW="30px",
   w="30px",
@@ -23,6 +23,9 @@ export const CurrencyButton: React.FC<CurrencyButtonProps & ButtonProps> = ({
       color={active ? '#fff' : '#000'}
       _hover={{
         bg: active ? 'autoOrange.500' : 'transparent'
+      }}
+      _active={{
+        bg: 'autoOrange.300'
       }}
       {...rest}
     >

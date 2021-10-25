@@ -4,24 +4,25 @@ import { Button, Collapse, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CurentyType } from 'src/constants';
-import { useAppSelector } from 'src/redux/app/hook';
-import { CurrencyButton } from '../Buttons/CurrencyButton';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { ButtonRound } from '../Buttons/CurrencyButton';
 import { InputRegular } from '../Inputs/InputRegular';
 import { MobileSelect } from '../MobileSelect';
 import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
-import {
-  MobileTransmissionPopup,
-} from '../MobileSelectPopups/MobileTransmissionPopup';
+import { MobileTransmissionPopup } from '../MobileSelectPopups/MobileTransmissionPopup';
 import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
 import { SearchButton } from '../SearchButton';
 import { TextRegular } from '../Texts/TextRegular';
 import { WithMobileKeyboard } from '../WithMobileKeyboard';
+import { selectYearFrom } from 'src/redux/features/auth/carFilterSlice';
 
 interface ThreeMobileSelectsProps {}
 
 export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
-  const {brand} = useAppSelector(state => state.carFilterReducer)
+  const { brand } = useAppSelector((state) => state.carFilterReducer);
   const [chosenCurrency, setChosenCurrency] = useState<CurentyType>('LARI');
+  const dispatch = useAppDispatch();
+
   // brand drawer
   const {
     isOpen: isBrandOpen,
@@ -56,6 +57,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
   const { brands } = useAppSelector((state) => state.carsReducer);
 
   const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
+  const [yearFrom, setYearFrom] = useState('');
 
   const handleModelSelect = () => {
     if (models.length !== 0) {
@@ -66,7 +68,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
   return (
     <Stack>
       {/* mobile select **fake** and its drawer */}
-      <MobileSelect onClick={openBrand} label={brand || "Brand"} />
+      <MobileSelect onClick={openBrand} label={brand || 'Brand'} />
       <MobileBrandPopup
         brands={brands}
         isOpen={isBrandOpen}
@@ -86,8 +88,15 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
           pr="2"
           placeholder="Year from"
           type="number"
+          value={yearFrom}
+          onChange={(e) => setYearFrom(e.currentTarget.value)}
           onFocus={() => setKeyboardActive(true)}
-          onBlur={() => setKeyboardActive(false)}
+          onBlur={() => {
+            setKeyboardActive(false);
+            yearFrom
+              ? dispatch(selectYearFrom(yearFrom))
+              : dispatch(selectYearFrom(null));
+          }}
         />
         <DividerVertical height="30px" />
         <InputRegular
@@ -124,24 +133,24 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
           justify="space-between"
           p="7px"
         >
-          <CurrencyButton
+          <ButtonRound
             onClick={() => setChosenCurrency('LARI')}
             active={chosenCurrency === 'LARI'}
           >
             ლ
-          </CurrencyButton>
-          <CurrencyButton
+          </ButtonRound>
+          <ButtonRound
             onClick={() => setChosenCurrency('USD')}
             active={chosenCurrency === 'USD'}
           >
             $
-          </CurrencyButton>
-          <CurrencyButton
+          </ButtonRound>
+          <ButtonRound
             onClick={() => setChosenCurrency('EUR')}
             active={chosenCurrency === 'EUR'}
           >
             €
-          </CurrencyButton>
+          </ButtonRound>
         </HStack>
       </HStack>
       {/* colapsable selects */}
@@ -186,8 +195,6 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
           ></MobileSelect>
 
           {/* <MobileSelect onClick={openCylinders} label="Cylinder"></MobileSelect> */}
-
-
         </VStack>
       </Collapse>
       {/* apply button */}

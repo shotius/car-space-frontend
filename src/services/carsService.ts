@@ -1,4 +1,3 @@
-import { ICar } from 'src/redux/features/auth/types';
 import { axios } from 'src/utils/axios';
 
 const searchCars = async () => {
@@ -23,7 +22,7 @@ const getAllBrands = async () => {
 const getCars = async () => {
   try {
     const {data} = await axios.get('/api/cars')
-    return data.cars as ICar[]
+    return data
   } catch (error) {
     throw error
   }

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import carsService from 'src/services/carsService';
-import { CarsSliceState } from './types';
+import { setTotalPages } from './carPaginationSlice';
+import { CarsSliceState, ICar } from './types';
 
 const initialState: CarsSliceState = {
   cars: [],
@@ -31,10 +32,12 @@ export const getAllBrands = createAsyncThunk(
 
 export const getCars = createAsyncThunk(
   'cars/getCars',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
       const result = await carsService.getCars();
-      return result;
+      dispatch(setTotalPages(result.pagesTotal))
+      
+      return result.cars as ICar[];
     } catch (error) {
       return rejectWithValue(error);
     }

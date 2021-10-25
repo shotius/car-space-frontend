@@ -11,6 +11,7 @@ const initialState: CarFilters = {
   engineFrom: null,
   engineTo: null,
   transsmision: [],
+  currency: 'LARI',
 };
 
 const carFilterSlice = createSlice({
@@ -29,6 +30,21 @@ const carFilterSlice = createSlice({
     selectTranssmision: (state, action) => {
       state.transsmision = action.payload;
     },
+    selectPriseFrom: (state, action) => {
+      state.priceFrom = action.payload;
+    },
+    selectPriseTo: (state, action) => {
+      state.priceTo = action.payload;
+    },
+    selectYearFrom: (state, action) => {
+      state.yearFrom = action.payload;
+    },
+    selectYearTo: (state, action) => {
+      state.yearTo = action.payload;
+    },
+    selectCurrency: (state, action) => {
+      state.currency = action.payload;
+    },
   },
 });
 
@@ -37,5 +53,10 @@ export const {
   selectEngineFrom,
   selectEnginTo,
   selectTranssmision,
+  selectPriseFrom,
+  selectPriseTo,
+  selectYearFrom,
+  selectYearTo,
+  selectCurrency
 } = carFilterSlice.actions;
 export const { reducer: carFilterReducer } = carFilterSlice;

@@ -33,6 +33,7 @@ export interface CarsSliceState {
 }
 
 export type Transmission = 'Manual' | 'Automatic' | 'CVT';
+export type ICurrency = 'USD' | 'EUR' | 'LARI'
 
 export interface CarFilters {
   brand: string | null,
@@ -44,4 +45,10 @@ export interface CarFilters {
   engineFrom: number | null, 
   engineTo: number | null
   transsmision: Transmission[]
+  currency: ICurrency
+}
+
+export interface IPagination {
+  totalPages: number;
+  activePage: number;
 }

@@ -10,7 +10,7 @@ export const FiltersIcon = createIcon({
         data-name="Rectangle 160"
         fill="#fff"
         stroke="#000"
-        stroke-width="2"
+        strokeWidth="2"
       >
         <rect width="61" height="62" rx="8" stroke="none" />
         <rect x="1" y="1" width="59" height="60" rx="7" fill="none" />
