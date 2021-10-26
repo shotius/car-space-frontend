@@ -24,7 +24,7 @@ export const CarCard: React.FC<CarCardProps> = ({car}) => {
   const isVisible = !!entry?.isIntersecting;
 
   if (isVisible) {
-    console.log('appeard');
+    // console.log('appeard');
   }
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps

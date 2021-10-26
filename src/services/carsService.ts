@@ -19,9 +19,9 @@ const getAllBrands = async () => {
   }
 }
 
-const getCars = async () => {
+const getCars = async (page: number) => {
   try {
-    const {data} = await axios.get('/api/cars')
+    const {data} = await axios.get(`/api/cars?page=${page}`)
     return data
   } catch (error) {
     throw error

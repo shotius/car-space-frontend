@@ -3,7 +3,7 @@ import { IPagination } from './types';
 
 const initialState: IPagination = {
   totalPages: 0,
-  activePage: 96,
+  activePage: 1,
 };
 
 const carsPaginationSlice = createSlice({
@@ -17,6 +17,7 @@ const carsPaginationSlice = createSlice({
       state.activePage = action.payload;
     },
   },
+  // 595244242
 });
 
 export const { setTotalPages, setActivePage } = carsPaginationSlice.actions;

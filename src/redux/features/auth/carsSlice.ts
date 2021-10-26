@@ -5,8 +5,10 @@ import { CarsSliceState, ICar } from './types';
 
 const initialState: CarsSliceState = {
   cars: [],
+  fethingCars: false, 
   brands: [],
-  models: []
+  models: [],
+
 };
 
 export const searchCars = createAsyncThunk('cars/searchCars', async () => {
@@ -32,9 +34,9 @@ export const getAllBrands = createAsyncThunk(
 
 export const getCars = createAsyncThunk(
   'cars/getCars',
-  async (_, { rejectWithValue, dispatch }) => {
+  async (page: number, { rejectWithValue, dispatch }) => {
     try {
-      const result = await carsService.getCars();
+      const result = await carsService.getCars(page);
       dispatch(setTotalPages(result.pagesTotal))
       
       return result.cars as ICar[];
@@ -70,12 +72,20 @@ const carsSlice = createSlice({
         console.log('nothing is received in brands ');
       }
     });
+    /** fetch cars */
+    builder.addCase(getCars.pending, (state) => {
+        state.fethingCars = true
+    });
     builder.addCase(getCars.fulfilled, (state, action) => {
       if (action.payload) {
         //@ts-ignore
         state.cars = action.payload;
+        state.fethingCars  = false
       }
     });
+    builder.addCase(getCars.rejected, (state) => {
+      state.fethingCars = false
+  })
 
     // get models
     builder.addCase(getModels.fulfilled, (state, action) => {

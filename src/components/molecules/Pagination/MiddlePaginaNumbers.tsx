@@ -59,8 +59,6 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
         )
       );
     } else {
-      console.log('activePage', activePage, 'total', totalPages)
-      console.log()
       setMidNums([]);
     }
 

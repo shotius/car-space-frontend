@@ -30,6 +30,7 @@ export interface CarsSliceState {
   cars: ICar[],
   brands: string[]
   models: string[]
+  fethingCars: boolean;
 }
 
 export type Transmission = 'Manual' | 'Automatic' | 'CVT';
