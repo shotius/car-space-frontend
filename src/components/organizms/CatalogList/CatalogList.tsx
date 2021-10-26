@@ -19,7 +19,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
 
   const dispatch = useAppDispatch();
   const { cars } = useAppSelector((state) => state.carsReducer);
-  const { totalPages, activePage } = useAppSelector(
+  const {  activePage, totalPages } = useAppSelector(
     (state) => state.carsPagination
   );
 
