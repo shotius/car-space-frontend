@@ -4,7 +4,7 @@ import { ArrowNextIcon } from '../../atoms/Icons/Arrows/ArrowNextIcon';
 import { ArrowPrevIcon } from '../../atoms/Icons/Arrows/ArrowPrevIcon';
 import { ButtonRound } from '../Buttons/CurrencyButton';
 import { IconWithButton } from '../IconWithButton';
-import { PaginationMobile } from './PaginationMobile';
+import { MiddlePaginNumbers } from './MiddlePaginaNumbers';
 
 interface PaginationProps {
   totalPages: number;
@@ -17,17 +17,13 @@ export const Pagination: React.FC<PaginationProps> = ({
   totalPages = 0,
   onChange,
 }) => {
-  const { isMobile, isTablet } = useDetectScreen();
-
   // pagination nunbers to map through
   const paginNumbers = [...Array(totalPages).keys()]
     .map((num) => num + 1) // add one to all all page
     .slice(1, -1); // remove fist and last elements
 
-    console.log('isMobile', isMobile)
-
   return (
-    <HStack pt="18px" pb="18px" spacing={['1', '1']}>
+    <HStack pt="18px" pb="18px" spacing={['1', '2']}>
       <IconWithButton
         variant="ghost"
         bg="transparent"
@@ -38,23 +34,22 @@ export const Pagination: React.FC<PaginationProps> = ({
         _active={{ bg: 'autoGrey.400' }}
       />
 
+      {/* first page number is always shown */}
       <ButtonRound active={activePage === 1} onClick={() => onChange(1)}>
         <Heading fontSize="18px" fontWeight="light">
           1
         </Heading>
       </ButtonRound>
 
-      {(isMobile || isTablet) && (
-        <PaginationMobile
+      {/* dinamicly generated page numbers */}
+        <MiddlePaginNumbers
           activePage={activePage}
           totalPages={totalPages}
           onChange={onChange}
           paginNumbers={paginNumbers}
         />
-      )}
-      
-      {}
 
+      {/* last page number is always shown */}
       <ButtonRound
         active={activePage === totalPages}
         onClick={() => onChange(totalPages)}
