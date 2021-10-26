@@ -31,8 +31,8 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
 
   // set query params, get brands and all cars on the first load
   useEffect(() => {
-    const page = query.get('page');
-    dispatch(setActivePage(Number(page)));
+    let page = Number(query.get('page')) || 1;
+    dispatch(setActivePage(page));
     dispatch(getAllBrands());
   }, []);
 
