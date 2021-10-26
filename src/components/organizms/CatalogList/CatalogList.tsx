@@ -46,6 +46,12 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
             </Flex>
           ))}
         </CatalogListWrap>
+        <Pagination
+          totalPages={totalPages}
+          activePage={activePage}
+          onChange={(num: number) => dispatch(setActivePage(num))}
+        />
+
       </VStack>
     </ContainerOuter>
   );

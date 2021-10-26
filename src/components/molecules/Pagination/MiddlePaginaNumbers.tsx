@@ -32,7 +32,7 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
 
 
   // numbers to show in begining and in the end
-  let toShow = 10;
+  let toShow = 5;
   if (isMobile) toShow = 3;
   if (isDesktop) toShow = 10;
 
