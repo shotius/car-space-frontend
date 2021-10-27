@@ -38,10 +38,8 @@ export const CarCard: React.FC<CarCardProps> = ({car}) => {
       borderRadius="8px"
       p="19px"
       maxW={['388px', '343px', null, '324px', '388px', '398px']}
-      // maxW={['343px', null, null, '314px', '388px']}
       // cursor="pointer"
       // w="330px"
-      // minW={["300px", '340px']}
     >
       <VStack w="full" spacing={['19px', null, null, '19px', '15px']}>
         {/* header */}
@@ -50,6 +48,8 @@ export const CarCard: React.FC<CarCardProps> = ({car}) => {
             <Heading
               fontSize={['16px', null, null, '18px', null, '24px']}
               fontWeight="400"
+              maxW="220px"
+              isTruncated
             >
               {car?.m} {car?.mG}
             </Heading>

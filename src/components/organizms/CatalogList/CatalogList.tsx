@@ -3,6 +3,7 @@ import { Spinner, useDisclosure } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
+import { BannerCard } from 'src/components/molecules/BannerCard';
 import { CarCard } from 'src/components/molecules/CarCard';
 import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
@@ -18,14 +19,12 @@ interface CatalogLIstProps {}
 
 export const CatalogList: React.FC<CatalogLIstProps> = () => {
   const { isOpen: isFilterOpen, onToggle: toggleFilters } = useDisclosure();
-
-  const dispatch = useAppDispatch();
   const { cars, fethingCars } = useAppSelector((state) => state.carsReducer);
-
   const { activePage, totalPages } = useAppSelector(
     (state) => state.carsPagination
   );
 
+  const dispatch = useAppDispatch();
   const history = useHistory();
   const query = useQueryRarams();
 
@@ -53,6 +52,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
         <FilterWrap>
           <CatalogFilter isOpen={isFilterOpen} onToggle={toggleFilters} />
         </FilterWrap>
+        <BannerCard />        
         {/* top pagination */}
         <Pagination
           totalPages={totalPages}
