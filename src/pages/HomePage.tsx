@@ -4,6 +4,7 @@ import { HomeCarousel } from 'src/components/molecules/HomeCarousel/HomeCarousel
 import { Search } from 'src/components/molecules/Search/Search';
 import { Calculator } from 'src/components/organizms/Calculator';
 import Catalog from 'src/components/organizms/Catalog/Catalog';
+import { CustomersReview } from 'src/components/organizms/CustomersReview';
 import { CustomperReview } from 'src/components/organizms/CustomperReview';
 import { DealersSection } from 'src/components/organizms/DealersSection';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
@@ -25,6 +26,7 @@ export const Home: React.FC<HomeProps> = () => (
         <MiniCategory />
         <Catalog />
         <CustomperReview />
+        <CustomersReview />
         <TopBrands />
         <DealersSection />
         <Calculator />

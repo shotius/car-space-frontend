@@ -19,10 +19,9 @@ export const Pagination: React.FC<PaginationProps> = ({
   // pagination nunbers to map through
   const paginNumbers = [...Array(totalPages).keys()]
     .map((num) => num + 1) // add one to all all page
-    // .slice(1, -1); // remove fist and last elements
 
   return (
-    <HStack pt="18px" pb="18px" spacing={['1', '2']}>
+    <HStack pt="18px" pb="18px" spacing={['1', '2']} maxW="100%" flexWrap="wrap">
       <IconWithButton
         variant="ghost"
         bg="transparent"

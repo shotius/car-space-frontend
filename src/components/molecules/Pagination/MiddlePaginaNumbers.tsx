@@ -17,7 +17,7 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
   onChange,
   paginNumbers,
 }) => {
-  const { isMobile, isDesktop } = useDetectScreen();
+  const { isMobile, isTablet, isDesktop } = useDetectScreen();
 
   const [firstNums, setFirstNums] = useState<number[]>([]);
   const [lastNums, setLastNums] = useState<number[]>([]);
@@ -32,8 +32,8 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
 
 
   // numbers to show in begining and in the end
-  let toShow = 5;
-  if (isMobile) toShow = 3;
+  let toShow = 3;
+  if (isTablet) toShow = 5;
   if (isDesktop) toShow = 10;
 
   // handle with pagin numbers

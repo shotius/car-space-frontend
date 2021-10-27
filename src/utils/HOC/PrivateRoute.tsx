@@ -1,20 +1,26 @@
 import { Suspense } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import ErrorBoundary from 'src/components/molecules/ErrorBoundary';
+import { Roles } from 'src/constants';
 import { useAppSelector } from 'src/redux/app/hook';
 
 interface PrivateRouteProps {
   component: React.FC;
+  role: `${Roles}`;
 }
 
 export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
   component: Component,
   exact = true,
+  role,
   ...rest
 }) => {
-  const { isAuthenticated } = useAppSelector((state) => state.authReducer);
+  const { isAuthenticated, role: userRole } = useAppSelector(
+    (state) => state.authReducer
+  );
 
-  if (!isAuthenticated) {
+  // if client not authenticated or his/her role not in complement to the redux state -> redirect
+  if (!isAuthenticated || role != userRole) {
     return <Redirect to="/login" />;
   }
 

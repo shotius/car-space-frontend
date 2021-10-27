@@ -1,5 +1,4 @@
 import { LoginTemplate } from "src/components/templates/Login";
-;
 
 interface LoginProps {}
 

@@ -4,7 +4,7 @@ import { forwardRef } from 'react';
 
 interface SwiperButtonsProps {
   isVisible: boolean;
-  side: 'right' | 'left';
+  side?: 'right' | 'left';
 }
 
 export const SwiperButton = forwardRef<

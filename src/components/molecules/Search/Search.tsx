@@ -18,7 +18,7 @@ export const Search: React.FC<SearchProps> = () => {
       <Card
         maxW={{ sm: '550px', md: '600px', lg: '844px', xl: '82%' }}
         bg="autoBlue.400"
-        p={{ md: '4', xl: '16px', '2xl': '24px' }}
+        p={{ base: '4', xl: '16px', '2xl': '24px' }}
         mb="0"
         minH="auto"
         w={['100%', '90%', '100%']}
@@ -74,7 +74,7 @@ export const Search: React.FC<SearchProps> = () => {
             display={['block', 'block', 'none']}
             w="full"
             h={["44px",null, null,"50px",  "62px"]}
-            mt={['2', '3']}
+            mt={['4', '3']}
             // pl={[null, null, '4']}
           />
       </Card>

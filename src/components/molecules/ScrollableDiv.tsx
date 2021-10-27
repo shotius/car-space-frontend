@@ -25,11 +25,7 @@ export const ScrollableDiv: React.FC<ScrollableDivProps & SimpleGridProps> = ({
         `repeat(${columnsLaptop}, 1fr)`,
         `repeat(${columnsHD}, 1fr)`,
       ]}
-      css={{
-        '&::-webkit-scrollbar': {
-          display: 'none',
-        },
-      }}
+        nb
       {...rest}
     >
       {children}

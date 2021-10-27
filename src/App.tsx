@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom';
 import 'src/App.css';
 import { StyledApp } from 'src/components/organizms/StyledApp';
@@ -15,7 +15,7 @@ import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const CatalogPage = lazy(() => import('./pages/CatalogPage'));
-const AdminPage = lazy(() => import('./pages/AdminPage'))
+const AdminPage = lazy(() => import('./pages/AdminPage'));
 const DealerDashboard = lazy(() => import('./pages/DealerDashboard'));
 const Home = lazy(() => import('./pages/HomePage'));
 const Login = lazy(() => import('./pages/LoginPage'));
@@ -23,7 +23,6 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 
 function App() {
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -33,12 +32,12 @@ function App() {
 
   // if (loading) {
   //   return (
-      // <Center w="full" bg="white" h="100vh">
-      //   <VStack spacing="0">
-      //     <Icon as={LogoIcon} boxSize={['150px', null, null, '200px']} />
-      //     <Spinner h="30px" w="30px" thickness="1px" />
-      //   </VStack>
-      // </Center>
+  // <Center w="full" bg="white" h="100vh">
+  //   <VStack spacing="0">
+  //     <Icon as={LogoIcon} boxSize={['150px', null, null, '200px']} />
+  //     <Spinner h="30px" w="30px" thickness="1px" />
+  //   </VStack>
+  // </Center>
   //   );
   // }
 
@@ -53,8 +52,16 @@ function App() {
           <PublicRoute path="/home" component={Home} />
           <PublicRoute path="/catalog" component={CatalogPage} />
           <PublicRoute path="/services" component={ServicesPage} />
-          <PrivateRoute path="/admin/dashboard" component={AdminPage} />
-          <PrivateRoute path="/dealer/dashboard" component={DealerDashboard} />
+          <PrivateRoute
+            path="/admin/dashboard"
+            component={AdminPage}
+            role="admin"
+          />
+          <PrivateRoute
+            path="/dealer/dashboard"
+            role="dealer"
+            component={DealerDashboard}
+          />
           <AuthRoute path="/login" component={Login} />
           <AuthRoute path="/register" component={RegisterPage} />
           <Route path="*" render={() => <ErrorPage />} />
