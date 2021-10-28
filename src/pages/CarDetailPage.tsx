@@ -59,7 +59,7 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
             {/* bid info */}
             <BidInfoCard />
           </VStack>
-          <VStack display={['none', 'flex']} w="full">
+          <VStack display={['none', null,  'flex']} w="full">
             <Heading>Car info</Heading>
           </VStack>
         </HStack>

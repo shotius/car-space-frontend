@@ -6,7 +6,7 @@ interface CarDetailSliderProps {}
 export const CarDetailSlider: React.FC<CarDetailSliderProps> = ({}) => {
   return (
     <>
-      <AspectRatio ratio={375 / 295} w="full">
+      <AspectRatio ratio={375 / 295} w="full" maxH="400px">
         <Image src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg" />
       </AspectRatio>
       <ScrollableDiv

@@ -1,10 +1,10 @@
 import {
-  AspectRatio, HStack,
+  AspectRatio,
+  HStack,
   InputGroup,
-  InputLeftElement,
+  InputLeftElement, useNumberInput,
   VStack
 } from '@chakra-ui/react';
-import { useState } from 'react';
 import { ButtonRegular } from './Buttons/ButtonRegular';
 import { ButtonRound } from './Buttons/ButtonRound';
 import { Card } from './Card';
@@ -15,7 +15,15 @@ import { TextRegular } from './Texts/TextRegular';
 interface BidInfoCardProps {}
 
 export const BidInfoCard: React.FC<BidInfoCardProps> = ({}) => {
-  const [userBidValue, setUserBidValue] = useState<number>(200);
+
+  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
+    useNumberInput({ step: 100, defaultValue: 200, min: 100, max: 1000000 });
+
+  const inc = getIncrementButtonProps();
+  const dec = getDecrementButtonProps();
+  const input = getInputProps({readOnly: true});
+
+  const userBidLength = input['aria-valuetext']!.toString().length;
 
   return (
     <Card mt="48px !important" p="0">
@@ -59,15 +67,17 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({}) => {
         </HStack>
 
         {/* User bid info */}
-        <HStack bg="autoGrey.200" w="full" borderRadius="8px" p="4">
-          <TextRegular
-            opacity="0.5"
-            w={userBidValue > 9999 ? '70%' : 'full'}
-            p="0"
-          >
+        <HStack
+          bg="autoGrey.200"
+          w="full"
+          borderRadius="8px"
+          p="4"
+          justify="space-between"
+        >
+          <TextRegular opacity="0.5" w="auto">
             Your Price
           </TextRegular>
-          <HStack w="full" p="0">
+          <HStack maxW="200px" justify="space-between" >
             <AspectRatio ratio={1} w="26px" minW="26px">
               <ButtonRound
                 bg="autoBlue.400"
@@ -78,7 +88,8 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({}) => {
                 _hover={{
                   bg: 'autoBlue',
                 }}
-                onClick={() => setUserBidValue(userBidValue - 100)}
+                // onClick={() => setUserBidValue(userBidValue - 100)}
+                {...dec}
               >
                 -
               </ButtonRound>
@@ -93,10 +104,12 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({}) => {
               <InputRegular
                 type="number"
                 h="26px"
-                value={userBidValue}
-                onChange={(e) => setUserBidValue(Number(e.currentTarget.value))}
+                // value={userBidValue}
+                // onChange={(e) => setUserBidValue(Number(e.currentTarget.value))}
                 opacity="1"
                 fontWeight="bold"
+                w={`${userBidLength + 2}ch`}
+                {...input}
                 pr="0"
               />
             </InputGroup>
@@ -110,7 +123,8 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({}) => {
                 _hover={{
                   bg: 'autoBlue',
                 }}
-                onClick={() => setUserBidValue(userBidValue + 100)}
+                // onClick={() => setUserBidValue(userBidValue + 100)}
+                {...inc}
               >
                 +
               </ButtonRound>
