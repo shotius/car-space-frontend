@@ -6,14 +6,10 @@ import { TextRegular } from "./Texts/TextRegular";
 import { useMediaQuery, Image } from "@chakra-ui/react"
 import { useState } from "react";
 
-
-
 interface BannerCardProps {}
 
 export const BannerCard: React.FC<BannerCardProps> = ({}) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)")
-
-
   const [isShown, setIsShown] = useState(true)
 
   return (

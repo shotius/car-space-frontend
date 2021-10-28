@@ -1,7 +1,7 @@
 import { Heading } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { ButtonRound } from '../Buttons/CurrencyButton';
+import { ButtonRound } from '../Buttons/ButtonRound';
 import { TextRegular } from '../Texts/TextRegular';
 
 interface MiddlePaginNumbersProps {

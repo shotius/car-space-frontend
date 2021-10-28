@@ -1,24 +1,18 @@
-import {
-  Box,
-  Heading,
-  HStack,
-  StackDivider,
-  VStack
-} from '@chakra-ui/react';
+import { Box, Heading, HStack, StackDivider, VStack } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
-import { FiHeart } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { ICar } from 'src/redux/features/auth/types';
 import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
 import { TextMain } from '../atoms/Texts/TextMain';
+import { ButtonHeart } from './Buttons/ButtonHeart';
 import { CarImageCarousel } from './CarImageCarousel/CarImageCarousel';
-import { IconWithButton } from './IconWithButton';
 
 interface CarCardProps {
   car?: ICar;
 }
 
-export const CarCard: React.FC<CarCardProps> = ({car}) => {
+export const CarCard: React.FC<CarCardProps> = ({ car }) => {
   const ref = useRef(null);
   const entry = useIntersectionObserver(ref, {});
   const isVisible = !!entry?.isIntersecting;
@@ -50,21 +44,17 @@ export const CarCard: React.FC<CarCardProps> = ({car}) => {
               fontWeight="400"
               maxW="220px"
               isTruncated
+              _hover={{
+                textDecor: 'underline',
+              }}
             >
-              {car?.m} {car?.mG}
+              <Link to={`/car/${car?.lN}`}>
+                {car?.m} {car?.mG}
+              </Link>
             </Heading>
             <TextMain opacity="50%">{car?.y}</TextMain>
           </VStack>
-          <IconWithButton
-            icon={FiHeart}
-            boxSize={6}
-            bg="autoGrey.600"
-            p="0"
-            h="40px"
-            _hover={{
-              bg: "autoGrey.700"
-            }}
-          />
+          <ButtonHeart />
         </HStack>
         {/* picture swiper */}
         {/* <Image

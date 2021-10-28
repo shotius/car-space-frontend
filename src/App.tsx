@@ -13,6 +13,7 @@ import { autoLogin } from 'src/redux/features/auth/authSlice';
 import { AuthRoute } from 'src/utils/HOC/AuthRoutes';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
+const  CarDetailPage = lazy(() => import('./pages/CarDetailPage'))
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const CatalogPage = lazy(() => import('./pages/CatalogPage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
@@ -52,6 +53,7 @@ function App() {
           <PublicRoute path="/home" component={Home} />
           <PublicRoute path="/catalog" component={CatalogPage} />
           <PublicRoute path="/services" component={ServicesPage} />
+          <PublicRoute path="/car/:lotNumber" component={CarDetailPage} exact/>
           <PrivateRoute
             path="/admin/dashboard"
             component={AdminPage}

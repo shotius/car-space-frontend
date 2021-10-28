@@ -4,6 +4,7 @@ import { SimpleGrid, SimpleGridProps } from '@chakra-ui/layout';
 interface ScrollableDivProps {
   cardCount: number;
   columnsLaptop?: number;
+  spacing?: SimpleGridProps['spacing'];
   columnsHD?: number;
 }
 
@@ -12,12 +13,13 @@ export const ScrollableDiv: React.FC<ScrollableDivProps & SimpleGridProps> = ({
   columnsLaptop = 6,
   columnsHD = 6,
   children,
+  spacing, 
   ...rest
 }) => {
   return (
     <SimpleGrid
       overflow="auto"
-      gap="4"
+      gap={spacing}
       gridTemplateColumns={[
         `repeat(${cardCount}, 1fr)`,
         null,
@@ -25,7 +27,6 @@ export const ScrollableDiv: React.FC<ScrollableDivProps & SimpleGridProps> = ({
         `repeat(${columnsLaptop}, 1fr)`,
         `repeat(${columnsHD}, 1fr)`,
       ]}
-        nb
       {...rest}
     >
       {children}

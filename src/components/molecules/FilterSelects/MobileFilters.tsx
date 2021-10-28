@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CurentyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { ButtonRound } from '../Buttons/CurrencyButton';
+import { ButtonRound } from '../Buttons/ButtonRound';
 import { InputRegular } from '../Inputs/InputRegular';
 import { MobileSelect } from '../MobileSelect';
 import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';

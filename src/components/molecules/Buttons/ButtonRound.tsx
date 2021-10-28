@@ -6,9 +6,11 @@ interface ButtonRoundProps {
 
 export const ButtonRound: React.FC<ButtonRoundProps & ButtonProps> = ({
   active = false,
-  minW="30px",
+  minW="1px",
+  minH="1px",
   w="30px",
   h="30px",
+  px="0px",
   children,
   ...rest
 }) => {
@@ -16,8 +18,10 @@ export const ButtonRound: React.FC<ButtonRoundProps & ButtonProps> = ({
     <Button
       fontWeight="light"
       minW={minW}
+      minH={minH}
       w={w}
       h={h}
+      px={px}
       borderRadius="100px"
       bg={active ? 'autoOrange.500' : 'transparent'}
       color={active ? '#fff' : '#000'}
