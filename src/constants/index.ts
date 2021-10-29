@@ -1,6 +1,7 @@
 export enum Roles {
     ADMIN='admin',
-    DEALER='dealer'
+    DEALER='dealer',
+    USER='user'
 }
 
 export enum Currencies {

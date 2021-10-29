@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/layout';
 import { ScrollableDiv } from 'src/components/molecules/ScrollableDiv';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
-import { TopBrandCard } from 'src/components/molecules/TopBrandCard';
+import { TopBrandCard } from '../../molecules/Cards/TopBrandCard';
 
 
 interface TopBrandsProps {}

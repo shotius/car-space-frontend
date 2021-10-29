@@ -1,6 +1,6 @@
 import { VStack, Image, Heading } from '@chakra-ui/react';
 import { Card } from './Card';
-import { TextRegular } from './Texts/TextRegular';
+import { TextRegular } from '../Texts/TextRegular';
 
 interface BlogCardProps {}
 

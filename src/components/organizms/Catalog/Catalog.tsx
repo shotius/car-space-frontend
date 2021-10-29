@@ -12,12 +12,12 @@ import './styles.css';
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from 'swiper';
 import { Box } from '@chakra-ui/layout';
-import { CarCard } from 'src/components/molecules/CarCard';
 import { IconButton } from '@chakra-ui/button';
 import { ArrowNextIcon } from 'src/components/atoms/Icons/Arrows/ArrowNextIcon';
 import { ArrowPrevIcon } from 'src/components/atoms/Icons/Arrows/ArrowPrevIcon';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import { useMediaQuery } from '@chakra-ui/media-query';
+import { CarCard } from 'src/components/molecules/Cards/CarCard';
 
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);

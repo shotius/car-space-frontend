@@ -9,9 +9,9 @@ import {
 } from '@chakra-ui/layout';
 import { Select } from '@chakra-ui/select';
 import { DividerVertical } from 'src/components/atoms/Divider';
-import { Card } from 'src/components/molecules/Card';
 import { SearchButton } from 'src/components/molecules/SearchButton';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
+import { Card } from '../molecules/Cards/Card';
 
 interface CalculatorProps {}
 

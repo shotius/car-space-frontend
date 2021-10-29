@@ -1,12 +1,12 @@
 import { Box, Heading, HStack, StackDivider, VStack } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { TextMain } from 'src/components/atoms/Texts/TextMain';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { ICar } from 'src/redux/features/auth/types';
 import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
-import { TextMain } from '../atoms/Texts/TextMain';
-import { ButtonHeart } from './Buttons/ButtonHeart';
-import { CarImageCarousel } from './CarImageCarousel/CarImageCarousel';
+import { ButtonHeart } from '../Buttons/ButtonHeart';
+import { CarImageCarousel } from '../CarImageCarousel/CarImageCarousel';
 
 interface CarCardProps {
   car?: ICar;

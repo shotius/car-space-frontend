@@ -4,12 +4,12 @@ import { HomeCarousel } from 'src/components/molecules/HomeCarousel/HomeCarousel
 import { Search } from 'src/components/molecules/Search/Search';
 import { Calculator } from 'src/components/organizms/Calculator';
 import Catalog from 'src/components/organizms/Catalog/Catalog';
-import { CustomersReview } from 'src/components/organizms/CustomersReview';
-import { CustomperReview } from 'src/components/organizms/CustomperReview';
+import { CustomersReview } from 'src/components/organizms/HomePage/CustomersReview';
+import { CustomperReview } from 'src/components/organizms/HomePage/CustomperReview';
 import { DealersSection } from 'src/components/organizms/DealersSection';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
-import { TopBrands } from 'src/components/organizms/TopBrands';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
+import { TopBrands } from 'src/components/organizms/HomePage/TopBrands';
 
 interface HomeProps {}
 

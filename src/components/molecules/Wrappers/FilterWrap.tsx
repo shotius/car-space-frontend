@@ -1,5 +1,5 @@
 import { BoxProps } from '@chakra-ui/layout';
-import { Card } from '../Card';
+import { Card } from '../Cards/Card';
 
 interface FilterWrapProps {}
 

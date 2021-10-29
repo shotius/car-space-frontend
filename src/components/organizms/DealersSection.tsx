@@ -1,5 +1,5 @@
 import { Box, SimpleGrid } from '@chakra-ui/layout';
-import { DealerCard } from 'src/components/molecules/DealerCard';
+import { DealerCard } from 'src/components/molecules/Cards/DealerCard';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 
 

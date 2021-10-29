@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { CustomerReviewCard } from '../molecules/CustomerReviewCard';
+import { CustomerReviewCard } from '../../molecules/CustomerReviewCard';
 
 SwiperCore.use([Navigation]);
 

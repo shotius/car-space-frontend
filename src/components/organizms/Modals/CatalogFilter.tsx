@@ -3,8 +3,8 @@ import { Collapse } from '@chakra-ui/react';
 import { ThreeHDSelects } from 'src/components/molecules/FilterSelects/ThreeHDSelects';
 import { ThreeTabletSelects } from 'src/components/molecules/FilterSelects/ThreeTabletSelects';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { MobileFilters } from '../molecules/FilterSelects/MobileFilters';
-import SelectSecondary from '../molecules/SelectSecondary';
+import { MobileFilters } from '../../molecules/FilterSelects/MobileFilters';
+import SelectSecondary from '../../molecules/SelectSecondary';
 
 interface FilterMobileProps {
   isOpen: boolean;

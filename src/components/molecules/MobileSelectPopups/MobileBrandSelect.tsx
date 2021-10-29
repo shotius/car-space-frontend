@@ -23,11 +23,11 @@ import { selectBrand } from 'src/redux/features/auth/carFilterSlice';
 import { getModels } from 'src/redux/features/auth/carsSlice';
 import { ButtonRegular } from '../Buttons/ButtonRegular';
 import { TextButton } from '../Buttons/TextButton';
+import { TopBrandCard } from '../Cards/TopBrandCard';
 import { IconWithButton } from '../IconWithButton';
 import { InputRegular } from '../Inputs/InputRegular';
 import { ScrollableDiv } from '../ScrollableDiv';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
-import { TopBrandCard } from '../TopBrandCard';
 
 interface BrandSelectProps {
   brands: string[];

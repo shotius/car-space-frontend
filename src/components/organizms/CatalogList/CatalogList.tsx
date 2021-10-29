@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BannerCard } from 'src/components/molecules/BannerCard';
-import { CarCard } from 'src/components/molecules/CarCard';
+import { CarCard } from 'src/components/molecules/Cards/CarCard';
 import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
 import { FilterWrap } from 'src/components/molecules/Wrappers/FilterWrap';
@@ -13,7 +13,7 @@ import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { getAllBrands, getCars } from 'src/redux/features/auth/carsSlice';
 import { ICar } from 'src/redux/features/auth/types';
 import { useQueryRarams } from 'src/utils/hooks/useQueryParams';
-import { CatalogFilter } from '../CatalogFilter';
+import { CatalogFilter } from '../Modals/CatalogFilter';
 
 interface CatalogLIstProps {}
 
@@ -54,11 +54,6 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
         </FilterWrap>
         <BannerCard />        
         {/* top pagination */}
-        <Pagination
-          totalPages={totalPages}
-          activePage={activePage}
-          onChange={(num: number) => dispatch(setActivePage(num))}
-        />
         {/* car car list */}
         {!fethingCars ? (
           <CatalogListWrap>
