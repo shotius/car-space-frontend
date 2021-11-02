@@ -56,7 +56,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
         {/* top pagination */}
         {/* car car list */}
         {!fethingCars ? (
-          <CatalogListWrap>
+          <CatalogListWrap bg="red">
             {cars.map((car: ICar, i) => (
               <Flex justify="center" key={i}>
                 <CarCard car={car} />

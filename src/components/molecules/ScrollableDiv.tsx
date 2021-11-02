@@ -10,10 +10,8 @@ interface ScrollableDivProps {
 
 export const ScrollableDiv: React.FC<ScrollableDivProps & SimpleGridProps> = ({
   cardCount,
-  columnsLaptop = 6,
-  columnsHD = 6,
   children,
-  spacing="4", 
+  spacing=['11px', null, null, '10px'], 
   ...rest
 }) => {
   return (
@@ -24,8 +22,7 @@ export const ScrollableDiv: React.FC<ScrollableDivProps & SimpleGridProps> = ({
         `repeat(${cardCount}, 1fr)`,
         null,
         null,
-        `repeat(${columnsLaptop}, 1fr)`,
-        `repeat(${columnsHD}, 1fr)`,
+        `repeat(${cardCount}, 1fr)`,
       ]}
       {...rest}
     >

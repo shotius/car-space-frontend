@@ -1,19 +1,24 @@
 import { HStack, VStack } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
+import { BidInfoCard } from 'src/components/molecules/BidInfoCard';
 import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { CarInfoCard } from 'src/components/organizms/CarDeatailPage/CarInfoCard';
-// import { CarDeailsCardM } from 'src/components/organizms/Cards/CarDeailsCard';
+import { CarDeailsCard } from 'src/components/organizms/CarDeatailPage/Cards/CarDeailsCard';
+import { CarInfoCard } from 'src/components/organizms/CarDeatailPage/Cards/CarInfoCard';
+import { CarDescriptionHeader } from 'src/components/organizms/MiniHeaders/CarDescriptionHeader';
+import { ICar } from 'src/redux/features/auth/types';
 
-interface CarDetailPageDesktopProps {}
+interface CarDetailPageDesktopProps {
+  car?: ICar
+}
 
 export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> =
-  ({}) => {
+  ({car}) => {
     return (
       <ContainerOuter>
-        <HStack bg="green">
-          <VStack spacing="49px">
+        <HStack align="baseline" spacing="80px">
+          <VStack spacing="49px" w="full">
             <HeadingSecondary p="100px">Card Picture Slider</HeadingSecondary>
             <CarInfoCard />
             <CardWithHeading heading="Transportation and fee">
@@ -32,10 +37,12 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> =
                 </HStack>
               </HStack>
             </CardWithHeading>
-            {/* <CarDeailsCard /> */}
+            <CarDeailsCard  variant="desktop" />
           </VStack>
-          <VStack>
-            <HeadingSecondary>Calculatro and bidding info</HeadingSecondary>
+          <VStack w="full" spacing="32px" bg="cyan" alignItems="flex-start">
+            <CarDescriptionHeader car={car} />
+            <BidInfoCard />
+            <TextRegular>Some Info</TextRegular>
           </VStack>
         </HStack>
       </ContainerOuter>

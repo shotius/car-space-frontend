@@ -1,11 +1,12 @@
-import { VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import CarListSlider from 'src/components/organizms/Sliders/CarListSlider';
 import { CarDetailPageDesktop } from 'src/components/templates/CarDeatailsPage/CarDetailPageDesktop';
 import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/CarDetailPageMobile';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
+import { DamCar } from 'src/DamnCard';
 import { useAppSelector } from 'src/redux/app/hook';
 import { ICar } from 'src/redux/features/auth/types';
 import carsService from 'src/services/carsService';
@@ -33,15 +34,16 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
   return (
     <PublicLayout>
       {isLargerThan ? (
-        <CarDetailPageDesktop />
+        <CarDetailPageDesktop car={carInfo} />
       ) : (
         <CarDetailPageMobile car={carInfo} />
       )}
+
       {/* similar vehicles*/}
-      <VStack w="full" p="75px 16px 16px 16px">
+      <ContainerOuter mt="65px">
         <SectionHeader mainText="Similar vehicles" />
-        <CarListSlider />
-      </VStack>
+        <CarListSlider car={DamCar} />
+      </ContainerOuter>
     </PublicLayout>
   );
 };

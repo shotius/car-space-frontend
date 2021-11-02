@@ -11,24 +11,25 @@ import { CustomperReview } from 'src/components/organizms/HomePage/CustomperRevi
 import { TopBrands } from 'src/components/organizms/HomePage/TopBrands';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
+import { DamCar } from 'src/DamnCard';
 
 interface HomeProps {}
 
-export const Home: React.FC<HomeProps> = () => (
-  <PublicLayout>
+export const Home: React.FC<HomeProps> = () => {
+  return <PublicLayout>
     <ContainerOuter>
       <HomeCarousel />
       <Search />
       <VStack
         w="full"
         alignItems="flex-start"
-        spacing={['64px', '85px', '101px', '138px']}
+        spacing='64px'
       >
         <MiniCategory />
         <VStack w="full">
           <SectionHeader mainText="Catalog" secondaryText="See all" />
-          <CarListSlider />
-          </VStack>
+          <CarListSlider car={DamCar} />
+        </VStack>
         <CustomperReview />
         <CustomersReview />
         <TopBrands />
@@ -36,6 +37,6 @@ export const Home: React.FC<HomeProps> = () => (
         <Calculator />
       </VStack>
     </ContainerOuter>
-  </PublicLayout>
-);
+  </PublicLayout>;
+};
 export default Home;

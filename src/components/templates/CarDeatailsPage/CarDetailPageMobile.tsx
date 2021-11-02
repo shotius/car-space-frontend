@@ -1,13 +1,11 @@
 import { HStack, VStack } from '@chakra-ui/layout';
+import { CarDeailsCard } from 'src/components/organizms/CarDeatailPage/Cards/CarDeailsCard';
 import { ICar } from 'src/redux/features/auth/types';
 import { ContainerOuter } from '../../atoms/Containers/ContainerOuter';
 import { BidInfoCard } from '../../molecules/BidInfoCard';
 import { CarDetailSlider } from '../../molecules/CarDetailSlider';
 import { TextRegular } from '../../molecules/Texts/TextRegular';
-import {
-  CarDeailsCardMobile
-} from '../../organizms/Cards/CarDeailsCard';
-import { CarInfoCardMobile } from '../../organizms/Cards/CarInfoCardMobile';
+import { CarInfoCardMobile } from '../../organizms/CarDeatailPage/Cards/CarInfoCardMobile';
 import { CarDescriptionHeader } from '../../organizms/MiniHeaders/CarDescriptionHeader';
 
 interface CarDetailPageMobileProps {
@@ -43,7 +41,7 @@ export const CarDetailPageMobile: React.FC<CarDetailPageMobileProps> = ({
             <CarInfoCardMobile />
 
             {/* car details */}
-            <CarDeailsCardMobile />
+            <CarDeailsCard variant="mobile" />
             
           </VStack>
         </HStack>
