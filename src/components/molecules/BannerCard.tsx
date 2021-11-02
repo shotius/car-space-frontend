@@ -1,39 +1,44 @@
-import { HStack, VStack, Heading } from "@chakra-ui/layout";
-import { CloseIcon } from "../atoms/Icons/CloseIcon";
-import { IconWithButton } from "./IconWithButton";
-import { TextRegular } from "./Texts/TextRegular";
-import { useMediaQuery, Image } from "@chakra-ui/react"
-import { useState } from "react";
-import { Card } from "./Cards/Card";
+import { Heading, HStack } from '@chakra-ui/layout';
+import { Image, useMediaQuery, VStack } from '@chakra-ui/react';
+import { useState } from 'react';
+import { CloseIcon } from '../atoms/Icons/CloseIcon';
+import { Card } from './Cards/Card';
+import { IconWithButton } from './IconWithButton';
+import { TextRegular } from './Texts/TextRegular';
 
 interface BannerCardProps {}
 
 export const BannerCard: React.FC<BannerCardProps> = ({}) => {
-  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)")
-  const [isShown, setIsShown] = useState(true)
+  const [isLargerThan1280] = useMediaQuery('(min-width: 1280px)');
+  const [isShown, setIsShown] = useState(true);
 
   return (
     <>
       {isLargerThan1280 && (
-        <Card w="full" p="30px" display={isShown ? "block" : "none"}>
-          <HStack spacing="32px">
-            <Image
-              src="src/assets/png/car with bg-1@2x.png"
-              w={{ md: '140px' }}
+        <Card
+          w="full"
+          p="30px"
+          display={isShown ? 'block' : 'none'}
+          // h={['158px']}
+        >
+          <HStack spacing="32px" position="relative">
+            <Image src="src/assets/png/car with bg-1@2x.png" w={['110px']} />
+            <IconWithButton
+              icon={CloseIcon}
+              boxSize={6}
+              position="absolute"
+              right="-2"
+              top="-2"
+              _active={{ bg: 'autoGrey.400' }}
+              onClick={() => setIsShown(false)}
             />
             <VStack alignItems="flex-start">
-              <IconWithButton
-                icon={CloseIcon}
-                mb="-20px"
-                alignSelf="flex-end"
-                _active={{ bg: 'autoGrey.400' }}
-                onClick={() => setIsShown(false)}
-              />
-              <Heading fontSize="24px">Certified Car</Heading>
+              <Heading fontSize="16px">Certified Car</Heading>
 
               <TextRegular
-                fontSize={['14px', null, null, '14px', null, '18px']}
-                lineHeight="32px  "
+                fontSize='14px'
+                lineHeight="24px"
+                opacity="63%"
               >
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Doloremque, magnam deleniti voluptatum officiis tempore aperiam

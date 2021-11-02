@@ -5,7 +5,7 @@ interface TextRegularProps {}
 
 export const TextRegular: React.FC<TextRegularProps & TextProps> = ({
   children,
-  fontSize=["14px", null, null, "14px", null,  "16px"],
+  fontSize=["16px", null, "14px"],
   ...rest
 }) => {
   return <Text fontSize={fontSize} {...rest}>{children}</Text>;

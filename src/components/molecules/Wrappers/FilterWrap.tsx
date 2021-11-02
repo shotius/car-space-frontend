@@ -7,7 +7,7 @@ export const FilterWrap: React.FC<FilterWrapProps & BoxProps> = ({children, ...r
   return (
     <Card
       bg={{ base: 'transparent', md: 'autoBlue.400' }}
-      p={{ md: '4', xl: '16px', '2xl': '24px' }}
+      p={{ md: '4', lg: '16px' }}
       w="full"
       minH="auto"
       {...rest}

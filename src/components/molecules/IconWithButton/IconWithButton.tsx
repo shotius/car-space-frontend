@@ -6,6 +6,7 @@ interface IconButtonProps {
   _activeBg?: ButtonProps['bg'];
   _hoverBg?: ButtonProps['bg'];
   boxSize?: IconProps['boxSize']
+  fill?: IconProps['fill']
 }
 
 export const IconWithButton: React.FC<IconButtonProps & ButtonProps> = ({
@@ -13,6 +14,7 @@ export const IconWithButton: React.FC<IconButtonProps & ButtonProps> = ({
   _activeBg = { bg: 'white' },
   _hoverBg = { bg: 'white' },
   icon,
+  fill, 
   boxSize,
   children, 
   ...rest
@@ -25,7 +27,7 @@ export const IconWithButton: React.FC<IconButtonProps & ButtonProps> = ({
       _hover={{ bg: _hoverBg }}
       {...rest}
     >
-      <Icon as={icon} boxSize={boxSize} />
+      <Icon as={icon} boxSize={boxSize} fill={fill}/>
       {children}
     </Button>
   );

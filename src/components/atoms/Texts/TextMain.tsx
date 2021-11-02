@@ -6,7 +6,7 @@ interface TextMainProps {}
 export const TextMain: React.FC<TextMainProps & TextProps> = ({
   opacity = '63%',
   color = '#000',
-  fontSize = '16px',
+  fontSize = ['14px', '16px'],
   lineHeight = '21px',
   children,
   ...rest

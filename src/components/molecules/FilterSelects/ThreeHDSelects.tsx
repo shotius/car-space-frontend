@@ -13,7 +13,6 @@ interface ThreeHDSelectsProps {
 export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
   isOpen,
   onToggle,
-  // p = { md: '2', lg: '4', xl: '4' },
   p = { base: '0', md: '8px 8px 8px 0px' },
   bg = '#fff',
   direction = 'row',
@@ -48,7 +47,7 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
       <HStack spacing={{ md: '0', xl: '2' }}>
         <SearchButton
           w={{ md: '140px', lg: '144px', '2xl': '211px' }}
-          ml={[null, null, null, '0px', '16px']}
+          ml={[null, null, '0px', '16px']}
         />
         {!isOpen ? (
           <IconWithButton

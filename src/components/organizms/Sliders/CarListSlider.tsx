@@ -44,8 +44,8 @@ export const  CarListSlider = ({car}: {car: ICar}) =>  {
           992: {
             slidesPerView: 3,
           },
-          1200: {
-            slidesPerView: 3,
+          1137: {
+            slidesPerView: 4,
           },
           1280: {
             slidesPerView: 4,

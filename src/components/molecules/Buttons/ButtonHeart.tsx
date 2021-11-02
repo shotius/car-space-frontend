@@ -1,17 +1,24 @@
 import { ButtonProps } from "@chakra-ui/button";
+import { IconProps } from "@chakra-ui/icon";
 import { FiHeart } from "react-icons/fi";
 import { IconWithButton } from "../IconWithButton";
 
-export const ButtonHeart: React.FC<ButtonProps> = ({...rest}) => {
+interface ButtonHeartProps {
+  boxSize?: IconProps['boxSize'] 
+}
+
+export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({boxSize = 6, ...rest}) => {
   return (
     <IconWithButton
       icon={FiHeart}
-      boxSize={6}
+      boxSize={boxSize}
       bg="autoGrey.600"
       p="0"
       h="40px"
+      
       _hover={{
-        bg: 'autoGrey.700',
+        bg: '#FB560729',
+        fill: 'red'
       }}
       {...rest}
     />

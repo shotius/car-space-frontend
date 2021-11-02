@@ -17,6 +17,7 @@ import { MenuMobile } from '../MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { Center } from '@chakra-ui/react';
 
 interface HeaderProps {}
 
@@ -26,7 +27,6 @@ export const Header: React.FC<HeaderProps> = () => {
   const [lang, setLang] = useState<Languages>(Languages.ENG);
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
   const history = useHistory();
-
 
   // if menu open stop body scroll
   useEffect(() => {
@@ -41,7 +41,7 @@ export const Header: React.FC<HeaderProps> = () => {
   const {
     // onOpen: openCurr,
     onClose: closeCurr,
-    onToggle: toggleCurr, 
+    onToggle: toggleCurr,
     isOpen: isCurrOpen,
   } = useDisclosure();
 
@@ -73,8 +73,12 @@ export const Header: React.FC<HeaderProps> = () => {
           <HStack
             ml="auto"
             display={['none', 'none', 'flex']}
-            spacing={[null, null, '16px', null, '18px', '24px']}
-            divider={<StackDivider />}
+            spacing={[null, null, '16px']}
+            divider={
+              <Center>
+                <StackDivider h="25px" />
+              </Center>
+            }
           >
             <HStack spacing={[null, null, '16px', '24px', '32px']}>
               <MenuLink to="/catalog" label="Catalog" />
@@ -112,7 +116,7 @@ export const Header: React.FC<HeaderProps> = () => {
                 fontSize="16px"
                 onClick={() => history.push('/login')}
                 _hover={{
-                  bg: "autoGrey.200"
+                  bg: 'autoGrey.200',
                 }}
               >
                 <TextRegular>Log in</TextRegular>
@@ -127,8 +131,8 @@ export const Header: React.FC<HeaderProps> = () => {
                 w="100px"
                 transition="all 0.5s"
                 _hover={{
-                  bg: "autoGrey.200",
-                  border: "white"
+                  bg: 'autoGrey.200',
+                  border: 'white',
                 }}
               >
                 <Icon as={PersonIcon} boxSize="4" />

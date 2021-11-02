@@ -27,22 +27,20 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
   return (
     <Box
       ref={ref}
-      w="full"
+      w={["full", null, null,  '263px']}
       bg="white"
       borderRadius="8px"
-      p="19px"
-      maxW={['388px', '343px', null, '324px', '388px', '398px']}
-      // cursor="pointer"
-      // w="330px"
+      p="4"
+      maxW={['388px', '343px', null]}
     >
-      <VStack w="full" spacing={['19px', null, null, '19px', '15px']}>
+      <VStack w="full" spacing={['19px', null, null, '14px', '15px']}>
         {/* header */}
         <HStack justifyContent="space-between" w="full">
           <VStack alignItems="flex-start" spacing="0">
-            <Heading
-              fontSize={['16px', null, null, '18px', null, '24px']}
-              fontWeight="400"
-              maxW="220px"
+            <TextRegular
+              fontFamily="Roboto Medium"
+              fontSize='18px'
+              maxW={['200px', "150px"]}
               isTruncated
               _hover={{
                 textDecor: 'underline',
@@ -51,10 +49,10 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
               <Link to={`/car/${car?.lN}`}>
                 {car?.m} {car?.mG}
               </Link>
-            </Heading>
+            </TextRegular>
             <TextMain opacity="50%">{car?.y}</TextMain>
           </VStack>
-          <ButtonHeart />
+          <ButtonHeart h="35px" w="35px" boxSize={5}/>
         </HStack>
         {/* picture swiper */}
         {/* <Image
@@ -72,25 +70,25 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
           /> */}
         <CarImageCarousel />
         {/* description */}
-        <VStack w="full" divider={<StackDivider />}>
-          <VStack flex="1" alignItems="flex-start" minW="150px" mb="2" w="full">
-            <HStack>
+        <VStack w="full" divider={<StackDivider />} >
+          <VStack alignItems="flex-start" minW="150px" mb="2" w="full" spacing="8px">
+            <HStack w="full">
               <TextRegular opacity="63%">Damage: </TextRegular>
-              <Heading fontWeight="400" fontSize="16px">
+              <TextRegular fontFamily={['Roboto Medium',null,  'Roboto Regular']} isTruncated>
                 {car?.dmg}
-              </Heading>
+              </TextRegular>
             </HStack>
             <HStack>
               <TextRegular opacity="63%">Mileage:</TextRegular>
-              <Heading fontWeight="400" fontSize="16px">
+              <TextRegular fontFamily={['Roboto Medium',null, 'Roboto Regular']}>
                 {car?.od} km
-              </Heading>
+              </TextRegular>
             </HStack>
           </VStack>
           <HStack justifyContent="space-between" w="full">
             <TextRegular opacity="63%">Estimate Price</TextRegular>
             <Heading
-              fontSize={['20px', null, null, '18px', '24px']}
+              fontSize={['20px', null, '16px']}
               color="autoOrange.500"
               pr="4"
               fontWeight="400"
@@ -101,7 +99,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
           <HStack justifyContent="space-between" w="full">
             <TextRegular opacity="63%">Estimate Price</TextRegular>
             <Heading
-              fontSize={['20px', null, null, '18px', '24px']}
+              fontSize={['20px', null, '16px']}
               pr="4"
               fontWeight="400"
             >

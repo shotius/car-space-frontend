@@ -10,8 +10,8 @@ export const CatalogListWrap: React.FC<CatalogListWrapProps & SimpleGridProps> =
           '1fr',
           'repeat(2, 1fr)',
           'repeat(3, 1fr)',
-          null,
           'repeat(4, 1fr)',
+          null, 
         ]}
         spacing="4"
         w="full"

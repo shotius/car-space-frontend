@@ -30,7 +30,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
       w="full"
       overflow="hidden"
       borderRadius="md"
-      maxH={['192px', null, null, '160px', '190px', '218px']}
+      maxH={['192px', null,  '143px']}
       onMouseEnter={() => {
         isLaptopScreen && setButtonsVisible(true);
       }}
