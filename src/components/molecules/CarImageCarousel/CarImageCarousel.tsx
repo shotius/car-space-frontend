@@ -11,7 +11,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { SwiperButton } from '../Buttons/SwiperButton';
-import './styles.css';
+import style from  './styles.module.scss';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination]);
@@ -37,7 +37,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
       onMouseLeave={() => setButtonsVisible(false)}
     >
       <Swiper
-        className="CarImagesSwiper"
+        className={style.CarImagesSwiper}
         slidesPerView={1}
         spaceBetween={3}
         pagination={true}

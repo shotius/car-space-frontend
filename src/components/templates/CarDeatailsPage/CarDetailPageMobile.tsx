@@ -4,7 +4,9 @@ import { ContainerOuter } from '../../atoms/Containers/ContainerOuter';
 import { BidInfoCard } from '../../molecules/BidInfoCard';
 import { CarDetailSlider } from '../../molecules/CarDetailSlider';
 import { TextRegular } from '../../molecules/Texts/TextRegular';
-import { CarDeailsCard } from '../../organizms/Cards/CarDeailsCard';
+import {
+  CarDeailsCardMobile
+} from '../../organizms/Cards/CarDeailsCard';
 import { CarInfoCardMobile } from '../../organizms/Cards/CarInfoCardMobile';
 import { CarDescriptionHeader } from '../../organizms/MiniHeaders/CarDescriptionHeader';
 
@@ -41,7 +43,8 @@ export const CarDetailPageMobile: React.FC<CarDetailPageMobileProps> = ({
             <CarInfoCardMobile />
 
             {/* car details */}
-            <CarDeailsCard />
+            <CarDeailsCardMobile />
+            
           </VStack>
         </HStack>
       </ContainerOuter>

@@ -13,7 +13,7 @@ export const ScrollableDiv: React.FC<ScrollableDivProps & SimpleGridProps> = ({
   columnsLaptop = 6,
   columnsHD = 6,
   children,
-  spacing, 
+  spacing="4", 
   ...rest
 }) => {
   return (

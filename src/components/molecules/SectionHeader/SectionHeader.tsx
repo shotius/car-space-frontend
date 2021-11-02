@@ -15,7 +15,7 @@ interface SectionHeaderProps {
 
 export const SectionHeader: React.FC<SectionHeaderProps & FlexProps> = ({
   mainText,
-  mainFontSize = {base: "26px",  lg: '18px', xl: '20px', "2xl": '24px' },
+  mainFontSize = {base: "20px",  lg: '18px' },
   mainlineHeight = { lg: '24px', xl: '26px' },
   secondaryText,
   secondaryFontSize = '16px',

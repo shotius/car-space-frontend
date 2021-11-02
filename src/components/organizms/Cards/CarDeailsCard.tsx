@@ -1,13 +1,21 @@
-import { VStack, StackDivider, HStack } from '@chakra-ui/react';
+import { HStack, StackDivider, VStack } from '@chakra-ui/react';
 import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 
 interface CarDeailsCardProps {}
 
-export const CarDeailsCard: React.FC<CarDeailsCardProps> = () => {
+export const CarDeailsCardMobile: React.FC<CarDeailsCardProps> = ({}) => {
   return (
-    <CardWithHeading heading="Car details">
+    <CardWithHeading
+      heading="Car details"
+      headingBg="transparent"
+      bg="transparent"
+      headinCl="#000"
+      headingFontSize="20px"
+      bodyPadding="0"
+      headingPadding="12px 0px 25px 0px"
+    >
       <VStack divider={<StackDivider />} w="full" spacing="2.5">
         <HStack w="full" justify="space-between">
           <TextRegular opacity="0.5">VIN number</TextRegular>
