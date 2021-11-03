@@ -1,19 +1,25 @@
 import {
+  Box,
   Divider,
   HStack,
-  RadioGroup,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
   Spacer,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
-import { Radio } from 'src/components/atoms/Radio';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { InputGrey } from '../Inputs/InputGrey';
 import { TabBlue } from '../Tabs/TabBlue';
 import { TextRegular } from '../Texts/TextRegular';
+import { CalculatroFooter } from './CalculatroFooter';
+import { ImportTaxCalculator } from './ImportTaxCalculator';
+import { LoanCalculator } from './LoanCalculator';
 import { TransportCalculator } from './TransportCalculator';
 
 interface CalculatorDesktopProps {}
@@ -60,31 +66,10 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps> = ({}) => {
             <TransportCalculator />
           </TabPanel>
           <TabPanel h="full">
-            <VStack w="full" h="full" spacing="32px">
-              <RadioGroup w="full">
-                <HStack w="full" spacing="38px">
-                  <Radio value="1">
-                    <TextRegular opacity=".4">Hybrid</TextRegular>
-                  </Radio>
-                  <Radio value="2">
-                    <TextRegular opacity=".4">Electric</TextRegular>
-                  </Radio>
-                </HStack>
-              </RadioGroup>
-              <VStack w="full">
-                <InputGrey placeholder="Year" type="number" />
-                <InputGrey placeholder="Engine" type="number"/>
-              </VStack>
-              <Spacer />
-              <Divider />
-              <HStack w="full" justify="space-between">
-                <TextRegular>Total</TextRegular>
-                <HeadingSecondary color="autoOrange.500">$ 200</HeadingSecondary>
-              </HStack>
-            </VStack>
+            <ImportTaxCalculator />
           </TabPanel>
-          <TabPanel>
-            <TextRegular>Loan</TextRegular>
+          <TabPanel h="full">
+           <LoanCalculator />
           </TabPanel>
           <TabPanel>
             <TextRegular>Leasing</TextRegular>
