@@ -1,8 +1,8 @@
-import './styles.css';
-import { HStack, RadioGroup, Spacer, VStack } from '@chakra-ui/react';
+import { HStack, RadioGroup, VStack } from '@chakra-ui/react';
 import { InputGrey } from '../Inputs/InputGrey';
 import { TextRegular } from '../Texts/TextRegular';
-import { CalculatroFooter } from './CalculatroFooter';
+import { CalculatorFooter } from './CalculatorFooter';
+import './styles.css';
 
 interface ImportTaxCalculatroProps {}
 
@@ -25,8 +25,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
         <InputGrey placeholder="Year" type="number" />
         <InputGrey placeholder="Engine" type="number" />
       </VStack>
-      <Spacer />
-      <CalculatroFooter />
+      <CalculatorFooter />
     </VStack>
   );
 };

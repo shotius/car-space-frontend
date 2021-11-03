@@ -1,24 +1,16 @@
 import {
-  Box,
-  Divider,
   HStack,
-  Slider,
-  SliderFilledTrack,
-  SliderThumb,
-  SliderTrack,
-  Spacer,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
-  VStack
+  VStack,
 } from '@chakra-ui/react';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
-import { InputGrey } from '../Inputs/InputGrey';
 import { TabBlue } from '../Tabs/TabBlue';
 import { TextRegular } from '../Texts/TextRegular';
-import { CalculatroFooter } from './CalculatroFooter';
 import { ImportTaxCalculator } from './ImportTaxCalculator';
+import { LeasingCalculator } from './LeasingCalculator';
 import { LoanCalculator } from './LoanCalculator';
 import { TransportCalculator } from './TransportCalculator';
 
@@ -26,22 +18,25 @@ interface CalculatorDesktopProps {}
 
 export const CalculatorDesktop: React.FC<CalculatorDesktopProps> = ({}) => {
   return (
-    <Tabs w="full">
+    <Tabs
+      w="full"
+      boxShadow="0px 1px 15px #00000029"
+      h="299px"
+      borderRadius="8px"
+    >
       <HStack
         w="full"
-        h="310px"
+        h="full"
         bg="#fff"
         alignItems="stretch"
-        pt="0px !important"
         borderRadius="8px"
       >
         <TabList
-          pb="10px"
+          // pb="10px"
           w="156px"
           bg="#F8F8F8"
           border="none"
           borderLeftRadius="8px"
-          h="full"
         >
           <VStack w="full">
             <HeadingSecondary p="24px 0px 16px 16px" w="full">
@@ -61,7 +56,7 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps> = ({}) => {
             </TabBlue>
           </VStack>
         </TabList>
-        <TabPanels p="8px 16px 24px 16px">
+        <TabPanels p="8px 16px 24px 8px" position="relative">
           <TabPanel h="full">
             <TransportCalculator />
           </TabPanel>
@@ -69,10 +64,10 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps> = ({}) => {
             <ImportTaxCalculator />
           </TabPanel>
           <TabPanel h="full">
-           <LoanCalculator />
+            <LoanCalculator />
           </TabPanel>
           <TabPanel>
-            <TextRegular>Leasing</TextRegular>
+            <LeasingCalculator />
           </TabPanel>
         </TabPanels>
       </HStack>

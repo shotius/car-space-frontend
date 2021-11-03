@@ -9,7 +9,6 @@ export const InputGrey: React.FC<InputGreyProps & InputProps> = ({
   return (
     <InputRegular
       bg="#F4F4F4"
-      placeholder="Location"
       border="1px"
       borderColor="#EAEAEB"
       _placeholder={{ fontSize: '14px', color: 'black', opacity: '.4' }}

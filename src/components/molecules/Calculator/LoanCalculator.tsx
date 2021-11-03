@@ -4,14 +4,12 @@ import {
   Slider,
   SliderFilledTrack,
   SliderThumb,
-  SliderTrack,
-  Spacer,
-  VStack,
+  SliderTrack, VStack
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { InputGrey } from '../Inputs/InputGrey';
 import { TextRegular } from '../Texts/TextRegular';
-import { CalculatroFooter } from './CalculatroFooter';
+import { CalculatorFooter } from './CalculatorFooter';
 
 interface LoanCalculatorProps {}
 
@@ -43,8 +41,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
         <InputGrey placeholder="Loan amount" />
         <InputGrey placeholder="Percentage" />
       </VStack>
-      <Spacer />
-      <CalculatroFooter />
+      <CalculatorFooter></CalculatorFooter>
     </VStack>
   );
 };
