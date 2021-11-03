@@ -26,7 +26,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
       </Box>
       <Container
         maxW="1920px"
-        bg="#f4f4f5"
+        bg="#F0F0F0"
         minH="100vh"
         pb={['64px', '85px', '101px', '138px']}
         pl="0"

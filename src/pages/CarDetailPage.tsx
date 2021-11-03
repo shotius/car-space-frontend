@@ -10,12 +10,13 @@ import { DamCar } from 'src/DamnCard';
 import { useAppSelector } from 'src/redux/app/hook';
 import { ICar } from 'src/redux/features/auth/types';
 import carsService from 'src/services/carsService';
-import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
+import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 
 interface CardDetailPageProps {}
 
 export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
-  const { isLargerThan } = useMediaQueryMin(600);
+  // const { isLargerThan } = useMediaQueryMin(800);
+  const {isDesktop} = useDetectScreen()
 
   const { lotNumber } = useParams<{ lotNumber: string }>();
   const [carInfo, setCarInfo] = useState<ICar>();
@@ -33,7 +34,7 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
 
   return (
     <PublicLayout>
-      {isLargerThan ? (
+      {isDesktop ? (
         <CarDetailPageDesktop car={carInfo} />
       ) : (
         <CarDetailPageMobile car={carInfo} />

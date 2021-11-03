@@ -4,7 +4,7 @@ import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
 import { Select } from 'src/components/atoms/Selects';
 import { IconWithButton } from '../IconWithButton';
-import { SearchButton } from '../SearchButton';
+import { SearchButton } from '../Buttons/SearchButton';
 interface ThreeHDSelectsProps {
   isOpen: boolean;
   onToggle: () => void;

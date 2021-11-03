@@ -1,6 +1,6 @@
 import { IconProps } from '@chakra-ui/icon';
 import { Select, SelectProps } from '@chakra-ui/select';
-import { DropdownIcon } from '../atoms/Icons/DropdownIcon';
+import { DropdownIcon } from '../../atoms/Icons/DropdownIcon';
 
 interface CustomSelectProps {
   arrowColor?: IconProps['color']

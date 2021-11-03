@@ -18,7 +18,7 @@ export const CardWithHeading: React.FC<CardWithHeaderProps & BoxProps> = ({
   headingPadding="12px 24px 12px 24px",
   bodyPadding="24px",
   w="full", 
-  maxW=[null, null , '480px'],
+  maxW=[null, null , '480px', 'full'],
   heading,
   children,
   ...rest

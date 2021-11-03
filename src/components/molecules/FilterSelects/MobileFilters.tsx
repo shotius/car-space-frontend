@@ -11,7 +11,7 @@ import { MobileSelect } from '../MobileSelect';
 import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
 import { MobileTransmissionPopup } from '../MobileSelectPopups/MobileTransmissionPopup';
 import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
-import { SearchButton } from '../SearchButton';
+import { SearchButton } from '../Buttons/SearchButton';
 import { TextRegular } from '../Texts/TextRegular';
 import { WithMobileKeyboard } from '../WithMobileKeyboard';
 import { selectYearFrom } from 'src/redux/features/auth/carFilterSlice';

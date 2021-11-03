@@ -4,7 +4,7 @@ import { ThreeHDSelects } from 'src/components/molecules/FilterSelects/ThreeHDSe
 import { ThreeTabletSelects } from 'src/components/molecules/FilterSelects/ThreeTabletSelects';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { MobileFilters } from '../../molecules/FilterSelects/MobileFilters';
-import SelectSecondary from '../../molecules/SelectSecondary';
+import SelectSecondary from '../../molecules/Selects/SelectSecondary';
 
 interface FilterMobileProps {
   isOpen: boolean;

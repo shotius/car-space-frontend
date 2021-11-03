@@ -1,4 +1,4 @@
-import { HStack, Stack, VStack } from '@chakra-ui/react';
+import { HStack, SimpleGrid, VStack } from '@chakra-ui/react';
 import { ButtonRegular } from './Buttons/ButtonRegular';
 import { CardWithHeading } from './Cards/CardWithHeading';
 import { HeadingSecondary } from './Headings/HeadingSecondary';
@@ -7,8 +7,9 @@ import { TextRegular } from './Texts/TextRegular';
 interface BidInfoCardProps {}
 
 export const BidInfoCard: React.FC<BidInfoCardProps> = ({}) => {
+
   return (
-    <CardWithHeading heading="Bid information">
+    <CardWithHeading heading="Bid information" w="full">
       {/* current bid */}
       <HStack w="full" alignItems="baseline">
         <VStack w="full" align="flex-start" spacing="0">
@@ -26,17 +27,21 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({}) => {
       </HStack>
 
       {/* // contancet button */}
-      <Stack
-        spacing={['10px', '15px']}
+      <SimpleGrid
+        spacingX= '15px'
+        spacingY='10px'
         w="full"
         pt="4"
-        direction={['column', 'row-reverse']}
+        minChildWidth="170px"
       >
-        <ButtonRegular>Contact</ButtonRegular>
+        <ButtonRegular >Contact</ButtonRegular>
         <ButtonRegular
           color="#000"
+          gridRow={1}
           bg="#F0F0F0"
           _active={{ bg: 'autoGrey.400' }}
+          display="flex"
+          alignItems="center"
         >
           But it now
           <TextRegular opacity="0.5" ml="4">
@@ -44,7 +49,7 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({}) => {
             $2 500
           </TextRegular>
         </ButtonRegular>
-      </Stack>
+      </SimpleGrid>
     </CardWithHeading>
   );
 };

@@ -25,7 +25,7 @@ const CustomSelect: React.FC<CustomSelectProps & SelectProps> = ({
       border={border}
       fontSize={fontSize}
       h={h}
-      icon={<DropdownIcon fill={arrowColor}/>}
+      icon={<DropdownIcon fill={arrowColor} boxSize={4}/>}
       {...rest}
     >
       {' '}

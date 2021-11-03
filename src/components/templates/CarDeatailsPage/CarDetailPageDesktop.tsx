@@ -1,6 +1,7 @@
 import { HStack, VStack } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BidInfoCard } from 'src/components/molecules/BidInfoCard';
+import { CalculatorDesktop } from 'src/components/molecules/Calculator/CalculatorDesktop';
 import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
@@ -17,12 +18,12 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> =
   ({car}) => {
     return (
       <ContainerOuter>
-        <HStack align="baseline" spacing="80px">
-          <VStack spacing="49px" w="full">
+        <HStack align="baseline" justify="space-between">
+          <VStack spacing="49px" w="579px">
             <HeadingSecondary p="100px">Card Picture Slider</HeadingSecondary>
             <CarInfoCard />
             <CardWithHeading heading="Transportation and fee">
-              <HStack w="full" justify="space-between">
+              <HStack w="full" justify="space-between" align="flex-start">
                 <VStack align="flex-start" spacing="1">
                   <TextRegular opacity="0.5"> Transportation to Poti</TextRegular>
                   <HeadingSecondary>$ 400</HeadingSecondary>
@@ -39,10 +40,10 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> =
             </CardWithHeading>
             <CarDeailsCard  variant="desktop" />
           </VStack>
-          <VStack w="full" spacing="32px" bg="cyan" alignItems="flex-start">
+          <VStack w="441px" spacing="32px" alignItems="flex-start">
             <CarDescriptionHeader car={car} />
             <BidInfoCard />
-            <TextRegular>Some Info</TextRegular>
+            <CalculatorDesktop />
           </VStack>
         </HStack>
       </ContainerOuter>

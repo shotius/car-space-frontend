@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/layout';
 import { Select } from '@chakra-ui/select';
 import { DividerVertical } from 'src/components/atoms/Divider';
-import { SearchButton } from 'src/components/molecules/SearchButton';
+import { SearchButton } from 'src/components/molecules/Buttons/SearchButton';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import { Card } from '../molecules/Cards/Card';
 

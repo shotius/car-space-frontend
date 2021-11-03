@@ -2,7 +2,7 @@ import { Center, Divider, Flex } from '@chakra-ui/react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { Select } from 'src/components/atoms/Selects';
 import { Card } from '../Cards/Card';
-import { SearchButton } from '../SearchButton';
+import { SearchButton } from '../Buttons/SearchButton';
 
 
 interface SearchProps {}
