@@ -24,10 +24,10 @@ import { getModels } from 'src/redux/features/auth/carsSlice';
 import { ButtonRegular } from '../Buttons/ButtonRegular';
 import { TextButton } from '../Buttons/TextButton';
 import { TopBrandCard } from '../Cards/TopBrandCard';
-import { IconWithButton } from '../IconWithButton';
 import { InputRegular } from '../Inputs/InputRegular';
 import { ScrollableDiv } from '../Wrappers/ScrollableDiv';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
+import { ButtonWithIcon } from '../Buttons/IconWithButton';
 
 interface BrandSelectProps {
   brands: string[];
@@ -108,7 +108,7 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
               <InputRightElement
                 children={
                   <Center w="full" h="full">
-                    <IconWithButton
+                    <ButtonWithIcon
                       icon={CloseIcon}
                       onClick={() => {
                         setSearchWord('');

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
+import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarousel/CarListCarousel';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
-import CarListSlider from 'src/components/molecules/Sliders/CarListSlider/CarListSlider';
 import { CarDetailPageDesktop } from 'src/components/templates/CarDeatailsPage/CarDetailPageDesktop';
 import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/CarDetailPageMobile';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
@@ -43,7 +43,7 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
       {/* similar vehicles*/}
       <ContainerOuter mt="65px">
         <SectionHeader mainText="Similar vehicles" />
-        <CarListSlider car={DamCar} />
+        <CarListCarousel car={DamCar} />
       </ContainerOuter>
     </PublicLayout>
   );

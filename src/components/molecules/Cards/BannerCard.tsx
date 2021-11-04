@@ -2,7 +2,7 @@ import { Heading, HStack } from '@chakra-ui/layout';
 import { Image, useMediaQuery, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
-import { IconWithButton } from '../IconWithButton';
+import { ButtonWithIcon } from '../Buttons/IconWithButton';
 import { TextRegular } from '../Texts/TextRegular';
 import { Card } from './Card';
 
@@ -23,7 +23,7 @@ export const BannerCard: React.FC<BannerCardProps> = ({}) => {
         >
           <HStack spacing="32px" position="relative">
             <Image src="src/assets/png/car with bg-1@2x.png" w={['110px']} />
-            <IconWithButton
+            <ButtonWithIcon
               icon={CloseIcon}
               boxSize={6}
               position="absolute"

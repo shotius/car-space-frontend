@@ -1,8 +1,8 @@
-import { IconWithButton } from 'src/components/molecules/IconWithButton';
 
+import { ButtonWithIcon } from '../molecules/Buttons/IconWithButton';
 import { LogoIcon } from './Icons/LogoIcon';
 
-type LogoProps = React.ComponentProps<typeof IconWithButton>;
+type LogoProps = React.ComponentProps<typeof ButtonWithIcon>;
 
 export const Logo: React.FC<LogoProps> = ({
   icon = LogoIcon,
@@ -13,7 +13,7 @@ export const Logo: React.FC<LogoProps> = ({
   ...rest
 }) => {
   return (
-    <IconWithButton
+    <ButtonWithIcon
       icon={icon}
       boxSize={boxSize}
       bg={bg}

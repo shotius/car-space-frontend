@@ -18,7 +18,7 @@ import styles from './styles.module.scss';
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
-export const  CarListSlider = ({car}: {car: ICar}) =>  {
+export const  CarListCarousel = ({car}: {car: ICar}) =>  {
   const [isLaptopScreen] = useMediaQuery("(min-width: 1024px)")
 
   return (
@@ -101,4 +101,3 @@ export const  CarListSlider = ({car}: {car: ICar}) =>  {
     </Box>
   );
 }
-export default CarListSlider

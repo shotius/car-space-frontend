@@ -6,7 +6,7 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { ICar } from 'src/redux/features/auth/types';
 import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
 import { ButtonHeart } from '../Buttons/ButtonHeart';
-import { CarImageCarousel } from '../CarImageCarousel/CarImageCarousel';
+import { CarImageCarousel } from '../Carousels/CarImageCarousel/CarImageCarousel';
 
 interface CarCardProps {
   car?: ICar;

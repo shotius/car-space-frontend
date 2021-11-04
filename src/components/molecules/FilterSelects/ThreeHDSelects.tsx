@@ -3,7 +3,7 @@ import { DividerVertical } from 'src/components/atoms/Divider';
 import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
 import { Select } from 'src/components/atoms/Selects';
-import { IconWithButton } from '../IconWithButton';
+import { ButtonWithIcon } from '../Buttons/IconWithButton';
 import { SearchButton } from '../Buttons/SearchButton';
 interface ThreeHDSelectsProps {
   isOpen: boolean;
@@ -50,7 +50,7 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
           ml={[null, null, '0px', '16px']}
         />
         {!isOpen ? (
-          <IconWithButton
+          <ButtonWithIcon
             icon={FiltersIcon}
             boxSize={[null, null, '10',null,  '10', '12']}
             onClick={onToggle}
@@ -58,7 +58,7 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
             pl={[null, null, '2', '12px', '0']}
           />
         ) : (
-          <IconWithButton
+          <ButtonWithIcon
             icon={CloseOutlineIcon}
             boxSize={[null, null, '10',null,  '10', '12']}
             onClick={onToggle}

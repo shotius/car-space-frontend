@@ -9,7 +9,7 @@ interface IconButtonProps {
   fill?: IconProps['fill']
 }
 
-export const IconWithButton: React.FC<IconButtonProps & ButtonProps> = ({
+export const ButtonWithIcon: React.FC<IconButtonProps & ButtonProps> = ({
   bg = 'white',
   _activeBg = { bg: 'white' },
   _hoverBg = { bg: 'white' },

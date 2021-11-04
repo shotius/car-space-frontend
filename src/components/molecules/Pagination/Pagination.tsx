@@ -2,7 +2,7 @@ import { HStack } from '@chakra-ui/react';
 // import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ArrowNextIcon } from '../../atoms/Icons/Arrows/ArrowNextIcon';
 import { ArrowPrevIcon } from '../../atoms/Icons/Arrows/ArrowPrevIcon';
-import { IconWithButton } from '../IconWithButton';
+import { ButtonWithIcon } from '../Buttons/IconWithButton';
 import { MiddlePaginNumbers } from './MiddlePaginaNumbers';
 
 interface PaginationProps {
@@ -22,7 +22,7 @@ export const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <HStack pt="18px" pb="18px" spacing={['1', '2']} maxW="100%" flexWrap="wrap">
-      <IconWithButton
+      <ButtonWithIcon
         variant="ghost"
         bg="transparent"
         icon={ArrowPrevIcon}
@@ -41,7 +41,7 @@ export const Pagination: React.FC<PaginationProps> = ({
           paginNumbers={paginNumbers}
         />
 
-      <IconWithButton
+      <ButtonWithIcon
         variant="ghost"
         bg="transparent"
         icon={ArrowNextIcon}

@@ -10,7 +10,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { SwiperButton } from '../Buttons/SwiperButton';
+import { SwiperButton } from '../../Buttons/SwiperButton';
 import style from  './styles.module.scss';
 
 // install Swiper modules
