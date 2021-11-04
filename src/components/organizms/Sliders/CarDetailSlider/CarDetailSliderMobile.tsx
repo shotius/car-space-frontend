@@ -1,9 +1,9 @@
 import { AspectRatio, Image } from "@chakra-ui/react";
-import { ScrollableDiv } from "./ScrollableDiv";
+import { ScrollableDiv } from "../../../molecules/ScrollableDiv";
 
 interface CarDetailSliderProps {}
 
-export const CarDetailSlider: React.FC<CarDetailSliderProps> = ({}) => {
+export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({}) => {
   return (
     <>
       <AspectRatio ratio={375 / 295} w="full" maxH="400px">

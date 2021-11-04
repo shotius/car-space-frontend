@@ -22,15 +22,22 @@ export const SwiperButton = forwardRef<
         left={side === 'left' ? '0' : 'null'}
         zIndex={zIndex}
         ref={ref}
-        icon={<DropdownIcon fill="white" boxSize="5" ml="5px" />}
+        icon={
+          <DropdownIcon
+            fill="white"
+            boxSize="5"
+            ml="4px"
+            mt={side === 'right' ? '-15px' : '0px'}
+            mb={side === 'left' ? '15px' : '0px'}
+          />
+        }
         borderRadius="none"
-        transform={side === 'right' ? 'rotate(-90deg)' : 'rotate(270deg)'}
+        transform={side === 'right' ? 'rotate(-90deg)' : 'rotate(90deg)'}
         bg="black"
-        w={{ md: '50px', '2xl': '70px' }}
-        mr={side === 'right' ? { md: '-10px', '2xl': '-15px' } : '0px'}
-        ml={side === 'left' ? { md: '-10px', '2xl': '-15px' } : '0px'}
-        borderTopRadius={side === 'right' ? '100px' : '0px'}
-        borderBottomRadius={side === 'left' ? '100px' : '0px'}
+        w="55px"
+        mr={side === 'right' ? '-25px' : '0px'}
+        ml={side === 'left' ? '-25px' : '0px'}
+        borderTopRadius='100px'
         opacity=".65"
         display={isVisible ? 'block' : 'none'}
         _hover={{

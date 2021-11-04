@@ -3,7 +3,7 @@ import { CarDeailsCard } from 'src/components/organizms/CarDeatailPage/Cards/Car
 import { ICar } from 'src/redux/features/auth/types';
 import { ContainerOuter } from '../../atoms/Containers/ContainerOuter';
 import { BidInfoCard } from '../../molecules/BidInfoCard';
-import { CarDetailSlider } from '../../molecules/CarDetailSlider';
+import { CarDetailSliderMobile } from '../../organizms/Sliders/CarDetailSlider/CarDetailSliderMobile';
 import { TextRegular } from '../../molecules/Texts/TextRegular';
 import { CarInfoCardMobile } from '../../organizms/CarDeatailPage/Cards/CarInfoCardMobile';
 import { CarDescriptionHeader } from '../../organizms/MiniHeaders/CarDescriptionHeader';
@@ -18,7 +18,7 @@ export const CarDetailPageMobile: React.FC<CarDetailPageMobileProps> = ({
   return (
     <>
       <ContainerOuter p="0">
-        <CarDetailSlider />
+        <CarDetailSliderMobile />
       </ContainerOuter>
       <ContainerOuter pt="4">
         <HStack>

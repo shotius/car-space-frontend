@@ -59,7 +59,7 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps & TabsProps> =
                 <HeadingSecondary
                   p={
                     size === 'regular'
-                      ? "24px 0px 16px 16px"
+                    ? "24px 0px 16px 16px"
                       : '24px 0px 50px 16px'
                   }
                   w="full"

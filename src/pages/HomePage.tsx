@@ -8,7 +8,7 @@ import { DealersSection } from 'src/components/organizms/DealersSection';
 import { CustomersReview } from 'src/components/organizms/HomePage/CustomersReview';
 import { TopBrands } from 'src/components/organizms/HomePage/TopBrands';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
-import { CarListSlider } from 'src/components/organizms/Sliders/CarListSlider';
+import { CarListSlider } from 'src/components/organizms/Sliders/CarListSlider/CarListSlider';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamCar } from 'src/DamnCard';
 
