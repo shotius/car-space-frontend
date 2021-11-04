@@ -8,7 +8,7 @@ import {
   DrawerProps
 } from '@chakra-ui/modal';
 import { ReactNode } from 'react';
-import { ButtonRegular } from './Buttons/ButtonRegular';
+import { ButtonRegular } from '../Buttons/ButtonRegular';
 
 interface MobileEnginePopupProps {
   isOpen: boolean;

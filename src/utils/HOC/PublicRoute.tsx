@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Route, RouteProps } from 'react-router-dom';
-import ErrorBoundary from 'src/components/molecules/ErrorBoundary';
+import ErrorBoundary from 'src/components/molecules/Errors/ErrorBoundary';
 
 interface PublicRouteProps {
   component: React.FC;

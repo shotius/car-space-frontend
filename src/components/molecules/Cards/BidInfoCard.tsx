@@ -1,8 +1,8 @@
 import { HStack, SimpleGrid, VStack } from '@chakra-ui/react';
-import { ButtonRegular } from './Buttons/ButtonRegular';
-import { CardWithHeading } from './Cards/CardWithHeading';
-import { HeadingSecondary } from './Headings/HeadingSecondary';
-import { TextRegular } from './Texts/TextRegular';
+import { ButtonRegular } from '../Buttons/ButtonRegular';
+import { CardWithHeading } from './CardWithHeading';
+import { HeadingSecondary } from '../Headings/HeadingSecondary';
+import { TextRegular } from '../Texts/TextRegular';
 
 interface BidInfoCardProps {}
 

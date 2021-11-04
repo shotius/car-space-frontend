@@ -1,4 +1,4 @@
-import { CatalogList } from 'src/components/organizms/CatalogList';
+import { CatalogList } from 'src/components/organizms/CatalogPage/CatalogList';
 
 import { PublicLayout } from '../Layouts/PublicLayout';
 

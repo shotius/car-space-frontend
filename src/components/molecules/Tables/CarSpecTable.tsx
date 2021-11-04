@@ -1,7 +1,7 @@
 import { VStack, StackDivider, HStack } from '@chakra-ui/layout';
 import { ICar } from 'src/redux/features/auth/types';
-import { HeadingSecondary } from './Headings/HeadingSecondary';
-import { TextRegular } from './Texts/TextRegular';
+import { HeadingSecondary } from '../Headings/HeadingSecondary';
+import { TextRegular } from '../Texts/TextRegular';
 
 interface CarSpecTableProps {
   car?: ICar;

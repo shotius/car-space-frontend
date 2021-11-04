@@ -1,5 +1,5 @@
 import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading';
-import { CarSpecTable } from 'src/components/molecules/CarSpecTable';
+import { CarSpecTable } from 'src/components/molecules/Tables/CarSpecTable';
 
 interface CarDeailsCardProps {
   variant: 'mobile' | 'desktop';

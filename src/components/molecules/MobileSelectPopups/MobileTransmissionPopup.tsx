@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectTranssmision } from 'src/redux/features/auth/carFilterSlice';
 import { Transmission } from 'src/redux/features/auth/types';
-import { MobileFilterPopup } from '../MobileFIlterPopup';
+import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
 interface MobileTransmissionPopupProps {
   isOpen: boolean;

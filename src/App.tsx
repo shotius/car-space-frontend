@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import 'src/App.css';
-import { StyledApp } from 'src/components/organizms/StyledApp';
+import { StyledApp } from 'src/components/organizms/Wrappers/StyledApp';
 import { ErrorPage } from 'src/pages/ErrorPage';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';

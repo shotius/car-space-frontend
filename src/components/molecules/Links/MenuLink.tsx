@@ -1,5 +1,5 @@
  ;
-import { TextRegular } from './Texts/TextRegular';
+import { TextRegular } from '../Texts/TextRegular';
 import { useRouteMatch, Link } from 'react-router-dom';
 
 interface MenuLinkProps {

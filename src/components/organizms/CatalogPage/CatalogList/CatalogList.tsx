@@ -3,7 +3,7 @@ import { Spinner, useDisclosure } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
-import { BannerCard } from 'src/components/molecules/BannerCard';
+import { BannerCard } from 'src/components/molecules/Cards/BannerCard';
 import { CarCard } from 'src/components/molecules/Cards/CarCard';
 import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
@@ -13,7 +13,7 @@ import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { getAllBrands, getCars } from 'src/redux/features/auth/carsSlice';
 import { ICar } from 'src/redux/features/auth/types';
 import { useQueryRarams } from 'src/utils/hooks/useQueryParams';
-import { CatalogFilter } from '../Modals/CatalogFilter';
+import { CatalogFilter } from '../../Modals/CatalogFilter';
 
 interface CatalogLIstProps {}
 

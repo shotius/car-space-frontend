@@ -1,10 +1,10 @@
 import { Heading, HStack } from '@chakra-ui/layout';
 import { Image, useMediaQuery, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
-import { CloseIcon } from '../atoms/Icons/CloseIcon';
-import { Card } from './Cards/Card';
-import { IconWithButton } from './IconWithButton';
-import { TextRegular } from './Texts/TextRegular';
+import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
+import { IconWithButton } from '../IconWithButton';
+import { TextRegular } from '../Texts/TextRegular';
+import { Card } from './Card';
 
 interface BannerCardProps {}
 

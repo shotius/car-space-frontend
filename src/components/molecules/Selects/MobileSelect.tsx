@@ -1,6 +1,6 @@
 import { HStack, Icon, StackProps, TextProps } from '@chakra-ui/react';
-import { DropdownIcon } from '../atoms/Icons/DropdownIcon';
-import { TextRegular } from './Texts/TextRegular';
+import { DropdownIcon } from '../../atoms/Icons/DropdownIcon';
+import { TextRegular } from '../Texts/TextRegular';
 
 interface MobileSelectProps {
   onClick: () => void;

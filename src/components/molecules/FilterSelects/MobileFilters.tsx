@@ -7,13 +7,13 @@ import { CurentyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { ButtonRound } from '../Buttons/ButtonRound';
 import { InputRegular } from '../Inputs/InputRegular';
-import { MobileSelect } from '../MobileSelect';
+import { MobileSelect } from '../Selects/MobileSelect';
 import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
 import { MobileTransmissionPopup } from '../MobileSelectPopups/MobileTransmissionPopup';
 import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
 import { SearchButton } from '../Buttons/SearchButton';
 import { TextRegular } from '../Texts/TextRegular';
-import { WithMobileKeyboard } from '../WithMobileKeyboard';
+import { WithMobileKeyboard } from '../Wrappers/WithMobileKeyboard';
 import { selectYearFrom } from 'src/redux/features/auth/carFilterSlice';
 
 interface ThreeMobileSelectsProps {}

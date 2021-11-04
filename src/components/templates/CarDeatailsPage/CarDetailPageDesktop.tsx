@@ -1,14 +1,14 @@
 import { VStack } from '@chakra-ui/layout';
 import { Flex, Spacer } from '@chakra-ui/react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
-import { BidInfoCard } from 'src/components/molecules/BidInfoCard';
 import { CalculatorDesktop } from 'src/components/molecules/Calculator/CalculatorDesktop';
 import { CarDeailsCard } from 'src/components/organizms/CarDeatailPage/Cards/CarDeailsCard';
 import { CarInfoCard } from 'src/components/organizms/CarDeatailPage/Cards/CarInfoCard';
 import { CarTransportationCard } from 'src/components/organizms/CarDeatailPage/Cards/CarTransportationCard';
 import { CarDescriptionHeader } from 'src/components/organizms/MiniHeaders/CarDescriptionHeader';
-import { CarDetailSlider } from 'src/components/organizms/Sliders/CarDetailSlider/CarDetailSlider';
+import { CarDetailSlider } from 'src/components/organizms/CarDeatailPage/CarDetailSlider/CarDetailSlider';
 import { ICar } from 'src/redux/features/auth/types';
+import { BidInfoCard } from 'src/components/molecules/Cards/BidInfoCard';
 
 interface CarDetailPageDesktopProps {
   car?: ICar;

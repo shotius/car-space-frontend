@@ -1,13 +1,13 @@
 import { Center, Divider, Flex } from '@chakra-ui/react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { Select } from 'src/components/atoms/Selects';
-import { Card } from '../Cards/Card';
-import { SearchButton } from '../Buttons/SearchButton';
+import { Card } from '../../../molecules/Cards/Card';
+import { SearchButton } from '../../../molecules/Buttons/SearchButton';
 
 
 interface SearchProps {}
 
-export const Search: React.FC<SearchProps> = () => {
+export const HomeFilters: React.FC<SearchProps> = () => {
   return (
     <Center
       mt={['-69px', '-80px', '-65px', '-60px']}

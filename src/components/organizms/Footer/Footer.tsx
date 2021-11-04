@@ -7,7 +7,7 @@ import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { LogoIcon } from 'src/components/atoms/Icons/LogoIcon';
 import { Logo } from 'src/components/atoms/Logo';
 import { Text } from 'src/components/atoms/Text';
-import { SocialLinks } from 'src/components/molecules/SocialLinks';
+import { SocialLinks } from 'src/components/molecules/Links/SocialLinks';
 
 import { Link } from 'react-router-dom';
 

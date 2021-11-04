@@ -1,5 +1,5 @@
 import { AspectRatio, Image } from "@chakra-ui/react";
-import { ScrollableDiv } from "../../../molecules/ScrollableDiv";
+import { ScrollableDiv } from "../../../molecules/Wrappers/ScrollableDiv";
 
 interface CarDetailSliderProps {}
 

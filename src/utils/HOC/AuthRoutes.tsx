@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
-import ErrorBoundary from 'src/components/molecules/ErrorBoundary';
+import ErrorBoundary from 'src/components/molecules/Errors/ErrorBoundary';
 import { useAppSelector } from 'src/redux/app/hook';
 
 interface AuthRoutesProps {

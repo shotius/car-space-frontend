@@ -11,7 +11,6 @@ export const CalculatorFooter: React.FC<CalculatroFooterProps & StackProps> = ({
   ...rest
 }) => {
   const size = useContext(SizeContext);
-  console.log('size', size);
 
   return (
     <VStack

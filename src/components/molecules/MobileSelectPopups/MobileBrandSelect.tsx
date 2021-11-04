@@ -26,7 +26,7 @@ import { TextButton } from '../Buttons/TextButton';
 import { TopBrandCard } from '../Cards/TopBrandCard';
 import { IconWithButton } from '../IconWithButton';
 import { InputRegular } from '../Inputs/InputRegular';
-import { ScrollableDiv } from '../ScrollableDiv';
+import { ScrollableDiv } from '../Wrappers/ScrollableDiv';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
 
 interface BrandSelectProps {

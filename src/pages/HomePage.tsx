@@ -2,15 +2,15 @@ import { VStack } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CalculatorDesktop } from 'src/components/molecules/Calculator/CalculatorDesktop';
 import { HomeCarousel } from 'src/components/molecules/HomeCarousel/HomeCarousel';
-import { Search } from 'src/components/molecules/Search/Search';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
-import { DealersSection } from 'src/components/organizms/DealersSection';
-import { CustomersReview } from 'src/components/organizms/HomePage/CustomersReview';
-import { TopBrands } from 'src/components/organizms/HomePage/TopBrands';
+import { HomeFilters } from 'src/components/organizms/HomePage/Sections/HomeFilters';
+import { TopBrands } from 'src/components/organizms/HomePage/Sections/TopBrands';
+import { CustomersReviewSlider } from 'src/components/organizms/HomePage/Sliders/CustomersReviewSlider';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
-import { CarListSlider } from 'src/components/organizms/Sliders/CarListSlider/CarListSlider';
+import { CarListSlider } from 'src/components/molecules/Sliders/CarListSlider/CarListSlider';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamCar } from 'src/DamnCard';
+import { DealersSection } from 'src/components/organizms/HomePage/Sections/DealersSection';
 
 interface HomeProps {}
 
@@ -19,7 +19,7 @@ export const Home: React.FC<HomeProps> = () => {
     <PublicLayout>
       <ContainerOuter>
         <HomeCarousel />
-        <Search />
+        <HomeFilters />
         <VStack w="full" alignItems="flex-start" spacing="64px">
           <MiniCategory />
           <VStack w="full">
@@ -28,7 +28,7 @@ export const Home: React.FC<HomeProps> = () => {
           </VStack>
           <VStack w="full">
             <SectionHeader mainText="Customer review" />
-            <CustomersReview />
+            <CustomersReviewSlider />
           </VStack>
           <TopBrands />
           <DealersSection />

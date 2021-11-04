@@ -6,13 +6,13 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { CustomerReviewCard } from '../../molecules/CustomerReviewCard';
+import { CustomerReviewCard } from '../../../molecules/Cards/CustomerReviewCard';
 
 SwiperCore.use([Navigation]);
 
 interface CustomersReviewProps {}
 
-export const CustomersReview: React.FC<CustomersReviewProps> = () => {
+export const CustomersReviewSlider: React.FC<CustomersReviewProps> = () => {
   return (
     <Box w="100%">
       <Swiper navigation={true} className="mySwiper">

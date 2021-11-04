@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
-import CarListSlider from 'src/components/organizms/Sliders/CarListSlider/CarListSlider';
+import CarListSlider from 'src/components/molecules/Sliders/CarListSlider/CarListSlider';
 import { CarDetailPageDesktop } from 'src/components/templates/CarDeatailsPage/CarDetailPageDesktop';
 import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/CarDetailPageMobile';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
