@@ -9,8 +9,8 @@ export const ButtonRegular = forwardRef<
 >(
   (
     {
-      h = ['44px', null, '40px', null, null, '62px'],
-      fontSize = ['16px', null, null, null, null, '22px'],
+      h = ['44px', null, '40px'],
+      fontSize = ['16px'],
       borderRadius = '8px',
       variant = 'solid',
       fontWeight = 'light',

@@ -28,11 +28,11 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
             onChangeEnd={(val) => setValue(val)}
             w="70%"
           >
-            <SliderTrack bg="autoBlue.400">
+            <SliderTrack bg="autoBlue.400" h="2px">
               <Box position="relative" right={10} />
               <SliderFilledTrack bg="autoBlue.400" />
             </SliderTrack>
-            <SliderThumb boxSize={5} bg="autoBlue.400" />
+            <SliderThumb boxSize={4} bg="autoBlue.400" />
           </Slider>
           <TextRegular w="50%">( {value} Months)</TextRegular>
         </HStack>

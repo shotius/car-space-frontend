@@ -1,5 +1,6 @@
 import { VStack } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
+import { CalculatorDesktop } from 'src/components/molecules/Calculator/CalculatorDesktop';
 import { HomeCarousel } from 'src/components/molecules/HomeCarousel/HomeCarousel';
 import { Search } from 'src/components/molecules/Search/Search';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
@@ -31,7 +32,9 @@ export const Home: React.FC<HomeProps> = () => {
           </VStack>
           <TopBrands />
           <DealersSection />
-          {/* <Calculator /> */}
+          <VStack w='full'>
+            <CalculatorDesktop children size="large" />
+          </VStack>
         </VStack>
       </ContainerOuter>
     </PublicLayout>

@@ -1,4 +1,3 @@
-import { Input } from '@chakra-ui/input';
 import { Box, Center, Flex, Heading, VStack } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
@@ -13,17 +12,26 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
         <Center pt="8">
           <VStack w="full">
             <Heading>Services</Heading>
-            <Flex w="full" h="400px" border="1px" direction="column">
-              <Box p="40px" bg="white">
-                <Input placeholder="Search"/>
+            <Flex w="full" border="1px" alignItems="start">
+              <Box w="full" flex="1" overflowY="auto" bg="red">
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
               </Box>
-              <VStack w="full" bg="teal.500" flex="1" overflowY="auto">
-                  <TextRegular>Lorem</TextRegular>
-                  <TextRegular>Lorem</TextRegular>
-                  <TextRegular>Lorem</TextRegular>
-                  <TextRegular>Lorem</TextRegular>
-
-
+              <VStack style={{background: "pink"}}>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
+                <TextRegular>Lorem</TextRegular>
               </VStack>
             </Flex>
           </VStack>
@@ -33,4 +41,4 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
   );
 };
 
-export default ServicesPage
+export default ServicesPage;
