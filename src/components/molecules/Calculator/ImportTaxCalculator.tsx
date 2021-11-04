@@ -8,16 +8,16 @@ interface ImportTaxCalculatroProps {}
 
 export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
   return (
-    <VStack w="full" h="full" spacing="32px">
+    <VStack w="full" h="full" spacing="25px">
       <RadioGroup w="full">
         <HStack w="full" spacing="38px">
           <HStack>
             <input type="radio" name="car_type" value="hybrid" />
-            <TextRegular opacity="0.5">Electric</TextRegular>
+            <TextRegular opacity="0.4">Electric</TextRegular>
           </HStack>
           <HStack>
             <input type="radio" name="car_type" value="electric" />
-            <TextRegular opacity="0.5">Hybrid</TextRegular>
+            <TextRegular opacity="0.4">Hybrid</TextRegular>
           </HStack>
         </HStack>
       </RadioGroup>

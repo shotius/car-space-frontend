@@ -3,8 +3,9 @@ input[type='radio'] {
   cursor: pointer;
   width:15px;
   height:15px;
-  border:1px solid darkgray;
+  border:2px solid black;
   border-radius:50%;
+  opacity: .5;
   outline:none;
 }
 

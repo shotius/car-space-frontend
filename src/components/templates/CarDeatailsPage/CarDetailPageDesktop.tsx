@@ -1,5 +1,5 @@
 import { HStack, VStack } from '@chakra-ui/layout';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Spacer } from '@chakra-ui/react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BidInfoCard } from 'src/components/molecules/BidInfoCard';
 import { CalculatorDesktop } from 'src/components/molecules/Calculator/CalculatorDesktop';
@@ -20,7 +20,12 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
 }) => {
   return (
     <ContainerOuter position="relative">
-      <Flex pt="40px" justify="space-between" position="relative" alignItems="start">
+      <Flex
+        pt="40px"
+        justify="space-between"
+        position="relative"
+        alignItems="start"
+      >
         <VStack spacing="49px" w="579px">
           <HeadingSecondary p="100px">Card Picture Slider</HeadingSecondary>
           <CarInfoCard />
@@ -42,6 +47,7 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
           </CardWithHeading>
           <CarDeailsCard variant="desktop" />
         </VStack>
+        <Spacer minW="20px"/> 
         <VStack
           w="441px"
           spacing="32px"
@@ -52,7 +58,7 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
         >
           <CarDescriptionHeader car={car} />
           <BidInfoCard />
-          <CalculatorDesktop children size='regular'/>
+          <CalculatorDesktop children size="regular" />
         </VStack>
       </Flex>
     </ContainerOuter>
