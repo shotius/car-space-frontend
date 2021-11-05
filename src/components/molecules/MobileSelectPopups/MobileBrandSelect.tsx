@@ -150,32 +150,32 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
             >
               <TopBrandCard
                 image="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png"
-                minW="38px"
-                minH="38px"
+                maxW="50px"
+                maxH="50px"
                 imageWidth="20px"
               />
               <TopBrandCard
                 image="https://i.pinimg.com/originals/03/e1/b0/03e1b0207489ad32d10b9a860ffc6623.png"
-                minW="38px"
-                minH="38px"
+                maxW="50px"
+                maxH="50px"
                 imageWidth="20px"
               />
               <TopBrandCard
                 image="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png"
-                minW="38px"
-                minH="38px"
+                maxW="50px"
+                maxH="50px"
                 imageWidth="20px"
               />
               <TopBrandCard
                 image="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png"
-                minW="38px"
-                minH="38px"
+                maxW="50px"
+                maxH="50px"
                 imageWidth="20px"
               />
               <TopBrandCard
                 image="https://i.pinimg.com/originals/03/e1/b0/03e1b0207489ad32d10b9a860ffc6623.png"
-                minW="38px"
-                minH="38px"
+                maxW="50px"
+                maxH="50px"
                 imageWidth="20px"
               />
             </ScrollableDiv>

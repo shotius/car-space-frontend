@@ -23,7 +23,6 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
       {isMobile && <MobileFilters />}
 
       {/* desktop selects */}
-      {console.log('isTablet: ', isTablet)}
       {!isMobile && <ThreeHDSelects isOpen={isOpen} onToggle={onToggle} />}
 
       {/* this colapsable filters will appear on tablet and laptop screens */}

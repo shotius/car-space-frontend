@@ -19,7 +19,6 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
   borderRadius = 'md',
   ...rest
 }) => {
-  console.log('here')
   return (
     <Stack
       p={p}
