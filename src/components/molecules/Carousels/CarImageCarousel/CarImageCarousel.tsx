@@ -46,6 +46,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
           swiper.params.navigation.prevEl = prevRef.current;
           // @ts-ignore
           swiper.params.navigation.nextEl = nextRef.current;
+          // console.log('prev', prevRef.current);
           swiper.navigation.init();
           swiper.navigation.update();
         }}

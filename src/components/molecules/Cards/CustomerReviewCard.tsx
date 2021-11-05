@@ -1,20 +1,15 @@
 import {
-  Box,
-  Image,
-  Flex,
-  Stack,
-  AspectRatio,
-  Heading,
-  SimpleGrid,
+  AspectRatio, Flex, Heading, Image, SimpleGrid, Stack
 } from '@chakra-ui/react';
 import { TextMain } from 'src/components/atoms/Texts/TextMain';
+import { Card } from './Card';
 
 
 interface CustomerReviewCardProps {}
 
 export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
   return (
-    <Box bg="white" borderRadius="md" p={['4', '6', '8', '63px']}>
+    <Card p={["4", '8', '48px']}>
       <Flex
         spacing="4"
         direction={['column', 'row']}
@@ -96,15 +91,8 @@ export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
               borderRadius="4px"
             />
           </AspectRatio>
-          <AspectRatio ratio={5 / 4} w={['50px', '80px', '100px']}>
-            <Image
-              src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"
-              alt="car white"
-              borderRadius="4px"
-            />
-          </AspectRatio>
         </SimpleGrid>
       </Flex>
-    </Box>
+    </Card>
   );
 };
