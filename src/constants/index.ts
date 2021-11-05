@@ -17,8 +17,8 @@ export enum Languages {
     GE="Geo"
 }
 
-export const MOBILE_SCREEN_SIZE = 510
-export const TABLET_SCREEN_SIZE = 768
+export const MOBILE_SCREEN_SIZE = 480
+export const TABLET_SCREEN_SIZE = 1135
 
 export const HEADER_HEIGHT =[
     '50px', // < 480px sm mobile

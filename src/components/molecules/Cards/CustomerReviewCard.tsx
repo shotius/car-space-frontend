@@ -1,90 +1,84 @@
 import {
-  AspectRatio, Flex, Heading, Image, SimpleGrid, Stack
+  AspectRatio, Image,
+  SimpleGrid,
+  Stack
 } from '@chakra-ui/react';
-import { TextMain } from 'src/components/atoms/Texts/TextMain';
+import { UserAvatar } from '../Avatars/UserAvatar';
+import { TextRegular } from '../Texts/TextRegular';
 import { Card } from './Card';
-
 
 interface CustomerReviewCardProps {}
 
 export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
   return (
-    <Card p={["4", '8', '48px']}>
-      <Flex
-        spacing="4"
+    <Card p={['4', '8', '48px']}>
+      <Stack
+        spacing={['4', '8', '48px']}
         direction={['column', 'row']}
-        alignItems="center"
-        wrap="wrap"
+        align={['center', 'center']}
+        justify="space-around"
         w="full"
-      >
-        <Stack
-          direction={['row', 'column']}
-          alignItems="center"
-          spacing="4"
-          flexBasis={['100%', '40%']}
-          w="100%"
-          mb="4"
-        >
-          <AspectRatio ratio={1 / 1} w={['49px', '100px']}>
-            <Image
-              src="https://www.elitesingles.co.uk/wp-content/uploads/sites/59/2019/11/2b_en_articleslide_sm2-350x264.jpg"
-              alt="delear"
-              objectFit="cover"
-              borderRadius="full"
-            />
-          </AspectRatio>
-          <Heading fontSize={['16px', null, '24px']} fontWeight="400">
-            Full name
-          </Heading>
-        </Stack>
 
-        <TextMain
-          fontSize={['14px', '16px']}
-          lineHeight={{ md: '24px' }}
-          opacity="80%"
-          color="#000"
-          flexBasis={['50%', '60%', '70%', '100%']}
-          mb="4"
-        >
+      >
+        {/* user photo and name */}
+        <UserAvatar
+          image="https://www.elitesingles.co.uk/wp-content/uploads/sites/59/2019/11/2b_en_articleslide_sm2-350x264.jpg"
+          mainText="Full name123"
+        />
+
+        {/* descripttion */}
+        <TextRegular opacity="0.8" noOfLines={[4, null, 5]} h="full">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
           explicabo consectetur illum vel harum numquam, natus cupiditate.
           Ipsam, quam quis, cum expedita dolorum itaque iste necessitatibus ipsa
-          voluptatem labore minus.
-        </TextMain>
+          numquam, natus cupiditate.
+        </TextRegular>
 
+        {/* photos of cars in a grid */}
         <SimpleGrid
-          w="full"
+          gap="2"
+          display={['grid', 'none', 'grid']}
+          w={['full', 'auto']}
           gridTemplateColumns={[
             'repeat(auto-fill, 50px)',
-            'repeat(auto-fill, 80px)',
-            'repeat(auto-fill, 100px)',
+            null,
+            'repeat(2, 80px)',
           ]}
-          gap={['2', '2', '3']}
-          flexBasis={['40%', '100%']}
-          display={['grid', 'none', 'grid']}
         >
-          <AspectRatio ratio={5 / 4} w={['50px', '80px', '100px']}>
+          <AspectRatio
+            ratio={[50 / 42, null, 80 / 56]}
+            w={['50px', null, '80px']}
+          >
             <Image
               src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"
               alt="car white"
               borderRadius="4px"
             />
           </AspectRatio>
-          <AspectRatio ratio={5 / 4} w={['50px', '80px', '100px']}>
+          <AspectRatio
+            ratio={[50 / 42, null, 80 / 56]}
+            w={['50px', null, '80px']}
+          >
             <Image
               src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"
               alt="car white"
               borderRadius="4px"
             />
           </AspectRatio>
-          <AspectRatio ratio={5 / 4} w={['50px', '80px', '100px']}>
+          <AspectRatio
+            ratio={[50 / 42, null, 80 / 56]}
+            w={['50px', null, '80px']}
+          >
             <Image
               src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"
               alt="car white"
               borderRadius="4px"
             />
           </AspectRatio>
-          <AspectRatio ratio={5 / 4} w={['50px', '80px', '100px']}>
+          <AspectRatio
+            ratio={[50 / 42, null, 80 / 56]}
+            w={['50px', null, '80px']}
+          >
             <Image
               src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"
               alt="car white"
@@ -92,7 +86,7 @@ export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
             />
           </AspectRatio>
         </SimpleGrid>
-      </Flex>
+      </Stack>
     </Card>
   );
 };
