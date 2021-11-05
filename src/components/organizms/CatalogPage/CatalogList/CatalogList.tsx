@@ -1,5 +1,5 @@
-import { Flex, VStack } from '@chakra-ui/layout';
-import { Spinner, useDisclosure } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/layout';
+import { Flex, Spinner, useDisclosure } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
@@ -52,14 +52,14 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
         <FilterWrap>
           <CatalogFilter isOpen={isFilterOpen} onToggle={toggleFilters} />
         </FilterWrap>
-        <BannerCard />        
+        <BannerCard />
         {/* top pagination */}
         {/* car car list */}
         {!fethingCars ? (
           <CatalogListWrap>
             {cars.map((car: ICar, i) => (
               <Flex justify="center" key={i}>
-                <CarCard car={car}/>
+                <CarCard car={car} />
               </Flex>
             ))}
           </CatalogListWrap>

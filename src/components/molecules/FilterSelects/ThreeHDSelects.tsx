@@ -13,18 +13,17 @@ interface ThreeHDSelectsProps {
 export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
   isOpen,
   onToggle,
-  p = { base: '0', md: '8px 8px 8px 0px' },
+  p="8px 8px 8px 0px",
   bg = '#fff',
   direction = 'row',
   borderRadius = 'md',
-  display = { base: 'none', md: 'flex' },
   ...rest
 }) => {
+  console.log('here')
   return (
     <Stack
       p={p}
       bg={bg}
-      display={display}
       direction={direction}
       borderRadius={borderRadius}
       alignItems="center"

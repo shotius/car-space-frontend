@@ -1,7 +1,5 @@
-import { IconButton } from '@chakra-ui/button';
 import { Box, HStack } from '@chakra-ui/layout';
 import { useEffect, useRef, useState } from 'react';
-import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import useWindowSize from 'src/utils/hooks/useWindowSize';
 // import Swiper core and required modules
@@ -68,29 +66,24 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
         }}
       >
         <SwiperSlide>
-          {' '}
           <CustomerReviewCard />
         </SwiperSlide>
         <SwiperSlide>
-          {' '}
           <CustomerReviewCard />
         </SwiperSlide>
         <SwiperSlide>
-          {' '}
           <CustomerReviewCard />
         </SwiperSlide>
         <SwiperSlide>
-          {' '}
           <CustomerReviewCard />
         </SwiperSlide>
         <SwiperSlide>
-          {' '}
           <CustomerReviewCard />
         </SwiperSlide>
       </Swiper>
 
       {/* navigation buttons */}
-      
+
       {!isDesktop ? (
         // buttons in mobile and tablet
         <HStack

@@ -144,10 +144,10 @@ export const Header: React.FC<HeaderProps> = () => {
 
         {/* mobile view profile and menu hamburger*/}
         {isMobile || isTablet ? (
-          <HStack ml="auto" display={['flex', 'flex', 'none']} spacing={0}>
+          <HStack ml="auto" display={['flex', 'flex',null,  'none']} spacing={0}>
             <IconButton
               aria-label="profile"
-              icon={<PersonIcon boxSize="5" />}
+              icon={<PersonIcon boxSize="5"/>}
               bg="transparent"
             />
             <IconButton
@@ -160,7 +160,7 @@ export const Header: React.FC<HeaderProps> = () => {
 
             <IconButton
               aria-label="close menu"
-              icon={<CloseIcon boxSize="6" />}
+              icon={<CloseIcon boxSize="6"/>}
               display={menuOpen ? 'block' : 'none'}
               onClick={() => setMenuOpen(false)}
               bg="transparent"

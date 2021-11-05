@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { TextMain } from 'src/components/atoms/Texts/TextMain';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { ICar } from 'src/redux/features/auth/types';
+import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
 import { ButtonHeart } from '../Buttons/ButtonHeart';
 import { CarImageCarousel } from '../Carousels/CarImageCarousel/CarImageCarousel';
@@ -27,7 +28,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
   return (
     <Box
       ref={ref}
-      w={["full", null, null,  '263px']}
+      w={['full', null, null, null]}
       bg="white"
       borderRadius="8px"
       p="4"
@@ -39,9 +40,9 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
           <VStack alignItems="flex-start" spacing="0">
             <TextRegular
               fontFamily="Roboto Medium"
-              fontSize='18px'
-              maxW={['200px', "150px"]}
-              isTruncated
+              fontSize="18px"
+              maxW={['200px', '150px']}
+              noOfLines={1}
               _hover={{
                 textDecor: 'underline',
               }}
@@ -52,7 +53,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
             </TextRegular>
             <TextMain opacity="50%">{car?.y}</TextMain>
           </VStack>
-          <ButtonHeart h="35px" w="35px" boxSize={5}/>
+          <ButtonHeart h="35px" w="35px" boxSize={5} />
         </HStack>
         {/* picture swiper */}
         {/* <Image
@@ -70,17 +71,29 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
           /> */}
         <CarImageCarousel />
         {/* description */}
-        <VStack w="full" divider={<StackDivider />} >
-          <VStack alignItems="flex-start" minW="150px" mb="2" w="full" spacing="8px">
+        <VStack w="full" divider={<StackDivider />}>
+          <VStack
+            alignItems="flex-start"
+            minW="150px"
+            mb="2"
+            w="full"
+            spacing="8px"
+          >
             <HStack w="full">
               <TextRegular opacity="63%">Damage: </TextRegular>
-              <TextRegular fontFamily={['Roboto Medium',null,  'Roboto Regular']} isTruncated>
-                {car?.dmg}
+              <TextRegular
+                fontFamily={['Roboto Medium', null, 'Roboto Regular']}
+                noOfLines={1}
+                maxW="full"
+              >
+                {car?.dmg && capitalizeEach(car?.dmg)}
               </TextRegular>
             </HStack>
             <HStack>
               <TextRegular opacity="63%">Mileage:</TextRegular>
-              <TextRegular fontFamily={['Roboto Medium',null, 'Roboto Regular']}>
+              <TextRegular
+                fontFamily={['Roboto Medium', null, 'Roboto Regular']}
+              >
                 {car?.od} km
               </TextRegular>
             </HStack>
@@ -90,7 +103,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
             <Heading
               fontSize={['20px', null, '16px']}
               color="autoOrange.500"
-              pr="4"
+              pr={['4', '0', '4']}
               fontWeight="400"
             >
               $ 20 000
@@ -100,7 +113,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
             <TextRegular opacity="63%">Estimate Price</TextRegular>
             <Heading
               fontSize={['20px', null, '16px']}
-              pr="4"
+              pr={['4', '0', '4']}
               fontWeight="400"
             >
               $ 20 000

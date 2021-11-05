@@ -1,7 +1,6 @@
 import { SimpleGrid, Stack, StackProps } from '@chakra-ui/layout';
 import { Collapse } from '@chakra-ui/react';
 import { ThreeHDSelects } from 'src/components/molecules/FilterSelects/ThreeHDSelects';
-import { ThreeTabletSelects } from 'src/components/molecules/FilterSelects/ThreeTabletSelects';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { MobileFilters } from '../../molecules/FilterSelects/MobileFilters';
 import SelectSecondary from '../../molecules/Selects/SelectSecondary';
@@ -16,18 +15,16 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
   onToggle,
   ...rest
 }) => {
-  const { isDesktop, isTablet, isMobile } = useDetectScreen();
+  const { isTablet, isMobile } = useDetectScreen();
 
   return (
     <Stack {...rest} spacing="0">
       {/* mobile selects */}
       {isMobile && <MobileFilters />}
 
-      {/* tablet selects */}
-      {isTablet && <ThreeTabletSelects />}
-
       {/* desktop selects */}
-      {isDesktop && <ThreeHDSelects isOpen={isOpen} onToggle={onToggle} />}
+      {console.log('isTablet: ', isTablet)}
+      {!isMobile && <ThreeHDSelects isOpen={isOpen} onToggle={onToggle} />}
 
       {/* this colapsable filters will appear on tablet and laptop screens */}
       {!isMobile && (
@@ -40,7 +37,7 @@ export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
               'repeat(5, 1fr)',
             ]}
             // gap={['4', null, null, '16px', null]}
-            spacingX='4'
+            spacingX="4"
             spacingY="2"
             mt={['2', '4', null, '4', null, '24px']}
           >
