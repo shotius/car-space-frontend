@@ -2,12 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "downlevelIteration": true,
-    "lib": [
-      "es6",
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["es6", "dom", "dom.iterable", "esnext"],
     "noImplicitAny": false,
     "noImplicitThis": true,
     "noUnusedParameters": true,
@@ -26,9 +21,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
+    "baseUrl": "."
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src", "../common"],
+  "references": [{ "path": "../common" }]
 }

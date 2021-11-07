@@ -18,6 +18,7 @@ import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { Center } from '@chakra-ui/react';
+import { LoginModal } from '../Modals/LoginModal';
 
 interface HeaderProps {}
 
@@ -27,6 +28,13 @@ export const Header: React.FC<HeaderProps> = () => {
   const [lang, setLang] = useState<Languages>(Languages.ENG);
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
   const history = useHistory();
+
+  //login modal
+  const {
+    isOpen: isLoginOpen,
+    onOpen: openLogin,
+    onClose: closeLogin,
+  } = useDisclosure();
 
   // if menu open stop body scroll
   useEffect(() => {
@@ -114,13 +122,15 @@ export const Header: React.FC<HeaderProps> = () => {
                 variant="ghost"
                 fontWeight="light"
                 fontSize="16px"
-                onClick={() => history.push('/login')}
+                // onClick={() => history.push('/login')}
+                onClick={openLogin}
                 _hover={{
                   bg: 'autoGrey.200',
                 }}
               >
                 <TextRegular>Log in</TextRegular>
               </Button>
+              <LoginModal isOpen={isLoginOpen} onClose={closeLogin} />
               <Button
                 backgroundColor="white"
                 fontWeight="light"
@@ -144,10 +154,14 @@ export const Header: React.FC<HeaderProps> = () => {
 
         {/* mobile view profile and menu hamburger*/}
         {isMobile || isTablet ? (
-          <HStack ml="auto" display={['flex', 'flex',null,  'none']} spacing={0}>
+          <HStack
+            ml="auto"
+            display={['flex', 'flex', null, 'none']}
+            spacing={0}
+          >
             <IconButton
               aria-label="profile"
-              icon={<PersonIcon boxSize="5"/>}
+              icon={<PersonIcon boxSize="5" />}
               bg="transparent"
             />
             <IconButton
@@ -160,7 +174,7 @@ export const Header: React.FC<HeaderProps> = () => {
 
             <IconButton
               aria-label="close menu"
-              icon={<CloseIcon boxSize="6"/>}
+              icon={<CloseIcon boxSize="6" />}
               display={menuOpen ? 'block' : 'none'}
               onClick={() => setMenuOpen(false)}
               bg="transparent"

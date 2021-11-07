@@ -35,8 +35,7 @@ export const loginUser = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.log(error.response);
-        return rejectWithValue(error.response.data.error);
+        return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
       }

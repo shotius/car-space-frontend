@@ -2,20 +2,20 @@ import { SimpleGrid, Stack, StackProps } from '@chakra-ui/layout';
 import { Collapse } from '@chakra-ui/react';
 import { ThreeHDSelects } from 'src/components/molecules/FilterSelects/ThreeHDSelects';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { MobileFilters } from '../../molecules/FilterSelects/MobileFilters';
-import SelectSecondary from '../../molecules/Selects/SelectSecondary';
+import { MobileFilters } from '../../../molecules/FilterSelects/MobileFilters';
+import SelectSecondary from '../../../molecules/Selects/SelectSecondary';
 
 interface FilterMobileProps {
   isOpen: boolean;
   onToggle: () => void;
 }
 
-export const CatalogFilter: React.FC<FilterMobileProps & StackProps> = ({
+export const CatalogFilters: React.FC<FilterMobileProps & StackProps> = ({
   isOpen,
   onToggle,
   ...rest
 }) => {
-  const { isTablet, isMobile } = useDetectScreen();
+  const { isMobile } = useDetectScreen();
 
   return (
     <Stack {...rest} spacing="0">

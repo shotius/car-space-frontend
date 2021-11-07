@@ -10,9 +10,9 @@ import 'swiper/css/navigation';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { CustomerReviewCard } from '../../../molecules/Cards/CustomerReviewCard';
-import { ButtonMobile } from './Navigation/ButtonMobile';
-import { ButtonNext } from './Navigation/Deskop/ButtonNext';
-import { ButtonPrev } from './Navigation/Deskop/ButtonPrev';
+import { ButtonMobile } from '../../../molecules/CarouselNavigations/Mobile/ButtonMobile';
+import { ButtonNext } from "../../../molecules/CarouselNavigations/Deskop/ButtonNext";
+import { ButtonPrev } from "../../../molecules/CarouselNavigations/Deskop/ButtonPrev";
 
 SwiperCore.use([Navigation]);
 

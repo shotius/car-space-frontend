@@ -11,7 +11,7 @@ export const AdminPage: React.FC<AdminProps> = () => {
   const history = useHistory();
 
   const handleLogout = () => {
-    dispatch(logoutUser()).then(() => history.push('/login'));
+    dispatch(logoutUser()).then(() => history.push('/'));
   };
 
   const handleMe = () => {

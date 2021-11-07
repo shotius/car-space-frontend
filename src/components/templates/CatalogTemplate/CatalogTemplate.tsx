@@ -1,5 +1,5 @@
-import { CatalogList } from 'src/components/organizms/CatalogPage/CatalogList';
 
+import { CatalogList } from 'src/components/organizms/CatalogPage/Sections/CatalogList';
 import { PublicLayout } from '../Layouts/PublicLayout';
 
 interface CatalogTemplateProps {}

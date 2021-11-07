@@ -13,7 +13,7 @@ import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { getAllBrands, getCars } from 'src/redux/features/auth/carsSlice';
 import { ICar } from 'src/redux/features/auth/types';
 import { useQueryRarams } from 'src/utils/hooks/useQueryParams';
-import { CatalogFilter } from '../../Modals/CatalogFilter';
+import { CatalogFilters } from './CatalogFilter';
 
 interface CatalogLIstProps {}
 
@@ -50,7 +50,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
       <VStack w="full" spacing={['66px']}>
         {/* filter */}
         <FilterWrap>
-          <CatalogFilter isOpen={isFilterOpen} onToggle={toggleFilters} />
+          <CatalogFilters isOpen={isFilterOpen} onToggle={toggleFilters} />
         </FilterWrap>
         <BannerCard />
         {/* top pagination */}
