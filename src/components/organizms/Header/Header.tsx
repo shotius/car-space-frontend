@@ -19,6 +19,7 @@ import { LanguagePopover } from '../PopOvers/LanguagePopover';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { Center } from '@chakra-ui/react';
 import { LoginModal } from '../Modals/LoginModal';
+import { useAppSelector } from 'src/redux/app/hook';
 
 interface HeaderProps {}
 
@@ -27,6 +28,9 @@ export const Header: React.FC<HeaderProps> = () => {
   const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
   const [lang, setLang] = useState<Languages>(Languages.ENG);
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
+  const { isAuthenticated, role } = useAppSelector(
+    (state) => state.authReducer
+  );
   const history = useHistory();
 
   //login modal
@@ -116,39 +120,54 @@ export const Header: React.FC<HeaderProps> = () => {
                 setLanguage={(lang) => setLang(lang)}
               />
             </HStack>
-            {/* <Divider height="35px" borderColor="gray.500" /> */}
-            <HStack spacing={[null, null, '0', '2', null, '4']} ml="-15px">
+            
+            {/* if user is authenticated login and register buttons are not shown */}
+            {isAuthenticated ? (
               <Button
+                onClick={() => history.push(`${role}/dashboard`)}
                 variant="ghost"
                 fontWeight="light"
                 fontSize="16px"
-                // onClick={() => history.push('/login')}
-                onClick={openLogin}
                 _hover={{
                   bg: 'autoGrey.200',
                 }}
+                ml="-4"
               >
-                <TextRegular>Log in</TextRegular>
+                Go to Your Profile
               </Button>
-              <LoginModal isOpen={isLoginOpen} onClose={closeLogin} />
-              <Button
-                backgroundColor="white"
-                fontWeight="light"
-                borderColor="#565656"
-                borderWidth="1px"
-                onClick={() => history.push('/register')}
-                borderRadius="8px"
-                w="100px"
-                transition="all 0.5s"
-                _hover={{
-                  bg: 'autoGrey.200',
-                  border: 'white',
-                }}
-              >
-                <Icon as={PersonIcon} boxSize="4" />
-                <TextRegular ml="1">Register</TextRegular>
-              </Button>
-            </HStack>
+            ) : (
+              <HStack spacing={[null, null, '0', '2', null, '4']} ml="-15px">
+                <Button
+                  variant="ghost"
+                  fontWeight="light"
+                  fontSize="16px"
+                  onClick={openLogin}
+                  _hover={{
+                    bg: 'autoGrey.200',
+                  }}
+                >
+                  <TextRegular>Log in</TextRegular>
+                </Button>
+                <LoginModal isOpen={isLoginOpen} onClose={closeLogin} />
+                <Button
+                  backgroundColor="white"
+                  fontWeight="light"
+                  borderColor="#565656"
+                  borderWidth="1px"
+                  onClick={() => history.push('/register')}
+                  borderRadius="8px"
+                  w="100px"
+                  transition="all 0.5s"
+                  _hover={{
+                    bg: 'autoGrey.200',
+                    border: 'white',
+                  }}
+                >
+                  <Icon as={PersonIcon} boxSize="4" />
+                  <TextRegular ml="1">Register</TextRegular>
+                </Button>
+              </HStack>
+            )}
           </HStack>
         ) : null}
 

@@ -10,10 +10,12 @@ export const PublicRoute: React.FC<PublicRouteProps & RouteProps> = ({
   component: Component,
   exact = true,
   ...rest
-}) => (
-  <ErrorBoundary>
-    <Suspense fallback={<h1>Loading...</h1>}>
-      <Route exact {...rest} render={() => <Component />} />
-    </Suspense>
-  </ErrorBoundary>
-);
+}) => {
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Route exact {...rest} render={() => <Component />} />
+      </Suspense>
+    </ErrorBoundary>
+  );
+};

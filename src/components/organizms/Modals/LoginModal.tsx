@@ -5,7 +5,7 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalHeader,
-  ModalOverlay,
+  ModalOverlay
 } from '@chakra-ui/modal';
 import { Form, Formik } from 'formik';
 import { useHistory } from 'react-router';
@@ -16,6 +16,8 @@ import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecon
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { loginUser } from 'src/redux/features/auth/authSlice';
+import { toErrorMap } from 'src/utils/functions/toErrorMap';
+import { ApiResponse } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -24,7 +26,6 @@ interface LoginModalProps {
 
 export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   const dispatch = useAppDispatch();
-  // const { role } = useAppSelector((state) => state.authReducer);
   const history = useHistory();
 
   return (
@@ -38,19 +39,20 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
         <ModalBody>
           <Formik
             initialValues={{ username: '', password: '' }}
-            onSubmit={(values) => {
+            onSubmit={(values, { setErrors }) => {
               const credentials = {
                 username: values.username,
                 password: values.password,
               };
               dispatch(loginUser(credentials)).then((data) => {
-                // if any errors
-                if (data.payload.errors) {
-                  console.log(data.payload.errors);
-                } else if (data.payload.user) {
-                  onClose();
-                  history.push(`/${data.payload.role}/dashboard`);
-                } else {
+                const result: ApiResponse = data.payload;
+
+                if (result.code === 422 && result.errors?.length) {
+                  setErrors(toErrorMap(result.errors));
+                }  
+
+                if (result.success) {
+                  history.push(`/${result.results.role}/dashboard`)
                 }
               });
             }}

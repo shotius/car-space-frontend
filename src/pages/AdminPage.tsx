@@ -22,6 +22,8 @@ export const AdminPage: React.FC<AdminProps> = () => {
     <div>
       <Button onClick={handleLogout}>logout</Button>
       <Button onClick={handleMe}>Me</Button>
+      <Button onClick={() => history.push('/home')}>Home</Button>
+      <Button onClick={() => history.push('/catalog')}>catalog</Button>
       {/* <Button onClick={() => history.push('/dealer/dashboard')}> */}
         <Link to="/dealer/dashboard">dealer</Link>
       {/* </Button> */}

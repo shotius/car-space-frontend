@@ -13,12 +13,12 @@ export const AuthRoute: React.FC<AuthRoutesProps & RouteProps> = ({
   exact = true,
   ...rest
 }) => {
-  const { isAuthenticated, role } = useAppSelector(
+  const { isAuthenticated } = useAppSelector(
     (state) => state.authReducer
   );
 
   if (isAuthenticated) {
-    return <Redirect to={`/${role}/dashboard`} />;
+    return <Redirect to={`/error`} />;
   }
 
   return (

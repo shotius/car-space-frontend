@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authService from "src/services/authService";
 import { axios } from "src/utils/axios";
 import { Roles } from "src/constants/index";
+import { ApiResponse } from "../../../../../server/shared_with_front/types/types-shared";
 
 interface loginCredentials {
   username: string;
@@ -29,12 +30,12 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (credentials: loginCredentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`/api/users/login`, credentials, {
-        withCredentials: true,
-      });
-      return response.data;
+      const response = await authService.login(credentials);
+      console.log('response', response)
+      return response;
     } catch (error: any) {
       if (error.response) {
+        console.log('error:', error.response)
         return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
@@ -47,10 +48,10 @@ export const logoutUser = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await axios.get("/api/users/logout");
+      await axios.get("/api/auth/logout");
     } catch (error: any) {
       if (error.response) {
-        console.log(error.response);
+        // if (error.response.data.error)
         return rejectWithValue(error.response);
       } else {
         return rejectWithValue(error.message);
@@ -80,15 +81,19 @@ const authSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
+      const payload: ApiResponse = action.payload
+      
       localStorage.setItem("USER_ROLE", action.payload.role);
-      state.role = action.payload.role;
+      state.role = payload.results.role;
       state.loading = false;
       state.isAuthenticated = true
+      state.username = payload.results.username
     });
-    builder.addCase(loginUser.rejected, (state, action) => {
-      state.error = String(action.payload);
+    builder.addCase(loginUser.rejected, (state) => {
+      state.error = 'error happened';
       state.loading = false;
       state.isAuthenticated = false
+      state.username=''
     });
     /** logout */
     builder.addCase(logoutUser.fulfilled, (state) => {

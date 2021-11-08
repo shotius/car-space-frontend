@@ -1,4 +1,5 @@
 import { axios } from "src/utils/axios";
+import { LoginParams } from "../../../server/shared_with_front/types/types-shared";
 
 const autoLogin = async () => {
   try {
@@ -10,8 +11,19 @@ const autoLogin = async () => {
   }
 };
 
+const login = async (credentials: LoginParams) => {
+  try {
+    const response = await axios.post(`/api/auth/login`, credentials);
+    console.log('here')
+    return response.data
+  }catch(error) {
+    throw error
+  }
+}
+
 const authService = {
   autoLogin,
+  login
 };
 
 export default authService;

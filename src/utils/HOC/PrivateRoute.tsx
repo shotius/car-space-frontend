@@ -20,8 +20,12 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
   );
 
   // if client not authenticated or his/her role not in complement to the redux state -> redirect
-  if (!isAuthenticated || role != userRole) {
-    return <Redirect to="/login" />;
+  if (!isAuthenticated) {
+    // if not authenticated redirect to home page
+    return <Redirect to="/home" />;
+  } else if (role != userRole) {
+    // if role does't comply with account 
+    return <Redirect to={`/${userRole}/dashboard`} />;
   }
 
   return (
