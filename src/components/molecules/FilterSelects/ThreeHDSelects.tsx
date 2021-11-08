@@ -53,7 +53,7 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
             boxSize={[null, null, '10',null,  '10', '12']}
             onClick={onToggle}
             pr={[null, null, '0', '0', '-4']}
-            pl={[null, null, '2', '12px', '0']}
+            pl={[null, null, '2', '12px']}
           />
         ) : (
           <ButtonWithIcon
@@ -62,7 +62,7 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
             onClick={onToggle}
             p="0"
             pr={[null, null, '0', '0', '-4']}
-            pl={[null, null, '2', '12px', '0']}
+            pl={[null, null, '2', '12px']}
           />
         )}
       </HStack>

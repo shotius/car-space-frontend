@@ -11,7 +11,7 @@ export const InputGrey: React.FC<InputGreyProps & InputProps> = ({
       bg="#F4F4F4"
       border="1px"
       borderColor="#EAEAEB"
-      _placeholder={{ fontSize: '14px', color: 'black', opacity: '.4' }}
+      _placeholder={{ fontSize: ['16px', null,'14px'], color: 'black', opacity: '.4' }}
       {...rest}
     />
   );

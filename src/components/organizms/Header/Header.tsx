@@ -13,7 +13,7 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Currencies, Languages } from 'src/constants/index';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { MenuMobile } from '../LoginForm/MenuMobile';
+import { MenuMobile } from '../Forms/LoginForm/MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
@@ -21,6 +21,7 @@ import { Center } from '@chakra-ui/react';
 import { LoginModal } from '../Modals/LoginModal';
 import { useAppSelector } from 'src/redux/app/hook';
 import { RegisterModal } from '../Modals/RegisterModal';
+import { LoginRegisterDrawer } from '../Drawers/LoginRegisterDrawer';
 
 interface HeaderProps {}
 
@@ -70,6 +71,13 @@ export const Header: React.FC<HeaderProps> = () => {
     onToggle: toggleLang,
     onClose: closeLang,
     isOpen: isLangOpen,
+  } = useDisclosure();
+
+  // Mobile login register Drawer
+  const {
+    isOpen: isLoginRegisterOpen,
+    onOpen: openLoginRegister,
+    onClose: closeLoginRegister,
   } = useDisclosure();
 
   return (
@@ -207,6 +215,11 @@ export const Header: React.FC<HeaderProps> = () => {
               aria-label="profile"
               icon={<PersonIcon boxSize="5" />}
               bg="transparent"
+              onClick={openLoginRegister}
+            />
+            <LoginRegisterDrawer
+              isOpen={isLoginRegisterOpen}
+              onClose={closeLoginRegister}
             />
             <IconButton
               aria-label="menu"
