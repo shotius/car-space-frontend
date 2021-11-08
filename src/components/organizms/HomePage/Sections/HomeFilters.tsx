@@ -10,7 +10,7 @@ interface SearchProps {}
 export const HomeFilters: React.FC<SearchProps> = () => {
   return (
     <Center
-      mt={['-69px', '-80px', '-65px', '-60px']}
+      mt={['-69px', '-60px', '-45px', '-45px']}
       mb={{ base: '16', md: '20' }}
       position="relative"
       zIndex="1"

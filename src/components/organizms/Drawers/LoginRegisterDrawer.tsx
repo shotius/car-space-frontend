@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/modal';
 import { Center, Flex } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
-import { LoginForm } from '../Forms/LoginForm';
+import { LoginForm } from '../LoginForm';
 import { RegisterForm } from '../Forms/RegisterForm';
 
 interface LoginRegisterDrawerProps {
@@ -34,12 +34,11 @@ export const LoginRegisterDrawer: React.FC<LoginRegisterDrawerProps> = ({
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerBody>
-          <Center h={form == 'login' ? 'lg' : '2xl'} mt="50px">
+          <Center h={form == 'login' ? 'md' : '2xl'} mt="50px">
             <Flex
               direction="column"
               maxW="450px"
               w="full"
-              // h="xl"
               justify="center"
             >
               {form === 'login' ? (

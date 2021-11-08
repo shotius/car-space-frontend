@@ -2,9 +2,9 @@ import { VStack } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CalculatorDesktop } from 'src/components/molecules/Calculator/CalculatorDesktop';
 import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarousel/CarListCarousel';
-import { HomeCarousel } from 'src/components/molecules/HomeCarousel/HomeCarousel';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import { CustomersReviewCarousel } from 'src/components/organizms/HomePage/Carousels/CustomersReviewCarousel';
+import { HomeCarousel } from 'src/components/organizms/HomePage/Carousels/HomeCarousel';
 import { DealersSection } from 'src/components/organizms/HomePage/Sections/DealersSection';
 import { HomeFilters } from 'src/components/organizms/HomePage/Sections/HomeFilters';
 import { TopBrands } from 'src/components/organizms/HomePage/Sections/TopBrands';
@@ -19,8 +19,10 @@ export const Home: React.FC<HomeProps> = () => {
   const { isMobile } = useDetectScreen();
   return (
     <PublicLayout>
-      <ContainerOuter>
+      <ContainerOuter p="0" pt={["0", null, '0', '48px']}>
         <HomeCarousel />
+      </ContainerOuter>
+      <ContainerOuter>
         <HomeFilters />
 
         <VStack w="full" alignItems="flex-start" spacing="64px">

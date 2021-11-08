@@ -10,7 +10,7 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { loginUser } from 'src/redux/features/auth/authSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
-import { ApiResponse } from '../../../../../../server/shared_with_front/types/types-shared';
+import { ApiResponse } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface LoginFormProps {
   onClose: () => void;

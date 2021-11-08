@@ -4,7 +4,7 @@ import {
   ModalCloseButton,
   ModalContent, ModalOverlay
 } from '@chakra-ui/modal';
-import { LoginForm } from '../Forms/LoginForm';
+import { LoginForm } from '../LoginForm';
 
 interface LoginModalProps {
   isOpen: boolean;

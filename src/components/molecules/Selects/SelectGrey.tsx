@@ -17,7 +17,7 @@ export const SelectGrey: React.FC<SelectGreyProps & SelectProps> = ({children, .
       }}
       h="40px"
       color="#a5a5a5"
-      fontSize={['16px',null,  "14px"]}
+      fontSize={['16px',null, "14px"]}
       {...rest}
     >
      {children}

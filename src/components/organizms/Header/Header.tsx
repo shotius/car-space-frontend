@@ -13,7 +13,7 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Currencies, Languages } from 'src/constants/index';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { MenuMobile } from '../Forms/LoginForm/MenuMobile';
+import { MenuMobile } from '../LoginForm/MenuMobile';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
@@ -215,8 +215,16 @@ export const Header: React.FC<HeaderProps> = () => {
               aria-label="profile"
               icon={<PersonIcon boxSize="5" />}
               bg="transparent"
-              onClick={openLoginRegister}
+              onClick={() => {
+                // if authenticated: redirect to you page, else open login
+                if (isAuthenticated) {
+                  history.push(`${role}/dashboard`)
+                } else {
+                  openLoginRegister();
+                }
+              }}
             />
+
             <LoginRegisterDrawer
               isOpen={isLoginRegisterOpen}
               onClose={closeLoginRegister}
