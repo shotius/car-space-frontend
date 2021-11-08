@@ -3,14 +3,13 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch,
+  Switch
 } from 'react-router-dom';
 import 'src/App.css';
 import { StyledApp } from 'src/components/organizms/Wrappers/StyledApp';
 import { ErrorPage } from 'src/pages/ErrorPage';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
-import { AuthRoute } from 'src/utils/HOC/AuthRoutes';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
 const  UserDashpboardPage = lazy(() => import('./pages/UserDashpboardPage')) ;
@@ -20,8 +19,6 @@ const CatalogPage = lazy(() => import('./pages/CatalogPage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
 const DealerDashboard = lazy(() => import('./pages/DealerDashboard'));
 const Home = lazy(() => import('./pages/HomePage'));
-const Login = lazy(() => import('./pages/LoginPage'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 
 
@@ -71,8 +68,6 @@ function App() {
             role="user"
             component={UserDashpboardPage}
           />
-          <AuthRoute path="/login" component={Login} />
-          <AuthRoute path="/register" component={RegisterPage} />
           <Route path="*" render={() => <ErrorPage />} />
         </Switch>
       </Router>

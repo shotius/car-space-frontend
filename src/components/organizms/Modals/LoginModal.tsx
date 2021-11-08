@@ -5,7 +5,7 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalHeader,
-  ModalOverlay
+  ModalOverlay,
 } from '@chakra-ui/modal';
 import { Form, Formik } from 'formik';
 import { useHistory } from 'react-router';
@@ -22,21 +22,26 @@ import { ApiResponse } from '../../../../../server/shared_with_front/types/types
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
+  openRegister: () => void;
 }
 
-export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
+export const LoginModal: React.FC<LoginModalProps> = ({
+  isOpen,
+  onClose,
+  openRegister,
+}) => {
   const dispatch = useAppDispatch();
   const history = useHistory();
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInBottom">
+    <Modal isOpen={isOpen} onClose={onClose} >
       <ModalOverlay />
       <ModalContent p="32px 48px" w="460px">
-        <ModalHeader>
-          <HeadingSecondary fontSize="24px">Log in</HeadingSecondary>
+        <ModalHeader p="0">
+          <HeadingSecondary pb="48px" fontSize="24px">Log in</HeadingSecondary>
         </ModalHeader>
-        <ModalCloseButton top="43px" right="48px" />
-        <ModalBody>
+        <ModalCloseButton top="30px" right="48px" />
+        <ModalBody p="0">
           <Formik
             initialValues={{ username: '', password: '' }}
             onSubmit={(values, { setErrors }) => {
@@ -49,10 +54,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
 
                 if (result.code === 422 && result.errors?.length) {
                   setErrors(toErrorMap(result.errors));
-                }  
+                }
 
                 if (result.success) {
-                  history.push(`/${result.results.role}/dashboard`)
+                  history.push(`/${result.results.role}/dashboard`);
                 }
               });
             }}
@@ -78,7 +83,9 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                   </ButtonRegular>
                   <HStack w="full">
                     <TextRegular>Don’t have an account?</TextRegular>
-                    <TextButton color="#427AD6">Register</TextButton>
+                    <TextButton color="#427AD6" onClick={openRegister}>
+                      Register
+                    </TextButton>
                   </HStack>
                 </VStack>
               </Form>

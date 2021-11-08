@@ -22,7 +22,7 @@ export const FormikInput: React.FC<InputFieldProps> = ({
     <FormControl isInvalid={!!error} p="0">
       <FormLabel htmlFor={field.name}>{label}</FormLabel>
       <InputGrey {...field} {...props} />
-      {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
+      {error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
 };

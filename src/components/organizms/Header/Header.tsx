@@ -20,6 +20,7 @@ import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { Center } from '@chakra-ui/react';
 import { LoginModal } from '../Modals/LoginModal';
 import { useAppSelector } from 'src/redux/app/hook';
+import { RegisterModal } from '../Modals/RegisterModal';
 
 interface HeaderProps {}
 
@@ -28,7 +29,7 @@ export const Header: React.FC<HeaderProps> = () => {
   const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
   const [lang, setLang] = useState<Languages>(Languages.ENG);
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
-  const { isAuthenticated, role } = useAppSelector(
+  const { isAuthenticated, role, username } = useAppSelector(
     (state) => state.authReducer
   );
   const history = useHistory();
@@ -38,6 +39,13 @@ export const Header: React.FC<HeaderProps> = () => {
     isOpen: isLoginOpen,
     onOpen: openLogin,
     onClose: closeLogin,
+  } = useDisclosure();
+
+  // register modal
+  const {
+    isOpen: isRegisterOpen,
+    onOpen: openRegister,
+    onClose: closeRegister,
   } = useDisclosure();
 
   // if menu open stop body scroll
@@ -107,7 +115,6 @@ export const Header: React.FC<HeaderProps> = () => {
                 isOpen={isCurrOpen}
                 closeCurrency={closeCurr}
                 toggleCurrency={toggleCurr}
-                // onOpen={openCurr}
                 currency={currency}
                 setCurrency={(currency) => setCurrency(currency)}
               />
@@ -120,7 +127,7 @@ export const Header: React.FC<HeaderProps> = () => {
                 setLanguage={(lang) => setLang(lang)}
               />
             </HStack>
-            
+
             {/* if user is authenticated login and register buttons are not shown */}
             {isAuthenticated ? (
               <Button
@@ -133,7 +140,8 @@ export const Header: React.FC<HeaderProps> = () => {
                 }}
                 ml="-4"
               >
-                Go to Your Profile
+                <Icon as={PersonIcon} boxSize="4" mr="2" />
+                {username}
               </Button>
             ) : (
               <HStack spacing={[null, null, '0', '2', null, '4']} ml="-15px">
@@ -148,13 +156,20 @@ export const Header: React.FC<HeaderProps> = () => {
                 >
                   <TextRegular>Log in</TextRegular>
                 </Button>
-                <LoginModal isOpen={isLoginOpen} onClose={closeLogin} />
+                <LoginModal
+                  isOpen={isLoginOpen}
+                  onClose={closeLogin}
+                  openRegister={() => {
+                    closeLogin();
+                    openRegister();
+                  }}
+                />
                 <Button
                   backgroundColor="white"
                   fontWeight="light"
                   borderColor="#565656"
                   borderWidth="1px"
-                  onClick={() => history.push('/register')}
+                  onClick={openRegister}
                   borderRadius="8px"
                   w="100px"
                   transition="all 0.5s"
@@ -164,8 +179,18 @@ export const Header: React.FC<HeaderProps> = () => {
                   }}
                 >
                   <Icon as={PersonIcon} boxSize="4" />
-                  <TextRegular ml="1">Register</TextRegular>
+                  <TextRegular ml="2" mt="1">
+                    Register
+                  </TextRegular>
                 </Button>
+                <RegisterModal
+                  isOpen={isRegisterOpen}
+                  onClose={closeRegister}
+                  openLogin={() => {
+                    closeRegister();
+                    openLogin();
+                  }}
+                />
               </HStack>
             )}
           </HStack>
