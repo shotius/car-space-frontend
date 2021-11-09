@@ -12,12 +12,12 @@ export const UserCard: React.FC<UserCardProps> = ({}) => {
   const { path } = useRouteMatch();
   const dispatch = useAppDispatch();
   return (
-    <Card bg="white" p="0" w="full">
+    <Card bg="white" p="0" w={["full", null, null, '200px']}>
       <Box p="32px">
         <UserAvatar
           image="https://www.elitesingles.co.uk/wp-content/uploads/sites/59/2019/11/2b_en_articleslide_sm2-350x264.jpg"
           mainText="Full Name"
-          secondaryText="+995 123123123"
+          secondaryText="+995 123123 123"
           size="70px"
           
         />

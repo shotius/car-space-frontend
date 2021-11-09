@@ -13,12 +13,8 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({boxSize =
       icon={FiHeart}
       boxSize={boxSize}
       bg="autoGrey.600"
-      p="0"
-      h="40px"
-      
       _hover={{
         bg: '#FB560729',
-        fill: 'red'
       }}
       {...rest}
     />

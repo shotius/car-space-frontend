@@ -22,7 +22,7 @@ export const BannerCard: React.FC<BannerCardProps> = ({}) => {
           // h={['158px']}
         >
           <HStack spacing="32px" position="relative">
-            <Image src="src/assets/png/car with bg-1@2x.png" w={['110px']} />
+            <Image src="src/assets/png/car with bg-1@2x.png" w={['110px']} loading="lazy"/>
             <ButtonWithIcon
               icon={CloseIcon}
               boxSize={6}

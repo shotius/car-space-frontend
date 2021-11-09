@@ -7,13 +7,13 @@ import {
   TabsProps,
   VStack,
 } from '@chakra-ui/react';
-import { HeadingSecondary } from '../Headings/HeadingSecondary';
-import { TabBlue } from '../Tabs/TabBlue';
-import { TextRegular } from '../Texts/TextRegular';
-import { ImportTaxCalculator } from './ImportTaxCalculator';
-import { LeasingCalculator } from './LeasingCalculator';
-import { LoanCalculator } from './LoanCalculator';
-import { TransportCalculator } from './TransportCalculator';
+import { HeadingSecondary } from '../../molecules/Headings/HeadingSecondary';
+import { TabBlue } from '../../molecules/Tabs/TabBlue';
+import { TextRegular } from '../../molecules/Texts/TextRegular';
+import { ImportTaxCalculator } from '../../molecules/Calculator/ImportTaxCalculator';
+import { LeasingCalculator } from '../../molecules/Calculator/LeasingCalculator';
+import { LoanCalculator } from '../../molecules/Calculator/LoanCalculator';
+import { TransportCalculator } from '../../molecules/Calculator/TransportCalculator';
 import { createContext } from 'react';
 
 interface CalculatorDesktopProps {

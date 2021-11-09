@@ -16,7 +16,7 @@ interface LoanCalculatorProps {}
 export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
   const [value, setValue] = useState<number>(3);
   return (
-    <VStack w="full" spacing="32px">
+    <VStack w="full" spacing={["24px",null,  "32px"]}>
       <VStack w="full" align="flex-start">
         <TextRegular opacity="0.5">Duration</TextRegular>
         <HStack w="full" spacing="30px">

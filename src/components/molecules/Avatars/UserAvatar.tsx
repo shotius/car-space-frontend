@@ -31,18 +31,24 @@ export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
       direction={direction}
       align={align}
       spacing={spacing}
-      ml={[null, '4']}
       w={w}
       {...rest}
     >
       <AspectRatio ratio={1 / 1} w={size}>
         <Image src={image} alt="delear" objectFit="cover" borderRadius="full" />
       </AspectRatio>
-      <VStack align={["flex-start", "center"]} spacing={0}>
-        <HeadingSecondary isTruncated maxW="200px">
-          {mainText}
+      <VStack align={['flex-start', 'center']} spacing={0}>
+        <HeadingSecondary maxW="150px" isTruncated>
+          {mainText} 
         </HeadingSecondary>
-        <HeadingSecondary fontSize="16px" opacity="0.5">{secondaryText}</HeadingSecondary>
+        <HeadingSecondary
+          fontSize="16px"
+          isTruncated
+          maxW="150px"
+          opacity="0.5"
+        >
+          {secondaryText}
+        </HeadingSecondary>
       </VStack>
     </Stack>
   );

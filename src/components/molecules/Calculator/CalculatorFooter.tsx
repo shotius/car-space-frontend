@@ -2,7 +2,7 @@ import { Divider, HStack, VStack, StackProps } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { TextRegular } from '../Texts/TextRegular';
-import { SizeContext } from './CalculatorDesktop';
+import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
 
 interface CalculatroFooterProps {}
 
@@ -16,7 +16,7 @@ export const CalculatorFooter: React.FC<CalculatroFooterProps & StackProps> = ({
     <VStack
       w="full"
       position="absolute"
-      bottom="0px"
+      bottom={['-15px', null, '0px']}
       p={size === 'regular' ? '0px 32px 32px' : '0 82px 82px'}
       {...rest}
     >

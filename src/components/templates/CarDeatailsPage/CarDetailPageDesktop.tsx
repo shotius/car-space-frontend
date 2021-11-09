@@ -1,7 +1,7 @@
 import { VStack } from '@chakra-ui/layout';
 import { Flex, Spacer } from '@chakra-ui/react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
-import { CalculatorDesktop } from 'src/components/molecules/Calculator/CalculatorDesktop';
+import { CalculatorDesktop } from 'src/components/organizms/Calculator/CalculatorDesktop';
 import { CarDeailsCard } from 'src/components/organizms/CarDeatailPage/Cards/CarDeailsCard';
 import { CarInfoCard } from 'src/components/organizms/CarDeatailPage/Cards/CarInfoCard';
 import { CarTransportationCard } from 'src/components/organizms/CarDeatailPage/Cards/CarTransportationCard';

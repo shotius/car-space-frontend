@@ -148,7 +148,7 @@ export const Header: React.FC<HeaderProps> = () => {
             {/* if user is authenticated login and register buttons are not shown */}
             {isAuthenticated ? (
               <Button
-                onClick={() => history.push(`${role}/dashboard`)}
+                onClick={() => history.push(`/${role}/dashboard`)}
                 variant="ghost"
                 fontWeight="light"
                 fontSize="16px"

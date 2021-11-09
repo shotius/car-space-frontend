@@ -1,6 +1,6 @@
 import { VStack } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
-import { CalculatorDesktop } from 'src/components/molecules/Calculator/CalculatorDesktop';
+import { CalculatorDesktop } from 'src/components/organizms/Calculator/CalculatorDesktop';
 import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarousel/CarListCarousel';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import { CustomersReviewCarousel } from 'src/components/organizms/HomePage/Carousels/CustomersReviewCarousel';
@@ -12,6 +12,7 @@ import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamCar } from 'src/DamnCard';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { CalculatorMobile } from 'src/components/organizms/Calculator/CalculatorMobile';
 
 interface HomeProps {}
 
@@ -19,7 +20,7 @@ export const Home: React.FC<HomeProps> = () => {
   const { isMobile } = useDetectScreen();
   return (
     <PublicLayout>
-      <ContainerOuter p="0" pt={["0", null, '0', '48px']}>
+      <ContainerOuter p="0" pt={['0', null, '0', '48px']}>
         <HomeCarousel />
       </ContainerOuter>
       <ContainerOuter>
@@ -38,7 +39,14 @@ export const Home: React.FC<HomeProps> = () => {
           <TopBrands />
           <DealersSection />
           <VStack w="full">
-            {!isMobile && <CalculatorDesktop children size="large" />}
+            {isMobile ? (
+              <VStack w="full">
+                <SectionHeader mainText="Calculator" />
+                <CalculatorMobile />
+              </VStack>
+            ) : (
+              <CalculatorDesktop children size="large" />
+            )}
           </VStack>
         </VStack>
       </ContainerOuter>

@@ -48,7 +48,7 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
   }, [swiper, windowSize]);
 
   return (
-    <Box w="100%" position="relative">
+    <Box w="100%" position="relative" >
       <Swiper
         className="mySwiper"
         loop={isDesktop}

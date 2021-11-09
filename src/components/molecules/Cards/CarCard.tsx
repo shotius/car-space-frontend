@@ -1,13 +1,11 @@
 import { Box, Heading, HStack, StackDivider, VStack } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { ICar } from 'src/redux/features/auth/types';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
-import { ButtonHeart } from '../Buttons/ButtonHeart';
 import { CarImageCarousel } from '../Carousels/CarImageCarousel/CarImageCarousel';
+import { CarCardHeading } from '../Headings/CarCardHeading';
 
 interface CarCardProps {
   car?: ICar;
@@ -36,25 +34,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
     >
       <VStack w="full" spacing={['19px', null, null, '14px', '15px']}>
         {/* header */}
-        <HStack justifyContent="space-between" w="full">
-          <VStack alignItems="flex-start" spacing="0">
-            <TextRegular
-              fontFamily="Roboto Medium"
-              fontSize="18px"
-              maxW={['200px', '150px']}
-              noOfLines={1}
-              _hover={{
-                textDecor: 'underline',
-              }}
-            >
-              <Link to={`/car/${car?.lN}`}>
-                {car?.m} {car?.mG}
-              </Link>
-            </TextRegular>
-            <TextSecondary opacity="50%">{car?.y}</TextSecondary>
-          </VStack>
-          <ButtonHeart h="35px" w="35px" boxSize={5} />
-        </HStack>
+        <CarCardHeading car={car}/>
         {/* picture swiper */}
         {/* <Image
             src={

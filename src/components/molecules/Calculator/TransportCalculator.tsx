@@ -4,7 +4,7 @@ import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { InputGrey } from '../Inputs/InputGrey';
 import { SelectGrey } from '../Selects/SelectGrey';
 import { TextRegular } from '../Texts/TextRegular';
-import { SizeContext } from './CalculatorDesktop';
+import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
 import { CalculatorFooter } from './CalculatorFooter';
 
 interface TransportCalculatorProps {}
