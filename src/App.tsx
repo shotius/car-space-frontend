@@ -12,12 +12,12 @@ import { useAppDispatch } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
-const  UserProfilePage = lazy(() => import('./pages/UserPrifilePage')) ;
+const  UserProfilePage = lazy(() => import('./pages/role/user/UserPrifilePage')) ;
 const  CarDetailPage = lazy(() => import('./pages/CarDetailPage'))
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const CatalogPage = lazy(() => import('./pages/CatalogPage'));
-const AdminPage = lazy(() => import('./pages/AdminPage'));
-const DealerDashboard = lazy(() => import('./pages/DealerDashboard'));
+const AdminPage = lazy(() => import('./pages/role/admin/AdminPage'));
+const DealerDashboard = lazy(() => import('./pages/role/dealer/DealerPage'));
 const Home = lazy(() => import('./pages/HomePage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 

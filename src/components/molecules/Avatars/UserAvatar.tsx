@@ -38,7 +38,7 @@ export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
       <AspectRatio ratio={1 / 1} w={size}>
         <Image src={image} alt="delear" objectFit="cover" borderRadius="full" />
       </AspectRatio>
-      <VStack align="flex-start" spacing={0}>
+      <VStack align={["flex-start", "center"]} spacing={0}>
         <HeadingSecondary isTruncated maxW="200px">
           {mainText}
         </HeadingSecondary>

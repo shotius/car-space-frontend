@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import { Flex } from '@chakra-ui/layout';
 import { GTArrow } from 'src/components/atoms/Icons/GTArrow';
-import { TextMain } from 'src/components/atoms/Texts/TextMain';
+import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
 
 import { useHistory } from 'react-router-dom';
 
@@ -24,9 +24,9 @@ export const NavMenuLink: React.FC<NavMenuLinkProps> = ({
   return (
     <Button onClick={handleClick} w="full" bg="white" p='0'>
       <Flex justifyContent="space-between" alignItems="center" px="35px" py="2" w="full">
-        <TextMain opacity="100%" color="black" fontWeight="light">
+        <TextSecondary opacity="100%" color="black" fontWeight="light">
           {heading}
-        </TextMain>
+        </TextSecondary>
         <GTArrow />
       </Flex>
     </Button>

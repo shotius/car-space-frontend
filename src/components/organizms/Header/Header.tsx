@@ -51,9 +51,9 @@ export const Header: React.FC<HeaderProps> = () => {
     onClose: closeRegister,
   } = useDisclosure();
 
-  // if menu open stop body scroll
+  // if mobile menu is open stop body scroll
   useEffect(() => {
-    setSafeDocument(document)
+    setSafeDocument(document);
     if (safeDocument) {
       if (menuOpen === true) {
         safeDocument.body.style.overflow = 'hidden';
@@ -61,7 +61,7 @@ export const Header: React.FC<HeaderProps> = () => {
         safeDocument.body.style.overflow = 'auto';
       }
     }
-
+    // clean up, without it I had a problem in nested routes
     return () => {
       setSafeDocument(null);
     };

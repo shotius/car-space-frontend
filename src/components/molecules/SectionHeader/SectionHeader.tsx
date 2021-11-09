@@ -1,7 +1,7 @@
 import { Flex, FlexProps, Heading, HeadingProps } from '@chakra-ui/react';
 
 import { Link } from 'react-router-dom';
-import { TextMain } from 'src/components/atoms/Texts/TextMain';
+import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
 
 interface SectionHeaderProps {
   mainText: string;
@@ -32,13 +32,13 @@ export const SectionHeader: React.FC<SectionHeaderProps & FlexProps> = ({
       >
         {mainText}
       </Heading>
-      <TextMain
+      <TextSecondary
         opacity={secondaryTextOpacity}
         fontSize={secondaryFontSize}
         color="#000"
       >
         <Link to="#">{secondaryText}</Link>
-      </TextMain>
+      </TextSecondary>
     </Flex>
   );
 };

@@ -1,7 +1,7 @@
 import { Box, Heading, HStack, StackDivider, VStack } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { TextMain } from 'src/components/atoms/Texts/TextMain';
+import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { ICar } from 'src/redux/features/auth/types';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
@@ -51,7 +51,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
                 {car?.m} {car?.mG}
               </Link>
             </TextRegular>
-            <TextMain opacity="50%">{car?.y}</TextMain>
+            <TextSecondary opacity="50%">{car?.y}</TextSecondary>
           </VStack>
           <ButtonHeart h="35px" w="35px" boxSize={5} />
         </HStack>

@@ -1,9 +1,9 @@
 import { Text, TextProps } from '@chakra-ui/layout';
 
 
-interface TextMainProps {}
+interface TextSecondaryProps {}
 
-export const TextMain: React.FC<TextMainProps & TextProps> = ({
+export const TextSecondary: React.FC<TextSecondaryProps & TextProps> = ({
   opacity = '63%',
   color = '#000',
   fontSize = ['14px', '16px'],
