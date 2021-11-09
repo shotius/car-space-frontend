@@ -18,7 +18,7 @@ export const MenuLink: React.FC<MenuLinkProps> = ({
     exact: activeOnlyWhenExact,
   });
   return (
-    <TextRegular color={match ? 'autoOrange.500' : '#000'}>
+    <TextRegular color={match ? 'autoOrange.400' : '#000'}>
       <Link to={to}>{label}</Link>
     </TextRegular>
   );

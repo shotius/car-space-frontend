@@ -31,11 +31,9 @@ export const loginUser = createAsyncThunk(
   async (credentials: loginCredentials, { rejectWithValue }) => {
     try {
       const response = await authService.login(credentials);
-      console.log('response', response)
       return response;
     } catch (error: any) {
       if (error.response) {
-        console.log('error:', error.response)
         return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
@@ -83,7 +81,7 @@ const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
       const payload: ApiResponse = action.payload
       
-      localStorage.setItem("USER_ROLE", action.payload.role);
+      localStorage.setItem("USER_ROLE", payload.results.role);
       state.role = payload.results.role;
       state.loading = false;
       state.isAuthenticated = true
@@ -97,7 +95,6 @@ const authSlice = createSlice({
     });
     /** logout */
     builder.addCase(logoutUser.fulfilled, (state) => {
-      console.log('logout fullfilled')
       localStorage.removeItem("USER_ROLE");
       state.role = null;
       state.isAuthenticated = false

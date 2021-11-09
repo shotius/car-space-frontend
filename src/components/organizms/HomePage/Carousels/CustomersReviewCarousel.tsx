@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import useWindowSize from 'src/utils/hooks/useWindowSize';
 // import Swiper core and required modules
-import SwiperCore, { Navigation } from 'swiper';
+import SwiperCore from 'swiper';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -13,8 +13,6 @@ import { CustomerReviewCard } from '../../../molecules/Cards/CustomerReviewCard'
 import { ButtonMobile } from '../../../molecules/CarouselNavigations/Mobile/ButtonMobile';
 import { ButtonNext } from "../../../molecules/CarouselNavigations/Deskop/ButtonNext";
 import { ButtonPrev } from "../../../molecules/CarouselNavigations/Deskop/ButtonPrev";
-
-SwiperCore.use([Navigation]);
 
 interface CustomersReviewProps {}
 

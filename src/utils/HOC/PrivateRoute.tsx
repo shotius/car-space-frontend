@@ -18,14 +18,17 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
   const { isAuthenticated, role: userRole } = useAppSelector(
     (state) => state.authReducer
   );
+  const USER = localStorage.getItem('USER_ROLE');
 
-  // if client not authenticated or his/her role not in complement to the redux state -> redirect
-  if (!isAuthenticated) {
-    // if not authenticated redirect to home page
-    return <Redirect to="/home" />;
-  } else if (role != userRole) {
-    // if role does't comply with account 
-    return <Redirect to={`/${userRole}/dashboard`} />;
+  if (!USER) {
+    // if client not authenticated or his/her role not in complement to the redux state -> redirect
+    if (!isAuthenticated) {
+      // if not authenticated redirect to home page
+      return <Redirect to="/home" />;
+    } else if (role != userRole) {
+      // if role does't comply with account
+      return <Redirect to={`/${userRole}/dashboard`} />;
+    }
   }
 
   return (

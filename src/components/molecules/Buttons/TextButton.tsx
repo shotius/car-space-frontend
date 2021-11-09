@@ -1,22 +1,25 @@
 import { Button, ButtonProps } from '@chakra-ui/button';
+import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { TextRegular } from '../Texts/TextRegular';
 
 interface TextButtonProps {
   bgFocus?: ButtonProps['bg'];
   bgActive?: ButtonProps['bg'];
-  bgHover?: ButtonProps['bg']
+  bgHover?: ButtonProps['bg'];
+  font?: 'Medium' | 'Regular';
 }
 
 export const TextButton: React.FC<TextButtonProps & ButtonProps> = ({
-  variant="ghost",
-  p="0",
-  bg="transparent",
-  bgActive="transparent",
-  bgFocus="transparent",
-  bgHover="transparent",
-  fontWeight="light",
+  variant = 'ghost',
+  p = '0',
+  bg = 'transparent',
+  bgActive = 'transparent',
+  bgFocus = 'transparent',
+  bgHover = 'transparent',
+  fontWeight = 'light',
   fontSize,
   children,
+  font = 'Regular',
   ...rest
 }) => {
   return (
@@ -38,7 +41,11 @@ export const TextButton: React.FC<TextButtonProps & ButtonProps> = ({
       h="auto"
       {...rest}
     >
-      <TextRegular fontSize={fontSize}>{children}</TextRegular>
+      {font === 'Regular' ? (
+        <TextRegular fontSize={fontSize}>{children}</TextRegular>
+      ) : (
+        <HeadingSecondary fontSize={fontSize}>{children}</HeadingSecondary>
+      )}
     </Button>
   );
 };

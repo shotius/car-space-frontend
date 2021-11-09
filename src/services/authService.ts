@@ -14,7 +14,6 @@ const autoLogin = async () => {
 const login = async (credentials: LoginParams) => {
   try {
     const response = await axios.post(`/api/auth/login`, credentials);
-    console.log('here')
     return response.data
   }catch(error) {
     throw error

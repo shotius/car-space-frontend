@@ -12,7 +12,7 @@ import { useAppDispatch } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
-const  UserDashpboardPage = lazy(() => import('./pages/UserDashpboardPage')) ;
+const  UserProfilePage = lazy(() => import('./pages/UserPrifilePage')) ;
 const  CarDetailPage = lazy(() => import('./pages/CarDetailPage'))
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const CatalogPage = lazy(() => import('./pages/CatalogPage'));
@@ -66,7 +66,7 @@ function App() {
           <PrivateRoute 
             path="/user/dashboard"
             role="user"
-            component={UserDashpboardPage}
+            component={UserProfilePage}
           />
           <Route path="*" render={() => <ErrorPage />} />
         </Switch>

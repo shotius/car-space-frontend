@@ -5,14 +5,14 @@ import { ButtonNext } from 'src/components/molecules/CarouselNavigations/Deskop/
 import { ButtonPrev } from 'src/components/molecules/CarouselNavigations/Deskop/ButtonPrev';
 import useWindowSize from 'src/utils/hooks/useWindowSize';
 // import Swiper core and required modules
-import SwiperCore, { Navigation, EffectFade } from 'swiper';
+import SwiperCore, { EffectFade } from 'swiper';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // install Swiper modules
-SwiperCore.use([Navigation, EffectFade]);
+SwiperCore.use([ EffectFade]);
 
 export const HomeCarousel = () => {
   const prevRef = useRef<HTMLButtonElement>(null);

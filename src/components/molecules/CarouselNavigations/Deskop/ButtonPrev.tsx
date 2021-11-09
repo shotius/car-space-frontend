@@ -1,6 +1,7 @@
 import { ButtonProps, IconButton } from '@chakra-ui/button';
 import { forwardRef } from 'react';
 import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
+import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 
 interface ButtonPrevProps {}
 
@@ -19,6 +20,8 @@ export const ButtonPrev = forwardRef<
     },
     ref
   ) => {
+    const { isDesktop } = useDetectScreen();
+
     return (
       <IconButton
         top={top}
@@ -34,11 +37,15 @@ export const ButtonPrev = forwardRef<
         position="absolute"
         borderRadius="100px"
         _hover={{
-          transform: 'rotate(90deg) translateX(-50%) translateY(9px)',
+          opacity: isDesktop && '0.86',
+          transform:
+            isDesktop && 'rotate(90deg) translateX(-50%) translateY(9px)'  ,
         }}
         _active={{
           bg: bg,
+          opacity: !isDesktop && "1",
           transform:
+            isDesktop &&
             'rotate(90deg) translateX(-50%) translateY(10px) scale(0.9)',
         }}
         zIndex="1"

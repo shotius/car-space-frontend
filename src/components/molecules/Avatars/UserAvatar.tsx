@@ -1,41 +1,48 @@
 import {
-  AspectRatio, Image, ImageProps, Stack, StackProps,
-  VStack
+  AspectRatio,
+  Image,
+  ImageProps,
+  Stack,
+  StackProps,
+  VStack,
 } from '@chakra-ui/react';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
-import { TextRegular } from '../Texts/TextRegular';
 
 interface UserAvatarProps {
   image: ImageProps['src'];
   mainText?: string;
   secondaryText?: string;
+  size?: ImageProps['w'];
 }
 
 export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
   image,
   mainText,
-  secondaryText, 
+  secondaryText,
+  direction = ['row', 'column'],
+  align = 'center',
+  spacing = ['4', '10px'],
+  w = ['full', 'auto'],
+  size = ['49px', '70px'],
   ...rest
 }) => {
   return (
     <Stack
-      direction={['row', 'column']}
-      align="center"
-      spacing={["4", '10px']}
+      direction={direction}
+      align={align}
+      spacing={spacing}
       ml={[null, '4']}
-      w={["full", 'auto']}
+      w={w}
       {...rest}
     >
-      <AspectRatio ratio={1 / 1} w={['49px', '70px']}>
+      <AspectRatio ratio={1 / 1} w={size}>
         <Image src={image} alt="delear" objectFit="cover" borderRadius="full" />
       </AspectRatio>
       <VStack align="flex-start" spacing={0}>
         <HeadingSecondary isTruncated maxW="200px">
           {mainText}
         </HeadingSecondary>
-        <TextRegular opacity="0.5">
-          {secondaryText}
-        </TextRegular>
+        <HeadingSecondary fontSize="16px" opacity="0.5">{secondaryText}</HeadingSecondary>
       </VStack>
     </Stack>
   );

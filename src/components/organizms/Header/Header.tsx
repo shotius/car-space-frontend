@@ -2,6 +2,9 @@ import { Button, IconButton } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
 import Icon from '@chakra-ui/icon';
 import { Flex, HStack, StackDivider } from '@chakra-ui/layout';
+import { Center } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BurgerIcon } from 'src/components/atoms/Icons/BurgerIcon';
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
@@ -11,17 +14,14 @@ import { Logo } from 'src/components/atoms/Logo';
 import { MenuLink } from 'src/components/molecules/Links/MenuLink';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Currencies, Languages } from 'src/constants/index';
-import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useAppSelector } from 'src/redux/app/hook';
+import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { LoginRegisterDrawer } from '../Drawers/LoginRegisterDrawer';
 import { MenuMobile } from '../LoginForm/MenuMobile';
+import { LoginModal } from '../Modals/LoginModal';
+import { RegisterModal } from '../Modals/RegisterModal';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
-import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { Center } from '@chakra-ui/react';
-import { LoginModal } from '../Modals/LoginModal';
-import { useAppSelector } from 'src/redux/app/hook';
-import { RegisterModal } from '../Modals/RegisterModal';
-import { LoginRegisterDrawer } from '../Drawers/LoginRegisterDrawer';
 
 interface HeaderProps {}
 
@@ -34,6 +34,8 @@ export const Header: React.FC<HeaderProps> = () => {
     (state) => state.authReducer
   );
   const history = useHistory();
+
+  const [safeDocument, setSafeDocument] = useState<Document | null>(document);
 
   //login modal
   const {
@@ -51,11 +53,18 @@ export const Header: React.FC<HeaderProps> = () => {
 
   // if menu open stop body scroll
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
+    setSafeDocument(document)
+    if (safeDocument) {
+      if (menuOpen === true) {
+        safeDocument.body.style.overflow = 'hidden';
+      } else {
+        safeDocument.body.style.overflow = 'auto';
+      }
     }
+
+    return () => {
+      setSafeDocument(null);
+    };
   }, [menuOpen]);
 
   // curency change popover
@@ -218,7 +227,7 @@ export const Header: React.FC<HeaderProps> = () => {
               onClick={() => {
                 // if authenticated: redirect to you page, else open login
                 if (isAuthenticated) {
-                  history.push(`${role}/dashboard`)
+                  history.push(`/${role}/dashboard`);
                 } else {
                   openLoginRegister();
                 }
