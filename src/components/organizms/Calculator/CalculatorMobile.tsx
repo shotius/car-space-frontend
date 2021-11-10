@@ -10,7 +10,7 @@ import "./styles.css"
 interface CalculatorMobileProps {}
 
 export const CalculatorMobile: React.FC<CalculatorMobileProps> = ({}) => {
-  const [calcType, setCalcType] = useState<'1' | '2' | '3' | '4'>('1')
+  const [calcType, setCalcType] = useState<string>('1')
 
   const CalcType = () => {
     switch(calcType) {

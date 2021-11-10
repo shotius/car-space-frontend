@@ -1,31 +1,23 @@
 import { createIcon } from '@chakra-ui/icon';
- 
 
 export const CloseIcon = createIcon({
   displayName: 'CloseIcon',
   viewBox: '0 0 24 24',
   path: (
     <>
-      <g
-        id="close_icon"
-        data-name="close icon"
-        transform="translate(-1168 -274)"
-      >
-        <rect
-          id="Rectangle_339"
-          data-name="Rectangle 339"
-          width="24"
-          height="24"
-          transform="translate(1168 274)"
-          fill="#fff"
-        />
-        <path
-          id="Icon_ionic-md-close"
-          data-name="Icon ionic-md-close"
-          d="M22.523,9.023l-1.5-1.5-6,6-6-6-1.5,1.5,6,6-6,6,1.5,1.5,6-6,6,6,1.5-1.5-6-6Z"
-          transform="translate(1165.477 271.477)"
-        />
-      </g>
+      <rect
+        id="Rectangle_339"
+        data-name="Rectangle 339"
+        width="24"
+        height="24"
+        fill="none"
+      />
+      <path
+        id="Path_1582"
+        data-name="Path 1582"
+        d="M2.651,20.667a.96.96,0,0,0,.457.258,1.061,1.061,0,0,0,.522,0,1.012,1.012,0,0,0,.456-.254l6.266-6.278,6.272,6.277a1.027,1.027,0,0,0,1.435,0,1,1,0,0,0,.289-.723.968.968,0,0,0-.286-.713L11.79,12.954l6.272-6.265a.988.988,0,0,0,.291-.717.946.946,0,0,0-.294-.719,1,1,0,0,0-.723-.29.961.961,0,0,0-.712.287l-6.272,6.275L4.086,5.249a1,1,0,0,0-.456-.255,1.108,1.108,0,0,0-.522,0,.892.892,0,0,0-.457.262,1.028,1.028,0,0,0-.257.461,1.061,1.061,0,0,0,0,.522.951.951,0,0,0,.254.452l6.265,6.267L2.648,19.231a.993.993,0,0,0-.259.452,1.043,1.043,0,0,0,0,.527A.926.926,0,0,0,2.651,20.667Z"
+        transform="translate(1.647 -0.961)"
+      />
     </>
   ),
 });

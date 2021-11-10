@@ -6,7 +6,7 @@ import { CarDeailsCard } from 'src/components/organizms/CarDeatailPage/Cards/Car
 import { CarInfoCard } from 'src/components/organizms/CarDeatailPage/Cards/CarInfoCard';
 import { CarTransportationCard } from 'src/components/organizms/CarDeatailPage/Cards/CarTransportationCard';
 import { CarDescriptionHeader } from 'src/components/organizms/MiniHeaders/CarDescriptionHeader';
-import { CarDetailSlider } from 'src/components/organizms/CarDeatailPage/CarDetailSlider/CarDetailSlider';
+import { CarDetailSlider } from 'src/components/organizms/CarDeatailPage/Carousels/CarDetailSlider';
 import { ICar } from 'src/redux/features/auth/types';
 import { BidInfoCard } from 'src/components/molecules/Cards/BidInfoCard';
 

@@ -5,12 +5,11 @@ import { Flex, HStack, StackDivider } from '@chakra-ui/layout';
 import { Center } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { CarSpaceLogo } from 'src/components/atoms/CarSpaceLogo';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BurgerIcon } from 'src/components/atoms/Icons/BurgerIcon';
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
-import { LogoIcon } from 'src/components/atoms/Icons/LogoIcon';
 import { PersonIcon } from 'src/components/atoms/Icons/PersonIcon';
-import { Logo } from 'src/components/atoms/Logo';
 import { MenuLink } from 'src/components/molecules/Links/MenuLink';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Currencies, Languages } from 'src/constants/index';
@@ -98,8 +97,8 @@ export const Header: React.FC<HeaderProps> = () => {
     >
       {/* desktop view */}
       <Flex h="full" alignItems="center" zIndex="10">
-        <Logo
-          icon={LogoIcon}
+        {/* // Logo  */}
+        <CarSpaceLogo
           onClick={() => {
             setMenuOpen(false);
             history.push('/home');

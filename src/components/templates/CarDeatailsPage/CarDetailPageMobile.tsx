@@ -3,7 +3,7 @@ import { CarDeailsCard } from 'src/components/organizms/CarDeatailPage/Cards/Car
 import { ICar } from 'src/redux/features/auth/types';
 import { ContainerOuter } from '../../atoms/Containers/ContainerOuter';
 import { BidInfoCard } from '../../molecules/Cards/BidInfoCard';
-import { CarDetailSliderMobile } from '../../organizms/CarDeatailPage/CarDetailSlider/CarDetailSliderMobile';
+import { CarDetailSliderMobile } from '../../organizms/CarDeatailPage/Carousels/CarDetailSliderMobile';
 import { TextRegular } from '../../molecules/Texts/TextRegular';
 import { CarInfoCardMobile } from '../../organizms/CarDeatailPage/Cards/CarInfoCardMobile';
 import { CarDescriptionHeader } from '../../organizms/MiniHeaders/CarDescriptionHeader';

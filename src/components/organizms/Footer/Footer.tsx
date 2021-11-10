@@ -3,19 +3,18 @@ import { useDisclosure } from '@chakra-ui/hooks';
 import { Stack, VStack } from '@chakra-ui/layout';
 import { useMediaQuery } from '@chakra-ui/media-query';
 import { Collapse } from '@chakra-ui/transition';
+import { Link, useHistory } from 'react-router-dom';
+import { CarSpaceLogo } from 'src/components/atoms/CarSpaceLogo';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
-import { LogoIcon } from 'src/components/atoms/Icons/LogoIcon';
-import { Logo } from 'src/components/atoms/Logo';
 import { Text } from 'src/components/atoms/Text';
 import { SocialLinks } from 'src/components/molecules/Links/SocialLinks';
-
-import { Link } from 'react-router-dom';
 
 interface FooterProps {}
 
 export const Footer: React.FC<FooterProps> = () => {
   // when screen is larger then 768px open all the colapsable info
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
+  const history = useHistory()
 
   // open close Service info
   const { isOpen: isServicesOpen, onToggle: onServicesToggle } = useDisclosure({
@@ -40,14 +39,19 @@ export const Footer: React.FC<FooterProps> = () => {
         justify="space-between"
       >
         <Stack>
-          <Logo icon={LogoIcon} boxSize={['150px', null, null, '200px']} />
+          <CarSpaceLogo
+          mb={["32px", null, '0px']}
+          imgW={['100px', null, '167px']}
+            onClick={() => {
+              history.push('/home');
+            }}
+          />
           <SocialLinks display={['none', 'none', 'flex']} />
         </Stack>
 
         <VStack
           spacing="0"
           alignItems={['center', null, 'flex-start']}
-          pt={['0px', null, '4']}
         >
           <Button
             fontWeight="bold"
@@ -75,7 +79,6 @@ export const Footer: React.FC<FooterProps> = () => {
         <VStack
           spacing={0}
           alignItems={['center', null, 'flex-start']}
-          pt={['0px', null, '4']}
         >
           <Button variant="link" color="#000" onClick={onContactToggle} mb="4">
             Contact
@@ -96,7 +99,6 @@ export const Footer: React.FC<FooterProps> = () => {
         <VStack
           spacing="0"
           alignItems={['center', null, 'flex-start']}
-          pt={['0px', null, '4']}
         >
           <Button variant="link" color="#000" onClick={onLegalToggle} mb="4">
             Legal

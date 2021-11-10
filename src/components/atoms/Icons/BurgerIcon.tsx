@@ -10,7 +10,7 @@ export const BurgerIcon = createIcon({
         data-name="Rectangle 244"
         width="24"
         height="24"
-        fill="#fff"
+        fill="none"
       />
       <path
         id="list"
