@@ -1,9 +1,8 @@
-import { HStack, Stack, StackProps } from '@chakra-ui/react';
+import { HStack, IconButton, Stack, StackProps } from '@chakra-ui/react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
 import { Select } from 'src/components/atoms/Selects';
-import { ButtonWithIcon } from '../Buttons/IconWithButton';
 import { SearchButton } from '../Buttons/SearchButton';
 interface ThreeHDSelectsProps {
   isOpen: boolean;
@@ -13,7 +12,7 @@ interface ThreeHDSelectsProps {
 export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
   isOpen,
   onToggle,
-  p="8px 8px 8px 0px",
+  p = '2',
   bg = '#fff',
   direction = 'row',
   borderRadius = 'md',
@@ -46,23 +45,33 @@ export const ThreeHDSelects: React.FC<ThreeHDSelectsProps & StackProps> = ({
         <SearchButton
           w={{ md: '140px', lg: '144px', '2xl': '211px' }}
           ml={[null, null, '0px', '16px']}
+          mr="2"
         />
         {!isOpen ? (
-          <ButtonWithIcon
-            icon={FiltersIcon}
-            boxSize={[null, null, '10',null,  '10', '12']}
+          <IconButton
             onClick={onToggle}
-            pr={[null, null, '0', '0', '-4']}
-            pl={[null, null, '2', '12px']}
+            icon={<FiltersIcon />}
+            aria-label="open advanced filters"
+            bg="white"
+            _hover={{
+              bg: "white"
+            }}
+            _active={{
+              bg: "white"
+            }}
           />
         ) : (
-          <ButtonWithIcon
-            icon={CloseOutlineIcon}
-            boxSize={[null, null, '10',null,  '10', '12']}
+          <IconButton
+            icon={<CloseOutlineIcon />}
             onClick={onToggle}
-            p="0"
-            pr={[null, null, '0', '0', '-4']}
-            pl={[null, null, '2', '12px']}
+            aria-label ="close advanced filters"
+            bg="white"
+            _hover={{
+              bg: "white"
+            }}
+            _active={{
+              bg: "white"
+            }}
           />
         )}
       </HStack>

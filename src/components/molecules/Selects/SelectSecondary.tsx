@@ -11,8 +11,8 @@ const SelectSecondary: React.FC<CustomSelectProps & SelectProps> = ({
   bg = 'white',
   opacity="0.5",
   border = 'none',
-  fontSize= [null, null, null, '16px', null, '20px'],
-  h = ['44px', null, '40px', null,null,  '59px'],
+  fontSize= "16px",
+  h = ['44px', null, '40px'],
   arrowColor = "#a6a6a6" , 
   children,
   ...rest

@@ -1,26 +1,45 @@
-import { createIcon } from '@chakra-ui/icon';
-
-export const CloseOutlineIcon = createIcon({
-  displayName: 'CloseOutlineIcon',
-  viewBox: '0 0 49 50',
-  path: (
-    <>
+export const CloseOutlineIcon = () => {
+  return (
+    <svg
+      id="Group_975"
+      data-name="Group 975"
+      xmlns="http://www.w3.org/2000/svg"
+      width="40"
+      height="40"
+      viewBox="0 0 40 40"
+    >
       <g
         id="Rectangle_160"
         data-name="Rectangle 160"
-        fill="#fff"
-        stroke="#000"
-        stroke-width="2"
+        fill="none"
+        stroke="#3d405b"
+        stroke-width="1.5"
       >
-        <rect width="49" height="50" rx="8" stroke="none" />
-        <rect x="1" y="1" width="47" height="48" rx="7" fill="none" />
+        <rect width="40" height="40" rx="8" stroke="none" />
+        <rect
+          x="0.75"
+          y="0.75"
+          width="38.5"
+          height="38.5"
+          rx="7.25"
+          fill="none"
+        />
       </g>
-      <path
-        id="close_icon"
-        data-name="close icon"
-        d="M25.523,9.323l-1.8-1.8-7.2,7.2-7.2-7.2-1.8,1.8,7.2,7.2-7.2,7.2,1.8,1.8,7.2-7.2,7.2,7.2,1.8-1.8-7.2-7.2Z"
-        transform="translate(7.476 8.477)"
-      />{' '}
-    </>
-  ),
-});
+      <g id="Group_937" data-name="Group 937" transform="translate(8 8)">
+        <path
+          id="Path_454"
+          data-name="Path 454"
+          d="M0,0H24V24H0Z"
+          fill="none"
+        />
+        <path
+          id="Path_1582"
+          data-name="Path 1582"
+          d="M2.651,20.667a.96.96,0,0,0,.457.258,1.061,1.061,0,0,0,.522,0,1.012,1.012,0,0,0,.456-.254l6.266-6.278,6.272,6.277a1.027,1.027,0,0,0,1.435,0,1,1,0,0,0,.289-.723.968.968,0,0,0-.286-.713L11.79,12.954l6.272-6.265a.988.988,0,0,0,.291-.717.946.946,0,0,0-.294-.719,1,1,0,0,0-.723-.29.961.961,0,0,0-.712.287l-6.272,6.275L4.086,5.249a1,1,0,0,0-.456-.255,1.108,1.108,0,0,0-.522,0,.892.892,0,0,0-.457.262,1.028,1.028,0,0,0-.257.461,1.061,1.061,0,0,0,0,.522.951.951,0,0,0,.254.452l6.265,6.267L2.648,19.231a.993.993,0,0,0-.259.452,1.043,1.043,0,0,0,0,.527A.926.926,0,0,0,2.651,20.667Z"
+          transform="translate(1.647 -0.961)"
+          fill="#3d405b"
+        />
+      </g>
+    </svg>
+  );
+};

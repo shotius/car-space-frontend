@@ -4,9 +4,9 @@ import { SearchIcon } from 'src/components/atoms/Icons/SearchIcon';
 interface SearchButtonProps {}
 
 export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
-  h = ['44px', null, '40px', null, null, '50px'],
+  h = ['44px', null, '40px'],
   bg = 'autoOrange.500',
-  fontSize = ['16px', null, null, null, null, '18px'],
+  fontSize = ['16px', null,],
   borderRadius = '8px',
   w = {xl: "144px", "2xl": "155px"},
   maxW={xl: "144px", "2xl": "155px"},

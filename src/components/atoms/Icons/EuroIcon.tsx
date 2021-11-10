@@ -9,8 +9,8 @@ export const EuroIcon = createIcon({
         id="_"
         data-name="€"
         transform="translate(0 19)"
-        font-size="20"
-        font-family="HelveticaNeue, Helvetica Neue"
+        fontSize="20"
+        fontFamily="HelveticaNeue, Helvetica Neue"
       >
         <tspan x="0" y="0">
           €

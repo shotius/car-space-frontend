@@ -1,19 +1,15 @@
 import { VStack } from '@chakra-ui/layout';
 import {
-  Button,
-  HStack,
-  Icon,
   Popover,
   PopoverArrow,
   PopoverBody,
   PopoverContent,
   PopoverTrigger,
 } from '@chakra-ui/react';
-import { EuroIcon } from 'src/components/atoms/Icons/EuroIcon';
-import { GelIcon } from 'src/components/atoms/Icons/GelIcon';
-import { UsdIcon } from 'src/components/atoms/Icons/UsdIcon';
-import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { Currencies } from 'src/constants/index';
+import { CurrencyType } from 'src/constants/index';
+import { ButtonEur } from './CurrencyButtons/EurButton';
+import { ButtonGel } from './CurrencyButtons/GelButton';
+import { ButtonUsd } from './CurrencyButtons/UsdButton';
 // import {Text} from '@chakra-ui/react'
 
 interface CurrencyPopoverProps {
@@ -21,8 +17,8 @@ interface CurrencyPopoverProps {
   // onOpen: () => void;
   toggleCurrency: () => void;
   closeCurrency: () => void;
-  currency: string;
-  setCurrency: (Currencies: Currencies) => void;
+  currency: CurrencyType;
+  setCurrency: (Currencies: CurrencyType) => void;
 }
 
 export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
@@ -32,68 +28,69 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
   toggleCurrency,
   closeCurrency,
 }) => {
+  const trigger = () => {
+    switch (currency) {
+      case 'USD':
+        return (
+          <ButtonUsd
+            w="60px"
+            p="0px 12px 0px 0px"
+            _hover={{ bg: 'white' }}
+            fontSize="14px"
+            onClick={toggleCurrency}
+          />
+        );
+      case 'EUR':
+        return (
+          <ButtonEur
+            w="60px"
+            p="0px 12px 0px 0px"
+            _hover={{ bg: 'white' }}
+            fontSize="14px"
+            onClick={toggleCurrency}
+          />
+        );
+      case 'GEL':
+        return (
+          <ButtonGel
+            w="60px"
+            p="0px 12px 0px 0px"
+            _hover={{ bg: 'white' }}
+            fontSize="14px"
+            onClick={toggleCurrency}
+          />
+        );
+    }
+  };
+
   return (
     <Popover isOpen={isOpen} placement="bottom">
       <PopoverTrigger>
         {/* writing here imported component causes problems */}
-        <Button
-          fontSize={['14px', null, null, null, null, '16px']}
-          mr={['2', null, null, null, '4']}
-          cursor="pointer"
-          onClick={toggleCurrency}
-          variant="ghost"
-          fontWeight="light"
-          _hover={{
-            bg: 'transparent',
-          }}
-          _active={{
-            bg: 'transparent',
-          }}
-          minW="0px"
-          w="auto"
-          p="0"
-        >
-          {currency}
-        </Button>
+        {trigger()}
       </PopoverTrigger>
       <PopoverContent w="80px" outline="none">
         <PopoverArrow />
-        <PopoverBody>
-          <VStack spacing={4}>
-            <HStack
-              w="full"
-              spacing="0"
+        <PopoverBody p="0">
+          <VStack spacing={0} p="0">
+            <ButtonGel
               onClick={() => {
-                setCurrency(Currencies.GEL);
+                setCurrency('GEL');
                 closeCurrency();
               }}
-            >
-              <Icon as={GelIcon} boxSize={6} />
-              <TextRegular fontSize="16px">Gel</TextRegular>
-            </HStack>
-            <HStack
-              w="full"
-              spacing="0"
+            />
+            <ButtonUsd
               onClick={() => {
-                setCurrency(Currencies.USD);
+                setCurrency('USD');
                 closeCurrency();
               }}
-            >
-              <Icon as={UsdIcon} boxSize={6} />
-              <TextRegular fontSize="16px">Usd</TextRegular>
-            </HStack>
-            <HStack
-              spacing="0"
-              pl="2px"
-              w="full"
+            />
+            <ButtonEur
               onClick={() => {
-                setCurrency(Currencies.EUR);
+                setCurrency('EUR');
                 closeCurrency();
               }}
-            >
-              <Icon as={EuroIcon} boxSize={6} />
-              <TextRegular fontSize="16px">Eur</TextRegular>
-            </HStack>
+            />
           </VStack>
         </PopoverBody>
       </PopoverContent>

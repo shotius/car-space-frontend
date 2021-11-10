@@ -10,7 +10,7 @@ export enum Currencies {
     EUR="€ Eur"
 }
 
-export type CurentyType = 'USD' | 'EUR' | 'LARI'
+export type CurrencyType = 'USD' | 'EUR' | 'GEL'
 
 export enum Languages {
     ENG="Eng",

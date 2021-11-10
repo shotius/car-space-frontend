@@ -3,24 +3,24 @@ import { HStack, Stack } from '@chakra-ui/layout';
 import { Button, Collapse, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
-import { CurentyType } from 'src/constants';
+import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { selectYearFrom } from 'src/redux/features/auth/carFilterSlice';
 import { ButtonRound } from '../Buttons/ButtonRound';
-import { InputRegular } from '../Inputs/InputRegular';
-import { MobileSelect } from '../Selects/MobileSelect';
-import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
-import { MobileTransmissionPopup } from '../MobileSelectPopups/MobileTransmissionPopup';
-import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
 import { SearchButton } from '../Buttons/SearchButton';
+import { InputRegular } from '../Inputs/InputRegular';
+import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
+import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
+import { MobileTransmissionPopup } from '../MobileSelectPopups/MobileTransmissionPopup';
+import { MobileSelect } from '../Selects/MobileSelect';
 import { TextRegular } from '../Texts/TextRegular';
 import { WithMobileKeyboard } from '../Wrappers/WithMobileKeyboard';
-import { selectYearFrom } from 'src/redux/features/auth/carFilterSlice';
 
 interface ThreeMobileSelectsProps {}
 
 export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
   const { brand } = useAppSelector((state) => state.carFilterReducer);
-  const [chosenCurrency, setChosenCurrency] = useState<CurentyType>('LARI');
+  const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
   const dispatch = useAppDispatch();
 
   // brand drawer
@@ -134,8 +134,8 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
           p="7px"
         >
           <ButtonRound
-            onClick={() => setChosenCurrency('LARI')}
-            active={chosenCurrency === 'LARI'}
+            onClick={() => setChosenCurrency('GEL')}
+            active={chosenCurrency === 'GEL'}
           >
             ლ
           </ButtonRound>

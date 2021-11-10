@@ -12,7 +12,7 @@ import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
 import { PersonIcon } from 'src/components/atoms/Icons/PersonIcon';
 import { MenuLink } from 'src/components/molecules/Links/MenuLink';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { Currencies, Languages } from 'src/constants/index';
+import { CurrencyType, Languages } from 'src/constants/index';
 import { useAppSelector } from 'src/redux/app/hook';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { LoginRegisterDrawer } from '../Drawers/LoginRegisterDrawer';
@@ -26,7 +26,7 @@ interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
+  const [currency, setCurrency] = useState<CurrencyType>('EUR');
   const [lang, setLang] = useState<Languages>(Languages.ENG);
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
   const { isAuthenticated, role, username } = useAppSelector(
