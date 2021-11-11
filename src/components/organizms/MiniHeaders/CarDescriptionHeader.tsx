@@ -20,7 +20,7 @@ export const CarDescriptionHeader: React.FC<CarDescriptionHeaderProps> =
             <TextRegular>{carInfo?.lN}</TextRegular>
           </HStack>
         </VStack>
-        <ButtonHeart />
+        <ButtonHeart liked/>
       </HStack>
     );
   };

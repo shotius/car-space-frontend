@@ -28,7 +28,7 @@ export const CarCardHeading: React.FC<CarCardHeadingProps> = ({ car }) => {
         </TextRegular>
         <TextSecondary opacity="50%">{car?.y}</TextSecondary>
       </VStack>
-      <ButtonHeart h="40px" w="36px" boxSize={5} liked/>
+      <ButtonHeart h="40px" w="36px" boxSize={5} liked={false} />
     </HStack>
   );
 };

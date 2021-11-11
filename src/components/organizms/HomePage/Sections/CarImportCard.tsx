@@ -3,13 +3,17 @@ import { CarImportIcon } from 'src/components/atoms/Icons/CarImportIcon';
 import { Card } from 'src/components/molecules/Cards/Card';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import "./styles.css"
 
 interface CarImportCardProps {}
 
 export const CarImportCard: React.FC<CarImportCardProps> = ({}) => {
   return (
-    <Card p="32px" w={["full", null, null, "417px"]} h="407px" className="test">
+    <Card
+      p="32px"
+      w={['full', null, null, '417px']}
+      h="407px"
+      className="hoverable"
+    >
       <VStack w="full" spacing="24px">
         <Icon as={CarImportIcon} />
         <HeadingSecondary>Car Importing</HeadingSecondary>

@@ -1,6 +1,7 @@
 import { Image } from '@chakra-ui/image';
 import { AspectRatio, Box, Flex, VStack } from '@chakra-ui/layout';
 import { HStack } from '@chakra-ui/react';
+import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { TextRegular } from '../Texts/TextRegular';
 import { Card } from './Card';
 
@@ -12,18 +13,12 @@ export const DealerCard: React.FC<DealerCardProps> = () => {
       w="full"
       p="4"
       h="auto"
-      cursor="pointer"
-      _hover={{
-        // boxShadow: '0 0.7rem 1.5rem rgba(0, 0, 0, 0.082)',
-        boxShadow: "0px 3px 10px #00000029", 
-        // transform: 'translateY(-2px)',
-        transition: 'all .2s',
-      }}
+      className="hoverable"      
     >
-      <VStack w="full" spacing={{ base: '14px', 'lg': '16px' }}>
+      <VStack w="full" spacing='14px'>
         <HStack w="full" justify="space-between">
-          <TextRegular>Shop's name</TextRegular>
-          <TextRegular opacity=".5">125 vehicles</TextRegular>
+          <HeadingSecondary fontSize="14px" cursor="pointer">Shop's name</HeadingSecondary>
+          <TextRegular opacity=".5" cursor="pointer">125 vehicles</TextRegular>
         </HStack>
         <Flex w="full">
           <AspectRatio

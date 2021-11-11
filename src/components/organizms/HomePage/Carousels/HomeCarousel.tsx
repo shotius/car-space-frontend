@@ -3,6 +3,7 @@ import { AspectRatio, Box, Image } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { ButtonNext } from 'src/components/molecules/CarouselNavigations/Deskop/ButtonNext';
 import { ButtonPrev } from 'src/components/molecules/CarouselNavigations/Deskop/ButtonPrev';
+import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import useWindowSize from 'src/utils/hooks/useWindowSize';
 // import Swiper core and required modules
 import SwiperCore, { EffectFade } from 'swiper';
@@ -12,7 +13,7 @@ import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // install Swiper modules
-SwiperCore.use([ EffectFade]);
+SwiperCore.use([EffectFade]);
 
 export const HomeCarousel = () => {
   const prevRef = useRef<HTMLButtonElement>(null);
@@ -20,6 +21,7 @@ export const HomeCarousel = () => {
 
   const [swiper, setSwiper] = useState<SwiperCore | null>(null);
   const windowWidth = useWindowSize();
+  const { isDesktop } = useDetectScreen();
 
   // swiper initialize function
   // extracted in function because we use it in useEffect
@@ -64,7 +66,7 @@ export const HomeCarousel = () => {
           </AspectRatio>
         </SwiperSlide>
         <SwiperSlide>
-          <AspectRatio ratio={5 / 3} h={['279px', null, "360px"]}>
+          <AspectRatio ratio={5 / 3} h={['279px', null, '360px']}>
             <Image src="https://images.unsplash.com/photo-1560253787-9c3babc1fab2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" />
           </AspectRatio>
         </SwiperSlide>
@@ -80,17 +82,35 @@ export const HomeCarousel = () => {
         ref={prevRef}
         bg="#E8E8E8"
         opacity="0.7"
-        left={["20px", null, null, '30px']}
+        left={['20px', null, null, '30px']}
         w={['40px', '45px', '56px']}
         h={['40px', '45px', '56px']}
+        _hover={{
+          opacity: isDesktop && '0.86',
+        }}
+        _active={{
+          bg: 'white',
+          transform:
+            isDesktop &&
+            'rotate(90deg) translateX(-50%) translateY(5px) scale(0.96)',
+        }}
       />
       <ButtonNext
         ref={nextRef}
         bg="#E8E8E8"
         opacity="0.7"
-        right={["0px", null, null, '10px']}
+        right={['0px', null, null, '10px']}
         w={['40px', '45px', '56px']}
         h={['40px', '45px', '56px']}
+        _hover={{
+          opacity: isDesktop && '0.86',
+        }}
+        _active={{
+          bg: 'white',
+          transform:
+            isDesktop &&
+            'rotate(-90deg) translateX(50%) translateY(-15px) scale(0.96)',
+        }}
       />
     </Box>
   );

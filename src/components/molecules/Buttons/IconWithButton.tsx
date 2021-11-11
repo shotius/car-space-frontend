@@ -1,22 +1,27 @@
-import { Button, Icon, ButtonProps, IconProps } from '@chakra-ui/react';
-import { IconType } from 'react-icons';
+import {
+  Button,
+  Icon,
+  ButtonProps,
+  IconProps,
+} from '@chakra-ui/react';
 
-interface IconButtonProps {
-  icon: IconType | React.FC;
+interface ButtonWithIconProps {
+  // icon: IconButtonProps['icon'];
+  icon: any
   _activeBg?: ButtonProps['bg'];
   _hoverBg?: ButtonProps['bg'];
-  boxSize?: IconProps['boxSize']
-  fill?: IconProps['fill']
+  boxSize?: IconProps['boxSize'];
+  fill?: IconProps['fill'];
 }
 
-export const ButtonWithIcon: React.FC<IconButtonProps & ButtonProps> = ({
+export const ButtonWithIcon: React.FC<ButtonWithIconProps & ButtonProps> = ({
   bg = 'white',
   _activeBg = { bg: 'white' },
   _hoverBg = { bg: 'white' },
   icon,
-  fill, 
+  fill,
   boxSize,
-  children, 
+  children,
   ...rest
 }) => {
   return (
@@ -27,7 +32,7 @@ export const ButtonWithIcon: React.FC<IconButtonProps & ButtonProps> = ({
       _hover={{ bg: _hoverBg }}
       {...rest}
     >
-      <Icon as={icon} boxSize={boxSize} fill={fill}/>
+      <Icon as={icon} boxSize={boxSize} fill={fill} />
       {children}
     </Button>
   );

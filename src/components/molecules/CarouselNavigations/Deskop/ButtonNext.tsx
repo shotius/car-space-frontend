@@ -3,7 +3,9 @@ import { forwardRef } from 'react';
 import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 
-interface ButtonNextProps {}
+interface ButtonNextProps {
+  activeBg?: ButtonProps['bg'];
+}
 
 export const ButtonNext = forwardRef<
   HTMLButtonElement,
@@ -11,6 +13,7 @@ export const ButtonNext = forwardRef<
 >(
   (
     {
+      activeBg = 'autoGrey.200',
       bg = 'autoGrey.600',
       top = '50%',
       right = '-35px',
@@ -40,8 +43,8 @@ export const ButtonNext = forwardRef<
             isDesktop && 'rotate(-90deg) translateX(50%) translateY(-11px)',
         }}
         _active={{
-          opacity: !isDesktop && "1",
-          bg: bg,
+          opacity: !isDesktop && '1',
+          bg: activeBg,
           transform:
             isDesktop &&
             'rotate(-90deg) translateX(50%) translateY(-11px) scale(0.9)',

@@ -28,7 +28,7 @@ interface HeaderProps {}
 export const Header: React.FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currency, setCurrency] = useState<CurrencyType>('EUR');
-  const [lang, setLang] = useState<Languages>("Geo");
+  const [lang, setLang] = useState<Languages>('Geo');
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
   const { isAuthenticated, role, username } = useAppSelector(
     (state) => state.authReducer
@@ -117,7 +117,6 @@ export const Header: React.FC<HeaderProps> = () => {
               </Center>
             }
           >
-            
             <HStack spacing={[null, null, '16px', '24px', '32px']}>
               <MenuLink to="/catalog" label="Catalog" />
               <MenuLink to="/services" label="Services" />
@@ -148,9 +147,7 @@ export const Header: React.FC<HeaderProps> = () => {
 
             {/* if user is authenticated login and register buttons are not shown */}
             {isAuthenticated ? (
-              <ButtonOutline
-                onClick={() => history.push(`/${role}/dashboard`)}
-              >
+              <ButtonOutline onClick={() => history.push(`/${role}/dashboard`)}>
                 <Icon as={PersonIcon} boxSize="4" mr="2" />
                 {username}
               </ButtonOutline>
@@ -175,10 +172,7 @@ export const Header: React.FC<HeaderProps> = () => {
                     openRegister();
                   }}
                 />
-                <ButtonOutline
-                  onClick={openRegister}
-                  transition="all 0.5s"
-                >
+                <ButtonOutline onClick={openRegister} transition="all 0.5s">
                   <Icon as={PersonIcon} boxSize="4" />
                   <TextRegular ml="2" mt="1">
                     Register
@@ -239,7 +233,12 @@ export const Header: React.FC<HeaderProps> = () => {
               opacity={menuOpen ? '1' : '0'}
               transition="all ease .2"
             />
-            <MenuMobile menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+            <MenuMobile
+              menuOpen={menuOpen}
+              setMenuOpen={setMenuOpen}
+              lang="Eng"
+              currency="GEL"
+            />
           </HStack>
         ) : null}
       </Flex>

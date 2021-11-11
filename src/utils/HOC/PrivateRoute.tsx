@@ -1,5 +1,5 @@
-import { Suspense } from 'react';
-import { Redirect, Route, RouteProps } from 'react-router-dom';
+import { Suspense, useEffect } from 'react';
+import { Route, RouteProps, useHistory } from 'react-router-dom';
 import ErrorBoundary from 'src/components/molecules/Errors/ErrorBoundary';
 import { Roles } from 'src/constants';
 import { useAppSelector } from 'src/redux/app/hook';
@@ -12,23 +12,35 @@ interface PrivateRouteProps {
 export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
   component: Component,
   exact = true,
-  role,
+  role, 
   ...rest
 }) => {
-  const { isAuthenticated, role: userRole } = useAppSelector(
+  const { isAuthenticated, role: userRole, loading: gettingUserInfo} = useAppSelector(
     (state) => state.authReducer
   );
   const USER = localStorage.getItem('USER_ROLE');
+  const history = useHistory();
 
-  if (!USER) {
-    // if client not authenticated or his/her role not in complement to the redux state -> redirect
-    if (!isAuthenticated) {
+  useEffect(() => {
+    if (userRole) {
       // if not authenticated redirect to home page
-      return <Redirect to="/home" />;
-    } else if (role != userRole) {
-      // if role does't comply with account
-      return <Redirect to={`/${userRole}/dashboard`} />;
+      if (!isAuthenticated) {
+        history.push('/home');
+      }
+      
+      // if private route role and USER role don't match redirect
+      if (USER !== userRole) {
+        history.push(`/${userRole}/dashboard`);
+      }
     }
+  }, [isAuthenticated, userRole]);
+  
+  if (gettingUserInfo) {
+    return <h1>Loading Private page</h1>
+  }
+  // user is not in localstorage redirect to home
+  if (!USER || USER !== role ) {
+    history.push("/home") ;
   }
 
   return (

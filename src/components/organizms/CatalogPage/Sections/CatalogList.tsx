@@ -52,7 +52,8 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
         <FilterWrap>
           <CatalogFilters isOpen={isFilterOpen} onToggle={toggleFilters} />
         </FilterWrap>
-        {/* top pagination */}
+        <BannerCard />
+
         {/* car car list */}
         {!fethingCars ? (
           <CatalogListWrap>
@@ -73,7 +74,6 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
           activePage={activePage}
           onChange={(num: number) => dispatch(setActivePage(num))}
         />
-        <BannerCard />
       </VStack>
     </ContainerOuter>
   );
