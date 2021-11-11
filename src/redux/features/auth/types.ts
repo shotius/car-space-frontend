@@ -47,6 +47,7 @@ export interface CarFilters {
   engineTo: number | null
   transsmision: Transmission[]
   currency: ICurrency
+  isAdvancedFiltersOpen: boolean
 }
 
 export interface IPagination {

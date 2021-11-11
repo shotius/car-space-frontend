@@ -12,6 +12,7 @@ const initialState: CarFilters = {
   engineTo: null,
   transsmision: [],
   currency: 'LARI',
+  isAdvancedFiltersOpen: false
 };
 
 const carFilterSlice = createSlice({
@@ -45,6 +46,16 @@ const carFilterSlice = createSlice({
     selectCurrency: (state, action) => {
       state.currency = action.payload;
     },
+    toggleAdvancedFilters: (state) => {
+      if (state.isAdvancedFiltersOpen) {
+        state.isAdvancedFiltersOpen = false
+      } else {
+        state.isAdvancedFiltersOpen = true
+      }
+    },
+    openAdvancedFilters: (state) => {
+      state.isAdvancedFiltersOpen = true
+    }
   },
 });
 
@@ -57,6 +68,8 @@ export const {
   selectPriseTo,
   selectYearFrom,
   selectYearTo,
-  selectCurrency
+  selectCurrency,
+  toggleAdvancedFilters,
+  openAdvancedFilters
 } = carFilterSlice.actions;
 export const { reducer: carFilterReducer } = carFilterSlice;

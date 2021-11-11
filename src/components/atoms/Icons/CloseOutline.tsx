@@ -13,7 +13,7 @@ export const CloseOutlineIcon = () => {
         data-name="Rectangle 160"
         fill="none"
         stroke="#3d405b"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       >
         <rect width="40" height="40" rx="8" stroke="none" />
         <rect

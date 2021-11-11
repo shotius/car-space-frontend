@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { selectYearFrom } from 'src/redux/features/auth/carFilterSlice';
+import { selectYearFrom, toggleAdvancedFilters } from 'src/redux/features/auth/carFilterSlice';
 import { ButtonRound } from '../Buttons/ButtonRound';
 import { SearchButton } from '../Buttons/SearchButton';
 import { InputRegular } from '../Inputs/InputRegular';
@@ -19,7 +19,7 @@ import { WithMobileKeyboard } from '../Wrappers/WithMobileKeyboard';
 interface ThreeMobileSelectsProps {}
 
 export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
-  const { brand } = useAppSelector((state) => state.carFilterReducer);
+  const { brand, isAdvancedFiltersOpen } = useAppSelector((state) => state.carFilterReducer);
   const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
   const dispatch = useAppDispatch();
 
@@ -50,11 +50,8 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
     onOpen: openTransm,
   } = useDisclosure();
 
-  // additial filters
-  const { isOpen: isFiltersOpen, onToggle: toggleFilters } = useDisclosure();
-  const { models } = useAppSelector((state) => state.carsReducer);
-
-  const { brands } = useAppSelector((state) => state.carsReducer);
+  // advanced filters
+  const { brands, models } = useAppSelector((state) => state.carsReducer);
 
   const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
   const [yearFrom, setYearFrom] = useState('');
@@ -154,7 +151,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
         </HStack>
       </HStack>
       {/* colapsable selects */}
-      <Collapse in={isFiltersOpen}>
+      <Collapse in={isAdvancedFiltersOpen}>
         <VStack>
           <MobileSelect onClick={openEngine} label="Engine"></MobileSelect>
           <MobileEnginePopup onClose={closeEngine} isOpen={isEngineOpen} />
@@ -203,13 +200,13 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
         <WithMobileKeyboard isKeyboardActive={keyboardActive}>
           <SearchButton w="full" />
         </WithMobileKeyboard>
-        <Button variant="link" onClick={toggleFilters} bg="transparent">
+        <Button variant="link" onClick={() => dispatch(toggleAdvancedFilters())} bg="transparent">
           <TextRegular
             color={'#000'}
             display={keyboardActive ? 'none' : 'block'}
             lineHeight="19px"
           >
-            {isFiltersOpen ? 'See less filter' : 'See more filter'}
+            {isAdvancedFiltersOpen ? 'See less filter' : 'See more filter'}
           </TextRegular>
         </Button>
       </VStack>

@@ -3,11 +3,17 @@ import { DividerVertical } from 'src/components/atoms/Divider';
 import { Select } from 'src/components/atoms/Selects';
 import { Card } from '../../../molecules/Cards/Card';
 import { SearchButton } from '../../../molecules/Buttons/SearchButton';
-
+import { TextButton } from 'src/components/molecules/Buttons/TextButton';
+import { useHistory } from 'react-router';
+import { useAppDispatch } from 'src/redux/app/hook';
+import { openAdvancedFilters, toggleAdvancedFilters } from 'src/redux/features/auth/carFilterSlice';
 
 interface SearchProps {}
 
 export const HomeFilters: React.FC<SearchProps> = () => {
+  const history  = useHistory()
+  const dispatch = useAppDispatch()
+
   return (
     <Center
       mt={['-69px', '-60px', '-45px', '-45px']}
@@ -18,7 +24,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
       <Card
         maxW={{ sm: '550px', md: '600px', lg: '844px', xl: '82%' }}
         bg="autoBlue.400"
-        p={{ base: '4', lg: '16px'}}
+        p={{ base: '4', lg: '16px' }}
         mb="0"
         minH="auto"
         w={['100%', '90%', '100%']}
@@ -31,7 +37,11 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           flexWrap={{ base: 'wrap', md: 'nowrap' }}
           justifyContent="space-between"
         >
-          <Select placeholder="Brand" w={['100%', '30%', '100%']} arrowColor="#848484">
+          <Select
+            placeholder="Brand"
+            w={['100%', '30%', '100%']}
+            arrowColor="#848484"
+          >
             <option value="value">brand</option>
             <option value="value">brand</option>
             <option value="value">brand</option>
@@ -40,24 +50,32 @@ export const HomeFilters: React.FC<SearchProps> = () => {
             height="40px"
             display={['none', 'block']}
             borderColor="gray.300"
-            margin={[null, null, "4"]}
+            margin={[null, null, '4']}
           />
           <Divider display={['block', 'none', 'none']} borderColor="gray.300" />
 
-          <Select placeholder="Model" w={['100%', '30%', '100%']} arrowColor="#848484">
+          <Select
+            placeholder="Model"
+            w={['100%', '30%', '100%']}
+            arrowColor="#848484"
+          >
             <option value="value">model</option>
             <option value="value">model</option>
             <option value="value">model</option>
           </Select>
           <DividerVertical
-            height = {['44px', null, '40px', null,null,  '50px']}
+            height={['44px', null, '40px', null, null, '50px']}
             display={['none', 'block']}
             borderColor="gray.300"
-            margin={[null, null, "4"]}
+            margin={[null, null, '4']}
           />
           <Divider display={['block', 'none']} borderColor="gray.300" />
 
-          <Select placeholder="Year" w={['100%', '30%', '100%']} arrowColor="#848484">
+          <Select
+            placeholder="Year"
+            w={['100%', '30%', '100%']}
+            arrowColor="#848484"
+          >
             <option value="value">year</option>
             <option value="value">year</option>
             <option value="value">year</option>
@@ -65,18 +83,25 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           <SearchButton
             display={['none', 'none', 'block']}
             flexBasis={['100%', null, null, '70%', '80%']}
-            ml={[null, null, "8px", '24px']}
-            w={{xl: "144px", "2xl": "55px"}}
+            ml={[null, null, '8px', '24px']}
+            w={{ xl: '144px', '2xl': '55px' }}
             // h="60px"
           />
         </Flex>
-          <SearchButton
-            display={['block', 'block', 'none']}
-            w="full"
-            h={["44px",null, null,"50px",  "62px"]}
-            mt={['4', '3']}
-            // pl={[null, null, '4']}
-          />
+        <SearchButton
+          display={['block', 'block', 'none']}
+          w="full"
+          h={['44px', null, null, '50px', '62px']}
+          mt={['4', '3']}
+          // pl={[null, null, '4']}
+        />
+        <TextButton w="full" textAlign="center" color="white" pt="4"
+        onClick={() => {
+          history.push('/catalog')
+          dispatch(openAdvancedFilters())
+        }}>
+          See advanced filter
+        </TextButton>
       </Card>
     </Center>
   );
