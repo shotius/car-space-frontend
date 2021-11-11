@@ -22,7 +22,7 @@ export const RusIcon = createIcon({
         id="russia-2"
         data-name="russia"
         transform="translate(-1226 -2116)"
-        clip-path="url(#clip-path)"
+        clipPath="url(#clip-path)"
       >
         <g id="russia-3" data-name="russia" transform="translate(1223 2116)">
           <path

@@ -14,7 +14,8 @@ import { ButtonOutline } from 'src/components/molecules/Buttons/ButtonOutline';
 import { MenuLink } from 'src/components/molecules/Links/MenuLink';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { CurrencyType, Languages } from 'src/constants/index';
-import { useAppSelector } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { logoutUser } from 'src/redux/features/auth/authSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { LoginRegisterDrawer } from '../Drawers/LoginRegisterDrawer';
 import { MenuMobile } from '../LoginForm/MenuMobile';
@@ -30,10 +31,12 @@ export const Header: React.FC<HeaderProps> = () => {
   const [currency, setCurrency] = useState<CurrencyType>('EUR');
   const [lang, setLang] = useState<Languages>('Geo');
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
+  const USER = localStorage.getItem('USER_ROLE');
   const { isAuthenticated, role, username } = useAppSelector(
     (state) => state.authReducer
   );
   const history = useHistory();
+  const dispatch = useAppDispatch();
 
   const [safeDocument, setSafeDocument] = useState<Document | null>(document);
 
@@ -147,7 +150,16 @@ export const Header: React.FC<HeaderProps> = () => {
 
             {/* if user is authenticated login and register buttons are not shown */}
             {isAuthenticated ? (
-              <ButtonOutline onClick={() => history.push(`/${role}/dashboard`)}>
+              <ButtonOutline
+                onClick={() => {
+                  // if USER is deleted from localstorage logout
+                  if (!USER) {
+                    dispatch(logoutUser());
+                  } else {
+                    history.push(`/${role}/dashboard`);
+                  }
+                }}
+              >
                 <Icon as={PersonIcon} boxSize="4" mr="2" />
                 {username}
               </ButtonOutline>
@@ -157,7 +169,7 @@ export const Header: React.FC<HeaderProps> = () => {
                   variant="ghost"
                   fontWeight="light"
                   fontSize="16px"
-                  onClick={openLogin}
+                  onClick={() => openLogin()}
                   _hover={{
                     bg: 'autoGrey.200',
                   }}
@@ -204,7 +216,9 @@ export const Header: React.FC<HeaderProps> = () => {
               bg="transparent"
               onClick={() => {
                 // if authenticated: redirect to you page, else open login
-                if (isAuthenticated) {
+                if (!USER) {
+                  openLoginRegister();
+                } else if (isAuthenticated) {
                   history.push(`/${role}/dashboard`);
                 } else {
                   openLoginRegister();

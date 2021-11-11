@@ -27,7 +27,6 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
       if (!isAuthenticated) {
         history.push('/home');
       }
-      
       // if private route role and USER role don't match redirect
       if (USER !== userRole) {
         history.push(`/${userRole}/dashboard`);
