@@ -4,16 +4,32 @@ import { VStack, HStack } from '@chakra-ui/layout';
 import { StackDivider } from '@chakra-ui/react';
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
 import { NavMenuLink } from 'src/components/molecules/Links/NavMenuLink';
+import { CurrencyType, Languages } from 'src/constants';
 
 interface MenuMobileProps {
   menuOpen: boolean;
   setMenuOpen: (boolean) => void;
+  lang: Languages;
+  currency: CurrencyType
 }
 
 export const MenuMobile: React.FC<MenuMobileProps> = ({
   menuOpen,
   setMenuOpen,
+  lang, 
+  currency
 }) => {
+  const iconLang = () => {
+    switch(lang) {
+      case "Eng": return UKIcon
+    }
+  }
+
+  const iconCurr = () => {
+    switch(currency) {
+      case "GEL": return "Geo"
+    }
+  }
   return (
     <VStack
       boxShadow={menuOpen ? '-20px 0px 100px rgba(0, 0, 0, 0.2)' : ''}
@@ -71,11 +87,10 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
 
       <HStack justifyContent="space-around" pt="4" spacing="2" w="full">
         <Button w="40%" bg="autoGrey.200">
-          <Icon as={UKIcon} boxSize="6" />
+          <Icon as={iconLang()} boxSize="6" />
         </Button>
         <Button w="40%" bg="autoGrey.200">
-          {' '}
-          GEL
+          {iconCurr()}
         </Button>
       </HStack>
     </VStack>

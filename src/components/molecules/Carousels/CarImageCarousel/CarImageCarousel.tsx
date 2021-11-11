@@ -26,7 +26,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
 
   return (
     <AspectRatio
-      ratio={311 / 292}
+      ratio={[311 / 292, null, null, 231/143]}
       w="full"
       overflow="hidden"
       borderRadius="md"
