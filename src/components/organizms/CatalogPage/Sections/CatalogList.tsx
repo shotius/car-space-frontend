@@ -9,6 +9,7 @@ import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
 import { FilterWrap } from 'src/components/molecules/Wrappers/FilterWrap';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { toggleAdvancedFilters } from 'src/redux/features/auth/carFilterSlice';
 import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { getAllBrands, getCars } from 'src/redux/features/auth/carsSlice';
 import { ICar } from 'src/redux/features/auth/types';
@@ -18,7 +19,9 @@ import { CatalogFilters } from './CatalogFilter';
 interface CatalogLIstProps {}
 
 export const CatalogList: React.FC<CatalogLIstProps> = () => {
-  const { isOpen: isFilterOpen, onToggle: toggleFilters } = useDisclosure();
+  const { isAdvancedFiltersOpen } = useAppSelector(
+    (state) => state.carFilterReducer
+  );
   const { cars, fethingCars } = useAppSelector((state) => state.carsReducer);
   const { activePage, totalPages } = useAppSelector(
     (state) => state.carsPagination
@@ -45,12 +48,21 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
     window.scrollTo(0, 0);
   }, [activePage]);
 
+
+  // filter toggle funciotn 
+  // const onToggle = () => {
+  //   dispatch(toggleAdvancedFilters())
+  // }
+
   return (
     <ContainerOuter pt={['4', '6', null, '8', '16']}>
       <VStack w="full" spacing={['66px']}>
         {/* filter */}
         <FilterWrap>
-          <CatalogFilters isOpen={isFilterOpen} onToggle={toggleFilters} />
+          <CatalogFilters
+            isOpen={isAdvancedFiltersOpen}
+            onToggle={() => dispatch(toggleAdvancedFilters())}
+          />
         </FilterWrap>
         <BannerCard />
 

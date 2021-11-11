@@ -6,13 +6,13 @@ import { SearchButton } from '../../../molecules/Buttons/SearchButton';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { useHistory } from 'react-router';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { openAdvancedFilters, toggleAdvancedFilters } from 'src/redux/features/auth/carFilterSlice';
+import { openAdvancedFilters } from 'src/redux/features/auth/carFilterSlice';
 
 interface SearchProps {}
 
 export const HomeFilters: React.FC<SearchProps> = () => {
-  const history  = useHistory()
-  const dispatch = useAppDispatch()
+  const history = useHistory();
+  const dispatch = useAppDispatch();
 
   return (
     <Center
@@ -95,11 +95,17 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           mt={['4', '3']}
           // pl={[null, null, '4']}
         />
-        <TextButton w="full" textAlign="center" color="white" pt="4"
-        onClick={() => {
-          history.push('/catalog')
-          dispatch(openAdvancedFilters())
-        }}>
+        <TextButton
+          w="full"
+          textAlign="center"
+          color="white"
+          pt="4"
+          display={[null, null, 'none', 'none']}
+          onClick={() => {
+            history.push('/catalog');
+            dispatch(openAdvancedFilters());
+          }}
+        >
           See advanced filter
         </TextButton>
       </Card>

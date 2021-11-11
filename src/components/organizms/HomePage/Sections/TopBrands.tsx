@@ -9,7 +9,6 @@ import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHea
 import { ScrollableDiv } from 'src/components/molecules/Wrappers/ScrollableDiv';
 import { TopBrandCard } from '../../../molecules/Cards/TopBrandCard';
 
-
 interface TopBrandsProps {}
 
 export const TopBrands: React.FC<TopBrandsProps> = () => {
@@ -17,13 +16,13 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
     <Box w="full">
       <SectionHeader mainText="Top Brands" secondaryText="See all" />
       <ScrollableDiv cardCount={7}>
-        <TopBrandCard icon={BmwIcon} />
-        <TopBrandCard icon={MercedesIcon} />
-        <TopBrandCard icon={VolkswagenIcon} />
-        <TopBrandCard icon={AudiIcon} />
-        <TopBrandCard icon={HiundayIcon} />
-        <TopBrandCard icon={ToyotaIcon} />
-        <TopBrandCard icon={HiundayIcon} />
+        <TopBrandCard className="hoverable" icon={BmwIcon} />
+        <TopBrandCard className="hoverable" icon={MercedesIcon} />
+        <TopBrandCard className="hoverable" icon={VolkswagenIcon} />
+        <TopBrandCard className="hoverable" icon={AudiIcon} />
+        <TopBrandCard className="hoverable" icon={HiundayIcon} />
+        <TopBrandCard className="hoverable" icon={ToyotaIcon} />
+        <TopBrandCard className="hoverable" icon={HiundayIcon} />
       </ScrollableDiv>
     </Box>
   );

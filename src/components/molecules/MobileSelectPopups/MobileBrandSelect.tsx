@@ -28,6 +28,8 @@ import { InputRegular } from '../Inputs/InputRegular';
 import { ScrollableDiv } from '../Wrappers/ScrollableDiv';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { ButtonWithIcon } from '../Buttons/IconWithButton';
+import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
+import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
 
 interface BrandSelectProps {
   brands: string[];
@@ -86,22 +88,12 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
       placement="bottom"
     >
       <DrawerOverlay />
-          
+
       <DrawerContent h="80%" borderTopRadius="16px" p="32px 48px 16px 48px">
         {/* drawer header */}
-        <DrawerHeader
-          {...swipeHandlers}
-          borderTopRadius="16px"
-          p="0"
-        >
+        <DrawerHeader {...swipeHandlers} borderTopRadius="16px" p="0">
           {' '}
-          <VStack
-            spacing="4"
-            pb="4"
-            bg="white"
-            zIndex="10"
-            w="full"
-          >
+          <VStack spacing="4" pb="4" bg="white" zIndex="10" w="full">
             {/* search input */}
             <InputGroup w="full">
               <InputLeftElement children={<SearchIcon fill="autoGrey.400" />} />
@@ -146,37 +138,39 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
             <ScrollableDiv
               cardCount={5}
               w="full"
+              pl="0"
+              pr="0"
               display={topBrandsVisible ? 'grid' : 'none'}
             >
               <TopBrandCard
-                image="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png"
-                maxW="50px"
-                maxH="50px"
-                imageWidth="20px"
+                icon={MercedesIcon}
+                maxW="48px"
+                maxH="48px"
+                boxSize={5}
               />
               <TopBrandCard
-                image="https://i.pinimg.com/originals/03/e1/b0/03e1b0207489ad32d10b9a860ffc6623.png"
-                maxW="50px"
-                maxH="50px"
-                imageWidth="20px"
+                icon={BmwIcon}
+                maxW="48px"
+                maxH="48px"
+                boxSize={5}
               />
               <TopBrandCard
-                image="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png"
-                maxW="50px"
-                maxH="50px"
-                imageWidth="20px"
+                icon={BmwIcon}
+                maxW="48px"
+                maxH="48px"
+                boxSize={5}
               />
               <TopBrandCard
-                image="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png"
-                maxW="50px"
-                maxH="50px"
-                imageWidth="20px"
+                icon={BmwIcon}
+                maxW="48px"
+                maxH="48px"
+                boxSize={5}
               />
               <TopBrandCard
-                image="https://i.pinimg.com/originals/03/e1/b0/03e1b0207489ad32d10b9a860ffc6623.png"
-                maxW="50px"
-                maxH="50px"
-                imageWidth="20px"
+                icon={BmwIcon}
+                maxW="48px"
+                maxH="48px"
+                boxSize={5}
               />
             </ScrollableDiv>
           </VStack>

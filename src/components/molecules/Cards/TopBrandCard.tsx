@@ -16,10 +16,11 @@ export const TopBrandCard: React.FC<TopBrandCardProps & BoxProps> = ({
   imageWidth = ['41px', null, null, '56px'],
   cardColor = 'autoGrey.600',
   boxSize=[10, null, null, 16], 
+  className,
   ...rest
 }) => {
   return (
-    <Card bg={cardColor} h={h} w={w} {...rest} className="hoverable">
+    <Card bg={cardColor} h={h} w={w} {...rest} className={className}>
       <Center h="full" w="full" >
         <Icon as={icon} boxSize={boxSize} cursor="pointer"/>
       </Center>
