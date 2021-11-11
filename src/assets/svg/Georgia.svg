@@ -1,10 +1,10 @@
 <svg id="Georgia" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
   <defs>
-    <clipPath id="clip-path">
+    <clipPath id="clipPath">
       <circle id="Ellipse_28" data-name="Ellipse 28" cx="10" cy="10" r="10" transform="translate(1297 2152)" fill="#fff"/>
     </clipPath>
   </defs>
-  <g id="Georgia-2" data-name="Georgia" transform="translate(-1297 -2152)" clip-path="url(#clip-path)">
+  <g id="Georgia-2" data-name="Georgia" transform="translate(-1297 -2152)" clipPath="url(#clipPath)">
     <g id="georgia_1_" data-name="georgia (1)" transform="translate(1296.004 2153.753)">
       <path id="Path_1179" data-name="Path 1179" d="M0,0H25.729V19.3H0Z" transform="translate(-1.868 -1.478)" fill="#fff"/>
       <path id="Path_1180" data-name="Path 1180" d="M272,0h3.89V19.3H272Z" transform="translate(-262.95 -1.478)" fill="red"/>

@@ -6,7 +6,7 @@ export const RusIcon = createIcon({
   path: (
     <>
       <defs>
-        <clipPath id="clip-path">
+        <clipPath id="clipPath">
           <circle
             id="Ellipse_29"
             data-name="Ellipse 29"
@@ -22,7 +22,7 @@ export const RusIcon = createIcon({
         id="russia-2"
         data-name="russia"
         transform="translate(-1226 -2116)"
-        clipPath="url(#clip-path)"
+        clipPath="url(#clipPath)"
       >
         <g id="russia-3" data-name="russia" transform="translate(1223 2116)">
           <path

@@ -1,6 +1,12 @@
 import { Box } from '@chakra-ui/layout';
-import { ScrollableDiv } from 'src/components/molecules/Wrappers/ScrollableDiv';
+import { AudiIcon } from 'src/components/atoms/Icons/AudiIcon';
+import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
+import { HiundayIcon } from 'src/components/atoms/Icons/HyundayIcon';
+import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
+import { ToyotaIcon } from 'src/components/atoms/Icons/ToyotaIcon';
+import { VolkswagenIcon } from 'src/components/atoms/Icons/VoltswagenIcon';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
+import { ScrollableDiv } from 'src/components/molecules/Wrappers/ScrollableDiv';
 import { TopBrandCard } from '../../../molecules/Cards/TopBrandCard';
 
 
@@ -11,13 +17,13 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
     <Box w="full">
       <SectionHeader mainText="Top Brands" secondaryText="See all" />
       <ScrollableDiv cardCount={7}>
-        <TopBrandCard image="https://i.pinimg.com/originals/03/e1/b0/03e1b0207489ad32d10b9a860ffc6623.png" />
-        <TopBrandCard image="https://i.pinimg.com/originals/03/e1/b0/03e1b0207489ad32d10b9a860ffc6623.png" />
-        <TopBrandCard image="https://i.pinimg.com/originals/03/e1/b0/03e1b0207489ad32d10b9a860ffc6623.png" />
-        <TopBrandCard image="https://i.pinimg.com/originals/03/e1/b0/03e1b0207489ad32d10b9a860ffc6623.png" />
-        <TopBrandCard image="https://i.pinimg.com/originals/03/e1/b0/03e1b0207489ad32d10b9a860ffc6623.png" />
-        <TopBrandCard image="https://i.pinimg.com/originals/03/e1/b0/03e1b0207489ad32d10b9a860ffc6623.png" />
-        <TopBrandCard image="https://i.pinimg.com/originals/03/e1/b0/03e1b0207489ad32d10b9a860ffc6623.png" />
+        <TopBrandCard icon={BmwIcon} />
+        <TopBrandCard icon={MercedesIcon} />
+        <TopBrandCard icon={VolkswagenIcon} />
+        <TopBrandCard icon={AudiIcon} />
+        <TopBrandCard icon={HiundayIcon} />
+        <TopBrandCard icon={ToyotaIcon} />
+        <TopBrandCard icon={HiundayIcon} />
       </ScrollableDiv>
     </Box>
   );
