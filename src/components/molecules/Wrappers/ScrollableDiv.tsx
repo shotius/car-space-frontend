@@ -11,12 +11,14 @@ interface ScrollableDivProps {
 export const ScrollableDiv: React.FC<ScrollableDivProps & SimpleGridProps> = ({
   cardCount,
   children,
+  p="4",
   spacing=['11px', null, null, '10px'], 
   ...rest
 }) => {
   return (
     <SimpleGrid
       overflow="auto"
+      p={p}
       gap={spacing}
       gridTemplateColumns={[
         `repeat(${cardCount}, 1fr)`,

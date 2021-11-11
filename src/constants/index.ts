@@ -12,10 +12,7 @@ export enum Currencies {
 
 export type CurrencyType = 'USD' | 'EUR' | 'GEL'
 
-export enum Languages {
-    ENG="Eng",
-    GE="Geo"
-}
+export type Languages  = "Eng" | "Geo" | "Rus"
 
 export const MOBILE_SCREEN_SIZE = 480
 // export const MOBILE_SCREEN_SIZE = 766

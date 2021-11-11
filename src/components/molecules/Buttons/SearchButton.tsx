@@ -27,10 +27,10 @@ export const SearchButton: React.FC<SearchButtonProps & ButtonProps> = ({
       fontSize={fontSize}
       borderRadius={borderRadius}
       _hover={{
-        bg: 'autoOrange.400',
+        bg: 'autoOrange.500',
       }}
       _active={{
-        bg: 'autoOrange.200',
+        bg: 'autoOrange.400',
       }}
       {...rest}
     >

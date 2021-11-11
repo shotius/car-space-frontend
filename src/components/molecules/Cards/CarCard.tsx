@@ -25,6 +25,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
 
   return (
     <Box
+      className="hoverable"
       ref={ref}
       w={['full', null, null, null]}
       bg="white"

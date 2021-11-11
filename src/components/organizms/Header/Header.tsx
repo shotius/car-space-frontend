@@ -10,6 +10,7 @@ import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BurgerIcon } from 'src/components/atoms/Icons/BurgerIcon';
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
 import { PersonIcon } from 'src/components/atoms/Icons/PersonIcon';
+import { ButtonOutline } from 'src/components/molecules/Buttons/ButtonOutline';
 import { MenuLink } from 'src/components/molecules/Links/MenuLink';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { CurrencyType, Languages } from 'src/constants/index';
@@ -27,7 +28,7 @@ interface HeaderProps {}
 export const Header: React.FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currency, setCurrency] = useState<CurrencyType>('EUR');
-  const [lang, setLang] = useState<Languages>(Languages.ENG);
+  const [lang, setLang] = useState<Languages>("Geo");
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
   const { isAuthenticated, role, username } = useAppSelector(
     (state) => state.authReducer
@@ -116,6 +117,7 @@ export const Header: React.FC<HeaderProps> = () => {
               </Center>
             }
           >
+            
             <HStack spacing={[null, null, '16px', '24px', '32px']}>
               <MenuLink to="/catalog" label="Catalog" />
               <MenuLink to="/services" label="Services" />
@@ -146,19 +148,12 @@ export const Header: React.FC<HeaderProps> = () => {
 
             {/* if user is authenticated login and register buttons are not shown */}
             {isAuthenticated ? (
-              <Button
+              <ButtonOutline
                 onClick={() => history.push(`/${role}/dashboard`)}
-                variant="ghost"
-                fontWeight="light"
-                fontSize="16px"
-                _hover={{
-                  bg: 'autoGrey.200',
-                }}
-                ml="-4"
               >
                 <Icon as={PersonIcon} boxSize="4" mr="2" />
                 {username}
-              </Button>
+              </ButtonOutline>
             ) : (
               <HStack spacing={[null, null, '0', '2', null, '4']} ml="-15px">
                 <Button
@@ -180,25 +175,15 @@ export const Header: React.FC<HeaderProps> = () => {
                     openRegister();
                   }}
                 />
-                <Button
-                  backgroundColor="white"
-                  fontWeight="light"
-                  borderColor="#565656"
-                  borderWidth="1px"
+                <ButtonOutline
                   onClick={openRegister}
-                  borderRadius="8px"
-                  w="100px"
                   transition="all 0.5s"
-                  _hover={{
-                    bg: 'autoGrey.200',
-                    border: 'white',
-                  }}
                 >
                   <Icon as={PersonIcon} boxSize="4" />
                   <TextRegular ml="2" mt="1">
                     Register
                   </TextRegular>
-                </Button>
+                </ButtonOutline>
                 <RegisterModal
                   isOpen={isRegisterOpen}
                   onClose={closeRegister}

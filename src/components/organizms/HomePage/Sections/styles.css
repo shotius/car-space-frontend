@@ -1,0 +1,7 @@
+.test {
+  cursor: pointer;
+}
+
+.test:hover {
+  box-shadow: 0px 3px 10px #00000029;
+}

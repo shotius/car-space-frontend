@@ -12,14 +12,11 @@ import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './styles.module.scss';
 
-
-
-
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
-export const  CarListCarousel = ({car}: {car: ICar}) =>  {
-  const [isLaptopScreen] = useMediaQuery("(min-width: 1024px)")
+export const CarListCarousel = ({ car }: { car: ICar }) => {
+  const [isLaptopScreen] = useMediaQuery('(min-width: 1024px)');
 
   return (
     <Box w="full" position="relative">
@@ -54,50 +51,50 @@ export const  CarListCarousel = ({car}: {car: ICar}) =>  {
       >
         <SwiperSlide>
           <Box w="full">
-            <CarCard car={car}/>
+            <CarCard car={car} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box w="full">
-          <CarCard car={car}/>
+            <CarCard car={car} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box w="full">
-          <CarCard car={car}/>
+            <CarCard car={car} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box w="full">
-            <CarCard car={car}/>
+            <CarCard car={car} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box w="full">
-            <CarCard car={car}/>
+            <CarCard car={car} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box w="full">
-            <CarCard car={car}/>
+            <CarCard car={car} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box w="full">
-            <CarCard car={car}/>
+            <CarCard car={car} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box>
-            <CarCard car={car}/>
+            <CarCard car={car} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box>
-            <CarCard car={car}/>
+            <CarCard car={car} />
           </Box>
         </SwiperSlide>
       </Swiper>
     </Box>
   );
-}
+};

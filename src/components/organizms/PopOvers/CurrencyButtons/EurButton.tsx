@@ -1,10 +1,9 @@
-import { Button, ButtonProps, Icon } from '@chakra-ui/react';
+import { Button, ButtonProps, HStack } from '@chakra-ui/react';
 import { forwardRef } from 'react';
-import { EuroIcon } from 'src/components/atoms/Icons/EuroIcon';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 
 export const ButtonEur = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({fontSize = "16px",  ...rest }, ref) => {
+  ({ fontSize = '16px', ...rest }, ref) => {
     return (
       <Button
         bg="white"
@@ -17,8 +16,11 @@ export const ButtonEur = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...rest}
       >
-        <Icon as={EuroIcon} boxSize={6} />
-        <TextRegular fontSize={fontSize} pt="3px">Eur</TextRegular>
+        {/* <Icon as={EuroIcon} boxSize={6} /> */}
+        <HStack pt="1px" pl="1">
+          <TextRegular fontSize="18px">€</TextRegular>
+          <TextRegular fontSize={fontSize}>Eur</TextRegular>
+        </HStack>
       </Button>
     );
   }

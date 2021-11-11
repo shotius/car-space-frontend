@@ -6,9 +6,9 @@
   </defs>
   <g id="russia-2" data-name="russia" transform="translate(-1226 -2116)" clip-path="url(#clip-path)">
     <g id="russia-3" data-name="russia" transform="translate(1223 2116)">
-      <path id="Path_1186" data-name="Path 1186" d="M0,0H26V20H0Z" fill="#fff" fill-rule="evenodd"/>
-      <path id="Path_1187" data-name="Path 1187" d="M0,160H26v13.333H0Z" transform="translate(0 -153.336)" fill="#0039a6" fill-rule="evenodd"/>
-      <path id="Path_1188" data-name="Path 1188" d="M0,320H26v6.667H0Z" transform="translate(0 -306.664)" fill="#d52b1e" fill-rule="evenodd"/>
+      <path id="Path_1186" data-name="Path 1186" d="M0,0H26V20H0Z" fill="#fff"/>
+      <path id="Path_1187" data-name="Path 1187" d="M0,160H26v13.333H0Z" transform="translate(0 -153.336)" fill="#0039a6"/>
+      <path id="Path_1188" data-name="Path 1188" d="M0,320H26v6.667H0Z" transform="translate(0 -306.664)" fill="#d52b1e"/>
     </g>
   </g>
 </svg>

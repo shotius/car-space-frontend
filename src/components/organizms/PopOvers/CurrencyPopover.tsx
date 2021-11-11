@@ -33,8 +33,9 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
       case 'USD':
         return (
           <ButtonUsd
-            w="60px"
-            p="0px 12px 0px 0px"
+            w="50px"
+            mr="2"
+            pl="0"
             _hover={{ bg: 'white' }}
             fontSize="14px"
             onClick={toggleCurrency}
@@ -43,8 +44,9 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
       case 'EUR':
         return (
           <ButtonEur
-            w="60px"
-            p="0px 12px 0px 0px"
+            w="50px"
+            pl="0"
+            mr="2"
             _hover={{ bg: 'white' }}
             fontSize="14px"
             onClick={toggleCurrency}
@@ -53,8 +55,9 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
       case 'GEL':
         return (
           <ButtonGel
-            w="60px"
-            p="0px 12px 0px 0px"
+            w="50px"
+            pl="0"
+            mr="2"
             _hover={{ bg: 'white' }}
             fontSize="14px"
             onClick={toggleCurrency}

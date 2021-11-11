@@ -6,18 +6,20 @@ import {
   PopoverArrow,
   PopoverBody,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from '@chakra-ui/react';
+import { GeoIcon } from 'src/components/atoms/Icons/GeoIcon';
+import { RusIcon } from 'src/components/atoms/Icons/RusIcon';
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
+import { ButtonRect } from 'src/components/molecules/Buttons/ButtonRect';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Languages } from 'src/constants/index';
-
 
 interface LanguagePopoverProps {
   isOpen: boolean;
   closePopover: () => void;
   togglePopover: () => void;
-  lang: string;
+  lang: Languages;
   setLanguage: (Currencies: Languages) => void;
 }
 
@@ -28,62 +30,73 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
   lang,
   setLanguage,
 }) => {
+  const icon = () => {
+    switch (lang) {
+      case 'Eng':
+        return UKIcon;
+      case 'Geo':
+        return GeoIcon;
+      case 'Rus':
+        return RusIcon;
+    }
+  };
+
   return (
-    <Popover
-      isOpen={isOpen}
-      placement="bottom"
-    >
+    <Popover isOpen={isOpen} placement="bottom">
       <PopoverTrigger>
         {/* here <Text /> is given instead of <TextRegular /> because of ref error */}
         <HStack spacing="2" cursor="pointer">
           <Button
-          fontSize={['14px', null, null, null , null, '16px']}
-          // mr={['2', null, null, null, '4']}
-          pr={[null, null, '4']}
-          cursor="pointer"
-          onClick={togglePopover}
-          variant="ghost"
-          fontWeight="light"
-          _hover={{
-            bg: "transparent"
-          }}
-          _active={{
-            bg: "transparent"
-          }}
-          minW="0px"
-          w="auto"
-          p="0"
-        >
-          <Icon as={UKIcon} boxSize="20px" mr="2"/>
-
-          {lang}
-        </Button>
+            mr="4"
+            w="50px"
+            onClick={togglePopover}
+            variant="ghost"
+            fontWeight="light"
+            _hover={{
+              bg: 'transparent',
+            }}
+            _active={{
+              bg: 'transparent',
+            }}
+            minW="0px"
+            p="0"
+          >
+            <Icon as={icon()} boxSize="20px" mr="2" />
+            <TextRegular pt="1px">{lang}</TextRegular>
+          </Button>
         </HStack>
       </PopoverTrigger>
       <PopoverContent w="70px" outline="none">
         <PopoverArrow />
-        <PopoverBody>
-          <VStack spacing={1}>
-            <Button
-              borderRadius="none"
-              bg="white"
+        <PopoverBody p="0">
+          <VStack spacing={1} p="0">
+            <ButtonRect
               onClick={() => {
-                setLanguage(Languages.ENG);
+                setLanguage('Eng');
                 closePopover();
               }}
             >
-              <TextRegular fontWeight="light">{Languages.ENG}</TextRegular>
-            </Button>
-            <Button
-              borderRadius="none"
-              bg="white"
+              <Icon as={UKIcon} mr="2" />
+              <TextRegular fontWeight="light">Eng</TextRegular>
+            </ButtonRect>
+            <ButtonRect
               onClick={() => {
-                setLanguage(Languages.GE);
+                setLanguage('Geo');
                 closePopover();
               }}
             >
-              <TextRegular fontWeight="light">{Languages.GE}</TextRegular>
-            </Button>
+              <Icon as={GeoIcon} mr="2" />
+              <TextRegular fontWeight="light">Geo</TextRegular>
+            </ButtonRect>
+            <ButtonRect
+              onClick={() => {
+                setLanguage('Rus');
+                closePopover();
+              }}
+            >
+              <Icon as={RusIcon} mr="2" />
+              <TextRegular fontWeight="light">Rus</TextRegular>
+            </ButtonRect>
           </VStack>
         </PopoverBody>
       </PopoverContent>

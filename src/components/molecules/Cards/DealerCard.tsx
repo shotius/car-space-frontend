@@ -14,8 +14,9 @@ export const DealerCard: React.FC<DealerCardProps> = () => {
       h="auto"
       cursor="pointer"
       _hover={{
-        boxShadow: '0 0.7rem 1.5rem rgba(0, 0, 0, 0.082)',
-        transform: 'translateY(-2px)',
+        // boxShadow: '0 0.7rem 1.5rem rgba(0, 0, 0, 0.082)',
+        boxShadow: "0px 3px 10px #00000029", 
+        // transform: 'translateY(-2px)',
         transition: 'all .2s',
       }}
     >

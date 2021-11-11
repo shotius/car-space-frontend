@@ -1,6 +1,6 @@
 import { ButtonProps } from "@chakra-ui/button";
 import { IconProps } from "@chakra-ui/icon";
-import { FiHeart } from "react-icons/fi";
+import { HeartIcon } from "src/components/atoms/Icons/HeatIcon";
 import { ButtonWithIcon } from "./IconWithButton";
 
 interface ButtonHeartProps {
@@ -10,10 +10,11 @@ interface ButtonHeartProps {
 export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({boxSize = 6, ...rest}) => {
   return (
     <ButtonWithIcon
-      icon={FiHeart}
+      icon={HeartIcon}
       boxSize={boxSize}
-      bg="autoGrey.600"
+      bg="autoGrey.500"
       _hover={{
+        fill: 'red', 
         bg: '#FB560729',
       }}
       {...rest}
