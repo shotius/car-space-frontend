@@ -1,16 +1,20 @@
 import { useDisclosure } from '@chakra-ui/hooks';
 import { HStack, Stack } from '@chakra-ui/layout';
 import { Button, Collapse, VStack } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { selectYearFrom, toggleAdvancedFilters } from 'src/redux/features/auth/carFilterSlice';
+import {
+  selectYearFrom,
+  toggleAdvancedFilters,
+} from 'src/redux/features/auth/carFilterSlice';
 import { ButtonRound } from '../Buttons/ButtonRound';
 import { SearchButton } from '../Buttons/SearchButton';
 import { InputRegular } from '../Inputs/InputRegular';
 import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
 import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
+import { MobileModelsPopup } from '../MobileSelectPopups/MobileModelsPopup';
 import { MobileTransmissionPopup } from '../MobileSelectPopups/MobileTransmissionPopup';
 import { MobileSelect } from '../Selects/MobileSelect';
 import { TextRegular } from '../Texts/TextRegular';
@@ -19,15 +23,24 @@ import { WithMobileKeyboard } from '../Wrappers/WithMobileKeyboard';
 interface ThreeMobileSelectsProps {}
 
 export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
-  const { brand, isAdvancedFiltersOpen } = useAppSelector((state) => state.carFilterReducer);
+  const { brands: selectedBrands, isAdvancedFiltersOpen } = useAppSelector(
+    (state) => state.carFilterReducer
+  );
   const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
   const dispatch = useAppDispatch();
+  const searchButtonRef = useRef<HTMLButtonElement>(null);
 
   // brand drawer
   const {
     isOpen: isBrandOpen,
     onClose: closeBrand,
     onOpen: openBrand,
+  } = useDisclosure();
+
+  const {
+    isOpen: isModelsOpen,
+    onClose: closeModels,
+    onOpen: openModels,
   } = useDisclosure();
 
   // engine
@@ -44,6 +57,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
   //   onOpen: openCylinders,
   // } = useDisclosure();
 
+  // Transmissions
   const {
     isOpen: isTransmOpen,
     onClose: closeTransm,
@@ -58,15 +72,19 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
 
   const handleModelSelect = () => {
     if (models.length !== 0) {
-      openBrand();
+      openModels();
     }
   };
 
   return (
     <Stack>
-      {/* mobile select **fake** and its drawer */}
-      <MobileSelect onClick={openBrand} label={brand || 'Brand'} />
+      {/* mobile select opens drawer */}
+      <MobileSelect
+        onClick={openBrand}
+        label={selectedBrands.join(' ') || 'Brand'}
+      />
       <MobileBrandPopup
+        finalFocusRef={searchButtonRef}
         brands={brands}
         isOpen={isBrandOpen}
         onClose={closeBrand}
@@ -78,6 +96,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
         label="Models"
         textOpacity={models.length !== 0 ? '0.5' : '0.2'}
       />
+      <MobileModelsPopup isOpen={isModelsOpen} onClose={closeModels} />
 
       {/* year */}
       <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
@@ -198,9 +217,13 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
       <VStack pt="2" spacing="3">
         {/* this mobile input sticks button to the keyboard */}
         <WithMobileKeyboard isKeyboardActive={keyboardActive}>
-          <SearchButton w="full" />
+          <SearchButton w="full" ref={searchButtonRef} />
         </WithMobileKeyboard>
-        <Button variant="link" onClick={() => dispatch(toggleAdvancedFilters())} bg="transparent">
+        <Button
+          variant="link"
+          onClick={() => dispatch(toggleAdvancedFilters())}
+          bg="transparent"
+        >
           <TextRegular
             color={'#000'}
             display={keyboardActive ? 'none' : 'block'}

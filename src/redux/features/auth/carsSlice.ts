@@ -47,9 +47,9 @@ export const getCars = createAsyncThunk(
 );
 
 
-export const getModels = createAsyncThunk('carFilter/getModels', async (brand: string, {rejectWithValue}) => {
+export const getModels = createAsyncThunk('carFilter/getModels', async (brand: string[], {rejectWithValue}) => {
   try {
-    const result = await carsService.getModels(brand)
+    const result = await carsService.getModels(brand[0]) // TO-DO on the server search for array
     return result
   } catch (error) {
     console.log(error)

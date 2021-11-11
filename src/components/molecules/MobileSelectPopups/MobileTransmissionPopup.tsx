@@ -45,7 +45,7 @@ export const MobileTransmissionPopup: React.FC<MobileTransmissionPopupProps> =
       onClose();
     };
     return (
-      <MobileFilterPopup isOpen={isOpen} onClose={onClose} submit={submit}>
+      <MobileFilterPopup isOpen={isOpen} onClose={onClose} onSubmit={submit}>
         <VStack w="full" alignItems="flex-start">
           {transmissions.map((tr) => (
             <Checkbox

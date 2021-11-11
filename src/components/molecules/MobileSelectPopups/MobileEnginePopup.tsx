@@ -42,7 +42,7 @@ export const MobileEnginePopup: React.FC<MobileEnginePopupProps> = ({
   };
 
   return (
-    <MobileFilterPopup isOpen={isOpen} onClose={onClose} submit={submit}>
+    <MobileFilterPopup isOpen={isOpen} onClose={onClose} onSubmit={submit}>
       <HStack h="full" divider={<StackDivider borderColor="autoGrey.400" />}>
         <VStack h="full" w="full" spacing="4">
           <Heading fontSize="16px" fontWeight="600">

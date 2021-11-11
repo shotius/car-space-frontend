@@ -19,8 +19,6 @@ import { useSwipeable } from 'react-swipeable';
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
 import { SearchIcon } from 'src/components/atoms/Icons/SearchIcon';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { selectBrand } from 'src/redux/features/auth/carFilterSlice';
-import { getModels } from 'src/redux/features/auth/carsSlice';
 import { ButtonRegular } from '../Buttons/ButtonRegular';
 import { TextButton } from '../Buttons/TextButton';
 import { TopBrandCard } from '../Cards/TopBrandCard';
@@ -30,27 +28,32 @@ import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { ButtonWithIcon } from '../Buttons/IconWithButton';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
+import { selectBrand } from 'src/redux/features/auth/carFilterSlice';
+import { getModels } from 'src/redux/features/auth/carsSlice';
+import { SearchInput } from '../Inputs/SearchInput';
 
 interface BrandSelectProps {
   brands: string[];
   isOpen: boolean;
   onClose: () => void;
+  finalFocusRef: React.RefObject<HTMLButtonElement>;
 }
 
 export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
   brands,
   isOpen,
   onClose,
+  finalFocusRef,
 }) => {
   const initialRef = useRef<HTMLButtonElement | null>(null);
   const [topBrandsVisible, setTopBrandsVisible] = useState(true);
   const [searchWord, setSearchWord] = useState<string>('');
-  const [selectedBrand, setSelectedBrand] = useState<string>('');
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (brands) {
-      setSelectedBrand(brands[0]);
+    if (brands.length) {
+      setSelectedBrands(selectedBrands.concat(brands[0]));
     }
   }, [brands]);
 
@@ -80,12 +83,31 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
     },
   });
 
+  // if user clicks second time on the  brand
+  // it will be removed from the selected brads list
+  // else brand will be added in the list
+  const toggleSelcetion = (brand: string) => {
+    if (selectedBrands.includes(brand)) {
+      setSelectedBrands(selectedBrands.filter((el) => el !== brand));
+    } else {
+      const brands = [...new Set(selectedBrands.concat(brand))];
+      setSelectedBrands(brands);
+    }
+  };
+
+  const onSubmit = () => {
+    dispatch(selectBrand(selectedBrands));
+    dispatch(getModels(selectedBrands));
+    onClose();
+  };
+
   return (
     <Drawer
       isOpen={isOpen}
       onClose={onClose}
       initialFocusRef={initialRef}
       placement="bottom"
+      finalFocusRef={finalFocusRef}
     >
       <DrawerOverlay />
 
@@ -95,7 +117,7 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
           {' '}
           <VStack spacing="4" pb="4" bg="white" zIndex="10" w="full">
             {/* search input */}
-            <InputGroup w="full">
+            {/* <InputGroup w="full">
               <InputLeftElement children={<SearchIcon fill="autoGrey.400" />} />
               <InputRightElement
                 children={
@@ -125,7 +147,17 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
                   setTopBrandsVisible(true);
                 }}
               />
-            </InputGroup>
+            </InputGroup> */}
+            <SearchInput
+              searchWord={searchWord}
+              setSearchWord={setSearchWord}
+              onFocus={() => {
+                setTopBrandsVisible(false);
+              }}
+              onBlur={() => {
+                setTopBrandsVisible(true);
+              }}
+            />
 
             {/* top brands */}
             <SectionHeader
@@ -144,32 +176,32 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
             >
               <TopBrandCard
                 icon={MercedesIcon}
-                maxW="48px"
-                maxH="48px"
+                maxW="43px"
+                maxH="45px"
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW="48px"
-                maxH="48px"
+                maxW="43px"
+                maxH="45px"
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW="48px"
-                maxH="48px"
+                maxW="43px"
+                maxH="45px"
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW="48px"
-                maxH="48px"
+                maxW="43px"
+                maxH="45px"
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW="48px"
-                maxH="48px"
+                maxW="43px"
+                maxH="45px"
                 boxSize={5}
               />
             </ScrollableDiv>
@@ -194,8 +226,10 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
                   </Heading>
                 ) : (
                   <TextButton
-                    onClick={() => setSelectedBrand(brand)}
-                    color={selectedBrand === brand ? 'autoOrange.500' : '#000'}
+                    onClick={() => toggleSelcetion(brand)}
+                    color={
+                      selectedBrands.includes(brand) ? 'autoOrange.500' : '#000'
+                    }
                     fontSize="16px"
                   >
                     {brand}
@@ -207,16 +241,7 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
         </DrawerBody>
         {/* footer */}
         <DrawerFooter p="16px 0">
-          {' '}
-          <ButtonRegular
-            ref={initialRef}
-            p="0.5"
-            onClick={() => {
-              dispatch(selectBrand(selectedBrand));
-              dispatch(getModels(selectedBrand));
-              onClose();
-            }}
-          >
+          <ButtonRegular ref={initialRef} p="0.5" onClick={onSubmit}>
             Apply
           </ButtonRegular>
         </DrawerFooter>

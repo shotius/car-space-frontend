@@ -1,3 +1,5 @@
+import { CurrencyType } from './../../../constants/index';
+
 export interface ICar {
   _id: string, 
   lN: string, // Lot number
@@ -34,11 +36,10 @@ export interface CarsSliceState {
 }
 
 export type Transmission = 'Manual' | 'Automatic' | 'CVT';
-export type ICurrency = 'USD' | 'EUR' | 'LARI'
 
 export interface CarFilters {
-  brand: string | null,
-  model: string | null, 
+  brands: string[],
+  models: string[], 
   yearFrom: string | null, 
   yearTo: string | null, 
   priceFrom: string | null, 
@@ -46,7 +47,7 @@ export interface CarFilters {
   engineFrom: number | null, 
   engineTo: number | null
   transsmision: Transmission[]
-  currency: ICurrency
+  currency: CurrencyType
   isAdvancedFiltersOpen: boolean
 }
 

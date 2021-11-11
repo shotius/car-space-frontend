@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { CarFilters } from './types';
 
 const initialState: CarFilters = {
-  brand: null,
-  model: null,
+  brands: [],
+  models: [],
   yearFrom: null,
   yearTo: null,
   priceFrom: null,
@@ -11,7 +11,7 @@ const initialState: CarFilters = {
   engineFrom: null,
   engineTo: null,
   transsmision: [],
-  currency: 'LARI',
+  currency: "GEL",
   isAdvancedFiltersOpen: false
 };
 
@@ -20,7 +20,10 @@ const carFilterSlice = createSlice({
   initialState,
   reducers: {
     selectBrand: (state, action) => {
-      state.brand = action.payload;
+      state.brands = action.payload;
+    },
+    selectModels: (state, action) => {
+      state.models = action.payload
     },
     selectEngineFrom: (state, action) => {
       state.engineFrom = action.payload;
@@ -61,6 +64,7 @@ const carFilterSlice = createSlice({
 
 export const {
   selectBrand,
+  selectModels, 
   selectEngineFrom,
   selectEnginTo,
   selectTranssmision,
@@ -70,6 +74,6 @@ export const {
   selectYearTo,
   selectCurrency,
   toggleAdvancedFilters,
-  openAdvancedFilters
+  openAdvancedFilters,
 } = carFilterSlice.actions;
 export const { reducer: carFilterReducer } = carFilterSlice;

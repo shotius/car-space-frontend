@@ -1,5 +1,5 @@
 import { VStack } from '@chakra-ui/layout';
-import { Flex, Spinner, useDisclosure } from '@chakra-ui/react';
+import { Flex, Spinner } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
