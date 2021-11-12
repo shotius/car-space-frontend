@@ -22,23 +22,25 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
   const { models: initialySelectedModels } = useAppSelector(
     (state) => state.carFilterReducer
   );
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
+  // asign initial selected models to the state
+  useEffect(() => {
+    if (initialySelectedModels.length) {
+      setSelectedModels(initialySelectedModels);
+    }
+  }, [initialySelectedModels]);
 
-    useEffect(() => {
-      if(initialySelectedModels.length) {
-        setSelectedModels(initialySelectedModels)
-      }
-    }, [initialySelectedModels])
-
+  // checkbox change handler
   const onChangeHandler = (model: string) => {
     if (!selectedModels.includes(model)) {
-      setSelectedModels(selectedModels.concat(model))
+      setSelectedModels(selectedModels.concat(model));
     } else {
-      setSelectedModels(selectedModels.filter(m => m !== model))
+      setSelectedModels(selectedModels.filter((m) => m !== model));
     }
   };
 
+  // filter based on search word
   const modelsToShow = () =>
     allModels.filter((model) =>
       model.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
@@ -49,8 +51,8 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={() => {
-        dispatch(selectModels(selectedModels))
-        onClose()
+        dispatch(selectModels(selectedModels));
+        onClose();
       }}
       header={
         <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />

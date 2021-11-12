@@ -12,6 +12,12 @@ const initialState: CarFilters = {
   engineTo: null,
   transsmision: [],
   currency: "GEL",
+  conditions: [],
+  types: [],
+  locations: [],
+  drives: [],
+  fuels: [],
+
   isAdvancedFiltersOpen: false
 };
 
@@ -49,6 +55,21 @@ const carFilterSlice = createSlice({
     selectCurrency: (state, action) => {
       state.currency = action.payload;
     },
+    selectConditions: (state, action) => {
+      state.conditions = action.payload
+    }, 
+    selectTypes: (state, action) => {
+      state.types = action.payload
+    }, 
+    selectLocations: (state, action) => {
+      state.locations = action.payload
+    }, 
+    selectDrives: (state, action) => {
+      state.drives = action.payload
+    }, 
+    selectFuels: (state, action) => {
+      state.fuels = action.payload
+    }, 
     toggleAdvancedFilters: (state) => {
       if (state.isAdvancedFiltersOpen) {
         state.isAdvancedFiltersOpen = false
@@ -58,7 +79,7 @@ const carFilterSlice = createSlice({
     },
     openAdvancedFilters: (state) => {
       state.isAdvancedFiltersOpen = true
-    }
+    },
   },
 });
 
@@ -73,6 +94,11 @@ export const {
   selectYearFrom,
   selectYearTo,
   selectCurrency,
+  selectConditions, 
+  selectDrives, 
+  selectFuels, 
+  selectTypes, 
+  selectLocations,
   toggleAdvancedFilters,
   openAdvancedFilters,
 } = carFilterSlice.actions;

@@ -55,6 +55,11 @@ export interface CarFilters {
   transsmision: Transmission[];
   currency: CurrencyType;
   isAdvancedFiltersOpen: boolean;
+  conditions: string[];
+  types: string[];
+  locations: string[];
+  drives: string[];
+  fuels: string[];
 }
 
 export interface IPagination {

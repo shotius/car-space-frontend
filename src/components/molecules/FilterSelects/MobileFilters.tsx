@@ -13,6 +13,7 @@ import { ButtonRound } from '../Buttons/ButtonRound';
 import { SearchButton } from '../Buttons/SearchButton';
 import { InputRegular } from '../Inputs/InputRegular';
 import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
+import { MobileConditionPopup } from '../MobileSelectPopups/MobileConditionPopup';
 import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
 import { MobileModelsPopup } from '../MobileSelectPopups/MobileModelsPopup';
 import { MobileTransmissionPopup } from '../MobileSelectPopups/MobileTransmissionPopup';
@@ -62,6 +63,13 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
     isOpen: isTransmOpen,
     onClose: closeTransm,
     onOpen: openTransm,
+  } = useDisclosure();
+
+  // Conditions
+  const {
+    isOpen: isConditionsOpen,
+    onOpen: openConditions,
+    onClose: closeConditions,
   } = useDisclosure();
 
   // advanced filters
@@ -174,15 +182,24 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
         <VStack>
           <MobileSelect onClick={openEngine} label="Engine"></MobileSelect>
           <MobileEnginePopup onClose={closeEngine} isOpen={isEngineOpen} />
-
+          
+          {/* Mileage */}
           <MobileSelect
             onClick={() => console.log('cliecked')}
             label="Mileage"
           ></MobileSelect>
+
+          {/* Conditions */}
           <MobileSelect
-            onClick={() => console.log('cliecked')}
+            onClick={openConditions}
             label="Condition"
           ></MobileSelect>
+          <MobileConditionPopup
+            isOpen={isConditionsOpen}
+            onClose={closeConditions}
+          />
+          
+          {/* Types */}
           <MobileSelect
             onClick={() => console.log('cliecked')}
             label="Type"
@@ -209,7 +226,6 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
             onClick={() => console.log('cliecked')}
             label="Fuel"
           ></MobileSelect>
-
           {/* <MobileSelect onClick={openCylinders} label="Cylinder"></MobileSelect> */}
         </VStack>
       </Collapse>

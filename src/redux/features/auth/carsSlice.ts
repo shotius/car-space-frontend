@@ -29,9 +29,7 @@ export const getFilters = createAsyncThunk(
   'cars/getFilters',
   async (_, { rejectWithValue }) => {
     try {
-      const filters = await carsService.getFilters();
-      console.log('filters: ', filters);
-      return filters;
+      return await carsService.getFilters();
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -101,7 +99,7 @@ const carsSlice = createSlice({
     builder.addCase(getFilters.fulfilled, (state, action) => {
       const filters = action.payload as IFilters;
 
-      state.brands = filters.brands
+      state.brands = filters.brands;
       state.conditions = filters.conditions;
       state.types = filters.types;
       state.locations = filters.location;
