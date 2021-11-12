@@ -1,7 +1,7 @@
 import { Checkbox, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { selectTypes } from 'src/redux/features/auth/carFilterSlice';
+import { selectTypes } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SearchInput } from '../Inputs/SearchInput';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 

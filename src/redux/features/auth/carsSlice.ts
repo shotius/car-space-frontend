@@ -106,6 +106,7 @@ const carsSlice = createSlice({
       state.locations = filters.location;
       state.drives = filters.drives;
       state.fuels = filters.fuels;
+      state.cylinders =filters.cylinders
     });
     builder.addCase(getFilters.rejected, (state) => {
       state.getFiltersError = true;

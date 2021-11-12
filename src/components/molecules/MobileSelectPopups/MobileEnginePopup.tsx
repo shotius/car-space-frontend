@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectEngineFrom,
   selectEnginTo
-} from 'src/redux/features/auth/carFilterSlice';
+} from 'src/redux/features/auth/selectedCarFilterSlice';
 import { TextButton } from '../Buttons/TextButton';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 

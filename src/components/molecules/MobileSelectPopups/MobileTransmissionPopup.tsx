@@ -2,7 +2,7 @@ import { Checkbox } from '@chakra-ui/checkbox';
 import { VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { selectTranssmision } from 'src/redux/features/auth/carFilterSlice';
+import { selectTranssmision } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { Transmission } from 'src/redux/features/auth/types';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 

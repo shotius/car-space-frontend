@@ -13,7 +13,7 @@ import { useSwipeable } from 'react-swipeable';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { selectBrand } from 'src/redux/features/auth/carFilterSlice';
+import { selectBrand } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { getModels } from 'src/redux/features/auth/carsSlice';
 import { ButtonRegular } from '../Buttons/ButtonRegular';
 import { TextButton } from '../Buttons/TextButton';

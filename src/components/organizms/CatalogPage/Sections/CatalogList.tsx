@@ -9,7 +9,7 @@ import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
 import { FilterWrap } from 'src/components/molecules/Wrappers/FilterWrap';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { toggleAdvancedFilters } from 'src/redux/features/auth/carFilterSlice';
+import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { getCars, getFilters } from 'src/redux/features/auth/carsSlice';
 import { ICar } from 'src/redux/features/auth/types';

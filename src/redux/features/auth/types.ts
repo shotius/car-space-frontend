@@ -76,4 +76,5 @@ export interface IFilters {
   drives: string[];
   fuels: string[];
   brands: string[]
+  cylinders: string[]
 }

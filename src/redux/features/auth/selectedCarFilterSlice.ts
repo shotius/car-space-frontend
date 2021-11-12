@@ -11,14 +11,14 @@ const initialState: SelectedCarFilters = {
   engineFrom: null,
   engineTo: null,
   transsmision: [],
-  currency: "GEL",
+  currency: 'GEL',
   conditions: [],
   types: [],
   locations: [],
   drives: [],
   fuels: [],
-  cylinders: [], 
-  isAdvancedFiltersOpen: false
+  cylinders: [],
+  isAdvancedFiltersOpen: false,
 };
 
 const selectedCarFilterSlice = createSlice({
@@ -29,7 +29,7 @@ const selectedCarFilterSlice = createSlice({
       state.brands = action.payload;
     },
     selectModels: (state, action) => {
-      state.models = action.payload
+      state.models = action.payload;
     },
     selectEngineFrom: (state, action) => {
       state.engineFrom = action.payload;
@@ -56,36 +56,39 @@ const selectedCarFilterSlice = createSlice({
       state.currency = action.payload;
     },
     selectConditions: (state, action) => {
-      state.conditions = action.payload
-    }, 
+      state.conditions = action.payload;
+    },
     selectTypes: (state, action) => {
-      state.types = action.payload
-    }, 
+      state.types = action.payload;
+    },
     selectLocations: (state, action) => {
-      state.locations = action.payload
-    }, 
+      state.locations = action.payload;
+    },
     selectDrives: (state, action) => {
-      state.drives = action.payload
-    }, 
+      state.drives = action.payload;
+    },
     selectFuels: (state, action) => {
-      state.fuels = action.payload
-    }, 
+      state.fuels = action.payload;
+    },
+    selectCylinders: (state, action) => {
+      state.cylinders = action.payload;
+    },
     toggleAdvancedFilters: (state) => {
       if (state.isAdvancedFiltersOpen) {
-        state.isAdvancedFiltersOpen = false
+        state.isAdvancedFiltersOpen = false;
       } else {
-        state.isAdvancedFiltersOpen = true
+        state.isAdvancedFiltersOpen = true;
       }
     },
     openAdvancedFilters: (state) => {
-      state.isAdvancedFiltersOpen = true
+      state.isAdvancedFiltersOpen = true;
     },
   },
 });
 
 export const {
   selectBrand,
-  selectModels, 
+  selectModels,
   selectEngineFrom,
   selectEnginTo,
   selectTranssmision,
@@ -94,12 +97,13 @@ export const {
   selectYearFrom,
   selectYearTo,
   selectCurrency,
-  selectConditions, 
-  selectDrives, 
-  selectFuels, 
-  selectTypes, 
+  selectConditions,
+  selectDrives,
+  selectFuels,
+  selectTypes,
   selectLocations,
   toggleAdvancedFilters,
   openAdvancedFilters,
+  selectCylinders,
 } = selectedCarFilterSlice.actions;
 export const { reducer: selectedCarFilters } = selectedCarFilterSlice;

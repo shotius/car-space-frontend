@@ -8,12 +8,13 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectYearFrom,
   toggleAdvancedFilters,
-} from 'src/redux/features/auth/carFilterSlice';
+} from 'src/redux/features/auth/selectedCarFilterSlice';
 import { ButtonRound } from '../Buttons/ButtonRound';
 import { SearchButton } from '../Buttons/SearchButton';
 import { InputRegular } from '../Inputs/InputRegular';
 import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
 import { MobileConditionPopup } from '../MobileSelectPopups/MobileConditionPopup';
+import { MobileCylinderPopup } from '../MobileSelectPopups/MobileCylinderPopup';
 import { MobileDrivesPopup } from '../MobileSelectPopups/MobileDrivePopup';
 import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
 import { MobileFuelsPopup } from '../MobileSelectPopups/MobileFuelPopup';
@@ -55,13 +56,6 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
     onOpen: openEngine,
   } = useDisclosure();
 
-  // // cylinders
-  // const {
-  //   isOpen: isCylindersOpen,
-  //   onClose: closeCylinders,
-  //   onOpen: openCylinders,
-  // } = useDisclosure();
-
   // Transmissions
   const {
     isOpen: isTransmOpen,
@@ -92,17 +86,24 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
 
   // Drives
   const {
-    isOpen: isDrivesOpen, 
-    onOpen: openDrives, 
-    onClose: closeDrives
-  } = useDisclosure()
+    isOpen: isDrivesOpen,
+    onOpen: openDrives,
+    onClose: closeDrives,
+  } = useDisclosure();
 
   // Fuels
   const {
-    isOpen: isFuelsOpen, 
-    onOpen: openFuels, 
-    onClose: closeFuels
-  } = useDisclosure()
+    isOpen: isFuelsOpen,
+    onOpen: openFuels,
+    onClose: closeFuels,
+  } = useDisclosure();
+
+  // cylinders
+  const {
+    isOpen: isCylindersOpen,
+    onClose: closeCylinders,
+    onOpen: openCylinders,
+  } = useDisclosure();
 
   // advanced filters
   const { brands, models } = useAppSelector((state) => state.carsReducer);
@@ -236,11 +237,11 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
           <MobileTypePopup isOpen={isTypesOpen} onClose={closeTypes} />
 
           {/* Locations */}
-          <MobileSelect
-            onClick={openLocations}
-            label="Location"
-          ></MobileSelect>
-          <MobileLocationPopup isOpen={isLocatinsOpen} onClose={closeLocations}/> 
+          <MobileSelect onClick={openLocations} label="Location"></MobileSelect>
+          <MobileLocationPopup
+            isOpen={isLocatinsOpen}
+            onClose={closeLocations}
+          />
 
           {/* transmission */}
           <MobileSelect
@@ -252,20 +253,19 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
             onClose={closeTransm}
           />
           {/* drive */}
-          <MobileSelect
-            onClick={openDrives}
-            label="Drive"
-          ></MobileSelect>
-          <MobileDrivesPopup isOpen={isDrivesOpen} onClose={closeDrives} /> 
+          <MobileSelect onClick={openDrives} label="Drive"></MobileSelect>
+          <MobileDrivesPopup isOpen={isDrivesOpen} onClose={closeDrives} />
 
           {/* Fuels */}
-          <MobileSelect
-            onClick={openFuels}
-            label="Fuel"
-          ></MobileSelect>
-          <MobileFuelsPopup isOpen={isFuelsOpen} onClose={closeFuels} /> 
+          <MobileSelect onClick={openFuels} label="Fuel"></MobileSelect>
+          <MobileFuelsPopup isOpen={isFuelsOpen} onClose={closeFuels} />
 
-          {/* <MobileSelect onClick={openCylinders} label="Cylinder"></MobileSelect> */}
+          {/* Cylinders */}
+          <MobileSelect onClick={openCylinders} label="Cylinder"></MobileSelect>
+          <MobileCylinderPopup
+            isOpen={isCylindersOpen}
+            onClose={closeCylinders}
+          />
         </VStack>
       </Collapse>
       {/* apply button */}

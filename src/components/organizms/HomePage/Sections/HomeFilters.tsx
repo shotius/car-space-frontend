@@ -6,7 +6,7 @@ import { SearchButton } from '../../../molecules/Buttons/SearchButton';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { useHistory } from 'react-router';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { openAdvancedFilters } from 'src/redux/features/auth/carFilterSlice';
+import { openAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 
 interface SearchProps {}
 

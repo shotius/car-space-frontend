@@ -58,7 +58,8 @@ const getFilters = async () => {
       axios.get('/locations'),
       axios.get('/drives'),
       axios.get('/fuels'),
-      axios.get('/brands')
+      axios.get('/brands'),
+      axios.get('/cylinders'),
     ]);
 
     const filters: IFilters = {
@@ -69,9 +70,10 @@ const getFilters = async () => {
       drives: results[3].status === 'fulfilled' ? results[3].value.data : [],
       fuels: results[4].status === 'fulfilled' ? results[4].value.data : [],
       brands: results[5].status === 'fulfilled' ? results[5].value.data : [],
+      cylinders: results[6].status === 'fulfilled' ? results[6].value.data : [],
     };
 
-    return filters
+    return filters;
   } catch (error) {
     throw error;
   }
