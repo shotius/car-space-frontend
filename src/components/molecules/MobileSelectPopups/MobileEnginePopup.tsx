@@ -19,7 +19,7 @@ export const MobileEnginePopup: React.FC<MobileEnginePopupProps> = ({
 }) => {
   // on the second visit user fill see last selections
   const { engineFrom: initEnginFrom, engineTo: initEnginTo } = useAppSelector(
-    (state) => state.carFilterReducer
+    (state) => state.selectedCarFilters
   );
   const [engineFrom, setEngineFrom] = useState(initEnginFrom || 0.5);
   const [engineTo, setEngineTo] = useState(initEnginTo || 0.5);

@@ -15,7 +15,7 @@ export const MobileTransmissionPopup: React.FC<MobileTransmissionPopupProps> =
   ({ isOpen, onClose }) => {
     // if user opens filter second types last selection will be saved
     const { transsmision: initialSelection } = useAppSelector(
-      (state) => state.carFilterReducer
+      (state) => state.selectedCarFilters
     );
     // state
     const [selectedTransmissions, setSelectedTransmissions] =

@@ -20,7 +20,7 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
 
   const { models: allModels } = useAppSelector((state) => state.carsReducer);
   const { models: initialySelectedModels } = useAppSelector(
-    (state) => state.carFilterReducer
+    (state) => state.selectedCarFilters
   );
   const dispatch = useAppDispatch();
 

@@ -20,7 +20,7 @@ interface CatalogLIstProps {}
 
 export const CatalogList: React.FC<CatalogLIstProps> = () => {
   const { isAdvancedFiltersOpen } = useAppSelector(
-    (state) => state.carFilterReducer
+    (state) => state.selectedCarFilters
   );
   const { cars, fethingCars } = useAppSelector((state) => state.carsReducer);
   const { activePage, totalPages } = useAppSelector(

@@ -1,53 +1,52 @@
 import { Checkbox, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { selectConditions } from 'src/redux/features/auth/carFilterSlice';
+import { selectLocations } from 'src/redux/features/auth/carFilterSlice';
 import { SearchInput } from '../Inputs/SearchInput';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
-interface MobileConditionPopupProps {
+interface MobileLocationPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export const MobileConditionPopup: React.FC<MobileConditionPopupProps> = ({
+export const MobileLocationPopup: React.FC<MobileLocationPopupProps> = ({
   isOpen,
   onClose,
 }) => {
   const [searchWord, setSearchWord] = useState('');
-  const [selectedConditions, setSelectedConditions] = useState<string[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   // all conditions
-  const { conditions: allConditions } = useAppSelector(
+  const { locations: allLocations } = useAppSelector(
     (state) => state.carsReducer
   );
   // already selected conditions
-  const { conditions: initSelectedConditions } = useAppSelector(
+  const { locations: initSelectedLocations } = useAppSelector(
     (state) => state.selectedCarFilters
   );
 
   // asign already selected conditions to the state
   useEffect(() => {
-    if (initSelectedConditions.length) {
-      setSelectedConditions(initSelectedConditions);
+    if (initSelectedLocations.length) {
+      setSelectedLocation(initSelectedLocations);
     }
-  }, [initSelectedConditions]);
+  }, [initSelectedLocations]);
 
   // conditions filtered base on search word
   // if condition is empty it means it is not demaged so "New"
-  const conditionsToShow = () =>
-    allConditions.filter(
-      (condition) =>
-        condition &&
-        condition.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
-    );
+  const LocationsToShow = () =>
+    allLocations
+      .filter((loc) =>
+        loc.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
+      );
 
   // checkbox change handler
-  const onChangeHandler = (condition: string) => {
-    if (!selectedConditions.includes(condition)) {
-      setSelectedConditions(selectedConditions.concat(condition));
+  const onChangeHandler = (location: string) => {
+    if (!selectedLocation.includes(location)) {
+      setSelectedLocation(selectedLocation.concat(location));
     } else {
-      setSelectedConditions(selectedConditions.filter((c) => c !== condition));
+      setSelectedLocation(selectedLocation.filter((c) => c !== location));
     }
   };
 
@@ -56,25 +55,25 @@ export const MobileConditionPopup: React.FC<MobileConditionPopupProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={() => {
-        dispatch(selectConditions(selectedConditions));
+        dispatch(selectLocations(selectedLocation));
         onClose();
       }}
       header={
         <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />
       }
     >
-      <VStack w="full" alignItems="flex-start" minH="80vh" spacing="16px">
-        {conditionsToShow().map((condition) => (
+      <VStack w="full" alignItems="flex-start" spacing="16px">
+        {LocationsToShow().map((locations) => (
           <Checkbox
             colorScheme="autoOrange"
-            defaultChecked={initSelectedConditions?.includes(condition)}
+            defaultChecked={initSelectedLocations?.includes(locations)}
             onChange={(e) => {
               e.preventDefault();
-              onChangeHandler(condition);
+              onChangeHandler(locations);
             }}
-            key={condition}
+            key={locations}
           >
-            {condition}
+            {locations}
           </Checkbox>
         ))}
       </VStack>

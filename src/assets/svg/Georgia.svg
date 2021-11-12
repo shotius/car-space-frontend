@@ -1,6 +1,6 @@
 <svg id="Georgia" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
   <defs>
-    <clipPath id="clipPath">
+    <clipPath id="clip-path">
       <circle id="Ellipse_28" data-name="Ellipse 28" cx="10" cy="10" r="10" transform="translate(1297 2152)" fill="#fff"/>
     </clipPath>
   </defs>

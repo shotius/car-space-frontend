@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CarFilters } from './types';
+import { SelectedCarFilters } from './types';
 
-const initialState: CarFilters = {
+const initialState: SelectedCarFilters = {
   brands: [],
   models: [],
   yearFrom: null,
@@ -17,11 +17,11 @@ const initialState: CarFilters = {
   locations: [],
   drives: [],
   fuels: [],
-
+  cylinders: [], 
   isAdvancedFiltersOpen: false
 };
 
-const carFilterSlice = createSlice({
+const selectedCarFilterSlice = createSlice({
   name: 'carFilter',
   initialState,
   reducers: {
@@ -101,5 +101,5 @@ export const {
   selectLocations,
   toggleAdvancedFilters,
   openAdvancedFilters,
-} = carFilterSlice.actions;
-export const { reducer: carFilterReducer } = carFilterSlice;
+} = selectedCarFilterSlice.actions;
+export const { reducer: selectedCarFilters } = selectedCarFilterSlice;

@@ -1,53 +1,52 @@
 import { Checkbox, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { selectConditions } from 'src/redux/features/auth/carFilterSlice';
+import { selectDrives, selectFuels } from 'src/redux/features/auth/carFilterSlice';
 import { SearchInput } from '../Inputs/SearchInput';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
-interface MobileConditionPopupProps {
+interface MobileFuelPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export const MobileConditionPopup: React.FC<MobileConditionPopupProps> = ({
+export const MobileFuelsPopup: React.FC<MobileFuelPopupProps> = ({
   isOpen,
   onClose,
 }) => {
   const [searchWord, setSearchWord] = useState('');
-  const [selectedConditions, setSelectedConditions] = useState<string[]>([]);
+  const [selectedFuels, setSelectedFuels] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   // all conditions
-  const { conditions: allConditions } = useAppSelector(
+  const { fuels: allFuels } = useAppSelector(
     (state) => state.carsReducer
   );
   // already selected conditions
-  const { conditions: initSelectedConditions } = useAppSelector(
+  const { fuels: initSelectedFuels } = useAppSelector(
     (state) => state.selectedCarFilters
   );
 
   // asign already selected conditions to the state
   useEffect(() => {
-    if (initSelectedConditions.length) {
-      setSelectedConditions(initSelectedConditions);
+    if (initSelectedFuels.length) {
+      setSelectedFuels(initSelectedFuels);
     }
-  }, [initSelectedConditions]);
+  }, [initSelectedFuels]);
 
   // conditions filtered base on search word
   // if condition is empty it means it is not demaged so "New"
-  const conditionsToShow = () =>
-    allConditions.filter(
-      (condition) =>
-        condition &&
-        condition.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
-    );
+  const fuelsToShow = () =>
+    allFuels
+      .filter((fuels) =>
+        fuels && fuels.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
+      );
 
   // checkbox change handler
-  const onChangeHandler = (condition: string) => {
-    if (!selectedConditions.includes(condition)) {
-      setSelectedConditions(selectedConditions.concat(condition));
+  const onChangeHandler = (fuel: string) => {
+    if (!selectedFuels.includes(fuel)) {
+      setSelectedFuels(selectedFuels.concat(fuel));
     } else {
-      setSelectedConditions(selectedConditions.filter((c) => c !== condition));
+      setSelectedFuels(selectedFuels.filter((c) => c !== fuel));
     }
   };
 
@@ -56,25 +55,25 @@ export const MobileConditionPopup: React.FC<MobileConditionPopupProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={() => {
-        dispatch(selectConditions(selectedConditions));
+        dispatch(selectFuels(selectedFuels));
         onClose();
       }}
       header={
         <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />
       }
     >
-      <VStack w="full" alignItems="flex-start" minH="80vh" spacing="16px">
-        {conditionsToShow().map((condition) => (
+      <VStack w="full" alignItems="flex-start" spacing="16px" minH="30vh">
+        {fuelsToShow().map((fuel) => (
           <Checkbox
             colorScheme="autoOrange"
-            defaultChecked={initSelectedConditions?.includes(condition)}
+            defaultChecked={initSelectedFuels?.includes(fuel)}
             onChange={(e) => {
               e.preventDefault();
-              onChangeHandler(condition);
+              onChangeHandler(fuel);
             }}
-            key={condition}
+            key={fuel}
           >
-            {condition}
+            {fuel}
           </Checkbox>
         ))}
       </VStack>

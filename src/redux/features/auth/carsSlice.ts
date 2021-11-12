@@ -13,6 +13,7 @@ const initialState: CarsSliceState = {
   fuels: [],
   conditions: [],
   drives: [],
+  cylinders: [], 
   getFiltersError: false,
 };
 

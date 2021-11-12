@@ -14,9 +14,13 @@ import { SearchButton } from '../Buttons/SearchButton';
 import { InputRegular } from '../Inputs/InputRegular';
 import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
 import { MobileConditionPopup } from '../MobileSelectPopups/MobileConditionPopup';
+import { MobileDrivesPopup } from '../MobileSelectPopups/MobileDrivePopup';
 import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
+import { MobileFuelsPopup } from '../MobileSelectPopups/MobileFuelPopup';
+import { MobileLocationPopup } from '../MobileSelectPopups/MobileLocationPopup';
 import { MobileModelsPopup } from '../MobileSelectPopups/MobileModelsPopup';
 import { MobileTransmissionPopup } from '../MobileSelectPopups/MobileTransmissionPopup';
+import { MobileTypePopup } from '../MobileSelectPopups/MobileTypePopup';
 import { MobileSelect } from '../Selects/MobileSelect';
 import { TextRegular } from '../Texts/TextRegular';
 import { WithMobileKeyboard } from '../Wrappers/WithMobileKeyboard';
@@ -25,7 +29,7 @@ interface ThreeMobileSelectsProps {}
 
 export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
   const { brands: selectedBrands, isAdvancedFiltersOpen } = useAppSelector(
-    (state) => state.carFilterReducer
+    (state) => state.selectedCarFilters
   );
   const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
   const dispatch = useAppDispatch();
@@ -71,6 +75,34 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
     onOpen: openConditions,
     onClose: closeConditions,
   } = useDisclosure();
+
+  // Types
+  const {
+    isOpen: isTypesOpen,
+    onOpen: openTypes,
+    onClose: closeTypes,
+  } = useDisclosure();
+
+  // Locations
+  const {
+    isOpen: isLocatinsOpen,
+    onOpen: openLocations,
+    onClose: closeLocations,
+  } = useDisclosure();
+
+  // Drives
+  const {
+    isOpen: isDrivesOpen, 
+    onOpen: openDrives, 
+    onClose: closeDrives
+  } = useDisclosure()
+
+  // Fuels
+  const {
+    isOpen: isFuelsOpen, 
+    onOpen: openFuels, 
+    onClose: closeFuels
+  } = useDisclosure()
 
   // advanced filters
   const { brands, models } = useAppSelector((state) => state.carsReducer);
@@ -182,7 +214,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
         <VStack>
           <MobileSelect onClick={openEngine} label="Engine"></MobileSelect>
           <MobileEnginePopup onClose={closeEngine} isOpen={isEngineOpen} />
-          
+
           {/* Mileage */}
           <MobileSelect
             onClick={() => console.log('cliecked')}
@@ -198,16 +230,18 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
             isOpen={isConditionsOpen}
             onClose={closeConditions}
           />
-          
+
           {/* Types */}
+          <MobileSelect onClick={openTypes} label="Type"></MobileSelect>
+          <MobileTypePopup isOpen={isTypesOpen} onClose={closeTypes} />
+
+          {/* Locations */}
           <MobileSelect
-            onClick={() => console.log('cliecked')}
-            label="Type"
-          ></MobileSelect>
-          <MobileSelect
-            onClick={() => console.log('cliecked')}
+            onClick={openLocations}
             label="Location"
           ></MobileSelect>
+          <MobileLocationPopup isOpen={isLocatinsOpen} onClose={closeLocations}/> 
+
           {/* transmission */}
           <MobileSelect
             onClick={openTransm}
@@ -219,13 +253,18 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
           />
           {/* drive */}
           <MobileSelect
-            onClick={() => console.log('cliecked')}
+            onClick={openDrives}
             label="Drive"
           ></MobileSelect>
+          <MobileDrivesPopup isOpen={isDrivesOpen} onClose={closeDrives} /> 
+
+          {/* Fuels */}
           <MobileSelect
-            onClick={() => console.log('cliecked')}
+            onClick={openFuels}
             label="Fuel"
           ></MobileSelect>
+          <MobileFuelsPopup isOpen={isFuelsOpen} onClose={closeFuels} /> 
+
           {/* <MobileSelect onClick={openCylinders} label="Cylinder"></MobileSelect> */}
         </VStack>
       </Collapse>

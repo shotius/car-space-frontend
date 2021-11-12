@@ -38,12 +38,13 @@ export interface CarsSliceState {
   locations: string[];
   drives: string[];
   fuels: string[];
+  cylinders: string[]
   getFiltersError: boolean
 }
 
 export type Transmission = 'Manual' | 'Automatic' | 'CVT';
 
-export interface CarFilters {
+export interface SelectedCarFilters {
   brands: string[];
   models: string[];
   yearFrom: string | null;
@@ -60,6 +61,7 @@ export interface CarFilters {
   locations: string[];
   drives: string[];
   fuels: string[];
+  cylinders: string[]
 }
 
 export interface IPagination {
