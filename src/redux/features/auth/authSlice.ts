@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import authService from "src/services/authService";
-import { axios } from "src/utils/axios";
-import { Roles } from "src/constants/index";
-import { ApiResponse } from "../../../../../server/shared_with_front/types/types-shared";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import authService from 'src/services/authService';
+import { axios } from 'src/utils/axios';
+import { Roles } from 'src/constants/index';
+import { ApiResponse } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface loginCredentials {
   username: string;
@@ -23,11 +23,11 @@ const initialState: authState = {
   error: null,
   role: null,
   isAuthenticated: false,
-  username: ''
+  username: '',
 };
 
 export const loginUser = createAsyncThunk(
-  "auth/login",
+  'auth/login',
   async (credentials: loginCredentials, { rejectWithValue }) => {
     try {
       const response = await authService.login(credentials);
@@ -43,10 +43,10 @@ export const loginUser = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk(
-  "auth/logout",
+  'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await axios.get("/api/auth/logout");
+      await axios.get('/api/auth/logout');
     } catch (error: any) {
       if (error.response) {
         // if (error.response.data.error)
@@ -58,19 +58,19 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-export const autoLogin = createAsyncThunk("auth/autoLogin", async () => {
-  try{
-    const result = await authService.autoLogin()
+export const autoLogin = createAsyncThunk('auth/autoLogin', async () => {
+  try {
+    const result = await authService.autoLogin();
     // if (result.isAuthenticated){
-      return result
-    // } 
-  } catch(error) {
-    console.log(error)
+    return result;
+    // }
+  } catch (error) {
+    console.log(error);
   }
 });
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -79,43 +79,45 @@ const authSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      const payload: ApiResponse = action.payload
-      
-      localStorage.setItem("USER_ROLE", payload.results.role);
+      const payload: ApiResponse = action.payload;
+
+      localStorage.setItem('USER_ROLE', payload.results.role);
       state.role = payload.results.role;
       state.loading = false;
-      state.isAuthenticated = true
-      state.username = payload.results.username
+      state.isAuthenticated = true;
+      state.username = payload.results.username;
     });
     builder.addCase(loginUser.rejected, (state) => {
       state.error = 'error happened';
       state.loading = false;
-      state.isAuthenticated = false
-      state.username=''
+      state.isAuthenticated = false;
+      state.username = '';
     });
     /** logout */
     builder.addCase(logoutUser.fulfilled, (state) => {
-      localStorage.removeItem("USER_ROLE");
+      localStorage.removeItem('USER_ROLE');
       state.role = null;
-      state.isAuthenticated = false
+      state.isAuthenticated = false;
     });
     builder.addCase(logoutUser.rejected, (state, action) => {
       state.error = String(action.payload);
-      state.isAuthenticated = true
+      state.isAuthenticated = true;
     });
     /** autoLogin */
     builder.addCase(autoLogin.pending, (state) => {
-      state.loading = true
-    })
-    builder.addCase(autoLogin.fulfilled, (state, action)=> {
-      state.loading = false
-      state.isAuthenticated = action.payload.isAuthenticated
-      state.role = action.payload.role
-      state.username = action.payload.username
-    })
+      state.loading = true;
+    });
+    builder.addCase(autoLogin.fulfilled, (state, action) => {
+      state.loading = false;
+      if (action.payload && action.payload.isAuthenticated) {
+        state.isAuthenticated = action.payload.isAuthenticated;
+        state.role = action.payload.role;
+        state.username = action.payload.username;
+      }
+    });
     builder.addCase(autoLogin.rejected, (state) => {
-      state.isAuthenticated = false
-    })
+      state.isAuthenticated = false;
+    });
   },
 });
 

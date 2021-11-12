@@ -1,8 +1,7 @@
 import { Checkbox, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { selectConditions, selectCylinders } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { SearchInput } from '../Inputs/SearchInput';
+import { selectCylinders } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
 interface MobileCylinderPopupProps {
@@ -14,7 +13,6 @@ export const MobileCylinderPopup: React.FC<MobileCylinderPopupProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [searchWord, setSearchWord] = useState('');
   const [selectedCylinders, setSelectedCylinders] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   // all conditions
@@ -35,12 +33,7 @@ export const MobileCylinderPopup: React.FC<MobileCylinderPopupProps> = ({
 
   // conditions filtered base on search word
   // if condition is empty it means it is not demaged so "New"
-  const cylindersToShow = () =>
-    allCylinders.filter(
-      (cylinder) =>
-        cylinder &&
-        cylinder.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
-    );
+  const cylindersToShow = () => allCylinders.filter((cylinder) => cylinder);
 
   // checkbox change handler
   const onChangeHandler = (cylinder: string) => {
@@ -59,9 +52,6 @@ export const MobileCylinderPopup: React.FC<MobileCylinderPopupProps> = ({
         dispatch(selectCylinders(selectedCylinders));
         onClose();
       }}
-      header={
-        <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />
-      }
     >
       <VStack w="full" alignItems="flex-start" minH="80vh" spacing="16px">
         {cylindersToShow().map((cylinder) => (

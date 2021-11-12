@@ -1,11 +1,11 @@
 import { IFilters } from './../redux/features/auth/types';
 import { axios } from 'src/utils/axios';
 
-axios.defaults.baseURL = '/api/cars';
+const baseURL = '/api/cars';
 
 const searchCars = async () => {
   try {
-    const data = await axios.get(`/`);
+    const data = await axios.get(`${baseURL}`);
     console.log(data);
     return data;
   } catch (error) {
@@ -15,7 +15,7 @@ const searchCars = async () => {
 
 const getAllBrands = async () => {
   try {
-    const { data } = await axios.get(`/brands`);
+    const { data } = await axios.get(`${baseURL}/brands`);
     return data;
   } catch (error) {
     throw error;
@@ -24,7 +24,7 @@ const getAllBrands = async () => {
 
 const getCars = async (page: number) => {
   try {
-    const { data } = await axios.get(`?page=${page}`);
+    const { data } = await axios.get(`${baseURL}?page=${page}`);
     return data;
   } catch (error) {
     throw error;
@@ -33,7 +33,7 @@ const getCars = async (page: number) => {
 
 const getSingleCar = async (lotNum: string) => {
   try {
-    const { data } = await axios.get(`/${lotNum}`);
+    const { data } = await axios.get(`${baseURL}/${lotNum}`);
     return data;
   } catch (error) {
     throw error;
@@ -42,7 +42,7 @@ const getSingleCar = async (lotNum: string) => {
 
 const getModels = async (brand: string) => {
   try {
-    const { data } = await axios.get(`/models?brand=${brand}`);
+    const { data } = await axios.get(`${baseURL}/models?brand=${brand}`);
     console.log(data);
     return data;
   } catch (error) {
@@ -53,13 +53,13 @@ const getModels = async (brand: string) => {
 const getFilters = async () => {
   try {
     const results = await Promise.allSettled([
-      axios.get('/conditions'),
-      axios.get('/types'),
-      axios.get('/locations'),
-      axios.get('/drives'),
-      axios.get('/fuels'),
-      axios.get('/brands'),
-      axios.get('/cylinders'),
+      axios.get(`${baseURL}/conditions`),
+      axios.get(`${baseURL}/types`),
+      axios.get(`${baseURL}/locations`),
+      axios.get(`${baseURL}/drives`),
+      axios.get(`${baseURL}/fuels`),
+      axios.get(`${baseURL}/brands`),
+      axios.get(`${baseURL}/cylinders`),
     ]);
 
     const filters: IFilters = {
