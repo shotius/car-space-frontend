@@ -50,6 +50,7 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
       onClose={onClose}
       onSubmit={() => {
         dispatch(selectModels(selectedModels))
+        onClose()
       }}
       header={
         <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />

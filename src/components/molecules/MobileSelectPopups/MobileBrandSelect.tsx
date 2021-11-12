@@ -1,36 +1,26 @@
 import {
-  Box,
-  Center,
-  Divider,
+  Box, Divider,
   Drawer,
   DrawerBody,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  Heading,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-  VStack,
+  Heading, VStack
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
-import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
-import { SearchIcon } from 'src/components/atoms/Icons/SearchIcon';
+import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
+import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
 import { useAppDispatch } from 'src/redux/app/hook';
+import { selectBrand } from 'src/redux/features/auth/carFilterSlice';
+import { getModels } from 'src/redux/features/auth/carsSlice';
 import { ButtonRegular } from '../Buttons/ButtonRegular';
 import { TextButton } from '../Buttons/TextButton';
 import { TopBrandCard } from '../Cards/TopBrandCard';
-import { InputRegular } from '../Inputs/InputRegular';
-import { ScrollableDiv } from '../Wrappers/ScrollableDiv';
-import { SectionHeader } from '../SectionHeader/SectionHeader';
-import { ButtonWithIcon } from '../Buttons/IconWithButton';
-import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
-import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
-import { selectBrand } from 'src/redux/features/auth/carFilterSlice';
-import { getModels } from 'src/redux/features/auth/carsSlice';
 import { SearchInput } from '../Inputs/SearchInput';
+import { SectionHeader } from '../SectionHeader/SectionHeader';
+import { ScrollableDiv } from '../Wrappers/ScrollableDiv';
 
 interface BrandSelectProps {
   brands: string[];

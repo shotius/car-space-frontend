@@ -25,5 +25,5 @@
   },
   "exclude": ["../server/node_modules"],
   "include": ["src", "../server/shared_with_front"],
-  "references": [{ "path": "../server/shared_with_front" }] // this reference is to types from backend
+  // "references": [{ "path": "../server/shared_with_front" }] // this reference is to types from backend
 }

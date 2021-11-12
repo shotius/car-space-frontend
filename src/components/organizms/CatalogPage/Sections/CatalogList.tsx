@@ -11,7 +11,7 @@ import { FilterWrap } from 'src/components/molecules/Wrappers/FilterWrap';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { toggleAdvancedFilters } from 'src/redux/features/auth/carFilterSlice';
 import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
-import { getAllBrands, getCars } from 'src/redux/features/auth/carsSlice';
+import { getCars, getFilters } from 'src/redux/features/auth/carsSlice';
 import { ICar } from 'src/redux/features/auth/types';
 import { useQueryRarams } from 'src/utils/hooks/useQueryParams';
 import { CatalogFilters } from './CatalogFilter';
@@ -35,7 +35,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
   useEffect(() => {
     let page = Number(query.get('page')) || 1;
     dispatch(setActivePage(page));
-    dispatch(getAllBrands());
+    dispatch(getFilters())
   }, []);
 
   // update the query parameter of the url and get next page
