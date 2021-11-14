@@ -17,7 +17,6 @@ const carsPaginationSlice = createSlice({
       state.activePage = action.payload;
     },
   },
-  // 595244242
 });
 
 export const { setTotalPages, setActivePage } = carsPaginationSlice.actions;

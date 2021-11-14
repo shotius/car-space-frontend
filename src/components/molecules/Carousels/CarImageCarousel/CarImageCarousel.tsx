@@ -11,14 +11,18 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { SwiperButton } from '../../Buttons/SwiperButton';
-import style from  './styles.module.scss';
+import style from './styles.module.scss';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination]);
 
-interface CarImageCarouselProps {}
+interface CarImageCarouselProps {
+  images: string[];
+}
 
-export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
+export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
+  images,
+}) => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const [buttonsVisible, setButtonsVisible] = useState<boolean>(false);
@@ -26,11 +30,11 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
 
   return (
     <AspectRatio
-      ratio={[311 / 292, null, null, 231/143]}
+      ratio={[311 / 292, null, null, 231 / 143]}
       w="full"
       overflow="hidden"
       borderRadius="md"
-      maxH={['192px', null,  '143px']}
+      maxH={['192px', null, '143px']}
       onMouseEnter={() => {
         isLaptopScreen && setButtonsVisible(true);
       }}
@@ -51,27 +55,22 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
           swiper.navigation.update();
         }}
       >
-        <SwiperSlide>
+        {images.map((image) => (
+          <SwiperSlide key={image}>
+            <Box
+               backgroundImage={image}
+             // backgroundImage="http://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX377/af1a9d83-d6ef-4a09-b539-0d9081a18090.JPG"
+              backgroundSize="cover"
+              backgroundPosition="center"
+              w="full"
+              h="full"
+            />
+          </SwiperSlide>
+        ))} 
+
+        {/* <SwiperSlide>
           <Box
-            backgroundImage="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"
-            backgroundSize="cover"
-            backgroundPosition="center"
-            w="full"
-            h="full"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Box
-            backgroundImage="https://media.istockphoto.com/photos/generic-red-suv-on-a-white-background-side-view-picture-id1157655660?k=20&m=1157655660&s=612x612&w=0&h=WOtAthbmJ9iG1zbKo4kNUsAGMe6-xM-E7a8TMxb5xmk="
-            backgroundSize="cover"
-            backgroundPosition="center"
-            w="100%"
-            h="full"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Box
-            backgroundImage="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
+            backgroundImage="http://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX377/af1a9d83-d6ef-4a09-b539-0d9081a18090.JPG"
             backgroundSize="cover"
             backgroundPosition="center"
             w="100%"
@@ -80,7 +79,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
         </SwiperSlide>
         <SwiperSlide>
           <Box
-            backgroundImage="https://media.istockphoto.com/photos/classic-car-picture-id466771069?k=20&m=466771069&s=612x612&w=0&h=BFsJcpBuT0Ijm2VZm9FfLsEkWv5YKIuvcDlf8jVk7MQ="
+            backgroundImage="http://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX377/fe8ecba7-4899-4939-8f8f-949956b606dc.JPG"
             backgroundSize="cover"
             backgroundPosition="center"
             w="100%"
@@ -89,13 +88,24 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = () => {
         </SwiperSlide>
         <SwiperSlide>
           <Box
-            backgroundImage="https://media.wired.com/photos/5d09594a62bcb0c9752779d9/master/pass/Transpo_G70_TA-518126.jpg"
+            backgroundImage="http://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX392/9397cb64-5c25-4226-88fb-f559e394e2ad.JPG"
             backgroundSize="cover"
             backgroundPosition="center"
             w="100%"
             h="full"
           />
         </SwiperSlide>
+        <SwiperSlide>
+          <Box
+            backgroundImage="http://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX392/93bd115c-22e9-4421-bb3a-202cecc64277.JPG"
+            backgroundSize="cover"
+            backgroundPosition="center"
+            w="100%"
+            h="full"
+          />
+          
+        </SwiperSlide>
+        */}
         <SwiperButton
           isVisible={buttonsVisible}
           ref={nextRef}

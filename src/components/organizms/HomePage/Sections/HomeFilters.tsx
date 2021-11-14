@@ -1,12 +1,16 @@
-import { Center, Divider, Flex } from '@chakra-ui/react';
+import { Box, Center, Divider, Flex } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { Select } from 'src/components/atoms/Selects';
-import { Card } from '../../../molecules/Cards/Card';
-import { SearchButton } from '../../../molecules/Buttons/SearchButton';
+import { ReactSelect } from 'src/components/atoms/Selects/ReactSelect';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
-import { useHistory } from 'react-router';
-import { useAppDispatch } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { getFilters } from 'src/redux/features/auth/carsSlice';
 import { openAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { getAlphabeticalGroups } from 'src/utils/functions/getAlphabeticalGroups';
+import { SearchButton } from '../../../molecules/Buttons/SearchButton';
+import { Card } from '../../../molecules/Cards/Card';
 
 interface SearchProps {}
 
@@ -14,6 +18,31 @@ export const HomeFilters: React.FC<SearchProps> = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
 
+  const { brands } = useAppSelector((state) => state.carsReducer);
+
+  // interface GroupedOption {
+  //   readonly label: string;
+  //   readonly options: string[];
+  // }
+
+  useEffect(() => {
+    dispatch(getFilters());
+  }, []);
+
+  interface Groups {
+    label: string;
+    options: {
+        value: string;
+        label: string;
+    }[];
+}[]
+  const groupedBrands = getAlphabeticalGroups(brands)
+
+  const formatGroupLabel = (data: Groups) => (
+    <div style={{color: "#000"}}>
+      <span style={{color: "red"}}>{data.label}</span>
+    </div>
+  );
   return (
     <Center
       mt={['-69px', '-60px', '-45px', '-45px']}
@@ -37,17 +66,15 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           flexWrap={{ base: 'wrap', md: 'nowrap' }}
           justifyContent="space-between"
         >
-          <Select
-            placeholder="Brand"
-            w={['100%', '30%', '100%']}
-            arrowColor="#848484"
-          >
-            <option value="value">brand</option>
-            <option value="value">brand</option>
-            <option value="value">brand</option>
-          </Select>
+          <Box w="full">
+            <ReactSelect
+              placeholder="Brands"
+              options={groupedBrands}
+              isMulti
+            />
+          </Box>
           <DividerVertical
-            height="40px"
+            height="30px"
             display={['none', 'block']}
             borderColor="gray.300"
             margin={[null, null, '4']}

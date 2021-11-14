@@ -24,7 +24,7 @@ function useIntersectionObserver(
   useEffect(() => {
     const node = elementRef?.current // DOM Ref
     const hasIOSupport = !!window.IntersectionObserver
-
+    useIntersectionObserver
     if (!hasIOSupport || frozen || !node) return
 
     const observerParams = { threshold, root, rootMargin }

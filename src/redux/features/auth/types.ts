@@ -1,4 +1,4 @@
-import { CurrencyType } from './../../../constants/index';
+import { CurrencyType, Languages } from './../../../constants/index';
 
 export interface ICar {
   _id: string;
@@ -38,8 +38,8 @@ export interface CarsSliceState {
   locations: string[];
   drives: string[];
   fuels: string[];
-  cylinders: string[]
-  getFiltersError: boolean
+  cylinders: string[];
+  getFiltersError: boolean;
 }
 
 export type Transmission = 'Manual' | 'Automatic' | 'CVT';
@@ -61,7 +61,7 @@ export interface SelectedCarFilters {
   locations: string[];
   drives: string[];
   fuels: string[];
-  cylinders: string[]
+  cylinders: string[];
 }
 
 export interface IPagination {
@@ -75,6 +75,23 @@ export interface IFilters {
   location: string[];
   drives: string[];
   fuels: string[];
-  brands: string[]
-  cylinders: string[]
+  brands: string[];
+  cylinders: string[];
+}
+
+//** Car image slice types */
+
+export interface CarImageSliceState {
+  fetchingMediums: Record<string, boolean>;
+  mediumImages: Record<string, string[]>;
+  errorFetchingMediums: string[];
+}
+
+
+
+//** Languages */
+
+export interface GlobalStateSliceState {
+  lang: Languages
+  currency: CurrencyType
 }

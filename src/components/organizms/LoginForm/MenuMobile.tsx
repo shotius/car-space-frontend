@@ -4,38 +4,34 @@ import { VStack, HStack } from '@chakra-ui/layout';
 import { StackDivider } from '@chakra-ui/react';
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
 import { NavMenuLink } from 'src/components/molecules/Links/NavMenuLink';
-import { CurrencyType, Languages } from 'src/constants';
+import { CurrencyType } from 'src/constants';
+import { MobileCurencyPopupver } from '../PopOvers/Mobile/MobileCurencyPopupver';
 
 interface MenuMobileProps {
   menuOpen: boolean;
   setMenuOpen: (boolean) => void;
-  lang: Languages;
-  currency: CurrencyType
 }
 
 export const MenuMobile: React.FC<MenuMobileProps> = ({
   menuOpen,
   setMenuOpen,
-  lang, 
-  currency
 }) => {
-  const iconLang = () => {
-    switch(lang) {
-      case "Eng": return UKIcon
-    }
-  }
+  const lang = 'Eng';
+  const currency: CurrencyType = 'GEL';
 
-  const iconCurr = () => {
-    switch(currency) {
-      case "GEL": return "Geo"
+  const iconLang = () => {
+    switch (lang) {
+      case 'Eng':
+        return UKIcon;
     }
-  }
+  };
+
   return (
     <VStack
       boxShadow={menuOpen ? '-20px 0px 100px rgba(0, 0, 0, 0.2)' : ''}
       position="fixed"
       h="100vh"
-      top={["50px",null,  '60px']}
+      top={['50px', null, '60px']}
       left={menuOpen ? '0' : '100%'}
       right="0"
       w="100vw"
@@ -45,8 +41,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
       zIndex="-1"
       overflowY="scroll"
       divider={<StackDivider />}
-      pb="200px" // padding added because the last row was not visible
-      
+      pb="400px" // padding added because the last row was not visible
     >
       <NavMenuLink
         heading="Catalog"
@@ -89,9 +84,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
         <Button w="40%" bg="autoGrey.200">
           <Icon as={iconLang()} boxSize="6" />
         </Button>
-        <Button w="40%" bg="autoGrey.200">
-          {iconCurr()}
-        </Button>
+        <MobileCurencyPopupver currency={currency} />
       </HStack>
     </VStack>
   );

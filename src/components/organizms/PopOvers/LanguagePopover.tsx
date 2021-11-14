@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@chakra-ui/layout';
+import { HStack } from '@chakra-ui/layout';
 import {
   Button,
   Icon,
@@ -6,14 +6,15 @@ import {
   PopoverArrow,
   PopoverBody,
   PopoverContent,
-  PopoverTrigger,
+  PopoverTrigger
 } from '@chakra-ui/react';
 import { GeoIcon } from 'src/components/atoms/Icons/GeoIcon';
 import { RusIcon } from 'src/components/atoms/Icons/RusIcon';
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
-import { ButtonRect } from 'src/components/molecules/Buttons/ButtonRect';
+import { LanguageSwitcher } from 'src/components/molecules/PopoverBodies/LanguageSwitcher';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { Languages } from 'src/constants/index';
+import { useAppSelector } from 'src/redux/app/hook';
 
 interface LanguagePopoverProps {
   isOpen: boolean;
@@ -27,9 +28,9 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
   isOpen,
   closePopover,
   togglePopover,
-  lang,
-  setLanguage,
 }) => {
+  const {lang} = useAppSelector(state => state.globalAppState)
+
   const icon = () => {
     switch (lang) {
       case 'Eng':
@@ -69,35 +70,9 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
       <PopoverContent w="70px" outline="none">
         <PopoverArrow />
         <PopoverBody p="0">
-          <VStack spacing={1} p="0">
-            <ButtonRect
-              onClick={() => {
-                setLanguage('Eng');
-                closePopover();
-              }}
-            >
-              <Icon as={UKIcon} mr="2" />
-              <TextRegular fontWeight="light">Eng</TextRegular>
-            </ButtonRect>
-            <ButtonRect
-              onClick={() => {
-                setLanguage('Geo');
-                closePopover();
-              }}
-            >
-              <Icon as={GeoIcon} mr="2" />
-              <TextRegular fontWeight="light">Geo</TextRegular>
-            </ButtonRect>
-            <ButtonRect
-              onClick={() => {
-                setLanguage('Rus');
-                closePopover();
-              }}
-            >
-              <Icon as={RusIcon} mr="2" />
-              <TextRegular fontWeight="light">Rus</TextRegular>
-            </ButtonRect>
-          </VStack>
+          <LanguageSwitcher
+            closePopover={closePopover}
+          />
         </PopoverBody>
       </PopoverContent>
     </Popover>

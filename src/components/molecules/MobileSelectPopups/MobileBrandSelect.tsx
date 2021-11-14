@@ -21,6 +21,7 @@ import { TopBrandCard } from '../Cards/TopBrandCard';
 import { SearchInput } from '../Inputs/SearchInput';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { ScrollableDiv } from '../Wrappers/ScrollableDiv';
+import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 
 interface BrandSelectProps {
   brands: string[];
@@ -47,23 +48,8 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
     }
   }, [brands]);
 
-  // brands already is sorted, Here I add first letter of alphabet
-  const brandsWithAlphabet = brands.reduce<string[]>((prev, curr) => {
-    // on first iteration, prev is empty
-    if (prev.length === 0) {
-      return prev.concat(curr[0]).concat(curr);
-    }
-    // first letter of the next word has changed
-    if (prev[prev.length - 1][0] !== curr[0]) {
-      return prev.concat(curr[0]).concat(curr);
-    } else {
-      // else append word
-      return prev.concat(curr);
-    }
-  }, []);
-
   // filter brands when searchWord is specified
-  const brandsToShow = brandsWithAlphabet.filter((brand) => {
+  const brandsToShow = addLettersToSortedArray(brands).filter((brand) => {
     return brand.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
   });
 
@@ -107,37 +93,6 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
           {' '}
           <VStack spacing="4" pb="4" bg="white" zIndex="10" w="full">
             {/* search input */}
-            {/* <InputGroup w="full">
-              <InputLeftElement children={<SearchIcon fill="autoGrey.400" />} />
-              <InputRightElement
-                children={
-                  <Center w="full" h="full">
-                    <ButtonWithIcon
-                      icon={CloseIcon}
-                      onClick={() => {
-                        setSearchWord('');
-                      }}
-                      bg="transparent"
-                    />
-                  </Center>
-                }
-                display={!!searchWord ? 'block' : 'none'}
-              />
-              <InputRegular
-                placeholder="Search"
-                borderRadius="8px"
-                variant="filled"
-                pl="40px"
-                value={searchWord}
-                onChange={(e) => setSearchWord(e.target.value)}
-                onFocus={() => {
-                  setTopBrandsVisible(false);
-                }}
-                onBlur={() => {
-                  setTopBrandsVisible(true);
-                }}
-              />
-            </InputGroup> */}
             <SearchInput
               searchWord={searchWord}
               setSearchWord={setSearchWord}

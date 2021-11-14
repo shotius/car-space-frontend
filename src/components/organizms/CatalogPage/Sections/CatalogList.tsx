@@ -55,7 +55,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
   // }
 
   return (
-    <ContainerOuter pt={['4', '6', null, '8', '16']}>
+    <ContainerOuter pt={['4', '6', null, '8']}>
       <VStack w="full" spacing={['66px']}>
         {/* filter */}
         <FilterWrap>
@@ -67,9 +67,9 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
         <BannerCard />
 
         {/* car car list */}
-        {!fethingCars ? (
+        {!fethingCars && !!cars.length ? (
           <CatalogListWrap>
-            {cars.map((car: ICar, i) => (
+            { cars.map((car: ICar, i) => (
               <Flex justify="center" key={i}>
                 <CarCard car={car} />
               </Flex>

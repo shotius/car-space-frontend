@@ -12,8 +12,8 @@ const CustomSelect: React.FC<CustomSelectProps & SelectProps> = ({
   bg = '#fff',
   opacity="0.5",
   border = 'none',
-  fontSize = ['16px', null, null, '18px'],
-  h = ['44px', null, '40px'],
+  fontSize = '16px',
+  h = '40px',
   arrowColor = "#a6a6a6" , 
   children,
   ...rest

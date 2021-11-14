@@ -250,8 +250,6 @@ export const Header: React.FC<HeaderProps> = () => {
             <MenuMobile
               menuOpen={menuOpen}
               setMenuOpen={setMenuOpen}
-              lang="Eng"
-              currency="GEL"
             />
           </HStack>
         ) : null}
