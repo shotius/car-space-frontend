@@ -13,7 +13,6 @@ import { PersonIcon } from 'src/components/atoms/Icons/PersonIcon';
 import { ButtonOutline } from 'src/components/molecules/Buttons/ButtonOutline';
 import { MenuLink } from 'src/components/molecules/Links/MenuLink';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { CurrencyType, Languages } from 'src/constants/index';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { logoutUser } from 'src/redux/features/auth/authSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
@@ -28,8 +27,6 @@ interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [currency, setCurrency] = useState<CurrencyType>('EUR');
-  const [lang, setLang] = useState<Languages>('Geo');
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
   const USER = localStorage.getItem('USER_ROLE');
   const { isAuthenticated, role, username } = useAppSelector(
@@ -133,18 +130,14 @@ export const Header: React.FC<HeaderProps> = () => {
               {/* choose currency */}
               <CurrencyPopover
                 isOpen={isCurrOpen}
-                closeCurrency={closeCurr}
-                toggleCurrency={toggleCurr}
-                currency={currency}
-                setCurrency={(currency) => setCurrency(currency)}
+                closePopover={closeCurr}
+                togglePopover={toggleCurr}
               />
               {/* choose languages */}
               <LanguagePopover
                 isOpen={isLangOpen}
                 closePopover={closeLang}
                 togglePopover={toggleLang}
-                lang={lang}
-                setLanguage={(lang) => setLang(lang)}
               />
             </HStack>
 

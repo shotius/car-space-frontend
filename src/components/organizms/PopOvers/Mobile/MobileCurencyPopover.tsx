@@ -9,7 +9,7 @@ interface MobileCurencyPopupverProps {
   currency: CurrencyType;
 }
 
-export const MobileCurencyPopupver: React.FC<MobileCurencyPopupverProps> = ({
+export const MobileCurencyPopover: React.FC<MobileCurencyPopupverProps> = ({
   currency,
 }) => {
   const { isOpen, onToggle, onClose } = useDisclosure();

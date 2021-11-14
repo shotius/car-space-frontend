@@ -13,15 +13,12 @@ import { RusIcon } from 'src/components/atoms/Icons/RusIcon';
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
 import { LanguageSwitcher } from 'src/components/molecules/PopoverBodies/LanguageSwitcher';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { Languages } from 'src/constants/index';
 import { useAppSelector } from 'src/redux/app/hook';
 
 interface LanguagePopoverProps {
   isOpen: boolean;
   closePopover: () => void;
   togglePopover: () => void;
-  lang: Languages;
-  setLanguage: (Currencies: Languages) => void;
 }
 
 export const LanguagePopover: React.FC<LanguagePopoverProps> = ({

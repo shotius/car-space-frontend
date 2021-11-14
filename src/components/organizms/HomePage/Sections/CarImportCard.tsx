@@ -12,7 +12,6 @@ export const CarImportCard: React.FC<CarImportCardProps> = ({}) => {
       p="32px"
       w={['full', null, null, '417px']}
       h="407px"
-      className="hoverable"
     >
       <VStack w="full" spacing="24px">
         <Icon as={CarImportIcon} />

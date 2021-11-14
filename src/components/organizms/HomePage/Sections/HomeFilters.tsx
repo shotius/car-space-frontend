@@ -29,20 +29,20 @@ export const HomeFilters: React.FC<SearchProps> = () => {
     dispatch(getFilters());
   }, []);
 
-  interface Groups {
-    label: string;
-    options: {
-        value: string;
-        label: string;
-    }[];
-}[]
-  const groupedBrands = getAlphabeticalGroups(brands)
+  //   interface Groups {
+  //     label: string;
+  //     options: {
+  //         value: string;
+  //         label: string;
+  //     }[];
+  // }[]
+  const groupedBrands = getAlphabeticalGroups(brands);
 
-  const formatGroupLabel = (data: Groups) => (
-    <div style={{color: "#000"}}>
-      <span style={{color: "red"}}>{data.label}</span>
-    </div>
-  );
+  // const formatGroupLabel = (data: Groups) => (
+  //   <div style={{color: "#000"}}>
+  //     <span style={{color: "red"}}>{data.label}</span>
+  //   </div>
+  // );
   return (
     <Center
       mt={['-69px', '-60px', '-45px', '-45px']}
@@ -67,11 +67,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           justifyContent="space-between"
         >
           <Box w="full">
-            <ReactSelect
-              placeholder="Brands"
-              options={groupedBrands}
-              isMulti
-            />
+            <ReactSelect placeholder="Brands" options={groupedBrands} isMulti />
           </Box>
           <DividerVertical
             height="30px"

@@ -9,6 +9,7 @@ export const MiniCategoryCard: React.FC<MiniCategoryCardProps> = () => {
   return (
     <Card
       className="hoverable"
+      cursor="pointer"
       w={['137px', null, null, '143px']}
       h={['130px', null, null, '132px']}
     >

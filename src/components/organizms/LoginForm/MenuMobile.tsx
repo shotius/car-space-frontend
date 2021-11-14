@@ -5,7 +5,7 @@ import { StackDivider } from '@chakra-ui/react';
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
 import { NavMenuLink } from 'src/components/molecules/Links/NavMenuLink';
 import { CurrencyType } from 'src/constants';
-import { MobileCurencyPopupver } from '../PopOvers/Mobile/MobileCurencyPopupver';
+import { MobileCurencyPopover } from '../PopOvers/Mobile/MobileCurencyPopover';
 
 interface MenuMobileProps {
   menuOpen: boolean;
@@ -84,7 +84,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
         <Button w="40%" bg="autoGrey.200">
           <Icon as={iconLang()} boxSize="6" />
         </Button>
-        <MobileCurencyPopupver currency={currency} />
+        <MobileCurencyPopover currency={currency} />
       </HStack>
     </VStack>
   );

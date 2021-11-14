@@ -9,9 +9,8 @@ import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
 import { FilterWrap } from 'src/components/molecules/Wrappers/FilterWrap';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { getCars, getFilters } from 'src/redux/features/auth/carsSlice';
+import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { ICar } from 'src/redux/features/auth/types';
 import { useQueryRarams } from 'src/utils/hooks/useQueryParams';
 import { CatalogFilters } from './CatalogFilter';
@@ -23,33 +22,35 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
     (state) => state.selectedCarFilters
   );
   const { cars, fethingCars } = useAppSelector((state) => state.carsReducer);
-  const { activePage, totalPages } = useAppSelector(
-    (state) => state.carsPagination
-  );
+  const { totalPages } = useAppSelector((state) => state.carsPagination);
 
   const dispatch = useAppDispatch();
   const history = useHistory();
   const query = useQueryRarams();
 
+  const page = Number(query.get('page')) || 1;
+
   // set query params, get brands and all cars on the first load
   useEffect(() => {
-    let page = Number(query.get('page')) || 1;
-    dispatch(setActivePage(page));
-    dispatch(getFilters())
+    dispatch(getFilters());
   }, []);
+
+  const changePage = (page: number) => {
+    history.push({
+      pathname: '/catalog',
+      search: `?page=${page}`,
+    });
+  };
 
   // update the query parameter of the url and get next page
   useEffect(() => {
-    history.push({
-      pathname: '/catalog',
-      search: `?page=${activePage}`,
-    });
-    dispatch(getCars(activePage));
     window.scrollTo(0, 0);
-  }, [activePage]);
+    changePage(page);
+    dispatch(getCars(page));
+    console.log(window.history)
+  }, [page]);
 
-
-  // filter toggle funciotn 
+  // filter toggle funciotn
   // const onToggle = () => {
   //   dispatch(toggleAdvancedFilters())
   // }
@@ -69,7 +70,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
         {/* car car list */}
         {!fethingCars && !!cars.length ? (
           <CatalogListWrap>
-            { cars.map((car: ICar, i) => (
+            {cars.map((car: ICar, i) => (
               <Flex justify="center" key={i}>
                 <CarCard car={car} />
               </Flex>
@@ -83,8 +84,8 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
         {/* bottom pagination` */}
         <Pagination
           totalPages={totalPages}
-          activePage={activePage}
-          onChange={(num: number) => dispatch(setActivePage(num))}
+          activePage={page}
+          onChange={(num: number) => changePage(num)}
         />
       </VStack>
     </ContainerOuter>
