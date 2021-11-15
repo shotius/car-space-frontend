@@ -113,6 +113,7 @@ export const CarDetailSlider = () => {
               />
             </AspectRatio>
           </SwiperSlide>
+          {/* last all picture slide  */}
           <SwiperSlide style={{ position: 'relative' }}>
             <Box
               position="absolute"

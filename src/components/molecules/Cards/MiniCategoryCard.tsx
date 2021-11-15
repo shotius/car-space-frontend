@@ -1,17 +1,27 @@
 import { BoxProps, Center, Heading, Image, VStack } from '@chakra-ui/react';
+import { useHistory } from 'react-router';
 import CarSmall from 'src/assets/png/car with bg-1.png';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
+import { useAppDispatch } from 'src/redux/app/hook';
+import { openCatalogBanner } from 'src/redux/features/global/gloabalSlice';
 import { Card } from './Card';
 
 interface MiniCategoryCardProps {}
 
 export const MiniCategoryCard: React.FC<MiniCategoryCardProps & BoxProps> = ({...rest}) => {
+
+  const history = useHistory()
+  const dispatch = useAppDispatch()
   return (
     <Card
       className="hoverable"
       cursor="pointer"
       w={['137px', null, null, '143px']}
       h={['130px', null, null, '132px']}
+      onClick={()=> {
+        history.push('/catalog')
+        dispatch(openCatalogBanner())
+      }}
       {...rest}
     >
       <Center h="full">

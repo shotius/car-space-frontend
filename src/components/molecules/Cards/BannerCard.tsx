@@ -15,6 +15,8 @@ export const BannerCard: React.FC<BannerCardProps> = ({}) => {
   const {isCatalogBannerOpen: isOpen} = useAppSelector(state => state.globalAppState)
   const dispatch = useAppDispatch()
 
+  console.log('isOpen: ', isOpen)
+
   return (
     <>
       {isLargerThan1280 && (

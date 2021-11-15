@@ -66,7 +66,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
         </FilterWrap>
         <BannerCard />
 
-        {/* car car list */}
+        {/* car list */}
         {!fethingCars && !!cars.length ? (
           <CatalogListWrap gap="4">
             {cars.map((car: ICar, i) => (

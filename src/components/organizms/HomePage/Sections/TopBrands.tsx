@@ -1,4 +1,5 @@
 import { Box } from '@chakra-ui/layout';
+import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { AudiIcon } from 'src/components/atoms/Icons/AudiIcon';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { HiundayIcon } from 'src/components/atoms/Icons/HyundayIcon';
@@ -14,16 +15,20 @@ interface TopBrandsProps {}
 export const TopBrands: React.FC<TopBrandsProps> = () => {
   return (
     <Box w="full">
-      <SectionHeader mainText="Top Brands" secondaryText="See all" />
-      <ScrollableDiv cardCount={7}>
-        <TopBrandCard className="hoverable" icon={BmwIcon} />
-        <TopBrandCard className="hoverable" icon={MercedesIcon} />
-        <TopBrandCard className="hoverable" icon={VolkswagenIcon} />
-        <TopBrandCard className="hoverable" icon={AudiIcon} mr="1px"/>
-        <TopBrandCard className="hoverable" icon={HiundayIcon} mr="1px"/>
-        <TopBrandCard className="hoverable" icon={ToyotaIcon} mr="1px"/>
-        <TopBrandCard className="hoverable" icon={HiundayIcon} mr="1px"/>
-      </ScrollableDiv>
+      <ContainerOuter>
+        <SectionHeader mainText="Top Brands" secondaryText="See all" />
+      </ContainerOuter>
+      <ContainerOuter pr="0">
+        <ScrollableDiv cardCount={7}>
+          <TopBrandCard className="hoverable" icon={BmwIcon} />
+          <TopBrandCard className="hoverable" icon={MercedesIcon} />
+          <TopBrandCard className="hoverable" icon={VolkswagenIcon} />
+          <TopBrandCard className="hoverable" icon={AudiIcon} mr="1px" />
+          <TopBrandCard className="hoverable" icon={HiundayIcon} mr="1px" />
+          <TopBrandCard className="hoverable" icon={ToyotaIcon} mr="1px" />
+          <TopBrandCard className="hoverable" icon={HiundayIcon} mr="1px" />
+        </ScrollableDiv>
+      </ContainerOuter>
     </Box>
   );
 };

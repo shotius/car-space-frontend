@@ -24,36 +24,48 @@ export const Home: React.FC<HomeProps> = () => {
       <ContainerOuter p="0" pt={['0', null, '0', '48px']}>
         <HomeCarousel />
       </ContainerOuter>
+
       <ContainerOuter>
         <HomeFilters />
+      </ContainerOuter>
 
-        <VStack w="full" alignItems="flex-start" spacing="64px">
-          <MiniCategory />
-          <VStack w="full">
+      <VStack w="full" alignItems="center" spacing="64px">
+        <MiniCategory />
+
+        <VStack w="full">
+          <ContainerOuter>
             <SectionHeader mainText="Catalog" secondaryText="See all" />
+          </ContainerOuter>
+          <ContainerOuter pr="0">
             <CarListCarousel car={DamCar} />
-          </VStack>
+          </ContainerOuter>
+        </VStack>
+
+        <ContainerOuter>
           <VStack w="full">
             <SectionHeader mainText="Customer review" />
             <CustomersReviewCarousel />
           </VStack>
-          <TopBrands />
+        </ContainerOuter>
+
+        <TopBrands />
+
+        <ContainerOuter>
           <DealersSection />
-          <VStack w="full">
-            {isMobile ? (
-              <VStack w="full">
-                <SectionHeader mainText="Calculator" />
-                <CalculatorMobile />
-              </VStack>
-            ) : (
-              <HStack spacing="48px" mt="64px">
-                <CalculatorDesktop children size="large" />
-                {isDesktop && <CarImportCard /> }
-              </HStack>
-            )}
-          </VStack>
-        </VStack>
-      </ContainerOuter>
+
+          {isMobile ? (
+            <VStack w="full" pt="64px">
+              <SectionHeader mainText="Calculator" />
+              <CalculatorMobile />
+            </VStack>
+          ) : (
+            <HStack spacing="48px" mt="128px" justify="center">
+              <CalculatorDesktop children size="large" />
+              {isDesktop && <CarImportCard />}
+            </HStack>
+          )}
+        </ContainerOuter>
+      </VStack>
     </PublicLayout>
   );
 };
