@@ -13,13 +13,15 @@ interface CurrencySwitcherProps {
 
 export const CurrencySwitcher: React.FC<CurrencySwitcherProps & StackProps> = ({
   closeCurrencyPopover,
+  spacing=0,
+  p="0", 
   ...rest
 }) => {
 
   const dispatch = useAppDispatch();
 
   return (
-    <VStack spacing={0} p="0" {...rest}>
+    <VStack spacing={spacing} p={p} {...rest}>
       <ButtonRect
         onClick={() => {
           dispatch(setAppCurrency('GEL'));

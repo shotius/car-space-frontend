@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
 import { NavMenuLink } from 'src/components/molecules/Links/NavMenuLink';
 import { MobileCurencyPopover } from '../PopOvers/Mobile/MobileCurencyPopover';
+import { MobileLanguagePopover } from '../PopOvers/Mobile/MobileLanguagePopover';
 
 interface MenuMobileProps {
   menuOpen: boolean;
@@ -17,15 +18,6 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
   setMenuOpen,
 }) => {
   const popoverRef = useRef<HTMLDivElement>(null);
-
-  const lang = 'Eng';
-
-  const iconLang = () => {
-    switch (lang) {
-      case 'Eng':
-        return UKIcon;
-    }
-  };
 
   return (
     <VStack
@@ -83,13 +75,11 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
 
       <VStack w="full" minH="300px" ref={popoverRef}>
         <HStack justifyContent="space-around" pt="4" spacing="2" w="full">
-          <Button w="40%" bg="autoGrey.200">
-            <Icon as={iconLang()} boxSize="6" />
-          </Button>
           {popoverRef.current && (
-            <MobileCurencyPopover
-              menuDiv={popoverRef.current}
-            />
+            <>
+              <MobileLanguagePopover popupDiv={popoverRef.current} />
+              <MobileCurencyPopover popoverDiv={popoverRef.current} />
+            </>
           )}
         </HStack>
       </VStack>

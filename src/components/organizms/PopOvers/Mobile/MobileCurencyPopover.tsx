@@ -7,11 +7,11 @@ import { useAppSelector } from 'src/redux/app/hook';
 import { capitalize } from 'src/utils/functions/capitalize';
 
 interface MobileCurencyPopupverProps {
-  menuDiv: HTMLDivElement;
+  popoverDiv: HTMLDivElement;
 }
 
 export const MobileCurencyPopover: React.FC<MobileCurencyPopupverProps> = ({
-  menuDiv,
+  popoverDiv,
 }) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const { currency } = useAppSelector((state) => state.globalAppState);
@@ -27,7 +27,7 @@ export const MobileCurencyPopover: React.FC<MobileCurencyPopupverProps> = ({
           bg="autoGrey.200"
           onClick={() => {
             // scoll bottom to appear popover on bottom of the button
-            menuDiv.scrollIntoView({ behavior: 'smooth' });
+            popoverDiv.scrollIntoView({ behavior: 'smooth' });
             setTimeout(() => onToggle(), 100);
           }}
         >
@@ -36,7 +36,7 @@ export const MobileCurencyPopover: React.FC<MobileCurencyPopupverProps> = ({
       </PopoverTrigger>
       <PopoverContent
         border="none"
-        w={buttonRef.current ? buttonRef.current.clientWidth : '150px'}
+        w={buttonRef.current ? buttonRef.current.clientWidth : '250px'}
       >
         <PopoverBody p="0">
           <CurrencySwitcher
