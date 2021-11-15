@@ -11,7 +11,7 @@ interface ScrollableDivProps {
 export const ScrollableDiv: React.FC<ScrollableDivProps & SimpleGridProps> = ({
   cardCount,
   children,
-  p="4",
+  p="16px 0px",
   spacing=['11px', null, null, '10px'], 
   ...rest
 }) => {

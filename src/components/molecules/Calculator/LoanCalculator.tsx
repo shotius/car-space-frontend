@@ -19,13 +19,13 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
     <VStack w="full" spacing={["24px",null,  "32px"]}>
       <VStack w="full" align="flex-start">
         <TextRegular opacity="0.5">Duration</TextRegular>
-        <HStack w="full" spacing="30px">
+        <HStack w="full" spacing="30px" justify="space-between">
           <Slider
             defaultValue={value}
             min={0}
             max={12}
             step={1}
-            onChangeEnd={(val) => setValue(val)}
+            onChange={(val) => setValue(val)}
             w="70%"
           >
             <SliderTrack bg="autoBlue.400" h="2px">
@@ -34,7 +34,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
             </SliderTrack>
             <SliderThumb boxSize={4} bg="autoBlue.400" />
           </Slider>
-          <TextRegular w="50%">( {value} Months)</TextRegular>
+          <TextRegular w="100px" textAlign="end">( {value} Months)</TextRegular>
         </HStack>
       </VStack>
       <VStack w="full">

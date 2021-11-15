@@ -24,6 +24,7 @@ export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
         <UserAvatar
           image="https://www.elitesingles.co.uk/wp-content/uploads/sites/59/2019/11/2b_en_articleslide_sm2-350x264.jpg"
           mainText="Full name123"
+          w="450px"
         />
 
         {/* descripttion */}

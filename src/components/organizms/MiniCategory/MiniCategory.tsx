@@ -15,10 +15,10 @@ export const MiniCategory: React.FC<MiniCategoryProps> = () => {
         <MiniCategoryCard />
         <MiniCategoryCard />
         <MiniCategoryCard />
-        <MiniCategoryCard />
-        <MiniCategoryCard />
-        <MiniCategoryCard />
-        <MiniCategoryCard />
+        <MiniCategoryCard mr="1px"/>
+        <MiniCategoryCard mr="1px"/>
+        <MiniCategoryCard mr="1px"/>
+        <MiniCategoryCard mr="1px"/>
       </ScrollableDiv>
     </Box>
   );

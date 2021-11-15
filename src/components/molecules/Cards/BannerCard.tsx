@@ -1,7 +1,9 @@
 import { Heading, HStack } from '@chakra-ui/layout';
 import { Image, useMediaQuery, VStack } from '@chakra-ui/react';
-import { useState } from 'react';
+import CarIcon from "src/assets/png/car with bg-1@2x.png";
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { closeCatalogBanner } from 'src/redux/features/global/gloabalSlice';
 import { ButtonWithIcon } from '../Buttons/IconWithButton';
 import { TextRegular } from '../Texts/TextRegular';
 import { Card } from './Card';
@@ -10,7 +12,8 @@ interface BannerCardProps {}
 
 export const BannerCard: React.FC<BannerCardProps> = ({}) => {
   const [isLargerThan1280] = useMediaQuery('(min-width: 1280px)');
-  const [isShown, setIsShown] = useState(true);
+  const {isCatalogBannerOpen: isOpen} = useAppSelector(state => state.globalAppState)
+  const dispatch = useAppDispatch()
 
   return (
     <>
@@ -18,11 +21,10 @@ export const BannerCard: React.FC<BannerCardProps> = ({}) => {
         <Card
           w="full"
           p="30px"
-          display={isShown ? 'block' : 'none'}
-          // h={['158px']}
+          display={isOpen ? 'block' : 'none'}
         >
           <HStack spacing="32px" position="relative">
-            <Image src="src/assets/png/car with bg-1@2x.png" w={['110px']} loading="lazy"/>
+            <Image src={CarIcon} w={['110px']} loading="lazy"/>
             <ButtonWithIcon
               icon={CloseIcon}
               boxSize={6}
@@ -30,7 +32,7 @@ export const BannerCard: React.FC<BannerCardProps> = ({}) => {
               right="-2"
               top="-2"
               _active={{ bg: 'autoGrey.400' }}
-              onClick={() => setIsShown(false)}
+              onClick={() => dispatch(closeCatalogBanner())}
             />
             <VStack alignItems="flex-start">
               <Heading fontSize="16px">Certified Car</Heading>
@@ -39,6 +41,7 @@ export const BannerCard: React.FC<BannerCardProps> = ({}) => {
                 fontSize='14px'
                 lineHeight="24px"
                 opacity="63%"
+                pr="35px"
               >
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Doloremque, magnam deleniti voluptatum officiis tempore aperiam

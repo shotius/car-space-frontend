@@ -46,7 +46,7 @@ export const Home: React.FC<HomeProps> = () => {
                 <CalculatorMobile />
               </VStack>
             ) : (
-              <HStack spacing="48px">
+              <HStack spacing="48px" mt="64px">
                 <CalculatorDesktop children size="large" />
                 {isDesktop && <CarImportCard /> }
               </HStack>

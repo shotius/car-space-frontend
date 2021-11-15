@@ -8,6 +8,7 @@ import {
   AspectRatio,
 } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
+import { useHistory } from 'react-router';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getImagesMedium } from 'src/redux/features/auth/carImagesSlice';
@@ -26,6 +27,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
   const entry = useIntersectionObserver(ref, {});
   const isVisible = !!entry?.isIntersecting;
   const dispatch = useAppDispatch();
+  const history = useHistory()
 
   const { mediumImages, errorFetchingMediums, fetchingMediums } =
     useAppSelector((state) => state.carImages);
@@ -58,6 +60,8 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
       borderRadius="8px"
       p="4"
       maxW={['388px', '343px', null]}
+      cursor="pointer"
+      onClick={() => history.push(`/car/${car?.lN}`)}
     >
       <VStack w="full" spacing={['19px', null, null, '14px', '15px']}>
         {/* header */}

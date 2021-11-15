@@ -87,7 +87,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
             <option value="value">model</option>
           </Select>
           <DividerVertical
-            height={['44px', null, '40px', null, null, '50px']}
+            height="30px"
             display={['none', 'block']}
             borderColor="gray.300"
             margin={[null, null, '4']}

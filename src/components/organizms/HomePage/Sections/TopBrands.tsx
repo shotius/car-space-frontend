@@ -19,10 +19,10 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
         <TopBrandCard className="hoverable" icon={BmwIcon} />
         <TopBrandCard className="hoverable" icon={MercedesIcon} />
         <TopBrandCard className="hoverable" icon={VolkswagenIcon} />
-        <TopBrandCard className="hoverable" icon={AudiIcon} />
-        <TopBrandCard className="hoverable" icon={HiundayIcon} />
-        <TopBrandCard className="hoverable" icon={ToyotaIcon} />
-        <TopBrandCard className="hoverable" icon={HiundayIcon} />
+        <TopBrandCard className="hoverable" icon={AudiIcon} mr="1px"/>
+        <TopBrandCard className="hoverable" icon={HiundayIcon} mr="1px"/>
+        <TopBrandCard className="hoverable" icon={ToyotaIcon} mr="1px"/>
+        <TopBrandCard className="hoverable" icon={HiundayIcon} mr="1px"/>
       </ScrollableDiv>
     </Box>
   );

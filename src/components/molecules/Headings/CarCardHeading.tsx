@@ -1,12 +1,13 @@
 import { HStack, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
+import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 import { ButtonHeart } from '../Buttons/ButtonHeart';
 import { TextRegular } from '../Texts/TextRegular';
 
 interface CarCardHeadingProps {
-  car?: ICar;
+  car: ICar;
   liked?: boolean;
 }
 
@@ -27,7 +28,7 @@ export const CarCardHeading: React.FC<CarCardHeadingProps> = ({
           }}
         >
           <Link to={`/car/${car?.lN}`}>
-            {car?.m} {car?.mG}
+            {capitalizeEach(car?.m)} {capitalizeEach(car?.mG)}
           </Link>
         </TextRegular>
         <TextSecondary opacity="50%">{car?.y}</TextSecondary>
