@@ -61,7 +61,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
       p="4"
       maxW={['388px', '343px', null]}
       cursor="pointer"
-      onClick={() => history.push(`/car/${car?.lN}`)}
+      // onClick={() => history.push(`/car/${car?.lN}`)}
     >
       <VStack w="full" spacing={['19px', null, null, '14px', '15px']}>
         {/* header */}

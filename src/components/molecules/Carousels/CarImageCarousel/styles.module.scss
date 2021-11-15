@@ -62,6 +62,7 @@ body {
 
 /** navigation bullet active*/
 .CarImagesSwiper {
+  position: relative;
   :global(.swiper-pagination-bullet-active) {
     border-radius: 0px !important;
     width: 40px !important;

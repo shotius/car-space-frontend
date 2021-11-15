@@ -7,7 +7,7 @@ interface SwiperButtonsProps {
   side?: 'right' | 'left';
 }
 
-export const SwiperButton = forwardRef<
+export const ButtonNext = forwardRef<
   HTMLButtonElement,
   SwiperButtonsProps & IconButtonProps
 >(
