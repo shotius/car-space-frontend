@@ -44,10 +44,9 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
 
   // update the query parameter of the url and get next page
   useEffect(() => {
-    window.scrollTo(0, 0);
-    changePage(page);
     dispatch(getCars(page));
-    console.log(window.history)
+    // browser back button scrolls to the bottom, this line will scroll to the top
+    setTimeout(() => window.scrollTo(0, 0));
   }, [page]);
 
   // filter toggle funciotn
