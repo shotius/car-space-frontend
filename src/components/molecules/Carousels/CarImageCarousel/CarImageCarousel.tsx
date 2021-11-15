@@ -10,7 +10,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ButtonNext } from '../../CarouselNavigations/Deskop/ButtonNext';
+import { ButtonNext } from './navigation/ButtonNext';
 import { ButtonPrev } from './navigation/ButtonPrev';
 import style from './styles.module.scss';
 
@@ -35,6 +35,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
       w="full"
       // overflow="hidden"
       borderRadius="md"
+      cursor="auto"
       maxH={['192px', null, '143px']}
       onClick={(e) => {
         if (e.stopPropagation) e.stopPropagation();
@@ -70,8 +71,11 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
           </SwiperSlide>
         ))}
 
-
-          <ButtonNext /> 
+        <ButtonNext
+          isVisible={buttonsVisible}
+          ref={nextRef}
+          aria-label="next slide"
+        />
         <ButtonPrev
           isVisible={buttonsVisible}
           ref={prevRef}
@@ -82,7 +86,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
           isVisible={buttonsVisible}
           ref={nextRef}
           side="right"
-          aria-label="next slide"
+          
         /> */}
         {/* <SwiperButton
           isVisible={buttonsVisible}

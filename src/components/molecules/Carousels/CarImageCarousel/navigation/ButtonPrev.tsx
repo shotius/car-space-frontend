@@ -12,7 +12,7 @@ export const ButtonPrev = forwardRef<
   SwiperButtonsProps & ButtonProps
 >(
   (
-    { isVisible, zIndex = '222', ...rest },
+    { isVisible, zIndex = '22', ...rest },
     ref: React.Ref<HTMLButtonElement>
   ) => {
     return (
@@ -25,11 +25,13 @@ export const ButtonPrev = forwardRef<
         left="-35px"
         h="full"
         bg="transparent"
+        pr="30px"
         _hover={{
           bg: 'transparent',
         }}
         _active={{
           bg: 'transparent',
+          opacity: '0.6',
         }}
         zIndex={zIndex}
         ref={ref}
@@ -51,31 +53,3 @@ export const ButtonPrev = forwardRef<
     );
   }
 );
-{
-  /* <IconButton
-      position="absolute"
-      top="50%"
-      left="10px"
-      bottom="0"
-      
-      zIndex={zIndex}
-      ref={ref}
-      icon={<DropdownIcon fill="white" boxSize="5" ml="4px" mt="0" mb="15px" />}
-      borderRadius="none"
-      transform="rotate(90deg) translateX(-50%)"
-      // w="full"
-      mr="0px"
-      ml="-25px"
-      // borderTopRadius="100px"
-      background="rgba(0, 0, 0, 0.5)"
-      display={isVisible ? 'block' : 'none'}
-      _hover={{
-        bg: 'black',
-      }}
-      _active={{
-        bg: 'black',
-        opacity: '.9',
-      }}
-      {...rest}
-    /> */
-}
