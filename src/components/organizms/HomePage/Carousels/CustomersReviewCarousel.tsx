@@ -50,6 +50,7 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
   return (
     <Box w="100%" position="relative" >
       <Swiper
+        spaceBetween={10}
         className="mySwiper"
         loop={isDesktop}
         onSlideChange={(swiper) => {
