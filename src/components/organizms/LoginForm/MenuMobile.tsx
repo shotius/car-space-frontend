@@ -1,23 +1,24 @@
 import { Button } from '@chakra-ui/button';
 import Icon from '@chakra-ui/icon';
-import { VStack, HStack } from '@chakra-ui/layout';
+import { HStack, VStack } from '@chakra-ui/layout';
 import { StackDivider } from '@chakra-ui/react';
+import { useRef } from 'react';
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
 import { NavMenuLink } from 'src/components/molecules/Links/NavMenuLink';
-import { CurrencyType } from 'src/constants';
 import { MobileCurencyPopover } from '../PopOvers/Mobile/MobileCurencyPopover';
 
 interface MenuMobileProps {
   menuOpen: boolean;
-  setMenuOpen: (boolean) => void;
+  setMenuOpen: (a: boolean) => void;
 }
 
 export const MenuMobile: React.FC<MenuMobileProps> = ({
   menuOpen,
   setMenuOpen,
 }) => {
+  const popoverRef = useRef<HTMLDivElement>(null);
+
   const lang = 'Eng';
-  const currency: CurrencyType = 'GEL';
 
   const iconLang = () => {
     switch (lang) {
@@ -30,7 +31,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
     <VStack
       boxShadow={menuOpen ? '-20px 0px 100px rgba(0, 0, 0, 0.2)' : ''}
       position="fixed"
-      h="100vh"
+      h="150vh"
       top={['50px', null, '60px']}
       left={menuOpen ? '0' : '100%'}
       right="0"
@@ -80,12 +81,18 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
         onClick={() => setMenuOpen(false)}
       />
 
-      <HStack justifyContent="space-around" pt="4" spacing="2" w="full">
-        <Button w="40%" bg="autoGrey.200">
-          <Icon as={iconLang()} boxSize="6" />
-        </Button>
-        <MobileCurencyPopover currency={currency} />
-      </HStack>
+      <VStack w="full" minH="300px" ref={popoverRef}>
+        <HStack justifyContent="space-around" pt="4" spacing="2" w="full">
+          <Button w="40%" bg="autoGrey.200">
+            <Icon as={iconLang()} boxSize="6" />
+          </Button>
+          {popoverRef.current && (
+            <MobileCurencyPopover
+              menuDiv={popoverRef.current}
+            />
+          )}
+        </HStack>
+      </VStack>
     </VStack>
   );
 };

@@ -5,6 +5,7 @@ import { GlobalStateSliceState } from '../auth/types';
 const initialState: GlobalStateSliceState = {
   lang: 'Eng',
   currency: 'GEL',
+  mobileMenuHeight: 0,
 };
 
 const globalStateSlice = createSlice({
@@ -17,8 +18,12 @@ const globalStateSlice = createSlice({
     setAppCurrency: (state, action: PayloadAction<CurrencyType>) => {
       state.currency = action.payload;
     },
+    setMobileMenuHeight: (state, action: PayloadAction<number>) => {
+      state.mobileMenuHeight = action.payload;
+    },
   },
 });
 
-export const { setAppCurrency, setAppLanguage } = globalStateSlice.actions;
+export const { setAppCurrency, setAppLanguage, setMobileMenuHeight } =
+  globalStateSlice.actions;
 export const { reducer: globalAppState } = globalStateSlice;

@@ -94,4 +94,5 @@ export interface CarImageSliceState {
 export interface GlobalStateSliceState {
   lang: Languages
   currency: CurrencyType
+  mobileMenuHeight: number
 }

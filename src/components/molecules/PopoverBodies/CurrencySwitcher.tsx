@@ -1,4 +1,4 @@
-import { VStack, HStack } from '@chakra-ui/layout';
+import { VStack, HStack, StackProps } from '@chakra-ui/layout';
 import { Icon } from '@chakra-ui/react';
 import { GelIcon } from 'src/components/atoms/Icons/GelIcon';
 import { UsdIcon } from 'src/components/atoms/Icons/UsdIcon';
@@ -11,14 +11,15 @@ interface CurrencySwitcherProps {
   closeCurrencyPopover: () => void;
 }
 
-export const CurrencySwitcher: React.FC<CurrencySwitcherProps> = ({
+export const CurrencySwitcher: React.FC<CurrencySwitcherProps & StackProps> = ({
   closeCurrencyPopover,
+  ...rest
 }) => {
 
   const dispatch = useAppDispatch();
 
   return (
-    <VStack spacing={0} p="0">
+    <VStack spacing={0} p="0" {...rest}>
       <ButtonRect
         onClick={() => {
           dispatch(setAppCurrency('GEL'));
