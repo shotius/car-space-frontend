@@ -8,7 +8,7 @@ import { OrderListPage } from './dashboard/OrderListPage';
 
 interface UserDashpboardPageProps {}
 
-export const UserDashpboardPage: React.FC<UserDashpboardPageProps> = () => {
+export const UserProfilePage: React.FC<UserDashpboardPageProps> = () => {
   const { path } = useRouteMatch();
 
   return (
@@ -43,4 +43,4 @@ export const UserDashpboardPage: React.FC<UserDashpboardPageProps> = () => {
   );
 };
 
-export default UserDashpboardPage;
+export default UserProfilePage;

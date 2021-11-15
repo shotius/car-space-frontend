@@ -3,7 +3,7 @@ import { SimpleGrid, SimpleGridProps } from '@chakra-ui/react';
 interface CatalogListWrapProps {}
 
 export const CatalogListWrap: React.FC<CatalogListWrapProps & SimpleGridProps> =
-  ({ children, ...rest }) => {
+  ({ children, gap="32px", ...rest }) => {
     return (
       <SimpleGrid
         gridTemplateColumns={[
@@ -12,7 +12,7 @@ export const CatalogListWrap: React.FC<CatalogListWrapProps & SimpleGridProps> =
           'repeat(3, 1fr)',
           'repeat(4, 1fr)',
         ]}
-        spacing="4"
+        gap={gap}
         w="full"
         {...rest}
       >

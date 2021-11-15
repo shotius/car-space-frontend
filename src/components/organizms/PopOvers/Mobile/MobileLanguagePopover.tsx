@@ -43,6 +43,12 @@ export const MobileLanguagePopover: React.FC<MobileLanguagePopoverProps> = ({
         <Button
           w="40%"
           bg="autoGrey.200"
+          _hover={{
+            bg: "autoGrey.100"
+          }}
+          _active={{
+            bg: "autoGrey.200"
+          }}
           ref={triggerRef}
           onClick={() => {
             popupDiv.scrollIntoView({ behavior: 'smooth' });

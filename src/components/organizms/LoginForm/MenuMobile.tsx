@@ -1,9 +1,6 @@
-import { Button } from '@chakra-ui/button';
-import Icon from '@chakra-ui/icon';
 import { HStack, VStack } from '@chakra-ui/layout';
 import { StackDivider } from '@chakra-ui/react';
 import { useRef } from 'react';
-import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
 import { NavMenuLink } from 'src/components/molecules/Links/NavMenuLink';
 import { MobileCurencyPopover } from '../PopOvers/Mobile/MobileCurencyPopover';
 import { MobileLanguagePopover } from '../PopOvers/Mobile/MobileLanguagePopover';

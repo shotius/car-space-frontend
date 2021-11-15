@@ -1,5 +1,5 @@
-import { OrderListDesktop } from 'src/components/organizms/UserProfile/Sections/OrderListDesktop';
-import { OrderListMobile } from 'src/components/organizms/UserProfile/Sections/OrderListMobile';
+import { OrderListDesktop } from 'src/components/organizms/UserProfile/OrderList/OrderListDesktop';
+import { OrderListMobile } from 'src/components/organizms/UserProfile/OrderList/OrderListMobile';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 
 interface OrderListPageProps {}

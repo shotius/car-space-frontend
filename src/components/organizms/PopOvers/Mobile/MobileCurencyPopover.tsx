@@ -25,6 +25,12 @@ export const MobileCurencyPopover: React.FC<MobileCurencyPopupverProps> = ({
           ref={buttonRef}
           w="40%"
           bg="autoGrey.200"
+          _hover={{
+            bg: "autoGrey.100"
+          }}
+          _active={{
+            bg: "autoGrey.200"
+          }}
           onClick={() => {
             // scoll bottom to appear popover on bottom of the button
             popoverDiv.scrollIntoView({ behavior: 'smooth' });
