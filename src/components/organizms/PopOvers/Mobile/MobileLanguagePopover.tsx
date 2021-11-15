@@ -60,7 +60,8 @@ export const MobileLanguagePopover: React.FC<MobileLanguagePopoverProps> = ({
       </PopoverTrigger>
       <PopoverContent
         border="none"
-        w={triggerRef.current ? triggerRef.current.clientWidth : '150px'}
+        w={triggerRef.current ? `calc(${triggerRef.current.clientWidth}px + 25px)` : '150px'}
+        mt="-8px"
       >
         <PopoverBody>
           <LanguageSwitcher
