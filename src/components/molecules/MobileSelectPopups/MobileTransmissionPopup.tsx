@@ -55,6 +55,8 @@ export const MobileTransmissionPopup: React.FC<MobileTransmissionPopupProps> =
                 e.preventDefault();
                 onChangeHandler(tr);
               }}
+              boxShadow="none !important"
+              shadow="none !important"
               key={tr}
             >
               {tr}

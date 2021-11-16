@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { SelectedCarFilters } from './types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Keys, SelectedCarFilters } from './types';
 
 const initialState: SelectedCarFilters = {
   brands: [],
@@ -19,6 +19,8 @@ const initialState: SelectedCarFilters = {
   fuels: [],
   cylinders: [],
   isAdvancedFiltersOpen: false,
+  keys: null, 
+  salesStatus: []
 };
 
 const selectedCarFilterSlice = createSlice({
@@ -73,6 +75,12 @@ const selectedCarFilterSlice = createSlice({
     selectCylinders: (state, action) => {
       state.cylinders = action.payload;
     },
+    selectCarKeys: (state, action: PayloadAction<Keys>) => {
+      state.keys = action.payload
+    }, 
+    selectSalesStatus: (state, action: PayloadAction<string[]>) => {
+      state.salesStatus = action.payload
+    }, 
     toggleAdvancedFilters: (state) => {
       if (state.isAdvancedFiltersOpen) {
         state.isAdvancedFiltersOpen = false;
@@ -83,6 +91,7 @@ const selectedCarFilterSlice = createSlice({
     openAdvancedFilters: (state) => {
       state.isAdvancedFiltersOpen = true;
     },
+    
   },
 });
 
@@ -105,5 +114,7 @@ export const {
   toggleAdvancedFilters,
   openAdvancedFilters,
   selectCylinders,
+  selectCarKeys, 
+  selectSalesStatus, 
 } = selectedCarFilterSlice.actions;
 export const { reducer: selectedCarFilters } = selectedCarFilterSlice;

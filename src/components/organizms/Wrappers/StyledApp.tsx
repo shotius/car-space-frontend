@@ -19,6 +19,11 @@ const GlobalStyles = css`
   * {
     -webkit-tap-highlight-color: transparent;
   }
+  
+  // remove blue shadows from checkbox and radio buttons
+  *[data-focus] {
+    box-shadow: none !important;
+  }
 `;
 
 export const StyledApp: React.FC<StylesAppProps> = ({ children }) => {

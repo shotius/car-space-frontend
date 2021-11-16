@@ -1,8 +1,11 @@
 import { useDisclosure } from '@chakra-ui/hooks';
 import { HStack, Stack } from '@chakra-ui/layout';
-import { Button, Collapse, VStack } from '@chakra-ui/react';
+import { Button, Collapse, Icon, VStack } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
+import { EuroIcon } from 'src/components/atoms/Icons/EuroIcon';
+import { GelIcon } from 'src/components/atoms/Icons/GelIcon';
+import { UsdIcon } from 'src/components/atoms/Icons/UsdIcon';
 import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
@@ -13,6 +16,7 @@ import { ButtonRound } from '../Buttons/ButtonRound';
 import { SearchButton } from '../Buttons/SearchButton';
 import { InputRegular } from '../Inputs/InputRegular';
 import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
+import { MobileCarKyesPopup } from '../MobileSelectPopups/MobileCarKeysPopup';
 import { MobileConditionPopup } from '../MobileSelectPopups/MobileConditionPopup';
 import { MobileCylinderPopup } from '../MobileSelectPopups/MobileCylinderPopup';
 import { MobileDrivesPopup } from '../MobileSelectPopups/MobileDrivePopup';
@@ -77,6 +81,13 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
     onClose: closeTypes,
   } = useDisclosure();
 
+  // Keys
+  const {
+    isOpen: isKeysOpen,
+    onClose: closeKeys,
+    onOpen: openKeys,
+  } = useDisclosure();
+
   // Locations
   const {
     isOpen: isLocatinsOpen,
@@ -122,7 +133,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
       {/* mobile select opens drawer */}
       <MobileSelect
         onClick={openBrand}
-        label={selectedBrands.join(' ') || 'Brand'}
+        label={selectedBrands.join(' ') || 'Manufacturer'}
       />
       <MobileBrandPopup
         finalFocusRef={searchButtonRef}
@@ -194,19 +205,21 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
             onClick={() => setChosenCurrency('GEL')}
             active={chosenCurrency === 'GEL'}
           >
-            ლ
+            <Icon as={GelIcon} boxSize={7} fontWeight="400" />
           </ButtonRound>
           <ButtonRound
             onClick={() => setChosenCurrency('USD')}
             active={chosenCurrency === 'USD'}
           >
-            $
+            <Icon as={UsdIcon} boxSize={6} fontWeight="400" />
           </ButtonRound>
           <ButtonRound
             onClick={() => setChosenCurrency('EUR')}
             active={chosenCurrency === 'EUR'}
+            fontSize="20px"
+            fontWeight="400"
           >
-            €
+            <Icon as={EuroIcon} boxSize={6} fontWeight="400" />
           </ButtonRound>
         </HStack>
       </HStack>
@@ -215,12 +228,6 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
         <VStack>
           <MobileSelect onClick={openEngine} label="Engine"></MobileSelect>
           <MobileEnginePopup onClose={closeEngine} isOpen={isEngineOpen} />
-
-          {/* Mileage */}
-          <MobileSelect
-            onClick={() => console.log('cliecked')}
-            label="Mileage"
-          ></MobileSelect>
 
           {/* Conditions */}
           <MobileSelect
@@ -252,16 +259,30 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
             isOpen={isTransmOpen}
             onClose={closeTransm}
           />
+
+          {/* Keys */}
+          <MobileSelect onClick={openKeys} label="Keys"></MobileSelect>
+          <MobileCarKyesPopup isOpen={isKeysOpen} onClose={closeKeys} />
+
           {/* drive */}
           <MobileSelect onClick={openDrives} label="Drive"></MobileSelect>
           <MobileDrivesPopup isOpen={isDrivesOpen} onClose={closeDrives} />
 
+          {/* Sales Status */}
+          <MobileSelect
+            onClick={openTransm}
+            label="Sales Status"
+          ></MobileSelect>
+
           {/* Fuels */}
-          <MobileSelect onClick={openFuels} label="Fuel"></MobileSelect>
+          <MobileSelect onClick={openFuels} label="Fuel Type"></MobileSelect>
           <MobileFuelsPopup isOpen={isFuelsOpen} onClose={closeFuels} />
 
           {/* Cylinders */}
-          <MobileSelect onClick={openCylinders} label="Cylinder"></MobileSelect>
+          <MobileSelect
+            onClick={openCylinders}
+            label="Cylinders"
+          ></MobileSelect>
           <MobileCylinderPopup
             isOpen={isCylindersOpen}
             onClose={closeCylinders}
@@ -272,7 +293,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
       <VStack pt="2" spacing="3">
         {/* this mobile input sticks button to the keyboard */}
         <WithMobileKeyboard isKeyboardActive={keyboardActive}>
-          <SearchButton w="full" ref={searchButtonRef} />
+          <SearchButton w="full" />
         </WithMobileKeyboard>
         <Button
           variant="link"
@@ -283,6 +304,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
             color={'#000'}
             display={keyboardActive ? 'none' : 'block'}
             lineHeight="19px"
+            fontWeight="400"
           >
             {isAdvancedFiltersOpen ? 'See less filter' : 'See more filter'}
           </TextRegular>

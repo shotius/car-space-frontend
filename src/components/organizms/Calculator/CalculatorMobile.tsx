@@ -34,7 +34,7 @@ export const CalculatorMobile: React.FC<CalculatorMobileProps> = ({}) => {
           textAlignLast: 'center',
         }}
       >
-        <option value={1} className="dropdownSelect">Tranport</option>
+        <option value={1} className="dropdownSelect">Transport</option>
         <option value={2} className="dropdownSelect">Import Tax</option>
         <option value={3} className="dropdownSelect">Loan</option>
         <option value={4} className="dropdownSelect">Leasing</option>

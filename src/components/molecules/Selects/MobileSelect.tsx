@@ -14,8 +14,7 @@ interface MobileSelectProps {
 export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
   onClick,
   label,
-  textOpacity = '0.5',
-  // arrowOpacity = '0.5'
+  textOpacity = '0.4',
   ...rest
 }) => {
   return (
@@ -26,7 +25,7 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
       borderRadius="8px"
       onClick={onClick}
       pl="4"
-      pr="2"
+      pr="3"
       justify="space-between"
       {...rest}
     >
@@ -36,7 +35,7 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
       >
         {label}
       </TextRegular>
-      <Icon as={DropdownIcon} boxSize="5" opacity={textOpacity} />
+      <Icon as={DropdownIcon} boxSize={4} opacity={textOpacity} />
     </HStack>
   );
 };
