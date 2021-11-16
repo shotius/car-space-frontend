@@ -11,7 +11,7 @@ export const MobileModelSelect: React.FC<MobileModelSelectProps> = ({}) => {
 
   const dispatch = useAppDispatch();
   const { models: ModelFilters } = useAppSelector((state) => state.carsReducer);
-  const { models: selectedModels } = useAppSelector(
+  const { models: selection } = useAppSelector(
     (state) => state.selectedCarFilters
   );
 
@@ -26,9 +26,9 @@ export const MobileModelSelect: React.FC<MobileModelSelectProps> = ({}) => {
     <>
       <MobileSelect
         onClick={handleModelSelect}
-        label={selectedModels.join('; ') || 'Models'}
+        label={selection.length ? `Model: ${selection.join('; ')}` : 'Models'}
         isDisabled={!!!ModelFilters.length}
-        hasValue={!!selectedModels.length}
+        hasValue={!!selection.length}
         onClear={() => dispatch(selectModels([]))}
       />
       <MobileModelsPopup isOpen={isOpen} onClose={onClose} />

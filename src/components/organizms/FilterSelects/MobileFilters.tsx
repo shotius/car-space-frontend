@@ -1,4 +1,3 @@
-import { useDisclosure } from '@chakra-ui/hooks';
 import { HStack, Stack } from '@chakra-ui/layout';
 import { Button, Collapse, Icon, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -15,20 +14,19 @@ import {
 import { ButtonRound } from '../../molecules/Buttons/ButtonRound';
 import { SearchButton } from '../../molecules/Buttons/SearchButton';
 import { InputRegular } from '../../molecules/Inputs/InputRegular';
-import { MobileCylinderPopup } from '../../molecules/MobileSelectPopups/MobileCylinderPopup';
-import { MobileDrivesPopup } from '../../molecules/MobileSelectPopups/MobileDrivePopup';
-import { MobileFuelsPopup } from '../../molecules/MobileSelectPopups/MobileFuelPopup';
-import { MobileSalesStatusPopup } from '../../molecules/MobileSelectPopups/MobileSalesStatusPopup';
-import { MobileSelect } from '../../molecules/Selects/MobileSelect';
 import { TextRegular } from '../../molecules/Texts/TextRegular';
 import { WithMobileKeyboard } from '../../molecules/Wrappers/WithMobileKeyboard';
 import { MobileBrandSelect } from './mobile/MobileBrandSelect';
 import { MobileCarKeysSelect } from './mobile/MobileCarKeySelect';
 import { MobileConditionSelect } from './mobile/MobileConditionSelect';
+import { MobileCylindersSelect } from './mobile/MobileCylindersSelect';
+import { MobileDriveSelect } from './mobile/MobileDriveSelect';
 import { MobileEngineSelect } from './mobile/MobileEngineSelect';
+import { MobileFuelsSelect } from './mobile/MobileFuelsSelect';
 import { MobileLocationSelect } from './mobile/MobileLocationSelect';
 import { MobileModelSelect } from './mobile/MobileModelSelect';
-import {  MobileTransmissionSelect } from './mobile/MobileTransmissionSelect';
+import { MobileSalesStatusSelect } from './mobile/MobileSalesStatusSelect';
+import { MobileTransmissionSelect } from './mobile/MobileTransmissionSelect';
 import { MobileTypesSelect } from './mobile/MobileTypesSelect';
 
 interface ThreeMobileSelectsProps {}
@@ -41,35 +39,6 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
     (state) => state.selectedCarFilters
   );
   const dispatch = useAppDispatch();
-
-  const {
-    isOpen: isSalesStatusOpen,
-    onOpen: openSalesStatus,
-    onClose: closeSalesStatus,
-  } = useDisclosure();
-
-  // Drives
-  const {
-    isOpen: isDrivesOpen,
-    onOpen: openDrives,
-    onClose: closeDrives,
-  } = useDisclosure();
-
-  // Fuels
-  const {
-    isOpen: isFuelsOpen,
-    onOpen: openFuels,
-    onClose: closeFuels,
-  } = useDisclosure();
-
-  // cylinders
-  const {
-    isOpen: isCylindersOpen,
-    onClose: closeCylinders,
-    onOpen: openCylinders,
-  } = useDisclosure();
-
-  // advanced filters
 
   const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
   const [yearFrom, setYearFrom] = useState('');
@@ -178,32 +147,16 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
           <MobileCarKeysSelect /> 
 
           {/* drive */}
-          <MobileSelect onClick={openDrives} label="Drive"></MobileSelect>
-          <MobileDrivesPopup isOpen={isDrivesOpen} onClose={closeDrives} />
+          <MobileDriveSelect />
 
           {/* Sales Status */}
-          <MobileSelect
-            onClick={openSalesStatus}
-            label="Sales Status"
-          ></MobileSelect>
-          <MobileSalesStatusPopup
-            onClose={closeSalesStatus}
-            isOpen={isSalesStatusOpen}
-          />
+          <MobileSalesStatusSelect /> 
 
           {/* Fuels */}
-          <MobileSelect onClick={openFuels} label="Fuel Type"></MobileSelect>
-          <MobileFuelsPopup isOpen={isFuelsOpen} onClose={closeFuels} />
+          <MobileFuelsSelect /> 
 
           {/* Cylinders */}
-          <MobileSelect
-            onClick={openCylinders}
-            label="Cylinders"
-          ></MobileSelect>
-          <MobileCylinderPopup
-            isOpen={isCylindersOpen}
-            onClose={closeCylinders}
-          />
+          <MobileCylindersSelect /> 
         </VStack>
       </Collapse>
       {/* apply button */}

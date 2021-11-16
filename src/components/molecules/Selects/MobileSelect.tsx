@@ -31,11 +31,10 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
       w="full"
       bg="white"
       borderRadius="8px"
-      // onClick={() => {
-        // if (!isDesabled) onClick();
-        // onClick()
-      // }}
-      onClick={onClick}
+      onClick={() => {
+        if (!isDisabled) onClick();
+        onClick()
+      }}
       pl="4"
       pr="3"
       justify="space-between"

@@ -1,33 +1,32 @@
 import { useDisclosure } from '@chakra-ui/react';
-import { MobileTypePopup } from 'src/components/molecules/MobileSelectPopups/MobileTypePopup';
+import { MobileFuelsPopup } from 'src/components/molecules/MobileSelectPopups/MobileFuelPopup';
 import { MobileSelect } from 'src/components/molecules/Selects/MobileSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { selectTypes } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { selectFuels } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 
-interface MobileTypesSelectProps {}
+interface MobileFuelsSelectProps {}
 
-export const MobileTypesSelect: React.FC<MobileTypesSelectProps> = ({}) => {
+export const MobileFuelsSelect: React.FC<MobileFuelsSelectProps> = ({}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const dispatch = useAppDispatch();
-  const { types: selection } = useAppSelector(
+  const { fuels: selection } = useAppSelector(
     (state) => state.selectedCarFilters
   );
-
   return (
     <>
       <MobileSelect
         onClick={onOpen}
         label={
           selection.length
-            ? `Types: ${capitalizeEach(selection.join('; '))}`
-            : 'Type'
+            ? `Fuel: ${capitalizeEach(selection.join(', '))}`
+            : 'Fuel Types'
         }
         hasValue={!!selection.length}
-        onClear={() => dispatch(selectTypes([]))}
+        onClear={() => dispatch(selectFuels([]))}
       />
-      <MobileTypePopup isOpen={isOpen} onClose={onClose} />
+      <MobileFuelsPopup isOpen={isOpen} onClose={onClose} />
     </>
   );
 };

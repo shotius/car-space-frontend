@@ -11,7 +11,7 @@ interface MobileEngineSelectProps {}
 
 export const MobileEngineSelect: React.FC<MobileEngineSelectProps> = ({}) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  
+
   const dispatch = useAppDispatch();
   const { engineFrom: selectedEngineFrom, engineTo: selectedEngineTo } =
     useAppSelector((state) => state.selectedCarFilters);
@@ -21,9 +21,9 @@ export const MobileEngineSelect: React.FC<MobileEngineSelectProps> = ({}) => {
       <MobileSelect
         label={
           selectedEngineFrom && selectedEngineTo
-            ? `${selectedEngineFrom.toFixed(1)} -  ${selectedEngineTo.toFixed(
+            ? `Engine: ${selectedEngineFrom.toFixed(
                 1
-              )}`
+              )} -  ${selectedEngineTo.toFixed(1)} (from - to)`
             : 'Engine'
         }
         onClick={onOpen}

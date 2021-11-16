@@ -12,7 +12,7 @@ export const MobileConditionSelect: React.FC<MobileConditionSelectProps> =
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const dispatch = useAppDispatch();
-    const { conditions: selectedConditions } = useAppSelector(
+    const { conditions: selection } = useAppSelector(
       (state) => state.selectedCarFilters
     );
 
@@ -21,11 +21,11 @@ export const MobileConditionSelect: React.FC<MobileConditionSelectProps> =
         <MobileSelect
           onClick={onOpen}
           label={
-            selectedConditions.length
-              ? capitalizeEach(selectedConditions.join('; '))
+            selection.length
+              ? `Condition: ${capitalizeEach(selection.join('; '))}`
               : 'Condition'
           }
-          hasValue={!!selectedConditions.length}
+          hasValue={!!selection.length}
           onClear={() => dispatch(selectConditions([]))}
         />
         <MobileConditionPopup isOpen={isOpen} onClose={onClose} />

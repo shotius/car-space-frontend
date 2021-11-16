@@ -10,16 +10,20 @@ export const MobileTransmissionSelect: React.FC<MobileTransmissionSelectProps> =
   ({}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const dispatch = useAppDispatch()
-    const { transsmision: selectedLocations } = useAppSelector(
+    const dispatch = useAppDispatch();
+    const { transsmision: selection } = useAppSelector(
       (state) => state.selectedCarFilters
     );
     return (
       <>
         <MobileSelect
           onClick={onOpen}
-          label={selectedLocations.join(', ') || "Transmission"}
-          hasValue={!!selectedLocations.length}
+          label={
+            selection.length
+              ? `Transmission: ${selection.join(', ')}`
+              : 'Transmission'
+          }
+          hasValue={!!selection.length}
           onClear={() => dispatch(selectTranssmision([]))}
         />
         <MobileTransmissionPopup isOpen={isOpen} onClose={onClose} />

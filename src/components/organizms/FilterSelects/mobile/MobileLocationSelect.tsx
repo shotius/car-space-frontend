@@ -18,7 +18,11 @@ export const MobileLocationSelect: React.FC<MobileLocationSelectProps> =
       <>
         <MobileSelect
           onClick={onOpen}
-          label={selection.join(', ') || 'Locations'}
+          label={
+            selection.length
+              ? `Location: ${selection.join(', ')}`
+              : 'Locations'
+          }
           hasValue={!!selection.length}
           onClear={() => dispatch(selectLocations([]))}
         />
