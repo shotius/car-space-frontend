@@ -3,7 +3,7 @@ import { DividerVertical } from 'src/components/atoms/Divider';
 import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
 import { Select } from 'src/components/atoms/Selects';
-import { SearchButton } from '../Buttons/SearchButton';
+import { SearchButton } from '../../molecules/Buttons/SearchButton';
 interface ThreeHDSelectsProps {
   isOpen: boolean;
   onToggle: () => void;

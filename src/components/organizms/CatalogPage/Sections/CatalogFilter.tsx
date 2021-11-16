@@ -1,8 +1,8 @@
 import { SimpleGrid, Stack, StackProps } from '@chakra-ui/layout';
 import { Collapse } from '@chakra-ui/react';
-import { ThreeHDSelects } from 'src/components/molecules/FilterSelects/ThreeHDSelects';
+import { ThreeHDSelects } from 'src/components/organizms/FilterSelects/ThreeHDSelects';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { MobileFilters } from '../../../molecules/FilterSelects/MobileFilters';
+import { MobileFilters } from '../../FilterSelects/MobileFilters';
 import SelectSecondary from '../../../molecules/Selects/SelectSecondary';
 
 interface FilterMobileProps {

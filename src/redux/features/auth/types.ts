@@ -45,7 +45,7 @@ export interface CarsSliceState {
 
 export type Transmission = 'Manual' | 'Automatic' | 'CVT';
 
-export type Keys = 'YES' | 'NO'
+export type Keys = 'YES' | 'NO' | null
 
 export interface SelectedCarFilters {
   brands: string[];

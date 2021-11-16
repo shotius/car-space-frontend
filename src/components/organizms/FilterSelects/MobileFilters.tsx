@@ -1,7 +1,7 @@
 import { useDisclosure } from '@chakra-ui/hooks';
 import { HStack, Stack } from '@chakra-ui/layout';
 import { Button, Collapse, Icon, VStack } from '@chakra-ui/react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { EuroIcon } from 'src/components/atoms/Icons/EuroIcon';
 import { GelIcon } from 'src/components/atoms/Icons/GelIcon';
@@ -9,111 +9,43 @@ import { UsdIcon } from 'src/components/atoms/Icons/UsdIcon';
 import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
-  selectBrand,
-  selectConditions,
-  selectEngineFrom,
-  selectEnginTo,
-  selectModels,
   selectYearFrom,
   toggleAdvancedFilters
 } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
-import { ButtonRound } from '../Buttons/ButtonRound';
-import { SearchButton } from '../Buttons/SearchButton';
-import { InputRegular } from '../Inputs/InputRegular';
-import { MobileBrandPopup } from '../MobileSelectPopups/MobileBrandSelect';
-import { MobileCarKyesPopup } from '../MobileSelectPopups/MobileCarKeysPopup';
-import { MobileConditionPopup } from '../MobileSelectPopups/MobileConditionPopup';
-import { MobileCylinderPopup } from '../MobileSelectPopups/MobileCylinderPopup';
-import { MobileDrivesPopup } from '../MobileSelectPopups/MobileDrivePopup';
-import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
-import { MobileFuelsPopup } from '../MobileSelectPopups/MobileFuelPopup';
-import { MobileLocationPopup } from '../MobileSelectPopups/MobileLocationPopup';
-import { MobileModelsPopup } from '../MobileSelectPopups/MobileModelsPopup';
-import { MobileSalesStatusPopup } from '../MobileSelectPopups/MobileSalesStatusPopup';
-import { MobileTransmissionPopup } from '../MobileSelectPopups/MobileTransmissionPopup';
-import { MobileTypePopup } from '../MobileSelectPopups/MobileTypePopup';
-import { MobileSelect } from '../Selects/MobileSelect';
-import { TextRegular } from '../Texts/TextRegular';
-import { WithMobileKeyboard } from '../Wrappers/WithMobileKeyboard';
+import { ButtonRound } from '../../molecules/Buttons/ButtonRound';
+import { SearchButton } from '../../molecules/Buttons/SearchButton';
+import { InputRegular } from '../../molecules/Inputs/InputRegular';
+import { MobileCylinderPopup } from '../../molecules/MobileSelectPopups/MobileCylinderPopup';
+import { MobileDrivesPopup } from '../../molecules/MobileSelectPopups/MobileDrivePopup';
+import { MobileFuelsPopup } from '../../molecules/MobileSelectPopups/MobileFuelPopup';
+import { MobileSalesStatusPopup } from '../../molecules/MobileSelectPopups/MobileSalesStatusPopup';
+import { MobileSelect } from '../../molecules/Selects/MobileSelect';
+import { TextRegular } from '../../molecules/Texts/TextRegular';
+import { WithMobileKeyboard } from '../../molecules/Wrappers/WithMobileKeyboard';
+import { MobileBrandSelect } from './mobile/MobileBrandSelect';
+import { MobileCarKeysSelect } from './mobile/MobileCarKeySelect';
+import { MobileConditionSelect } from './mobile/MobileConditionSelect';
+import { MobileEngineSelect } from './mobile/MobileEngineSelect';
+import { MobileLocationSelect } from './mobile/MobileLocationSelect';
+import { MobileModelSelect } from './mobile/MobileModelSelect';
+import {  MobileTransmissionSelect } from './mobile/MobileTransmissionSelect';
+import { MobileTypesSelect } from './mobile/MobileTypesSelect';
 
 interface ThreeMobileSelectsProps {}
 
 export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
   const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
-  const searchButtonRef = useRef<HTMLButtonElement>(null);
 
   // redux variables
-  const {
-    brands: selectedBrands,
-    models: selectedModels,
-    engineFrom: selectedEngineFrom,
-    engineTo: selectedEngineTo,
-    conditions: selectedConditions,
-    isAdvancedFiltersOpen,
-  } = useAppSelector((state) => state.selectedCarFilters);
-  const { models: ModelFilters } = useAppSelector((state) => state.carsReducer);
+  const { isAdvancedFiltersOpen } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
   const dispatch = useAppDispatch();
-
-  // brand drawer
-  const {
-    isOpen: isBrandOpen,
-    onClose: closeBrand,
-    onOpen: openBrand,
-  } = useDisclosure();
-
-  const {
-    isOpen: isModelsOpen,
-    onClose: closeModels,
-    onOpen: openModels,
-  } = useDisclosure();
-
-  // engine
-  const {
-    isOpen: isEngineOpen,
-    onClose: closeEngine,
-    onOpen: openEngine,
-  } = useDisclosure();
-
-  // Transmissions
-  const {
-    isOpen: isTransmOpen,
-    onClose: closeTransm,
-    onOpen: openTransm,
-  } = useDisclosure();
-
-  // Conditions
-  const {
-    isOpen: isConditionsOpen,
-    onOpen: openConditions,
-    onClose: closeConditions,
-  } = useDisclosure();
-
-  // Types
-  const {
-    isOpen: isTypesOpen,
-    onOpen: openTypes,
-    onClose: closeTypes,
-  } = useDisclosure();
 
   const {
     isOpen: isSalesStatusOpen,
     onOpen: openSalesStatus,
     onClose: closeSalesStatus,
-  } = useDisclosure();
-
-  // Keys
-  const {
-    isOpen: isKeysOpen,
-    onClose: closeKeys,
-    onOpen: openKeys,
-  } = useDisclosure();
-
-  // Locations
-  const {
-    isOpen: isLocatinsOpen,
-    onOpen: openLocations,
-    onClose: closeLocations,
   } = useDisclosure();
 
   // Drives
@@ -142,36 +74,13 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
   const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
   const [yearFrom, setYearFrom] = useState('');
 
-  const handleModelSelect = () => {
-    if (ModelFilters.length !== 0) {
-      openModels();
-    }
-  };
-
   return (
     <Stack>
       {/* mobile select opens drawer */}
-      <MobileSelect
-        onClick={openBrand}
-        label={selectedBrands.join(' ') || 'Manufacturer'}
-        hasValue={!!selectedBrands.length}
-        onClear={() => dispatch(selectBrand([]))}
-      />
-      <MobileBrandPopup
-        finalFocusRef={searchButtonRef}
-        isOpen={isBrandOpen}
-        onClose={closeBrand}
-      />
+      <MobileBrandSelect />
 
       {/* mobile model select and its drawer */}
-      <MobileSelect
-        onClick={handleModelSelect}
-        label={selectedModels.join('; ') || 'Models'}
-        textOpacity={ModelFilters.length !== 0 ? '0.4' : '0.2'}
-        hasValue={!!selectedModels.length}
-        onClear={() => dispatch(selectModels([]))}
-      />
-      <MobileModelsPopup isOpen={isModelsOpen} onClose={closeModels} />
+      <MobileModelSelect />
 
       {/* year */}
       <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
@@ -251,61 +160,22 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
       <Collapse in={isAdvancedFiltersOpen}>
         <VStack>
           {/* Engine  */}
-          <MobileSelect
-            label={
-              selectedEngineFrom && selectedEngineTo
-                ? `${selectedEngineFrom} -  ${selectedEngineTo}`
-                : 'Engine'
-            }
-            onClick={openEngine}
-            hasValue={!!(selectedEngineFrom && selectedEngineTo)}
-            onClear={() => {
-              dispatch(selectEngineFrom(null));
-              dispatch(selectEnginTo(null));
-            }}
-          />
-          <MobileEnginePopup onClose={closeEngine} isOpen={isEngineOpen} />
+          <MobileEngineSelect />
 
           {/* Conditions */}
-          <MobileSelect
-            onClick={openConditions}
-            label={
-              selectedConditions.length
-                ? capitalizeEach(selectedConditions.join('; '))
-                : 'Condition'
-            }
-            hasValue={!!selectedConditions.length}
-            onClear={() => dispatch(selectConditions([]))}
-          />
-          <MobileConditionPopup
-            isOpen={isConditionsOpen}
-            onClose={closeConditions}
-          />
+          <MobileConditionSelect />
 
           {/* Types */}
-          <MobileSelect onClick={openTypes} label="Type"></MobileSelect>
-          <MobileTypePopup isOpen={isTypesOpen} onClose={closeTypes} />
+          <MobileTypesSelect />
 
           {/* Locations */}
-          <MobileSelect onClick={openLocations} label="Location"></MobileSelect>
-          <MobileLocationPopup
-            isOpen={isLocatinsOpen}
-            onClose={closeLocations}
-          />
+          <MobileLocationSelect />
 
           {/* transmission */}
-          <MobileSelect
-            onClick={openTransm}
-            label="Transmission"
-          ></MobileSelect>
-          <MobileTransmissionPopup
-            isOpen={isTransmOpen}
-            onClose={closeTransm}
-          />
+          <MobileTransmissionSelect />
 
           {/* Keys */}
-          <MobileSelect onClick={openKeys} label="Keys"></MobileSelect>
-          <MobileCarKyesPopup isOpen={isKeysOpen} onClose={closeKeys} />
+          <MobileCarKeysSelect /> 
 
           {/* drive */}
           <MobileSelect onClick={openDrives} label="Drive"></MobileSelect>

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Keys, SelectedCarFilters } from './types';
+import { Keys, SelectedCarFilters, Transmission } from './types';
 
 const initialState: SelectedCarFilters = {
   brands: [],
@@ -39,7 +39,7 @@ const selectedCarFilterSlice = createSlice({
     selectEnginTo: (state, action) => {
       state.engineTo = action.payload;
     },
-    selectTranssmision: (state, action) => {
+    selectTranssmision: (state, action: PayloadAction<Transmission[]>) => {
       state.transsmision = action.payload;
     },
     selectPriseFrom: (state, action) => {

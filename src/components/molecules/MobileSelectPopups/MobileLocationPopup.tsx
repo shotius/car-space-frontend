@@ -30,6 +30,8 @@ export const MobileLocationPopup: React.FC<MobileLocationPopupProps> = ({
   useEffect(() => {
     if (initSelectedLocations.length) {
       setSelectedLocation(initSelectedLocations);
+    } else {
+      setSelectedLocation([])
     }
   }, [initSelectedLocations]);
 

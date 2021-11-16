@@ -11,6 +11,7 @@ interface MobileSelectProps {
   label: string;
   textOpacity?: TextProps['opacity'];
   arrowOpacity?: TextProps['opacity'];
+  isDisabled?: boolean;
 }
 
 // in mobile version, select field is fake one, because we need to pop up
@@ -20,6 +21,7 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
   label,
   onClear,
   hasValue,
+  isDisabled = false,
   textOpacity = '0.4',
   ...rest
 }) => {
@@ -29,6 +31,10 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
       w="full"
       bg="white"
       borderRadius="8px"
+      // onClick={() => {
+        // if (!isDesabled) onClick();
+        // onClick()
+      // }}
       onClick={onClick}
       pl="4"
       pr="3"
@@ -36,7 +42,7 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
       {...rest}
     >
       <TextRegular
-        opacity={textOpacity}
+        opacity={!isDisabled ? textOpacity : '0.2'}
         fontSize={['16px', null, null, '18px', null, '24px']}
         isTruncated
       >
@@ -56,7 +62,11 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
           }}
         />
       ) : (
-        <Icon as={DropdownIcon} boxSize={4} opacity={textOpacity} />
+        <Icon
+          as={DropdownIcon}
+          boxSize={4}
+          opacity={!isDisabled ? textOpacity : '0.2'}
+        />
       )}
     </HStack>
   );
