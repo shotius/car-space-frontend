@@ -1,18 +1,20 @@
 import {
-  Box, Divider,
+  Box,
+  Divider,
   Drawer,
   DrawerBody,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  Heading, VStack
+  Heading,
+  VStack,
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
-import { useAppDispatch } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectBrand } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { getModels } from 'src/redux/features/auth/carsSlice';
 import { ButtonRegular } from '../Buttons/ButtonRegular';
@@ -24,14 +26,12 @@ import { ScrollableDiv } from '../Wrappers/ScrollableDiv';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 
 interface BrandSelectProps {
-  brands: string[];
   isOpen: boolean;
   onClose: () => void;
   finalFocusRef: React.RefObject<HTMLButtonElement>;
 }
 
 export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
-  brands,
   isOpen,
   onClose,
   finalFocusRef,
@@ -40,16 +40,29 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
   const [topBrandsVisible, setTopBrandsVisible] = useState(true);
   const [searchWord, setSearchWord] = useState<string>('');
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const { brands: allBrands } = useAppSelector((state) => state.carsReducer);
+  const { brands: initSelectedBrands } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (brands.length) {
-      setSelectedBrands(selectedBrands.concat(brands[0]));
+    // if we have filters saved in redux assign them to components state
+    if (initSelectedBrands.length) {
+      console.log('here')
+      setSelectedBrands(initSelectedBrands);
+    } else if (allBrands.length) {
+      // if we don't have salected filters and all brand cases are fetched
+      // assign first brand to the component state
+      setSelectedBrands([allBrands[0]]);
+    } else {
+      // else empy array
+      setSelectedBrands([]);
     }
-  }, [brands]);
+  }, [allBrands, initSelectedBrands]);
 
   // filter brands when searchWord is specified
-  const brandsToShow = addLettersToSortedArray(brands).filter((brand) => {
+  const brandsToShow = addLettersToSortedArray(allBrands).filter((brand) => {
     return brand.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
   });
 

@@ -9,3 +9,25 @@ h1 {
 }
 
 
+input[type='radio'] {
+  -webkit-appearance:none;
+  cursor: pointer;
+  width:16px;
+  height:16px;
+  border:2px solid #928a8a;
+  border-radius:50%;
+  outline:none;
+}
+
+input[type='radio']:before {
+  content:'';
+  display:block;
+  width:66%;
+  height:66%;
+  margin: 18% auto;    
+  border-radius:50%;    
+}
+
+input[type='radio']:checked:before {
+  background:#FB5607;
+}

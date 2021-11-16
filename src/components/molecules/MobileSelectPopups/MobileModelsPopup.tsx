@@ -28,6 +28,8 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
   useEffect(() => {
     if (initialySelectedModels.length) {
       setSelectedModels(initialySelectedModels);
+    } else {
+      setSelectedModels([]);
     }
   }, [initialySelectedModels]);
 

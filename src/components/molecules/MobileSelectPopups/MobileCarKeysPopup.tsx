@@ -1,12 +1,10 @@
-import { Checkbox } from '@chakra-ui/checkbox';
 import { HStack, VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
-  selectCarKeys,
-  selectTranssmision,
+  selectCarKeys
 } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { Keys, Transmission } from 'src/redux/features/auth/types';
+import { Keys } from 'src/redux/features/auth/types';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 import { TextRegular } from '../Texts/TextRegular';
 
@@ -51,7 +49,7 @@ export const MobileCarKyesPopup: React.FC<MobileCarKyesPopupProps> = ({
             checked={selectedKeys === 'YES'}
             onChange={() => setSelectedKeys('YES')}
           />
-          <TextRegular opacity="0.4">YES</TextRegular>
+          <TextRegular>Yes</TextRegular>
         </HStack>
         <HStack>
           <input
@@ -61,7 +59,7 @@ export const MobileCarKyesPopup: React.FC<MobileCarKyesPopupProps> = ({
             checked={selectedKeys === 'NO'}
             onChange={() => setSelectedKeys('NO')}
           />
-          <TextRegular opacity="0.4">NO</TextRegular>
+          <TextRegular>No</TextRegular>
         </HStack>
       </VStack>
     </MobileFilterPopup>

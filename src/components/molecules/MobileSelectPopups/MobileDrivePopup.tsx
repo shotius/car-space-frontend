@@ -62,7 +62,7 @@ export const MobileDrivesPopup: React.FC<MobileDrivesPopupProps> = ({
         <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />
       }
     >
-      <VStack w="full" alignItems="flex-start" spacing="16px" minH="80vh">
+      <VStack w="full" alignItems="flex-start" spacing="16px" maxH="80vh">
         {drivesToShow().map((drive) => (
           <Checkbox
             colorScheme="autoOrange"

@@ -2,6 +2,7 @@ import { Checkbox, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectFuels } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { SearchInput } from '../Inputs/SearchInput';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
@@ -73,7 +74,7 @@ export const MobileFuelsPopup: React.FC<MobileFuelPopupProps> = ({
             }}
             key={fuel}
           >
-            {fuel}
+            {capitalizeEach(fuel)}
           </Checkbox>
         ))}
       </VStack>

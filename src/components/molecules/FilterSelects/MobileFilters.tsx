@@ -9,6 +9,8 @@ import { UsdIcon } from 'src/components/atoms/Icons/UsdIcon';
 import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
+  selectBrand,
+  selectModels,
   selectYearFrom,
   toggleAdvancedFilters,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
@@ -34,12 +36,17 @@ import { WithMobileKeyboard } from '../Wrappers/WithMobileKeyboard';
 interface ThreeMobileSelectsProps {}
 
 export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
-  const { brands: selectedBrands, isAdvancedFiltersOpen } = useAppSelector(
-    (state) => state.selectedCarFilters
-  );
   const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
-  const dispatch = useAppDispatch();
   const searchButtonRef = useRef<HTMLButtonElement>(null);
+
+  // redux variables
+  const {
+    brands: selectedBrands,
+    models: selectedModels,
+    isAdvancedFiltersOpen,
+  } = useAppSelector((state) => state.selectedCarFilters);
+  const { models: ModelFilters } = useAppSelector((state) => state.carsReducer);
+  const dispatch = useAppDispatch();
 
   // brand drawer
   const {
@@ -124,13 +131,12 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
   } = useDisclosure();
 
   // advanced filters
-  const { brands, models } = useAppSelector((state) => state.carsReducer);
 
   const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
   const [yearFrom, setYearFrom] = useState('');
 
   const handleModelSelect = () => {
-    if (models.length !== 0) {
+    if (ModelFilters.length !== 0) {
       openModels();
     }
   };
@@ -141,10 +147,11 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
       <MobileSelect
         onClick={openBrand}
         label={selectedBrands.join(' ') || 'Manufacturer'}
+        hasValue={!!selectedBrands.length}
+        onClear={() => dispatch(selectBrand([]))}
       />
       <MobileBrandPopup
         finalFocusRef={searchButtonRef}
-        brands={brands}
         isOpen={isBrandOpen}
         onClose={closeBrand}
       />
@@ -152,8 +159,10 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
       {/* mobile model select and its drawer */}
       <MobileSelect
         onClick={handleModelSelect}
-        label="Models"
-        textOpacity={models.length !== 0 ? '0.5' : '0.2'}
+        label={selectedModels.join('; ') || "Models"}
+        textOpacity={ModelFilters.length !== 0 ? '0.4' : '0.2'}
+        hasValue={!!selectedModels.length}
+        onClear={() => dispatch(selectModels([]))}
       />
       <MobileModelsPopup isOpen={isModelsOpen} onClose={closeModels} />
 

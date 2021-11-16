@@ -1,9 +1,13 @@
 import { HStack, Icon, StackProps, TextProps } from '@chakra-ui/react';
+import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
 import { DropdownIcon } from '../../atoms/Icons/DropdownIcon';
+import { ButtonWithIcon } from '../Buttons/IconWithButton';
 import { TextRegular } from '../Texts/TextRegular';
 
 interface MobileSelectProps {
   onClick: () => void;
+  onClear?: () => void;
+  hasValue?: boolean;
   label: string;
   textOpacity?: TextProps['opacity'];
   arrowOpacity?: TextProps['opacity'];
@@ -14,6 +18,8 @@ interface MobileSelectProps {
 export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
   onClick,
   label,
+  onClear,
+  hasValue,
   textOpacity = '0.4',
   ...rest
 }) => {
@@ -32,10 +38,26 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
       <TextRegular
         opacity={textOpacity}
         fontSize={['16px', null, null, '18px', null, '24px']}
+        isTruncated
       >
         {label}
       </TextRegular>
-      <Icon as={DropdownIcon} boxSize={4} opacity={textOpacity} />
+      {/* if Some value is selected clear icon will appear, else dropdown */}
+      {hasValue ? (
+        <ButtonWithIcon
+          icon={CloseIcon}
+          aria-label="clear-selected"
+          p="0"
+          minW="0"
+          opacity="0.6"
+          onClick={(e) => {
+            if (e.stopPropagation) e.stopPropagation();
+            if (onClear) onClear();
+          }}
+        />
+      ) : (
+        <Icon as={DropdownIcon} boxSize={4} opacity={textOpacity} />
+      )}
     </HStack>
   );
 };
