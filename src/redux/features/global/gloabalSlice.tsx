@@ -8,6 +8,7 @@ const initialState: GlobalStateSliceState = {
   isCatalogBannerOpen: false,
   isLoginOpen: false,
   isRegistrationOpen: false,
+  isMobileRegisterLoginOpen: false,
 };
 
 const globalStateSlice = createSlice({
@@ -36,6 +37,11 @@ const globalStateSlice = createSlice({
         ? (state.isRegistrationOpen = false)
         : (state.isRegistrationOpen = true);
     },
+    toggleMobileAuthorization: (state) => {
+      state.isMobileRegisterLoginOpen
+        ? (state.isMobileRegisterLoginOpen = false)
+        : (state.isMobileRegisterLoginOpen = true);
+    },
   },
 });
 
@@ -46,5 +52,6 @@ export const {
   closeCatalogBanner,
   toggleLogin,
   toggleRegistration,
+  toggleMobileAuthorization, 
 } = globalStateSlice.actions;
 export const { reducer: globalAppState } = globalStateSlice;

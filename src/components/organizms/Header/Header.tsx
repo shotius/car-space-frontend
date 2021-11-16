@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { logoutUser } from 'src/redux/features/auth/authSlice';
 import {
   toggleLogin,
+  toggleMobileAuthorization,
   toggleRegistration,
 } from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
@@ -36,9 +37,8 @@ export const Header: React.FC<HeaderProps> = () => {
   const { isAuthenticated, role, username } = useAppSelector(
     (state) => state.authReducer
   );
-  const { isLoginOpen, isRegistrationOpen } = useAppSelector(
-    (state) => state.globalAppState
-  );
+  const { isLoginOpen, isRegistrationOpen, isMobileRegisterLoginOpen } =
+    useAppSelector((state) => state.globalAppState);
   const history = useHistory();
   const dispatch = useAppDispatch();
 
@@ -76,11 +76,11 @@ export const Header: React.FC<HeaderProps> = () => {
   } = useDisclosure();
 
   // Mobile login register Drawer
-  const {
-    isOpen: isLoginRegisterOpen,
-    onOpen: openLoginRegister,
-    onClose: closeLoginRegister,
-  } = useDisclosure();
+  // const {
+  //   isOpen: isLoginRegisterOpen,
+  //   onOpen: openLoginRegister,
+  //   onClose: closeLoginRegister,
+  // } = useDisclosure();
 
   return (
     <ContainerOuter
@@ -210,18 +210,18 @@ export const Header: React.FC<HeaderProps> = () => {
               onClick={() => {
                 // if authenticated: redirect to you page, else open login
                 if (!USER) {
-                  openLoginRegister();
+                  dispatch(toggleMobileAuthorization());
                 } else if (isAuthenticated) {
                   history.push(`/${role}/dashboard`);
                 } else {
-                  openLoginRegister();
+                  dispatch(toggleMobileAuthorization());
                 }
               }}
             />
 
             <LoginRegisterDrawer
-              isOpen={isLoginRegisterOpen}
-              onClose={closeLoginRegister}
+              isOpen={isMobileRegisterLoginOpen}
+              onClose={() => dispatch(toggleMobileAuthorization())}
             />
             <IconButton
               aria-label="menu"

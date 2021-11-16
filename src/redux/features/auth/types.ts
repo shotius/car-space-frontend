@@ -103,4 +103,5 @@ export interface GlobalStateSliceState {
   isCatalogBannerOpen: boolean
   isRegistrationOpen: boolean
   isLoginOpen: boolean
+  isMobileRegisterLoginOpen: boolean
 }
