@@ -10,10 +10,14 @@ import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectBrand,
+  selectConditions,
+  selectEngineFrom,
+  selectEnginTo,
   selectModels,
   selectYearFrom,
-  toggleAdvancedFilters,
+  toggleAdvancedFilters
 } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { ButtonRound } from '../Buttons/ButtonRound';
 import { SearchButton } from '../Buttons/SearchButton';
 import { InputRegular } from '../Inputs/InputRegular';
@@ -43,6 +47,9 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
   const {
     brands: selectedBrands,
     models: selectedModels,
+    engineFrom: selectedEngineFrom,
+    engineTo: selectedEngineTo,
+    conditions: selectedConditions,
     isAdvancedFiltersOpen,
   } = useAppSelector((state) => state.selectedCarFilters);
   const { models: ModelFilters } = useAppSelector((state) => state.carsReducer);
@@ -159,7 +166,7 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
       {/* mobile model select and its drawer */}
       <MobileSelect
         onClick={handleModelSelect}
-        label={selectedModels.join('; ') || "Models"}
+        label={selectedModels.join('; ') || 'Models'}
         textOpacity={ModelFilters.length !== 0 ? '0.4' : '0.2'}
         hasValue={!!selectedModels.length}
         onClear={() => dispatch(selectModels([]))}
@@ -239,17 +246,37 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
           </ButtonRound>
         </HStack>
       </HStack>
+
       {/* colapsable selects */}
       <Collapse in={isAdvancedFiltersOpen}>
         <VStack>
-          <MobileSelect onClick={openEngine} label="Engine"></MobileSelect>
+          {/* Engine  */}
+          <MobileSelect
+            label={
+              selectedEngineFrom && selectedEngineTo
+                ? `${selectedEngineFrom} -  ${selectedEngineTo}`
+                : 'Engine'
+            }
+            onClick={openEngine}
+            hasValue={!!(selectedEngineFrom && selectedEngineTo)}
+            onClear={() => {
+              dispatch(selectEngineFrom(null));
+              dispatch(selectEnginTo(null));
+            }}
+          />
           <MobileEnginePopup onClose={closeEngine} isOpen={isEngineOpen} />
 
           {/* Conditions */}
           <MobileSelect
             onClick={openConditions}
-            label="Condition"
-          ></MobileSelect>
+            label={
+              selectedConditions.length
+                ? capitalizeEach(selectedConditions.join('; '))
+                : 'Condition'
+            }
+            hasValue={!!selectedConditions.length}
+            onClear={() => dispatch(selectConditions([]))}
+          />
           <MobileConditionPopup
             isOpen={isConditionsOpen}
             onClose={closeConditions}
