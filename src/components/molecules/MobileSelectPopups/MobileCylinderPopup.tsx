@@ -53,7 +53,7 @@ export const MobileCylinderPopup: React.FC<MobileCylinderPopupProps> = ({
         onClose();
       }}
     >
-      <VStack w="full" alignItems="flex-start" minH="80vh" spacing="16px">
+      <VStack w="full" alignItems="flex-start" maxH="80vh" spacing="16px">
         {cylindersToShow().map((cylinder) => (
           <Checkbox
             colorScheme="autoOrange"

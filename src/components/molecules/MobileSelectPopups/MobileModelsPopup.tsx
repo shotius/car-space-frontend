@@ -58,7 +58,7 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
         <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />
       }
     >
-      <VStack w="full" alignItems="flex-start" minH="300px" spacing="16px">
+      <VStack w="full" alignItems="flex-start" maxH="300px" spacing="16px">
         {modelsToShow().map((model) => (
           <Checkbox
             colorScheme="autoOrange"

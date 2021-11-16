@@ -24,6 +24,7 @@ import { MobileEnginePopup } from '../MobileSelectPopups/MobileEnginePopup';
 import { MobileFuelsPopup } from '../MobileSelectPopups/MobileFuelPopup';
 import { MobileLocationPopup } from '../MobileSelectPopups/MobileLocationPopup';
 import { MobileModelsPopup } from '../MobileSelectPopups/MobileModelsPopup';
+import { MobileSalesStatusPopup } from '../MobileSelectPopups/MobileSalesStatusPopup';
 import { MobileTransmissionPopup } from '../MobileSelectPopups/MobileTransmissionPopup';
 import { MobileTypePopup } from '../MobileSelectPopups/MobileTypePopup';
 import { MobileSelect } from '../Selects/MobileSelect';
@@ -79,6 +80,12 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
     isOpen: isTypesOpen,
     onOpen: openTypes,
     onClose: closeTypes,
+  } = useDisclosure();
+
+  const {
+    isOpen: isSalesStatusOpen,
+    onOpen: openSalesStatus,
+    onClose: closeSalesStatus,
   } = useDisclosure();
 
   // Keys
@@ -270,9 +277,13 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
 
           {/* Sales Status */}
           <MobileSelect
-            onClick={openTransm}
+            onClick={openSalesStatus}
             label="Sales Status"
           ></MobileSelect>
+          <MobileSalesStatusPopup
+            onClose={closeSalesStatus}
+            isOpen={isSalesStatusOpen}
+          />
 
           {/* Fuels */}
           <MobileSelect onClick={openFuels} label="Fuel Type"></MobileSelect>

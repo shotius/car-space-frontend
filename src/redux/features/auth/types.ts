@@ -39,6 +39,7 @@ export interface CarsSliceState {
   drives: string[];
   fuels: string[];
   cylinders: string[];
+  salesStatus: string[]
   getFiltersError: boolean;
 }
 
@@ -81,6 +82,7 @@ export interface IFilters {
   fuels: string[];
   brands: string[];
   cylinders: string[];
+  salesStatus: string[]
 }
 
 //** Car image slice types */

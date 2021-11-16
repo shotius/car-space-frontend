@@ -14,6 +14,7 @@ const initialState: CarsSliceState = {
   conditions: [],
   drives: [],
   cylinders: [], 
+  salesStatus: [], 
   getFiltersError: false,
 };
 
@@ -107,6 +108,7 @@ const carsSlice = createSlice({
       state.drives = filters.drives;
       state.fuels = filters.fuels;
       state.cylinders =filters.cylinders
+      state.salesStatus = filters.salesStatus
     });
     builder.addCase(getFilters.rejected, (state) => {
       state.getFiltersError = true;
