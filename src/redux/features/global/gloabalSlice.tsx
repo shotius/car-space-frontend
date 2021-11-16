@@ -6,6 +6,8 @@ const initialState: GlobalStateSliceState = {
   lang: 'Eng',
   currency: 'GEL',
   isCatalogBannerOpen: false,
+  isLoginOpen: false,
+  isRegistrationOpen: false,
 };
 
 const globalStateSlice = createSlice({
@@ -24,6 +26,16 @@ const globalStateSlice = createSlice({
     closeCatalogBanner: (state) => {
       state.isCatalogBannerOpen = false;
     },
+    toggleLogin: (state) => {
+      state.isLoginOpen
+        ? (state.isLoginOpen = false)
+        : (state.isLoginOpen = true);
+    },
+    toggleRegistration: (state) => {
+      state.isRegistrationOpen
+        ? (state.isRegistrationOpen = false)
+        : (state.isRegistrationOpen = true);
+    },
   },
 });
 
@@ -32,5 +44,7 @@ export const {
   setAppLanguage,
   openCatalogBanner,
   closeCatalogBanner,
+  toggleLogin,
+  toggleRegistration,
 } = globalStateSlice.actions;
 export const { reducer: globalAppState } = globalStateSlice;

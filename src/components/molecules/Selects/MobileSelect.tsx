@@ -52,6 +52,7 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
           icon={CloseIcon}
           aria-label="clear-selected"
           p="0"
+          pr="4px"
           minW="0"
           opacity="0.6"
           onClick={(e) => {

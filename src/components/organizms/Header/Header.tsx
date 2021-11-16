@@ -15,6 +15,10 @@ import { MenuLink } from 'src/components/molecules/Links/MenuLink';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { logoutUser } from 'src/redux/features/auth/authSlice';
+import {
+  toggleLogin,
+  toggleRegistration,
+} from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { LoginRegisterDrawer } from '../Drawers/LoginRegisterDrawer';
 import { MenuMobile } from '../LoginForm/MenuMobile';
@@ -32,24 +36,13 @@ export const Header: React.FC<HeaderProps> = () => {
   const { isAuthenticated, role, username } = useAppSelector(
     (state) => state.authReducer
   );
+  const { isLoginOpen, isRegistrationOpen } = useAppSelector(
+    (state) => state.globalAppState
+  );
   const history = useHistory();
   const dispatch = useAppDispatch();
 
   const [safeDocument, setSafeDocument] = useState<Document | null>(document);
-
-  //login modal
-  const {
-    isOpen: isLoginOpen,
-    onOpen: openLogin,
-    onClose: closeLogin,
-  } = useDisclosure();
-
-  // register modal
-  const {
-    isOpen: isRegisterOpen,
-    onOpen: openRegister,
-    onClose: closeRegister,
-  } = useDisclosure();
 
   // if mobile menu is open stop body scroll
   useEffect(() => {
@@ -106,7 +99,7 @@ export const Header: React.FC<HeaderProps> = () => {
           }}
         />
         {/* menu links Desktop*/}
-        {isDesktop ? (
+        {isDesktop && (
           <HStack
             ml="auto"
             display={['none', 'none', 'flex']}
@@ -158,43 +151,50 @@ export const Header: React.FC<HeaderProps> = () => {
               </ButtonOutline>
             ) : (
               <HStack spacing={[null, null, '0', '2', null, '4']} ml="-15px">
+                {/* Login Button  */}
                 <Button
                   variant="ghost"
                   fontWeight="light"
                   fontSize="16px"
-                  onClick={() => openLogin()}
+                  onClick={() => dispatch(toggleLogin())}
                   _hover={{
                     bg: 'autoGrey.200',
                   }}
                 >
                   <TextRegular>Log in</TextRegular>
                 </Button>
+                {/* Login modal  */}
                 <LoginModal
                   isOpen={isLoginOpen}
-                  onClose={closeLogin}
+                  onClose={() => dispatch(toggleLogin())}
                   openRegister={() => {
-                    closeLogin();
-                    openRegister();
+                    dispatch(toggleLogin());
+                    dispatch(toggleRegistration());
                   }}
                 />
-                <ButtonOutline onClick={openRegister} transition="all 0.5s">
+                {/* Register Button  */}
+                <ButtonOutline
+                  onClick={() => dispatch(toggleRegistration())}
+                  transition="all 0.5s"
+                >
                   <Icon as={PersonIcon} boxSize="4" />
                   <TextRegular ml="2" mt="1">
                     Register
                   </TextRegular>
                 </ButtonOutline>
+                {/* Register modal  */}
                 <RegisterModal
-                  isOpen={isRegisterOpen}
-                  onClose={closeRegister}
+                  isOpen={isRegistrationOpen}
+                  onClose={() => dispatch(toggleRegistration())}
                   openLogin={() => {
-                    closeRegister();
-                    openLogin();
+                    dispatch(toggleRegistration());
+                    dispatch(toggleLogin());
                   }}
                 />
               </HStack>
             )}
           </HStack>
-        ) : null}
+        )}
 
         {/* mobile view profile and menu hamburger*/}
         {isMobile || isTablet ? (
@@ -240,10 +240,7 @@ export const Header: React.FC<HeaderProps> = () => {
               opacity={menuOpen ? '1' : '0'}
               transition="all ease .2"
             />
-            <MenuMobile
-              menuOpen={menuOpen}
-              setMenuOpen={setMenuOpen}
-            />
+            <MenuMobile menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
           </HStack>
         ) : null}
       </Flex>
