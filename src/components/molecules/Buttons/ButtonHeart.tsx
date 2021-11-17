@@ -24,7 +24,7 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
   ...rest
 }) => {
   const dispatch = useAppDispatch();
-  const { username } = useAppSelector((state) => state.authReducer);
+  const { username } = useAppSelector((state) => state.UserInfoSlice);
   const { isDesktop } = useDetectScreen();
 
   const car = useContext(CarContext) as ICar

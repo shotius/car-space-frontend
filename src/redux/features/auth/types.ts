@@ -1,4 +1,4 @@
-import { CurrencyType, Languages } from './../../../constants/index';
+import { CurrencyType, Languages, Roles } from './../../../constants/index';
 
 export interface ICar {
   _id: string;
@@ -104,4 +104,16 @@ export interface GlobalStateSliceState {
   isRegistrationOpen: boolean
   isLoginOpen: boolean
   isMobileRegisterLoginOpen: boolean
+}
+
+
+
+//** User slice */
+
+export type RoleTypes = Roles.ADMIN | Roles.DEALER;
+
+export interface IUser {
+  role: RoleTypes | null;
+  isAuthenticated: boolean;
+  username: string | null;
 }

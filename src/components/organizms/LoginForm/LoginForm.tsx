@@ -33,7 +33,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           password: values.password,
         };
         dispatch(loginUser(credentials)).then((data) => {
-          const result: ApiResponse = data.payload;
+          const result: ApiResponse = data.payload as ApiResponse;
 
           if (result.code === 422 && result.errors?.length) {
             setErrors(toErrorMap(result.errors));

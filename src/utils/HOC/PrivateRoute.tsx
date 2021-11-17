@@ -12,11 +12,14 @@ interface PrivateRouteProps {
 export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
   component: Component,
   exact = true,
-  role, 
+  role,
   ...rest
 }) => {
-  const { isAuthenticated, role: userRole, loading: gettingUserInfo} = useAppSelector(
+  const { loading: gettingUserInfo } = useAppSelector(
     (state) => state.authReducer
+  );
+  const { isAuthenticated, role: userRole } = useAppSelector(
+    (state) => state.UserInfoSlice
   );
   const USER = localStorage.getItem('USER_ROLE');
   const history = useHistory();
@@ -33,13 +36,13 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
       }
     }
   }, [isAuthenticated, userRole]);
-  
+
   if (gettingUserInfo) {
-    return <h1>Loading Private page</h1>
+    return <h1>Loading Private page</h1>;
   }
   // user is not in localstorage redirect to home
-  if (!USER || USER !== role ) {
-    history.push("/home") ;
+  if (!USER || USER !== role) {
+    history.push('/home');
   }
 
   return (
