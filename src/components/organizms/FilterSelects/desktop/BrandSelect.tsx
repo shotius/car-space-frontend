@@ -15,25 +15,42 @@ import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 
 interface BrandSelectProps {}
 
+// In the compont I have 4 different variables
+//1. Value: is used to display selected option 
+//2. Placeholder: is displayed when not searching
+//3. searchWord: when user writing in search box, search word is changing
+//4. selected: are Selected options, used to keep track of other three variables 
 export const BrandSelect: React.FC<BrandSelectProps> = () => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [placeholder, setPlaceholder] = useState<string>('');
   const [value, setValue] = useState<string>('');
+  const [searchWord, setSearchWord] = useState<string>('')
 
   const { brands: options } = useAppSelector((state) => state.carsReducer);
 
+  // whenever selected values change change value as well
   useEffect(() => {
     setValue(selected.join(', '));
   }, [selected.length]);
 
+  // handle option select
   const handleSelect = (opt: string) => {
+    // search keyword will be cleared
+    setSearchWord('')
+    // if option is in selected values remove, else include
     if (selected.includes(opt)) {
       setSelected(selected.filter((o) => o !== opt));
     } else {
       setSelected([opt].concat(selected));
     }
   };
+
+
+   // filter options when searchWord is specified
+   const optionsToShow = addLettersToSortedArray(options).filter((option) => {
+    return option.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
+  });
 
   return (
     <Box w={['100%', '30%', '100%']}>
@@ -69,8 +86,8 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
             bg="transparent"
             border="none"
             placeholder={capitalizeEach(placeholder) || 'Brands'}
-            value={capitalizeEach(value)}
-            onChange={(e) => setValue(e.currentTarget.value)}
+            value={value ? capitalizeEach(value) : searchWord}
+            onChange={(e) => setSearchWord(e.currentTarget.value)}
             isTruncated
             _focus={{
               bg: 'white',
@@ -184,7 +201,7 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
                 onClick={() => handleSelect('BMW')}
               />
             </Grid>
-            {addLettersToSortedArray(options).map((opt) => (
+            {optionsToShow.map((opt) => (
               <Box p="0" key={opt}>
                 {opt.length === 1 ? (
                   <HeadingSecondary pt="4" fontSize="14px">
