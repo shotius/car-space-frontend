@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { HeartFilled } from 'src/components/atoms/Icons/HeartFilledIcon';
 import { HeartIcon } from 'src/components/atoms/Icons/HeatIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { likeCarThunk } from 'src/redux/features/auth/userSlice';
 import {
   toggleLogin,
   toggleMobileAuthorization,
@@ -15,20 +16,21 @@ import { ButtonWithIcon } from './IconWithButton';
 
 interface ButtonHeartProps {
   boxSize?: IconProps['boxSize'];
-  liked: boolean;
+  liked?: boolean;
 }
 
 export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
   boxSize = 6,
-  liked,
   ...rest
 }) => {
   const dispatch = useAppDispatch();
-  const { username } = useAppSelector((state) => state.UserInfoSlice);
+  const { username, favourites } = useAppSelector((state) => state.UserInfoSlice);
   const { isDesktop } = useDetectScreen();
-
   const car = useContext(CarContext) as ICar
 
+  const liked = favourites?.includes(car.lN)
+
+  console.log('favourites', favourites, car.lN)
   return (
     <ButtonWithIcon
       icon={liked ? HeartFilled : HeartIcon}
@@ -37,7 +39,7 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
       onClick={(event) => {
         if (event.stopPropagation) event.stopPropagation();
         if (username) {
-          console.log('liked', car.lN);
+          dispatch(likeCarThunk(car.lN))
         } else {
           isDesktop
             ? dispatch(toggleLogin())

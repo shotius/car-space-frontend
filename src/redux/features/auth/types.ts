@@ -116,4 +116,5 @@ export interface IUser {
   role: RoleTypes | null;
   isAuthenticated: boolean;
   username: string | null;
+  favourites?: string[]
 }
