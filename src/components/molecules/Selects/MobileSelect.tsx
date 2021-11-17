@@ -5,7 +5,7 @@ import { ButtonWithIcon } from '../Buttons/IconWithButton';
 import { TextRegular } from '../Texts/TextRegular';
 
 interface MobileSelectProps {
-  onClick: () => void;
+  onClick?: () => void;
   onClear?: () => void;
   hasValue?: boolean;
   label: string;
@@ -32,8 +32,7 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
       bg="white"
       borderRadius="8px"
       onClick={() => {
-        if (!isDisabled) onClick();
-        onClick()
+        if (!isDisabled && onClick) onClick();
       }}
       pl="4"
       pr="3"

@@ -31,3 +31,28 @@ input[type='radio']:before {
 input[type='radio']:checked:before {
   background:#FB5607;
 }
+
+
+/** for styling scollbar*/ 
+/* // css={{
+  // '&::-webkit-scrollbar': {
+  //   width: '6px',
+  // },
+  // '&::-webkit-scrollbar-track': {
+  // width: '6px',
+  // overflow: 'hidden',
+  // marginTop: "10px"
+  // },
+  // '&::-webkit-scrollbar-thumb': {
+  //   background: '#DEDEE0',
+  //   borderRadius: '100px',
+  // },
+  // '::-webkit-scrollbar-button': {
+  //   backgroundColor: 'white',
+  //   display: 'block',
+  //   visibility: 'hidden',
+  //   borderStyle: 'solid',
+  //   height: '3px',
+  //   width: '6px',
+  // },
+  // }} */

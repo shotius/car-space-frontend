@@ -8,22 +8,22 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Heading,
-  VStack
+  VStack,
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { getModels } from 'src/redux/features/auth/carsSlice';
 import { selectBrand } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
+import { getModels } from 'src/redux/features/auth/carsSlice';
 import { ButtonRegular } from '../Buttons/ButtonRegular';
 import { TextButton } from '../Buttons/TextButton';
 import { TopBrandCard } from '../Cards/TopBrandCard';
 import { SearchInput } from '../Inputs/SearchInput';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { ScrollableDiv } from '../Wrappers/ScrollableDiv';
+import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 
 interface BrandSelectProps {
   isOpen: boolean;

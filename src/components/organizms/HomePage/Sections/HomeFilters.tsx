@@ -43,6 +43,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
   //     <span style={{color: "red"}}>{data.label}</span>
   //   </div>
   // );
+
   return (
     <Center
       mt={['-69px', '-60px', '-45px', '-45px']}
@@ -66,8 +67,15 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           flexWrap={{ base: 'wrap', md: 'nowrap' }}
           justifyContent="space-between"
         >
-          <Box w="full">
-            <ReactSelect placeholder="Brands" options={groupedBrands} isMulti />
+          
+          <Box w={['full', '30%', 'full']} maxW={[null,null,  '130px', "200px"]} > 
+            <ReactSelect
+              placeholder="Brands"
+              options={groupedBrands}
+              isMulti
+            />
+            {/* <MobileBrandSelect />  */}
+            {/* <select truncate></select> */}
           </Box>
           <DividerVertical
             height="30px"
