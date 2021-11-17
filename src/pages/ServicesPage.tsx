@@ -67,7 +67,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
               }}
             >
               <InputGrey
-                placeholder={placeholder.join(', ')}
+                placeholder={placeholder.length ? placeholder.join(', ') : "Brands"}
                 value={value}
                 onChange={(e) => setValue(e.currentTarget.value)}
                 isTruncated

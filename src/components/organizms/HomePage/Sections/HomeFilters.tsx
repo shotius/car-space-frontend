@@ -1,16 +1,14 @@
-import { Box, Center, Divider, Flex } from '@chakra-ui/react';
+import { Center, Divider, Flex } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { DividerVertical } from 'src/components/atoms/Divider';
-import { Select } from 'src/components/atoms/Selects';
-import { ReactSelect } from 'src/components/atoms/Selects/ReactSelect';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { useAppDispatch } from 'src/redux/app/hook';
 import { getFilters } from 'src/redux/features/auth/carsSlice';
 import { openAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { getAlphabeticalGroups } from 'src/utils/functions/getAlphabeticalGroups';
 import { SearchButton } from '../../../molecules/Buttons/SearchButton';
 import { Card } from '../../../molecules/Cards/Card';
+import { BrandSelect } from '../../FilterSelects/desktop/BrandSelect';
 
 interface SearchProps {}
 
@@ -18,31 +16,9 @@ export const HomeFilters: React.FC<SearchProps> = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
 
-  const { brands } = useAppSelector((state) => state.carsReducer);
-
-  // interface GroupedOption {
-  //   readonly label: string;
-  //   readonly options: string[];
-  // }
-
   useEffect(() => {
     dispatch(getFilters());
   }, []);
-
-  //   interface Groups {
-  //     label: string;
-  //     options: {
-  //         value: string;
-  //         label: string;
-  //     }[];
-  // }[]
-  const groupedBrands = getAlphabeticalGroups(brands);
-
-  // const formatGroupLabel = (data: Groups) => (
-  //   <div style={{color: "#000"}}>
-  //     <span style={{color: "red"}}>{data.label}</span>
-  //   </div>
-  // );
 
   return (
     <Center
@@ -68,15 +44,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           justifyContent="space-between"
         >
           
-          <Box w={['full', '30%', 'full']} maxW={[null,null,  '130px', "200px"]} > 
-            <ReactSelect
-              placeholder="Brands"
-              options={groupedBrands}
-              isMulti
-            />
-            {/* <MobileBrandSelect />  */}
-            {/* <select truncate></select> */}
-          </Box>
+         <BrandSelect /> 
           <DividerVertical
             height="30px"
             display={['none', 'block']}
@@ -85,15 +53,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           />
           <Divider display={['block', 'none', 'none']} borderColor="gray.300" />
 
-          <Select
-            placeholder="Model"
-            w={['100%', '30%', '100%']}
-            arrowColor="#848484"
-          >
-            <option value="value">model</option>
-            <option value="value">model</option>
-            <option value="value">model</option>
-          </Select>
+          <BrandSelect /> 
           <DividerVertical
             height="30px"
             display={['none', 'block']}
@@ -102,21 +62,12 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           />
           <Divider display={['block', 'none']} borderColor="gray.300" />
 
-          <Select
-            placeholder="Year"
-            w={['100%', '30%', '100%']}
-            arrowColor="#848484"
-          >
-            <option value="value">year</option>
-            <option value="value">year</option>
-            <option value="value">year</option>
-          </Select>
+          <BrandSelect /> 
           <SearchButton
             display={['none', 'none', 'block']}
             flexBasis={['100%', null, null, '70%', '80%']}
             ml={[null, null, '8px', '24px']}
             w={{ xl: '144px', '2xl': '55px' }}
-            // h="60px"
           />
         </Flex>
         <SearchButton

@@ -20,9 +20,9 @@ export const TopBrandCard: React.FC<TopBrandCardProps & BoxProps> = ({
   ...rest
 }) => {
   return (
-    <Card bg={cardColor} h={h} w={w} {...rest} className={className}>
+    <Card bg={cardColor} h={h} w={w} {...rest} className={className} cursor="pointer">
       <Center h="full" w="full" >
-        <Icon as={icon} boxSize={boxSize} cursor="pointer"/>
+        <Icon as={icon} boxSize={boxSize}/>
       </Center>
     </Card>
   );
