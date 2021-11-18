@@ -20,7 +20,7 @@ export const CarDescriptionHeader: React.FC<CarDescriptionHeaderProps> =
             <TextRegular>{carInfo?.lN}</TextRegular>
           </HStack>
         </VStack>
-        <ButtonHeart h="48px" w="50px" lotNumber="39029881"/>
+        <ButtonHeart h="48px" w="50px" lotNumber="39029881" buttonInactiveColor="#E8E8E8"/>
       </HStack>
     );
   };

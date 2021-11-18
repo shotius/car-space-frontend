@@ -34,7 +34,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
             </SliderTrack>
             <SliderThumb boxSize={4} bg="autoBlue.400" />
           </Slider>
-          <TextRegular w="100px" textAlign="end">( {value} Months)</TextRegular>
+          <TextRegular w="120px" textAlign="end">( {value} Months)</TextRegular>
         </HStack>
       </VStack>
       <VStack w="full">

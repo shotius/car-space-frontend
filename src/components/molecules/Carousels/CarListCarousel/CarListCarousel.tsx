@@ -19,7 +19,7 @@ export const CarListCarousel = ({ car }: { car: ICar }) => {
   const [isLaptopScreen] = useMediaQuery('(min-width: 1024px)');
 
   return (
-    <Box w="full" position="relative">
+    <Box w="full" position="relative" >
       {/* Swiper */}
       <Swiper
         className={styles.carCardSwiper}

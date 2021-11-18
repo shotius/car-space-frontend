@@ -14,12 +14,14 @@ import { ButtonWithIcon } from './IconWithButton';
 
 interface ButtonHeartProps {
   boxSize?: IconProps['boxSize'];
+  buttonInactiveColor?: string;
   lotNumber: string;
 }
 
 export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
   boxSize = 6,
   lotNumber, 
+  buttonInactiveColor = "autoGrey.500", 
   ...rest
 }) => {
   const [liked, setLiked] = useState(false)
@@ -39,7 +41,7 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
     <ButtonWithIcon
       icon={liked ? HeartFilled : HeartIcon}
       boxSize={boxSize}
-      bg={liked ? '#FB560729' : 'autoGrey.500'}
+      bg={liked ? '#FB560729' : buttonInactiveColor}
       onClick={(event) => {
         if (event.stopPropagation) event.stopPropagation();
         if (username) {

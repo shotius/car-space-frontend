@@ -19,14 +19,14 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
         <SectionHeader mainText="Top Brands" secondaryText="See all" />
       </ContainerOuter>
       <ContainerOuter pr="0">
-        <ScrollableDiv cardCount={7}>
+        <ScrollableDiv cardCount={7} ml="-4" pl="4" mr="-4" pr="4">
           <TopBrandCard className="hoverable" icon={BmwIcon} />
           <TopBrandCard className="hoverable" icon={MercedesIcon} />
           <TopBrandCard className="hoverable" icon={VolkswagenIcon} />
           <TopBrandCard className="hoverable" icon={AudiIcon} mr="1px" />
           <TopBrandCard className="hoverable" icon={HiundayIcon} mr="1px" />
           <TopBrandCard className="hoverable" icon={ToyotaIcon} mr="1px" />
-          <TopBrandCard className="hoverable" icon={HiundayIcon} mr="1px" />
+          <TopBrandCard className="hoverable" icon={HiundayIcon} />
         </ScrollableDiv>
       </ContainerOuter>
     </Box>

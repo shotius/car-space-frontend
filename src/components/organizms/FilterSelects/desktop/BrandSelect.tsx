@@ -91,7 +91,6 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
             isTruncated
             _focus={{
               bg: 'white',
-              opacity: '1',
             }}
             pr="32px"
           />
@@ -100,6 +99,8 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
               children={<CloseIcon />}
               cursor="pointer"
               opacity="0.6"
+              transition="all .3s"
+              transform="rotate(90deg)"
               onClick={(e) => {
                 if (e.stopPropagation) e.stopPropagation();
                 setSelected([]);
@@ -112,7 +113,7 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
             <InputRightElement
               children={
                 <DropdownIcon
-                  opacity="0.5"
+                  opacity="0.4"
                   boxSize={5}
                   transform={areOptionsOpen ? 'rotate(180deg)' : ''}
                   transition="all .2s"

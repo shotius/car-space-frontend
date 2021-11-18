@@ -53,7 +53,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
             height="30px"
             display={['none', 'block']}
             borderColor="gray.300"
-            margin={[null, null, '4']}
+            margin={[null, null, '2']}
           />
           <Divider display={['block', 'none', 'none']} borderColor="gray.300" />
 
@@ -62,7 +62,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
             height="30px"
             display={['none', 'block']}
             borderColor="gray.300"
-            margin={[null, null, '4']}
+            margin={[null, null, '2']}
           />
           <Divider display={['block', 'none']} borderColor="gray.300" />
 

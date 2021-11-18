@@ -13,6 +13,7 @@ import { getCars, getFilters } from 'src/redux/features/auth/carsSlice';
 import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { ICar } from 'src/redux/features/auth/types';
 import { getAllFavouritesThunk } from 'src/redux/features/auth/userSlice';
+import { openCatalogBanner } from 'src/redux/features/global/gloabalSlice';
 import { useQueryRarams } from 'src/utils/hooks/useQueryParams';
 import { CatalogFilters } from './CatalogFilter';
 
@@ -32,11 +33,9 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
 
   const page = Number(query.get('page')) || 1;
 
-  console.log('isAuthenticated one: ', isAuthenticated)
   // set query params, get brands and all cars on the first load
   useEffect(() => {
-  console.log('isAuthenticated two: ', isAuthenticated)
-
+    dispatch(openCatalogBanner())
     dispatch(getFilters());
     if (isAuthenticated) {
       dispatch(getAllFavouritesThunk());
