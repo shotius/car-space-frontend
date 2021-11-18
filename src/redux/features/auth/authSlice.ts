@@ -13,12 +13,16 @@ interface authState {
   loading: boolean;
   error: string | null;
   loginSuccess: boolean;
+  autoLoginLoading: boolean
+  autoLoginSuccess: boolean;
 }
 
 const initialState: authState = {
   loading: false,
   error: null,
-  loginSuccess: false
+  loginSuccess: false,
+  autoLoginLoading: false,
+  autoLoginSuccess: false
 };
 
 export const loginUser = createAsyncThunk(
@@ -53,6 +57,7 @@ export const logoutUser = createAsyncThunk(
       dispatch(setUsername(null))
       dispatch(setRole(null))
       dispatch(setIsAuthenticated(false))
+      // dispatch(setFav)
     } catch (error: any) {
       if (error.response) {
         return rejectWithValue(error.response);
@@ -67,9 +72,9 @@ export const autoLogin = createAsyncThunk('auth/autoLogin', async (_, {dispatch}
   try {
     const result = await authService.autoLogin();
     if (result && result.isAuthenticated) {
+      dispatch(setIsAuthenticated(true))
       dispatch(setUsername(result.username))
       dispatch(setRole(result.role))
-      dispatch(setIsAuthenticated(true))
     }
     return result;
   } catch (error) {
@@ -92,6 +97,7 @@ const authSlice = createSlice({
       const payload: ApiResponse = action.payload as ApiResponse;
       localStorage.setItem('USER_ROLE', payload.results.role);
       state.loginSuccess = true
+      state.loading = false
     });
     builder.addCase(loginUser.rejected, (state) => {
       state.error = 'error happened';
@@ -107,14 +113,17 @@ const authSlice = createSlice({
     });
     /** autoLogin */
     builder.addCase(autoLogin.pending, (state) => {
-      state.loading = true;
+      state.autoLoginLoading = true; 
     });
     builder.addCase(autoLogin.fulfilled, (state) => {
-      state.loading = false;
+      state.autoLoginLoading =  false
+      state.autoLoginSuccess = true
       state.error = null
     });
     builder.addCase(autoLogin.rejected, (state) => {
       state.error = 'autoLogin failed'
+      state.autoLoginLoading = false;
+      state.autoLoginSuccess = false
     });
   },
 });

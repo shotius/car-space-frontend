@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = () => {
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
   const USER = localStorage.getItem('USER_ROLE');
   const { isAuthenticated, role, username } = useAppSelector(
-    (state) => state.UserInfoSlice
+    (state) => state.userInfoSlice
   );
   const { isLoginOpen, isRegistrationOpen, isMobileRegisterLoginOpen } =
     useAppSelector((state) => state.globalAppState);

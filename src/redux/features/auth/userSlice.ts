@@ -41,6 +41,9 @@ const userInfoSlice = createSlice({
     setIsAuthenticated: (state, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;
     },
+    setFavourites: (state, action: PayloadAction<string[]>) => {
+      state.favourites = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(

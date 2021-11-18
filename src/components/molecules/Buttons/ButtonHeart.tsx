@@ -24,13 +24,13 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
   ...rest
 }) => {
   const dispatch = useAppDispatch();
-  const { username, favourites } = useAppSelector((state) => state.UserInfoSlice);
+  const { username, favourites } = useAppSelector((state) => state.userInfoSlice);
   const { isDesktop } = useDetectScreen();
   const car = useContext(CarContext) as ICar
 
   const liked = favourites?.includes(car.lN)
 
-  console.log('favourites', favourites, car.lN)
+  // console.log('favourites', favourites, car.lN)
   return (
     <ButtonWithIcon
       icon={liked ? HeartFilled : HeartIcon}

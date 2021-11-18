@@ -14,7 +14,7 @@ const reducer = {
   carsPagination,
   carImages,
   globalAppState,
-  UserInfoSlice: UserInfo,
+  userInfoSlice: UserInfo,
 };
 
 export const store = configureStore({

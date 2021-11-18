@@ -19,15 +19,17 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
     (state) => state.authReducer
   );
   const { isAuthenticated, role: userRole } = useAppSelector(
-    (state) => state.UserInfoSlice
+    (state) => state.userInfoSlice
   );
   const USER = localStorage.getItem('USER_ROLE');
   const history = useHistory();
 
   useEffect(() => {
     if (userRole) {
+      console.log('userRole: ', userRole, isAuthenticated)
       // if not authenticated redirect to home page
       if (!isAuthenticated) {
+        console.log('in effect')
         history.push('/home');
       }
       // if private route role and USER role don't match redirect
@@ -38,10 +40,11 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
   }, [isAuthenticated, userRole]);
 
   if (gettingUserInfo) {
-    return <h1>Loading Private page</h1>;
+    return <h1>Loading Private page here</h1>;
   }
   // user is not in localstorage redirect to home
   if (!USER || USER !== role) {
+    console.log('here: ')
     history.push('/home');
   }
 
