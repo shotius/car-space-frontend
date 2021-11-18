@@ -22,7 +22,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
         <HStack w="full" spacing="30px" justify="space-between">
           <Slider
             defaultValue={value}
-            min={0}
+            min={1}
             max={12}
             step={1}
             onChange={(val) => setValue(val)}

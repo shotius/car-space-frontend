@@ -24,6 +24,7 @@ import { SearchInput } from '../Inputs/SearchInput';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { ScrollableDiv } from '../Wrappers/ScrollableDiv';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
+import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 
 interface BrandSelectProps {
   isOpen: boolean;
@@ -46,15 +47,12 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
   );
   const dispatch = useAppDispatch();
 
+  const {isMobile} = useDetectScreen()
+
   useEffect(() => {
     // if we have filters saved in redux assign them to components state
     if (initSelectedBrands.length) {
-      console.log('here')
       setSelectedBrands(initSelectedBrands);
-    } else if (allBrands.length) {
-      // if we don't have salected filters and all brand cases are fetched
-      // assign first brand to the component state
-      setSelectedBrands([allBrands[0]]);
     } else {
       // else empy array
       setSelectedBrands([]);
@@ -119,47 +117,54 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
 
             {/* top brands */}
             <SectionHeader
+              
               mainText="Top Brands"
               mainFontSize="16px"
-              display={topBrandsVisible ? 'block' : 'none'}
+              display={isMobile && topBrandsVisible ? 'block' : 'none'}
             />
 
             {/* top brand icons */}
             <ScrollableDiv
               cardCount={5}
               w="full"
-              pl="0"
-              pr="0"
-              display={topBrandsVisible ? 'grid' : 'none'}
+              display={isMobile && topBrandsVisible ? 'grid' : 'none'}
+              p="0"
+              gap="10px"
             >
+              {/* <TopBrandCard
+                icon={MercedesIcon}
+                maxW={["38px", '50px']}
+                maxH={["38px", '50px']}
+                boxSize={5}
+              /> */}
               <TopBrandCard
                 icon={MercedesIcon}
-                maxW="43px"
-                maxH="45px"
+                maxW={["38px", '50px']}
+                maxH={["38px", '50px']}
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW="43px"
-                maxH="45px"
+                maxW={["38px", '50px']}
+                maxH={["38px", '50px']}
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW="43px"
-                maxH="45px"
+                maxW={["38px", '50px']}
+                maxH={["38px", '50px']}
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW="43px"
-                maxH="45px"
+                maxW={["38px", '50px']}
+                maxH={["38px", '50px']}
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW="43px"
-                maxH="45px"
+                maxW={["38px", '50px']}
+                maxH={["38px", '50px']}
                 boxSize={5}
               />
             </ScrollableDiv>

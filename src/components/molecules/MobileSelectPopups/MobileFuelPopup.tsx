@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectFuels } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
-import { SearchInput } from '../Inputs/SearchInput';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
 interface MobileFuelPopupProps {
@@ -15,13 +14,10 @@ export const MobileFuelsPopup: React.FC<MobileFuelPopupProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [searchWord, setSearchWord] = useState('');
   const [selectedFuels, setSelectedFuels] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   // all conditions
-  const { fuels: allFuels } = useAppSelector(
-    (state) => state.carsReducer
-  );
+  const { fuels: allFuels } = useAppSelector((state) => state.carsReducer);
   // already selected conditions
   const { fuels: initSelectedFuels } = useAppSelector(
     (state) => state.selectedCarFilters
@@ -36,11 +32,7 @@ export const MobileFuelsPopup: React.FC<MobileFuelPopupProps> = ({
 
   // conditions filtered base on search word
   // if condition is empty it means it is not demaged so "New"
-  const fuelsToShow = () =>
-    allFuels
-      .filter((fuels) =>
-        fuels && fuels.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
-      );
+  const fuelsToShow = () => allFuels.filter((fuel) => fuel);
 
   // checkbox change handler
   const onChangeHandler = (fuel: string) => {
@@ -59,9 +51,6 @@ export const MobileFuelsPopup: React.FC<MobileFuelPopupProps> = ({
         dispatch(selectFuels(selectedFuels));
         onClose();
       }}
-      header={
-        <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />
-      }
     >
       <VStack w="full" alignItems="flex-start" spacing="16px" minH="30vh">
         {fuelsToShow().map((fuel) => (

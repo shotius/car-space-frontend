@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectConditions } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
-import { SearchInput } from '../Inputs/SearchInput';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
 interface MobileConditionPopupProps {
@@ -15,7 +14,6 @@ export const MobileConditionPopup: React.FC<MobileConditionPopupProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [searchWord, setSearchWord] = useState('');
   const [selectedConditions, setSelectedConditions] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   // all conditions
@@ -36,12 +34,7 @@ export const MobileConditionPopup: React.FC<MobileConditionPopupProps> = ({
 
   // conditions filtered base on search word
   // if condition is empty it means it is not demaged so "New"
-  const conditionsToShow = () =>
-    allConditions.filter(
-      (condition) =>
-        condition &&
-        condition.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
-    );
+  const conditionsToShow = () => allConditions.filter((condition) => condition);
 
   // checkbox change handler
   const onChangeHandler = (condition: string) => {
@@ -60,9 +53,6 @@ export const MobileConditionPopup: React.FC<MobileConditionPopupProps> = ({
         dispatch(selectConditions(selectedConditions));
         onClose();
       }}
-      header={
-        <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />
-      }
     >
       <VStack w="full" alignItems="flex-start" minH="80vh" spacing="16px">
         {conditionsToShow().map((condition) => (

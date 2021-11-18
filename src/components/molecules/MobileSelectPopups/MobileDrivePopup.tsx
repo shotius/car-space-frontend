@@ -2,7 +2,6 @@ import { Checkbox, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectDrives } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { SearchInput } from '../Inputs/SearchInput';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
 interface MobileDrivesPopupProps {
@@ -14,13 +13,10 @@ export const MobileDrivesPopup: React.FC<MobileDrivesPopupProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [searchWord, setSearchWord] = useState('');
   const [selectedDrives, setSelectedDrives] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   // all conditions
-  const { drives: allDrives } = useAppSelector(
-    (state) => state.carsReducer
-  );
+  const { drives: allDrives } = useAppSelector((state) => state.carsReducer);
   // already selected conditions
   const { drives: initSelectedDrives } = useAppSelector(
     (state) => state.selectedCarFilters
@@ -35,11 +31,7 @@ export const MobileDrivesPopup: React.FC<MobileDrivesPopupProps> = ({
 
   // conditions filtered base on search word
   // if condition is empty it means it is not demaged so "New"
-  const drivesToShow = () =>
-    allDrives
-      .filter((drive) =>
-        drive && drive.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
-      );
+  const drivesToShow = () => allDrives.filter((drive) => drive);
 
   // checkbox change handler
   const onChangeHandler = (drive: string) => {
@@ -58,9 +50,6 @@ export const MobileDrivesPopup: React.FC<MobileDrivesPopupProps> = ({
         dispatch(selectDrives(selectedDrives));
         onClose();
       }}
-      header={
-        <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />
-      }
     >
       <VStack w="full" alignItems="flex-start" spacing="16px" maxH="80vh">
         {drivesToShow().map((drive) => (

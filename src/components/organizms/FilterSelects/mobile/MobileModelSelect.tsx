@@ -1,4 +1,4 @@
-import { useDisclosure } from '@chakra-ui/react';
+import { Box, BoxProps, useDisclosure } from '@chakra-ui/react';
 import { MobileModelsPopup } from 'src/components/molecules/MobileSelectPopups/MobileModelsPopup';
 import { MobileSelect } from 'src/components/molecules/Selects/MobileSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
@@ -6,7 +6,11 @@ import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
 
 interface MobileModelSelectProps {}
 
-export const MobileModelSelect: React.FC<MobileModelSelectProps> = ({}) => {
+export const MobileModelSelect: React.FC<MobileModelSelectProps & BoxProps> = ({
+  minW = ['full', '30%', '20%'],
+  maxW = ['full', '30%', '20%'],
+  ...rest
+}) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   const dispatch = useAppDispatch();
@@ -23,15 +27,15 @@ export const MobileModelSelect: React.FC<MobileModelSelectProps> = ({}) => {
   };
 
   return (
-    <>
+    <Box minW={minW} maxW={maxW} {...rest}>
       <MobileSelect
         onClick={handleModelSelect}
-        label={selection.length ? `Model: ${selection.join('; ')}` : 'Models'}
+        label={selection.length ? selection.join('; ') : 'Models'}
         isDisabled={!!!ModelFilters.length}
         hasValue={!!selection.length}
         onClear={() => dispatch(selectModels([]))}
       />
       <MobileModelsPopup isOpen={isOpen} onClose={onClose} />
-    </>
+    </Box>
   );
 };

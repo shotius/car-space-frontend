@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectTypes } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
-import { SearchInput } from '../Inputs/SearchInput';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
 interface MobileTypePopupProps {
@@ -15,7 +14,6 @@ export const MobileTypePopup: React.FC<MobileTypePopupProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [searchWord, setSearchWord] = useState('');
   const [selectedType, setSelectedTypes] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   // all conditions
@@ -34,12 +32,7 @@ export const MobileTypePopup: React.FC<MobileTypePopupProps> = ({
 
   // conditions filtered base on search word
   // if condition is empty it means it is not demaged so "New"
-  const TypesToShow = () =>
-    allTypes.filter(
-      (type) =>
-        type &&
-        type.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
-    );
+  const TypesToShow = () => allTypes.filter((type) => type);
 
   // checkbox change handler
   const onChangeHandler = (type: string) => {
@@ -58,9 +51,6 @@ export const MobileTypePopup: React.FC<MobileTypePopupProps> = ({
         dispatch(selectTypes(selectedType));
         onClose();
       }}
-      header={
-        <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />
-      }
     >
       <VStack w="full" alignItems="flex-start" minH="80vh" spacing="16px">
         {TypesToShow().map((type) => (

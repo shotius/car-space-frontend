@@ -1,8 +1,11 @@
 import { Button, ButtonProps, Icon } from '@chakra-ui/react';
 import { forwardRef } from 'react';
 import { SearchIcon } from 'src/components/atoms/Icons/SearchIcon';
+import { TextRegular } from '../Texts/TextRegular';
 
-interface SearchButtonProps {}
+interface SearchButtonProps {
+  isKeyboardActive?: boolean;
+}
 
 export const SearchButton = forwardRef<
   HTMLButtonElement,
@@ -19,6 +22,7 @@ export const SearchButton = forwardRef<
       variant = 'solid',
       color = '#fff',
       fontWeight = 'light',
+      isKeyboardActive,
       ...rest
     },
     ref
@@ -43,13 +47,19 @@ export const SearchButton = forwardRef<
         }}
         {...rest}
       >
-        <Icon
-          as={SearchIcon}
-          mr={['1', null, null, '1.5', null, '12px']}
-          boxSize={['4', null, null, null, '4', '5']}
-          fill="white"
-        />{' '}
-        Search
+        {isKeyboardActive ? (
+          <TextRegular>Apply</TextRegular>
+        ) : (
+          <>
+            <Icon
+              as={SearchIcon}
+              mr={['1', null, null, '1.5', null, '12px']}
+              boxSize={['4', null, null, null, '4', '5']}
+              fill="white"
+            />{' '}
+            Search
+          </>
+        )}
       </Button>
     );
   }

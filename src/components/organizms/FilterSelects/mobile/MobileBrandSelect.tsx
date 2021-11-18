@@ -1,4 +1,4 @@
-import { useDisclosure } from '@chakra-ui/react';
+import { Box, BoxProps, useDisclosure } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { MobileBrandPopup } from 'src/components/molecules/MobileSelectPopups/MobileBrandSelectPopup';
 import { MobileSelect } from 'src/components/molecules/Selects/MobileSelect';
@@ -8,7 +8,11 @@ import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 
 interface MobileBrandSelectProps {}
 
-export const MobileBrandSelect: React.FC<MobileBrandSelectProps> = ({}) => {
+export const MobileBrandSelect: React.FC<MobileBrandSelectProps & BoxProps> = ({
+  minW = ['full', '30%', '23%'],
+  maxW=['full', '30%', '23%'], 
+  ...rest
+}) => {
   const searchButtonRef = useRef(null);
   const dispatch = useAppDispatch();
 
@@ -24,10 +28,10 @@ export const MobileBrandSelect: React.FC<MobileBrandSelectProps> = ({}) => {
   } = useDisclosure();
 
   return (
-    <>
+    <Box {...rest} minW={minW} maxW={maxW}>
       <MobileSelect
         onClick={openBrand}
-        label={capitalizeEach(selectedBrands.join(', ')) || 'Manufacturer'}
+        label={capitalizeEach(selectedBrands.join(', ')) || 'Brands'}
         hasValue={!!selectedBrands.length}
         onClear={() => dispatch(selectBrand([]))}
       />
@@ -36,6 +40,6 @@ export const MobileBrandSelect: React.FC<MobileBrandSelectProps> = ({}) => {
         isOpen={isBrandOpen}
         onClose={closeBrand}
       />
-    </>
+    </Box>
   );
 };

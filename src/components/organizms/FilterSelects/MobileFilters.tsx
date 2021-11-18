@@ -9,7 +9,7 @@ import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectYearFrom,
-  toggleAdvancedFilters
+  toggleAdvancedFilters,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { ButtonRound } from '../../molecules/Buttons/ButtonRound';
 import { SearchButton } from '../../molecules/Buttons/SearchButton';
@@ -106,13 +106,23 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
             onClick={() => setChosenCurrency('GEL')}
             active={chosenCurrency === 'GEL'}
           >
-            <Icon as={GelIcon} boxSize={7} fontWeight="400" />
+            <Icon
+              as={GelIcon}
+              fill={chosenCurrency === 'GEL' ? '#fff' : '#000'}
+              boxSize={7}
+              fontWeight="400"
+            />
           </ButtonRound>
           <ButtonRound
             onClick={() => setChosenCurrency('USD')}
             active={chosenCurrency === 'USD'}
           >
-            <Icon as={UsdIcon} boxSize={6} fontWeight="400" />
+            <Icon
+              as={UsdIcon}
+              boxSize={6}
+              fontWeight="400"
+              fill={chosenCurrency === 'USD' ? '#fff' : '#000'}
+            />
           </ButtonRound>
           <ButtonRound
             onClick={() => setChosenCurrency('EUR')}
@@ -120,7 +130,12 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
             fontSize="20px"
             fontWeight="400"
           >
-            <Icon as={EuroIcon} boxSize={6} fontWeight="400" />
+            <Icon
+              as={EuroIcon}
+              boxSize={6}
+              fontWeight="400"
+              fill={chosenCurrency === 'EUR' ? '#fff' : '#000'}
+            />
           </ButtonRound>
         </HStack>
       </HStack>
@@ -144,26 +159,26 @@ export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
           <MobileTransmissionSelect />
 
           {/* Keys */}
-          <MobileCarKeysSelect /> 
+          <MobileCarKeysSelect />
 
           {/* drive */}
           <MobileDriveSelect />
 
           {/* Sales Status */}
-          <MobileSalesStatusSelect /> 
+          <MobileSalesStatusSelect />
 
           {/* Fuels */}
-          <MobileFuelsSelect /> 
+          <MobileFuelsSelect />
 
           {/* Cylinders */}
-          <MobileCylindersSelect /> 
+          <MobileCylindersSelect />
         </VStack>
       </Collapse>
       {/* apply button */}
       <VStack pt="2" spacing="3">
         {/* this mobile input sticks button to the keyboard */}
         <WithMobileKeyboard isKeyboardActive={keyboardActive}>
-          <SearchButton w="full" />
+          <SearchButton w="full" isKeyboardActive={keyboardActive}/>
         </WithMobileKeyboard>
         <Button
           variant="link"

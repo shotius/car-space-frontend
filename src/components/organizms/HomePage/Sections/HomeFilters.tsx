@@ -6,9 +6,13 @@ import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { getFilters } from 'src/redux/features/auth/carsSlice';
 import { openAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { SearchButton } from '../../../molecules/Buttons/SearchButton';
 import { Card } from '../../../molecules/Cards/Card';
 import { BrandSelect } from '../../FilterSelects/desktop/BrandSelect';
+import { MobileBrandSelect } from '../../FilterSelects/mobile/MobileBrandSelect';
+import { MobileLocationSelect } from '../../FilterSelects/mobile/MobileLocationSelect';
+import { MobileModelSelect } from '../../FilterSelects/mobile/MobileModelSelect';
 
 interface SearchProps {}
 
@@ -16,6 +20,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
 
+  const { isDesktop } = useDetectScreen();
   useEffect(() => {
     dispatch(getFilters());
   }, []);
@@ -28,12 +33,12 @@ export const HomeFilters: React.FC<SearchProps> = () => {
       zIndex="1"
     >
       <Card
-        maxW={{ sm: '550px', md: '600px', lg: '844px', xl: '82%' }}
+        maxW={{ sm: '550px', md: '700px', lg: '844px', xl: '82%' }}
         bg="autoBlue.400"
         p={{ base: '4', lg: '16px' }}
         mb="0"
+        w={['100%', '800px', '900px']}
         minH="auto"
-        w={['100%', '90%', '100%']}
       >
         <Flex
           padding={['1', '1.5', null, '8px']}
@@ -43,8 +48,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           flexWrap={{ base: 'wrap', md: 'nowrap' }}
           justifyContent="space-between"
         >
-          
-         <BrandSelect /> 
+          {!isDesktop ? <MobileBrandSelect /> : <BrandSelect />}
           <DividerVertical
             height="30px"
             display={['none', 'block']}
@@ -53,7 +57,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           />
           <Divider display={['block', 'none', 'none']} borderColor="gray.300" />
 
-          <BrandSelect /> 
+          {!isDesktop ? <MobileModelSelect /> : <BrandSelect />}
           <DividerVertical
             height="30px"
             display={['none', 'block']}
@@ -62,12 +66,12 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           />
           <Divider display={['block', 'none']} borderColor="gray.300" />
 
-          <BrandSelect /> 
+          {!isDesktop ? <MobileLocationSelect /> : <BrandSelect />}
           <SearchButton
             display={['none', 'none', 'block']}
             flexBasis={['100%', null, null, '70%', '80%']}
             ml={[null, null, '8px', '24px']}
-            w={{ xl: '144px', '2xl': '55px' }}
+            minW='144px'
           />
         </Flex>
         <SearchButton
@@ -75,7 +79,6 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           w="full"
           h={['44px', null, null, '50px', '62px']}
           mt={['4', '3']}
-          // pl={[null, null, '4']}
         />
         <TextButton
           w="full"
