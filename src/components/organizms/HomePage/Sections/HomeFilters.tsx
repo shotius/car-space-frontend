@@ -10,6 +10,7 @@ import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { SearchButton } from '../../../molecules/Buttons/SearchButton';
 import { Card } from '../../../molecules/Cards/Card';
 import { BrandSelect } from '../../FilterSelects/desktop/BrandSelect';
+import { ModelSelect } from '../../FilterSelects/desktop/ModelSelect';
 import { MobileBrandSelect } from '../../FilterSelects/mobile/MobileBrandSelect';
 import { MobileLocationSelect } from '../../FilterSelects/mobile/MobileLocationSelect';
 import { MobileModelSelect } from '../../FilterSelects/mobile/MobileModelSelect';
@@ -57,7 +58,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           />
           <Divider display={['block', 'none', 'none']} borderColor="gray.300" />
 
-          {!isDesktop ? <MobileModelSelect /> : <BrandSelect />}
+          {!isDesktop ? <MobileModelSelect /> : <ModelSelect />}
           <DividerVertical
             height="30px"
             display={['none', 'block']}

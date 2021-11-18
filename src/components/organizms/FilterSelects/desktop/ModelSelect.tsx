@@ -1,36 +1,44 @@
 import { InputGroup, InputRightElement } from '@chakra-ui/input';
-import { Box, Divider, Grid, VStack } from '@chakra-ui/layout';
+import { Box, VStack } from '@chakra-ui/layout';
+import { Button, Checkbox } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
 import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
-import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
-import { TextButton } from 'src/components/molecules/Buttons/TextButton';
-import { TopBrandCard } from 'src/components/molecules/Cards/TopBrandCard';
-import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { InputGrey } from 'src/components/molecules/Inputs/InputGrey';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
+import { useAppSelector } from 'src/redux/app/hook';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 
-interface BrandSelectProps {}
+interface ModelSelectProps {}
 
 // In the compont I have 4 different variables
 //1. Value: is used to display selected option
 //2. Placeholder: is displayed when not searching
 //3. searchWord: when user writing in search box, search word is changing
 //4. selected: are Selected options, used to keep track of other three variables
-export const BrandSelect: React.FC<BrandSelectProps> = () => {
+export const ModelSelect: React.FC<ModelSelectProps> = () => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [placeholder, setPlaceholder] = useState<string>('');
   const [value, setValue] = useState<string>('');
   const [searchWord, setSearchWord] = useState<string>('');
-  const dispatch = useAppDispatch();
 
-  const { brands: options } = useAppSelector((state) => state.carsReducer);
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  const { models: options } = useAppSelector((state) => state.carsReducer);
+
+  useEffect(() => {
+    if (options.length) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true)
+      setAreOptionsOpen(false)
+      setValue('')
+      setPlaceholder('')
+      setSelected([])
+    }
+  }, [options]);
 
   // whenever selected values change change value as well
   useEffect(() => {
@@ -67,13 +75,13 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
         onClick={() => {
           setAreOptionsOpen(false);
           setPlaceholder(selected.join(', '));
-          dispatch(getModels(selected));
           setValue('');
         }}
       />
       {/*  Input */}
       <VStack position="relative">
         <InputGroup
+          cursor={isDisabled ? 'not-allowed' : 'pointer'}
           onFocus={() => {
             // onFocus open Options
             setAreOptionsOpen(true);
@@ -87,8 +95,10 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
         >
           <InputGrey
             bg="transparent"
+            isDisabled={isDisabled}
             border="none"
-            placeholder={capitalizeEach(placeholder) || 'Brands'}
+            opacity={isDisabled ? '0.4' : '1'}
+            placeholder={capitalizeEach(placeholder) || 'Models'}
             value={value ? capitalizeEach(value) : searchWord}
             onChange={(e) => setSearchWord(e.currentTarget.value)}
             isTruncated
@@ -110,14 +120,13 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
                 setValue('');
                 setPlaceholder('');
                 setAreOptionsOpen(false);
-                dispatch(setModels([]));
               }}
             />
           ) : (
             <InputRightElement
               children={
                 <DropdownIcon
-                  opacity="0.4"
+                  opacity={isDisabled ? '0.1' : '0.4'}
                   boxSize={5}
                   transform={areOptionsOpen ? 'rotate(180deg)' : ''}
                   transition="all .2s"
@@ -146,92 +155,37 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
           overflowY={areOptionsOpen ? 'auto' : 'hidden'}
         >
           <VStack
-            h="full"
             w="full"
             overflowY={areOptionsOpen ? 'auto' : 'hidden'}
-            textOverflow="ellipsis"
             align="flex-start"
-            p="4"
+            p="0"
             pt="2"
-            spacing="4"
+            spacing="0"
           >
-            <Grid
-              w="full"
-              flexWrap="wrap"
-              gap="2"
-              gridTemplateColumns="1fr 1fr 1fr"
-            >
-              <TopBrandCard
-                icon={MercedesIcon}
-                w="full"
-                h="full"
-                maxH="43px"
-                bg={
-                  selected.includes('Mercedes')
-                    ? 'autoOrange.100'
-                    : 'autoGrey.600'
-                }
-                boxSize={4}
-                onClick={() => handleSelect('Mercedes')}
-              />
-              <TopBrandCard
-                icon={MercedesIcon}
-                w="full"
-                h="full"
-                maxH="43px"
-                boxSize={4}
-                onClick={() => handleSelect('Mercedes')}
-              />
-              <TopBrandCard
-                icon={BmwIcon}
-                w="full"
-                h="full"
-                bg={
-                  selected.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
-                }
-                boxSize={5}
-                onClick={() => handleSelect('BMW')}
-              />
-              <TopBrandCard
-                icon={BmwIcon}
-                w="full"
-                h="full"
-                boxSize={5}
-                onClick={() => handleSelect('BMW')}
-              />
-              <TopBrandCard
-                icon={BmwIcon}
-                w="full"
-                h="full"
-                boxSize={5}
-                onClick={() => handleSelect('BMW')}
-              />
-              <TopBrandCard
-                icon={BmwIcon}
-                w="full"
-                h="full"
-                boxSize={5}
-                onClick={() => handleSelect('BMW')}
-              />
-            </Grid>
             {optionsToShow.map((opt) => (
-              <Box p="0" key={opt}>
-                {opt.length === 1 ? (
-                  <HeadingSecondary pt="4" fontSize="14px">
-                    {opt}{' '}
-                    <Divider w="40px" mt="6px" borderColor="autoGrey.400" />
-                  </HeadingSecondary>
-                ) : (
-                  <TextButton
-                    onClick={() => handleSelect(opt)}
-                    isTruncated
-                    maxW="full"
-                    color={selected.includes(opt) ? 'autoOrange.500' : '#000'}
-                  >
-                    <TextRegular>{capitalizeEach(opt)}</TextRegular>
-                  </TextButton>
-                )}
-              </Box>
+              <Button
+                w="full"
+                p="4"
+                borderRadius="none"
+                display="flex"
+                justifyContent="flex-start"
+                variant="ghost"
+                _hover={{
+                  bg: "autoGrey.100"
+                }}
+              >
+                <Checkbox
+                  colorScheme="autoOrange"
+                  defaultChecked={selected?.includes(opt)}
+                  onChange={(e) => {
+                    e.preventDefault();
+                    handleSelect(opt);
+                  }}
+                  key={opt}
+                >
+                  <TextRegular>{opt}</TextRegular>
+                </Checkbox>
+              </Button>
             ))}
           </VStack>
         </VStack>

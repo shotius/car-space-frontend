@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import carsService from 'src/services/carsService';
 import { setTotalPages } from './carPaginationSlice';
 import { CarsSliceState, ICar, IFilters } from './types';
@@ -13,8 +13,8 @@ const initialState: CarsSliceState = {
   fuels: [],
   conditions: [],
   drives: [],
-  cylinders: [], 
-  salesStatus: [], 
+  cylinders: [],
+  salesStatus: [],
   getFiltersError: false,
 };
 
@@ -68,7 +68,11 @@ export const getModels = createAsyncThunk(
 const carsSlice = createSlice({
   name: 'cars',
   initialState,
-  reducers: {},
+  reducers: {
+    setModels: (state, action: PayloadAction<string[]>) => {
+      state.models = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(searchCars.fulfilled, (state, action) => {
       console.log(state, action);
@@ -107,8 +111,8 @@ const carsSlice = createSlice({
       state.locations = filters.location;
       state.drives = filters.drives;
       state.fuels = filters.fuels;
-      state.cylinders =filters.cylinders
-      state.salesStatus = filters.salesStatus
+      state.cylinders = filters.cylinders;
+      state.salesStatus = filters.salesStatus;
     });
     builder.addCase(getFilters.rejected, (state) => {
       state.getFiltersError = true;
@@ -116,4 +120,5 @@ const carsSlice = createSlice({
   },
 });
 
+export const { setModels } = carsSlice.actions;
 export const { reducer: carsReducer } = carsSlice;
