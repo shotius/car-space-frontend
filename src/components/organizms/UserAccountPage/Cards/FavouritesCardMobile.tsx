@@ -19,7 +19,7 @@ export const UserFavouritesCardMobile: React.FC<FavouritesCardProps> = ({}) => {
     <Card w="full" p="4">
       <VStack spacing="4">
         {/* Heading  */}
-        <CarCardHeading car={DamCar} liked={true}/>
+        <CarCardHeading car={DamCar} lotNumber="39029881"/>
         {/* Images  */}
         <SimpleGrid
           gridTemplateAreas={`"a a b" "a a c"`}

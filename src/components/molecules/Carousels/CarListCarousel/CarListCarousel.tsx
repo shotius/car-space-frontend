@@ -54,7 +54,7 @@ export const CarListCarousel = ({ car }: { car: ICar }) => {
             <CarCard car={car} />
           </Box>
         </SwiperSlide>
-        {/* <SwiperSlide>
+        <SwiperSlide>
           <Box w="full">
             <CarCard car={car} />
           </Box>
@@ -93,7 +93,7 @@ export const CarListCarousel = ({ car }: { car: ICar }) => {
           <Box>
             <CarCard car={car} />
           </Box>
-        </SwiperSlide> */}
+        </SwiperSlide>
       </Swiper>
     </Box>
   );

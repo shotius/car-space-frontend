@@ -12,12 +12,17 @@ const initialState: IUser = {
 export const likeCarThunk = createAsyncThunk(
   'user/likeCar',
   async (lotNumber: string, { dispatch }) => {
-    const result = await userServices.likeCar(lotNumber);
-    console.log('result: ', result);
-    if (result && result.success) {
-      dispatch(getAllFavouritesThunk());
+    console.log('clicked');
+    try {
+      const result = await userServices.likeCar(lotNumber);
+      console.log('result: ', result);
+      if (result && result.success) {
+        dispatch(getAllFavouritesThunk());
+      }
+      return result;
+    } catch (error) {
+      console.log(error);
     }
-    return result;
   }
 );
 
@@ -42,8 +47,8 @@ const userInfoSlice = createSlice({
       state.isAuthenticated = action.payload;
     },
     setFavourites: (state, action: PayloadAction<string[]>) => {
-      state.favourites = action.payload
-    }
+      state.favourites = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -55,6 +60,6 @@ const userInfoSlice = createSlice({
   },
 });
 
-export const { setUsername, setRole, setIsAuthenticated } =
+export const { setUsername, setRole, setIsAuthenticated, setFavourites } =
   userInfoSlice.actions;
 export const { reducer: UserInfo } = userInfoSlice;

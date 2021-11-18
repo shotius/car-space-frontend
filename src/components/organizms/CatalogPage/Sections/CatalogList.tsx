@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getCars, getFilters } from 'src/redux/features/auth/carsSlice';
 import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { ICar } from 'src/redux/features/auth/types';
+import { getAllFavouritesThunk } from 'src/redux/features/auth/userSlice';
 import { useQueryRarams } from 'src/utils/hooks/useQueryParams';
 import { CatalogFilters } from './CatalogFilter';
 
@@ -23,6 +24,7 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
   );
   const { cars, fethingCars } = useAppSelector((state) => state.carsReducer);
   const { totalPages } = useAppSelector((state) => state.carsPagination);
+  const { isAuthenticated } = useAppSelector((state) => state.userInfoSlice);
 
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -30,10 +32,16 @@ export const CatalogList: React.FC<CatalogLIstProps> = () => {
 
   const page = Number(query.get('page')) || 1;
 
+  console.log('isAuthenticated one: ', isAuthenticated)
   // set query params, get brands and all cars on the first load
   useEffect(() => {
+  console.log('isAuthenticated two: ', isAuthenticated)
+
     dispatch(getFilters());
-  }, []);
+    if (isAuthenticated) {
+      dispatch(getAllFavouritesThunk());
+    }
+  }, [isAuthenticated]);
 
   const changePage = (page: number) => {
     history.push({

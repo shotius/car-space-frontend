@@ -8,13 +8,10 @@ import { TextRegular } from '../Texts/TextRegular';
 
 interface CarCardHeadingProps {
   car: ICar;
-  liked?: boolean;
+  lotNumber: string;
 }
 
-export const CarCardHeading: React.FC<CarCardHeadingProps> = ({
-  car,
-  liked = false,
-}) => {
+export const CarCardHeading: React.FC<CarCardHeadingProps> = ({ car }) => {
   return (
     <HStack justifyContent="space-between" w="full">
       <VStack alignItems="flex-start" spacing="0">
@@ -28,12 +25,12 @@ export const CarCardHeading: React.FC<CarCardHeadingProps> = ({
           }}
         >
           <Link to={`/car/${car?.lN}`}>
-            {capitalizeEach(car?.m)} {capitalizeEach(car?.mG)}
+            {capitalizeEach(car?.m)} {capitalizeEach(car.mG)}
           </Link>
         </TextRegular>
         <TextSecondary opacity="50%">{car?.y}</TextSecondary>
       </VStack>
-      <ButtonHeart h="40px" w="36px" boxSize={5} liked={liked} />
+      <ButtonHeart h="40px" w="36px" boxSize={5} lotNumber={car.lN} />
     </HStack>
   );
 };

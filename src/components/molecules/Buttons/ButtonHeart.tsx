@@ -1,37 +1,39 @@
 import { ButtonProps } from '@chakra-ui/button';
 import { IconProps } from '@chakra-ui/icon';
-import { useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { HeartFilled } from 'src/components/atoms/Icons/HeartFilledIcon';
 import { HeartIcon } from 'src/components/atoms/Icons/HeatIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { likeCarThunk } from 'src/redux/features/auth/userSlice';
 import {
   toggleLogin,
-  toggleMobileAuthorization,
+  toggleMobileAuthorization
 } from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
-import { CarContext } from '../Cards/CarCard';
 import { ButtonWithIcon } from './IconWithButton';
 
 interface ButtonHeartProps {
   boxSize?: IconProps['boxSize'];
-  liked?: boolean;
+  lotNumber: string;
 }
 
 export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
   boxSize = 6,
+  lotNumber, 
   ...rest
 }) => {
+  const [liked, setLiked] = useState(false)
   const dispatch = useAppDispatch();
   const { username, favourites } = useAppSelector((state) => state.userInfoSlice);
   const { isDesktop } = useDetectScreen();
-  const car = useContext(CarContext) as ICar
 
-  if (!car) {
-    return <></>
-  }
-  const liked = favourites?.includes(car.lN)
+  useEffect(() => {
+    if(favourites?.length && favourites.includes(lotNumber)) {
+      setLiked(true)
+    } else {
+      setLiked(false)
+    }
+  }, [favourites])
 
   return (
     <ButtonWithIcon
@@ -41,7 +43,7 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
       onClick={(event) => {
         if (event.stopPropagation) event.stopPropagation();
         if (username) {
-          dispatch(likeCarThunk(car.lN))
+          dispatch(likeCarThunk(lotNumber))
         } else {
           isDesktop
             ? dispatch(toggleLogin())
@@ -52,7 +54,7 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
         fill: 'red',
         bg: '#FB560729',
       }}
-      {...rest}
+    {...rest}
     />
   );
 };

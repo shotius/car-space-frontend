@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import authService from 'src/services/authService';
 import { axios } from 'src/utils/axios';
 import { ApiResponse } from '../../../../../server/shared_with_front/types/types-shared';
-import { setIsAuthenticated, setRole, setUsername } from './userSlice';
+import { setFavourites, setIsAuthenticated, setRole, setUsername } from './userSlice';
 
 interface loginCredentials {
   username: string;
@@ -57,7 +57,7 @@ export const logoutUser = createAsyncThunk(
       dispatch(setIsAuthenticated(false))
       dispatch(setUsername(null))
       dispatch(setRole(null))
-      // dispatch(setFav)
+      dispatch(setFavourites([]))
     } catch (error: any) {
       if (error.response) {
         return rejectWithValue(error.response);

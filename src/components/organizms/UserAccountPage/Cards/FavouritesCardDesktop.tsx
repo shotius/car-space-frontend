@@ -38,7 +38,7 @@ export const UserFavouritesCardDesktop: React.FC<FavouritesCardDesktopProps> =
             <TextSecondary>Location</TextSecondary>
             <HeadingSecondary fontSize="16px">Engine</HeadingSecondary>
           </VStack>
-          <ButtonHeart liked={true} h="46px" w="45px" />
+          <ButtonHeart lotNumber="39029881" h="46px" w="45px" />
         </HStack>
       </Card>
     );
