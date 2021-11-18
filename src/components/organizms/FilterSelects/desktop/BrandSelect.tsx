@@ -126,6 +126,7 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
         {/* Options  */}
         <VStack
           w="full"
+          minW="200px"
           position="absolute"
           top={!areOptionsOpen ? '41px' : '45px'}
           h={areOptionsOpen ? '300px' : '0px'}

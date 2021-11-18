@@ -54,9 +54,9 @@ export const logoutUser = createAsyncThunk(
   async (_, { rejectWithValue, dispatch }) => {
     try {
       await axios.get('/api/auth/logout');
+      dispatch(setIsAuthenticated(false))
       dispatch(setUsername(null))
       dispatch(setRole(null))
-      dispatch(setIsAuthenticated(false))
       // dispatch(setFav)
     } catch (error: any) {
       if (error.response) {

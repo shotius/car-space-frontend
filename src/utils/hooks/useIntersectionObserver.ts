@@ -19,9 +19,17 @@ function useIntersectionObserver(
 
   const updateEntry = ([entry]: IntersectionObserverEntry[]): void => {
     setEntry(entry)
+    if (!elementRef.current) {
+      setEntry(undefined)
+    }
+    console.log('updated Entry ------> ', entry)
   }
 
+  console.log('here useIntersect', elementRef)
+
+  
   useEffect(() => {
+    
     const node = elementRef?.current // DOM Ref
     const hasIOSupport = !!window.IntersectionObserver
     useIntersectionObserver

@@ -1,13 +1,9 @@
 import {
-  Box,
-  Image,
-  Heading,
-  HStack,
-  StackDivider,
-  VStack,
-  AspectRatio,
+  AspectRatio, Box, Heading,
+  HStack, Image, StackDivider,
+  VStack
 } from '@chakra-ui/react';
-import { createContext, useEffect, useRef } from 'react';
+import { createContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
@@ -30,23 +26,44 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
   const isVisible = !!entry?.isIntersecting;
   const dispatch = useAppDispatch();
   const history = useHistory();
+  const [shouldHaveRef, setShouldHaveRef] =useState(true)
 
   const { mediumImages, errorFetchingMediums, fetchingMediums } =
     useAppSelector((state) => state.carImages);
 
-  const getImage = async () => {
-    if (car) {
+  // // getImages if they are not fetched yet and they are not  in errors
+  // const getImage = async () => {
+  //   if (car) {
+  //     if (!mediumImages[car.lN] && !errorFetchingMediums.includes(car.lN)) {
+  //       dispatch(getImagesMedium(car.lN));
+  //     }
+  //   }
+  // };
+
+  const shouldFetch = useMemo(() => {
+    console.log('memo')
+    if (isVisible && car) {
       if (!mediumImages[car.lN] && !errorFetchingMediums.includes(car.lN)) {
-        dispatch(getImagesMedium(car.lN));
+        return true
       }
     }
-  };
+    return false
+  }, [isVisible])
 
+  // console.log('shouldFetch', shouldFetch)
+  // console.log('isVisible: ', isVisible)
+  // console.log('should: ', shouldHaveRef)
+  console.log('ref: ', ref.current)
+  
   useEffect(() => {
-    if (isVisible) {
-      getImage();
+    // console.log('useEffect')
+    if (shouldFetch) {
+      console.log('fetching...')
+      dispatch(getImagesMedium(car.lN));
+      setShouldHaveRef(false)
+      ref.current = null
     }
-  }, [isVisible]);
+  }, [shouldFetch]);
 
   const displayImageCarousel =
     !fetchingMediums[car.lN] &&
@@ -57,7 +74,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
     <CarContext.Provider value={car}>
       <Box
         className="hoverable"
-        ref={ref}
+        ref={shouldHaveRef ?ref : null}
         w={['full', null, null, null]}
         bg="white"
         borderRadius="8px"

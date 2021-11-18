@@ -28,9 +28,11 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
   const { isDesktop } = useDetectScreen();
   const car = useContext(CarContext) as ICar
 
+  if (!car) {
+    return <></>
+  }
   const liked = favourites?.includes(car.lN)
 
-  // console.log('favourites', favourites, car.lN)
   return (
     <ButtonWithIcon
       icon={liked ? HeartFilled : HeartIcon}

@@ -26,10 +26,8 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
 
   useEffect(() => {
     if (userRole) {
-      console.log('userRole: ', userRole, isAuthenticated)
       // if not authenticated redirect to home page
       if (!isAuthenticated) {
-        console.log('in effect')
         history.push('/home');
       }
       // if private route role and USER role don't match redirect
@@ -44,7 +42,6 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
   }
   // user is not in localstorage redirect to home
   if (!USER || USER !== role) {
-    console.log('here: ')
     history.push('/home');
   }
 
