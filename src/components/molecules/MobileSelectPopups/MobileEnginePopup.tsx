@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectEngineFrom,
-  selectEnginTo
+  selectEnginTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { TextButton } from '../Buttons/TextButton';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
@@ -48,7 +48,7 @@ export const MobileEnginePopup: React.FC<MobileEnginePopupProps> = ({
           <Heading fontSize="16px" fontWeight="600">
             From
           </Heading>
-          <VStack overflowY="scroll" h="full" w="full" spacing="4">
+          <VStack h="full" w="full" spacing="4" overflowY="scroll">
             {generatedEngines(0.5, 6).map((num) => (
               <TextButton
                 fontSize="16px"
@@ -72,7 +72,7 @@ export const MobileEnginePopup: React.FC<MobileEnginePopupProps> = ({
           <Heading fontSize="16px" fontWeight="600">
             To
           </Heading>
-          <VStack overflowY="scroll" h="full" w="full" spacing="4">
+          <VStack  h="full" w="full" spacing="4" overflowY="scroll">
             {generatedEngines(0.5, 6).map((num) => (
               <TextButton
                 fontSize="16px"

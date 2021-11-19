@@ -19,27 +19,43 @@ export const CarListCarousel = ({ car }: { car: ICar }) => {
   const [isLaptopScreen] = useMediaQuery('(min-width: 1024px)');
 
   return (
-    <Box w="full" position="relative" >
+    <Box
+      position="relative"
+      ml={[null, null, null, '-4']}
+      mr={[null, null, null, '-4']}
+      w={['full', 'auto']}
+    >
       {/* Swiper */}
       <Swiper
         className={styles.carCardSwiper}
         allowTouchMove={!isLaptopScreen} // disable slider on laptop screen
-        spaceBetween={15}
+        spaceBetween={16}
         slidesPerView={2.1}
         breakpoints={{
           // when window width is >= 640px
           300: {
-            slidesPerView: 1.071,
+            slidesPerView: 1.081,
+          },
+          420: {
+            slidesPerView: 1.271,
+          },
+          490: {
+            slidesPerView: 1.471,
           },
           540: {
-            slidesPerView: 2.2,
+            slidesPerView: 1.6,
           },
-          // when window width is >= 768px
+          700: {
+            slidesPerView: 2.25,
+          },
           768: {
             slidesPerView: 2.5,
           },
+          890: {
+            slidesPerView: 3.2,
+          },
           992: {
-            slidesPerView: 3,
+            slidesPerView: 4,
           },
           1137: {
             slidesPerView: 4,

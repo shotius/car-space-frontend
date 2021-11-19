@@ -11,6 +11,7 @@ import { SearchButton } from '../../../molecules/Buttons/SearchButton';
 import { Card } from '../../../molecules/Cards/Card';
 import { BrandSelect } from '../../FilterSelects/desktop/BrandSelect';
 import { ModelSelect } from '../../FilterSelects/desktop/ModelSelect';
+import { YearSelect } from '../../FilterSelects/desktop/YearSelect';
 import { MobileBrandSelect } from '../../FilterSelects/mobile/MobileBrandSelect';
 import { MobileLocationSelect } from '../../FilterSelects/mobile/MobileLocationSelect';
 import { MobileModelSelect } from '../../FilterSelects/mobile/MobileModelSelect';
@@ -67,7 +68,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           />
           <Divider display={['block', 'none']} borderColor="gray.300" />
 
-          {!isDesktop ? <MobileLocationSelect /> : <BrandSelect />}
+          {!isDesktop ? <MobileLocationSelect /> : <YearSelect />}
           <SearchButton
             display={['none', 'none', 'block']}
             flexBasis={['100%', null, null, '70%', '80%']}

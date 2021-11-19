@@ -18,8 +18,13 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
       <ContainerOuter>
         <SectionHeader mainText="Top Brands" secondaryText="See all" />
       </ContainerOuter>
-      <ContainerOuter pr="0">
-        <ScrollableDiv cardCount={7} ml="-4" pl="4" mr="-4" pr="4">
+      <ContainerOuter p="0">
+        <ScrollableDiv
+          cardCount={7}
+          pl={['4', null, null, '4']}
+          pr={['4', null, null, '4']}
+          w="full"
+        >
           <TopBrandCard className="hoverable" icon={BmwIcon} />
           <TopBrandCard className="hoverable" icon={MercedesIcon} />
           <TopBrandCard className="hoverable" icon={VolkswagenIcon} />

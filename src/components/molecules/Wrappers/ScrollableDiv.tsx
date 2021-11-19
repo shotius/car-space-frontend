@@ -25,6 +25,11 @@ export const ScrollableDiv: React.FC<ScrollableDivProps & SimpleGridProps> = ({
         null,
         `repeat(${cardCount}, 1fr)`,
       ]}
+      css={{
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
+      }}
       {...rest}
     >
       {children}

@@ -14,8 +14,8 @@ export const MiniCategory: React.FC<MiniCategoryProps> = () => {
       <ContainerOuter pl="4">
         <SectionHeader mainText="Mini Category" />
       </ContainerOuter>
-      <ContainerOuter pr="0" pl={['4',null, null ,  "0"]}>
-        <ScrollableDiv cardCount={7} ml="-4" pl="4" mr="-4" pr="4">
+      <ContainerOuter p="0">
+        <ScrollableDiv cardCount={7} pl="4" pr="4">
           <MiniCategoryCard />
           <MiniCategoryCard />
           <MiniCategoryCard />

@@ -34,13 +34,19 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
   const { mediumImages, errorFetchingMediums: errorFetchingMediumImagess } =
     useAppSelector((state) => state.carImages);
 
+  // if car visible and we have not fetch it yet: true, else: false
   const shouldFetch = useMemo(() => {
     if (isVisible && car) {
+      // if we dont have car in redux state, either in a list or in errors: true , else: false
       if (
         !mediumImages[car.lN] &&
         !errorFetchingMediumImagess.includes(car.lN)
       ) {
         return true;
+      } else {
+        // if we have a car in the redux remove current from ref, it Prevents from re-renders
+        ref.current = null;
+        return false;
       }
     }
     return false;
@@ -50,7 +56,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
     if (shouldFetch) {
       dispatch(getImagesMedium(car.lN));
       setShouldHaveRef(false);
-      // remove div from observer
+      // remove div from observer, it prevents rerenders
       ref.current = null;
     }
   }, [shouldFetch]);

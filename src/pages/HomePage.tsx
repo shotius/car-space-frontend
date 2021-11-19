@@ -21,7 +21,7 @@ export const Home: React.FC<HomeProps> = () => {
   const { isMobile, isDesktop } = useDetectScreen();
   return (
     <PublicLayout>
-      <ContainerOuter p="0" pt={['0', null, '0', '48px']}>
+      <ContainerOuter pt={['0', null, '0', '48px']} p={["0", null, null, '4']}>
         <HomeCarousel />
       </ContainerOuter>
 
@@ -36,7 +36,7 @@ export const Home: React.FC<HomeProps> = () => {
           <ContainerOuter>
             <SectionHeader mainText="Catalog"  secondaryText="See all"/>
           </ContainerOuter>
-          <ContainerOuter pr="0">
+          <ContainerOuter pr="-4" mr="-4" ml='-4' pl="0">
             <CarListCarousel car={DamCar} />
           </ContainerOuter>
         </VStack>

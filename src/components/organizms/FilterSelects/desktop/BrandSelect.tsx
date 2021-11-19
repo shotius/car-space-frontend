@@ -1,15 +1,18 @@
-import { InputGroup, InputRightElement } from '@chakra-ui/input';
+import { InputGroup } from '@chakra-ui/input';
 import { Box, Divider, Grid, VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
-import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
-import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { TopBrandCard } from 'src/components/molecules/Cards/TopBrandCard';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { InputGrey } from 'src/components/molecules/Inputs/InputGrey';
+import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { CustomSelectArrow } from 'src/components/molecules/triggerers/CustomSelectArrow';
+import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
+import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
+import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
@@ -55,15 +58,9 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
   });
 
   return (
-    <Box w={['100%', '30%', '100%']}>
-      <Box
-        position="fixed"
-        top="0"
-        bottom="0"
-        left="0"
-        right="0"
-        bg="rgba(0, 0, 0, 0)"
-        display={areOptionsOpen ? 'block' : 'none'}
+    <SelectWrapper>
+      <SelectOverlay
+        isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);
           setPlaceholder(selected.join(', '));
@@ -71,8 +68,9 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
           setValue('');
         }}
       />
+       {/* Content  */}
+      <SelectContent>
       {/*  Input */}
-      <VStack position="relative">
         <InputGroup
           onFocus={() => {
             // onFocus open Options
@@ -97,54 +95,22 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
             }}
             pr="32px"
           />
-          {selected.length ? (
-            <InputRightElement
-              children={<CloseIcon />}
-              cursor="pointer"
-              opacity="0.6"
-              transition="all .3s"
-              transform="rotate(90deg)"
-              onClick={(e) => {
-                if (e.stopPropagation) e.stopPropagation();
-                setSelected([]);
-                setValue('');
-                setPlaceholder('');
-                setAreOptionsOpen(false);
-                dispatch(setModels([]));
-              }}
-            />
-          ) : (
-            <InputRightElement
-              children={
-                <DropdownIcon
-                  opacity="0.4"
-                  boxSize={5}
-                  transform={areOptionsOpen ? 'rotate(180deg)' : ''}
-                  transition="all .2s"
-                />
-              }
-              pointerEvents="painted"
-            />
-          )}
+          <CustomSelectArrow
+            clearCb={(e) => {
+              if (e.stopPropagation) e.stopPropagation();
+              setSelected([]);
+              setValue('');
+              setPlaceholder('');
+              setAreOptionsOpen(false);
+              dispatch(setModels([]));
+            }}
+            areOptionsOpen={areOptionsOpen}
+            areOptionsSelected={!!selected.length}
+          />
         </InputGroup>
 
         {/* Options  */}
-        <VStack
-          w="full"
-          minW="200px"
-          zIndex="modal"
-          position="absolute"
-          top={!areOptionsOpen ? '41px' : '45px'}
-          h={areOptionsOpen ? '300px' : '0px'}
-          opacity={areOptionsOpen ? '1' : '0.7'}
-          transition="all .25s"
-          bg="white"
-          boxShadow="0px 3px 10px #00000029"
-          borderRadius="8px"
-          p={areOptionsOpen ? '8px 0' : '0'}
-          // overflow needs to be here, to totaly hide options
-          overflowY={areOptionsOpen ? 'auto' : 'hidden'}
-        >
+        <SelectOptions isOpen={areOptionsOpen}>
           <VStack
             h="full"
             w="full"
@@ -234,8 +200,8 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
               </Box>
             ))}
           </VStack>
-        </VStack>
-      </VStack>
-    </Box>
+        </SelectOptions>
+      </SelectContent>
+    </SelectWrapper>
   );
 };
