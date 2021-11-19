@@ -19,7 +19,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 }) => {
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent p="32px 48px" w="460px">
         <ModalCloseButton top="30px" right="48px" />

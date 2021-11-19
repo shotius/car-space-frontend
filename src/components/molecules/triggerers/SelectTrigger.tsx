@@ -1,25 +1,27 @@
-import { InputGroup } from "@chakra-ui/input";
+import { InputGroup, InputGroupProps } from "@chakra-ui/input";
 import { CustomSelectArrow } from "./CustomSelectArrow";
 
 interface CustomSelectTriggerProps {
-  selectedValues: any | any[]
   areOptionsOpen: boolean;
   isDisabled?: boolean;
   clearCb: (e: any) => void
+  areOptionsSelected: boolean;
 }
 
-export const SelectTrigger: React.FC<CustomSelectTriggerProps> = ({
+export const SelectTrigger: React.FC<CustomSelectTriggerProps & InputGroupProps> = ({
   children,
-  selectedValues, 
   areOptionsOpen,
   isDisabled, 
-  clearCb
+  clearCb,
+  areOptionsSelected, 
+  cursor="pointer",
+  ...rest
 }) => {
   return (
-    <InputGroup>
+    <InputGroup cursor={cursor} {...rest}>
       {children}
       <CustomSelectArrow
-        areOptionsSelected={!!selectedValues.length}
+        areOptionsSelected={areOptionsSelected}
         areOptionsOpen={areOptionsOpen}
         isDisabled={isDisabled}
         clearCb={clearCb}

@@ -7,9 +7,11 @@ import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { TopBrandCard } from 'src/components/molecules/Cards/TopBrandCard';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { InputGrey } from 'src/components/molecules/Inputs/InputGrey';
+import { SelectSearch } from 'src/components/molecules/Inputs/SelectSearch';
 import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { CustomSelectArrow } from 'src/components/molecules/triggerers/CustomSelectArrow';
+import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger';
 import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
@@ -52,6 +54,12 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
     }
   };
 
+  const updatePlaceholder = () => {
+    if (selected.length) {
+      setPlaceholder(`Brands: ${selected.join(', ')}`);
+    }
+  };
+
   // filter options when searchWord is specified
   const optionsToShow = addLettersToSortedArray(options).filter((option) => {
     return option.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
@@ -63,51 +71,42 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);
-          setPlaceholder(selected.join(', '));
+          updatePlaceholder()
           dispatch(getModels(selected));
           setValue('');
+          setSearchWord('');
         }}
       />
-       {/* Content  */}
+      {/* Content  */}
       <SelectContent>
-      {/*  Input */}
-        <InputGroup
-          onFocus={() => {
-            // onFocus open Options
-            setAreOptionsOpen(true);
-            // if something is selected, display in placeholder
-            if (selected.length) {
-              setPlaceholder(selected.join(', '));
-            }
-            // clear value in the search field
+        {/*  Input */}
+        <SelectTrigger
+          areOptionsOpen={areOptionsOpen}
+          areOptionsSelected={!!selected.length}
+          clearCb={(e) => {
+            if (e.stopPropagation) e.stopPropagation();
+            setSelected([]);
             setValue('');
+            setPlaceholder('');
+            setAreOptionsOpen(false);
+            dispatch(setModels([]));
           }}
         >
-          <InputGrey
-            bg="transparent"
-            border="none"
-            placeholder={capitalizeEach(placeholder) || 'Brands'}
+          <SelectSearch
+            label="Brands"
+            placeholder={placeholder}
             value={value ? capitalizeEach(value) : searchWord}
             onChange={(e) => setSearchWord(e.currentTarget.value)}
-            isTruncated
-            _focus={{
-              bg: 'white',
-            }}
-            pr="32px"
-          />
-          <CustomSelectArrow
-            clearCb={(e) => {
-              if (e.stopPropagation) e.stopPropagation();
-              setSelected([]);
+            onFocus={() => {
+              // onFocus open Options
+              setAreOptionsOpen(true);
+              // if something is selected, display in placeholder
+              updatePlaceholder();
+              // clear value in the search field
               setValue('');
-              setPlaceholder('');
-              setAreOptionsOpen(false);
-              dispatch(setModels([]));
             }}
-            areOptionsOpen={areOptionsOpen}
-            areOptionsSelected={!!selected.length}
           />
-        </InputGroup>
+        </SelectTrigger>
 
         {/* Options  */}
         <SelectOptions isOpen={areOptionsOpen}>

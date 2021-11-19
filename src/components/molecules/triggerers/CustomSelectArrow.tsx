@@ -25,6 +25,7 @@ export const CustomSelectArrow: React.FC<CustomSelectArrowProps> = ({
           transition="all .3s"
           transform="rotate(90deg)"
           onClick={clearCb}
+          zIndex="10"
         />
       ) : (
         <InputRightElement
@@ -37,6 +38,7 @@ export const CustomSelectArrow: React.FC<CustomSelectArrowProps> = ({
             />
           }
           pointerEvents="painted"
+
         />
       )}
     </>

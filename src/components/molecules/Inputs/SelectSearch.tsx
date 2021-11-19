@@ -2,7 +2,7 @@ import { capitalizeEach } from "src/utils/functions/capitalizeEach";
 import { InputGrey } from "./InputGrey";
 
 interface SelectSearchProps {
-  isDisabled: boolean;
+  isDisabled?: boolean;
   placeholder: string;
   label: string;
 }
@@ -26,6 +26,9 @@ export const SelectSearch: React.FC<SelectSearchProps & OtherProps> = ({
       isTruncated
       _focus={{
         bg: 'white',
+      }}
+      _hover={{
+        bg: "autoGrey.200"
       }}
       pr="32px"
       {...rest}

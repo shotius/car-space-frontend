@@ -1,4 +1,3 @@
-import { VStack } from '@chakra-ui/layout';
 import { Button, Checkbox } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { SelectSearch } from 'src/components/molecules/Inputs/SelectSearch';
@@ -30,6 +29,7 @@ export const ModelSelect: React.FC<ModelSelectProps> = () => {
 
   const { models: options } = useAppSelector((state) => state.carsReducer);
 
+  // whenever models change in the redux store do this
   useEffect(() => {
     if (options.length) {
       setIsDisabled(false);
@@ -46,6 +46,13 @@ export const ModelSelect: React.FC<ModelSelectProps> = () => {
   useEffect(() => {
     setValue(selected.join(', '));
   }, [selected.length]);
+
+  const updatePlaceholder = () => {
+    if (selected.length) {
+      setPlaceholder(`Models: ${selected.join(', ')}`);
+    }
+  };
+
 
   // handle option select
   const handleSelect = (opt: string) => {
@@ -70,16 +77,25 @@ export const ModelSelect: React.FC<ModelSelectProps> = () => {
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);
-          setPlaceholder(selected.join(', '));
+          updatePlaceholder();
           setValue('');
+          setSearchWord('')
         }}
       />
       {/*  Input */}
       <SelectContent>
         <SelectTrigger
+          areOptionsSelected={!!selected.length}
           isDisabled={isDisabled}
           areOptionsOpen={areOptionsOpen}
-          selectedValues={selected}
+          onFocus={() => {
+            // onFocus open Options
+            setAreOptionsOpen(true);
+            // if something is selected, display in placeholder
+            updatePlaceholder();
+            // clear value in the search field
+            setValue('');
+          }}
           clearCb={(e) => {
             if (e.stopPropagation) e.stopPropagation();
             setSelected([]);
@@ -92,16 +108,6 @@ export const ModelSelect: React.FC<ModelSelectProps> = () => {
             label="Model"
             isDisabled={isDisabled}
             placeholder={placeholder}
-            onFocus={() => {
-              // onFocus open Options
-              setAreOptionsOpen(true);
-              // if something is selected, display in placeholder
-              if (selected.length) {
-                setPlaceholder(selected.join(', '));
-              }
-              // clear value in the search field
-              setValue('');
-            }}
             value={value ? capitalizeEach(value) : searchWord}
             onChange={(e) => setSearchWord(e.currentTarget.value)}
           />
@@ -123,7 +129,7 @@ export const ModelSelect: React.FC<ModelSelectProps> = () => {
             >
               <Checkbox
                 colorScheme="autoOrange"
-                defaultChecked={selected?.includes(opt)}
+                isChecked={selected?.includes(opt)}
                 onChange={(e) => {
                   e.preventDefault();
                   handleSelect(opt);
