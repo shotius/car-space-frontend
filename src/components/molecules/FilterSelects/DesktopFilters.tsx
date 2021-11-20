@@ -4,16 +4,18 @@ import {
   IconButton,
   SimpleGrid,
   Stack,
-  StackProps,
+  StackProps
 } from '@chakra-ui/react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
-import { Select } from 'src/components/atoms/Selects';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SearchButton } from '../Buttons/SearchButton';
 import SelectSecondary from '../Selects/SelectSecondary';
+import { BrandSelect } from './desktop/BrandSelect';
+import { ModelSelect } from './desktop/ModelSelect';
+import { YearSelect } from './desktop/YearSelect';
 
 interface ThreeHDSelectsProps {}
 
@@ -39,22 +41,23 @@ export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackPr
         direction={direction}
         borderRadius={borderRadius}
         alignItems="center"
-        pl="0px"
+        // pl="0px"
         {...rest}
       >
-        <Select placeholder="Brand"></Select>
+        {/* Brand Filter  */}
+        <BrandSelect labelPadding="2"/>
         <DividerVertical
           height={['40px', null, null, '30px']}
           borderColor="gray.300"
-          // margin="4"
         />
-        <Select placeholder="Model"></Select>
+        {/* Model Select  */}
+        <ModelSelect />
         <DividerVertical
           height={['40px', null, null, '30px']}
           borderColor="gray.300"
-          // margin="4"
         />
-        <Select placeholder="Year"></Select>
+        {/* Year Select  */}
+        <YearSelect />
         <HStack spacing={{ md: '0', xl: '2' }}>
           <SearchButton
             w={{ md: '140px', lg: '144px', '2xl': '211px' }}
@@ -104,14 +107,14 @@ export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackPr
           mt={['2', '4', null, '4', null, '24px']}
         >
           <SelectSecondary placeholder="Engine"></SelectSecondary>
-          <SelectSecondary placeholder="Engine"></SelectSecondary>
-          <SelectSecondary placeholder="Mileage"></SelectSecondary>
           <SelectSecondary placeholder="Condition"></SelectSecondary>
           <SelectSecondary placeholder="Type"></SelectSecondary>
           <SelectSecondary placeholder="Location"></SelectSecondary>
           <SelectSecondary placeholder="Transmission"></SelectSecondary>
-          <SelectSecondary placeholder="Drive"></SelectSecondary>
-          <SelectSecondary placeholder="Fuel"></SelectSecondary>
+          <SelectSecondary placeholder="Has Keys"></SelectSecondary>
+          <SelectSecondary placeholder="Drives"></SelectSecondary>
+          <SelectSecondary placeholder="Sales Status"></SelectSecondary>
+          <SelectSecondary placeholder="Fuel Type"></SelectSecondary>
           <SelectSecondary placeholder="Cylinder"></SelectSecondary>
         </SimpleGrid>
       </Collapse>

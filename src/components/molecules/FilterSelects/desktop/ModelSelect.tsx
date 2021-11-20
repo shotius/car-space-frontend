@@ -56,8 +56,6 @@ export const ModelSelect: React.FC<ModelSelectProps> = () => {
 
   // handle option select
   const handleSelect = (opt: string) => {
-    // search keyword will be cleared
-    setSearchWord('');
     // if option is in selected values remove, else include
     if (selected.includes(opt)) {
       setSelected(selected.filter((o) => o !== opt));
@@ -72,7 +70,7 @@ export const ModelSelect: React.FC<ModelSelectProps> = () => {
   });
 
   return (
-    <SelectWrapper>
+    <SelectWrapper title="Select Brand First">
       <SelectOverlay
         isActive={areOptionsOpen}
         onClick={() => {

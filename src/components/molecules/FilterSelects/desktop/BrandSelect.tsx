@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, VStack } from '@chakra-ui/layout';
+import { Box, BoxProps, Divider, Grid, VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
@@ -17,14 +17,16 @@ import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 
-interface BrandSelectProps {}
+interface BrandSelectProps { 
+  labelPadding?: BoxProps["p"]
+}
 
 // In the compont I have 4 different variables
 //1. Value: is used to display selected option
 //2. Placeholder: is displayed when not searching
 //3. searchWord: when user writing in search box, search word is changing
 //4. selected: are Selected options, used to keep track of other three variables
-export const BrandSelect: React.FC<BrandSelectProps> = () => {
+export const BrandSelect: React.FC<BrandSelectProps> = ({labelPadding}) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [placeholder, setPlaceholder] = useState<string>('');
@@ -42,7 +44,6 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
   // handle option select
   const handleSelect = (opt: string) => {
     // search keyword will be cleared
-    setSearchWord('');
     // if option is in selected values remove, else include
     if (selected.includes(opt)) {
       setSelected(selected.filter((o) => o !== opt));
@@ -90,6 +91,7 @@ export const BrandSelect: React.FC<BrandSelectProps> = () => {
           }}
         >
           <SelectSearch
+            labelPadding={labelPadding}
             label="Brands"
             placeholder={placeholder}
             value={value ? capitalizeEach(value) : searchWord}

@@ -14,7 +14,7 @@ interface YearSelectProps {}
 export const YearSelect: React.FC<YearSelectProps> = ({}) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<{
-    yearFrom: number ;
+    yearFrom: number;
     yearTo: number;
   }>({ yearFrom: 0, yearTo: 0 });
   const [placeholder, setPlaceholder] = useState<string>('');
@@ -50,7 +50,7 @@ export const YearSelect: React.FC<YearSelectProps> = ({}) => {
   const range = (from: number, to: number): number[] => {
     const arr = Array(to - from + 1).fill(0);
     const first = from;
-    return arr.map((_, i) => (i + first));
+    return arr.map((_, i) => i + first);
   };
 
   return (
@@ -65,16 +65,16 @@ export const YearSelect: React.FC<YearSelectProps> = ({}) => {
         <SelectTrigger
           areOptionsOpen={areOptionsOpen}
           clearCb={(e) => {
-            if (e.stopPropagation) e.stopPropagation()
-            setSelected({yearFrom: 0, yearTo: 0})
-            setPlaceholder('')
-            setAreOptionsOpen(false)
+            if (e.stopPropagation) e.stopPropagation();
+            setSelected({ yearFrom: 0, yearTo: 0 });
+            setPlaceholder('');
+            setAreOptionsOpen(false);
           }}
           areOptionsSelected={!!(selected.yearFrom && selected.yearTo)}
           onClick={() => setAreOptionsOpen((open) => !open)}
         >
           <HStack
-            pl="2"
+            pl="4"
             h="40px"
             w="full"
             _hover={{
@@ -94,8 +94,10 @@ export const YearSelect: React.FC<YearSelectProps> = ({}) => {
             divider={<StackDivider borderColor="autoGrey.400" />}
             pr="2px"
           >
-            <VStack h="full" w="full" spacing="4">
-              <TextRegular fontSize="16px">From</TextRegular>
+            <VStack h="full" w="full" spacing="2">
+              <TextRegular fontSize="16px" pr="4px">
+                From
+              </TextRegular>
               <VerticalScrollable>
                 {range(2000, 2020).map((num) => (
                   <TextButton
@@ -117,8 +119,10 @@ export const YearSelect: React.FC<YearSelectProps> = ({}) => {
                 ))}
               </VerticalScrollable>
             </VStack>
-            <VStack h="full" w="full" spacing="4">
-              <TextRegular fontSize="16px">To</TextRegular>
+            <VStack h="full" w="full" spacing="2">
+              <TextRegular fontSize="16px" pr="8px">
+                To
+              </TextRegular>
               <VerticalScrollable>
                 {range(2000, 2020).map((num) => (
                   <TextButton
