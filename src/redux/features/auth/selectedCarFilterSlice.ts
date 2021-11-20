@@ -42,10 +42,10 @@ const selectedCarFilterSlice = createSlice({
     selectTranssmision: (state, action: PayloadAction<Transmission[]>) => {
       state.transsmision = action.payload;
     },
-    selectPriseFrom: (state, action) => {
+    selectPriseFrom: (state, action: PayloadAction<string | null>) => {
       state.priceFrom = action.payload;
     },
-    selectPriseTo: (state, action) => {
+    selectPriseTo: (state, action: PayloadAction<string | null>) => {
       state.priceTo = action.payload;
     },
     selectYearFrom: (state, action) => {

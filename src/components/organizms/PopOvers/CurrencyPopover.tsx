@@ -34,7 +34,7 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
         return (
           <>
             <Icon as={UsdIcon} boxSize={6} />
-            <TextRegular fontSize="16px" mt="2px">
+            <TextRegular fontSize="14px" mt="2px">
               Usd
             </TextRegular>
           </>
@@ -43,14 +43,14 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
         return (
           <HStack pt="1px" pl="1">
             <TextRegular fontSize="18px">€</TextRegular>
-            <TextRegular fontSize="16px">Eur</TextRegular>
+            <TextRegular fontSize="14px">Eur</TextRegular>
           </HStack>
         );
       case 'GEL':
         return (
           <>
             <Icon as={GelIcon} boxSize={6} />
-            <TextRegular fontSize="16px" pt="3px">
+            <TextRegular fontSize="14px" pt="3px">
               Gel
             </TextRegular>
           </>

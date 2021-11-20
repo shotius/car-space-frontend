@@ -15,6 +15,7 @@ import { SearchButton } from '../Buttons/SearchButton';
 import SelectSecondary from '../Selects/SelectSecondary';
 import { BrandSelect } from './desktop/BrandSelect';
 import { ModelSelect } from './desktop/ModelSelect';
+import { PriceSelect } from './desktop/PriceSelect';
 import { TransmissionSelect } from './desktop/TransmissionSelect';
 import { YearSelect } from './desktop/YearSelect';
 
@@ -106,6 +107,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackPr
           spacingY="2"
           mt={['2', '4', null, '4', null, '24px']}
         >
+          <PriceSelect /> 
           <SelectSecondary placeholder="Engine"></SelectSecondary>
           <SelectSecondary placeholder="Condition"></SelectSecondary>
           <SelectSecondary placeholder="Type"></SelectSecondary>

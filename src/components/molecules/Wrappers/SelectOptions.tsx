@@ -5,20 +5,21 @@ interface SelectOptionsWrapperProps {
 }
 
 export const SelectOptions: React.FC<SelectOptionsWrapperProps & StackProps> =
-  ({ isOpen, children, maxH = '300px',  ...rest }) => {
+  ({ isOpen, children, maxH = '300px',p="8px 0",  ...rest }) => {
     return (
       <VStack
         w="full"
-        zIndex="1"
+        zIndex="sticky"
         position="absolute"
         top={!isOpen ? '41px' : '45px'}
         maxH={isOpen ? maxH : '0px'}
         opacity={isOpen ? '1' : '0.7'}
+        // display={isOpen ? "block" : "none"}
         transition="all .25s"
         bg="white"
         boxShadow="0px 3px 10px #00000029"
         borderRadius="8px"
-        p={isOpen ? '8px 0' : '0'}
+        p={isOpen ? p : '0'}
         // overflow needs to be here, to totaly hide options
         overflowY={isOpen ? 'auto' : 'hidden'}
         {...rest}
@@ -34,9 +35,9 @@ export const SelectOptions: React.FC<SelectOptionsWrapperProps & StackProps> =
               width: '6px',
             },
             '&::-webkit-scrollbar-track': {
-            width: '6px',
-            overflow: 'hidden',
-            marginTop: "10px"
+              width: '6px',
+              overflow: 'hidden',
+              marginTop: '10px',
             },
             '&::-webkit-scrollbar-thumb': {
               background: '#DEDEE0',
@@ -50,7 +51,7 @@ export const SelectOptions: React.FC<SelectOptionsWrapperProps & StackProps> =
               height: '3px',
               width: '6px',
             },
-            }}
+          }}
         >
           {children}
         </VStack>

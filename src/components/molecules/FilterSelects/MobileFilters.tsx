@@ -13,6 +13,7 @@ import {
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { ButtonRound } from '../Buttons/ButtonRound';
 import { SearchButton } from '../Buttons/SearchButton';
+import { CurrencySwitcherButtons } from '../CurrencySwitcherButtons';
 import { InputRegular } from '../Inputs/InputRegular';
 import { TextRegular } from '../Texts/TextRegular';
 import { WithMobileKeyboard } from '../Wrappers/WithMobileKeyboard';
@@ -31,170 +32,131 @@ import { MobileTypesSelect } from './mobile/MobileTypesSelect';
 
 interface ThreeMobileSelectsProps {}
 
-export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> = () => {
-  const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
+export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
+  () => {
+    const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
 
-  // redux variables
-  const { isAdvancedFiltersOpen } = useAppSelector(
-    (state) => state.selectedCarFilters
-  );
-  const dispatch = useAppDispatch();
+    // redux variables
+    const { isAdvancedFiltersOpen } = useAppSelector(
+      (state) => state.selectedCarFilters
+    );
+    const dispatch = useAppDispatch();
 
-  const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
-  const [yearFrom, setYearFrom] = useState('');
+    const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
+    const [yearFrom, setYearFrom] = useState('');
 
-  return (
-    <Stack>
-      {/* mobile select opens drawer */}
-      <MobileBrandSelect />
+    return (
+      <Stack>
+        {/* mobile select opens drawer */}
+        <MobileBrandSelect />
 
-      {/* mobile model select and its drawer */}
-      <MobileModelSelect />
+        {/* mobile model select and its drawer */}
+        <MobileModelSelect />
 
-      {/* year */}
-      <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
-        <InputRegular
-          pr="2"
-          placeholder="Year from"
-          type="number"
-          value={yearFrom}
-          onChange={(e) => setYearFrom(e.currentTarget.value)}
-          onFocus={() => setKeyboardActive(true)}
-          onBlur={() => {
-            setKeyboardActive(false);
-            yearFrom
-              ? dispatch(selectYearFrom(yearFrom))
-              : dispatch(selectYearFrom(null));
-          }}
-        />
-        <DividerVertical height="30px" />
-        <InputRegular
-          placeholder="Year to"
-          type="number"
-          onFocus={() => setKeyboardActive(true)}
-          onBlur={() => setKeyboardActive(false)}
-        />
-      </HStack>
-      {/* price */}
-      <HStack justify="space-between">
+        {/* year */}
         <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
           <InputRegular
             pr="2"
-            placeholder="Price from"
+            placeholder="Year from"
             type="number"
+            value={yearFrom}
+            onChange={(e) => setYearFrom(e.currentTarget.value)}
             onFocus={() => setKeyboardActive(true)}
-            onBlur={() => setKeyboardActive(false)}
+            onBlur={() => {
+              setKeyboardActive(false);
+              yearFrom
+                ? dispatch(selectYearFrom(yearFrom))
+                : dispatch(selectYearFrom(null));
+            }}
           />
           <DividerVertical height="30px" />
           <InputRegular
-            placeholder="Price to"
+            placeholder="Year to"
             type="number"
             onFocus={() => setKeyboardActive(true)}
             onBlur={() => setKeyboardActive(false)}
           />
         </HStack>
-        {/* currency */}
-        <HStack
-          borderRadius="8px"
-          bg="white"
-          spacing="2px"
-          flexBasis="30%"
-          justify="space-between"
-          p="7px"
-        >
-          <ButtonRound
-            onClick={() => setChosenCurrency('GEL')}
-            active={chosenCurrency === 'GEL'}
-          >
-            <Icon
-              as={GelIcon}
-              fill={chosenCurrency === 'GEL' ? '#fff' : '#000'}
-              boxSize={7}
-              fontWeight="400"
+        {/* price */}
+        <HStack justify="space-between">
+          <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
+            <InputRegular
+              pr="2"
+              placeholder="Price from"
+              type="number"
+              onFocus={() => setKeyboardActive(true)}
+              onBlur={() => setKeyboardActive(false)}
             />
-          </ButtonRound>
-          <ButtonRound
-            onClick={() => setChosenCurrency('USD')}
-            active={chosenCurrency === 'USD'}
-          >
-            <Icon
-              as={UsdIcon}
-              boxSize={6}
-              fontWeight="400"
-              fill={chosenCurrency === 'USD' ? '#fff' : '#000'}
+            <DividerVertical height="30px" />
+            <InputRegular
+              placeholder="Price to"
+              type="number"
+              onFocus={() => setKeyboardActive(true)}
+              onBlur={() => setKeyboardActive(false)}
             />
-          </ButtonRound>
-          <ButtonRound
-            onClick={() => setChosenCurrency('EUR')}
-            active={chosenCurrency === 'EUR'}
-            fontSize="20px"
-            fontWeight="400"
-          >
-            <Icon
-              as={EuroIcon}
-              boxSize={6}
-              fontWeight="400"
-              fill={chosenCurrency === 'EUR' ? '#fff' : '#000'}
-            />
-          </ButtonRound>
+          </HStack>
+          {/* currency */}
+          <CurrencySwitcherButtons
+            currency={chosenCurrency}
+            setCurrency={setChosenCurrency}
+          />
         </HStack>
-      </HStack>
 
-      {/* colapsable selects */}
-      <Collapse in={isAdvancedFiltersOpen}>
-        <VStack>
-          {/* Engine  */}
-          <MobileEngineSelect />
+        {/* colapsable selects */}
+        <Collapse in={isAdvancedFiltersOpen}>
+          <VStack>
+            {/* Engine  */}
+            <MobileEngineSelect />
 
-          {/* Conditions */}
-          <MobileConditionSelect />
+            {/* Conditions */}
+            <MobileConditionSelect />
 
-          {/* Types */}
-          <MobileTypesSelect />
+            {/* Types */}
+            <MobileTypesSelect />
 
-          {/* Locations */}
-          <MobileLocationSelect />
+            {/* Locations */}
+            <MobileLocationSelect />
 
-          {/* transmission */}
-          <MobileTransmissionSelect />
+            {/* transmission */}
+            <MobileTransmissionSelect />
 
-          {/* Keys */}
-          <MobileCarKeysSelect />
+            {/* Keys */}
+            <MobileCarKeysSelect />
 
-          {/* drive */}
-          <MobileDriveSelect />
+            {/* drive */}
+            <MobileDriveSelect />
 
-          {/* Sales Status */}
-          <MobileSalesStatusSelect />
+            {/* Sales Status */}
+            <MobileSalesStatusSelect />
 
-          {/* Fuels */}
-          <MobileFuelsSelect />
+            {/* Fuels */}
+            <MobileFuelsSelect />
 
-          {/* Cylinders */}
-          <MobileCylindersSelect />
-        </VStack>
-      </Collapse>
-      {/* apply button */}
-      <VStack pt="2" spacing="3">
-        {/* this mobile input sticks button to the keyboard */}
-        <WithMobileKeyboard isKeyboardActive={keyboardActive}>
-          <SearchButton w="full" isKeyboardActive={keyboardActive}/>
-        </WithMobileKeyboard>
-        <Button
-          variant="link"
-          onClick={() => dispatch(toggleAdvancedFilters())}
-          bg="transparent"
-        >
-          <TextRegular
-            color={'#000'}
-            display={keyboardActive ? 'none' : 'block'}
-            lineHeight="19px"
-            fontWeight="400"
+            {/* Cylinders */}
+            <MobileCylindersSelect />
+          </VStack>
+        </Collapse>
+        {/* apply button */}
+        <VStack pt="2" spacing="3">
+          {/* this mobile input sticks button to the keyboard */}
+          <WithMobileKeyboard isKeyboardActive={keyboardActive}>
+            <SearchButton w="full" isKeyboardActive={keyboardActive} />
+          </WithMobileKeyboard>
+          <Button
+            variant="link"
+            onClick={() => dispatch(toggleAdvancedFilters())}
+            bg="transparent"
           >
-            {isAdvancedFiltersOpen ? 'See less filter' : 'See more filter'}
-          </TextRegular>
-        </Button>
-      </VStack>
-    </Stack>
-  );
-};
+            <TextRegular
+              color={'#000'}
+              display={keyboardActive ? 'none' : 'block'}
+              lineHeight="19px"
+              fontWeight="400"
+            >
+              {isAdvancedFiltersOpen ? 'See less filter' : 'See more filter'}
+            </TextRegular>
+          </Button>
+        </VStack>
+      </Stack>
+    );
+  };
