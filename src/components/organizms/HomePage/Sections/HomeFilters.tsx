@@ -71,8 +71,6 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           {!isDesktop ? <MobileLocationSelect /> : <YearSelect />}
           <SearchButton
             display={['none', 'none', 'block']}
-            flexBasis={['100%', null, null, '70%', '80%']}
-            ml={[null, null, '8px', '24px']}
             minW='144px'
           />
         </Flex>

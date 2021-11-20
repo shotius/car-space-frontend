@@ -1,5 +1,5 @@
-import { Box, BoxProps, Divider, Grid, VStack } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
+import { Box, BoxProps, Divider, Flex, VStack } from '@chakra-ui/layout';
+import { useEffect, useRef, useState } from 'react';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
@@ -17,8 +17,8 @@ import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 
-interface BrandSelectProps { 
-  labelPadding?: BoxProps["p"]
+interface BrandSelectProps {
+  labelPadding?: BoxProps['p'];
 }
 
 // In the compont I have 4 different variables
@@ -26,7 +26,7 @@ interface BrandSelectProps {
 //2. Placeholder: is displayed when not searching
 //3. searchWord: when user writing in search box, search word is changing
 //4. selected: are Selected options, used to keep track of other three variables
-export const BrandSelect: React.FC<BrandSelectProps> = ({labelPadding}) => {
+export const BrandSelect: React.FC<BrandSelectProps> = ({ labelPadding }) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [placeholder, setPlaceholder] = useState<string>('');
@@ -69,7 +69,7 @@ export const BrandSelect: React.FC<BrandSelectProps> = ({labelPadding}) => {
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);
-          updatePlaceholder()
+          updatePlaceholder();
           dispatch(getModels(selected));
           setValue('');
           setSearchWord('');
@@ -108,28 +108,50 @@ export const BrandSelect: React.FC<BrandSelectProps> = ({labelPadding}) => {
         </SelectTrigger>
 
         {/* Options  */}
-        <SelectOptions isOpen={areOptionsOpen}>
+        <SelectOptions isOpen={areOptionsOpen} maxH="380px">
           <VStack
             h="full"
             w="full"
             overflowY={areOptionsOpen ? 'auto' : 'hidden'}
-            textOverflow="ellipsis"
+            // display="none"
+            // maxH="0px"
             align="flex-start"
             p="4"
             pt="2"
-            spacing="4"
+            spacing="2"
+            css={{
+              '&::-webkit-scrollbar': {
+                width: '6px',
+              },
+              '&::-webkit-scrollbar-track': {
+              width: '6px',
+              overflow: 'hidden',
+              },
+              '&::-webkit-scrollbar-thumb': {
+                background: '#DEDEE0',
+                borderRadius: '100px',
+              },
+              '::-webkit-scrollbar-button': {
+                backgroundColor: 'white',
+                display: 'block',
+                visibility: 'hidden',
+                borderStyle: 'solid',
+                height: '3px',
+                width: '6px',
+              },
+              }}
           >
-            <Grid
+            <Flex
               w="full"
               flexWrap="wrap"
-              gap="2"
-              gridTemplateColumns="1fr 1fr 1fr"
+              css={{
+                gap: '8px',
+              }}
             >
               <TopBrandCard
                 icon={MercedesIcon}
-                w="full"
-                h="full"
-                maxH="43px"
+                maxW="37px"
+                maxH="40px"
                 bg={
                   selected.includes('Mercedes')
                     ? 'autoOrange.100'
@@ -140,16 +162,15 @@ export const BrandSelect: React.FC<BrandSelectProps> = ({labelPadding}) => {
               />
               <TopBrandCard
                 icon={MercedesIcon}
-                w="full"
-                h="full"
-                maxH="43px"
+                maxW="37px"
+                maxH="40px"
                 boxSize={4}
                 onClick={() => handleSelect('Mercedes')}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                w="full"
-                h="full"
+                maxW="37px"
+                maxH="40px"
                 bg={
                   selected.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
                 }
@@ -158,26 +179,26 @@ export const BrandSelect: React.FC<BrandSelectProps> = ({labelPadding}) => {
               />
               <TopBrandCard
                 icon={BmwIcon}
-                w="full"
-                h="full"
+                maxW="37px"
+                maxH="40px"
                 boxSize={5}
                 onClick={() => handleSelect('BMW')}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                w="full"
-                h="full"
+                maxW="37px"
+                maxH="40px"
                 boxSize={5}
                 onClick={() => handleSelect('BMW')}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                w="full"
-                h="full"
+                maxW="37px"
+                maxH="40px"
                 boxSize={5}
                 onClick={() => handleSelect('BMW')}
               />
-            </Grid>
+            </Flex>
             {optionsToShow.map((opt) => (
               <Box p="0" key={opt}>
                 {opt.length === 1 ? (

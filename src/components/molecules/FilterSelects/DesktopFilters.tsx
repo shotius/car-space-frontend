@@ -15,6 +15,7 @@ import { SearchButton } from '../Buttons/SearchButton';
 import SelectSecondary from '../Selects/SelectSecondary';
 import { BrandSelect } from './desktop/BrandSelect';
 import { ModelSelect } from './desktop/ModelSelect';
+import { TransmissionSelect } from './desktop/TransmissionSelect';
 import { YearSelect } from './desktop/YearSelect';
 
 interface ThreeHDSelectsProps {}
@@ -41,7 +42,6 @@ export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackPr
         direction={direction}
         borderRadius={borderRadius}
         alignItems="center"
-        // pl="0px"
         {...rest}
       >
         {/* Brand Filter  */}
@@ -110,7 +110,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackPr
           <SelectSecondary placeholder="Condition"></SelectSecondary>
           <SelectSecondary placeholder="Type"></SelectSecondary>
           <SelectSecondary placeholder="Location"></SelectSecondary>
-          <SelectSecondary placeholder="Transmission"></SelectSecondary>
+          <TransmissionSelect />
           <SelectSecondary placeholder="Has Keys"></SelectSecondary>
           <SelectSecondary placeholder="Drives"></SelectSecondary>
           <SelectSecondary placeholder="Sales Status"></SelectSecondary>

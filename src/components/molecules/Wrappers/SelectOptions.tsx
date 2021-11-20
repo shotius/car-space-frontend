@@ -5,15 +5,14 @@ interface SelectOptionsWrapperProps {
 }
 
 export const SelectOptions: React.FC<SelectOptionsWrapperProps & StackProps> =
-  ({ isOpen, children, ...rest }) => {
+  ({ isOpen, children, maxH = '300px',  ...rest }) => {
     return (
       <VStack
         w="full"
-        minW="200px"
-        zIndex="modal"
+        zIndex="1"
         position="absolute"
         top={!isOpen ? '41px' : '45px'}
-        h={isOpen ? '300px' : '0px'}
+        maxH={isOpen ? maxH : '0px'}
         opacity={isOpen ? '1' : '0.7'}
         transition="all .25s"
         bg="white"
@@ -28,9 +27,30 @@ export const SelectOptions: React.FC<SelectOptionsWrapperProps & StackProps> =
           w="full"
           overflowY={isOpen ? 'auto' : 'hidden'}
           align="flex-start"
-          p="0"
-          pt="2"
+          pt="2`"
           spacing="0"
+          css={{
+            '&::-webkit-scrollbar': {
+              width: '6px',
+            },
+            '&::-webkit-scrollbar-track': {
+            width: '6px',
+            overflow: 'hidden',
+            marginTop: "10px"
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: '#DEDEE0',
+              borderRadius: '100px',
+            },
+            '::-webkit-scrollbar-button': {
+              backgroundColor: 'white',
+              display: 'block',
+              visibility: 'hidden',
+              borderStyle: 'solid',
+              height: '3px',
+              width: '6px',
+            },
+            }}
         >
           {children}
         </VStack>
