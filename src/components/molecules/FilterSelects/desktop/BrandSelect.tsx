@@ -1,4 +1,3 @@
-import { InputGroup } from '@chakra-ui/input';
 import { Box, Divider, Grid, VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
@@ -6,11 +5,9 @@ import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { TopBrandCard } from 'src/components/molecules/Cards/TopBrandCard';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
-import { InputGrey } from 'src/components/molecules/Inputs/InputGrey';
 import { SelectSearch } from 'src/components/molecules/Inputs/SelectSearch';
 import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { CustomSelectArrow } from 'src/components/molecules/triggerers/CustomSelectArrow';
 import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger';
 import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';

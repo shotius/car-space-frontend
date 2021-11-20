@@ -11,11 +11,11 @@ import {
   selectYearFrom,
   toggleAdvancedFilters,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { ButtonRound } from '../../molecules/Buttons/ButtonRound';
-import { SearchButton } from '../../molecules/Buttons/SearchButton';
-import { InputRegular } from '../../molecules/Inputs/InputRegular';
-import { TextRegular } from '../../molecules/Texts/TextRegular';
-import { WithMobileKeyboard } from '../../molecules/Wrappers/WithMobileKeyboard';
+import { ButtonRound } from '../Buttons/ButtonRound';
+import { SearchButton } from '../Buttons/SearchButton';
+import { InputRegular } from '../Inputs/InputRegular';
+import { TextRegular } from '../Texts/TextRegular';
+import { WithMobileKeyboard } from '../Wrappers/WithMobileKeyboard';
 import { MobileBrandSelect } from './mobile/MobileBrandSelect';
 import { MobileCarKeysSelect } from './mobile/MobileCarKeySelect';
 import { MobileConditionSelect } from './mobile/MobileConditionSelect';
@@ -31,7 +31,7 @@ import { MobileTypesSelect } from './mobile/MobileTypesSelect';
 
 interface ThreeMobileSelectsProps {}
 
-export const MobileFilters: React.FC<ThreeMobileSelectsProps> = () => {
+export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> = () => {
   const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
 
   // redux variables

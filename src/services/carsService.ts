@@ -5,8 +5,8 @@ const baseURL = '/api/cars';
 
 const searchCars = async () => {
   try {
-    return await axios.get(`${baseURL}`);
   } catch (error) {
+    return await axios.get(`${baseURL}`);
     throw error;
   }
 };

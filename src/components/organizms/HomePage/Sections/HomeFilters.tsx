@@ -9,12 +9,12 @@ import { openAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSl
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { SearchButton } from '../../../molecules/Buttons/SearchButton';
 import { Card } from '../../../molecules/Cards/Card';
-import { BrandSelect } from '../../FilterSelects/desktop/BrandSelect';
-import { ModelSelect } from '../../FilterSelects/desktop/ModelSelect';
-import { YearSelect } from '../../FilterSelects/desktop/YearSelect';
-import { MobileBrandSelect } from '../../FilterSelects/mobile/MobileBrandSelect';
-import { MobileLocationSelect } from '../../FilterSelects/mobile/MobileLocationSelect';
-import { MobileModelSelect } from '../../FilterSelects/mobile/MobileModelSelect';
+import { BrandSelect } from '../../../molecules/FilterSelects/desktop/BrandSelect';
+import { ModelSelect } from '../../../molecules/FilterSelects/desktop/ModelSelect';
+import { YearSelect } from '../../../molecules/FilterSelects/desktop/YearSelect';
+import { MobileBrandSelect } from '../../../molecules/FilterSelects/mobile/MobileBrandSelect';
+import { MobileLocationSelect } from '../../../molecules/FilterSelects/mobile/MobileLocationSelect';
+import { MobileModelSelect } from '../../../molecules/FilterSelects/mobile/MobileModelSelect';
 
 interface SearchProps {}
 

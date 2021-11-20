@@ -126,14 +126,14 @@ export const ModelSelect: React.FC<ModelSelectProps> = () => {
               _hover={{
                 bg: 'autoGrey.100',
               }}
+              onClick={(e) => {
+                e.preventDefault();
+                handleSelect(opt);
+              }}
             >
               <Checkbox
                 colorScheme="autoOrange"
                 isChecked={selected?.includes(opt)}
-                onChange={(e) => {
-                  e.preventDefault();
-                  handleSelect(opt);
-                }}
                 key={opt}
               >
                 <TextRegular>{opt}</TextRegular>

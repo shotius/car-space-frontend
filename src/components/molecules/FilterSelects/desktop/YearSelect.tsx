@@ -1,7 +1,6 @@
-import { Box, Heading, HStack, StackDivider, VStack } from '@chakra-ui/layout';
+import { HStack, StackDivider, VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
-import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger';
@@ -15,17 +14,14 @@ interface YearSelectProps {}
 export const YearSelect: React.FC<YearSelectProps> = ({}) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<{
-    yearFrom: number | null;
-    yearTo: number | null;
-  }>({ yearFrom: null, yearTo: null });
+    yearFrom: number ;
+    yearTo: number;
+  }>({ yearFrom: 0, yearTo: 0 });
   const [placeholder, setPlaceholder] = useState<string>('');
-  const [value, setValue] = useState<string>('');
-  const [searchWord, setSearchWord] = useState<string>('');
-  // const dispatch = useAppDispatch();
 
   // when ever selected value changes, placeholder changes as well
   useEffect(() => {
-    if (selected.yearFrom && selected.yearTo) {
+    if (selected.yearFrom || selected.yearTo) {
       setPlaceholder(`Year:  ${selected.yearFrom} - ${selected.yearTo}`);
     } else {
       setPlaceholder(`Year`);
@@ -34,7 +30,7 @@ export const YearSelect: React.FC<YearSelectProps> = ({}) => {
 
   // handler year from select
   const handleSelectYearFrom = (num: number) => {
-    if (selected.yearTo && num >= selected.yearTo) {
+    if (num >= selected.yearTo) {
       setSelected({ yearFrom: num, yearTo: num });
     } else {
       setSelected({ ...selected, yearFrom: num });
@@ -43,7 +39,7 @@ export const YearSelect: React.FC<YearSelectProps> = ({}) => {
 
   // hander year to select
   const handleSelectYearTo = (num: number) => {
-    if (selected.yearFrom && num <= selected.yearFrom) {
+    if (num <= selected.yearFrom) {
       setSelected({ yearTo: num, yearFrom: num });
     } else {
       setSelected({ ...selected, yearTo: num });
@@ -54,7 +50,7 @@ export const YearSelect: React.FC<YearSelectProps> = ({}) => {
   const range = (from: number, to: number): number[] => {
     const arr = Array(to - from + 1).fill(0);
     const first = from;
-    return arr.map((num, i) => (num = i + first));
+    return arr.map((_, i) => (i + first));
   };
 
   return (
@@ -70,7 +66,7 @@ export const YearSelect: React.FC<YearSelectProps> = ({}) => {
           areOptionsOpen={areOptionsOpen}
           clearCb={(e) => {
             if (e.stopPropagation) e.stopPropagation()
-            setSelected({yearFrom: null, yearTo: null})
+            setSelected({yearFrom: 0, yearTo: 0})
             setPlaceholder('')
             setAreOptionsOpen(false)
           }}
