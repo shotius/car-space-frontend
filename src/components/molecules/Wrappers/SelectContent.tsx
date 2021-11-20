@@ -6,7 +6,7 @@ export const SelectContent: React.FC<StackProps> = ({
   ...rest
 }) => {
   return (
-    <VStack position="relative" {...rest}>
+    <VStack w="full" position="relative" {...rest}>
       {children}
     </VStack>
   );

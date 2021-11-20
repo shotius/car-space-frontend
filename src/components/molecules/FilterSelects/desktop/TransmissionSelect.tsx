@@ -1,31 +1,17 @@
 import { Button } from '@chakra-ui/button';
 import { Checkbox } from '@chakra-ui/checkbox';
-import { HStack } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
 import { Transmission } from 'src/redux/features/auth/types';
-import { SelectOverlay } from '../../overlays/SelectOverlay';
 import { TextRegular } from '../../Texts/TextRegular';
-import { SelectTrigger } from '../../triggerers/SelectTrigger';
 import { SelectContent } from '../../Wrappers/SelectContent';
-import { SelectOptions } from '../../Wrappers/SelectOptions';
-import { SelectWrapper } from '../../Wrappers/SelectWrapper';
 
 interface TransmissionSelectProps {}
 
 export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
-  const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<Transmission[]>([]);
-  const [placeholder, setPlaceholder] = useState('');
 
   const transmissions = ['Manual', 'Automatic', 'CVT'] as const;
-
-  useEffect(() => {
-    if (selected.length) {
-      setPlaceholder(`${selected.join(', ')}`);
-    } else {
-      setPlaceholder(`Transmissions`);
-    }
-  }, [selected]);
 
   const handleSelect = (transmission: Transmission) => {
     if (selected.includes(transmission)) {
@@ -36,68 +22,38 @@ export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
   };
 
   return (
-    <SelectWrapper>
-      <SelectOverlay
-        isActive={areOptionsOpen}
-        onClick={() => {
-          setAreOptionsOpen(false);
-        }}
-      />
+    <SelectGeneral
+      selected={selected}
+      label="Transmission"
+      clearSelected={() => setSelected([])}
+    >
       <SelectContent>
-        <SelectTrigger
-          areOptionsOpen={areOptionsOpen}
-          clearCb={(e) => {
-            if (e.stopPropagation) e.stopPropagation();
-            setSelected([])
-            setAreOptionsOpen(false);
-          }}
-          areOptionsSelected={!!selected.length}
-          onClick={() => setAreOptionsOpen((open) => !open)}
-        >
-          <HStack
-            pl="4"
-            pr="4"
-            h="40px"
+        {transmissions.map((trans) => (
+          <Button
             w="full"
-            bg="white"
+            p="4"
+            borderRadius="none"
+            display="flex"
+            justifyContent="flex-start"
+            variant="ghost"
             _hover={{
-              bg: 'autoGrey.200',
+              bg: 'autoGrey.100',
             }}
-            borderRadius="8px"
+            onClick={(e) => {
+              e.preventDefault();
+              handleSelect(trans);
+            }}
           >
-            <TextRegular opacity={areOptionsOpen ? '1' : '0.5'} noOfLines={1}>
-              {placeholder}
-            </TextRegular>
-          </HStack>
-        </SelectTrigger>
-        <SelectOptions isOpen={areOptionsOpen} top="35px">
-          {transmissions.map((trans) => (
-            <Button
-              w="full"
-              p="4"
-              borderRadius="none"
-              display="flex"
-              justifyContent="flex-start"
-              variant="ghost"
-              _hover={{
-                bg: 'autoGrey.100',
-              }}
-              onClick={(e) => {
-                e.preventDefault();
-                handleSelect(trans);
-              }}
+            <Checkbox
+              colorScheme="autoOrange"
+              isChecked={selected?.includes(trans)}
+              key={trans}
             >
-              <Checkbox
-                colorScheme="autoOrange"
-                isChecked={selected?.includes(trans)}
-                key={trans}
-              >
-                <TextRegular>{trans}</TextRegular>
-              </Checkbox>
-            </Button>
-          ))}
-        </SelectOptions>
+              <TextRegular>{trans}</TextRegular>
+            </Checkbox>
+          </Button>
+        ))}
       </SelectContent>
-    </SelectWrapper>
+    </SelectGeneral>
   );
 };
