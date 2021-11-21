@@ -11,6 +11,7 @@ interface TransmissionSelectProps {
   selected: any[];
   label: string;
   clearSelected: () => void;
+  onApply: () => void;
 }
 
 export const SelectGeneral: React.FC<TransmissionSelectProps & StackProps> = ({
@@ -18,6 +19,7 @@ export const SelectGeneral: React.FC<TransmissionSelectProps & StackProps> = ({
   label,
   children,
   clearSelected,
+  onApply,
   ...rest
 }) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
@@ -31,12 +33,15 @@ export const SelectGeneral: React.FC<TransmissionSelectProps & StackProps> = ({
     }
   }, [selected]);
 
+  const closeOptions = () => setAreOptionsOpen(false);
+
   return (
     <SelectWrapper>
       <SelectOverlay
         isActive={areOptionsOpen}
         onClick={() => {
-          setAreOptionsOpen(false);
+          closeOptions();
+          onApply();
         }}
       />
       <SelectContent>
@@ -52,7 +57,7 @@ export const SelectGeneral: React.FC<TransmissionSelectProps & StackProps> = ({
         >
           <HStack
             pl="4"
-            pr="4"
+            pr="28px"
             h="40px"
             w="full"
             bg="white"

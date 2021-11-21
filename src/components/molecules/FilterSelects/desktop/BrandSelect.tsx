@@ -1,5 +1,5 @@
 import { Box, BoxProps, Divider, Flex, VStack } from '@chakra-ui/layout';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';

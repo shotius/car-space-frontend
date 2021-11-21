@@ -14,9 +14,18 @@ import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilter
 import { SearchButton } from '../Buttons/SearchButton';
 import SelectSecondary from '../Selects/SelectSecondary';
 import { BrandSelect } from './desktop/BrandSelect';
+import { ConditionSelect } from './desktop/ConditionSelect';
+import { CylinderSelect } from './desktop/CylinderSelect';
+import { DrivesSelect } from './desktop/DrivesSelect';
+import { EngineSelect } from './desktop/EngineSelect';
+import { FuelSelect } from './desktop/FuelTypesSelect';
+import { HasKeySelect } from './desktop/HasKeySelect';
+import { LocationSelect } from './desktop/LocationSelect';
 import { ModelSelect } from './desktop/ModelSelect';
 import { PriceSelect } from './desktop/PriceSelect';
+import { SalesStatusSelect } from './desktop/SalesStatusSelect';
 import { TransmissionSelect } from './desktop/TransmissionSelect';
+import { TypeSelect } from './desktop/TypeSelect';
 import { YearSelect } from './desktop/YearSelect';
 
 interface ThreeHDSelectsProps {}
@@ -108,16 +117,16 @@ export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackPr
           mt={['2', '4', null, '4', null, '24px']}
         >
           <PriceSelect /> 
-          <SelectSecondary placeholder="Engine"></SelectSecondary>
-          <SelectSecondary placeholder="Condition"></SelectSecondary>
-          <SelectSecondary placeholder="Type"></SelectSecondary>
-          <SelectSecondary placeholder="Location"></SelectSecondary>
+          <EngineSelect /> 
+          <ConditionSelect />
+          <TypeSelect /> 
+          <LocationSelect />
           <TransmissionSelect />
-          <SelectSecondary placeholder="Has Keys"></SelectSecondary>
-          <SelectSecondary placeholder="Drives"></SelectSecondary>
-          <SelectSecondary placeholder="Sales Status"></SelectSecondary>
-          <SelectSecondary placeholder="Fuel Type"></SelectSecondary>
-          <SelectSecondary placeholder="Cylinder"></SelectSecondary>
+          <HasKeySelect />
+          <DrivesSelect />
+          <SalesStatusSelect />
+          <FuelSelect />
+          <CylinderSelect />
         </SimpleGrid>
       </Collapse>
     </>

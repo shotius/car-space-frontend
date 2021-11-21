@@ -14,7 +14,6 @@ export const SelectOptions: React.FC<SelectOptionsWrapperProps & StackProps> =
         top={!isOpen ? '41px' : '45px'}
         maxH={isOpen ? maxH : '0px'}
         opacity={isOpen ? '1' : '0.7'}
-        // display={isOpen ? "block" : "none"}
         transition="all .25s"
         bg="white"
         boxShadow="0px 3px 10px #00000029"
@@ -27,6 +26,7 @@ export const SelectOptions: React.FC<SelectOptionsWrapperProps & StackProps> =
         <VStack
           w="full"
           overflowY={isOpen ? 'auto' : 'hidden'}
+          overflowX="hidden"
           align="flex-start"
           pt="2`"
           spacing="0"

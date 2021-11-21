@@ -1,17 +1,13 @@
 import { HStack, Stack } from '@chakra-ui/layout';
-import { Button, Collapse, Icon, VStack } from '@chakra-ui/react';
+import { Button, Collapse, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
-import { EuroIcon } from 'src/components/atoms/Icons/EuroIcon';
-import { GelIcon } from 'src/components/atoms/Icons/GelIcon';
-import { UsdIcon } from 'src/components/atoms/Icons/UsdIcon';
 import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectYearFrom,
-  toggleAdvancedFilters,
+  toggleAdvancedFilters
 } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { ButtonRound } from '../Buttons/ButtonRound';
 import { SearchButton } from '../Buttons/SearchButton';
 import { CurrencySwitcherButtons } from '../CurrencySwitcherButtons';
 import { InputRegular } from '../Inputs/InputRegular';

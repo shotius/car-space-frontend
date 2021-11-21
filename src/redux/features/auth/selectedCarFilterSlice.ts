@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CurrencyType } from 'src/constants';
 import { Keys, SelectedCarFilters, Transmission } from './types';
 
 const initialState: SelectedCarFilters = {
@@ -54,7 +55,7 @@ const selectedCarFilterSlice = createSlice({
     selectYearTo: (state, action) => {
       state.yearTo = action.payload;
     },
-    selectCurrency: (state, action) => {
+    selectCurrency: (state, action: PayloadAction<CurrencyType>) => {
       state.currency = action.payload;
     },
     selectConditions: (state, action) => {

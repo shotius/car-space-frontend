@@ -8,7 +8,7 @@ import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { CurrencyType } from 'src/constants';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { selectPriseFrom, selectPriseTo } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { selectCurrency, selectPriseFrom, selectPriseTo } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { CurrencySwitcherButtons } from '../../CurrencySwitcherButtons';
 import { InputGrey } from '../../Inputs/InputGrey';
 
@@ -49,6 +49,7 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
           setAreOptionsOpen(false);
           dispatch(selectPriseFrom(priceFrom))
           dispatch(selectPriseTo(priceTo))
+          dispatch(selectCurrency(currency))
         }}
       />
       <SelectContent>
@@ -57,6 +58,7 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
           clearCb={(e) => {
             if (e.stopPropagation) e.stopPropagation();
             dispatch(selectPriseFrom(null));
+            dispatch(selectPriseTo(null));
             setPlaceholder('');
             setAreOptionsOpen(false);
           }}
