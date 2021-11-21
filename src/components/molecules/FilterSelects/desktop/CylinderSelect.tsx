@@ -27,6 +27,7 @@ export const CylinderSelect: React.FC<CylinderSelectProps> = ({}) => {
 
   return (
     <SelectGeneral
+      size="md"
       selected={selected}
       label="Cylinders"
       clearSelected={() => {

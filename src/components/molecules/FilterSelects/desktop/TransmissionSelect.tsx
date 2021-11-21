@@ -26,6 +26,7 @@ export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
 
   return (
     <SelectGeneral
+      size="md"
       selected={selected}
       label="Transmission"
       clearSelected={() => {

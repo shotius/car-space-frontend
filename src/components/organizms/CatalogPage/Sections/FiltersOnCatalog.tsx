@@ -4,14 +4,14 @@ import { DesktopFiltersOnCatalogPage } from 'src/components/molecules/FilterSele
 import { MobileFiltersOnCatalogPage } from 'src/components/molecules/FilterSelects/MobileFilters';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { getFilters } from 'src/redux/features/auth/carsSlice';
-import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 
 interface CatalogLIstProps {}
 
 export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
-  const dispatch = useAppDispatch();
+  const{ isLargerThan: isLargerThen737} = useMediaQueryMin(737);
 
-  const { isMobile } = useDetectScreen();
+  const dispatch = useAppDispatch();
 
   // get filter options on the load
   useEffect(() => {
@@ -21,7 +21,7 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   return (
     <Stack spacing="0">
       {/* mobile selects */}
-      {isMobile ? (
+      {!isLargerThen737 ? (
         <MobileFiltersOnCatalogPage />
       ) : (
         <DesktopFiltersOnCatalogPage />

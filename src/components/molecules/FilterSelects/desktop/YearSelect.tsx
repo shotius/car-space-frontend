@@ -1,4 +1,4 @@
-import { HStack, StackDivider, VStack } from '@chakra-ui/layout';
+import { HStack, StackDivider, StackProps, VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
@@ -11,7 +11,7 @@ import { VerticalScrollable } from 'src/components/molecules/Wrappers/VerticalSc
 
 interface YearSelectProps {}
 
-export const YearSelect: React.FC<YearSelectProps> = ({}) => {
+export const YearSelect: React.FC<YearSelectProps & StackProps> = ({...rest}) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<{
     yearFrom: number;
@@ -54,7 +54,7 @@ export const YearSelect: React.FC<YearSelectProps> = ({}) => {
   };
 
   return (
-    <SelectWrapper>
+    <SelectWrapper {...rest}>
       <SelectOverlay
         isActive={areOptionsOpen}
         onClick={() => {
@@ -89,7 +89,7 @@ export const YearSelect: React.FC<YearSelectProps> = ({}) => {
         </SelectTrigger>
         <SelectOptions isOpen={areOptionsOpen} w="full">
           <HStack
-            h="290px"
+            h="300px"
             w="full"
             divider={<StackDivider borderColor="autoGrey.400" />}
             pr="2px"

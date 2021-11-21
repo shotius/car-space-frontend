@@ -9,8 +9,7 @@ interface MobileLocationSelectProps {}
 export const MobileLocationSelect: React.FC<
   MobileLocationSelectProps & BoxProps
 > = ({
-  minW = ['full', '30%', '23%'],
-  maxW = ['full', '30%', '23%'],
+  w='full',
   ...rest
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -20,7 +19,7 @@ export const MobileLocationSelect: React.FC<
     (state) => state.selectedCarFilters
   );
   return (
-    <Box minW={minW} maxW={maxW} {...rest}>
+    <Box minW={w} maxW={w} {...rest}>
       <MobileSelect
         onClick={onOpen}
         label={selection.length ? ` ${selection.join(', ')}` : 'Locations'}

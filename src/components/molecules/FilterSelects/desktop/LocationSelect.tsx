@@ -2,7 +2,7 @@ import { Checkbox } from '@chakra-ui/checkbox';
 import { useState } from 'react';
 import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { selectLocations, selectTypes } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { selectLocations } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SelectOptionButton } from '../../Buttons/SelectOptionButton';
 import { TextRegular } from '../../Texts/TextRegular';
 import { SelectContent } from '../../Wrappers/SelectContent';
@@ -27,6 +27,7 @@ export const LocationSelect: React.FC<LocationSelectProps> = ({}) => {
 
   return (
     <SelectGeneral
+      size="md"
       selected={selected}
       label="Location"
       clearSelected={() => {

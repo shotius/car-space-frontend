@@ -29,7 +29,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
 
   return (
     <Center
-      mt={['-69px', '-60px', '-45px', '-45px']}
+      mt={['-69px', '-60px', '-45px', '-58px']}
       mb={{ base: '16', md: '20' }}
       position="relative"
       zIndex="1"
@@ -50,7 +50,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           flexWrap={{ base: 'wrap', md: 'nowrap' }}
           justifyContent="space-between"
         >
-          {!isDesktop ? <MobileBrandSelect /> : <BrandSelect />}
+          {!isDesktop ? <MobileBrandSelect w={['100%', '30%', '23%']}/> : <BrandSelect w={['100%', '100%', '100%']} />}
           <DividerVertical
             height="30px"
             display={['none', 'block']}
@@ -59,7 +59,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           />
           <Divider display={['block', 'none', 'none']} borderColor="gray.300" />
 
-          {!isDesktop ? <MobileModelSelect /> : <ModelSelect />}
+          {!isDesktop ? <MobileModelSelect w={['100%', '30%', '23%']}/> : <ModelSelect w={['100%', '100%', '100%']}/>}
           <DividerVertical
             height="30px"
             display={['none', 'block']}
@@ -68,7 +68,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           />
           <Divider display={['block', 'none']} borderColor="gray.300" />
 
-          {!isDesktop ? <MobileLocationSelect /> : <YearSelect />}
+          {!isDesktop ? <MobileLocationSelect w={['100%', '30%', '23%']}/> : <YearSelect w={['100%', '100%', '100%']}/>}
           <SearchButton
             display={['none', 'none', 'block']}
             minW='144px'

@@ -12,6 +12,7 @@ interface TransmissionSelectProps {
   label: string;
   clearSelected: () => void;
   onApply: () => void;
+  size?: "lg" | "md"
 }
 
 export const SelectGeneral: React.FC<TransmissionSelectProps & StackProps> = ({
@@ -20,6 +21,7 @@ export const SelectGeneral: React.FC<TransmissionSelectProps & StackProps> = ({
   children,
   clearSelected,
   onApply,
+  size, 
   ...rest
 }) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
@@ -46,6 +48,7 @@ export const SelectGeneral: React.FC<TransmissionSelectProps & StackProps> = ({
       />
       <SelectContent>
         <SelectTrigger
+          size={size}
           areOptionsOpen={areOptionsOpen}
           clearCb={(e) => {
             if (e.stopPropagation) e.stopPropagation();

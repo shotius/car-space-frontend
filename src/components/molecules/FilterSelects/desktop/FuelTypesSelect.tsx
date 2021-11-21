@@ -27,6 +27,7 @@ export const FuelSelect: React.FC<FuelSelectProps> = ({}) => {
 
   return (
     <SelectGeneral
+      size="md"
       selected={selected}
       label="Fuel Type"
       clearSelected={() => {

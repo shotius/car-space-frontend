@@ -27,6 +27,7 @@ export const DrivesSelect: React.FC<DrivesSelectProps> = ({}) => {
 
   return (
     <SelectGeneral
+      size="md"
       selected={selected}
       label="Drives"
       clearSelected={() => {

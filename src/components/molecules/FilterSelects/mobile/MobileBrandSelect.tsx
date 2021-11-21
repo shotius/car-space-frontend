@@ -9,8 +9,7 @@ import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 interface MobileBrandSelectProps {}
 
 export const MobileBrandSelect: React.FC<MobileBrandSelectProps & BoxProps> = ({
-  minW = ['full', '30%', '23%'],
-  maxW=['full', '30%', '23%'], 
+  w="full",
   ...rest
 }) => {
   const searchButtonRef = useRef(null);
@@ -28,7 +27,7 @@ export const MobileBrandSelect: React.FC<MobileBrandSelectProps & BoxProps> = ({
   } = useDisclosure();
 
   return (
-    <Box {...rest} minW={minW} maxW={maxW}>
+    <Box {...rest} minW={w} maxW={w}>
       <MobileSelect
         onClick={openBrand}
         label={capitalizeEach(selectedBrands.join(', ')) || 'Brands'}

@@ -28,6 +28,7 @@ export const ConditionSelect: React.FC<ConditionSelectProps> = ({}) => {
 
   return (
     <SelectGeneral
+      size="md"
       selected={selected}
       label="Condition"
       clearSelected={() => {

@@ -27,6 +27,7 @@ export const SalesStatusSelect: React.FC<SalesStatusSelectProps> = ({}) => {
 
   return (
     <SelectGeneral
+      size="md"
       selected={selected}
       label="Sales Status"
       clearSelected={() => {

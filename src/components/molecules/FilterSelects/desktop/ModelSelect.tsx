@@ -70,7 +70,7 @@ export const ModelSelect: React.FC<ModelSelectProps> = () => {
   });
 
   return (
-    <SelectWrapper title="Select Brand First">
+    <SelectWrapper title="Select Brand First" w={['100%', '100%', '100%']}>
       <SelectOverlay
         isActive={areOptionsOpen}
         onClick={() => {

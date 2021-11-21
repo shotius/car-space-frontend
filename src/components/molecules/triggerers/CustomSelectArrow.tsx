@@ -7,6 +7,7 @@ interface CustomSelectArrowProps {
   areOptionsOpen: boolean;
   clearCb: (e: any) => void;
   isDisabled?: boolean;
+  size?: "lg" | "md"
 }
 
 export const CustomSelectArrow: React.FC<CustomSelectArrowProps> = ({
@@ -14,6 +15,7 @@ export const CustomSelectArrow: React.FC<CustomSelectArrowProps> = ({
   isDisabled,
   areOptionsOpen,
   clearCb,
+  size = "lg", 
 }) => {
   return (
     <>
@@ -31,7 +33,7 @@ export const CustomSelectArrow: React.FC<CustomSelectArrowProps> = ({
           children={
             <DropdownIcon
               opacity={isDisabled ? '0.18' : '0.4'}
-              boxSize={5}
+              boxSize={size === "lg" ? 5 : 4}
               transform={areOptionsOpen ? 'rotate(180deg)' : ''}
               transition="all .2s"
             />

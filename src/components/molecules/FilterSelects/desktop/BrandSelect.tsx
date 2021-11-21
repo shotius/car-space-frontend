@@ -1,4 +1,4 @@
-import { Box, BoxProps, Divider, Flex, VStack } from '@chakra-ui/layout';
+import { Box, BoxProps, Divider, Flex, StackProps, VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
@@ -26,7 +26,7 @@ interface BrandSelectProps {
 //2. Placeholder: is displayed when not searching
 //3. searchWord: when user writing in search box, search word is changing
 //4. selected: are Selected options, used to keep track of other three variables
-export const BrandSelect: React.FC<BrandSelectProps> = ({ labelPadding }) => {
+export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({ labelPadding, ...rest }) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [placeholder, setPlaceholder] = useState<string>('');
@@ -64,7 +64,7 @@ export const BrandSelect: React.FC<BrandSelectProps> = ({ labelPadding }) => {
   });
 
   return (
-    <SelectWrapper>
+    <SelectWrapper {...rest}>
       <SelectOverlay
         isActive={areOptionsOpen}
         onClick={() => {

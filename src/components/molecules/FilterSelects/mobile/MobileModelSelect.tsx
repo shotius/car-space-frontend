@@ -7,8 +7,7 @@ import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
 interface MobileModelSelectProps {}
 
 export const MobileModelSelect: React.FC<MobileModelSelectProps & BoxProps> = ({
-  minW = ['full', '30%', '20%'],
-  maxW = ['full', '30%', '20%'],
+  w='full',
   ...rest
 }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -27,7 +26,7 @@ export const MobileModelSelect: React.FC<MobileModelSelectProps & BoxProps> = ({
   };
 
   return (
-    <Box minW={minW} maxW={maxW} {...rest}>
+    <Box minW={w} maxW={w} {...rest}>
       <MobileSelect
         onClick={handleModelSelect}
         label={selection.length ? selection.join('; ') : 'Models'}

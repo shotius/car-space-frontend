@@ -12,7 +12,6 @@ import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SearchButton } from '../Buttons/SearchButton';
-import SelectSecondary from '../Selects/SelectSecondary';
 import { BrandSelect } from './desktop/BrandSelect';
 import { ConditionSelect } from './desktop/ConditionSelect';
 import { CylinderSelect } from './desktop/CylinderSelect';
@@ -55,7 +54,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackPr
         {...rest}
       >
         {/* Brand Filter  */}
-        <BrandSelect labelPadding="2"/>
+        <BrandSelect labelPadding="2" w={['100%', '100%', '100%']}/>
         <DividerVertical
           height={['40px', null, null, '30px']}
           borderColor="gray.300"

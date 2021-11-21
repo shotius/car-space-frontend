@@ -54,6 +54,7 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
       />
       <SelectContent>
         <SelectTrigger
+          size="md"
           areOptionsOpen={areOptionsOpen}
           clearCb={(e) => {
             if (e.stopPropagation) e.stopPropagation();

@@ -11,6 +11,7 @@ export const EngineSelect: React.FC<EngineSelectProps> = ({}) => {
 
   return (
     <SelectGeneral
+      size="md"
       selected={selected}
       label="Engine"
       clearSelected={() => setSelected([])}

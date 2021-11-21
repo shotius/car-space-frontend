@@ -6,6 +6,7 @@ interface CustomSelectTriggerProps {
   isDisabled?: boolean;
   clearCb: (e: any) => void
   areOptionsSelected: boolean;
+  size?: "lg" | "md"
 }
 
 export const SelectTrigger: React.FC<CustomSelectTriggerProps & InputGroupProps> = ({
@@ -15,6 +16,7 @@ export const SelectTrigger: React.FC<CustomSelectTriggerProps & InputGroupProps>
   clearCb,
   areOptionsSelected, 
   cursor="pointer",
+  size,
   ...rest
 }) => {
   return (
@@ -25,6 +27,7 @@ export const SelectTrigger: React.FC<CustomSelectTriggerProps & InputGroupProps>
         areOptionsOpen={areOptionsOpen}
         isDisabled={isDisabled}
         clearCb={clearCb}
+        size={size}
       />
     </InputGroup>
   );

@@ -27,6 +27,7 @@ export const TypeSelect: React.FC<TypeSelectProps> = ({}) => {
 
   return (
     <SelectGeneral
+      size="md"
       selected={selected}
       label="Types"
       clearSelected={() => {
