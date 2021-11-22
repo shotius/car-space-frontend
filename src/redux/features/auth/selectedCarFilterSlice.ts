@@ -21,7 +21,8 @@ const initialState: SelectedCarFilters = {
   cylinders: [],
   isAdvancedFiltersOpen: false,
   keys: null, 
-  salesStatus: []
+  salesStatus: [],
+  queryString: ''
 };
 
 const selectedCarFilterSlice = createSlice({
@@ -82,6 +83,9 @@ const selectedCarFilterSlice = createSlice({
     selectSalesStatus: (state, action: PayloadAction<string[]>) => {
       state.salesStatus = action.payload
     }, 
+    setFilterQueryString: (state, action: PayloadAction<string>) => {
+      state.queryString = action.payload
+    }, 
     toggleAdvancedFilters: (state) => {
       if (state.isAdvancedFiltersOpen) {
         state.isAdvancedFiltersOpen = false;
@@ -117,5 +121,6 @@ export const {
   selectCylinders,
   selectCarKeys, 
   selectSalesStatus, 
+  setFilterQueryString,
 } = selectedCarFilterSlice.actions;
 export const { reducer: selectedCarFilters } = selectedCarFilterSlice;

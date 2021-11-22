@@ -4,13 +4,15 @@ import {
   IconButton,
   SimpleGrid,
   Stack,
-  StackProps
+  StackProps,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { setFilterQueryString, toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SearchButton } from '../Buttons/SearchButton';
 import { BrandSelect } from './desktop/BrandSelect';
 import { ConditionSelect } from './desktop/ConditionSelect';
@@ -29,7 +31,9 @@ import { YearSelect } from './desktop/YearSelect';
 
 interface ThreeHDSelectsProps {}
 
-export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackProps> = ({
+export const DesktopFiltersOnCatalogPage: React.FC<
+  ThreeHDSelectsProps & StackProps
+> = ({
   p = '2',
   bg = '#fff',
   direction = 'row',
@@ -37,11 +41,51 @@ export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackPr
   ...rest
 }) => {
   const dispatch = useAppDispatch();
-  const { isAdvancedFiltersOpen: isOpen } = useAppSelector(
-    (state) => state.selectedCarFilters
-  );
+  const history = useHistory();
+  const { search} = useLocation();
+
+  const {
+    isAdvancedFiltersOpen: isOpen,
+    brands,
+    models,
+    yearFrom,
+    yearTo,
+  } = useAppSelector((state) => state.selectedCarFilters);
+
+  const {queryString: paginationQueryString} = useAppSelector(state => state.carsPagination)
+
+  // const test = query.get('brands')
+
+  useEffect(() => {
+    // console.log('search: ', search);
+  }, [search]);
 
   const onToggle = () => dispatch(toggleAdvancedFilters());
+
+  // apply filters to the url
+  const setSearchQuery = () => {
+    const queries: string[] = [];
+
+    if (brands.length) {
+      queries.push(`brands=${brands.join(',')}`);
+    }
+    if (models.length) {
+      queries.push(`models=${models.join(',')}`);
+    }
+    if (yearFrom && yearTo) {
+      queries.push(`year_from=${yearFrom}&year_to=${yearTo}`);
+    }
+
+    // since we have filter query string in redux we have to set it here
+    dispatch(setFilterQueryString(queries.join('&')))
+
+    //. be carefull to add all queries we need
+    // add paginationation query string
+    queries.push(paginationQueryString)
+
+    history.push(`?${queries.join('&')}`);
+
+  };
 
   return (
     <>
@@ -54,7 +98,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackPr
         {...rest}
       >
         {/* Brand Filter  */}
-        <BrandSelect labelPadding="2" w={['100%', '100%', '100%']}/>
+        <BrandSelect labelPadding="2" w={['100%', '100%', '100%']} />
         <DividerVertical
           height={['40px', null, null, '30px']}
           borderColor="gray.300"
@@ -72,6 +116,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackPr
             w={{ md: '140px', lg: '144px', '2xl': '211px' }}
             ml={[null, null, '0px', '16px']}
             mr="2"
+            onClick={setSearchQuery}
           />
           {!isOpen ? (
             <IconButton
@@ -115,10 +160,10 @@ export const DesktopFiltersOnCatalogPage: React.FC<ThreeHDSelectsProps & StackPr
           spacingY="2"
           mt={['2', '4', null, '4', null, '24px']}
         >
-          <PriceSelect /> 
-          <EngineSelect /> 
+          <PriceSelect />
+          <EngineSelect />
           <ConditionSelect />
-          <TypeSelect /> 
+          <TypeSelect />
           <LocationSelect />
           <TransmissionSelect />
           <HasKeySelect />

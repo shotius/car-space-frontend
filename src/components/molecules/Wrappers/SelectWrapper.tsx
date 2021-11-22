@@ -2,7 +2,7 @@ import { Box, BoxProps } from '@chakra-ui/layout';
 
 export const SelectWrapper: React.FC<BoxProps> = ({
   children,
-  w,
+  w ="full",
   ...rest
 }) => {
   return (

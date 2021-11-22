@@ -32,8 +32,25 @@ export const SelectOptions: React.FC<SelectOptionsWrapperProps & StackProps> =
           spacing="0"
           css={{
             '&::-webkit-scrollbar': {
-              display: 'none',
-            }
+              width: '6px',
+            },
+            '&::-webkit-scrollbar-track': {
+              width: '6px',
+              overflow: 'hidden',
+              marginTop: '10px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: '#DEDEE0',
+              borderRadius: '100px',
+            },
+            '::-webkit-scrollbar-button': {
+              backgroundColor: 'white',
+              display: 'block',
+              visibility: 'hidden',
+              borderStyle: 'solid',
+              height: '3px',
+              width: '6px',
+            },
           }}
         >
           {children}

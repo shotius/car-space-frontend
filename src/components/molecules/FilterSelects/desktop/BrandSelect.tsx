@@ -14,6 +14,7 @@ import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
+import { selectBrand } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 
@@ -70,6 +71,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({ labelPadd
         onClick={() => {
           setAreOptionsOpen(false);
           updatePlaceholder();
+          dispatch(selectBrand(selected))
           dispatch(getModels(selected));
           setValue('');
           setSearchWord('');

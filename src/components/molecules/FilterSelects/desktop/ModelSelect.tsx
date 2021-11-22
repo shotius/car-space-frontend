@@ -1,4 +1,4 @@
-import { Button, Checkbox } from '@chakra-ui/react';
+import { Button, Checkbox, StackProps } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { SelectSearch } from 'src/components/molecules/Inputs/SelectSearch';
 import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
@@ -7,7 +7,8 @@ import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger
 import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
-import { useAppSelector } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 
@@ -18,12 +19,13 @@ interface ModelSelectProps {}
 //2. Placeholder: is displayed when not searching
 //3. searchWord: when user writing in search box, search word is changing
 //4. selected: are Selected options, used to keep track of other three variables
-export const ModelSelect: React.FC<ModelSelectProps> = () => {
+export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ( {...rest}) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [placeholder, setPlaceholder] = useState<string>('');
   const [value, setValue] = useState<string>('');
   const [searchWord, setSearchWord] = useState<string>('');
+  const dispatch = useAppDispatch()
 
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -70,12 +72,13 @@ export const ModelSelect: React.FC<ModelSelectProps> = () => {
   });
 
   return (
-    <SelectWrapper title="Select Brand First" w={['100%', '100%', '100%']}>
+    <SelectWrapper title="Select Brand First" {...rest}>
       <SelectOverlay
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);
           updatePlaceholder();
+          dispatch(selectModels(selected))
           setValue('');
           setSearchWord('')
         }}

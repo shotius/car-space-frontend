@@ -67,11 +67,13 @@ export interface SelectedCarFilters {
   cylinders: string[];
   keys: Keys | null;
   salesStatus: string[]
+  queryString: string
 }
 
 export interface IPagination {
   totalPages: number;
   activePage: number;
+  queryString: string;
 }
 
 export interface IFilters {

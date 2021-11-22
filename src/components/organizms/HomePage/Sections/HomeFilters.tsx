@@ -27,6 +27,11 @@ export const HomeFilters: React.FC<SearchProps> = () => {
     dispatch(getFilters());
   }, []);
 
+
+  // const setSearchQuery = () => {
+
+  // }
+
   return (
     <Center
       mt={['-69px', '-60px', '-45px', '-58px']}
@@ -50,7 +55,12 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           flexWrap={{ base: 'wrap', md: 'nowrap' }}
           justifyContent="space-between"
         >
-          {!isDesktop ? <MobileBrandSelect w={['100%', '30%', '23%']}/> : <BrandSelect w={['100%', '100%', '100%']} />}
+          {/* Brand select  */}
+          {!isDesktop ? (
+            <MobileBrandSelect w={['100%', '30%', '23%']} />
+          ) : (
+            <BrandSelect w={['100%', '100%', '100%']} />
+          )}
           <DividerVertical
             height="30px"
             display={['none', 'block']}
@@ -59,7 +69,12 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           />
           <Divider display={['block', 'none', 'none']} borderColor="gray.300" />
 
-          {!isDesktop ? <MobileModelSelect w={['100%', '30%', '23%']}/> : <ModelSelect w={['100%', '100%', '100%']}/>}
+          {/* Model Selects  */}
+          {!isDesktop ? (
+            <MobileModelSelect w={['100%', '30%', '23%']} />
+          ) : (
+            <ModelSelect w="full" />
+          )}
           <DividerVertical
             height="30px"
             display={['none', 'block']}
@@ -68,11 +83,13 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           />
           <Divider display={['block', 'none']} borderColor="gray.300" />
 
-          {!isDesktop ? <MobileLocationSelect w={['100%', '30%', '23%']}/> : <YearSelect w={['100%', '100%', '100%']}/>}
-          <SearchButton
-            display={['none', 'none', 'block']}
-            minW='144px'
-          />
+          {/* Year Select  */}
+          {!isDesktop ? (
+            <MobileLocationSelect w={['100%', '30%', '23%']} />
+          ) : (
+            <YearSelect w={['100%', '100%', '100%']} />
+          )}
+          <SearchButton display={['none', 'none', 'block']} minW="144px" />
         </Flex>
         <SearchButton
           display={['block', 'block', 'none']}

@@ -8,6 +8,8 @@ import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { VerticalScrollable } from 'src/components/molecules/Wrappers/VerticalScrollable';
+import { useAppDispatch } from 'src/redux/app/hook';
+import { selectYearFrom, selectYearTo } from 'src/redux/features/auth/selectedCarFilterSlice';
 
 interface YearSelectProps {}
 
@@ -18,6 +20,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({...rest}) =>
     yearTo: number;
   }>({ yearFrom: 0, yearTo: 0 });
   const [placeholder, setPlaceholder] = useState<string>('');
+  const dispatch = useAppDispatch()
 
   // when ever selected value changes, placeholder changes as well
   useEffect(() => {
@@ -59,6 +62,8 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({...rest}) =>
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);
+          dispatch(selectYearFrom(selected.yearFrom))
+          dispatch(selectYearTo(selected.yearTo))
         }}
       />
       <SelectContent>

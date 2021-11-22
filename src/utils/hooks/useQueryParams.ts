@@ -1,5 +1,9 @@
-import { useLocation } from "react-router";
+import { useLocation } from 'react-router-dom';
 
-export function useQueryRarams() {
-  return new URLSearchParams(useLocation().search)
+// A custom hook that builds on useLocation to parse
+// the query string for you.
+export function useQuery() {
+  const { search } = useLocation();
+
+  return new URLSearchParams(search);
 }
