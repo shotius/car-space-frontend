@@ -41,7 +41,7 @@ const getSingleCar = async (lotNum: string) => {
 const getModels = async (brand: string) => {
   try {
     const { data } = await axios.get(`${baseURL}/models?brand=${brand}`);
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     throw error;

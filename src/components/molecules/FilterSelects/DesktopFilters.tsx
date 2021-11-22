@@ -12,7 +12,7 @@ import { DividerVertical } from 'src/components/atoms/Divider';
 import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { setFilterQueryString, toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SearchButton } from '../Buttons/SearchButton';
 import { BrandSelect } from './desktop/BrandSelect';
 import { ConditionSelect } from './desktop/ConditionSelect';
@@ -42,7 +42,8 @@ export const DesktopFiltersOnCatalogPage: React.FC<
 }) => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const { search} = useLocation();
+  const { search } = useLocation();
+  // const query = useQuery();
 
   const {
     isAdvancedFiltersOpen: isOpen,
@@ -52,39 +53,53 @@ export const DesktopFiltersOnCatalogPage: React.FC<
     yearTo,
   } = useAppSelector((state) => state.selectedCarFilters);
 
-  const {queryString: paginationQueryString} = useAppSelector(state => state.carsPagination)
-
-  // const test = query.get('brands')
-
   useEffect(() => {
     // console.log('search: ', search);
   }, [search]);
 
   const onToggle = () => dispatch(toggleAdvancedFilters());
 
-  // apply filters to the url
+  // apply filters to the url, create new totaly new query string
+  // (removes any we had before)
   const setSearchQuery = () => {
-    const queries: string[] = [];
+    const params = new URLSearchParams();
 
     if (brands.length) {
-      queries.push(`brands=${brands.join(',')}`);
+      brands.map(brand => params.append('brand', brand))  
+    } else {
+      params.delete('brand');
     }
+
     if (models.length) {
-      queries.push(`models=${models.join(',')}`);
+      models.map(model => params.append('model', model))  
+    } else {
+      params.delete('model')
     }
+
     if (yearFrom && yearTo) {
-      queries.push(`year_from=${yearFrom}&year_to=${yearTo}`);
+      params.append('year_from', yearFrom)
+      params.append('year_to', yearTo)
+    } else {
+      params.delete('year_from')
+      params.delete("year_to")
     }
 
-    // since we have filter query string in redux we have to set it here
-    dispatch(setFilterQueryString(queries.join('&')))
+    history.push({ pathname: '/catalog', search: params.toString() });
+    // if (
+    //   yearFrom &&
+    //   yearTo &&
+    //   (!queryYearFrom || queryYearFrom !== yearFrom) &&
+    //   (!queryYearTo || queryYearTo !== yearTo)
+    // ) {
+    //   queryArr.push(`year_from=${yearFrom}&year_to=${yearTo}`);
+    // }
 
-    //. be carefull to add all queries we need
-    // add paginationation query string
-    queries.push(paginationQueryString)
-
-    history.push(`?${queries.join('&')}`);
-
+    // if new query is not equal to the
+    // previous push new query string and update redux
+    // if (queryString !== newQueryString) {
+    // history.push(`?${newQueryString}`);
+    // dispatch(setQueryString(newQueryString));
+    // }
   };
 
   return (

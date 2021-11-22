@@ -11,7 +11,7 @@ import { getCars } from 'src/redux/features/auth/carsSlice';
 import { ICar } from 'src/redux/features/auth/types';
 import { getAllFavouritesThunk } from 'src/redux/features/auth/userSlice';
 import { openCatalogBanner } from 'src/redux/features/global/gloabalSlice';
-import { useQuery } from 'src/utils/hooks/useQueryParams';
+import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 
 interface CatalogLIstProps {}
 
@@ -23,14 +23,19 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     (state) => state.selectedCarFilters
   );
 
+
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const query = useQuery();
+  const query = useQueryParams();
 
   const page = Number(query.get('page')) || 1;
 
   // console.log('query in the catalog: ', query)
   // console.log('page', page)
+
+  useEffect(() => {
+    // console.log(query.get('brands'))
+  }, [query])
 
   // set query params, get brands and all cars on the first load
   useEffect(() => {

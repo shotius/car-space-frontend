@@ -89,6 +89,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({ labelPadd
             setValue('');
             setPlaceholder('');
             setAreOptionsOpen(false);
+            dispatch(selectBrand([]))
             dispatch(setModels([]));
           }}
         >

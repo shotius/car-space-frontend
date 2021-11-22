@@ -106,6 +106,7 @@ export interface GlobalStateSliceState {
   isRegistrationOpen: boolean
   isLoginOpen: boolean
   isMobileRegisterLoginOpen: boolean
+  queryString: string
 }
 
 

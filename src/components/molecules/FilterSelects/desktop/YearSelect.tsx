@@ -72,6 +72,8 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({...rest}) =>
           clearCb={(e) => {
             if (e.stopPropagation) e.stopPropagation();
             setSelected({ yearFrom: 0, yearTo: 0 });
+            dispatch(selectYearFrom(0))
+            dispatch(selectYearTo(0))
             setPlaceholder('');
             setAreOptionsOpen(false);
           }}
