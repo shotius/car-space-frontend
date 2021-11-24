@@ -31,8 +31,8 @@ export const DrivesSelect: React.FC<DrivesSelectProps> = ({}) => {
       selected={selected}
       label="Drives"
       clearSelected={() => {
-        setSelected([])
-        dispatch(selectDrives(selected))
+        setSelected([]);
+        dispatch(selectDrives(selected));
       }}
       onApply={() => dispatch(selectDrives(selected))}
       top="35px"
@@ -40,6 +40,7 @@ export const DrivesSelect: React.FC<DrivesSelectProps> = ({}) => {
       <SelectContent>
         {drivesToShow.map((drive) => (
           <SelectOptionButton
+            key={drive}
             onClick={(e) => {
               e.preventDefault();
               handleSelect(drive);
@@ -48,7 +49,6 @@ export const DrivesSelect: React.FC<DrivesSelectProps> = ({}) => {
             <Checkbox
               colorScheme="autoOrange"
               isChecked={selected?.includes(drive)}
-              key={drive}
             >
               <TextRegular w="full">{drive}</TextRegular>
             </Checkbox>

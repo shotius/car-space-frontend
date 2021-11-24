@@ -32,8 +32,8 @@ export const ConditionSelect: React.FC<ConditionSelectProps> = ({}) => {
       selected={selected}
       label="Condition"
       clearSelected={() => {
-        setSelected([])
-        dispatch(selectConditions([]))
+        setSelected([]);
+        dispatch(selectConditions([]));
       }}
       onApply={() => dispatch(selectConditions(selected))}
       top="35px"
@@ -41,6 +41,7 @@ export const ConditionSelect: React.FC<ConditionSelectProps> = ({}) => {
       <SelectContent>
         {conditionsToShow.map((condition) => (
           <SelectOptionButton
+            key={condition}
             onClick={(e) => {
               e.preventDefault();
               handleSelect(condition);
@@ -49,7 +50,6 @@ export const ConditionSelect: React.FC<ConditionSelectProps> = ({}) => {
             <Checkbox
               colorScheme="autoOrange"
               isChecked={selected?.includes(condition)}
-              key={condition}
             >
               <TextRegular w="full">{condition}</TextRegular>
             </Checkbox>

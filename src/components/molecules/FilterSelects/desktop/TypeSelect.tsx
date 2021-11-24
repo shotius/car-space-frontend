@@ -13,7 +13,7 @@ export const TypeSelect: React.FC<TypeSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
 
   const { types } = useAppSelector((state) => state.carsReducer);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const typesToShow = types.filter((condition) => condition);
 
@@ -31,8 +31,8 @@ export const TypeSelect: React.FC<TypeSelectProps> = ({}) => {
       selected={selected}
       label="Types"
       clearSelected={() => {
-        setSelected([])
-        dispatch(selectTypes([]))
+        setSelected([]);
+        dispatch(selectTypes([]));
       }}
       onApply={() => dispatch(selectTypes(selected))}
       top="35px"
@@ -40,6 +40,7 @@ export const TypeSelect: React.FC<TypeSelectProps> = ({}) => {
       <SelectContent>
         {typesToShow.map((type) => (
           <SelectOptionButton
+            key={type}
             onClick={(e) => {
               e.preventDefault();
               handleSelect(type);
@@ -48,7 +49,6 @@ export const TypeSelect: React.FC<TypeSelectProps> = ({}) => {
             <Checkbox
               colorScheme="autoOrange"
               isChecked={selected?.includes(type)}
-              key={type}
             >
               <TextRegular w="full">{type}</TextRegular>
             </Checkbox>

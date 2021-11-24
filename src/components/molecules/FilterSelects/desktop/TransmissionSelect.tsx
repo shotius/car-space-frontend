@@ -12,7 +12,7 @@ interface TransmissionSelectProps {}
 
 export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
   const [selected, setSelected] = useState<Transmission[]>([]);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const transmissions = ['Manual', 'Automatic', 'CVT'] as const;
 
@@ -30,14 +30,15 @@ export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
       selected={selected}
       label="Transmission"
       clearSelected={() => {
-        setSelected([])
-        dispatch(selectTranssmision([]))
+        setSelected([]);
+        dispatch(selectTranssmision([]));
       }}
       onApply={() => dispatch(selectTranssmision(selected))}
     >
       <SelectContent>
         {transmissions.map((trans) => (
           <SelectOptionButton
+            key={trans}
             onClick={(e) => {
               e.preventDefault();
               handleSelect(trans);
@@ -46,7 +47,6 @@ export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
             <Checkbox
               colorScheme="autoOrange"
               isChecked={selected?.includes(trans)}
-              key={trans}
             >
               <TextRegular>{trans}</TextRegular>
             </Checkbox>

@@ -4,7 +4,7 @@ import {
   Divider,
   Flex,
   StackProps,
-  VStack,
+  VStack
 } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
@@ -14,7 +14,6 @@ import { TopBrandCard } from 'src/components/molecules/Cards/TopBrandCard';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { SelectSearch } from 'src/components/molecules/Inputs/SelectSearch';
 import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
-import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger';
 import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
@@ -55,13 +54,12 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
     if (areOptionsOpen) {
       setValue(selected.join(', '));
     }
-    updatePlaceholder()
+    updatePlaceholder();
   }, [selected.length]);
 
   useEffect(() => {
     if (initSelection.length) {
       setSelected(initSelection);
-
     } else {
       setSelected([]);
     }
@@ -81,7 +79,6 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
 
   const updatePlaceholder = () => {
     if (selected.length) {
-      console.log('selecte: ', selected);
       setPlaceholder(() => `Brands: ${selected.join(', ')}`);
     }
   };
@@ -243,7 +240,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
                     maxW="full"
                     color={selected.includes(opt) ? 'autoOrange.500' : '#000'}
                   >
-                    <TextRegular>{capitalizeEach(opt)}</TextRegular>
+                    {capitalizeEach(opt)}
                   </TextButton>
                 )}
               </Box>

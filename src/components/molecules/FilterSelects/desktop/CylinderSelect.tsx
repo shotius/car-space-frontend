@@ -13,7 +13,7 @@ export const CylinderSelect: React.FC<CylinderSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
 
   const { cylinders } = useAppSelector((state) => state.carsReducer);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const cylindersToShow = cylinders.filter((cylinder) => cylinder);
 
@@ -31,26 +31,26 @@ export const CylinderSelect: React.FC<CylinderSelectProps> = ({}) => {
       selected={selected}
       label="Cylinders"
       clearSelected={() => {
-        setSelected([])
-        dispatch(selectCylinders([]))
+        setSelected([]);
+        dispatch(selectCylinders([]));
       }}
       onApply={() => dispatch(selectCylinders(selected))}
       top="35px"
     >
       <SelectContent>
-        {cylindersToShow.map((fuel) => (
+        {cylindersToShow.map((cylinder) => (
           <SelectOptionButton
+            key={cylinder}
             onClick={(e) => {
               e.preventDefault();
-              handleSelect(fuel);
+              handleSelect(cylinder);
             }}
           >
             <Checkbox
               colorScheme="autoOrange"
-              isChecked={selected?.includes(fuel)}
-              key={fuel}
+              isChecked={selected?.includes(cylinder)}
             >
-              <TextRegular w="full">{fuel}</TextRegular>
+              <TextRegular w="full">{cylinder}</TextRegular>
             </Checkbox>
           </SelectOptionButton>
         ))}

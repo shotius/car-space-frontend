@@ -13,7 +13,7 @@ export const LocationSelect: React.FC<LocationSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
 
   const { locations } = useAppSelector((state) => state.carsReducer);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const locationsToShow = locations.filter((location) => location);
 
@@ -31,8 +31,8 @@ export const LocationSelect: React.FC<LocationSelectProps> = ({}) => {
       selected={selected}
       label="Location"
       clearSelected={() => {
-        setSelected([])
-        dispatch(selectLocations([]))
+        setSelected([]);
+        dispatch(selectLocations([]));
       }}
       onApply={() => dispatch(selectLocations(selected))}
       top="35px"
@@ -40,6 +40,7 @@ export const LocationSelect: React.FC<LocationSelectProps> = ({}) => {
       <SelectContent>
         {locationsToShow.map((location) => (
           <SelectOptionButton
+            key={location}
             onClick={(e) => {
               e.preventDefault();
               handleSelect(location);
@@ -48,7 +49,6 @@ export const LocationSelect: React.FC<LocationSelectProps> = ({}) => {
             <Checkbox
               colorScheme="autoOrange"
               isChecked={selected?.includes(location)}
-              key={location}
             >
               <TextRegular w="full">{location}</TextRegular>
             </Checkbox>

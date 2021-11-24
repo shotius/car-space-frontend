@@ -17,9 +17,9 @@ export const TextButton: React.FC<TextButtonProps & ButtonProps> = ({
   bgFocus = 'transparent',
   bgHover = 'transparent',
   fontWeight = 'light',
-  fontSize,
-  children,
+  fontSize = ['16px', null, '14px'],
   font = 'Regular',
+  children,
   ...rest
 }) => {
   return (

@@ -2,7 +2,10 @@ import { Checkbox } from '@chakra-ui/checkbox';
 import { useState } from 'react';
 import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { selectSalesStatus, selectTypes } from 'src/redux/features/auth/selectedCarFilterSlice';
+import {
+  selectSalesStatus,
+  selectTypes,
+} from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SelectOptionButton } from '../../Buttons/SelectOptionButton';
 import { TextRegular } from '../../Texts/TextRegular';
 import { SelectContent } from '../../Wrappers/SelectContent';
@@ -13,7 +16,7 @@ export const SalesStatusSelect: React.FC<SalesStatusSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
 
   const { salesStatus } = useAppSelector((state) => state.carsReducer);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const salesStatusToShow = salesStatus.filter((status) => status);
 
@@ -31,8 +34,8 @@ export const SalesStatusSelect: React.FC<SalesStatusSelectProps> = ({}) => {
       selected={selected}
       label="Sales Status"
       clearSelected={() => {
-        setSelected([])
-        dispatch(selectSalesStatus([]))
+        setSelected([]);
+        dispatch(selectSalesStatus([]));
       }}
       onApply={() => dispatch(selectTypes(selected))}
       top="35px"
@@ -40,6 +43,7 @@ export const SalesStatusSelect: React.FC<SalesStatusSelectProps> = ({}) => {
       <SelectContent>
         {salesStatusToShow.map((status) => (
           <SelectOptionButton
+            key={status}
             onClick={(e) => {
               e.preventDefault();
               handleSelect(status);
@@ -48,7 +52,6 @@ export const SalesStatusSelect: React.FC<SalesStatusSelectProps> = ({}) => {
             <Checkbox
               colorScheme="autoOrange"
               isChecked={selected?.includes(status)}
-              key={status}
             >
               <TextRegular w="full">{status}</TextRegular>
             </Checkbox>

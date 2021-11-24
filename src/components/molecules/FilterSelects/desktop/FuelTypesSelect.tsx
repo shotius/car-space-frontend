@@ -13,7 +13,7 @@ export const FuelSelect: React.FC<FuelSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
 
   const { fuels } = useAppSelector((state) => state.carsReducer);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const fuelsToShow = fuels.filter((fuel) => fuel);
 
@@ -31,8 +31,8 @@ export const FuelSelect: React.FC<FuelSelectProps> = ({}) => {
       selected={selected}
       label="Fuel Type"
       clearSelected={() => {
-        setSelected([])
-        dispatch(selectFuels([]))
+        setSelected([]);
+        dispatch(selectFuels([]));
       }}
       onApply={() => dispatch(selectFuels(selected))}
       top="35px"
@@ -40,6 +40,7 @@ export const FuelSelect: React.FC<FuelSelectProps> = ({}) => {
       <SelectContent>
         {fuelsToShow.map((fuel) => (
           <SelectOptionButton
+            key={fuel}
             onClick={(e) => {
               e.preventDefault();
               handleSelect(fuel);
@@ -48,7 +49,6 @@ export const FuelSelect: React.FC<FuelSelectProps> = ({}) => {
             <Checkbox
               colorScheme="autoOrange"
               isChecked={selected?.includes(fuel)}
-              key={fuel}
             >
               <TextRegular w="full">{fuel}</TextRegular>
             </Checkbox>

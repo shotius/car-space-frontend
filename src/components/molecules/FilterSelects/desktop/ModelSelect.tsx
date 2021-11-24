@@ -59,7 +59,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
     if (areOptionsOpen) {
       setValue(selected.join(', '));
     }
-    updatePlaceholder()
+    updatePlaceholder();
   }, [selected.length, areOptionsOpen]);
 
   // if brands are not selected remove models filters
@@ -67,7 +67,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
     if (!selectedBrands.length) {
       dispatch(setModels([]));
     } else {
-      dispatch(getModels(selectedBrands))
+      dispatch(getModels(selectedBrands));
     }
   }, [selectedBrands]);
 
@@ -133,7 +133,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
             setSelected([]);
             setValue('');
             setPlaceholder('');
-            dispatch(selectModels([]))
+            dispatch(selectModels([]));
             setAreOptionsOpen(false);
           }}
         >
@@ -150,6 +150,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
         <SelectOptions isOpen={areOptionsOpen}>
           {optionsToShow.map((opt) => (
             <Button
+              key={opt}
               w="full"
               p="4"
               borderRadius="none"
@@ -167,7 +168,6 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
               <Checkbox
                 colorScheme="autoOrange"
                 isChecked={selected?.includes(opt)}
-                key={opt}
               >
                 <TextRegular>{opt}</TextRegular>
               </Checkbox>

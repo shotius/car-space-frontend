@@ -19,7 +19,6 @@ export const Pagination: React.FC<PaginationProps & StackProps> = ({
 }) => {
   // pagination nunbers to map through
   const paginNumbers = [...Array(totalPages).keys()].map((num) => num + 1); // add one to all all page
-  console.log('totalPages', totalPages);
 
   return (
     <HStack spacing={['1', '2']} {...rest}>

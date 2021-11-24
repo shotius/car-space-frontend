@@ -17,19 +17,16 @@ export const useDetectScreen = () => {
     if (window?.width) {
       const { width } = window;
       if (width > 0 && width < MOBILE_SCREEN_SIZE) {
-        console.log('inMobile: ', window);
         // mobile screen
         setIsMobile(true);
         setIsTablet(false);
         setIsDesktop(false);
       } else if (width > MOBILE_SCREEN_SIZE && width < TABLET_SCREEN_SIZE) {
-        console.log('inTable: ', window);
         // tablet screen
         setIsMobile(false);
         setIsTablet(true);
         setIsDesktop(false);
       } else if (width > TABLET_SCREEN_SIZE) {
-        console.log('inDesktop: ', window);
         // desktop
         setIsMobile(false);
         setIsTablet(false);
@@ -40,9 +37,6 @@ export const useDetectScreen = () => {
 
   useEffect(() => {
     if (isMobile !== null && isTablet !== null && isDesktop !== null) {
-      console.log('isMobile', isMobile);
-      console.log('isTablet', isTablet);
-      console.log('isDesktop', isDesktop);
       dispatch(
         setScreenSize({
           isDesktop,
