@@ -47,8 +47,8 @@ export const DesktopFiltersOnCatalogPage: React.FC<
 
   const {
     isAdvancedFiltersOpen: isOpen,
-    brands,
-    models,
+    brands: selectedBrands,
+    models: selectedModels,
     yearFrom,
     yearTo,
   } = useAppSelector((state) => state.selectedCarFilters);
@@ -58,35 +58,38 @@ export const DesktopFiltersOnCatalogPage: React.FC<
   // apply filters to the url, create new totaly new query string
   // (removes any we had before)
   const setSearchQuery = () => {
+    // before creating query, i delete all query filters in the url
+    query.delete('brand');
+    query.delete('model');
+    query.delete('year_from');
+    query.delete('year_to');
+
     // put brand values from redux in the url
-    if (brands.length) {
-      brands.map((brand) => {
-        // if brand is not in url append it
-        !query.getAll('brand').includes(brand) && query.append('brand', brand);
+    if (selectedBrands.length) {
+      selectedBrands.map((brand) => {
+        query.append('brand', brand);
       });
     } else {
-      query.delete('brand');
-      // remove models from url as well
+      // if there no brand selected remove models from the query
       query.delete('model');
     }
 
-    // if both brands and models exist put model in the url
-    if (brands.length && models.length) {
-      models.map((model) => {
-        !query.getAll('model').includes(model) && query.append('model', model)
+    // if brands exists put model in the url
+    if (selectedBrands.length) {
+      selectedModels.map((model) => {
+        query.append('model', model);
       });
-    } else {
-      query.delete('model');
     }
 
-    if (yearFrom && yearTo) {
+    if (yearFrom) {
       query.set('year_from', yearFrom);
-      query.set('year_to', yearTo);
-    } else {
-      query.delete('year_from');
-      query.delete('year_to');
     }
 
+    if (yearTo) {
+      query.set('year_to', yearTo);
+    }
+
+    // we need to see first page on search 
     query.set('page', '1');
 
     history.push({ pathname: '/catalog', search: query.toString() });

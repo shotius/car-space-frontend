@@ -1,4 +1,4 @@
-// brands already sorted, Here I add first letter of alphabet
+// passing already sorted, Here I add first letter of alphabet
 export const addLettersToSortedArray = (brands: string[]) =>
   brands.reduce<string[]>((prev, curr) => {
     // on first iteration, prev is empty

@@ -49,11 +49,13 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
     (state) => state.selectedCarFilters
   );
 
-  // whenever selected values change change value as well
+  // whenever selected values change change value and placeholder
   useEffect(() => {
     if (areOptionsOpen) {
       setValue(selected.join(', '));
     }
+    console.log('selected: ', selected)
+
     updatePlaceholder();
   }, [selected.length]);
 
@@ -80,6 +82,8 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
   const updatePlaceholder = () => {
     if (selected.length) {
       setPlaceholder(() => `Brands: ${selected.join(', ')}`);
+    } else {
+      setPlaceholder(() => `Brands`);
     }
   };
 

@@ -10,7 +10,6 @@ import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
 import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 
 interface ModelSelectProps {}
@@ -84,6 +83,8 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
   const updatePlaceholder = () => {
     if (selected.length) {
       setPlaceholder(`Models: ${selected.join(', ')}`);
+    } else {
+      setPlaceholder(`Models`);
     }
   };
 
@@ -98,7 +99,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
   };
 
   // filter options when searchWord is specified
-  const optionsToShow = addLettersToSortedArray(options).filter((option) => {
+  const optionsToShow = options.filter((option) => {
     return option.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
   });
 

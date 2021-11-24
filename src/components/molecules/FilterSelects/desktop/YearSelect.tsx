@@ -9,43 +9,53 @@ import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { VerticalScrollable } from 'src/components/molecules/Wrappers/VerticalScrollable';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { selectYearFrom, selectYearTo } from 'src/redux/features/auth/selectedCarFilterSlice';
+import {
+  selectYearFrom,
+  selectYearTo,
+} from 'src/redux/features/auth/selectedCarFilterSlice';
 
 interface YearSelectProps {}
 
-export const YearSelect: React.FC<YearSelectProps & StackProps> = ({...rest}) => {
+export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
+  ...rest
+}) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<{
-    yearFrom: number;
-    yearTo: number;
-  }>({ yearFrom: 0, yearTo: 0 });
+  const [yearFrom, setYearFrom] = useState(0);
+  const [yearTo, setYearTo] = useState(0);
   const [placeholder, setPlaceholder] = useState<string>('');
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   // when ever selected value changes, placeholder changes as well
   useEffect(() => {
-    if (selected.yearFrom || selected.yearTo) {
-      setPlaceholder(`Year:  ${selected.yearFrom} - ${selected.yearTo}`);
+    if (yearFrom || yearTo) {
+      setPlaceholder(`Year:  ${yearFrom} - ${yearTo}`);
     } else {
       setPlaceholder(`Year`);
     }
-  }, [selected]);
+  }, [yearFrom, yearTo]);
 
   // handler year from select
   const handleSelectYearFrom = (num: number) => {
-    if (num >= selected.yearTo) {
-      setSelected({ yearFrom: num, yearTo: num });
+    if (yearFrom === num) {
+      setYearFrom(0);
+    } else if (num >= yearTo) {
+      setYearFrom(num);
+      setYearTo(num);
     } else {
-      setSelected({ ...selected, yearFrom: num });
+      setYearFrom(num);
     }
   };
 
   // hander year to select
   const handleSelectYearTo = (num: number) => {
-    if (num <= selected.yearFrom) {
-      setSelected({ yearTo: num, yearFrom: num });
+    if (yearTo === num) {
+      setYearTo(0);
+      setYearFrom(0);
+    } else if (num <= yearFrom) {
+      setYearFrom(num);
+      setYearTo(num);
     } else {
-      setSelected({ ...selected, yearTo: num });
+      setYearTo(num);
     }
   };
 
@@ -62,8 +72,8 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({...rest}) =>
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);
-          dispatch(selectYearFrom(selected.yearFrom))
-          dispatch(selectYearTo(selected.yearTo))
+          dispatch(selectYearFrom(yearFrom));
+          dispatch(selectYearTo(yearTo));
         }}
       />
       <SelectContent>
@@ -71,13 +81,14 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({...rest}) =>
           areOptionsOpen={areOptionsOpen}
           clearCb={(e) => {
             if (e.stopPropagation) e.stopPropagation();
-            setSelected({ yearFrom: 0, yearTo: 0 });
-            dispatch(selectYearFrom(0))
-            dispatch(selectYearTo(0))
+            setYearTo(0);
+            setYearFrom(0);
+            dispatch(selectYearFrom(0));
+            dispatch(selectYearTo(0));
             setPlaceholder('');
             setAreOptionsOpen(false);
           }}
-          areOptionsSelected={!!(selected.yearFrom && selected.yearTo)}
+          areOptionsSelected={!!(yearFrom && yearTo)}
           onClick={() => setAreOptionsOpen((open) => !open)}
         >
           <HStack
@@ -113,9 +124,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({...rest}) =>
                     p="2"
                     lineHeight="21px"
                     w="full"
-                    color={
-                      selected.yearFrom === num ? 'autoOrange.400' : '#000'
-                    }
+                    color={yearFrom === num ? 'autoOrange.400' : '#000'}
                     onClick={() => handleSelectYearFrom(num)}
                     _hover={{
                       bg: 'autoGrey.100',
@@ -138,7 +147,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({...rest}) =>
                     key={num}
                     lineHeight="21px"
                     w="full"
-                    color={selected.yearTo === num ? 'autoOrange.400' : '#000'}
+                    color={yearTo === num ? 'autoOrange.400' : '#000'}
                     onClick={() => handleSelectYearTo(num)}
                     _hover={{
                       bg: 'autoGrey.100',

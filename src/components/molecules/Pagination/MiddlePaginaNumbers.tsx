@@ -27,9 +27,6 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
   const [lastNums, setLastNums] = useState<number[]>([]);
   const [midNums, setMidNums] = useState<number[]>([]);
 
-  const showLeftDots = firstNums.length === 1;
-  const showRightDots = lastNums.length === 1;
-
   const { isLargerThan: isLargerThan360 } = useMediaQueryMin(360);
 
   // numbers to show in begining and in the end
@@ -37,10 +34,10 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
   if (isTablet) toShow = 5;
   if (isDesktop) toShow = 10;
 
-  useEffect(() => {
-    // console.log('midNums: ', midNums);
-    // console.log('active Page: ', activePage);
-  }, [midNums, activePage]);
+  const showLeftDots = firstNums.length === 1;
+  const showRightDots = lastNums.length === 1;
+  const showLastNums = activePage > lastNums.length - toShow;
+
   // handle with pagin numbers
   useEffect(() => {
     // handle first page numbers
@@ -74,9 +71,11 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
     if (activePage === totalPages - toShow + 1) {
       // if active num is equal to the fist of last nums  -> add one more num in the begining
       setLastNums(paginNumbers.slice(totalPages - toShow - 1, totalPages));
+      setFirstNums([1]);
     } else if (activePage > totalPages - toShow) {
       // if active num is close to last nums show last nums
       setLastNums(paginNumbers.slice(totalPages - toShow, totalPages));
+      setFirstNums([1]);
     } else {
       // else last nums will just the last one
       setLastNums([totalPages]);
@@ -132,11 +131,7 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
               key={num}
               onClick={() => onChange(num)}
               active={activePage === num}
-              display={
-                isLargerThan360 && activePage > lastNums.length - 3
-                  ? 'block'
-                  : 'none'
-              }
+              display={isLargerThan360 && showLastNums ? 'block' : 'none'}
             >
               <Heading fontSize="18px" fontWeight="light">
                 {num}
