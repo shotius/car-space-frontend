@@ -33,8 +33,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
     <AspectRatio
       ratio={[311 / 292, null, null, 231 / 143]}
       w="full"
-      // overflow="hidden"
-      borderRadius="md"
+      borderRadius="8px"
       cursor="auto"
       maxH={['192px', null, '143px']}
       onClick={(e) => {

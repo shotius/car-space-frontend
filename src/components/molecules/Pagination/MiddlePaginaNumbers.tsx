@@ -92,8 +92,9 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
 
   return (
     <HStack>
+      {/* If screen is smaller then 360px I will show minimalistic pagination  */}
       {isLargerThan360 ? (
-        <>
+        <HStack w="full" display={paginNumbers.length > 1 ? 'flex' : 'none'}>
           {firstNums.map((num) => (
             <ButtonRound
               key={num}
@@ -142,8 +143,9 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
               </Heading>
             </ButtonRound>
           ))}
-        </>
+        </HStack>
       ) : (
+        // Minimaliscit pagination
         <>
           <TextRegular display={activePage > 1 ? 'block' : 'none'}>
             ...

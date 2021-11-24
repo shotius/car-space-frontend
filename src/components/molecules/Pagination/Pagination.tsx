@@ -13,12 +13,13 @@ interface PaginationProps {
 
 export const Pagination: React.FC<PaginationProps & StackProps> = ({
   activePage,
-  totalPages = 0,
+  totalPages = 1,
   onPageChange,
   ...rest
 }) => {
   // pagination nunbers to map through
   const paginNumbers = [...Array(totalPages).keys()].map((num) => num + 1); // add one to all all page
+  console.log('totalPages', totalPages);
 
   return (
     <HStack spacing={['1', '2']} {...rest}>
@@ -30,6 +31,7 @@ export const Pagination: React.FC<PaginationProps & StackProps> = ({
         onClick={() => onPageChange(activePage - 1)}
         boxSize="6"
         _active={{ bg: 'autoGrey.400' }}
+        display={totalPages === 1 ? 'none' : 'block'}
       />
 
       {/* dinamicly generated page numbers */}
@@ -49,6 +51,7 @@ export const Pagination: React.FC<PaginationProps & StackProps> = ({
         disabled={activePage === totalPages}
         onClick={() => onPageChange(activePage + 1)}
         _active={{ bg: 'autoGrey.400' }}
+        display={totalPages === 1 ? 'none' : 'block'}
       />
     </HStack>
   );

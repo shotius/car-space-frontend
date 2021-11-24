@@ -4,7 +4,7 @@ import {
   IconButton,
   SimpleGrid,
   Stack,
-  StackProps
+  StackProps,
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { DividerVertical } from 'src/components/atoms/Divider';
@@ -43,7 +43,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<
 }) => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const query = useQueryParams()
+  const query = useQueryParams();
 
   const {
     isAdvancedFiltersOpen: isOpen,
@@ -60,7 +60,10 @@ export const DesktopFiltersOnCatalogPage: React.FC<
   const setSearchQuery = () => {
     // put brand values from redux in the url
     if (brands.length) {
-      brands.map((brand) => query.set('brand', brand));
+      brands.map((brand) => {
+        // if brand is not in url append it
+        !query.getAll('brand').includes(brand) && query.append('brand', brand);
+      });
     } else {
       query.delete('brand');
       // remove models from url as well
@@ -69,7 +72,9 @@ export const DesktopFiltersOnCatalogPage: React.FC<
 
     // if both brands and models exist put model in the url
     if (brands.length && models.length) {
-      models.map((model) => query.set('model', model));
+      models.map((model) => {
+        !query.getAll('model').includes(model) && query.append('model', model)
+      });
     } else {
       query.delete('model');
     }
@@ -82,7 +87,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<
       query.delete('year_to');
     }
 
-    query.set('page', '1')
+    query.set('page', '1');
 
     history.push({ pathname: '/catalog', search: query.toString() });
     dispatch(getCars(query));
