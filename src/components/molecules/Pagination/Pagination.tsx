@@ -1,4 +1,4 @@
-import { Flex, StackProps } from '@chakra-ui/react';
+import { HStack, StackProps } from '@chakra-ui/react';
 // import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ArrowNextIcon } from '../../atoms/Icons/Arrows/ArrowNextIcon';
 import { ArrowPrevIcon } from '../../atoms/Icons/Arrows/ArrowPrevIcon';
@@ -21,13 +21,7 @@ export const Pagination: React.FC<PaginationProps & StackProps> = ({
   const paginNumbers = [...Array(totalPages).keys()].map((num) => num + 1); // add one to all all page
 
   return (
-    <Flex
-      pt="18px"
-      pb="18px"
-      spacing={['1', '2']}
-      w="full"
-      {...rest}
-    >
+    <HStack spacing={['1', '2']} {...rest}>
       <ButtonWithIcon
         variant="ghost"
         bg="transparent"
@@ -56,6 +50,6 @@ export const Pagination: React.FC<PaginationProps & StackProps> = ({
         onClick={() => onPageChange(activePage + 1)}
         _active={{ bg: 'autoGrey.400' }}
       />
-    </Flex>
+    </HStack>
   );
 };

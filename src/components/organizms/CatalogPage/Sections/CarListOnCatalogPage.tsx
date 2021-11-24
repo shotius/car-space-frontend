@@ -62,7 +62,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   }
 
   return (
-    <>
+    <VStack spacing="90px" w="full">
       {/* car list */}
       {!!cars.length ? (
         <CatalogListWrap gap="24px">
@@ -81,8 +81,8 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
         totalPages={totalPages}
         activePage={page}
         onPageChange={(num: number) => changePage(num)}
-        display={cars.length ? 'block' : 'none'}
+        display={cars.length ? 'flex' : 'none'}
       />
-    </>
+    </VStack>
   );
 };

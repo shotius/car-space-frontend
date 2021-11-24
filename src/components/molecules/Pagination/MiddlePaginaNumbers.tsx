@@ -1,6 +1,7 @@
-import { Heading } from '@chakra-ui/react';
+import { Heading, HStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { useAppSelector } from 'src/redux/app/hook';
+import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { ButtonRound } from '../Buttons/ButtonRound';
 import { TextRegular } from '../Texts/TextRegular';
 
@@ -17,7 +18,10 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
   onChange,
   paginNumbers,
 }) => {
-  const { isMobile, isTablet, isDesktop } = useDetectScreen();
+  // const { isMobile, isTablet, isDesktop } = useDetectScreen();
+  const { isDesktop, isMobile, isTablet } = useAppSelector(
+    (state) => state.globalAppState.screen
+  );
 
   const [firstNums, setFirstNums] = useState<number[]>([]);
   const [lastNums, setLastNums] = useState<number[]>([]);
@@ -25,17 +29,18 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
 
   const showLeftDots = firstNums.length === 1;
   const showRightDots = lastNums.length === 1;
-  
-  // numbers to show in the middle
-  let midNumsToShow = 3;
-  if (!isMobile) midNumsToShow = 5;
 
+  const { isLargerThan: isLargerThan360 } = useMediaQueryMin(360);
 
   // numbers to show in begining and in the end
   let toShow = 3;
   if (isTablet) toShow = 5;
   if (isDesktop) toShow = 10;
 
+  useEffect(() => {
+    // console.log('midNums: ', midNums);
+    // console.log('active Page: ', activePage);
+  }, [midNums, activePage]);
   // handle with pagin numbers
   useEffect(() => {
     // handle first page numbers
@@ -52,12 +57,15 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
 
     // handle MinNums
     if (activePage > toShow && activePage <= totalPages - toShow) {
-      setMidNums(
-        paginNumbers.slice(
-          activePage - Math.floor(midNumsToShow / 2) - 1,
-          activePage + Math.floor(midNumsToShow / 2)  
-        )
-      );
+      isMobile
+        ? setMidNums([activePage - 1, activePage, activePage + 1])
+        : setMidNums([
+            activePage - 2,
+            activePage - 1,
+            activePage,
+            activePage + 1,
+            activePage + 2,
+          ]);
     } else {
       setMidNums([]);
     }
@@ -83,46 +91,75 @@ export const MiddlePaginNumbers: React.FC<MiddlePaginNumbersProps> = ({
   }, [activePage, totalPages]);
 
   return (
-    <>
-      {firstNums.map((num) => (
-        <ButtonRound
-          key={num}
-          onClick={() => onChange(num)}
-          active={activePage === num}
-        >
-          <Heading fontSize="18px" fontWeight="light">
-            {num}
-          </Heading>
-        </ButtonRound>
-      ))}
+    <HStack>
+      {isLargerThan360 ? (
+        <>
+          {firstNums.map((num) => (
+            <ButtonRound
+              key={num}
+              onClick={() => onChange(num)}
+              active={activePage === num}
+            >
+              <Heading fontSize="18px" fontWeight="light">
+                {num}
+              </Heading>
+            </ButtonRound>
+          ))}
 
-      <TextRegular display={showLeftDots ? 'block' : 'none'}>...</TextRegular>
+          <TextRegular display={showLeftDots ? 'block' : 'none'}>
+            ...
+          </TextRegular>
 
-      {midNums.map((num) => (
-        <ButtonRound
-          key={num}
-          onClick={() => onChange(num)}
-          active={activePage === num}
-        >
-          <Heading fontSize="18px" fontWeight="light">
-            {num}
-          </Heading>
-        </ButtonRound>
-      ))}
+          {midNums.map((num) => (
+            <ButtonRound
+              key={num}
+              onClick={() => onChange(num)}
+              active={activePage === num}
+            >
+              <Heading fontSize="18px" fontWeight="light">
+                {num}
+              </Heading>
+            </ButtonRound>
+          ))}
 
-      <TextRegular display={showRightDots ? 'block' : 'none'}>...</TextRegular>
+          <TextRegular display={showRightDots ? 'block' : 'none'}>
+            ...
+          </TextRegular>
 
-      {lastNums.map((num) => (
-        <ButtonRound
-          key={num}
-          onClick={() => onChange(num)}
-          active={activePage === num}
-        >
-          <Heading fontSize="18px" fontWeight="light">
-            {num}
-          </Heading>
-        </ButtonRound>
-      ))}
-    </>
+          {lastNums.map((num) => (
+            <ButtonRound
+              key={num}
+              onClick={() => onChange(num)}
+              active={activePage === num}
+              display={
+                isLargerThan360 && activePage > lastNums.length - 3
+                  ? 'block'
+                  : 'none'
+              }
+            >
+              <Heading fontSize="18px" fontWeight="light">
+                {num}
+              </Heading>
+            </ButtonRound>
+          ))}
+        </>
+      ) : (
+        <>
+          <TextRegular display={activePage > 1 ? 'block' : 'none'}>
+            ...
+          </TextRegular>
+          <ButtonRound active={true}>
+            <Heading fontSize="18px" fontWeight="light">
+              {activePage}
+            </Heading>
+          </ButtonRound>
+          <TextRegular
+            display={activePage < paginNumbers.length ? 'block' : 'none'}
+          >
+            ...
+          </TextRegular>
+        </>
+      )}
+    </HStack>
   );
 };

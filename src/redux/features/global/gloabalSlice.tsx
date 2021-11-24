@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrencyType, Languages } from 'src/constants';
-import { GlobalStateSliceState } from '../auth/types';
+import { GlobalStateSliceState, ScreenSizes } from '../auth/types';
 
 const initialState: GlobalStateSliceState = {
   lang: 'Eng',
@@ -10,6 +10,11 @@ const initialState: GlobalStateSliceState = {
   isRegistrationOpen: false,
   isMobileRegisterLoginOpen: false,
   queryString: '',
+  screen: {
+    isDesktop: false,
+    isTablet: false,
+    isMobile: false, 
+  }
 };
 
 const globalStateSlice = createSlice({
@@ -46,6 +51,9 @@ const globalStateSlice = createSlice({
         ? (state.isMobileRegisterLoginOpen = false)
         : (state.isMobileRegisterLoginOpen = true);
     },
+    setScreenSize: (state, action: PayloadAction<ScreenSizes>) => {
+      state.screen = action.payload
+    }
   },
 });
 
@@ -58,5 +66,6 @@ export const {
   toggleRegistration,
   toggleMobileAuthorization,
   setQueryString,
+  setScreenSize
 } = globalStateSlice.actions;
 export const { reducer: globalAppState } = globalStateSlice;

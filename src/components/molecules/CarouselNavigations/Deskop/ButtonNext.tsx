@@ -1,7 +1,7 @@
 import { ButtonProps, IconButton } from '@chakra-ui/react';
 import { forwardRef } from 'react';
 import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
-import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { useAppSelector } from 'src/redux/app/hook';
 
 interface ButtonNextProps {
   activeBg?: ButtonProps['bg'];
@@ -23,7 +23,7 @@ export const ButtonNext = forwardRef<
     },
     ref
   ) => {
-    const { isDesktop } = useDetectScreen();
+    const {isDesktop} = useAppSelector(state => state.globalAppState.screen)
     return (
       <IconButton
         icon={

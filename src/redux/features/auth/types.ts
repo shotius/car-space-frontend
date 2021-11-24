@@ -39,13 +39,13 @@ export interface CarsSliceState {
   drives: string[];
   fuels: string[];
   cylinders: string[];
-  salesStatus: string[]
+  salesStatus: string[];
   getFiltersError: boolean;
 }
 
 export type Transmission = 'Manual' | 'Automatic' | 'CVT';
 
-export type Keys = 'YES' | 'NO' | null
+export type Keys = 'YES' | 'NO' | null;
 
 export interface SelectedCarFilters {
   brands: string[];
@@ -66,8 +66,8 @@ export interface SelectedCarFilters {
   fuels: string[];
   cylinders: string[];
   keys: Keys | null;
-  salesStatus: string[]
-  queryString: string
+  salesStatus: string[];
+  queryString: string;
 }
 
 export interface IPagination {
@@ -84,7 +84,7 @@ export interface IFilters {
   fuels: string[];
   brands: string[];
   cylinders: string[];
-  salesStatus: string[]
+  salesStatus: string[];
 }
 
 //** Car image slice types */
@@ -95,21 +95,24 @@ export interface CarImageSliceState {
   errorFetchingMediums: string[];
 }
 
-
-
 //** Languages */
 
-export interface GlobalStateSliceState {
-  lang: Languages
-  currency: CurrencyType
-  isCatalogBannerOpen: boolean
-  isRegistrationOpen: boolean
-  isLoginOpen: boolean
-  isMobileRegisterLoginOpen: boolean
-  queryString: string
+export interface ScreenSizes {
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
 }
 
-
+export interface GlobalStateSliceState {
+  lang: Languages;
+  currency: CurrencyType;
+  isCatalogBannerOpen: boolean;
+  isRegistrationOpen: boolean;
+  isLoginOpen: boolean;
+  isMobileRegisterLoginOpen: boolean;
+  queryString: string;
+  screen: ScreenSizes;
+}
 
 //** User slice */
 
@@ -119,5 +122,5 @@ export interface IUser {
   role: RoleTypes | null;
   isAuthenticated: boolean;
   username: string | null;
-  favourites?: string[]
+  favourites?: string[];
 }

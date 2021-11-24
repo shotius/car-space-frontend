@@ -3,7 +3,7 @@ import { AspectRatio, Box, Image } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { ButtonNext } from 'src/components/molecules/CarouselNavigations/Deskop/ButtonNext';
 import { ButtonPrev } from 'src/components/molecules/CarouselNavigations/Deskop/ButtonPrev';
-import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { useAppSelector } from 'src/redux/app/hook';
 import useWindowSize from 'src/utils/hooks/useWindowSize';
 // import Swiper core and required modules
 import SwiperCore, { EffectFade } from 'swiper';
@@ -21,7 +21,7 @@ export const HomeCarousel = () => {
 
   const [swiper, setSwiper] = useState<SwiperCore | null>(null);
   const windowWidth = useWindowSize();
-  const { isDesktop } = useDetectScreen();
+  const {isDesktop} = useAppSelector(state => state.globalAppState.screen)
 
   // swiper initialize function
   // extracted in function because we use it in useEffect
