@@ -26,10 +26,12 @@ import { MobileSalesStatusSelect } from './mobile/MobileSalesStatusSelect';
 import { MobileTransmissionSelect } from './mobile/MobileTransmissionSelect';
 import { MobileTypesSelect } from './mobile/MobileTypesSelect';
 
-interface ThreeMobileSelectsProps {}
+interface ThreeMobileSelectsProps {
+  onSubmit: () => void;
+}
 
 export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
-  () => {
+  ({onSubmit}) => {
     const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
 
     // redux variables
@@ -136,7 +138,7 @@ export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
         <VStack pt="2" spacing="3">
           {/* this mobile input sticks button to the keyboard */}
           <WithMobileKeyboard isKeyboardActive={keyboardActive}>
-            <SearchButton w="full" isKeyboardActive={keyboardActive} />
+            <SearchButton w="full" isKeyboardActive={keyboardActive} onClick={onSubmit}/>
           </WithMobileKeyboard>
           <Button
             variant="link"

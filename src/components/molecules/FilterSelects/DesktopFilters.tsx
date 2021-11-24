@@ -4,16 +4,13 @@ import {
   IconButton,
   SimpleGrid,
   Stack,
-  StackProps,
+  StackProps
 } from '@chakra-ui/react';
-import { useHistory } from 'react-router';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { getCars } from 'src/redux/features/auth/carsSlice';
 import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 import { SearchButton } from '../Buttons/SearchButton';
 import { BrandSelect } from './desktop/BrandSelect';
 import { ConditionSelect } from './desktop/ConditionSelect';
@@ -30,7 +27,9 @@ import { TransmissionSelect } from './desktop/TransmissionSelect';
 import { TypeSelect } from './desktop/TypeSelect';
 import { YearSelect } from './desktop/YearSelect';
 
-interface ThreeHDSelectsProps {}
+interface ThreeHDSelectsProps {
+  onSubmit: () => void;
+}
 
 export const DesktopFiltersOnCatalogPage: React.FC<
   ThreeHDSelectsProps & StackProps
@@ -39,62 +38,16 @@ export const DesktopFiltersOnCatalogPage: React.FC<
   bg = '#fff',
   direction = 'row',
   borderRadius = 'md',
+  onSubmit,
   ...rest
 }) => {
   const dispatch = useAppDispatch();
-  const history = useHistory();
-  const query = useQueryParams();
 
-  const {
-    isAdvancedFiltersOpen: isOpen,
-    brands: selectedBrands,
-    models: selectedModels,
-    yearFrom,
-    yearTo,
-  } = useAppSelector((state) => state.selectedCarFilters);
+  const { isAdvancedFiltersOpen: isOpen } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
 
   const onToggle = () => dispatch(toggleAdvancedFilters());
-
-  // apply filters to the url, create new totaly new query string
-  // (removes any we had before)
-  const setSearchQuery = () => {
-    // before creating query, i delete all query filters in the url
-    query.delete('brand');
-    query.delete('model');
-    query.delete('year_from');
-    query.delete('year_to');
-
-    // put brand values from redux in the url
-    if (selectedBrands.length) {
-      selectedBrands.map((brand) => {
-        query.append('brand', brand);
-      });
-    } else {
-      // if there no brand selected remove models from the query
-      query.delete('model');
-    }
-
-    // if brands exists put model in the url
-    if (selectedBrands.length) {
-      selectedModels.map((model) => {
-        query.append('model', model);
-      });
-    }
-
-    if (yearFrom) {
-      query.set('year_from', yearFrom);
-    }
-
-    if (yearTo) {
-      query.set('year_to', yearTo);
-    }
-
-    // we need to see first page on search 
-    query.set('page', '1');
-
-    history.push({ pathname: '/catalog', search: query.toString() });
-    dispatch(getCars(query));
-  };
 
   return (
     <>
@@ -125,7 +78,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<
             w={{ md: '140px', lg: '144px', '2xl': '211px' }}
             ml={[null, null, '0px', '16px']}
             mr="2"
-            onClick={setSearchQuery}
+            onClick={onSubmit}
           />
           {!isOpen ? (
             <IconButton
