@@ -1,4 +1,11 @@
-import { Box, BoxProps, Divider, Flex, StackProps, VStack } from '@chakra-ui/layout';
+import {
+  Box,
+  BoxProps,
+  Divider,
+  Flex,
+  StackProps,
+  VStack,
+} from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
@@ -27,7 +34,10 @@ interface BrandSelectProps {
 //2. Placeholder: is displayed when not searching
 //3. searchWord: when user writing in search box, search word is changing
 //4. selected: are Selected options, used to keep track of other three variables
-export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({ labelPadding, ...rest }) => {
+export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
+  labelPadding,
+  ...rest
+}) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [placeholder, setPlaceholder] = useState<string>('');
@@ -36,11 +46,26 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({ labelPadd
   const dispatch = useAppDispatch();
 
   const { brands: options } = useAppSelector((state) => state.carsReducer);
+  const { brands: initSelection } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
 
   // whenever selected values change change value as well
   useEffect(() => {
-    setValue(selected.join(', '));
+    if (areOptionsOpen) {
+      setValue(selected.join(', '));
+    }
+    updatePlaceholder()
   }, [selected.length]);
+
+  useEffect(() => {
+    if (initSelection.length) {
+      setSelected(initSelection);
+
+    } else {
+      setSelected([]);
+    }
+  }, [initSelection]);
 
   // handle option select
   const handleSelect = (opt: string) => {
@@ -48,6 +73,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({ labelPadd
     // if option is in selected values remove, else include
     if (selected.includes(opt)) {
       setSelected(selected.filter((o) => o !== opt));
+      setValue(selected.join(', '));
     } else {
       setSelected([opt].concat(selected));
     }
@@ -55,7 +81,8 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({ labelPadd
 
   const updatePlaceholder = () => {
     if (selected.length) {
-      setPlaceholder(`Brands: ${selected.join(', ')}`);
+      console.log('selecte: ', selected);
+      setPlaceholder(() => `Brands: ${selected.join(', ')}`);
     }
   };
 
@@ -71,7 +98,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({ labelPadd
         onClick={() => {
           setAreOptionsOpen(false);
           updatePlaceholder();
-          dispatch(selectBrand(selected))
+          dispatch(selectBrand(selected));
           dispatch(getModels(selected));
           setValue('');
           setSearchWord('');
@@ -89,7 +116,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({ labelPadd
             setValue('');
             setPlaceholder('');
             setAreOptionsOpen(false);
-            dispatch(selectBrand([]))
+            dispatch(selectBrand([]));
             dispatch(setModels([]));
           }}
         >
@@ -127,8 +154,8 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({ labelPadd
                 width: '6px',
               },
               '&::-webkit-scrollbar-track': {
-              width: '6px',
-              overflow: 'hidden',
+                width: '6px',
+                overflow: 'hidden',
               },
               '&::-webkit-scrollbar-thumb': {
                 background: '#DEDEE0',
@@ -142,7 +169,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({ labelPadd
                 height: '3px',
                 width: '6px',
               },
-              }}
+            }}
           >
             <Flex
               w="full"

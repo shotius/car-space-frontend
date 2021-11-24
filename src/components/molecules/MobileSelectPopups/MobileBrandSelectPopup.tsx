@@ -47,7 +47,7 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
   );
   const dispatch = useAppDispatch();
 
-  const {isMobile} = useDetectScreen()
+  const { isMobile } = useDetectScreen();
 
   useEffect(() => {
     // if we have filters saved in redux assign them to components state
@@ -57,7 +57,7 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
       // else empy array
       setSelectedBrands([]);
     }
-  }, [allBrands, initSelectedBrands]);
+  }, [initSelectedBrands]);
 
   // filter brands when searchWord is specified
   const brandsToShow = addLettersToSortedArray(allBrands).filter((brand) => {
@@ -117,7 +117,6 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
 
             {/* top brands */}
             <SectionHeader
-              
               mainText="Top Brands"
               mainFontSize="16px"
               display={isMobile && topBrandsVisible ? 'block' : 'none'}
@@ -139,32 +138,32 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
               /> */}
               <TopBrandCard
                 icon={MercedesIcon}
-                maxW={["38px", '50px']}
-                maxH={["38px", '50px']}
+                maxW={['38px', '50px']}
+                maxH={['38px', '50px']}
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW={["38px", '50px']}
-                maxH={["38px", '50px']}
+                maxW={['38px', '50px']}
+                maxH={['38px', '50px']}
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW={["38px", '50px']}
-                maxH={["38px", '50px']}
+                maxW={['38px', '50px']}
+                maxH={['38px', '50px']}
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW={["38px", '50px']}
-                maxH={["38px", '50px']}
+                maxW={['38px', '50px']}
+                maxH={['38px', '50px']}
                 boxSize={5}
               />
               <TopBrandCard
                 icon={BmwIcon}
-                maxW={["38px", '50px']}
-                maxH={["38px", '50px']}
+                maxW={['38px', '50px']}
+                maxH={['38px', '50px']}
                 boxSize={5}
               />
             </ScrollableDiv>

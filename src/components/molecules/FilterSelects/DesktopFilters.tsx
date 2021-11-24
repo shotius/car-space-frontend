@@ -4,15 +4,16 @@ import {
   IconButton,
   SimpleGrid,
   Stack,
-  StackProps,
+  StackProps
 } from '@chakra-ui/react';
-import { useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { getCars } from 'src/redux/features/auth/carsSlice';
 import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 import { SearchButton } from '../Buttons/SearchButton';
 import { BrandSelect } from './desktop/BrandSelect';
 import { ConditionSelect } from './desktop/ConditionSelect';
@@ -42,8 +43,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<
 }) => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const { search } = useLocation();
-  // const query = useQuery();
+  const query = useQueryParams()
 
   const {
     isAdvancedFiltersOpen: isOpen,
@@ -53,53 +53,39 @@ export const DesktopFiltersOnCatalogPage: React.FC<
     yearTo,
   } = useAppSelector((state) => state.selectedCarFilters);
 
-  useEffect(() => {
-    // console.log('search: ', search);
-  }, [search]);
-
   const onToggle = () => dispatch(toggleAdvancedFilters());
 
   // apply filters to the url, create new totaly new query string
   // (removes any we had before)
   const setSearchQuery = () => {
-    const params = new URLSearchParams();
-
+    // put brand values from redux in the url
     if (brands.length) {
-      brands.map(brand => params.append('brand', brand))  
+      brands.map((brand) => query.set('brand', brand));
     } else {
-      params.delete('brand');
+      query.delete('brand');
+      // remove models from url as well
+      query.delete('model');
     }
 
-    if (models.length) {
-      models.map(model => params.append('model', model))  
+    // if both brands and models exist put model in the url
+    if (brands.length && models.length) {
+      models.map((model) => query.set('model', model));
     } else {
-      params.delete('model')
+      query.delete('model');
     }
 
     if (yearFrom && yearTo) {
-      params.append('year_from', yearFrom)
-      params.append('year_to', yearTo)
+      query.set('year_from', yearFrom);
+      query.set('year_to', yearTo);
     } else {
-      params.delete('year_from')
-      params.delete("year_to")
+      query.delete('year_from');
+      query.delete('year_to');
     }
 
-    history.push({ pathname: '/catalog', search: params.toString() });
-    // if (
-    //   yearFrom &&
-    //   yearTo &&
-    //   (!queryYearFrom || queryYearFrom !== yearFrom) &&
-    //   (!queryYearTo || queryYearTo !== yearTo)
-    // ) {
-    //   queryArr.push(`year_from=${yearFrom}&year_to=${yearTo}`);
-    // }
+    query.set('page', '1')
 
-    // if new query is not equal to the
-    // previous push new query string and update redux
-    // if (queryString !== newQueryString) {
-    // history.push(`?${newQueryString}`);
-    // dispatch(setQueryString(newQueryString));
-    // }
+    history.push({ pathname: '/catalog', search: query.toString() });
+    dispatch(getCars(query));
   };
 
   return (

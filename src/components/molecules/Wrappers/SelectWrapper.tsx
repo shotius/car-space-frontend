@@ -6,7 +6,7 @@ export const SelectWrapper: React.FC<BoxProps> = ({
   ...rest
 }) => {
   return (
-    <Box w={w} {...rest}>
+    <Box w={w} {...rest} zIndex="1">
       {children}
     </Box>
   );

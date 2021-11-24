@@ -1,4 +1,4 @@
-import { HStack } from '@chakra-ui/react';
+import { Flex, StackProps } from '@chakra-ui/react';
 // import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ArrowNextIcon } from '../../atoms/Icons/Arrows/ArrowNextIcon';
 import { ArrowPrevIcon } from '../../atoms/Icons/Arrows/ArrowPrevIcon';
@@ -8,38 +8,43 @@ import { MiddlePaginNumbers } from './MiddlePaginaNumbers';
 interface PaginationProps {
   totalPages: number;
   activePage: number;
-  onChange: (number: number) => void;
+  onPageChange: (number: number) => void;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({
+export const Pagination: React.FC<PaginationProps & StackProps> = ({
   activePage,
   totalPages = 0,
-  onChange,
+  onPageChange,
+  ...rest
 }) => {
   // pagination nunbers to map through
-  const paginNumbers = [...Array(totalPages).keys()]
-    .map((num) => num + 1) // add one to all all page
+  const paginNumbers = [...Array(totalPages).keys()].map((num) => num + 1); // add one to all all page
 
   return (
-    <HStack pt="18px" pb="18px" spacing={['1', '2']} maxW="100%" flexWrap="wrap">
+    <Flex
+      pt="18px"
+      pb="18px"
+      spacing={['1', '2']}
+      w="full"
+      {...rest}
+    >
       <ButtonWithIcon
         variant="ghost"
         bg="transparent"
         icon={ArrowPrevIcon}
         disabled={activePage === 1}
-        onClick={() => onChange(activePage - 1)}
+        onClick={() => onPageChange(activePage - 1)}
         boxSize="6"
         _active={{ bg: 'autoGrey.400' }}
       />
 
-
       {/* dinamicly generated page numbers */}
-        <MiddlePaginNumbers
-          activePage={activePage}
-          totalPages={totalPages}
-          onChange={onChange}
-          paginNumbers={paginNumbers}
-        />
+      <MiddlePaginNumbers
+        activePage={activePage}
+        totalPages={totalPages}
+        onChange={onPageChange}
+        paginNumbers={paginNumbers}
+      />
 
       <ButtonWithIcon
         variant="ghost"
@@ -48,9 +53,9 @@ export const Pagination: React.FC<PaginationProps> = ({
         fill="#000"
         boxSize="6"
         disabled={activePage === totalPages}
-        onClick={() => onChange(activePage + 1)}
+        onClick={() => onPageChange(activePage + 1)}
         _active={{ bg: 'autoGrey.400' }}
       />
-    </HStack>
+    </Flex>
   );
 };

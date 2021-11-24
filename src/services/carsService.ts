@@ -20,9 +20,9 @@ const getAllBrands = async () => {
   }
 };
 
-const getCars = async (page: number) => {
+const getCars = async ({params}) => {
   try {
-    const { data } = await axios.get(`${baseURL}?page=${page}`);
+    const { data } = await axios.get(`${baseURL}`, {params});
     return data;
   } catch (error) {
     throw error;

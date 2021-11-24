@@ -40,9 +40,9 @@ export const getFilters = createAsyncThunk(
 
 export const getCars = createAsyncThunk(
   'cars/getCars',
-  async (page: number, { rejectWithValue, dispatch }) => {
+  async (params: URLSearchParams, { rejectWithValue, dispatch }) => {
     try {
-      const result = await carsService.getCars(page);
+      const result = await carsService.getCars({params});
       dispatch(setTotalPages(result.pagesTotal));
 
       return result.cars as ICar[];

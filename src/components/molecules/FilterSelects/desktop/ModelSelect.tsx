@@ -8,6 +8,7 @@ import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
 import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
@@ -19,17 +20,25 @@ interface ModelSelectProps {}
 //2. Placeholder: is displayed when not searching
 //3. searchWord: when user writing in search box, search word is changing
 //4. selected: are Selected options, used to keep track of other three variables
-export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ( {...rest}) => {
+export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
+  ...rest
+}) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [placeholder, setPlaceholder] = useState<string>('');
   const [value, setValue] = useState<string>('');
   const [searchWord, setSearchWord] = useState<string>('');
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const [isDisabled, setIsDisabled] = useState(true);
 
   const { models: options } = useAppSelector((state) => state.carsReducer);
+  const { models: initSelection } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
+  const { brands: selectedBrands } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
 
   // whenever models change in the redux store do this
   useEffect(() => {
@@ -44,17 +53,39 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ( {...rest})
     }
   }, [options]);
 
+  // if we have already selected values in redux initialize component state with it
   // whenever selected values change change value as well
   useEffect(() => {
-    setValue(selected.join(', '));
-  }, [selected.length]);
+    if (areOptionsOpen) {
+      setValue(selected.join(', '));
+    }
+    updatePlaceholder()
+  }, [selected.length, areOptionsOpen]);
+
+  // if brands are not selected remove models filters
+  useEffect(() => {
+    if (!selectedBrands.length) {
+      dispatch(setModels([]));
+    } else {
+      dispatch(getModels(selectedBrands))
+    }
+  }, [selectedBrands]);
+
+  // if we have already selected values in redux initialize component state with it
+  useEffect(() => {
+    if (initSelection.length) {
+      setSelected(initSelection);
+      setIsDisabled(false);
+    } else {
+      setSelected([]);
+    }
+  }, [initSelection]);
 
   const updatePlaceholder = () => {
     if (selected.length) {
       setPlaceholder(`Models: ${selected.join(', ')}`);
     }
   };
-
 
   // handle option select
   const handleSelect = (opt: string) => {
@@ -78,9 +109,9 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ( {...rest})
         onClick={() => {
           setAreOptionsOpen(false);
           updatePlaceholder();
-          dispatch(selectModels(selected))
+          dispatch(selectModels(selected));
           setValue('');
-          setSearchWord('')
+          setSearchWord('');
         }}
       />
       {/*  Input */}
@@ -102,6 +133,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ( {...rest})
             setSelected([]);
             setValue('');
             setPlaceholder('');
+            dispatch(selectModels([]))
             setAreOptionsOpen(false);
           }}
         >
