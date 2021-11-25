@@ -1,4 +1,4 @@
-import { Button, Checkbox, StackProps } from '@chakra-ui/react';
+import { Button, Checkbox, StackProps, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { SelectSearch } from 'src/components/molecules/Inputs/SelectSearch';
 import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
@@ -99,12 +99,16 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
   };
 
   // filter options when searchWord is specified
-  const optionsToShow = options.filter((option) => {
-    return option.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
-  });
+  // const optionsToShow = options.filter((option) => {
+  //   return option.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
+  // });
 
   return (
-    <SelectWrapper title="Select Brand First" {...rest}>
+    <SelectWrapper
+      title="Select Brand First"
+      {...rest}
+      areOptionsOpen={areOptionsOpen}
+    >
       <SelectOverlay
         isActive={areOptionsOpen}
         onClick={() => {
@@ -149,30 +153,37 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
 
         {/* Options  */}
         <SelectOptions isOpen={areOptionsOpen}>
-          {optionsToShow.map((opt) => (
-            <Button
-              key={opt}
-              w="full"
-              p="4"
-              borderRadius="none"
-              display="flex"
-              justifyContent="flex-start"
-              variant="ghost"
-              _hover={{
-                bg: 'autoGrey.100',
-              }}
-              onClick={(e) => {
-                e.preventDefault();
-                handleSelect(opt);
-              }}
-            >
-              <Checkbox
-                colorScheme="autoOrange"
-                isChecked={selected?.includes(opt)}
-              >
-                <TextRegular>{opt}</TextRegular>
-              </Checkbox>
-            </Button>
+          {options.map((option) => (
+            <VStack key={option.brand} align="flex-start">
+              <TextRegular pl="4" fontSize="14px" opacity="0.5">
+                {option.brand}
+              </TextRegular>
+              {option.models.map((model) => (
+                <Button
+                  key={model}
+                  w="full"
+                  p="4"
+                  borderRadius="none"
+                  display="flex"
+                  justifyContent="flex-start"
+                  variant="ghost"
+                  _hover={{
+                    bg: 'autoGrey.100',
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleSelect(model);
+                  }}
+                >
+                  <Checkbox
+                    colorScheme="autoOrange"
+                    isChecked={selected?.includes(model)}
+                  >
+                    <TextRegular>{model}</TextRegular>
+                  </Checkbox>
+                </Button>
+              ))}
+            </VStack>
           ))}
         </SelectOptions>
       </SelectContent>

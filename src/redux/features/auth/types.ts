@@ -28,11 +28,16 @@ export interface ICar {
   keys: string; // Has Keys-Yes or No
 }
 
+export interface ICarModel {
+  brand: string;
+  models: string[]
+}
+
 export interface CarsSliceState {
   cars: ICar[];
   fethingCars: boolean;
   brands: string[];
-  models: string[];
+  models: ICarModel[];
   conditions: string[];
   types: string[];
   locations: string[];

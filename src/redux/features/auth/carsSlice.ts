@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import carsService from 'src/services/carsService';
 import { setTotalPages } from './carPaginationSlice';
-import { CarsSliceState, ICar, IFilters } from './types';
+import { CarsSliceState, ICar, ICarModel, IFilters } from './types';
 
 const initialState: CarsSliceState = {
   cars: [],
@@ -54,9 +54,9 @@ export const getCars = createAsyncThunk(
 
 export const getModels = createAsyncThunk(
   'carFilter/getModels',
-  async (brand: string[], { rejectWithValue }) => {
+  async (brands: string[], { rejectWithValue }) => {
     try {
-      const result = await carsService.getModels(brand[0]); // TO-DO on the server search for array
+      const result = await carsService.getModels(brands);
       return result;
     } catch (error) {
       console.log(error);
@@ -69,7 +69,7 @@ const carsSlice = createSlice({
   name: 'cars',
   initialState,
   reducers: {
-    setModels: (state, action: PayloadAction<string[]>) => {
+    setModels: (state, action: PayloadAction<ICarModel[]>) => {
       state.models = action.payload;
     },
   },

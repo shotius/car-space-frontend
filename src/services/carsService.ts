@@ -1,5 +1,6 @@
 import { IFilters } from './../redux/features/auth/types';
 import { axios } from 'src/utils/axios';
+import { FilterQueries } from 'src/constants';
 
 const baseURL = '/api/cars';
 
@@ -20,9 +21,9 @@ const getAllBrands = async () => {
   }
 };
 
-const getCars = async ({params}) => {
+const getCars = async ({ params }) => {
   try {
-    const { data } = await axios.get(`${baseURL}`, {params});
+    const { data } = await axios.get(`${baseURL}`, { params });
     return data;
   } catch (error) {
     throw error;
@@ -38,10 +39,10 @@ const getSingleCar = async (lotNum: string) => {
   }
 };
 
-const getModels = async (brand: string) => {
+const getModels = async (brands: string[]) => {
   try {
-    const { data } = await axios.get(`${baseURL}/models?brand=${brand}`);
-    // console.log(data);
+    const queries = brands.map((b) => `${FilterQueries.BRAND}=${b}`);
+    const { data } = await axios.get(`${baseURL}/models?${queries.join('&')}`);
     return data;
   } catch (error) {
     throw error;

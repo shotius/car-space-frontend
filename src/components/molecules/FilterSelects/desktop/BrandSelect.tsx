@@ -93,7 +93,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
   });
 
   return (
-    <SelectWrapper {...rest}>
+    <SelectWrapper {...rest} areOptionsOpen={areOptionsOpen}>
       <SelectOverlay
         isActive={areOptionsOpen}
         onClick={() => {

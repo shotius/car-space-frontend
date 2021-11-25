@@ -38,7 +38,7 @@ export const SelectGeneral: React.FC<TransmissionSelectProps & StackProps> = ({
   const closeOptions = () => setAreOptionsOpen(false);
 
   return (
-    <SelectWrapper>
+    <SelectWrapper areOptionsOpen={areOptionsOpen}>
       <SelectOverlay
         isActive={areOptionsOpen}
         onClick={() => {

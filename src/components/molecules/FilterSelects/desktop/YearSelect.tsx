@@ -67,7 +67,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
   };
 
   return (
-    <SelectWrapper {...rest}>
+    <SelectWrapper {...rest} areOptionsOpen={areOptionsOpen}>
       <SelectOverlay
         isActive={areOptionsOpen}
         onClick={() => {

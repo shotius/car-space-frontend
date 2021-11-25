@@ -42,7 +42,7 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
   }, [priceFrom, priceTo, currency]);
 
   return (
-    <SelectWrapper>
+    <SelectWrapper areOptionsOpen={areOptionsOpen}>
       <SelectOverlay
         isActive={areOptionsOpen}
         onClick={() => {
