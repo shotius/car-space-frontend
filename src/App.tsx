@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom';
 import 'src/App.css';
 import { StyledApp } from 'src/components/organizms/Wrappers/StyledApp';
@@ -12,15 +12,15 @@ import { useAppDispatch } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
-const  UserProfilePage = lazy(() => import('./pages/role/user/UserProfilePage')) ;
-const  CarDetailPage = lazy(() => import('./pages/CarDetailPage'))
-const BlogPage = lazy(() => import('./pages/BlogPage'));
-const CatalogPage = lazy(() => import('./pages/CatalogPage'));
+const UserProfilePage = lazy(() => import('./pages/role/user/UserProfilePage'));
+const CarDetailPage = lazy(() => import('./pages/catalog/car/CarDetailPage'));
+const BlogPage = lazy(() => import('./pages/blogs/BlogPage'));
+const CatalogPage = lazy(() => import('./pages/catalog/CatalogPage'));
 const AdminPage = lazy(() => import('./pages/role/admin/AdminPage'));
 const DealerDashboard = lazy(() => import('./pages/role/dealer/DealerPage'));
 const Home = lazy(() => import('./pages/HomePage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
-
+const BlogDetailPage = lazy(() => import('./pages/blogs/blog/BlogDetailPage'));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -48,11 +48,24 @@ function App() {
           <Route path="/" exact>
             <Redirect to="/home" />
           </Route>
-          <PublicRoute path="/blog" component={BlogPage} />
           <PublicRoute path="/home" component={Home} />
-          <PublicRoute path="/catalog" component={CatalogPage} />
+
+          <PublicRoute path="/blogs" component={BlogPage} exact />
+          <PublicRoute
+            path="/blogs/blog/:blogId"
+            component={BlogDetailPage}
+            exact
+          />
+
+          <PublicRoute path="/catalog" component={CatalogPage} exact />
+          <PublicRoute
+            path="/catalog/car/:lotNumber"
+            component={CarDetailPage}
+            exact
+          />
+
           <PublicRoute path="/services" component={ServicesPage} />
-          <PublicRoute path="/car/:lotNumber" component={CarDetailPage} exact/>
+
           <PrivateRoute
             path="/admin/dashboard"
             component={AdminPage}
@@ -63,7 +76,7 @@ function App() {
             role="dealer"
             component={DealerDashboard}
           />
-          <PrivateRoute 
+          <PrivateRoute
             path="/user/dashboard"
             role="user"
             component={UserProfilePage}

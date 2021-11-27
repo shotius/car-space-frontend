@@ -113,7 +113,7 @@ export const Header: React.FC<HeaderProps> = () => {
             <HStack spacing={[null, null, '16px', '24px', '32px']}>
               <MenuLink to="/catalog" label="Catalog" />
               <MenuLink to="/services" label="Services" />
-              <MenuLink to="/blog" label="Blog" />
+              <MenuLink to="/blogs" label="Blog" />
             </HStack>
             {/* popovers */}
             <HStack

@@ -46,7 +46,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
 
       <NavMenuLink
         heading="Blog"
-        to="/blog"
+        to="/blogs"
         onClick={() => setMenuOpen(false)}
       />
       <NavMenuLink

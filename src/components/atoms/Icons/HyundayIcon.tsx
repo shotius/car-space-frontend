@@ -6,7 +6,7 @@ export const HiundayIcon = createIcon({
   path: (
     <>
       <defs>
-        <clipPath id="clip-path">
+        <clipPath id="clipPath">
           <rect
             id="Rectangle_664"
             data-name="Rectangle 664"
@@ -20,7 +20,7 @@ export const HiundayIcon = createIcon({
       <g
         id="hyundai"
         transform="translate(-994 -1811)"
-        clipPath="url(#clip-path)"
+        clipPath="url(#clipPath)"
       >
         <path
           id="logo"

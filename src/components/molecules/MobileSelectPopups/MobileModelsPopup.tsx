@@ -2,8 +2,7 @@ import { Checkbox } from '@chakra-ui/checkbox';
 import { VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { useAppSelector } from 'src/redux/app/hook';
 import { SearchInput } from '../Inputs/SearchInput';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
@@ -23,12 +22,11 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
   const { models: initialySelectedModels } = useAppSelector(
     (state) => state.selectedCarFilters
   );
-  const dispatch = useAppDispatch();
 
   // asign initial selected models to the state
   useEffect(() => {
     if (initialySelectedModels.length) {
-      setSelectedModels(initialySelectedModels);
+      // setSelectedModels(initialySelectedModels); to-do
     } else {
       setSelectedModels([]);
     }
@@ -54,7 +52,7 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={() => {
-        dispatch(selectModels(selectedModels));
+        // dispatch(selectModels(selectedModels)); to-do
         onClose();
       }}
       header={
@@ -68,7 +66,7 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
             {option.models.map((model) => (
               <Checkbox
                 colorScheme="autoOrange"
-                defaultChecked={initialySelectedModels?.includes(model)}
+                // defaultChecked={initialySelectedModels?.includes(model)}
                 onChange={(e) => {
                   e.preventDefault();
                   onChangeHandler(model);

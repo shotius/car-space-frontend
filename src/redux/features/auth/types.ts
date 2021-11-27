@@ -52,9 +52,14 @@ export type Transmission = 'Manual' | 'Automatic' | 'CVT';
 
 export type Keys = 'YES' | 'NO' | null;
 
+export interface SelectedCarModel {
+  brand: string;
+  models: string[]
+}
+
 export interface SelectedCarFilters {
   brands: string[];
-  models: string[];
+  models: SelectedCarModel[];
   yearFrom: string | null;
   yearTo: string | null;
   priceFrom: string | null;

@@ -25,11 +25,16 @@ export const MobileModelSelect: React.FC<MobileModelSelectProps & BoxProps> = ({
     }
   };
 
+  const allSelectedModels = Object.keys(selection).reduce<string[]>((acc, curr) => {
+    const arr = selection[curr]
+    return acc.concat(arr)
+  }, [])
+
   return (
     <Box minW={w} maxW={w} {...rest}>
       <MobileSelect
         onClick={handleModelSelect}
-        label={selection.length ? selection.join('; ') : 'Models'}
+        label={selection.length ? allSelectedModels.join('; ') : 'Models'}
         isDisabled={!!!ModelFilters.length}
         hasValue={!!selection.length}
         onClear={() => dispatch(selectModels([]))}

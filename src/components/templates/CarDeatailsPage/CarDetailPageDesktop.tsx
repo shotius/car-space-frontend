@@ -18,7 +18,7 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
   car,
 }) => {
   return (
-    <ContainerOuter position="relative">
+    <ContainerOuter>
       <Flex
         pt="40px"
         justify="space-between"

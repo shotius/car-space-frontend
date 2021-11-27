@@ -5,7 +5,7 @@ interface SelectOptionsWrapperProps {
 }
 
 export const SelectOptions: React.FC<SelectOptionsWrapperProps & StackProps> =
-  ({ isOpen, children, maxH = '300px',p="8px 0",  ...rest }) => {
+  ({ isOpen, children, maxH = '310px',p="8px 0",  ...rest }) => {
     return (
       <VStack
         w="full"

@@ -5,10 +5,7 @@ import { MobileFiltersOnCatalogPage } from 'src/components/molecules/FilterSelec
 import { FilterQueries } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getCars, getFilters } from 'src/redux/features/auth/carsSlice';
-import {
-  selectBrand,
-  selectModels,
-} from 'src/redux/features/auth/selectedCarFilterSlice';
+import { selectBrand } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';
 import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
@@ -24,22 +21,23 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
   const {
     brands: selectedBrands,
-    models: selectedModels,
+    // models: selectedModels,
     yearFrom,
     yearTo,
   } = useAppSelector((state) => state.selectedCarFilters);
 
-  const { models, brands } = useAppSelector(
+  const { brands } = useAppSelector(
     (state) => state.selectedCarFilters
   );
 
   // Parse query from url
   useEffect(() => {
     // parse selected models from url
-    const queryModels = query.getAll('model');
-    if (!compareTwoArrays(queryModels, models)) {
-      dispatch(selectModels(queryModels));
-    }
+    //to-do
+    // const queryModels = query.getAll('model');
+    // if (!compareTwoArrays(queryModels, models)) {
+      // dispatch(selectModels(queryModels));
+    // }
 
     // parse selected brands from url
     const queryBrands = query.getAll('brand');
@@ -74,11 +72,12 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     }
 
     // if brands exists put model in the url
-    if (selectedBrands.length) {
-      selectedModels.map((model) => {
-        query.append(MODEL, model);
-      });
-    }
+    // if (selectedBrands.length) {
+    //   selectedModels.map((option) => {
+
+    //     query.append(MODEL, model);
+    //   });
+    // }
 
     // set year from
     if (yearFrom) {

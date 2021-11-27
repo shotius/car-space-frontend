@@ -105,9 +105,9 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
             </TextRegular>
           </HStack>
         </SelectTrigger>
-        <SelectOptions isOpen={areOptionsOpen} w="full">
+      <SelectOptions isOpen={areOptionsOpen} w="full">
           <HStack
-            h="300px"
+            h="290px"
             w="full"
             divider={<StackDivider borderColor="autoGrey.400" />}
             pr="2px"

@@ -10,6 +10,7 @@ import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
 import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { SelectedCarModel } from 'src/redux/features/auth/types';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 
 interface ModelSelectProps {}
@@ -23,7 +24,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
   ...rest
 }) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selected, setSelected] = useState<SelectedCarModel[]>([]);
   const [placeholder, setPlaceholder] = useState<string>('');
   const [value, setValue] = useState<string>('');
   const [searchWord, setSearchWord] = useState<string>('');
@@ -56,10 +57,10 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
   // whenever selected values change change value as well
   useEffect(() => {
     if (areOptionsOpen) {
-      setValue(selected.join(', '));
+      setValue(allSelectedModels.join(', '));
     }
     updatePlaceholder();
-  }, [selected.length, areOptionsOpen]);
+  }, [selected, areOptionsOpen]);
 
   // if brands are not selected remove models filters
   useEffect(() => {
@@ -80,21 +81,49 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
     }
   }, [initSelection]);
 
+  const allSelectedModels = selected.reduce<string[]>((acc, curr) => {
+    const arr = curr.models;
+    return acc.concat(arr);
+  }, []);
+
   const updatePlaceholder = () => {
     if (selected.length) {
-      setPlaceholder(`Models: ${selected.join(', ')}`);
+      setPlaceholder(`Models: ${allSelectedModels.join(', ')}`);
     } else {
       setPlaceholder(`Models`);
     }
   };
 
   // handle option select
-  const handleSelect = (opt: string) => {
-    // if option is in selected values remove, else include
-    if (selected.includes(opt)) {
-      setSelected(selected.filter((o) => o !== opt));
-    } else {
-      setSelected([opt].concat(selected));
+  const handleSelect = ({ brand, model }: { brand: string; model: string }) => {
+    let changeHappend = false; // this varible is for notifying us about change in the loop
+     
+    selected.forEach((item, i) => {
+      // if there is another model selected for this brand
+      if (item.brand === brand) {
+        // if model already exists remove it
+        if (item.models.includes(model)) {
+          const modelsFiltered = item.models.filter((m) => m !== model);
+          setSelected([
+            ...selected.slice(0, i),
+            { brand, models: modelsFiltered },
+            ...selected.slice(i + 1),
+          ]);
+          changeHappend = true;
+        } else {
+          // else add model
+          setSelected([
+            ...selected.slice(0, i),
+            { brand, models: [...item.models, model] },
+            ...selected.slice(i + 1),
+          ]);
+          changeHappend = true;
+        }
+      }
+    });
+    // if there was not model selected from this brand add new object to the selected
+    if (!changeHappend) {
+      setSelected([...selected, { brand, models: [model] }]);
     }
   };
 
@@ -154,10 +183,11 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
         {/* Options  */}
         <SelectOptions isOpen={areOptionsOpen}>
           {options.map((option) => (
-            <VStack key={option.brand} align="flex-start">
+            <VStack key={option.brand} align="flex-start" w="full">
               <TextRegular pl="4" fontSize="14px" opacity="0.5">
                 {option.brand}
               </TextRegular>
+
               {option.models.map((model) => (
                 <Button
                   key={model}
@@ -172,12 +202,15 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
                   }}
                   onClick={(e) => {
                     e.preventDefault();
-                    handleSelect(model);
+                    handleSelect({
+                      brand: option.brand,
+                      model,
+                    });
                   }}
                 >
                   <Checkbox
                     colorScheme="autoOrange"
-                    isChecked={selected?.includes(model)}
+                    isChecked={allSelectedModels.includes(model)}
                   >
                     <TextRegular>{model}</TextRegular>
                   </Checkbox>
