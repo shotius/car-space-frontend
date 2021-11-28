@@ -23,10 +23,6 @@ export const TABLET_SCREEN_SIZE = 1135;
 export enum FilterQueries {
   BRAND = 'brand',
   MODEL = 'model',
-  YEAR_FROM = 'year_from',
-  YEAR_TO = 'year_to',
-  PRICE_FROM = 'price_from', 
-  PRICE_TO = 'price_to', 
   CONDITION ="condition", 
   TYPE='type', 
   LOCATION = 'location', 
@@ -35,5 +31,9 @@ export enum FilterQueries {
   DRIVE = 'drive', 
   SALES_STATUS = 'sales_status', 
   FUEL_TYPE= 'fuel', 
-  CYLINDER = 'cylinder'
+  CYLINDER = 'cylinder',
+  YEAR_FROM = 'year_from',
+  YEAR_TO = 'year_to',
+  PRICE_FROM = 'price_from', 
+  PRICE_TO = 'price_to', 
 }

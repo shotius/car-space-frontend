@@ -33,8 +33,8 @@ export interface SelectedCarFilters {
   models: SelectedCarModel[];
   yearFrom: string | null;
   yearTo: string | null;
-  priceFrom: string | null;
-  priceTo: string | null;
+  priceFrom?: string;
+  priceTo?: string;
   engineFrom: number | null;
   engineTo: number | null;
   transmission: string[];

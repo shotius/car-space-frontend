@@ -8,8 +8,8 @@ const initialState: SelectedCarFilters = {
   models: [],
   yearFrom: null,
   yearTo: null,
-  priceFrom: null,
-  priceTo: null,
+  priceFrom: undefined,
+  priceTo: undefined,
   engineFrom: null,
   engineTo: null,
   transmission: [],
@@ -45,10 +45,10 @@ const selectedCarFilterSlice = createSlice({
     selectTranssmision: (state, action: PayloadAction<string[]>) => {
       state.transmission = action.payload;
     },
-    selectPriseFrom: (state, action: PayloadAction<string | null>) => {
+    selectPriseFrom: (state, action: PayloadAction<string | undefined>) => {
       state.priceFrom = action.payload;
     },
-    selectPriseTo: (state, action: PayloadAction<string | null>) => {
+    selectPriseTo: (state, action: PayloadAction<string | undefined>) => {
       state.priceTo = action.payload;
     },
     selectYearFrom: (state, action) => {
@@ -87,6 +87,9 @@ const selectedCarFilterSlice = createSlice({
     setFilterQueryString: (state, action: PayloadAction<string>) => {
       state.queryString = action.payload
     }, 
+    closeAdvacedFilters: (state) => {
+      state.isAdvancedFiltersOpen = false
+    }, 
     toggleAdvancedFilters: (state) => {
       if (state.isAdvancedFiltersOpen) {
         state.isAdvancedFiltersOpen = false;
@@ -123,5 +126,6 @@ export const {
   selectCarKeys, 
   selectSalesStatus, 
   setFilterQueryString,
+  closeAdvacedFilters
 } = selectedCarFilterSlice.actions;
 export const { reducer: selectedCarFilters } = selectedCarFilterSlice;

@@ -1,4 +1,5 @@
-import { HStack, VStack, Heading } from "@chakra-ui/react";
+import { HStack, VStack, Heading, Icon } from "@chakra-ui/react";
+import { SeenIcon } from "src/components/atoms/Icons/SeenIcon";
 import { ICar } from "../../../../../server/shared_with_front/types/types-shared";
 import { ButtonHeart } from "../../molecules/Buttons/ButtonHeart";
 import { TextRegular } from "../../molecules/Texts/TextRegular";
@@ -17,7 +18,9 @@ export const CarDescriptionHeader: React.FC<CarDescriptionHeaderProps> =
           </Heading>
           <HStack>
             <TextRegular opacity="0.5">Lot #</TextRegular>
-            <TextRegular>{carInfo?.lN}</TextRegular>
+            <TextRegular pr="16px">{carInfo?.lN}</TextRegular>
+            <Icon as={SeenIcon} ml="10px" opacity="0.5"/>
+            <TextRegular>15</TextRegular>
           </HStack>
         </VStack>
         <ButtonHeart h="48px" w="50px" lotNumber="39029881" buttonInactiveColor="#E8E8E8"/>

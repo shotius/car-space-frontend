@@ -9,7 +9,7 @@ import { CarDescriptionHeader } from '../../organizms/MiniHeaders/CarDescription
 import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface CarDetailPageMobileProps {
-  car?: ICar;
+  car: ICar;
 }
 
 export const CarDetailPageMobile: React.FC<CarDetailPageMobileProps> = ({
@@ -35,13 +35,13 @@ export const CarDetailPageMobile: React.FC<CarDetailPageMobileProps> = ({
             </TextRegular>
 
             {/* bid info */}
-            <BidInfoCard />
+            <BidInfoCard car={car} />
 
             {/* car information */}
-            <CarInfoCardMobile />
+            <CarInfoCardMobile car={car} />
 
             {/* car details */}
-            <CarDeailsCard variant="mobile" />
+            <CarDeailsCard car={car} variant="mobile" />
             
           </VStack>
         </HStack>

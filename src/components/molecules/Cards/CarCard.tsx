@@ -133,24 +133,24 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
             </HStack>
           </VStack>
           <HStack justifyContent="space-between" w="full">
-            <TextRegular opacity="63%">Estimate Price</TextRegular>
+            <TextRegular opacity="63%">Est. Retail Value</TextRegular>
             <Heading
               fontSize={['20px', null, '16px']}
               color="autoOrange.500"
               pr={['4', '0', '4']}
               fontWeight="400"
             >
-              $ 20 000
+              $ {car.eRV}
             </Heading>
           </HStack>
           <HStack justifyContent="space-between" w="full">
-            <TextRegular opacity="63%">Estimate Price</TextRegular>
+            <TextRegular opacity="63%">Est. Repair Cost</TextRegular>
             <Heading
               fontSize={['20px', null, '16px']}
               pr={['4', '0', '4']}
               fontWeight="400"
             >
-              $ 20 000
+              $ {car.rC}
             </Heading>
           </HStack>
         </VStack>

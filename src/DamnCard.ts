@@ -10,10 +10,8 @@ export const DamCar = {
   od: '78825.0',
   cyl: '8',
   dr: '4x4 w/Rear Wheel Drv',
-  eP: '33481.0',
   curB: '300.0',
   hK: 'YES',
-  rC: '24847.0',
   mG: '1500',
   mD: '1500 LARAM',
   eng: '5.7L  8',
@@ -24,5 +22,7 @@ export const DamCar = {
   y: '2016',
   fuel: 'GAS',
   keys: 'YES',
-  sS: "AUTOMATIC"
+  sS: 'AUTOMATIC',
+  eRV: '120 000', // Est. Retail Value
+  rC: '24847.0',
 };

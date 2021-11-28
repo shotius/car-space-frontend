@@ -18,8 +18,8 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [currency, setCurrency] = useState<CurrencyType>('GEL');
   const [placeholder, setPlaceholder] = useState<string>('');
-  const [priceFrom, setPriceFrom] = useState('');
-  const [priceTo, setPriceTo] = useState('');
+  const [priceFrom, setPriceFrom] = useState<string | undefined>(undefined);
+  const [priceTo, setPriceTo] = useState<string | undefined>(undefined);
 
   const dispatch = useAppDispatch();
 
@@ -58,12 +58,14 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
           areOptionsOpen={areOptionsOpen}
           clearCb={(e) => {
             if (e.stopPropagation) e.stopPropagation();
-            dispatch(selectPriseFrom(null));
-            dispatch(selectPriseTo(null));
-            setPlaceholder('');
+            dispatch(selectPriseFrom());
+            dispatch(selectPriseTo());
+            setPriceFrom(undefined)
+            setPriceTo(undefined)
+            setPlaceholder('Price');
             setAreOptionsOpen(false);
           }}
-          areOptionsSelected={!!(priceFrom && priceTo)}
+          areOptionsSelected={!!priceFrom && !!priceTo}
           onClick={() => setAreOptionsOpen((open) => !open)}
         >
           <HStack

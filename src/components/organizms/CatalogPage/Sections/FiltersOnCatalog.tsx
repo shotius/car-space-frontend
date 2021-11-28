@@ -6,6 +6,7 @@ import { FilterQueries } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getCars, getFilters } from 'src/redux/features/auth/carsSlice';
 import {
+  closeAdvacedFilters,
   selectBrand,
   selectCarKeys,
   selectConditions,
@@ -18,7 +19,7 @@ import {
   selectTranssmision,
   selectTypes,
   selectYearFrom,
-  selectYearTo,
+  selectYearTo
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { Transmission } from 'src/redux/features/auth/types';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';
@@ -47,6 +48,8 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     SALES_STATUS,
     FUEL_TYPE,
     CYLINDER,
+    PRICE_FROM,
+    PRICE_TO,
   } = FilterQueries;
 
   const {
@@ -63,6 +66,8 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     salesStatus,
     fuels,
     cylinders,
+    priceFrom,
+    priceTo,
   } = useAppSelector((state) => state.selectedCarFilters);
 
   const { brands } = useAppSelector((state) => state.selectedCarFilters);
@@ -127,7 +132,7 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
     // restore transmissions from url
     const transmissions = query.getAll(TRANSMISSION) as Transmission[];
-    console.log('transmission: ', transmissions)
+    console.log('transmission: ', transmissions);
     if (transmissions.length) {
       dispatch(selectTranssmision(transmissions));
     }
@@ -204,6 +209,8 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     // before creating query, i delete all query filters in the url
     query.delete(BRAND);
     query.delete(YEAR_FROM);
+    query.delete(PRICE_FROM);
+    query.delete(PRICE_TO);
     query.delete(YEAR_TO);
     query.delete(CONDITION);
     query.delete(TYPE);
@@ -214,7 +221,6 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     query.delete(SALES_STATUS);
     query.delete(FUEL_TYPE);
     query.delete(CYLINDER);
-    query.delete('drive')
     deleteModelsFromURL(); // remote models
 
     // put brand values from redux in the url
@@ -249,6 +255,16 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     // set year to
     if (yearTo) {
       query.set(YEAR_TO, yearTo);
+    }
+
+    // set price from
+    if (priceFrom) {
+      query.set(PRICE_FROM, priceFrom);
+    }
+
+    // set pride to
+    if (priceTo) {
+      query.set(PRICE_TO, priceTo);
     }
 
     // condition
@@ -289,6 +305,8 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
     history.push({ pathname: '/catalog', search: query.toString() });
     dispatch(getCars(query));
+
+    !isLargerThen737 && dispatch(closeAdvacedFilters());
   };
 
   return (

@@ -1,12 +1,15 @@
 import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading';
 import { CarSpecTable } from 'src/components/molecules/Tables/CarSpecTable';
+import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CarDeailsCardProps {
   variant: 'mobile' | 'desktop';
+  car: ICar
 }
 
 export const CarDeailsCard: React.FC<CarDeailsCardProps> = ({
   variant,
+  car
 }) => {
   return (
     <>
@@ -20,11 +23,11 @@ export const CarDeailsCard: React.FC<CarDeailsCardProps> = ({
           bodyPadding="0"
           headingPadding="12px 0px 25px 0px"
         >
-          <CarSpecTable />
+          <CarSpecTable car={car} />
         </CardWithHeading>
       ) : (
         <CardWithHeading heading="Car details">
-          <CarSpecTable />
+          <CarSpecTable car={car}/>
         </CardWithHeading>
       )}
     </>

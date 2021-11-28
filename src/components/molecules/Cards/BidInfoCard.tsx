@@ -3,10 +3,13 @@ import { ButtonRegular } from '../Buttons/ButtonRegular';
 import { CardWithHeading } from './CardWithHeading';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { TextRegular } from '../Texts/TextRegular';
+import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 
-interface BidInfoCardProps {}
+interface BidInfoCardProps {
+  car: ICar
+}
 
-export const BidInfoCard: React.FC<BidInfoCardProps> = ({}) => {
+export const BidInfoCard: React.FC<BidInfoCardProps> = ({car}) => {
 
   return (
     <CardWithHeading heading="Bid information" w="full">
@@ -15,7 +18,7 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({}) => {
         <VStack w="full" align="flex-start" spacing="0">
           <TextRegular opacity="0.5"> Current bid</TextRegular>
           <HeadingSecondary color="autoOrange.500" fontSize="20px">
-            $2 500
+            ${car.curB}
           </HeadingSecondary>
         </VStack>
 

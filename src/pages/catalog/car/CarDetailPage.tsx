@@ -16,7 +16,7 @@ interface CardDetailPageProps {}
 
 export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
   // const { isLargerThan } = useMediaQueryMin(800);
-  const {isDesktop} = useDetectScreen()
+  const { isDesktop } = useDetectScreen();
 
   const { lotNumber } = useParams<{ lotNumber: string }>();
   const [carInfo, setCarInfo] = useState<ICar>();
@@ -24,14 +24,17 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
   const { cars } = useAppSelector((state) => state.carsReducer);
 
   useEffect(() => {
-    const carInRedux = cars.find((car) => car.lN === lotNumber);
-    if (carInRedux) {
-      setCarInfo(carInRedux);
+    const carInCache = cars.find((car) => car.lN === lotNumber);
+    if (carInCache) {
+      setCarInfo(carInCache);
     } else {
       carsService.getSingleCar(lotNumber).then((data) => setCarInfo(data));
     }
   }, []);
 
+  if (!carInfo) {
+    return <>...loading car info</>
+  }
   return (
     <PublicLayout>
       {isDesktop ? (
