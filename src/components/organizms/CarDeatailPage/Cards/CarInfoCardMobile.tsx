@@ -23,8 +23,8 @@ export const CarInfoCardMobile: React.FC<CarInfoCardMobileProps> = ({car}) => {
           <HeadingSecondary textAlign="end" w="40%">{capitalizeEach(car.sDmg)}</HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">
-          <TextRegular opacity="0.5">Car condition</TextRegular>
-          <HeadingSecondary>Front End</HeadingSecondary>
+          <TextRegular opacity="0.5">Sales Status</TextRegular>
+          <HeadingSecondary>{capitalizeEach(car.sS)}</HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">
           <TextRegular opacity="0.5">Location</TextRegular>
