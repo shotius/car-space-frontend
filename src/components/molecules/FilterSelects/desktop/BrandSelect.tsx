@@ -4,7 +4,7 @@ import {
   Divider,
   Flex,
   StackProps,
-  VStack
+  VStack,
 } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
@@ -20,7 +20,10 @@ import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
-import { selectBrand } from 'src/redux/features/auth/selectedCarFilterSlice';
+import {
+  selectBrand,
+  selectModels,
+} from 'src/redux/features/auth/selectedCarFilterSlice';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 
@@ -54,7 +57,6 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
     if (areOptionsOpen) {
       setValue(selected.join(', '));
     }
-    console.log('selected: ', selected)
 
     updatePlaceholder();
   }, [selected.length]);
@@ -119,6 +121,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
             setAreOptionsOpen(false);
             dispatch(selectBrand([]));
             dispatch(setModels([]));
+            dispatch(selectModels([]));
           }}
         >
           <SelectSearch
