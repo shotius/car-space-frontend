@@ -7,8 +7,8 @@ import { CarInfoCard } from 'src/components/organizms/CarDeatailPage/Cards/CarIn
 import { CarTransportationCard } from 'src/components/organizms/CarDeatailPage/Cards/CarTransportationCard';
 import { CarDescriptionHeader } from 'src/components/organizms/MiniHeaders/CarDescriptionHeader';
 import { CarDetailSlider } from 'src/components/organizms/CarDeatailPage/Carousels/CarDetailSlider';
-import { ICar } from 'src/redux/features/auth/types';
 import { BidInfoCard } from 'src/components/molecules/Cards/BidInfoCard';
+import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface CarDetailPageDesktopProps {
   car?: ICar;

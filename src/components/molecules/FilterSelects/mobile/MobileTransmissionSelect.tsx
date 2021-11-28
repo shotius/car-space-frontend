@@ -11,7 +11,7 @@ export const MobileTransmissionSelect: React.FC<MobileTransmissionSelectProps> =
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const dispatch = useAppDispatch();
-    const { transsmision: selection } = useAppSelector(
+    const { transmission: selection } = useAppSelector(
       (state) => state.selectedCarFilters
     );
     return (

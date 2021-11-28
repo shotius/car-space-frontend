@@ -1,7 +1,6 @@
 import { Box } from '@chakra-ui/layout';
 import { useMediaQuery } from '@chakra-ui/media-query';
 import { CarCard } from 'src/components/molecules/Cards/CarCard';
-import { ICar } from 'src/redux/features/auth/types';
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 // Import Swiper styles
@@ -10,6 +9,7 @@ import 'swiper/css/bundle';
 import 'swiper/css/pagination';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
 import styles from './styles.module.scss';
 
 // install Swiper modules

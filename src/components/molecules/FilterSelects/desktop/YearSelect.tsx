@@ -8,7 +8,7 @@ import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { VerticalScrollable } from 'src/components/molecules/Wrappers/VerticalScrollable';
-import { useAppDispatch } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectYearFrom,
   selectYearTo,
@@ -20,9 +20,10 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
   ...rest
 }) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
-  const [yearFrom, setYearFrom] = useState(0);
-  const [yearTo, setYearTo] = useState(0);
+  const [yearFrom, setYearFrom] = useState<number>(0);
+  const [yearTo, setYearTo] = useState<number>(0);
   const [placeholder, setPlaceholder] = useState<string>('');
+  const {yearFrom: initYearFrom , yearTo: initYearTo} = useAppSelector(state => state.selectedCarFilters)
   const dispatch = useAppDispatch();
 
   // when ever selected value changes, placeholder changes as well
@@ -33,6 +34,15 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
       setPlaceholder(`Year`);
     }
   }, [yearFrom, yearTo]);
+
+  useEffect(() => {
+    if(initYearFrom) {
+      setYearFrom(Number(initYearFrom))
+    }
+    if (initYearTo) {
+      setYearTo(Number(initYearTo))
+    }
+  }, [initYearFrom, initYearTo])
 
   // handler year from select
   const handleSelectYearFrom = (num: number) => {

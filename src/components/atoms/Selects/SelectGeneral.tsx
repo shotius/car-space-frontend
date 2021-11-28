@@ -29,7 +29,7 @@ export const SelectGeneral: React.FC<TransmissionSelectProps & StackProps> = ({
 
   useEffect(() => {
     if (selected.length) {
-      setPlaceholder(`${selected.join(', ')}`);
+      setPlaceholder(`${label}: ${selected.join(', ')}`);
     } else {
       setPlaceholder(label);
     }

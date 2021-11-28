@@ -8,10 +8,10 @@ import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getCars } from 'src/redux/features/auth/carsSlice';
-import { ICar } from 'src/redux/features/auth/types';
 import { getAllFavouritesThunk } from 'src/redux/features/auth/userSlice';
 import { openCatalogBanner } from 'src/redux/features/global/gloabalSlice';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
+import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CatalogLIstProps {}
 

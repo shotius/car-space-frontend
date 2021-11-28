@@ -8,9 +8,9 @@ import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/Ca
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamCar } from 'src/DamnCard';
 import { useAppSelector } from 'src/redux/app/hook';
-import { ICar } from 'src/redux/features/auth/types';
 import carsService from 'src/services/carsService';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface CardDetailPageProps {}
 

@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import carsService from 'src/services/carsService';
+import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 import { setTotalPages } from './carPaginationSlice';
-import { CarsSliceState, ICar, ICarModel, IFilters } from './types';
+import { CarsSliceState, ICarModel, IFilters } from './types';
 
 const initialState: CarsSliceState = {
   cars: [],
@@ -16,6 +17,7 @@ const initialState: CarsSliceState = {
   cylinders: [],
   salesStatus: [],
   getFiltersError: false,
+  transmissions: []
 };
 
 export const searchCars = createAsyncThunk('cars/searchCars', async () => {
@@ -113,6 +115,7 @@ const carsSlice = createSlice({
       state.fuels = filters.fuels;
       state.cylinders = filters.cylinders;
       state.salesStatus = filters.salesStatus;
+      state.transmissions = filters.transmissions
     });
     builder.addCase(getFilters.rejected, (state) => {
       state.getFiltersError = true;

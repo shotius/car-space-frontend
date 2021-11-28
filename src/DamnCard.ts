@@ -24,4 +24,5 @@ export const DamCar = {
   y: '2016',
   fuel: 'GAS',
   keys: 'YES',
+  sS: "AUTOMATIC"
 };

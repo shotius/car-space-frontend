@@ -1,12 +1,12 @@
 import { HStack, VStack } from '@chakra-ui/layout';
 import { CarDeailsCard } from 'src/components/organizms/CarDeatailPage/Cards/CarDeailsCard';
-import { ICar } from 'src/redux/features/auth/types';
 import { ContainerOuter } from '../../atoms/Containers/ContainerOuter';
 import { BidInfoCard } from '../../molecules/Cards/BidInfoCard';
 import { CarDetailSliderMobile } from '../../organizms/CarDeatailPage/Carousels/CarDetailSliderMobile';
 import { TextRegular } from '../../molecules/Texts/TextRegular';
 import { CarInfoCardMobile } from '../../organizms/CarDeatailPage/Cards/CarInfoCardMobile';
 import { CarDescriptionHeader } from '../../organizms/MiniHeaders/CarDescriptionHeader';
+import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface CarDetailPageMobileProps {
   car?: ICar;

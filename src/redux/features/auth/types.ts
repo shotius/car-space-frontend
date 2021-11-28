@@ -1,33 +1,6 @@
-import { SelectedCarModel } from '../../../../../server/shared_with_front/types/types-shared';
+import { ICar, SelectedCarModel } from '../../../../../server/shared_with_front/types/types-shared';
 import { CurrencyType, Languages, Roles } from './../../../constants/index';
 
-export interface ICar {
-  _id: string;
-  lN: string; // Lot number
-  m: string; // Make
-  vin: string; // VIN
-  bSt: string; // Body Style
-  sDmg: string; // Secondary Damage
-  lSt: string; // Location state
-  lC: string; // Location country
-  od: string; // Odometer
-  cyl: string; // Cylinders
-  dr: string; // Drive
-  eP: string; // Est. Retail Value
-  curB: string; // High Bid =non-vix,Sealed=Vix
-  hK: string; // Has Keys-Yes or No
-  rC: string; // Repair cost
-  mG: string; // Model Group
-  mD: string; // Model Detail
-  eng: string; // Engine
-  dmg: string; // Damage Description
-  trans: string; // Transmission
-  imgT: string; // Image Thumbnail
-  imgU: string; // Image URL
-  y: string; // Year
-  fuel: string; // Fuel Type
-  keys: string; // Has Keys-Yes or No
-}
 
 export interface ICarModel {
   brand: string;
@@ -47,6 +20,7 @@ export interface CarsSliceState {
   cylinders: string[];
   salesStatus: string[];
   getFiltersError: boolean;
+  transmissions: string[]
 }
 
 export type Transmission = 'Manual' | 'Automatic' | 'CVT';
@@ -63,7 +37,7 @@ export interface SelectedCarFilters {
   priceTo: string | null;
   engineFrom: number | null;
   engineTo: number | null;
-  transsmision: Transmission[];
+  transmission: string[];
   currency: CurrencyType;
   isAdvancedFiltersOpen: boolean;
   conditions: string[];
@@ -92,6 +66,7 @@ export interface IFilters {
   brands: string[];
   cylinders: string[];
   salesStatus: string[];
+  transmissions: string[]
 }
 
 //** Car image slice types */

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectTranssmision } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { Transmission } from 'src/redux/features/auth/types';
 import { SelectOptionButton } from '../../Buttons/SelectOptionButton';
 import { TextRegular } from '../../Texts/TextRegular';
 import { SelectContent } from '../../Wrappers/SelectContent';
@@ -11,13 +10,14 @@ import { SelectContent } from '../../Wrappers/SelectContent';
 interface TransmissionSelectProps {}
 
 export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
-  const [selected, setSelected] = useState<Transmission[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
   const dispatch = useAppDispatch();
-  const { transsmision: initSelection } = useAppSelector(
+  const {transmissions} = useAppSelector(state => state.carsReducer)
+  const { transmission: initSelection } = useAppSelector(
     (state) => state.selectedCarFilters
   );
 
-  const transmissions = ['Manual', 'Automatic', 'CVT'] as const;
+  const transToShow = transmissions.filter(t => t)
 
   useEffect(() => {
     if (initSelection.length) {
@@ -25,7 +25,7 @@ export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
     }
   }, [initSelection]);
 
-  const handleSelect = (transmission: Transmission) => {
+  const handleSelect = (transmission: string) => {
     if (selected.includes(transmission)) {
       setSelected(selected.filter((trans) => trans !== transmission));
     } else {
@@ -45,7 +45,7 @@ export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
       onApply={() => dispatch(selectTranssmision(selected))}
     >
       <SelectContent>
-        {transmissions.map((trans) => (
+        {transToShow.map((trans) => (
           <SelectOptionButton
             key={trans}
             onClick={(e) => {

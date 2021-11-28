@@ -1,5 +1,5 @@
 import { HStack, VStack, Heading } from "@chakra-ui/react";
-import { ICar } from "src/redux/features/auth/types";
+import { ICar } from "../../../../../server/shared_with_front/types/types-shared";
 import { ButtonHeart } from "../../molecules/Buttons/ButtonHeart";
 import { TextRegular } from "../../molecules/Texts/TextRegular";
 

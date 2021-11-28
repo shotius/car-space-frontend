@@ -57,7 +57,7 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     conditions,
     types,
     locations,
-    transsmision,
+    transmission,
     keys,
     drives,
     salesStatus,
@@ -214,6 +214,7 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     query.delete(SALES_STATUS);
     query.delete(FUEL_TYPE);
     query.delete(CYLINDER);
+    query.delete('drive')
     deleteModelsFromURL(); // remote models
 
     // put brand values from redux in the url
@@ -266,7 +267,7 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     });
 
     // TRANSMISSION
-    transsmision.map((t) => {
+    transmission.map((t) => {
       query.append(TRANSMISSION, t);
     });
 

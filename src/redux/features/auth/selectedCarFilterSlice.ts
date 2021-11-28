@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrencyType } from 'src/constants';
 import { SelectedCarModel } from '../../../../../server/shared_with_front/types/types-shared';
-import { Keys, SelectedCarFilters,  Transmission } from './types';
+import { Keys, SelectedCarFilters } from './types';
 
 const initialState: SelectedCarFilters = {
   brands: [],
@@ -12,7 +12,7 @@ const initialState: SelectedCarFilters = {
   priceTo: null,
   engineFrom: null,
   engineTo: null,
-  transsmision: [],
+  transmission: [],
   currency: 'GEL',
   conditions: [],
   types: [],
@@ -42,8 +42,8 @@ const selectedCarFilterSlice = createSlice({
     selectEnginTo: (state, action) => {
       state.engineTo = action.payload;
     },
-    selectTranssmision: (state, action: PayloadAction<Transmission[]>) => {
-      state.transsmision = action.payload;
+    selectTranssmision: (state, action: PayloadAction<string[]>) => {
+      state.transmission = action.payload;
     },
     selectPriseFrom: (state, action: PayloadAction<string | null>) => {
       state.priceFrom = action.payload;

@@ -1,5 +1,5 @@
 import { VStack, StackDivider, HStack } from '@chakra-ui/layout';
-import { ICar } from 'src/redux/features/auth/types';
+import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { TextRegular } from '../Texts/TextRegular';
 

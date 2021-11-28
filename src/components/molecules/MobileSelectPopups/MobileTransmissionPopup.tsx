@@ -14,12 +14,12 @@ interface MobileTransmissionPopupProps {
 export const MobileTransmissionPopup: React.FC<MobileTransmissionPopupProps> =
   ({ isOpen, onClose }) => {
     // if user opens filter second types last selection will be saved
-    const { transsmision: initialSelection } = useAppSelector(
+    const { transmission: initialSelection } = useAppSelector(
       (state) => state.selectedCarFilters
     );
     // state
     const [selectedTransmissions, setSelectedTransmissions] =
-      useState<Transmission[]>(initialSelection);
+      useState<string[]>(initialSelection);
 
     const dispatch = useAppDispatch();
     

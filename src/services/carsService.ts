@@ -60,6 +60,7 @@ const getFilters = async () => {
       axios.get(`${baseURL}/brands`),
       axios.get(`${baseURL}/cylinders`),
       axios.get(`${baseURL}/sales_status`),
+      axios.get(`${baseURL}/transmissions`),
     ]);
 
     const filters: IFilters = {
@@ -73,6 +74,8 @@ const getFilters = async () => {
       cylinders: results[6].status === 'fulfilled' ? results[6].value.data : [],
       salesStatus:
         results[7].status === 'fulfilled' ? results[7].value.data : [],
+      transmissions:
+        results[8].status === 'fulfilled' ? results[8].value.data : [],
     };
 
     return filters;

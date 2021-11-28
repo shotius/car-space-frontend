@@ -12,9 +12,9 @@ import { useHistory } from 'react-router';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getImagesMedium } from 'src/redux/features/auth/carImagesSlice';
-import { ICar } from 'src/redux/features/auth/types';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
+import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 import { CarImageCarousel } from '../Carousels/CarImageCarousel/CarImageCarousel';
 import { CarCardHeading } from '../Headings/CarCardHeading';
 
