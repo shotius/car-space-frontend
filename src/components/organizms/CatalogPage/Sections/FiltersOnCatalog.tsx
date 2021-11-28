@@ -4,17 +4,17 @@ import { DesktopFiltersOnCatalogPage } from 'src/components/molecules/FilterSele
 import { MobileFiltersOnCatalogPage } from 'src/components/molecules/FilterSelects/MobileFilters';
 import { FilterQueries } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { getFilters } from 'src/redux/features/auth/carsSlice';
+import { getCars, getFilters } from 'src/redux/features/auth/carsSlice';
 import {
   selectBrand,
   selectModels,
   selectYearFrom,
   selectYearTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { SelectedCarModel } from 'src/redux/features/auth/types';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';
 import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
+import { SelectedCarModel } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CatalogLIstProps {}
 
@@ -23,13 +23,36 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   const query = useQueryParams();
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const { BRAND, MODEL, YEAR_FROM, YEAR_TO } = FilterQueries;
+  const {
+    BRAND,
+    MODEL,
+    YEAR_FROM,
+    YEAR_TO,
+    CONDITION,
+    TYPE,
+    LOCATION,
+    TRANSMISSION,
+    KEYS,
+    DRIVE,
+    SALES_STATUS,
+    FUEL_TYPE,
+    CYLINDER,
+  } = FilterQueries;
 
   const {
     brands: selectedBrands,
     models: selectedModels,
     yearFrom,
     yearTo,
+    conditions,
+    types,
+    locations,
+    transsmision,
+    keys,
+    drives,
+    salesStatus,
+    fuels,
+    cylinders,
   } = useAppSelector((state) => state.selectedCarFilters);
 
   const { brands } = useAppSelector((state) => state.selectedCarFilters);
@@ -114,9 +137,16 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     query.delete(BRAND);
     query.delete(YEAR_FROM);
     query.delete(YEAR_TO);
-
-    // remote models
-    deleteModelsFromURL();
+    query.delete(CONDITION);
+    query.delete(TYPE);
+    query.delete(LOCATION);
+    query.delete(TRANSMISSION);
+    query.delete(KEYS);
+    query.delete(DRIVE);
+    query.delete(SALES_STATUS);
+    query.delete(FUEL_TYPE);
+    query.delete(CYLINDER);
+    deleteModelsFromURL(); // remote models
 
     // put brand values from redux in the url
     if (selectedBrands.length) {
@@ -142,16 +172,54 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
       query.set(YEAR_FROM, yearFrom);
     }
 
+    // KEYS
+    if (keys) {
+      query.set(KEYS, keys);
+    }
+
     // set year to
     if (yearTo) {
       query.set(YEAR_TO, yearTo);
     }
 
+    // condition
+    conditions.map((c) => {
+      query.append(CONDITION, c);
+    });
+
+    // TYPES
+    types.map((t) => {
+      query.append(TYPE, t);
+    });
+
+    // location
+    locations.map((l) => {
+      query.append(LOCATION, l);
+    });
+
+    // TRANSMISSION
+    transsmision.map((t) => {
+      query.append(TRANSMISSION, t);
+    });
+
+    // SALES STATUS
+
+    salesStatus.map((s) => query.append(SALES_STATUS, s));
+
+    // FUEL TYPE
+    fuels.map((f) => query.append(FUEL_TYPE, f))
+
+    // CYLINDERS
+    cylinders.map(c => query.append(CYLINDER, c))
+
+    // DRIVE
+    drives.map((d) => query.append(DRIVE, d));
+
     // we need to see first page on search
     query.set('page', '1');
 
     history.push({ pathname: '/catalog', search: query.toString() });
-    // dispatch(getCars(query));
+    dispatch(getCars(query));
   };
 
   return (

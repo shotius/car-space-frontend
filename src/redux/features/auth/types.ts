@@ -1,3 +1,4 @@
+import { SelectedCarModel } from '../../../../../server/shared_with_front/types/types-shared';
 import { CurrencyType, Languages, Roles } from './../../../constants/index';
 
 export interface ICar {
@@ -52,10 +53,6 @@ export type Transmission = 'Manual' | 'Automatic' | 'CVT';
 
 export type Keys = 'YES' | 'NO' | null;
 
-export interface SelectedCarModel {
-  brand: string;
-  models: string[]
-}
 
 export interface SelectedCarFilters {
   brands: string[];

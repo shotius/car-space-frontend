@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrencyType } from 'src/constants';
-import { Keys, SelectedCarFilters, SelectedCarModel, Transmission } from './types';
+import { SelectedCarModel } from '../../../../../server/shared_with_front/types/types-shared';
+import { Keys, SelectedCarFilters,  Transmission } from './types';
 
 const initialState: SelectedCarFilters = {
   brands: [],

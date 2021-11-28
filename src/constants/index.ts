@@ -25,5 +25,15 @@ export enum FilterQueries {
   MODEL = 'model',
   YEAR_FROM = 'year_from',
   YEAR_TO = 'year_to',
+  PRICE_FROM = 'price_from', 
+  PRICE_TO = 'price_to', 
   CONDITION ="condition", 
+  TYPE='type', 
+  LOCATION = 'location', 
+  TRANSMISSION = 'transmission', 
+  KEYS = 'keys', 
+  DRIVE = 'drive', 
+  SALES_STATUS = 'sales_status', 
+  FUEL_TYPE= 'fuel', 
+  CYLINDER = 'cylinder'
 }

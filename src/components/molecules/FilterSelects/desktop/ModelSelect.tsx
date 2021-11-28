@@ -10,8 +10,8 @@ import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
 import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { SelectedCarModel } from 'src/redux/features/auth/types';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
+import { SelectedCarModel } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface ModelSelectProps {}
 
