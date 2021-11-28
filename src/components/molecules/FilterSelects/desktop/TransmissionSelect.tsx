@@ -1,7 +1,7 @@
 import { Checkbox } from '@chakra-ui/checkbox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
-import { useAppDispatch } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectTranssmision } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { Transmission } from 'src/redux/features/auth/types';
 import { SelectOptionButton } from '../../Buttons/SelectOptionButton';
@@ -13,8 +13,17 @@ interface TransmissionSelectProps {}
 export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
   const [selected, setSelected] = useState<Transmission[]>([]);
   const dispatch = useAppDispatch();
+  const { transsmision: initSelection } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
 
   const transmissions = ['Manual', 'Automatic', 'CVT'] as const;
+
+  useEffect(() => {
+    if (initSelection.length) {
+      setSelected(initSelection);
+    }
+  }, [initSelection]);
 
   const handleSelect = (transmission: Transmission) => {
     if (selected.includes(transmission)) {

@@ -1,5 +1,5 @@
 import { Checkbox } from '@chakra-ui/checkbox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectFuels } from 'src/redux/features/auth/selectedCarFilterSlice';
@@ -11,11 +11,17 @@ interface FuelSelectProps {}
 
 export const FuelSelect: React.FC<FuelSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
-
   const { fuels } = useAppSelector((state) => state.carsReducer);
+  const { fuels: initSelection} = useAppSelector(state => state.selectedCarFilters)
   const dispatch = useAppDispatch();
 
   const fuelsToShow = fuels.filter((fuel) => fuel);
+
+  useEffect(() => {
+    if (initSelection.length) {
+      setSelected(initSelection)
+    }
+  }, [initSelection])
 
   const handleSelect = (fuel: string) => {
     if (selected.includes(fuel)) {

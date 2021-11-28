@@ -97,7 +97,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
   // handle option select
   const handleSelect = ({ brand, model }: { brand: string; model: string }) => {
     let changeHappend = false; // this varible is for notifying us about change in the loop
-     
+
     selected.forEach((item, i) => {
       // if there is another model selected for this brand
       if (item.brand === brand) {
@@ -127,10 +127,18 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
     }
   };
 
+  // all selected models in an array
+  const allModelsSelected = selected.reduce<string[]>(
+    (acc, cur) => acc.concat(cur.models),
+    []
+  );
+
   // filter options when searchWord is specified
   // const optionsToShow = options.filter((option) => {
   //   return option.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
   // });
+
+  console.log('selected: ', selected)
 
   return (
     <SelectWrapper
@@ -151,16 +159,16 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
       {/*  Input */}
       <SelectContent>
         <SelectTrigger
-          areOptionsSelected={!!selected.length}
+          areOptionsSelected={!!allModelsSelected.length}
           isDisabled={isDisabled}
           areOptionsOpen={areOptionsOpen}
           onFocus={() => {
             // onFocus open Options
             setAreOptionsOpen(true);
             // if something is selected, display in placeholder
-            updatePlaceholder();
+            // updatePlaceholder();
             // clear value in the search field
-            setValue('');
+            // setValue('');
           }}
           clearCb={(e) => {
             if (e.stopPropagation) e.stopPropagation();

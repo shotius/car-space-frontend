@@ -1,10 +1,9 @@
 import { Checkbox } from '@chakra-ui/checkbox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
-  selectSalesStatus,
-  selectTypes,
+  selectSalesStatus
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SelectOptionButton } from '../../Buttons/SelectOptionButton';
 import { TextRegular } from '../../Texts/TextRegular';
@@ -14,11 +13,18 @@ interface SalesStatusSelectProps {}
 
 export const SalesStatusSelect: React.FC<SalesStatusSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
-
   const { salesStatus } = useAppSelector((state) => state.carsReducer);
+  const { salesStatus: initSelection} = useAppSelector(state => state.selectedCarFilters)
   const dispatch = useAppDispatch();
 
   const salesStatusToShow = salesStatus.filter((status) => status);
+
+  console.log('seelction', initSelection)
+  useEffect(() => {
+    if (initSelection.length) {
+      setSelected(initSelection)
+    }
+  }, [initSelection])
 
   const handleSelect = (status: string) => {
     if (selected.includes(status)) {
@@ -37,7 +43,7 @@ export const SalesStatusSelect: React.FC<SalesStatusSelectProps> = ({}) => {
         setSelected([]);
         dispatch(selectSalesStatus([]));
       }}
-      onApply={() => dispatch(selectTypes(selected))}
+      onApply={() => dispatch(selectSalesStatus(selected))}
       top="35px"
     >
       <SelectContent>

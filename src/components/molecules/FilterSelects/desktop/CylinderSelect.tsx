@@ -1,5 +1,5 @@
 import { Checkbox } from '@chakra-ui/checkbox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectCylinders } from 'src/redux/features/auth/selectedCarFilterSlice';
@@ -11,11 +11,17 @@ interface CylinderSelectProps {}
 
 export const CylinderSelect: React.FC<CylinderSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
-
   const { cylinders } = useAppSelector((state) => state.carsReducer);
+  const { cylinders: initSelection} = useAppSelector(state=> state.selectedCarFilters)
   const dispatch = useAppDispatch();
 
   const cylindersToShow = cylinders.filter((cylinder) => cylinder);
+
+  useEffect(() => {
+    if (initSelection.length) {
+      setSelected(initSelection)
+    }
+  }, [initSelection])
 
   const handleSelect = (cylinder: string) => {
     if (selected.includes(cylinder)) {

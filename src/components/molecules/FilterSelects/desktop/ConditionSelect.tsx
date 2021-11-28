@@ -1,5 +1,5 @@
 import { Checkbox } from '@chakra-ui/checkbox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectConditions } from 'src/redux/features/auth/selectedCarFilterSlice';
@@ -11,12 +11,19 @@ interface ConditionSelectProps {}
 
 export const ConditionSelect: React.FC<ConditionSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
-
   const { conditions } = useAppSelector((state) => state.carsReducer);
-
+  const { conditions: initSelection } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
   const dispatch = useAppDispatch();
 
   const conditionsToShow = conditions.filter((condition) => condition);
+
+  useEffect(() => {
+    if (initSelection.length) {
+      setSelected(initSelection);
+    }
+  }, [initSelection]);
 
   const handleSelect = (condition: string) => {
     if (selected.includes(condition)) {

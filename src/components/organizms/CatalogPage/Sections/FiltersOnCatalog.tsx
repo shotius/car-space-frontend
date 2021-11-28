@@ -7,10 +7,20 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getCars, getFilters } from 'src/redux/features/auth/carsSlice';
 import {
   selectBrand,
+  selectCarKeys,
+  selectConditions,
+  selectCylinders,
+  selectDrives,
+  selectFuels,
+  selectLocations,
   selectModels,
+  selectSalesStatus,
+  selectTranssmision,
+  selectTypes,
   selectYearFrom,
   selectYearTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { Transmission } from 'src/redux/features/auth/types';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';
 import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
@@ -67,14 +77,20 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     }
 
     // parse selected models from url
-    const modelQueryKeys = Array.from(query.keys()).filter((q) =>
-      q.includes(`${MODEL}[`)
-    );
+    // finally: unique model qs
+    const modelQueryKeys = [
+      ...new Set(
+        Array.from(query.keys()).filter((q) => q.includes(`${MODEL}[`))
+      ),
+    ];
+
+    // restore models from url
     const models = parseModelQueries({ brands: queryBrands, modelQueryKeys });
     if (models.length) {
       dispatch(selectModels(models));
     }
 
+    // restore year from url
     const yearFrom = query.get(YEAR_FROM);
     if (yearFrom) {
       dispatch(selectYearFrom(yearFrom));
@@ -83,6 +99,61 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     const yearTo = query.get(YEAR_TO);
     if (yearTo) {
       dispatch(selectYearTo(yearTo));
+    }
+
+    // restore condition from url
+    const conditions = query.getAll(CONDITION);
+    if (conditions.length) {
+      dispatch(selectConditions(conditions));
+    }
+
+    // restore types from url
+    const types = query.getAll(TYPE);
+    if (types.length) {
+      dispatch(selectTypes(types));
+    }
+
+    // restore drives from url
+    const drives = query.getAll(DRIVE);
+    if (drives.length) {
+      dispatch(selectDrives(drives));
+    }
+
+    // restore location from url
+    const locations = query.getAll(LOCATION);
+    if (locations.length) {
+      dispatch(selectLocations(locations));
+    }
+
+    // restore transmissions from url
+    const transmissions = query.getAll(TRANSMISSION) as Transmission[];
+    console.log('transmission: ', transmissions)
+    if (transmissions.length) {
+      dispatch(selectTranssmision(transmissions));
+    }
+
+    // restore keys from url
+    const keys = query.get(KEYS);
+    if (keys === 'NO' || keys === 'YES') {
+      dispatch(selectCarKeys(keys));
+    }
+
+    // restore sales status from url
+    const salesStatus = query.getAll(SALES_STATUS);
+    if (salesStatus.length) {
+      dispatch(selectSalesStatus(salesStatus));
+    }
+
+    // restore fuel types
+    const fuels = query.getAll(FUEL_TYPE);
+    if (fuels.length) {
+      dispatch(selectFuels(fuels));
+    }
+
+    // restore Cylinders
+    const cylinders = query.getAll(CYLINDER);
+    if (cylinders.length) {
+      dispatch(selectCylinders(cylinders));
     }
   }, [query]);
 
@@ -103,31 +174,28 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   // receives list of brands in the url and queries of models
   // returns ready object of selected models to save in redux
   const parseModelQueries = ({
-    modelQueryKeys,
-    brands,
+    modelQueryKeys, // all queryString keys for selected models
+    brands, // all brands in url
   }: {
     modelQueryKeys: string[];
     brands: string[];
   }) => {
-    const newModels: SelectedCarModel[] = [];
+    const resultModelsObj: SelectedCarModel[] = [];
 
-    // fill models only with brands specified in the url
-    // if in the url we have models and not brands, we don't save these models in redux
-    brands.forEach((brand) => newModels.push({ brand, models: [] }));
+    // Iterate over all brands in the url and fill template object for adding models
+    brands.map((brand) => resultModelsObj.push({ brand, models: [] }));
 
-    // iterate over all model query keys and push them in to the models array
-    modelQueryKeys.forEach((q) => {
+    // iterate over all model query keys and push them in to the models array with brand name
+    modelQueryKeys.map((q) => {
+      // get brand name from modelQuery string
       const brand = q.slice(q.indexOf('[') + 1, q.indexOf(']'));
-      newModels.map((obj) => {
-        if (obj.brand === brand) {
-          const model = query.get(q);
-          if (model) {
-            obj.models.push(model);
-          }
-        }
-      });
+
+      // get all models for specific brand and put in a result
+      const modelsOfSpecificBrand = query.getAll(q);
+      resultModelsObj.push({ brand, models: modelsOfSpecificBrand });
     });
-    return newModels;
+    // filter empty models
+    return resultModelsObj.filter((m) => m.models.length);
   };
 
   // apply filters to the url, create new totaly new query string
@@ -207,10 +275,10 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     salesStatus.map((s) => query.append(SALES_STATUS, s));
 
     // FUEL TYPE
-    fuels.map((f) => query.append(FUEL_TYPE, f))
+    fuels.map((f) => query.append(FUEL_TYPE, f));
 
     // CYLINDERS
-    cylinders.map(c => query.append(CYLINDER, c))
+    cylinders.map((c) => query.append(CYLINDER, c));
 
     // DRIVE
     drives.map((d) => query.append(DRIVE, d));

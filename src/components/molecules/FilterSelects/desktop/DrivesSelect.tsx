@@ -1,5 +1,5 @@
 import { Checkbox } from '@chakra-ui/checkbox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectDrives } from 'src/redux/features/auth/selectedCarFilterSlice';
@@ -11,11 +11,17 @@ interface DrivesSelectProps {}
 
 export const DrivesSelect: React.FC<DrivesSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
-
   const { drives } = useAppSelector((state) => state.carsReducer);
+  const { drives: initSelection} = useAppSelector(state => state.selectedCarFilters)
   const dispatch = useAppDispatch();
 
   const drivesToShow = drives.filter((el) => el);
+
+  useEffect(() => {
+    if (initSelection.length) {
+      setSelected(initSelection)
+    }
+  }, [initSelection])
 
   const handleSelect = (drive: string) => {
     if (selected.includes(drive)) {
