@@ -2,7 +2,7 @@ import { axios } from 'src/utils/axios';
 
 const baseUrl = '/api/cars/images';
 
-const getMediumImages = async (lotNumber: string) => {
+const getMediumImages = async (lotNumber: number) => {
   const { data } = await axios.get(`${baseUrl}/medium?lotNumber=${lotNumber}`);
   return data;
 };

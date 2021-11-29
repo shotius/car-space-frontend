@@ -13,9 +13,9 @@ const initialState: CarImageSliceState = {
   errorFetchingThumbs: {},
 };
 
-export const getImagesMedium = createAsyncThunk(
-  'getImagesMedium',
-  async (lN: string, { rejectWithValue }) => {
+export const getImagesMediumThunk = createAsyncThunk(
+  'getImagesMediumThunk',
+  async (lN: number, { rejectWithValue }) => {
     try {
       return await carImageServices.getMediumImages(lN);
     } catch (error: any) {
@@ -54,16 +54,16 @@ const carImagesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     //** Get medium size images */
-    builder.addCase(getImagesMedium.pending, (state, action) => {
+    builder.addCase(getImagesMediumThunk.pending, (state, action) => {
       // in the state we have {loNumber: [...images]}
       state.fetchingMediums[action.meta.arg] = true;
       state.errorFetchingMediums[action.meta.arg] = undefined;
     });
-    builder.addCase(getImagesMedium.fulfilled, (state, action) => {
+    builder.addCase(getImagesMediumThunk.fulfilled, (state, action) => {
       state.fetchingMediums[action.meta.arg] = false;
       state.mediumImages[action.meta.arg] = action.payload;
     });
-    builder.addCase(getImagesMedium.rejected, (state, action) => {
+    builder.addCase(getImagesMediumThunk.rejected, (state, action) => {
       state.fetchingMediums[action.meta.arg] = false;
       state.errorFetchingMediums[action.meta.arg] = action.payload as string;
     });

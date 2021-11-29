@@ -128,7 +128,7 @@ const carsSlice = createSlice({
       console.log(state, action);
     });
 
-    /** fetch cars */
+    /** Fetch cars */
     builder.addCase(getCars.pending, (state) => {
       state.fethingCars = true;
       state.fetchingCarsError = undefined;
@@ -174,10 +174,9 @@ const carsSlice = createSlice({
       state.errorFetchingSingleCar = undefined;
     });
     builder.addCase(getSingleCarAsync.fulfilled, (state, action) => {
-      console.log('get single car fullfillded')
       state.fetchingSingleCar = false;
       state.errorFetchingSingleCar = undefined;
-      state.cars.concat(action.payload);
+      state.cars = state.cars.concat(action.payload);
     });
     builder.addCase(getSingleCarAsync.rejected, (state, aciton) => {
       state.fetchingSingleCar = false

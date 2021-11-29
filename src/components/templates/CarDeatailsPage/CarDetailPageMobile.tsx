@@ -1,6 +1,10 @@
-import { HStack, VStack } from '@chakra-ui/layout';
+import { AspectRatio, Box, HStack, VStack } from '@chakra-ui/layout';
+import { Spinner } from '@chakra-ui/spinner';
+import { useParams } from 'react-router-dom';
+import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { CarDeailsCard } from 'src/components/organizms/CarDeatailPage/Cards/CarDeailsCard';
 import { CarTrasportationInfo } from 'src/components/organizms/CarDeatailPage/Cards/CarTrasportationInfo';
+import { useAppSelector } from 'src/redux/app/hook';
 import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 import { ContainerOuter } from '../../atoms/Containers/ContainerOuter';
 import { BidInfoCard } from '../../molecules/Cards/BidInfoCard';
@@ -11,15 +15,44 @@ import { CarDescriptionHeader } from '../../organizms/MiniHeaders/CarDescription
 
 interface CarDetailPageMobileProps {
   car: ICar;
+  thumbs: string[];
+  images: string[];
 }
 
 export const CarDetailPageMobile: React.FC<CarDetailPageMobileProps> = ({
   car,
+  images,
+  thumbs,
 }) => {
+  const { fetchingMediums, fetchingThumbs } = useAppSelector(
+    (state) => state.carImages
+  );
+  const { lotNumber } = useParams<{ lotNumber: string }>();
+
   return (
     <>
       <ContainerOuter p="0">
-        <CarDetailSliderMobile />
+        {fetchingMediums[lotNumber] || fetchingThumbs[lotNumber] ? (
+          <>
+            <AspectRatio ratio={3 / 2} width="full">
+              <Box bg="autoGrey.400">
+                <Spinner />
+              </Box>
+            </AspectRatio>
+          </>
+        ) : (
+          <>
+            {!(thumbs.length && images.length) ? (
+              <AspectRatio ratio={3 / 2} width="full">
+                <Box bg="autoGrey.400">
+                  <HeadingSecondary>No photos available</HeadingSecondary>
+                </Box>
+              </AspectRatio>
+            ) : (
+              <CarDetailSliderMobile thumbs={thumbs} images={images} />
+            )}
+          </>
+        )}
       </ContainerOuter>
       <ContainerOuter pt="4">
         <HStack>
@@ -40,8 +73,8 @@ export const CarDetailPageMobile: React.FC<CarDetailPageMobileProps> = ({
 
             {/* car information */}
             <CarInfoCardMobile car={car} />
-            <CarTrasportationInfo /> 
-            
+            <CarTrasportationInfo />
+
             {/* car details */}
             <CarDeailsCard car={car} variant="mobile" />
           </VStack>

@@ -1,7 +1,8 @@
-import { AspectRatio, Box, Center, Image } from '@chakra-ui/react';
+import { AspectRatio, Box, Center, Image, Spinner } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useParams } from 'react-router';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import styles from './styles.module.scss';
+import { useAppSelector } from 'src/redux/app/hook';
 // import Swiper core and required modules
 import SwiperCore, { FreeMode, Navigation, Thumbs } from 'swiper';
 // Import Swiper styles
@@ -11,14 +12,27 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+import styles from './styles.module.scss';
 
 // install Swiper modules
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
-interface CarDetailSliderProps {}
+interface CarDetailSliderProps {
+  images: string[];
+  thumbs: string[];
+}
 
-export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({}) => {
+export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({
+  thumbs,
+  images,
+}) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
+  const { fetchingThumbs, fetchingMediums } = useAppSelector(
+    (state) => state.carImages
+  );
+  const { lotNumber } = useParams<{ lotNumber: string }>();
+
+  const fallbackArray = Array(5).fill(0);
 
   return (
     <Box w="full">
@@ -28,31 +42,29 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({}) => {
           thumbs={{ swiper: thumbsSwiper }}
           className="mySwiper2"
         >
-          <SwiperSlide>
-            <AspectRatio ratio={3 / 2} width="full">
-              <Image src="http://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX392/9397cb64-5c25-4226-88fb-f559e394e2ad.JPG" />
-            </AspectRatio>
-          </SwiperSlide>
-          <SwiperSlide>
-            <AspectRatio ratio={3 / 2} width="full">
-              <Image src="https://media.istockphoto.com/photos/generic-red-suv-on-a-white-background-side-view-picture-id1157655660?k=20&m=1157655660&s=612x612&w=0&h=WOtAthbmJ9iG1zbKo4kNUsAGMe6-xM-E7a8TMxb5xmk=" />
-            </AspectRatio>
-          </SwiperSlide>
-          <SwiperSlide>
-            <AspectRatio ratio={3 / 2} width="full">
-              <Image src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80" />
-            </AspectRatio>
-          </SwiperSlide>
-          <SwiperSlide>
-            <AspectRatio ratio={3 / 2} width="full">
-              <Image src="https://media.istockphoto.com/photos/classic-car-picture-id466771069?k=20&m=466771069&s=612x612&w=0&h=BFsJcpBuT0Ijm2VZm9FfLsEkWv5YKIuvcDlf8jVk7MQ=" />
-            </AspectRatio>
-          </SwiperSlide>
-          <SwiperSlide>
-            <AspectRatio ratio={3 / 2} width="full">
-              <Image src="https://media.wired.com/photos/5d09594a62bcb0c9752779d9/master/pass/Transpo_G70_TA-518126.jpg" />
-            </AspectRatio>
-          </SwiperSlide>
+          {fetchingMediums[lotNumber] ? (
+            <>
+              {fallbackArray.map((img) => (
+                <SwiperSlide key={img}>
+                  <AspectRatio ratio={3 / 2} width="full">
+                    <Box bg="autoGrey.400">
+                      <Spinner />
+                    </Box>
+                  </AspectRatio>
+                </SwiperSlide>
+              ))}
+            </>
+          ) : (
+            <>
+              {images.map((img) => (
+                <SwiperSlide key={img}>
+                  <AspectRatio ratio={3 / 2} width="full">
+                    <Image src={img} />
+                  </AspectRatio>
+                </SwiperSlide>
+              ))}
+            </>
+          )}
         </Swiper>
       </Box>
       <Box pt="4" pl="4">
@@ -101,71 +113,61 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({}) => {
           freeMode={true}
           watchSlidesProgress={true}
         >
-          <SwiperSlide>
-            <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
-              <Image
-                src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg"
-                borderRadius="8px"
-                width="88px"
-              />
-            </AspectRatio>
-          </SwiperSlide>
-          <SwiperSlide>
-            <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
-              <Image
-                src="https://media.istockphoto.com/photos/generic-red-suv-on-a-white-background-side-view-picture-id1157655660?k=20&m=1157655660&s=612x612&w=0&h=WOtAthbmJ9iG1zbKo4kNUsAGMe6-xM-E7a8TMxb5xmk="
-                borderRadius="8px"
-                width="88px"
-              />
-            </AspectRatio>
-          </SwiperSlide>
-          <SwiperSlide>
-            <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
-              <Image
-                src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
-                borderRadius="8px"
-                width="88px"
-              />
-            </AspectRatio>
-          </SwiperSlide>
-          <SwiperSlide>
-            <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
-              <Image
-                src="https://media.istockphoto.com/photos/classic-car-picture-id466771069?k=20&m=466771069&s=612x612&w=0&h=BFsJcpBuT0Ijm2VZm9FfLsEkWv5YKIuvcDlf8jVk7MQ="
-                borderRadius="8px"
-                width="88px"
-              />
-            </AspectRatio>
-          </SwiperSlide>
-          {/* last all picture slide  */}
-          <SwiperSlide style={{ position: 'relative' }}>
-            <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
-              <Box borderRadius="8px">
-                <Image
-                  src="https://media.wired.com/photos/5d09594a62bcb0c9752779d9/master/pass/Transpo_G70_TA-518126.jpg"
-                  width="full"
-                  h="full"
-                />
-                <Box
-                  position="absolute"
-                  top="0"
-                  right="0"
-                  bottom="0"
-                  left="0"
-                  borderRadius="8px"
-                  cursor="pointer"
-                  background="rgba(0, 0, 0,0.5)"
-                  zIndex="1"
-                >
-                  <Center h="full">
-                    <TextRegular fontSize="24px" color="white" opacity="1">
-                      +6
-                    </TextRegular>
-                  </Center>
-                </Box>
-              </Box>
-            </AspectRatio>
-          </SwiperSlide>
+          {/* if fetching thubnneils falback will be shown  */}
+          {fetchingThumbs[lotNumber] ? (
+            <>
+              {Array(5)
+                .fill(0)
+                .map((img) => (
+                  <SwiperSlide key={img}>
+                    <AspectRatio ratio={3 / 2} width="full">
+                      <Box bg="autoGrey.400" borderRadius="8px">
+                        <Spinner />
+                      </Box>
+                    </AspectRatio>
+                  </SwiperSlide>
+                ))}
+            </>
+          ) : (
+            <>
+              {thumbs.slice(0, thumbs.length - 1).map((thumb) => (
+                <SwiperSlide key={thumb}>
+                  <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
+                    <Image src={thumb} borderRadius="8px" width="88px" />
+                  </AspectRatio>
+                </SwiperSlide>
+              ))}
+              {/* last all picture slide  */}
+              <SwiperSlide style={{ position: 'relative' }}>
+                <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
+                  <Box borderRadius="8px">
+                    <Image
+                      src={thumbs[thumbs.length - 1]}
+                      width="full"
+                      h="full"
+                    />
+                    <Box
+                      position="absolute"
+                      top="0"
+                      right="0"
+                      bottom="0"
+                      left="0"
+                      borderRadius="8px"
+                      cursor="pointer"
+                      background="rgba(0, 0, 0,0.5)"
+                      zIndex="1"
+                    >
+                      <Center h="full">
+                        <TextRegular fontSize="24px" color="white" opacity="1">
+                          +6
+                        </TextRegular>
+                      </Center>
+                    </Box>
+                  </Box>
+                </AspectRatio>
+              </SwiperSlide>
+            </>
+          )}
         </Swiper>
       </Box>
     </Box>

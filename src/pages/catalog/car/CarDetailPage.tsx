@@ -8,6 +8,10 @@ import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/Ca
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamCar } from 'src/DamnCard';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import {
+  getImagesMediumThunk,
+  getThumbs,
+} from 'src/redux/features/auth/carImagesSlice';
 import { getSingleCarAsync } from 'src/redux/features/auth/carsSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
@@ -15,26 +19,48 @@ import { ICar } from '../../../../../server/shared_with_front/types/types-shared
 interface CardDetailPageProps {}
 
 export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
-  const { isDesktop } = useDetectScreen();
-  const { lotNumber } = useParams<{ lotNumber: string }>();
-  const { cars } = useAppSelector((state) => state.carsReducer);
   const [carInfo, setCarInfo] = useState<ICar>();
+  const [thumbs, setThumbs] = useState<string[]>([]);
+  const [images, setImages] = useState<string[]>([]);
+
+  const { cars } = useAppSelector((state) => state.carsReducer);
+  const { thumbImages, mediumImages } = useAppSelector(
+    (state) => state.carImages
+  );
   const dispatch = useAppDispatch();
 
+  const { lotNumber } = useParams<{ lotNumber: string }>();
+  const { isDesktop } = useDetectScreen();
+
   useEffect(() => {
+    // if Images are not in the cache fethc them
+    if (!mediumImages[lotNumber]) {
+      dispatch(getImagesMediumThunk(parseInt(lotNumber)))
+        .unwrap()
+        .then((data) => setImages(data));
+    } else {
+      setImages(mediumImages[lotNumber]);
+    }
+
+    // if thumbs are not in the cache fetch them
+    if (!thumbImages[lotNumber]) {
+      dispatch(getThumbs(parseInt(lotNumber)))
+        .unwrap()
+        .then((data) => setThumbs(data));
+    } else {
+      setThumbs(thumbImages[lotNumber]);
+    }
+
     const carInCache = cars.find((car) => car.lN === lotNumber);
+    // if car is not in the cache fetch it
     if (carInCache) {
-      console.log('from cache');
       setCarInfo(carInCache);
     } else {
-      console.log('fetching...');
       dispatch(getSingleCarAsync(Number(lotNumber)))
         .unwrap()
         .then((data) => setCarInfo(data));
     }
   }, []);
-
-  console.log('carInfo', carInfo)
 
   if (!carInfo) {
     return <>...loading car info</>;
@@ -42,9 +68,9 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
   return (
     <PublicLayout>
       {isDesktop ? (
-        <CarDetailPageDesktop car={carInfo} />
+        <CarDetailPageDesktop car={carInfo} thumbs={thumbs} images={images} />
       ) : (
-        <CarDetailPageMobile car={carInfo} />
+        <CarDetailPageMobile car={carInfo} thumbs={thumbs} images={images} />
       )}
 
       {/* similar vehicles*/}

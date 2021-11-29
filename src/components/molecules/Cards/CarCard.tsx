@@ -11,7 +11,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { getImagesMedium } from 'src/redux/features/auth/carImagesSlice';
+import { getImagesMediumThunk } from 'src/redux/features/auth/carImagesSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
@@ -39,10 +39,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
   const shouldFetch = useMemo(() => {
     if (isVisible && car) {
       // if we dont have car in redux state, either in a list or in errors: true , else: false
-      if (
-        !mediumImages[car.lN] &&
-        !errorFetchingMediumImagess[car.lN]
-      ) {
+      if (!mediumImages[car.lN] && !errorFetchingMediumImagess[car.lN]) {
         return true;
       } else {
         // if we have a car in the redux remove current from ref, it Prevents from re-renders
@@ -55,7 +52,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
 
   useEffect(() => {
     if (shouldFetch) {
-      dispatch(getImagesMedium(car.lN));
+      dispatch(getImagesMediumThunk(parseInt(car.lN)));
       setShouldHaveRef(false);
       // remove div from observer, it prevents rerenders
       ref.current = null;
