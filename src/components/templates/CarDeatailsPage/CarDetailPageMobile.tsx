@@ -1,15 +1,13 @@
 import { HStack, VStack } from '@chakra-ui/layout';
 import { CarDeailsCard } from 'src/components/organizms/CarDeatailPage/Cards/CarDeailsCard';
+import { CarTrasportationInfo } from 'src/components/organizms/CarDeatailPage/Cards/CarTrasportationInfo';
+import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 import { ContainerOuter } from '../../atoms/Containers/ContainerOuter';
 import { BidInfoCard } from '../../molecules/Cards/BidInfoCard';
-import { CarDetailSliderMobile } from '../../organizms/CarDeatailPage/Carousels/CarDetailSliderMobile';
 import { TextRegular } from '../../molecules/Texts/TextRegular';
 import { CarInfoCardMobile } from '../../organizms/CarDeatailPage/Cards/CarInfoCardMobile';
+import { CarDetailSliderMobile } from '../../organizms/CarDeatailPage/Carousels/CarDetailSliderMobile';
 import { CarDescriptionHeader } from '../../organizms/MiniHeaders/CarDescriptionHeader';
-import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
-import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading';
-import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
-import { CarTrasportationInfo } from 'src/components/organizms/CarDeatailPage/Cards/CarTrasportationInfo';
 
 interface CarDetailPageMobileProps {
   car: ICar;
