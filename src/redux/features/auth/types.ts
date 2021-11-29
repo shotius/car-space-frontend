@@ -74,7 +74,11 @@ export interface IFilters {
 export interface CarImageSliceState {
   fetchingMediums: Record<string, boolean>;
   mediumImages: Record<string, string[]>;
-  errorFetchingMediums: string[];
+  errorFetchingMediums: Record<string, string | undefined>;
+
+  fetchingThumbs: Record<string, boolean>; 
+  thumbImages: Record<string, string[]>
+  errorFetchingThumbs: Record<string, any | undefined>;
 }
 
 //** Languages */

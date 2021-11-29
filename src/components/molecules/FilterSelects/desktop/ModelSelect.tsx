@@ -138,8 +138,6 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
   //   return option.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
   // });
 
-  console.log('selected: ', selected)
-
   return (
     <SelectWrapper
       title="Select Brand First"

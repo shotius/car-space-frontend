@@ -13,6 +13,7 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getImagesMedium } from 'src/redux/features/auth/carImagesSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
+import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
 import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 import { CarImageCarousel } from '../Carousels/CarImageCarousel/CarImageCarousel';
@@ -40,7 +41,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
       // if we dont have car in redux state, either in a list or in errors: true , else: false
       if (
         !mediumImages[car.lN] &&
-        !errorFetchingMediumImagess.includes(car.lN)
+        !errorFetchingMediumImagess[car.lN]
       ) {
         return true;
       } else {
@@ -133,24 +134,24 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
             </HStack>
           </VStack>
           <HStack justifyContent="space-between" w="full">
-            <TextRegular opacity="63%">Est. Retail Value</TextRegular>
+            <TextRegular opacity="63%">Estimate Price</TextRegular>
             <Heading
               fontSize={['20px', null, '16px']}
               color="autoOrange.500"
               pr={['4', '0', '4']}
               fontWeight="400"
             >
-              $ {car.eRV}
+              $ {toTrippleNumber(Math.round(Number(car.eRV) + Number(car.rC)))}
             </Heading>
           </HStack>
           <HStack justifyContent="space-between" w="full">
-            <TextRegular opacity="63%">Est. Repair Cost</TextRegular>
+            <TextRegular opacity="63%">Buy it now price</TextRegular>
             <Heading
               fontSize={['20px', null, '16px']}
               pr={['4', '0', '4']}
               fontWeight="400"
             >
-              $ {car.rC}
+              $ {toTrippleNumber(Number(car.bin))}
             </Heading>
           </HStack>
         </VStack>

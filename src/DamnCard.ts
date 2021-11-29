@@ -1,5 +1,4 @@
 export const DamCar = {
-  _id: '6174a4b9a1dc0c8b068615e6',
   lN: '30101141',
   m: 'RAM',
   vin: '1C6RR7VT1GS172925',
@@ -11,7 +10,6 @@ export const DamCar = {
   cyl: '8',
   dr: '4x4 w/Rear Wheel Drv',
   curB: '300.0',
-  hK: 'YES',
   mG: '1500',
   mD: '1500 LARAM',
   eng: '5.7L  8',
@@ -22,7 +20,10 @@ export const DamCar = {
   y: '2016',
   fuel: 'GAS',
   keys: 'YES',
-  sS: 'AUTOMATIC',
-  eRV: '120 000', // Est. Retail Value
+  sS: 'On Minimum Bid',
+  eRV: '33481.0',
   rC: '24847.0',
+  c: 'CHARCOAL',
+  rd: 'DEFAULT',
+  bin: '0.0',
 };

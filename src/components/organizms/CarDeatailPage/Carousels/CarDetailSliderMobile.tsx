@@ -30,7 +30,7 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({}) => {
         >
           <SwiperSlide>
             <AspectRatio ratio={3 / 2} width="full">
-              <Image src="https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg" />
+              <Image src="http://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX392/9397cb64-5c25-4226-88fb-f559e394e2ad.JPG" />
             </AspectRatio>
           </SwiperSlide>
           <SwiperSlide>
@@ -61,7 +61,6 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({}) => {
           onSwiper={(swiper) => setThumbsSwiper(swiper)}
           spaceBetween={10}
           breakpoints={{
-            // when window width is >= 640px
             200: {
               slidesPerView: 2.2,
             },
@@ -141,11 +140,11 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({}) => {
           {/* last all picture slide  */}
           <SwiperSlide style={{ position: 'relative' }}>
             <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
-              <Box>
+              <Box borderRadius="8px">
                 <Image
                   src="https://media.wired.com/photos/5d09594a62bcb0c9752779d9/master/pass/Transpo_G70_TA-518126.jpg"
-                  borderRadius="8px"
-                  width="88px"
+                  width="full"
+                  h="full"
                 />
                 <Box
                   position="absolute"

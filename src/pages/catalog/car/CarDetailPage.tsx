@@ -33,7 +33,7 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
   }, []);
 
   if (!carInfo) {
-    return <>...loading car info</>
+    return <>...loading car info</>;
   }
   return (
     <PublicLayout>
@@ -44,8 +44,10 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
       )}
 
       {/* similar vehicles*/}
-      <ContainerOuter mt="65px">
+      <ContainerOuter mt="65px" >
         <SectionHeader mainText="Similar vehicles" />
+      </ContainerOuter>
+      <ContainerOuter mt={[null, null, null, "-20px"]} p={['0', null, null, '4']}>
         <CarListCarousel car={DamCar} />
       </ContainerOuter>
     </PublicLayout>

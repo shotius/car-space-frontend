@@ -5,83 +5,57 @@ import { FilterQueries } from 'src/constants';
 const baseURL = '/api/cars';
 
 const searchCars = async () => {
-  try {
-  } catch (error) {
-    return await axios.get(`${baseURL}`);
-    throw error;
-  }
+  return await axios.get(`${baseURL}`);
 };
 
 const getAllBrands = async () => {
-  try {
-    const { data } = await axios.get(`${baseURL}/brands`);
-    return data;
-  } catch (error) {
-    throw error;
-  }
+  const { data } = await axios.get(`${baseURL}/brands`);
+  return data;
 };
 
 const getCars = async ({ params }) => {
-  try {
-    const { data } = await axios.get(`${baseURL}`, { params });
-    return data;
-  } catch (error) {
-    throw error;
-  }
+  const { data } = await axios.get(`${baseURL}`, { params });
+  return data;
 };
 
 const getSingleCar = async (lotNum: string) => {
-  try {
-    const { data } = await axios.get(`${baseURL}/${lotNum}`);
-    return data;
-  } catch (error) {
-    throw error;
-  }
+  const { data } = await axios.get(`${baseURL}/${lotNum}`);
+  return data;
 };
 
 const getModels = async (brands: string[]) => {
-  try {
-    const queries = brands.map((b) => `${FilterQueries.BRAND}=${b}`);
-    const { data } = await axios.get(`${baseURL}/models?${queries.join('&')}`);
-    return data;
-  } catch (error) {
-    throw error;
-  }
+  const queries = brands.map((b) => `${FilterQueries.BRAND}=${b}`);
+  const { data } = await axios.get(`${baseURL}/models?${queries.join('&')}`);
+  return data;
 };
 
 const getFilters = async () => {
-  try {
-    const results = await Promise.allSettled([
-      axios.get(`${baseURL}/conditions`),
-      axios.get(`${baseURL}/types`),
-      axios.get(`${baseURL}/locations`),
-      axios.get(`${baseURL}/drives`),
-      axios.get(`${baseURL}/fuels`),
-      axios.get(`${baseURL}/brands`),
-      axios.get(`${baseURL}/cylinders`),
-      axios.get(`${baseURL}/sales_status`),
-      axios.get(`${baseURL}/transmissions`),
-    ]);
+  const results = await Promise.allSettled([
+    axios.get(`${baseURL}/conditions`),
+    axios.get(`${baseURL}/types`),
+    axios.get(`${baseURL}/locations`),
+    axios.get(`${baseURL}/drives`),
+    axios.get(`${baseURL}/fuels`),
+    axios.get(`${baseURL}/brands`),
+    axios.get(`${baseURL}/cylinders`),
+    axios.get(`${baseURL}/sales_status`),
+    axios.get(`${baseURL}/transmissions`),
+  ]);
 
-    const filters: IFilters = {
-      conditions:
-        results[0].status === 'fulfilled' ? results[0].value.data : [],
-      types: results[1].status === 'fulfilled' ? results[1].value.data : [],
-      location: results[2].status === 'fulfilled' ? results[2].value.data : [],
-      drives: results[3].status === 'fulfilled' ? results[3].value.data : [],
-      fuels: results[4].status === 'fulfilled' ? results[4].value.data : [],
-      brands: results[5].status === 'fulfilled' ? results[5].value.data : [],
-      cylinders: results[6].status === 'fulfilled' ? results[6].value.data : [],
-      salesStatus:
-        results[7].status === 'fulfilled' ? results[7].value.data : [],
-      transmissions:
-        results[8].status === 'fulfilled' ? results[8].value.data : [],
-    };
+  const filters: IFilters = {
+    conditions: results[0].status === 'fulfilled' ? results[0].value.data : [],
+    types: results[1].status === 'fulfilled' ? results[1].value.data : [],
+    location: results[2].status === 'fulfilled' ? results[2].value.data : [],
+    drives: results[3].status === 'fulfilled' ? results[3].value.data : [],
+    fuels: results[4].status === 'fulfilled' ? results[4].value.data : [],
+    brands: results[5].status === 'fulfilled' ? results[5].value.data : [],
+    cylinders: results[6].status === 'fulfilled' ? results[6].value.data : [],
+    salesStatus: results[7].status === 'fulfilled' ? results[7].value.data : [],
+    transmissions:
+      results[8].status === 'fulfilled' ? results[8].value.data : [],
+  };
 
-    return filters;
-  } catch (error) {
-    throw error;
-  }
+  return filters;
 };
 
 const carsService = {

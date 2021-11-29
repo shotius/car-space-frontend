@@ -1,24 +1,48 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios, { AxiosError } from 'axios';
 import carImageServices from 'src/services/carImageServices';
 import { CarImageSliceState } from './types';
 
 const initialState: CarImageSliceState = {
   fetchingMediums: {},
   mediumImages: {},
-  errorFetchingMediums: [],
+  errorFetchingMediums: {},
+
+  fetchingThumbs: {},
+  thumbImages: {},
+  errorFetchingThumbs: {},
 };
 
 export const getImagesMedium = createAsyncThunk(
   'getImagesMedium',
   async (lN: string, { rejectWithValue }) => {
     try {
-      const images = await carImageServices.getMediumImages(lN);
-      return images;
+      return await carImageServices.getMediumImages(lN);
     } catch (error: any) {
       if (error.response) {
-        return rejectWithValue(error.response.data.message);
+        return rejectWithValue(error.response.data);
       } else {
-        throw new Error(lN);
+        throw rejectWithValue(lN + 'error not identificeted');
+      }
+    }
+  }
+);
+
+export const getThumbs = createAsyncThunk(
+  'getThumbs',
+  async (lN: number, { rejectWithValue }) => {
+    try {
+      const thumbs = await carImageServices.getThumbImages(lN);
+      return thumbs;
+    } catch (error: any | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          return rejectWithValue(error.response.data.message);
+        } else {
+          return rejectWithValue(error.response);
+        }
+      } else {
+        return rejectWithValue('Error while getting thumbs');
       }
     }
   }
@@ -31,16 +55,31 @@ const carImagesSlice = createSlice({
   extraReducers: (builder) => {
     //** Get medium size images */
     builder.addCase(getImagesMedium.pending, (state, action) => {
-      state.fetchingMediums[action.meta.arg] = true
-      state.errorFetchingMediums.filter(lotNum => lotNum !== action.meta.arg)
-    })
+      // in the state we have {loNumber: [...images]}
+      state.fetchingMediums[action.meta.arg] = true;
+      state.errorFetchingMediums[action.meta.arg] = undefined;
+    });
     builder.addCase(getImagesMedium.fulfilled, (state, action) => {
-      state.fetchingMediums[action.meta.arg] = false
-      state.mediumImages[action.meta.arg] = action.payload
+      state.fetchingMediums[action.meta.arg] = false;
+      state.mediumImages[action.meta.arg] = action.payload;
     });
     builder.addCase(getImagesMedium.rejected, (state, action) => {
-      state.fetchingMediums[action.meta.arg] = false
-      state.errorFetchingMediums.push(action.meta.arg)
+      state.fetchingMediums[action.meta.arg] = false;
+      state.errorFetchingMediums[action.meta.arg] = action.payload as string;
+    });
+
+    /** Get Thumbs for single lot numbre */
+    builder.addCase(getThumbs.pending, (state, action) => {
+      state.fetchingThumbs[action.meta.arg] = true;
+      state.errorFetchingThumbs[action.meta.arg] = undefined;
+    });
+    builder.addCase(getThumbs.fulfilled, (state, action) => {
+      state.thumbImages[action.meta.arg] = action.payload;
+      state.fetchingThumbs[action.meta.arg] = false;
+    });
+    builder.addCase(getThumbs.rejected, (state, action) => {
+      state.fetchingThumbs[action.meta.arg] = false;
+      state.errorFetchingThumbs[action.meta.arg] = action.payload;
     });
   },
 });

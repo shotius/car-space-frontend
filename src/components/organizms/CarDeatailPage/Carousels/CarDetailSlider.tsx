@@ -115,28 +115,10 @@ export const CarDetailSlider = () => {
           </SwiperSlide>
           {/* last all picture slide  */}
           <SwiperSlide style={{ position: 'relative' }}>
-            <Box
-              position="absolute"
-              top="0"
-              right="5px"
-              bottom="0"
-              left="0"
-              borderRadius="8px"
-              cursor="pointer"
-              background="rgba(0, 0, 0,0.5)"
-              zIndex="1"
-            >
-              <Center h="full">
-                <TextRegular fontSize="24px" color="white" opacity="1">
-                  +6
-                </TextRegular>
-              </Center>
-            </Box>
             <AspectRatio ratio={103 / 70} cursor="pointer" width="103px">
-              <Box>
+              <Box borderRadius="8px">
                 <Image
                   src="https://media.wired.com/photos/5d09594a62bcb0c9752779d9/master/pass/Transpo_G70_TA-518126.jpg"
-                  borderRadius="8px"
                   width="103px"
                 />
                 <Box
@@ -145,9 +127,8 @@ export const CarDetailSlider = () => {
                   right="0"
                   bottom="0"
                   left="0"
-                  borderRadius="8px"
                   cursor="pointer"
-                  background="rgba(0, 0, 0,0.2)"
+                  background="rgba(0, 0, 0,0.5)"
                   zIndex="1"
                 >
                   <Center h="full">

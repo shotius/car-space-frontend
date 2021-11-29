@@ -132,7 +132,6 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
     // restore transmissions from url
     const transmissions = query.getAll(TRANSMISSION) as Transmission[];
-    console.log('transmission: ', transmissions);
     if (transmissions.length) {
       dispatch(selectTranssmision(transmissions));
     }

@@ -37,7 +37,7 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
           spacing="32px"
           alignItems="flex-start"
           position="sticky"
-          top="110px"
+          top={[null, null, null,"110px", '120px']}
         >
           <CarDescriptionHeader car={car} />
           <BidInfoCard car={car}/>

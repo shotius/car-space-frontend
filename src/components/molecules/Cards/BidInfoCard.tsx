@@ -4,6 +4,7 @@ import { CardWithHeading } from './CardWithHeading';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { TextRegular } from '../Texts/TextRegular';
 import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
+import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 
 interface BidInfoCardProps {
   car: ICar
@@ -18,7 +19,7 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({car}) => {
         <VStack w="full" align="flex-start" spacing="0">
           <TextRegular opacity="0.5"> Current bid</TextRegular>
           <HeadingSecondary color="autoOrange.500" fontSize="20px">
-            ${car.curB}
+            $ {toTrippleNumber(Number(car.curB))}
           </HeadingSecondary>
         </VStack>
 
@@ -49,7 +50,7 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({car}) => {
           But it now
           <TextRegular opacity="0.5" ml="4">
             {' '}
-            $2 500
+            $ {Number(car.bin).toFixed(0)}
           </TextRegular>
         </ButtonRegular>
       </SimpleGrid>

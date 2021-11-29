@@ -3,14 +3,16 @@ import { axios } from 'src/utils/axios';
 const baseUrl = '/api/cars/images';
 
 const getMediumImages = async (lotNumber: string) => {
-  try {
-    const {data} = await axios.get(`${baseUrl}/medium?lotNumber=${lotNumber}`);
-    return data
-  } catch (error) {
-    throw error;
-  }
+  const { data } = await axios.get(`${baseUrl}/medium?lotNumber=${lotNumber}`);
+  return data;
+};
+
+const getThumbImages = async (lotNumber: number) => {
+  const { data } = await axios.get(`${baseUrl}/thumbs?lotNumber=${lotNumber}`);
+  return data;
 };
 
 export default {
   getMediumImages,
+  getThumbImages,
 };
