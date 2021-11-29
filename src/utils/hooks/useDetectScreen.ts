@@ -1,3 +1,4 @@
+import { useAppSelector } from 'src/redux/app/hook';
 import { useAppDispatch } from './../../redux/app/hook';
 import { MOBILE_SCREEN_SIZE, TABLET_SCREEN_SIZE } from '../../constants/index';
 import { useState, useLayoutEffect, useEffect } from 'react';
@@ -8,7 +9,11 @@ export const useDetectScreen = () => {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const [isTablet, setIsTablet] = useState<boolean | null>(null);
   const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
-
+  const {
+    isDesktop: isDeskroptRedux,
+    isMobile: isMobileRedux,
+    isTablet: isTabletRedux,
+  } = useAppSelector((state) => state.globalAppState.screen);
   const window = useWindowSize();
 
   const dispatch = useAppDispatch();
@@ -37,13 +42,19 @@ export const useDetectScreen = () => {
 
   useEffect(() => {
     if (isMobile !== null && isTablet !== null && isDesktop !== null) {
-      dispatch(
-        setScreenSize({
-          isDesktop,
-          isTablet,
-          isMobile,
-        })
-      );
+      if (
+        isMobile !== isMobileRedux ||
+        isTablet !== isTabletRedux ||
+        isDesktop !== isDeskroptRedux
+      ) {
+        dispatch(
+          setScreenSize({
+            isDesktop,
+            isTablet,
+            isMobile,
+          })
+        );
+      }
     }
   }, [isDesktop, isTablet, isMobile]);
 

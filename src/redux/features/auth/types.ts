@@ -10,6 +10,11 @@ export interface ICarModel {
 export interface CarsSliceState {
   cars: ICar[];
   fethingCars: boolean;
+  fetchingCarsError: string | undefined;
+
+  fetchingSingleCar: boolean;
+  errorFetchingSingleCar: string | undefined; 
+  
   brands: string[];
   models: ICarModel[];
   conditions: string[];
