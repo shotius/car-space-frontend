@@ -10,7 +10,6 @@ interface CarSpecTableProps {
 }
 
 export const CarSpecTable: React.FC<CarSpecTableProps> = ({car}) => {
-  console.log('car', car)
   return (
     <VStack divider={<StackDivider />} w="full" spacing="2.5">
       <HStack w="full" justify="space-between">

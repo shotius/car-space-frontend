@@ -7,6 +7,9 @@ import { TextRegular } from '../../molecules/Texts/TextRegular';
 import { CarInfoCardMobile } from '../../organizms/CarDeatailPage/Cards/CarInfoCardMobile';
 import { CarDescriptionHeader } from '../../organizms/MiniHeaders/CarDescriptionHeader';
 import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
+import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading';
+import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
+import { CarTrasportationInfo } from 'src/components/organizms/CarDeatailPage/Cards/CarTrasportationInfo';
 
 interface CarDetailPageMobileProps {
   car: ICar;
@@ -39,10 +42,10 @@ export const CarDetailPageMobile: React.FC<CarDetailPageMobileProps> = ({
 
             {/* car information */}
             <CarInfoCardMobile car={car} />
-
+            <CarTrasportationInfo /> 
+            
             {/* car details */}
             <CarDeailsCard car={car} variant="mobile" />
-            
           </VStack>
         </HStack>
       </ContainerOuter>

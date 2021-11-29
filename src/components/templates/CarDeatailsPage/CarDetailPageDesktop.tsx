@@ -11,7 +11,7 @@ import { BidInfoCard } from 'src/components/molecules/Cards/BidInfoCard';
 import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface CarDetailPageDesktopProps {
-  car?: ICar;
+  car: ICar;
 }
 
 export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
@@ -27,9 +27,9 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
       >
         <VStack spacing="49px" w="579px">
           <CarDetailSlider /> 
-          <CarInfoCard />
+          <CarInfoCard car={car} />
           <CarTransportationCard /> 
-          <CarDeailsCard variant="desktop" />
+          <CarDeailsCard variant="desktop" car={car}/>
         </VStack>
         <Spacer minW="20px"/> 
         <VStack
@@ -40,7 +40,7 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
           top="110px"
         >
           <CarDescriptionHeader car={car} />
-          <BidInfoCard />
+          <BidInfoCard car={car}/>
           <CalculatorDesktop children size="regular" />
         </VStack>
       </Flex>

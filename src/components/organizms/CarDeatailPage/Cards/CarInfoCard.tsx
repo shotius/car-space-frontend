@@ -2,10 +2,13 @@ import { VStack, HStack } from '@chakra-ui/react';
 import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
 
-interface CarInfoCardProps {}
+interface CarInfoCardProps {
+  car: ICar;
+}
 
-export const CarInfoCard: React.FC<CarInfoCardProps> = ({}) => {
+export const CarInfoCard: React.FC<CarInfoCardProps> = ({ car }) => {
   return (
     <CardWithHeading heading="Car information">
       <TextRegular pb="30px" lineHeight="27px">
@@ -18,24 +21,24 @@ export const CarInfoCard: React.FC<CarInfoCardProps> = ({}) => {
         <HStack w="full" justify="space-between">
           <VStack w="full" alignItems="flex-start" spacing="4px">
             <TextRegular opacity="0.5">Primary damage</TextRegular>
-            <HeadingSecondary>Front End</HeadingSecondary>
+            <HeadingSecondary>{car.dmg}</HeadingSecondary>
           </VStack>
 
           <VStack w="full" alignItems="flex-start" spacing="4px">
             <TextRegular opacity="0.5">Secondary damage</TextRegular>
-            <HeadingSecondary>Front End</HeadingSecondary>
+            <HeadingSecondary>{car.sDmg}</HeadingSecondary>
           </VStack>
         </HStack>
 
         <HStack w="full" justify="space-between">
           <VStack w="full" alignItems="flex-start" spacing="4px">
-            <TextRegular opacity="0.5">Primary damage</TextRegular>
-            <HeadingSecondary>Front End</HeadingSecondary>
+            <TextRegular opacity="0.5">Sales Status</TextRegular>
+            <HeadingSecondary>{car.sS}</HeadingSecondary>
           </VStack>
 
           <VStack w="full" alignItems="flex-start" spacing="4px">
-            <TextRegular opacity="0.5">Secondary damage</TextRegular>
-            <HeadingSecondary>Front End</HeadingSecondary>
+            <TextRegular opacity="0.5">Location</TextRegular>
+            <HeadingSecondary>{car.lC}</HeadingSecondary>
           </VStack>
         </HStack>
       </VStack>
