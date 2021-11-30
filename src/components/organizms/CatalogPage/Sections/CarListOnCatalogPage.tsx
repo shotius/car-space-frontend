@@ -42,11 +42,18 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
   // on the first load put page query in the url and open the banner
   useEffect(() => {
-    activePage
-      ? query.set('page', activePage.toString())
-      : query.set('page', page.toString());
-    history.push({ search: query.toString() });
-    dispatch(setActivePage(query.get('page')));
+    if (!catalogQuery) {
+      
+      console.log('here', page)
+      activePage
+        ? query.set('page', activePage.toString())
+        : query.set('page', page.toString());
+
+      history.push({ search: query.toString() });
+      dispatch(setActivePage(query.get('page')));
+    } else {
+      history.push({ search: catalogQuery });
+    }
     dispatch(openCatalogBanner());
   }, []);
 
@@ -68,10 +75,13 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     }
   }, [page, catalogQuery]);
 
+  // on pagin number press
   const changePage = (page: number) => {
     query.set('page', String(page));
     history.push({ search: query.toString() });
   };
+
+  // if network error occurs notification will be displayed
   const addToast = () => {
     toastIdRef.current = toast({
       title: networkError,
