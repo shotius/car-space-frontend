@@ -32,17 +32,24 @@ interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isDesktop, isMobile, isTablet } = useDetectScreen();
-  const USER = localStorage.getItem('USER_ROLE');
+  const [safeDocument, setSafeDocument] = useState<Document | null>(document);
+
+  const {
+    isLoginOpen,
+    isRegistrationOpen,
+    isMobileRegisterLoginOpen,
+    catalogQuery,
+  } = useAppSelector((state) => state.globalAppState);
+ 
   const { isAuthenticated, role, username } = useAppSelector(
     (state) => state.userInfoSlice
   );
-  const { isLoginOpen, isRegistrationOpen, isMobileRegisterLoginOpen } =
-    useAppSelector((state) => state.globalAppState);
-  const history = useHistory();
-  const dispatch = useAppDispatch();
 
-  const [safeDocument, setSafeDocument] = useState<Document | null>(document);
+  const { isDesktop, isMobile, isTablet } = useDetectScreen();
+  const USER = localStorage.getItem('USER_ROLE');
+
+  const dispatch = useAppDispatch();
+  const history = useHistory();
 
   // if mobile menu is open stop body scroll
   useEffect(() => {
@@ -111,9 +118,13 @@ export const Header: React.FC<HeaderProps> = () => {
             }
           >
             <HStack spacing={[null, null, '16px', '24px', '32px']}>
-              <MenuLink to="/catalog" label="Catalog" activeOnlyWhenExact={true}/>
+              <MenuLink
+                to={`/catalog?${catalogQuery}`}
+                label="Catalog"
+                activeOnlyWhenExact={true}
+              />
               <MenuLink to="/services" label="Services" />
-              <MenuLink to="/blogs" label="Blog" activeOnlyWhenExact={true}/>
+              <MenuLink to="/blogs" label="Blog" activeOnlyWhenExact={true} />
             </HStack>
             {/* popovers */}
             <HStack

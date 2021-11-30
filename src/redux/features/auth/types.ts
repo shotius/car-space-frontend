@@ -95,6 +95,7 @@ export interface ScreenSizes {
 }
 
 export interface GlobalStateSliceState {
+  catalogQuery: string | undefined; 
   lang: Languages;
   currency: CurrencyType;
   isCatalogBannerOpen: boolean;

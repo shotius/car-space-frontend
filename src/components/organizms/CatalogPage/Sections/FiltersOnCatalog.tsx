@@ -22,7 +22,7 @@ import {
   selectYearTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { Transmission } from 'src/redux/features/auth/types';
-import { setNetworkError } from 'src/redux/features/global/gloabalSlice';
+import { setCatalogQuery, setNetworkError } from 'src/redux/features/global/gloabalSlice';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';
 import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
@@ -308,6 +308,10 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     history.push({ pathname: '/catalog', search: query.toString() });
     dispatch(getCars(query));
 
+    // save catalog query in redux for caching purpose
+    dispatch(setCatalogQuery(query.toString()))
+
+    // if screen is small close advanced filters
     !isLargerThen737 && dispatch(closeAdvacedFilters());
   };
 

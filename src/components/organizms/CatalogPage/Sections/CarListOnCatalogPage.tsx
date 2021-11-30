@@ -24,7 +24,9 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   const { isAuthenticated } = useAppSelector((state) => state.userInfoSlice);
   const toast = useToast();
   const toastIdRef = useRef<any>();
-  const { networkError } = useAppSelector((state) => state.globalAppState);
+  const { networkError, catalogQuery } = useAppSelector(
+    (state) => state.globalAppState
+  );
 
   useEffect(() => {
     if (networkError) {
@@ -57,11 +59,14 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
   // when page number changes, get cars and scroll to top and save active page in redux
   useEffect(() => {
-    dispatch(getCars(query));
-    dispatch(setActivePage(query.get('page')));
-    // browser back button scrolls to the bottom, this line will scroll to the top
-    setTimeout(() => window.scrollTo(0, 0));
-  }, [page]);
+    if (catalogQuery !== query.toString()) {
+      console.log('query', query.toString());
+      dispatch(getCars(query));
+      dispatch(setActivePage(query.get('page')));
+      // browser back button scrolls to the bottom, this line will scroll to the top
+      setTimeout(() => window.scrollTo(0, 0));
+    }
+  }, [page, catalogQuery]);
 
   const changePage = (page: number) => {
     query.set('page', String(page));
@@ -71,7 +76,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     toastIdRef.current = toast({
       title: networkError,
       status: 'error',
-      position: "top", 
+      position: 'top',
       duration: 3000,
       isClosable: true,
     });

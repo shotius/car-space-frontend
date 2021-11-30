@@ -3,7 +3,8 @@ import { CurrencyType, Languages } from 'src/constants';
 import { GlobalStateSliceState, ScreenSizes } from '../auth/types';
 
 const initialState: GlobalStateSliceState = {
-  networkError: undefined, 
+  catalogQuery: undefined,
+  networkError: undefined,
   lang: 'Eng',
   currency: 'GEL',
   isCatalogBannerOpen: false,
@@ -14,8 +15,8 @@ const initialState: GlobalStateSliceState = {
   screen: {
     isDesktop: false,
     isTablet: false,
-    isMobile: false, 
-  }
+    isMobile: false,
+  },
 };
 
 const globalStateSlice = createSlice({
@@ -53,11 +54,14 @@ const globalStateSlice = createSlice({
         : (state.isMobileRegisterLoginOpen = true);
     },
     setScreenSize: (state, action: PayloadAction<ScreenSizes>) => {
-      state.screen = action.payload
-    }, 
+      state.screen = action.payload;
+    },
     setNetworkError: (state, action: PayloadAction<string | undefined>) => {
-      state.networkError = action.payload
-    }
+      state.networkError = action.payload;
+    },
+    setCatalogQuery: (state, action: PayloadAction<string | undefined>) => {
+      state.catalogQuery = action.payload;
+    },
   },
 });
 
@@ -70,7 +74,8 @@ export const {
   toggleRegistration,
   toggleMobileAuthorization,
   setQueryString,
-  setScreenSize, 
-  setNetworkError
+  setScreenSize,
+  setNetworkError,
+  setCatalogQuery
 } = globalStateSlice.actions;
 export const { reducer: globalAppState } = globalStateSlice;
