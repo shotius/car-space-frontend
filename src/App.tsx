@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch,
+  Switch
 } from 'react-router-dom';
 import 'src/App.css';
 import { StyledApp } from 'src/components/organizms/Wrappers/StyledApp';

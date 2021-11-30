@@ -103,6 +103,7 @@ export interface GlobalStateSliceState {
   isMobileRegisterLoginOpen: boolean;
   queryString: string;
   screen: ScreenSizes;
+  networkError: string | undefined
 }
 
 //** User slice */

@@ -1,8 +1,8 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import { Global, css } from '@emotion/react';
-
+import { css, Global } from '@emotion/react';
 import { Fonts } from 'src/components/molecules/Fonts';
 import theme from 'src/utils/theme';
+
 
 interface StylesAppProps {}
 
@@ -19,7 +19,7 @@ const GlobalStyles = css`
   * {
     -webkit-tap-highlight-color: transparent;
   }
-  
+
   // remove blue shadows from checkbox and radio buttons
   *[data-focus] {
     box-shadow: none !important;

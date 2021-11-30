@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import carsService from 'src/services/carsService';
 import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
+import { setNetworkError } from '../global/gloabalSlice';
 import { setTotalPages } from './carPaginationSlice';
 import { CarsSliceState, ICarModel, IFilters } from './types';
 
@@ -59,7 +60,10 @@ export const getCars = createAsyncThunk<
     dispatch(setTotalPages(result.pagesTotal));
     return result.cars;
   } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.data) {
+    if (axios.isAxiosError(error)) {
+      if (error.code === 'ECONNABORTED') {
+        dispatch(setNetworkError('Network error'));
+      }
       return rejectWithValue(error.response?.data.message as string);
     } else {
       return rejectWithValue(
@@ -179,9 +183,9 @@ const carsSlice = createSlice({
       state.cars = state.cars.concat(action.payload);
     });
     builder.addCase(getSingleCarAsync.rejected, (state, aciton) => {
-      state.fetchingSingleCar = false
-      state.errorFetchingSingleCar = aciton.payload
-    })
+      state.fetchingSingleCar = false;
+      state.errorFetchingSingleCar = aciton.payload;
+    });
   },
 });
 

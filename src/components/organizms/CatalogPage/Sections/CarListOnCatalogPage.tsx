@@ -1,6 +1,6 @@
 import { VStack } from '@chakra-ui/layout';
-import { Flex, Spinner } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { Flex, Spinner, useToast } from '@chakra-ui/react';
+import { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router';
 import { CarCard } from 'src/components/molecules/Cards/CarCard';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
@@ -22,6 +22,15 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     (state) => state.carsPagination
   );
   const { isAuthenticated } = useAppSelector((state) => state.userInfoSlice);
+  const toast = useToast();
+  const toastIdRef = useRef<any>();
+  const { networkError } = useAppSelector((state) => state.globalAppState);
+
+  useEffect(() => {
+    if (networkError) {
+      addToast();
+    }
+  }, [networkError]);
 
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -35,7 +44,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
       ? query.set('page', activePage.toString())
       : query.set('page', page.toString());
     history.push({ search: query.toString() });
-    dispatch(setActivePage(query.get('page')))
+    dispatch(setActivePage(query.get('page')));
     dispatch(openCatalogBanner());
   }, []);
 
@@ -49,7 +58,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   // when page number changes, get cars and scroll to top and save active page in redux
   useEffect(() => {
     dispatch(getCars(query));
-    dispatch(setActivePage(query.get('page')))
+    dispatch(setActivePage(query.get('page')));
     // browser back button scrolls to the bottom, this line will scroll to the top
     setTimeout(() => window.scrollTo(0, 0));
   }, [page]);
@@ -57,6 +66,15 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   const changePage = (page: number) => {
     query.set('page', String(page));
     history.push({ search: query.toString() });
+  };
+  const addToast = () => {
+    toastIdRef.current = toast({
+      title: networkError,
+      status: 'error',
+      position: "top", 
+      duration: 3000,
+      isClosable: true,
+    });
   };
 
   if (fethingCars) {

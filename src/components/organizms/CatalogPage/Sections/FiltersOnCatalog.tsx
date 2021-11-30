@@ -19,9 +19,10 @@ import {
   selectTranssmision,
   selectTypes,
   selectYearFrom,
-  selectYearTo
+  selectYearTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { Transmission } from 'src/redux/features/auth/types';
+import { setNetworkError } from 'src/redux/features/global/gloabalSlice';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';
 import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
@@ -221,6 +222,8 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     query.delete(FUEL_TYPE);
     query.delete(CYLINDER);
     deleteModelsFromURL(); // remote models
+    // clear if there was network error
+    dispatch(setNetworkError());
 
     // put brand values from redux in the url
     if (selectedBrands.length) {
