@@ -25,9 +25,9 @@ export const CarDetailSlider: React.FC<Props> = ({ thumbs, images }) => {
 
   return (
     <Box w="full">
-      <Box borderRadius="8px">
+      <Box borderRadius="8px" overflow="hidden">
         <Swiper
-          spaceBetween={10}
+          spaceBetween={4}
           thumbs={{ swiper: thumbsSwiper }}
           className="mySwiper2"
         >

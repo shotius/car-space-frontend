@@ -58,7 +58,7 @@ export interface SelectedCarFilters {
 
 export interface IPagination {
   totalPages: number;
-  activePage: number;
+  activePage: number | null ;
   queryString: string;
 }
 

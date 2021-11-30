@@ -7,6 +7,7 @@ import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecon
 import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { getCars } from 'src/redux/features/auth/carsSlice';
 import { getAllFavouritesThunk } from 'src/redux/features/auth/userSlice';
 import { openCatalogBanner } from 'src/redux/features/global/gloabalSlice';
@@ -17,7 +18,9 @@ interface CatalogLIstProps {}
 
 export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   const { cars, fethingCars } = useAppSelector((state) => state.carsReducer);
-  const { totalPages } = useAppSelector((state) => state.carsPagination);
+  const { totalPages, activePage } = useAppSelector(
+    (state) => state.carsPagination
+  );
   const { isAuthenticated } = useAppSelector((state) => state.userInfoSlice);
 
   const dispatch = useAppDispatch();
@@ -26,32 +29,35 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
   const page = Number(query.get('page')) || 1;
 
-  // console.log('query in the catalog: ', query)
-  // console.log('page', page)
-
+  // on the first load put page query in the url and open the banner
   useEffect(() => {
-    // console.log(query.get('brands'))
-  }, [query]);
-
-  // set query params, get brands and all cars on the first load
-  useEffect(() => {
+    activePage
+      ? query.set('page', activePage.toString())
+      : query.set('page', page.toString());
+    history.push({ search: query.toString() });
+    dispatch(setActivePage(query.get('page')))
     dispatch(openCatalogBanner());
+  }, []);
+
+  // If Authenticated get All favourite cars
+  useEffect(() => {
     if (isAuthenticated) {
       dispatch(getAllFavouritesThunk());
     }
   }, [isAuthenticated]);
 
+  // when page number changes, get cars and scroll to top and save active page in redux
+  useEffect(() => {
+    dispatch(getCars(query));
+    dispatch(setActivePage(query.get('page')))
+    // browser back button scrolls to the bottom, this line will scroll to the top
+    setTimeout(() => window.scrollTo(0, 0));
+  }, [page]);
+
   const changePage = (page: number) => {
     query.set('page', String(page));
     history.push({ search: query.toString() });
   };
-
-  // update the query parameter of the url and get next page
-  useEffect(() => {
-    dispatch(getCars(query));
-    // browser back button scrolls to the bottom, this line will scroll to the top
-    setTimeout(() => window.scrollTo(0, 0));
-  }, [page]);
 
   if (fethingCars) {
     return (

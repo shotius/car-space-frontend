@@ -3,7 +3,7 @@ import { IPagination } from './types';
 
 const initialState: IPagination = {
   totalPages: 0,
-  activePage: 1,
+  activePage: null,
   queryString: '',
 };
 
