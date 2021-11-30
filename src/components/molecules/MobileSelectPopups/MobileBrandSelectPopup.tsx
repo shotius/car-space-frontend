@@ -73,7 +73,7 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
   // if user clicks second time on the  brand
   // it will be removed from the selected brads list
   // else brand will be added in the list
-  const toggleSelcetion = (brand: string) => {
+  const handleSelect = (brand: string) => {
     if (selectedBrands.includes(brand)) {
       setSelectedBrands(selectedBrands.filter((el) => el !== brand));
     } else {
@@ -81,6 +81,8 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
       setSelectedBrands(brands);
     }
   };
+  console.log('select', selectedBrands)
+
 
   const onSubmit = () => {
     dispatch(selectBrand(selectedBrands));
@@ -141,30 +143,47 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
                 maxW={['38px', '50px']}
                 maxH={['38px', '50px']}
                 boxSize={5}
+                bg={
+                  selectedBrands.includes('MERCEDES') ? 'autoOrange.100' : 'autoGrey.600'
+                }
+                onClick={() => handleSelect('MERCEDES')}
+              />
+              <TopBrandCard
+                icon={BmwIcon}
+                maxW={['38px', '50px']}
+                maxH={['38px', '50px']}
+                boxSize={5}bg={
+                  selectedBrands.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
+                }
+                onClick={() => handleSelect('BMW')}
               />
               <TopBrandCard
                 icon={BmwIcon}
                 maxW={['38px', '50px']}
                 maxH={['38px', '50px']}
                 boxSize={5}
+                bg={
+                  selectedBrands.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
+                }
+                onClick={() => handleSelect('BMW')}
               />
               <TopBrandCard
                 icon={BmwIcon}
                 maxW={['38px', '50px']}
                 maxH={['38px', '50px']}
                 boxSize={5}
+                bg={
+                  selectedBrands.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
+                }
               />
               <TopBrandCard
                 icon={BmwIcon}
                 maxW={['38px', '50px']}
                 maxH={['38px', '50px']}
                 boxSize={5}
-              />
-              <TopBrandCard
-                icon={BmwIcon}
-                maxW={['38px', '50px']}
-                maxH={['38px', '50px']}
-                boxSize={5}
+                bg={
+                  selectedBrands.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
+                }
               />
             </ScrollableDiv>
           </VStack>
@@ -188,7 +207,7 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
                   </Heading>
                 ) : (
                   <TextButton
-                    onClick={() => toggleSelcetion(brand)}
+                    onClick={() => handleSelect(brand)}
                     color={
                       selectedBrands.includes(brand) ? 'autoOrange.500' : '#000'
                     }
