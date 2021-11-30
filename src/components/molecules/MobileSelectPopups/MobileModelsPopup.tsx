@@ -2,42 +2,72 @@ import { Checkbox } from '@chakra-ui/checkbox';
 import { VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
-import { useAppSelector } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { SelectedCarModel } from '../../../../../server/shared_with_front/types/types-shared';
 import { SearchInput } from '../Inputs/SearchInput';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
 interface MobileModelsPopupProps {
   isOpen: boolean;
   onClose: () => void;
+  allSelectedModels: string[]
 }
 
 export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
   isOpen,
   onClose,
+  allSelectedModels
 }) => {
   const [searchWord, setSearchWord] = useState('');
-  const [selectedModels, setSelectedModels] = useState<string[]>([]);
+  const [selected, setSelected] = useState<SelectedCarModel[]>([]);
 
   const { models: options } = useAppSelector((state) => state.carsReducer);
   const { models: initialySelectedModels } = useAppSelector(
     (state) => state.selectedCarFilters
   );
 
+  const dispatch = useAppDispatch()
+
   // asign initial selected models to the state
   useEffect(() => {
     if (initialySelectedModels.length) {
-      // setSelectedModels(initialySelectedModels); to-do
+      setSelected(initialySelectedModels);
     } else {
-      setSelectedModels([]);
+      setSelected([]);
     }
   }, [initialySelectedModels]);
 
   // checkbox change handler
-  const onChangeHandler = (model: string) => {
-    if (!selectedModels.includes(model)) {
-      setSelectedModels(selectedModels.concat(model));
-    } else {
-      setSelectedModels(selectedModels.filter((m) => m !== model));
+  const handleSelect = ({ brand, model }: { brand: string; model: string }) => {
+    let changeHappend = false; // this varible is for notifying us about change in the loop
+
+    selected.forEach((item, i) => {
+      // if there is another model selected for this brand
+      if (item.brand === brand) {
+        // if model already exists remove it
+        if (item.models.includes(model)) {
+          const modelsFiltered = item.models.filter((m) => m !== model);
+          setSelected([
+            ...selected.slice(0, i),
+            { brand, models: modelsFiltered },
+            ...selected.slice(i + 1),
+          ]);
+          changeHappend = true;
+        } else {
+          // else add model
+          setSelected([
+            ...selected.slice(0, i),
+            { brand, models: [...item.models, model] },
+            ...selected.slice(i + 1),
+          ]);
+          changeHappend = true;
+        }
+      }
+    });
+    // if there was not model selected from this brand add new object to the selected
+    if (!changeHappend) {
+      setSelected([...selected, { brand, models: [model] }]);
     }
   };
 
@@ -52,7 +82,7 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={() => {
-        // dispatch(selectModels(selectedModels)); to-do
+        dispatch(selectModels(selected));
         onClose();
       }}
       header={
@@ -66,10 +96,13 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
             {option.models.map((model) => (
               <Checkbox
                 colorScheme="autoOrange"
-                // defaultChecked={initialySelectedModels?.includes(model)}
+                defaultChecked={allSelectedModels.includes(model)}
                 onChange={(e) => {
                   e.preventDefault();
-                  onChangeHandler(model);
+                  handleSelect({
+                    brand: option.brand,
+                    model,
+                  });
                 }}
                 key={model}
               >

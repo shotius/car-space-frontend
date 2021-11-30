@@ -3,10 +3,12 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
-import { useAppDispatch } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getFilters } from 'src/redux/features/auth/carsSlice';
 import { openAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { submitCarSearch } from 'src/utils/hooks/submitCarsSearch';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 import { SearchButton } from '../../../molecules/Buttons/SearchButton';
 import { Card } from '../../../molecules/Cards/Card';
 import { BrandSelect } from '../../../molecules/FilterSelects/desktop/BrandSelect';
@@ -21,16 +23,13 @@ interface SearchProps {}
 export const HomeFilters: React.FC<SearchProps> = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
+  const query = useQueryParams();
+  const filters = useAppSelector((state) => state.selectedCarFilters);
 
   const { isDesktop } = useDetectScreen();
   useEffect(() => {
     dispatch(getFilters());
   }, []);
-
-
-  // const setSearchQuery = () => {
-
-  // }
 
   return (
     <Center
@@ -89,13 +88,24 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           ) : (
             <YearSelect w={['100%', '100%', '100%']} />
           )}
-          <SearchButton display={['none', 'none', 'block']} minW="144px" />
+          <SearchButton
+            display={['none', 'none', 'block']}
+            minW="144px"
+            onClick={() => {
+              history.push({ pathname: '/catalog' });
+              submitCarSearch({ history, query, dispatch, filters });
+            }}
+          />
         </Flex>
         <SearchButton
           display={['block', 'block', 'none']}
           w="full"
           h={['44px', null, null, '50px', '62px']}
           mt={['4', '3']}
+          onClick={() => {
+            history.push({ pathname: '/catalog' });
+            submitCarSearch({ history, query, dispatch, filters });
+          }}
         />
         <TextButton
           w="full"

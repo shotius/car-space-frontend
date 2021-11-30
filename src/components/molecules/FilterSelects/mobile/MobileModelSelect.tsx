@@ -7,7 +7,7 @@ import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
 interface MobileModelSelectProps {}
 
 export const MobileModelSelect: React.FC<MobileModelSelectProps & BoxProps> = ({
-  w='full',
+  w = 'full',
   ...rest
 }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -25,21 +25,27 @@ export const MobileModelSelect: React.FC<MobileModelSelectProps & BoxProps> = ({
     }
   };
 
-  const allSelectedModels = Object.keys(selection).reduce<string[]>((acc, curr) => {
-    const arr = selection[curr]
-    return acc.concat(arr)
-  }, [])
+  const allSelectedModels = selection.reduce<string[]>((acc, curr) => {
+    const arr = curr.models;
+    return acc.concat(arr);
+  }, []);
 
   return (
     <Box minW={w} maxW={w} {...rest}>
       <MobileSelect
         onClick={handleModelSelect}
-        label={selection.length ? allSelectedModels.join('; ') : 'Models'}
+        label={
+          allSelectedModels.length ? allSelectedModels.join(', ') : 'Models'
+        }
         isDisabled={!!!ModelFilters.length}
         hasValue={!!selection.length}
         onClear={() => dispatch(selectModels([]))}
       />
-      <MobileModelsPopup isOpen={isOpen} onClose={onClose} />
+      <MobileModelsPopup
+        isOpen={isOpen}
+        onClose={onClose}
+        allSelectedModels={allSelectedModels}
+      />
     </Box>
   );
 };

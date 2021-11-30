@@ -4,7 +4,7 @@ import { DesktopFiltersOnCatalogPage } from 'src/components/molecules/FilterSele
 import { MobileFiltersOnCatalogPage } from 'src/components/molecules/FilterSelects/MobileFilters';
 import { FilterQueries } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { getCars, getFilters } from 'src/redux/features/auth/carsSlice';
+import { getFilters } from 'src/redux/features/auth/carsSlice';
 import {
   closeAdvacedFilters,
   selectBrand,
@@ -19,14 +19,14 @@ import {
   selectTranssmision,
   selectTypes,
   selectYearFrom,
-  selectYearTo,
+  selectYearTo
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { Transmission } from 'src/redux/features/auth/types';
-import { setCatalogQuery, setNetworkError } from 'src/redux/features/global/gloabalSlice';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';
+import { parseModelQueries } from 'src/utils/functions/parseModelQueries';
+import { submitCarSearch } from 'src/utils/hooks/submitCarsSearch';
 import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
-import { SelectedCarModel } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CatalogLIstProps {}
 
@@ -36,7 +36,6 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const {
-    BRAND,
     MODEL,
     YEAR_FROM,
     YEAR_TO,
@@ -49,29 +48,10 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     SALES_STATUS,
     FUEL_TYPE,
     CYLINDER,
-    PRICE_FROM,
-    PRICE_TO,
   } = FilterQueries;
 
-  const {
-    brands: selectedBrands,
-    models: selectedModels,
-    yearFrom,
-    yearTo,
-    conditions,
-    types,
-    locations,
-    transmission,
-    keys,
-    drives,
-    salesStatus,
-    fuels,
-    cylinders,
-    priceFrom,
-    priceTo,
-  } = useAppSelector((state) => state.selectedCarFilters);
-
   const { brands } = useAppSelector((state) => state.selectedCarFilters);
+  const filters = useAppSelector((state) => state.selectedCarFilters);
 
   // Parse query from url
   useEffect(() => {
@@ -91,7 +71,12 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     ];
 
     // restore models from url
-    const models = parseModelQueries({ brands: queryBrands, modelQueryKeys });
+    const models = parseModelQueries({
+      brands: queryBrands,
+      modelQueryKeys,
+      query,
+    });
+
     if (models.length) {
       dispatch(selectModels(models));
     }
@@ -167,150 +152,10 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     dispatch(getFilters());
   }, []);
 
-  // remove models from url
-  const deleteModelsFromURL = () => {
-    Array.from(query.keys()).forEach((q) => {
-      if (q.includes(`${MODEL}[`)) {
-        query.delete(q);
-      }
-    });
-  };
-
-  // receives list of brands in the url and queries of models
-  // returns ready object of selected models to save in redux
-  const parseModelQueries = ({
-    modelQueryKeys, // all queryString keys for selected models
-    brands, // all brands in url
-  }: {
-    modelQueryKeys: string[];
-    brands: string[];
-  }) => {
-    const resultModelsObj: SelectedCarModel[] = [];
-
-    // Iterate over all brands in the url and fill template object for adding models
-    brands.map((brand) => resultModelsObj.push({ brand, models: [] }));
-
-    // iterate over all model query keys and push them in to the models array with brand name
-    modelQueryKeys.map((q) => {
-      // get brand name from modelQuery string
-      const brand = q.slice(q.indexOf('[') + 1, q.indexOf(']'));
-
-      // get all models for specific brand and put in a result
-      const modelsOfSpecificBrand = query.getAll(q);
-      resultModelsObj.push({ brand, models: modelsOfSpecificBrand });
-    });
-    // filter empty models
-    return resultModelsObj.filter((m) => m.models.length);
-  };
-
   // apply filters to the url, create new totaly new query string
   // (removes any we had before)
   const onSubmit = () => {
-    // before creating query, i delete all query filters in the url
-    query.delete(BRAND);
-    query.delete(YEAR_FROM);
-    query.delete(PRICE_FROM);
-    query.delete(PRICE_TO);
-    query.delete(YEAR_TO);
-    query.delete(CONDITION);
-    query.delete(TYPE);
-    query.delete(LOCATION);
-    query.delete(TRANSMISSION);
-    query.delete(KEYS);
-    query.delete(DRIVE);
-    query.delete(SALES_STATUS);
-    query.delete(FUEL_TYPE);
-    query.delete(CYLINDER);
-    deleteModelsFromURL(); // remote models
-    // clear if there was network error
-    dispatch(setNetworkError());
-
-    // put brand values from redux in the url
-    if (selectedBrands.length) {
-      selectedBrands.map((brand) => {
-        query.append(BRAND, brand);
-      });
-    } else {
-      // if there no brand selected remove models from the query
-      deleteModelsFromURL();
-    }
-
-    // if brands exists put model in the url
-    if (selectedModels.length) {
-      selectedModels.map((item) => {
-        item.models.map((model) => {
-          query.append(`${MODEL}[${item.brand}]`, model);
-        });
-      });
-    }
-
-    // set year from
-    if (yearFrom) {
-      query.set(YEAR_FROM, yearFrom);
-    }
-
-    // KEYS
-    if (keys) {
-      query.set(KEYS, keys);
-    }
-
-    // set year to
-    if (yearTo) {
-      query.set(YEAR_TO, yearTo);
-    }
-
-    // set price from
-    if (priceFrom) {
-      query.set(PRICE_FROM, priceFrom);
-    }
-
-    // set pride to
-    if (priceTo) {
-      query.set(PRICE_TO, priceTo);
-    }
-
-    // condition
-    conditions.map((c) => {
-      query.append(CONDITION, c);
-    });
-
-    // TYPES
-    types.map((t) => {
-      query.append(TYPE, t);
-    });
-
-    // location
-    locations.map((l) => {
-      query.append(LOCATION, l);
-    });
-
-    // TRANSMISSION
-    transmission.map((t) => {
-      query.append(TRANSMISSION, t);
-    });
-
-    // SALES STATUS
-
-    salesStatus.map((s) => query.append(SALES_STATUS, s));
-
-    // FUEL TYPE
-    fuels.map((f) => query.append(FUEL_TYPE, f));
-
-    // CYLINDERS
-    cylinders.map((c) => query.append(CYLINDER, c));
-
-    // DRIVE
-    drives.map((d) => query.append(DRIVE, d));
-
-    // we need to see first page on search
-    query.set('page', '1');
-
-    history.push({ pathname: '/catalog', search: query.toString() });
-    dispatch(getCars(query));
-
-    // save catalog query in redux for caching purpose
-    dispatch(setCatalogQuery(query.toString()))
-
+    submitCarSearch({ dispatch, query, history, filters });
     // if screen is small close advanced filters
     !isLargerThen737 && dispatch(closeAdvacedFilters());
   };
