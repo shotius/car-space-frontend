@@ -2,6 +2,7 @@ import { HStack, VStack } from '@chakra-ui/layout';
 import { StackDivider } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { NavMenuLink } from 'src/components/molecules/Links/NavMenuLink';
+import { useAppSelector } from 'src/redux/app/hook';
 import { MobileCurencyPopover } from '../PopOvers/Mobile/MobileCurencyPopover';
 import { MobileLanguagePopover } from '../PopOvers/Mobile/MobileLanguagePopover';
 
@@ -15,6 +16,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
   setMenuOpen,
 }) => {
   const popoverRef = useRef<HTMLDivElement>(null);
+  const {catalogQuery} = useAppSelector(state => state.globalAppState)
 
   return (
     <VStack
@@ -35,7 +37,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({
     >
       <NavMenuLink
         heading="Catalog"
-        to="/catalog"
+        to={`/catalog?${catalogQuery || ''}`}
         onClick={() => setMenuOpen(false)}
       />
       <NavMenuLink

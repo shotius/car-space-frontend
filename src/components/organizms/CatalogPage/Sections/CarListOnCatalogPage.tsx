@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { getCars } from 'src/redux/features/auth/carsSlice';
 import { getAllFavouritesThunk } from 'src/redux/features/auth/userSlice';
-import { openCatalogBanner } from 'src/redux/features/global/gloabalSlice';
+import { openCatalogBanner, setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
 
@@ -43,7 +43,6 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   // on the first load put page query in the url and open the banner
   useEffect(() => {
     if (!catalogQuery) {
-      
       console.log('here', page)
       activePage
         ? query.set('page', activePage.toString())
@@ -51,6 +50,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
       history.push({ search: query.toString() });
       dispatch(setActivePage(query.get('page')));
+      dispatch(setCatalogQuery(query.toString()))
     } else {
       history.push({ search: catalogQuery });
     }
@@ -67,6 +67,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   // when page number changes, get cars and scroll to top and save active page in redux
   useEffect(() => {
     if (catalogQuery !== query.toString()) {
+      console.log('back on catalog', catalogQuery, query.toString())
       console.log('query', query.toString());
       dispatch(getCars(query));
       dispatch(setActivePage(query.get('page')));

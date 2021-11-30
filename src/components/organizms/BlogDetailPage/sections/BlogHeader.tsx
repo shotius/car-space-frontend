@@ -1,7 +1,4 @@
-import {
-  Box, HStack, IconButton,
-  Spacer
-} from '@chakra-ui/react';
+import { Box, Button, HStack, Icon, Spacer, useToast } from '@chakra-ui/react';
 import { CopyIcon } from 'src/components/atoms/Icons/CopyIcon';
 import { FbIconBlack } from 'src/components/atoms/Icons/FBIconBlack';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
@@ -10,6 +7,10 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 interface HeaderProps {}
 
 export const BlogHeader: React.FC<HeaderProps> = ({}) => {
+  const toast = useToast();
+  const url = window.location;
+  // const wSize = useWindowSize()
+
   return (
     <Box w="full">
       <HeadingSecondary
@@ -23,36 +24,57 @@ export const BlogHeader: React.FC<HeaderProps> = ({}) => {
           01.02.2021
         </TextRegular>
         <Spacer />
-        <HStack  pr="4">
-          <IconButton
-            borderRadius="100px"
-            h="20px"
-            w="20px"
-            minW="0px"
-            icon={<CopyIcon boxSize={6} />}
-            aria-label="copy link"
-            bg="transparent"
-            _hover={{ bg: 'transparent' }}
-          />
-          <TextRegular opacity="0.5" fontSize="14px">
-            Copy Link
-          </TextRegular>
-        </HStack>
+        <Button
+          fontWeight="400"
+          variant="link"
+          fontSize="14px"
+          aria-label="copy link"
+          bg="transparent"
+          _hover={{ bg: 'transparent' }}
+          pr="10px"
+          onClick={() => {
+            navigator.clipboard
+              .writeText(url.toString())
+              .then(() => {
+                toast({
+                  description: 'Link copied to the clipboard',
+                  duration: 1500,
+                  status: 'success',
+                  position: 'top',
+                });
+              })
+              .catch(() => {
+                toast({
+                  description: 'Could not copy the url',
+                  duration: 2000,
+                  status: 'error',
+                  position: 'top',
+                });
+              });
+          }}
+        >
+          <Icon as={CopyIcon} boxSize={6} />
+          Copy Link
+        </Button>
         <HStack>
-          <IconButton
+          <Button
+            onClick={() => {
+              window.open(
+                `https://www.facebook.com/sharer/sharer.php?u=${window.location}`,
+                'share',
+                "left=100,top=100,width=320,height=320"
+              );
+            }}
+            variant="link"
             bg="transparent"
-            p="0"
-            icon={<FbIconBlack boxSize="6"/>}
+            fontSize="14px"
+            fontWeight="400"
             aria-label="facebook share"
             _hover={{ bg: 'transparent' }}
-            borderRadius="100px"
-            h="20px"
-            w="20px"
-            minW="0px"
-          />
-          <TextRegular opacity="0.5" fontSize="14px">
+          >
+            <Icon as={FbIconBlack} boxSize={6} />
             Copy Link
-          </TextRegular>
+          </Button>
         </HStack>
       </HStack>
     </Box>

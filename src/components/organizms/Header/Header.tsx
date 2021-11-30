@@ -82,13 +82,6 @@ export const Header: React.FC<HeaderProps> = () => {
     isOpen: isLangOpen,
   } = useDisclosure();
 
-  // Mobile login register Drawer
-  // const {
-  //   isOpen: isLoginRegisterOpen,
-  //   onOpen: openLoginRegister,
-  //   onClose: closeLoginRegister,
-  // } = useDisclosure();
-
   return (
     <ContainerOuter
       zIndex="13"

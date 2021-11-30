@@ -11,7 +11,6 @@ const initialState: GlobalStateSliceState = {
   isLoginOpen: false,
   isRegistrationOpen: false,
   isMobileRegisterLoginOpen: false,
-  queryString: '',
   screen: {
     isDesktop: false,
     isTablet: false,
@@ -45,9 +44,6 @@ const globalStateSlice = createSlice({
         ? (state.isRegistrationOpen = false)
         : (state.isRegistrationOpen = true);
     },
-    setQueryString: (state, action: PayloadAction<string>) => {
-      state.queryString = action.payload;
-    },
     toggleMobileAuthorization: (state) => {
       state.isMobileRegisterLoginOpen
         ? (state.isMobileRegisterLoginOpen = false)
@@ -73,7 +69,6 @@ export const {
   toggleLogin,
   toggleRegistration,
   toggleMobileAuthorization,
-  setQueryString,
   setScreenSize,
   setNetworkError,
   setCatalogQuery
