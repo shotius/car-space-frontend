@@ -73,7 +73,7 @@ export const BlogHeader: React.FC<HeaderProps> = ({}) => {
             _hover={{ bg: 'transparent' }}
           >
             <Icon as={FbIconBlack} boxSize={6} />
-            Copy Link
+            Share
           </Button>
         </HStack>
       </HStack>

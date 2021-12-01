@@ -28,6 +28,9 @@ export const CarListCarousel = ({ car }: { car: ICar }) => {
       {/* Swiper */}
       <Swiper
         className={styles.carCardSwiper}
+        style={{
+          padding: "10px 14px 10px 14px"
+        }}
         allowTouchMove={!isLaptopScreen} // disable slider on laptop screen
         spaceBetween={16}
         slidesPerView={2.1}

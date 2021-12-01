@@ -1,42 +1,48 @@
 import { Button, HStack, Icon, StackDivider, VStack } from '@chakra-ui/react';
 import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
+import { IOrderData } from 'src/pages/role/user/dashboard/OrderListPage';
+import { dateToDMY } from 'src/utils/functions/dateToDMY';
+import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { Card } from './Card';
 
-interface OrderListCardProps {}
+interface OrderListCardProps {
+  order: IOrderData
+}
 
-export const OrderListCard: React.FC<OrderListCardProps> = ({}) => {
+export const OrderListCard: React.FC<OrderListCardProps> = ({order}) => {
+  const {createdDate: cD, deliveryDate: dD} = order
   return (
     <Card w="full" pb="0">
       <VStack divider={<StackDivider />} w="full" p="2">
         <HStack w="full" justify="space-between">
-          <TextSecondary>Order Name</TextSecondary>
-          <HeadingSecondary>12341324</HeadingSecondary>
+          <TextSecondary>Order Id</TextSecondary>
+          <HeadingSecondary>{order.orderId}</HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">
           <TextSecondary>Name</TextSecondary>
-          <HeadingSecondary>Chevrolet</HeadingSecondary>
+          <HeadingSecondary>{order.name}</HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">
           <TextSecondary>Created</TextSecondary>
-          <HeadingSecondary>01.01.2021</HeadingSecondary>
+          <HeadingSecondary>{dateToDMY(cD)}</HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">
           <TextSecondary>Dealivery</TextSecondary>
-          <HeadingSecondary>01.03.2021</HeadingSecondary>
+          <HeadingSecondary>{dateToDMY(dD)}</HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">
           <TextSecondary>Location</TextSecondary>
-          <HeadingSecondary>USA</HeadingSecondary>
+          <HeadingSecondary>{order.location}</HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">
           <TextSecondary>Total Price</TextSecondary>
-          <HeadingSecondary>10 000 USD</HeadingSecondary>
+          <HeadingSecondary>{toTrippleNumber(order.totalPrice)} USD</HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">
           <TextSecondary>Status</TextSecondary>
-          <HeadingSecondary>Complated</HeadingSecondary>
+          <HeadingSecondary>{order.status}</HeadingSecondary>
         </HStack>
           <HStack>
             <Button variant="ghost" bg="transparent">

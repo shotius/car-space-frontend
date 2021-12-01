@@ -8,7 +8,7 @@ export const BlogCardLittle: React.FC<BlogCardLittleProps & StackProps> = ({
   ...rest
 }) => {
   return (
-    <HStack {...rest} cursor="pointer" _hover={{bg: "autoGrey.300"}} borderRadius="8px">
+    <HStack {...rest} cursor="pointer" _hover={{bg: "autoGrey.300"}} borderRadius="8px" p="4" spacing="4">
       <Image
         w="103px"
         h="71px"

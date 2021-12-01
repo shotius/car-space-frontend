@@ -38,7 +38,7 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({
     <Box w="full">
       <Box borderRadius="8px">
         <Swiper
-          spaceBetween={10}
+          spaceBetween={0}
           thumbs={{ swiper: thumbsSwiper }}
           className="mySwiper2"
         >
