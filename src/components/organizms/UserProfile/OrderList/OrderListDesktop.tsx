@@ -1,4 +1,4 @@
-import { Button, IconButton } from '@chakra-ui/button';
+import { Button} from '@chakra-ui/button';
 import { Center } from '@chakra-ui/layout';
 import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table';
 import { useState } from 'react';
@@ -58,7 +58,7 @@ export const OrderListDesktop: React.FC<OrderListDesktopProps> = ({
                 <Td w="full" p={[null, null, null, '2', '4']} isTruncated>
                   <HeadingSecondary>{order.orderId}</HeadingSecondary>
                 </Td>
-                <Td>
+                <Td max>
                   <TextRegular
                     noOfLines={isExpanded.includes(i) ? 5 : 1}
                     fontSize="16px"

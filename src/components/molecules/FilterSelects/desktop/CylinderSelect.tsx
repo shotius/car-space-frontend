@@ -35,7 +35,7 @@ export const CylinderSelect: React.FC<CylinderSelectProps> = ({}) => {
     <SelectGeneral
       size="md"
       selected={selected}
-      label="Cylinders"
+      label="cylinders"
       clearSelected={() => {
         setSelected([]);
         dispatch(selectCylinders([]));

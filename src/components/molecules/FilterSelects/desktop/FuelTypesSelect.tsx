@@ -35,7 +35,7 @@ export const FuelSelect: React.FC<FuelSelectProps> = ({}) => {
     <SelectGeneral
       size="md"
       selected={selected}
-      label="Fuel Type"
+      label="fuel type"
       clearSelected={() => {
         setSelected([]);
         dispatch(selectFuels([]));

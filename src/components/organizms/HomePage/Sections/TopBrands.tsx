@@ -8,11 +8,16 @@ import { ToyotaIcon } from 'src/components/atoms/Icons/ToyotaIcon';
 import { VolkswagenIcon } from 'src/components/atoms/Icons/VoltswagenIcon';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import { ScrollableDiv } from 'src/components/molecules/Wrappers/ScrollableDiv';
+import useWindowSize from 'src/utils/hooks/useWindowSize';
 import { TopBrandCard } from '../../../molecules/Cards/TopBrandCard';
 
 interface TopBrandsProps {}
 
 export const TopBrands: React.FC<TopBrandsProps> = () => {
+  const windowSize = useWindowSize();
+
+  let wW = windowSize?.width || 200;
+
   return (
     <Box w="full">
       <ContainerOuter>
@@ -25,13 +30,51 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
           pr={['4', null, null, '4']}
           w="full"
         >
-          <TopBrandCard className="hoverable" icon={BmwIcon} />
-          <TopBrandCard className="hoverable" icon={MercedesIcon} />
-          <TopBrandCard className="hoverable" icon={VolkswagenIcon} />
-          <TopBrandCard className="hoverable" icon={AudiIcon} mr="1px" />
-          <TopBrandCard className="hoverable" icon={HiundayIcon} mr="1px" />
-          <TopBrandCard className="hoverable" icon={ToyotaIcon} mr="1px" />
-          <TopBrandCard className="hoverable" icon={HiundayIcon} />
+          <TopBrandCard
+            className="hoverable"
+            icon={BmwIcon}
+            w={wW ? wW / 4.1 : '88px'}
+            h={wW ? wW / 4.9 : '88px'}
+          />
+          <TopBrandCard
+            className="hoverable"
+            icon={MercedesIcon}
+            w={wW ? wW / 4.1 : '88px'}
+            h={wW ? wW / 4.9 : '88px'}
+          />
+          <TopBrandCard
+            className="hoverable"
+            icon={VolkswagenIcon}
+            w={wW ? wW / 4.1 : '88px'}
+            h={wW ? wW / 4.9 : '88px'}
+          />
+          <TopBrandCard
+            className="hoverable"
+            icon={AudiIcon}
+            mr="1px"
+            w={wW ? wW / 4.1 : '88px'}
+            h={wW ? wW / 4.9 : '88px'}
+          />
+          <TopBrandCard
+            className="hoverable"
+            icon={HiundayIcon}
+            mr="1px"
+            w={wW ? wW / 4.1 : '88px'}
+            h={wW ? wW / 4.9 : '88px'}
+          />
+          <TopBrandCard
+            className="hoverable"
+            icon={ToyotaIcon}
+            mr="1px"
+            w={wW ? wW / 4.1 : '88px'}
+            h={wW ? wW / 4.9 : '88px'}
+          />
+          <TopBrandCard
+            className="hoverable"
+            icon={HiundayIcon}
+            w={wW ? wW / 4.1 : '88px'}
+            h={wW ? wW / 4.9 : '88px'}
+          />
         </ScrollableDiv>
       </ContainerOuter>
     </Box>

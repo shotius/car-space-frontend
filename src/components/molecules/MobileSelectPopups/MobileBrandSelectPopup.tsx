@@ -126,18 +126,18 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
 
             {/* top brand icons */}
             <ScrollableDiv
-              cardCount={5}
+              cardCount={6}
               w="full"
               display={isMobile && topBrandsVisible ? 'grid' : 'none'}
               p="0"
               gap="10px"
             >
-              {/* <TopBrandCard
+              <TopBrandCard
                 icon={MercedesIcon}
                 maxW={["38px", '50px']}
                 maxH={["38px", '50px']}
                 boxSize={5}
-              /> */}
+              />
               <TopBrandCard
                 icon={MercedesIcon}
                 maxW={['38px', '50px']}

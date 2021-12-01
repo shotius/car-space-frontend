@@ -37,7 +37,7 @@ export const SalesStatusSelect: React.FC<SalesStatusSelectProps> = ({}) => {
     <SelectGeneral
       size="md"
       selected={selected}
-      label="Sales Status"
+      label="sale status"
       clearSelected={() => {
         setSelected([]);
         dispatch(selectSalesStatus([]));

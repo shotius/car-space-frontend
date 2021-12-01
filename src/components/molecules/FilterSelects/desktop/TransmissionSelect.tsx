@@ -37,7 +37,7 @@ export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
     <SelectGeneral
       size="md"
       selected={selected}
-      label="Transmission"
+      label="transmission"
       clearSelected={() => {
         setSelected([]);
         dispatch(selectTranssmision([]));

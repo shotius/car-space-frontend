@@ -1,67 +1,4 @@
-/* #app { height: 100% }
-html,
-body {
-  position: relative;
-  height: 100%;
-}
-
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
-
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.swiper-button-prev {
-  display: none;
-}
-
-.swiper-button-next {
-  display: none;
-} */
-
-/* .swiper-button-next {
-  display: none;
-}
-
-.swiper-button-prev {
-  display: none;
-} */
-
-/** navigation bullet active*/
-.CarImagesSwiper {
+@mixin baseStyle {
   position: relative;
   border-radius: 8px;
   z-index: 0;
@@ -71,7 +8,21 @@ body {
     height: 2px;
     opacity: 0.7;
   }
+  
+}
 
+/** navigation bullet active*/
+.CarImagesSwiper {
+  @include baseStyle;
+
+  /** general pagination style*/
+  :global(.swiper-pagination-bullet) {
+    display: none;
+  }
+}
+
+.CarImagesSwiperHover {
+  @include baseStyle; 
   /** general pagination style*/
   :global(.swiper-pagination-bullet) {
     background-color: black !important;
@@ -79,12 +30,4 @@ body {
     border-radius: 0px !important;
     height: 2px;
   }
-
-  // .swiper-button-next {
-  //   display: 'block';
-  // }
-
-  // .swiper-button-prev {
-  //   display: none;
-  // }
 }

@@ -35,7 +35,7 @@ export const TypeSelect: React.FC<TypeSelectProps> = ({}) => {
     <SelectGeneral
       size="md"
       selected={selected}
-      label="Types"
+      label="types"
       clearSelected={() => {
         setSelected([]);
         dispatch(selectTypes([]));

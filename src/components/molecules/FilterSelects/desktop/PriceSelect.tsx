@@ -35,9 +35,9 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
   // when ever selected value changes, placeholder changes as well
   useEffect(() => {
     if (priceTo && priceFrom) {
-      setPlaceholder(`Price: ${detectIcon()} ${priceFrom} - ${priceTo} `);
+      setPlaceholder(`price: ${detectIcon()} ${priceFrom} - ${priceTo} `);
     } else {
-      setPlaceholder(`Price`);
+      setPlaceholder(`price`);
     }
   }, [priceFrom, priceTo, currency]);
 

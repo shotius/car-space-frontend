@@ -35,7 +35,7 @@ export const DrivesSelect: React.FC<DrivesSelectProps> = ({}) => {
     <SelectGeneral
       size="md"
       selected={selected}
-      label="Drives"
+      label="drives"
       clearSelected={() => {
         setSelected([]);
         dispatch(selectDrives([]));

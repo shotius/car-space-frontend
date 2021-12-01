@@ -16,7 +16,7 @@ export const HasKeySelect: React.FC<HasKeySelectProps> = ({}) => {
     <SelectGeneral
       size="md"
       selected={[]}
-      label="Keys"
+      label="keys"
       clearSelected={() => setSelected(null)}
       onApply={() => dispatch(selectCarKeys(selected))}
       top="35px"

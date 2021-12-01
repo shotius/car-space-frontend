@@ -37,7 +37,7 @@ export const ConditionSelect: React.FC<ConditionSelectProps> = ({}) => {
     <SelectGeneral
       size="md"
       selected={selected}
-      label="Condition"
+      label="condition"
       clearSelected={() => {
         setSelected([]);
         dispatch(selectConditions([]));

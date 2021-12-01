@@ -13,7 +13,7 @@ export const EngineSelect: React.FC<EngineSelectProps> = ({}) => {
     <SelectGeneral
       size="md"
       selected={selected}
-      label="Engine"
+      label="engine"
       clearSelected={() => setSelected([])}
       onApply={() => {}}
       top="35px"

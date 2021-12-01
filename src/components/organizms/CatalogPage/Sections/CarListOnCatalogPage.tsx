@@ -105,7 +105,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     <VStack spacing="90px" w="full">
       {/* car list */}
       {!!cars.length ? (
-        <CatalogListWrap gap="24px">
+        <CatalogListWrap gap="16px">
           {cars.map((car: ICar, i) => (
             <Flex justify="center" key={i}>
               <CarCard car={car} />

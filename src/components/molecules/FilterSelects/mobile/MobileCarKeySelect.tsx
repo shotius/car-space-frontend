@@ -17,7 +17,7 @@ export const MobileCarKeysSelect: React.FC<MobileCarKeysSelectProps> = ({}) => {
     <>
       <MobileSelect
         onClick={onOpen}
-        label={selection ? `Has Keys: ${selection}` : 'Has Keys'}
+        label={selection ? `Keys: ${selection}` : 'Keys'}
         hasValue={!!selection}
         onClear={() => dispatch(selectCarKeys(null))}
       />

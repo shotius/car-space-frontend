@@ -45,7 +45,11 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
       onMouseLeave={() => setButtonsVisible(false)}
     >
       <Swiper
-        className={style.CarImagesSwiper}
+        className={
+          buttonsVisible
+            ? style.CarImagesSwiperHover
+            : style.CarImagesSwiper
+        }
         slidesPerView={1}
         spaceBetween={3}
         pagination={true}

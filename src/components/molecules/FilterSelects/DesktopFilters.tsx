@@ -19,7 +19,6 @@ import { DrivesSelect } from './desktop/DrivesSelect';
 import { EngineSelect } from './desktop/EngineSelect';
 import { FuelSelect } from './desktop/FuelTypesSelect';
 import { HasKeySelect } from './desktop/HasKeySelect';
-import { LocationSelect } from './desktop/LocationSelect';
 import { ModelSelect } from './desktop/ModelSelect';
 import { PriceSelect } from './desktop/PriceSelect';
 import { SalesStatusSelect } from './desktop/SalesStatusSelect';
@@ -126,7 +125,6 @@ export const DesktopFiltersOnCatalogPage: React.FC<
           <EngineSelect />
           <ConditionSelect />
           <TypeSelect />
-          <LocationSelect />
           <TransmissionSelect />
           <HasKeySelect />
           <DrivesSelect />
