@@ -4,10 +4,7 @@ import { useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import {
-  selectYearFrom,
-  toggleAdvancedFilters
-} from 'src/redux/features/auth/selectedCarFilterSlice';
+import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SearchButton } from '../Buttons/SearchButton';
 import { CurrencySwitcherButtons } from '../CurrencySwitcherButtons';
 import { InputRegular } from '../Inputs/InputRegular';
@@ -25,136 +22,128 @@ import { MobileModelSelect } from './mobile/MobileModelSelect';
 import { MobileSalesStatusSelect } from './mobile/MobileSalesStatusSelect';
 import { MobileTransmissionSelect } from './mobile/MobileTransmissionSelect';
 import { MobileTypesSelect } from './mobile/MobileTypesSelect';
+import { MobileYearInput } from './mobile/MobileYearInput';
 
 interface ThreeMobileSelectsProps {
   onSubmit: () => void;
 }
 
-export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
-  ({onSubmit}) => {
-    const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
+export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> = ({
+  onSubmit,
+}) => {
+  const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
+  const [yearFrom, setYearFrom] = useState('');
+  const [yearTo, setYearTo] = useState('');
 
-    // redux variables
-    const { isAdvancedFiltersOpen } = useAppSelector(
-      (state) => state.selectedCarFilters
-    );
-    const dispatch = useAppDispatch();
+  // redux variables
+  const { isAdvancedFiltersOpen } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
+  const dispatch = useAppDispatch();
 
-    const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
-    const [yearFrom, setYearFrom] = useState('');
+  const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
 
-    return (
-      <Stack>
-        {/* mobile select opens drawer */}
-        <MobileBrandSelect />
+  return (
+    <Stack>
+      {/* mobile select opens drawer */}
+      <MobileBrandSelect />
 
-        {/* mobile model select and its drawer */}
-        <MobileModelSelect />
+      {/* mobile model select and its drawer */}
+      <MobileModelSelect />
 
-        {/* year */}
+      {/* year */}
+      <MobileYearInput
+        setKeyboardActive={setKeyboardActive}
+        yearFrom={yearFrom}
+        setYearFrom={setYearFrom}
+        yearTo={yearTo}
+        setYearTo={setYearTo}
+      />
+
+      {/* price */}
+      <HStack justify="space-between">
         <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
           <InputRegular
             pr="2"
-            placeholder="Year from"
+            placeholder="Price from"
             type="number"
-            value={yearFrom}
-            onChange={(e) => setYearFrom(e.currentTarget.value)}
             onFocus={() => setKeyboardActive(true)}
-            onBlur={() => {
-              setKeyboardActive(false);
-              yearFrom
-                ? dispatch(selectYearFrom(yearFrom))
-                : dispatch(selectYearFrom(null));
-            }}
+            onBlur={() => setKeyboardActive(false)}
           />
           <DividerVertical height="30px" />
           <InputRegular
-            placeholder="Year to"
+            placeholder="Price to"
             type="number"
             onFocus={() => setKeyboardActive(true)}
             onBlur={() => setKeyboardActive(false)}
           />
         </HStack>
-        {/* price */}
-        <HStack justify="space-between">
-          <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
-            <InputRegular
-              pr="2"
-              placeholder="Price from"
-              type="number"
-              onFocus={() => setKeyboardActive(true)}
-              onBlur={() => setKeyboardActive(false)}
-            />
-            <DividerVertical height="30px" />
-            <InputRegular
-              placeholder="Price to"
-              type="number"
-              onFocus={() => setKeyboardActive(true)}
-              onBlur={() => setKeyboardActive(false)}
-            />
-          </HStack>
-          {/* currency */}
-          <CurrencySwitcherButtons
-            currency={chosenCurrency}
-            setCurrency={setChosenCurrency}
-          />
-        </HStack>
+        {/* currency */}
+        <CurrencySwitcherButtons
+          currency={chosenCurrency}
+          setCurrency={setChosenCurrency}
+        />
+      </HStack>
 
-        {/* colapsable selects */}
-        <Collapse in={isAdvancedFiltersOpen}>
-          <VStack>
-            {/* Engine  */}
-            <MobileEngineSelect />
+      {/* colapsable selects */}
+      <Collapse in={isAdvancedFiltersOpen}>
+        <VStack>
+          {/* Engine  */}
+          <MobileEngineSelect />
 
-            {/* Conditions */}
-            <MobileConditionSelect />
+          {/* Conditions */}
+          <MobileConditionSelect />
 
-            {/* Types */}
-            <MobileTypesSelect />
+          {/* Types */}
+          <MobileTypesSelect />
 
-            {/* Locations */}
-            <MobileLocationSelect />
+          {/* Locations */}
+          <MobileLocationSelect />
 
-            {/* transmission */}
-            <MobileTransmissionSelect />
+          {/* transmission */}
+          <MobileTransmissionSelect />
 
-            {/* Keys */}
-            <MobileCarKeysSelect />
+          {/* Keys */}
+          <MobileCarKeysSelect />
 
-            {/* drive */}
-            <MobileDriveSelect />
+          {/* drive */}
+          <MobileDriveSelect />
 
-            {/* Sales Status */}
-            <MobileSalesStatusSelect />
+          {/* Sales Status */}
+          <MobileSalesStatusSelect />
 
-            {/* Fuels */}
-            <MobileFuelsSelect />
+          {/* Fuels */}
+          <MobileFuelsSelect />
 
-            {/* Cylinders */}
-            <MobileCylindersSelect />
-          </VStack>
-        </Collapse>
-        {/* apply button */}
-        <VStack pt="2" spacing="3">
-          {/* this mobile input sticks button to the keyboard */}
-          <WithMobileKeyboard isKeyboardActive={keyboardActive}>
-            <SearchButton w="full" isKeyboardActive={keyboardActive} onClick={onSubmit}/>
-          </WithMobileKeyboard>
-          <Button
-            variant="link"
-            onClick={() => dispatch(toggleAdvancedFilters())}
-            bg="transparent"
-          >
-            <TextRegular
-              color={'#000'}
-              display={keyboardActive ? 'none' : 'block'}
-              lineHeight="19px"
-              fontWeight="400"
-            >
-              {isAdvancedFiltersOpen ? 'See less filter' : 'See more filter'}
-            </TextRegular>
-          </Button>
+          {/* Cylinders */}
+          <MobileCylindersSelect />
         </VStack>
-      </Stack>
-    );
-  };
+      </Collapse>
+      {/* apply button */}
+      <VStack pt="2" spacing="3">
+        {/* this mobile input sticks button to the keyboard */}
+        <WithMobileKeyboard isKeyboardActive={keyboardActive}>
+          <SearchButton
+            w="full"
+            isKeyboardActive={keyboardActive}
+            onClick={onSubmit}
+          />
+        </WithMobileKeyboard>
+        <Button
+          variant="link"
+          onClick={() => dispatch(toggleAdvancedFilters())}
+          bg="transparent"
+        >
+          <TextRegular
+            color={'#000'}
+            display={keyboardActive ? 'none' : 'block'}
+            lineHeight="19px"
+            fontWeight="400"
+          >
+            {isAdvancedFiltersOpen ? 'See less filter' : 'See more filter'}
+          </TextRegular>
+        </Button>
+      </VStack>
+    </Stack>
+  );
+};

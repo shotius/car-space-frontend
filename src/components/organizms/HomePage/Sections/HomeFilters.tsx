@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
+import { MobileYearSelect } from 'src/components/molecules/FilterSelects/mobile/MobileYearSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getFilters } from 'src/redux/features/auth/carsSlice';
 import { openAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
@@ -15,7 +16,6 @@ import { BrandSelect } from '../../../molecules/FilterSelects/desktop/BrandSelec
 import { ModelSelect } from '../../../molecules/FilterSelects/desktop/ModelSelect';
 import { YearSelect } from '../../../molecules/FilterSelects/desktop/YearSelect';
 import { MobileBrandSelect } from '../../../molecules/FilterSelects/mobile/MobileBrandSelect';
-import { MobileLocationSelect } from '../../../molecules/FilterSelects/mobile/MobileLocationSelect';
 import { MobileModelSelect } from '../../../molecules/FilterSelects/mobile/MobileModelSelect';
 
 interface SearchProps {}
@@ -84,7 +84,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
 
           {/* Year Select  */}
           {!isDesktop ? (
-            <MobileLocationSelect w={['100%', '30%', '23%']} />
+            <MobileYearSelect w={['100%', '30%', '23%']} />
           ) : (
             <YearSelect w={['100%', '100%', '100%']} />
           )}

@@ -51,11 +51,11 @@ const selectedCarFilterSlice = createSlice({
     selectPriseTo: (state, action: PayloadAction<string | undefined>) => {
       state.priceTo = action.payload;
     },
-    selectYearFrom: (state, action) => {
-      state.yearFrom = action.payload;
+    selectYearFrom: (state, action: PayloadAction<number>) => {
+      state.yearFrom = action.payload.toString();
     },
-    selectYearTo: (state, action) => {
-      state.yearTo = action.payload;
+    selectYearTo: (state, action: PayloadAction<number>) => {
+      state.yearTo = action.payload.toString();
     },
     selectCurrency: (state, action: PayloadAction<CurrencyType>) => {
       state.currency = action.payload;

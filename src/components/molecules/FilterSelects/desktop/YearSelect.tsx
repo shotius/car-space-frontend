@@ -13,6 +13,7 @@ import {
   selectYearFrom,
   selectYearTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { range } from 'src/utils/functions/range';
 
 interface YearSelectProps {}
 
@@ -29,7 +30,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
   // when ever selected value changes, placeholder changes as well
   useEffect(() => {
     if (yearFrom || yearTo) {
-      setPlaceholder(`Year:  ${yearFrom} - ${yearTo}`);
+      setPlaceholder(`${yearFrom} - ${yearTo}`);
     } else {
       setPlaceholder(`Year`);
     }
@@ -67,13 +68,6 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
     } else {
       setYearTo(num);
     }
-  };
-
-  // create range or nummbers
-  const range = (from: number, to: number): number[] => {
-    const arr = Array(to - from + 1).fill(0);
-    const first = from;
-    return arr.map((_, i) => i + first);
   };
 
   return (
@@ -127,7 +121,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
                 From
               </TextRegular>
               <VerticalScrollable>
-                {range(2000, 2020).map((num) => (
+                {range(1980, 2021).map((num) => (
                   <TextButton
                     fontSize="14px"
                     key={num}
@@ -150,7 +144,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
                 To
               </TextRegular>
               <VerticalScrollable>
-                {range(2000, 2020).map((num) => (
+                {range(1980, 2021).map((num) => (
                   <TextButton
                     fontSize="14px"
                     p="2"
