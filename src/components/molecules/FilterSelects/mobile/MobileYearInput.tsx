@@ -15,8 +15,8 @@ interface MobileYearInputProps {
 export const MobileYearInput: React.FC<MobileYearInputProps> = ({
   setKeyboardActive,
 }) => {
-  const [yearFrom, setYearFrom] = useState(0);
-  const [yearTo, setYearTo] = useState(0);
+  const [yearFrom, setYearFrom] = useState<string>('');
+  const [yearTo, setYearTo] = useState<string>('');
 
   const { yearFrom: initYearFrom, yearTo: initYearTo } = useAppSelector(
     (state) => state.selectedCarFilters
@@ -26,14 +26,14 @@ export const MobileYearInput: React.FC<MobileYearInputProps> = ({
   useEffect(() => {
     // if we have filters saved in redux assign them to components state
     if (initYearFrom) {
-      setYearFrom(parseInt(initYearFrom));
+      setYearFrom(initYearFrom.toString());
     } else {
-      setYearFrom(0);
+      setYearFrom('');
     }
     if (initYearTo) {
-      setYearTo(parseInt(initYearTo));
+      setYearTo(initYearTo.toString());
     } else {
-      setYearTo(0);
+      setYearTo('');
     }
   }, [initYearFrom, initYearTo]);
 
@@ -44,13 +44,13 @@ export const MobileYearInput: React.FC<MobileYearInputProps> = ({
         placeholder="Year from"
         type="number"
         value={yearFrom}
-        onChange={(e) => setYearFrom(parseInt(e.currentTarget.value))}
+        onChange={(e) => setYearFrom(e.currentTarget.value)}
         onFocus={() => setKeyboardActive(true)}
         onBlur={() => {
           setKeyboardActive(false);
           yearFrom
-            ? dispatch(selectYearFrom(yearFrom))
-            : dispatch(selectYearFrom(null));
+            ? dispatch(selectYearFrom(parseInt(yearFrom)))
+            : dispatch(selectYearFrom(0));
         }}
       />
       <DividerVertical height="30px" />
@@ -58,13 +58,11 @@ export const MobileYearInput: React.FC<MobileYearInputProps> = ({
         placeholder="Year to"
         type="number"
         value={yearTo}
-        onChange={(e) => setYearTo(parseInt(e.currentTarget.value))}
+        onChange={(e) => setYearTo(e.currentTarget.value)}
         onFocus={() => setKeyboardActive(true)}
         onBlur={() => {
           setKeyboardActive(false);
-          yearTo
-            ? dispatch(selectYearTo(yearTo))
-            : dispatch(selectYearFrom(null));
+          yearTo ? dispatch(selectYearTo(parseInt(yearTo))) : dispatch(selectYearFrom(0));
         }}
       />
     </HStack>

@@ -24,7 +24,9 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
   const [yearFrom, setYearFrom] = useState<number>(0);
   const [yearTo, setYearTo] = useState<number>(0);
   const [placeholder, setPlaceholder] = useState<string>('');
-  const {yearFrom: initYearFrom , yearTo: initYearTo} = useAppSelector(state => state.selectedCarFilters)
+  const { yearFrom: initYearFrom, yearTo: initYearTo } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
   const dispatch = useAppDispatch();
 
   // when ever selected value changes, placeholder changes as well
@@ -37,13 +39,13 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
   }, [yearFrom, yearTo]);
 
   useEffect(() => {
-    if(initYearFrom) {
-      setYearFrom(Number(initYearFrom))
+    if (initYearFrom) {
+      setYearFrom(Number(initYearFrom));
     }
     if (initYearTo) {
-      setYearTo(Number(initYearTo))
+      setYearTo(Number(initYearTo));
     }
-  }, [initYearFrom, initYearTo])
+  }, [initYearFrom, initYearTo]);
 
   // handler year from select
   const handleSelectYearFrom = (num: number) => {
@@ -92,7 +94,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
             setPlaceholder('');
             setAreOptionsOpen(false);
           }}
-          areOptionsSelected={!!(yearFrom && yearTo)}
+          areOptionsSelected={!!(yearFrom || yearTo)}
           onClick={() => setAreOptionsOpen((open) => !open)}
         >
           <HStack
@@ -109,7 +111,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
             </TextRegular>
           </HStack>
         </SelectTrigger>
-      <SelectOptions isOpen={areOptionsOpen} w="full">
+        <SelectOptions isOpen={areOptionsOpen} w="full">
           <HStack
             h="290px"
             w="full"
@@ -120,7 +122,13 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
               <TextRegular fontSize="16px" pr="4px">
                 From
               </TextRegular>
-              <VerticalScrollable>
+              <VerticalScrollable
+                css={{
+                  '&::-webkit-scrollbar': {
+                    display: 'none',
+                  },
+                }}
+              >
                 {range(1980, 2021).map((num) => (
                   <TextButton
                     fontSize="14px"
@@ -143,7 +151,13 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
               <TextRegular fontSize="16px" pr="8px">
                 To
               </TextRegular>
-              <VerticalScrollable>
+              <VerticalScrollable
+                css={{
+                  '&::-webkit-scrollbar': {
+                    display: 'none',
+                  },
+                }}
+              >
                 {range(1980, 2021).map((num) => (
                   <TextButton
                     fontSize="14px"

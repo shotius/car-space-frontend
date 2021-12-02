@@ -12,6 +12,8 @@ import {
   selectConditions,
   selectCylinders,
   selectDrives,
+  selectEngineFrom,
+  selectEnginTo,
   selectFuels,
   selectLocations,
   selectModels,
@@ -48,6 +50,8 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     SALES_STATUS,
     FUEL_TYPE,
     CYLINDER,
+    ENGINE_FROM, 
+    ENGINE_TO
   } = FilterQueries;
 
   const { brands } = useAppSelector((state) => state.selectedCarFilters);
@@ -84,12 +88,23 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     // restore year from url
     const yearFrom = query.get(YEAR_FROM);
     if (yearFrom) {
-      dispatch(selectYearFrom(yearFrom));
+      dispatch(selectYearFrom(parseInt(yearFrom)));
     }
 
     const yearTo = query.get(YEAR_TO);
     if (yearTo) {
-      dispatch(selectYearTo(yearTo));
+      dispatch(selectYearTo(parseInt(yearTo)));
+    }
+
+    // restore engine from url 
+    const engineFrom = query.get(ENGINE_FROM)
+    if (engineFrom) {
+      dispatch(selectEngineFrom(engineFrom))
+    }
+
+    const engineTo = query.get(ENGINE_TO)
+    if (engineTo) {
+      dispatch(selectEnginTo(engineTo))
     }
 
     // restore condition from url

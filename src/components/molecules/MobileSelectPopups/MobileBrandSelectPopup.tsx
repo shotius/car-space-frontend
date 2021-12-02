@@ -81,8 +81,6 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
       setSelectedBrands(brands);
     }
   };
-  console.log('select', selectedBrands)
-
 
   const onSubmit = () => {
     dispatch(selectBrand(selectedBrands));

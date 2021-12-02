@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { getCars } from 'src/redux/features/auth/carsSlice';
 import { getAllFavouritesThunk } from 'src/redux/features/auth/userSlice';
-import { openCatalogBanner, setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
+import { closeCatalogBanner, setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
 
@@ -54,7 +54,9 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     } else {
       history.push({ search: catalogQuery });
     }
-    dispatch(openCatalogBanner());
+    return () => {
+      dispatch(closeCatalogBanner());
+    }
   }, []);
 
   // If Authenticated get All favourite cars

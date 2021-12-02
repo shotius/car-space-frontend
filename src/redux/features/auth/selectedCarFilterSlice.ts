@@ -6,8 +6,8 @@ import { Keys, SelectedCarFilters } from './types';
 const initialState: SelectedCarFilters = {
   brands: [],
   models: [],
-  yearFrom: null,
-  yearTo: null,
+  yearFrom: 0,
+  yearTo: 0,
   priceFrom: undefined,
   priceTo: undefined,
   engineFrom: null,
@@ -52,10 +52,10 @@ const selectedCarFilterSlice = createSlice({
       state.priceTo = action.payload;
     },
     selectYearFrom: (state, action: PayloadAction<number>) => {
-      state.yearFrom = action.payload.toString();
+      state.yearFrom = action.payload;
     },
     selectYearTo: (state, action: PayloadAction<number>) => {
-      state.yearTo = action.payload.toString();
+      state.yearTo = action.payload;
     },
     selectCurrency: (state, action: PayloadAction<CurrencyType>) => {
       state.currency = action.payload;

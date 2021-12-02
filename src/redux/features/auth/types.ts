@@ -36,8 +36,8 @@ export type Keys = 'YES' | 'NO' | null;
 export interface SelectedCarFilters {
   brands: string[];
   models: SelectedCarModel[];
-  yearFrom: string | null;
-  yearTo: string | null;
+  yearFrom: number;
+  yearTo: number;
   priceFrom?: string;
   priceTo?: string;
   engineFrom: number | null;

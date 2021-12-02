@@ -36,4 +36,6 @@ export enum FilterQueries {
   YEAR_TO = 'year_to',
   PRICE_FROM = 'price_from', 
   PRICE_TO = 'price_to', 
+  ENGINE_FROM = 'engine_from', 
+  ENGINE_TO = 'engine_to', 
 }

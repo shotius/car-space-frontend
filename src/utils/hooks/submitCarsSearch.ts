@@ -1,16 +1,19 @@
 import { FilterQueries } from 'src/constants';
 import { getCars } from 'src/redux/features/auth/carsSlice';
 import {
-  setCatalogQuery, setNetworkError
+  setCatalogQuery,
+  setNetworkError,
 } from 'src/redux/features/global/gloabalSlice';
 import { deleteQueryFromURL } from '../functions/deleteQueryFromUrl';
 
-export const submitCarSearch = ({query, dispatch, history, filters}) => {
+export const submitCarSearch = ({ query, dispatch, history, filters }) => {
   const {
     brands: selectedBrands,
     models: selectedModels,
     yearFrom,
     yearTo,
+    engineFrom,
+    engineTo,
     conditions,
     types,
     locations,
@@ -22,7 +25,7 @@ export const submitCarSearch = ({query, dispatch, history, filters}) => {
     cylinders,
     priceFrom,
     priceTo,
-  } = filters
+  } = filters;
 
   const {
     BRAND,
@@ -40,6 +43,8 @@ export const submitCarSearch = ({query, dispatch, history, filters}) => {
     CYLINDER,
     PRICE_FROM,
     PRICE_TO,
+    ENGINE_FROM,
+    ENGINE_TO,
   } = FilterQueries;
 
   // before creating query, i delete all query filters in the url
@@ -57,6 +62,8 @@ export const submitCarSearch = ({query, dispatch, history, filters}) => {
   query.delete(SALES_STATUS);
   query.delete(FUEL_TYPE);
   query.delete(CYLINDER);
+  query.delete(ENGINE_FROM)
+  query.delete(ENGINE_TO)
 
   deleteQueryFromURL({ query, queryName: MODEL }); // remote models
   // clear if there was network error
@@ -104,6 +111,14 @@ export const submitCarSearch = ({query, dispatch, history, filters}) => {
   // set pride to
   if (priceTo) {
     query.set(PRICE_TO, priceTo);
+  }
+
+  if (engineFrom) {
+    query.set(ENGINE_FROM, engineFrom)
+  }
+
+  if (engineTo) {
+    query.set(ENGINE_TO, engineTo)
   }
 
   // condition

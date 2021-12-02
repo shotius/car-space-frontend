@@ -9,7 +9,7 @@ export const SelectOptions: React.FC<SelectOptionsWrapperProps & StackProps> =
     return (
       <VStack
         w="full"
-        zIndex="overlay"
+        zIndex="modal"
         position="absolute"
         top={!isOpen ? '41px' : '45px'}
         maxH={isOpen ? maxH : '0px'}

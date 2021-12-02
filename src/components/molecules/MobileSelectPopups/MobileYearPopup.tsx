@@ -2,15 +2,17 @@ import {
   Drawer,
   DrawerBody,
   DrawerContent,
-  DrawerFooter, DrawerOverlay, HStack,
+  DrawerFooter,
+  DrawerOverlay,
+  HStack,
   StackDivider,
-  VStack
+  VStack,
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectYearFrom,
-  selectYearTo
+  selectYearTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { range } from 'src/utils/functions/range';
 import { ButtonRegular } from '../Buttons/ButtonRegular';
@@ -40,17 +42,16 @@ export const MobileYearPopup: React.FC<SelectProps> = ({
   useEffect(() => {
     // if we have filters saved in redux assign them to components state
     if (initYearFrom) {
-      setYearFrom(parseInt(initYearFrom));
+      setYearFrom(initYearFrom);
     } else {
       setYearFrom(0);
     }
     if (initYearTo) {
-      setYearTo(parseInt(initYearTo));
+      setYearTo(initYearTo);
     } else {
-      setYearTo(0)
+      setYearTo(0);
     }
   }, [initYearFrom, initYearTo]);
-
 
   // handler year from select
   const handleSelectYearFrom = (num: number) => {
@@ -78,8 +79,10 @@ export const MobileYearPopup: React.FC<SelectProps> = ({
   };
 
   const onSubmit = () => {
-    dispatch(selectYearFrom(yearFrom));
-    dispatch(selectYearTo(yearTo));
+    if (yearFrom || yearTo) {
+      dispatch(selectYearFrom(yearFrom));
+      dispatch(selectYearTo(yearTo));
+    }
     onClose();
   };
 

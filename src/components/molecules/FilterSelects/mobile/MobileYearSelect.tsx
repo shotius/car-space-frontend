@@ -35,8 +35,8 @@ export const MobileYearSelect: React.FC<SelectProps & BoxProps> = ({
         }
         hasValue={!!(selectedYearFrom || selectedYearTo)}
         onClear={() => {
-          dispatch(selectYearFrom(null));
-          dispatch(selectYearTo(null));
+          dispatch(selectYearFrom(0));
+          dispatch(selectYearTo(0));
         }}
       />
       <MobileYearPopup

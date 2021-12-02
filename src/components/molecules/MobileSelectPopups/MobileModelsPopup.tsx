@@ -1,6 +1,6 @@
 import { Checkbox } from '@chakra-ui/checkbox';
 import { VStack } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
@@ -11,14 +11,15 @@ import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 interface MobileModelsPopupProps {
   isOpen: boolean;
   onClose: () => void;
-  allSelectedModels: string[]
+  allSelectedModels: string[];
 }
 
 export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
   isOpen,
   onClose,
-  allSelectedModels
+  allSelectedModels,
 }) => {
+  const initialFocusRef = useRef<HTMLButtonElement | null>(null)
   const [searchWord, setSearchWord] = useState('');
   const [selected, setSelected] = useState<SelectedCarModel[]>([]);
 
@@ -27,7 +28,7 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
     (state) => state.selectedCarFilters
   );
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   // asign initial selected models to the state
   useEffect(() => {
@@ -79,6 +80,8 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
 
   return (
     <MobileFilterPopup
+      initialFocusRef={initialFocusRef}
+      ref={initialFocusRef}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={() => {

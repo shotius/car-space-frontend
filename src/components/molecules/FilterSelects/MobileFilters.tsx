@@ -32,8 +32,6 @@ export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> = ({
   onSubmit,
 }) => {
   const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
-  const [yearFrom, setYearFrom] = useState('');
-  const [yearTo, setYearTo] = useState('');
 
   // redux variables
   const { isAdvancedFiltersOpen } = useAppSelector(
@@ -52,13 +50,7 @@ export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> = ({
       <MobileModelSelect />
 
       {/* year */}
-      <MobileYearInput
-        setKeyboardActive={setKeyboardActive}
-        yearFrom={yearFrom}
-        setYearFrom={setYearFrom}
-        yearTo={yearTo}
-        setYearTo={setYearTo}
-      />
+      <MobileYearInput setKeyboardActive={setKeyboardActive} />
 
       {/* price */}
       <HStack justify="space-between">
