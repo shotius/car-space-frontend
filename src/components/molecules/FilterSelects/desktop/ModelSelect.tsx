@@ -134,9 +134,14 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
   );
 
   // filter options when searchWord is specified
-  // const optionsToShow = options.filter((option) => {
-  //   return option.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
-  // });
+  const optionsToShow = options
+    .map((option) => {
+      return {
+        brand: option.brand,
+        models: option.models.filter((model) => model.toLowerCase().includes(searchWord.toLowerCase())),
+      };
+    })
+    .filter((option) => option.models.length);
 
   return (
     <SelectWrapper
@@ -157,7 +162,11 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
       {/*  Input */}
       <SelectContent>
         <SelectTrigger
-          onClick={() => setAreOptionsOpen(true)}
+          onClick={() => {
+            if (!isDisabled) {
+              setAreOptionsOpen(true);
+            }
+          }}
           areOptionsSelected={!!allModelsSelected.length}
           isDisabled={isDisabled}
           areOptionsOpen={areOptionsOpen}
@@ -165,9 +174,9 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
             // onFocus open Options
             setAreOptionsOpen(true);
             // if something is selected, display in placeholder
-            // updatePlaceholder();
+            updatePlaceholder();
             // clear value in the search field
-            // setValue('');
+            setValue('');
           }}
           clearCb={(e) => {
             if (e.stopPropagation) e.stopPropagation();
@@ -189,7 +198,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
 
         {/* Options  */}
         <SelectOptions isOpen={areOptionsOpen}>
-          {options.map((option) => (
+          {optionsToShow.map((option) => (
             <VStack key={option.brand} align="flex-start" w="full">
               <TextRegular pl="4" fontSize="14px" opacity="0.5">
                 {option.brand}

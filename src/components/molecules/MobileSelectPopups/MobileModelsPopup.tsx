@@ -73,10 +73,15 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
   };
 
   // filter based on search word
-  // const modelsToShow = () =>
-  //   allModels.filter((model) =>
-  //     model.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
-  //   );
+  const optionsToShow = options
+    .map((option) => {
+      return {
+        brand: option.brand,
+        models: option.models.filter((model) => model.toLowerCase().includes(searchWord.toLowerCase())),
+      };
+    })
+    .filter((option) => option.models.length);
+
 
   return (
     <MobileFilterPopup
@@ -92,8 +97,8 @@ export const MobileModelsPopup: React.FC<MobileModelsPopupProps> = ({
         <SearchInput searchWord={searchWord} setSearchWord={setSearchWord} />
       }
     >
-      <VStack w="full" alignItems="flex-start" maxH="300px" spacing="16px">
-        {options.map((option) => (
+      <VStack w="full" alignItems="flex-start" h="300px"  spacing="16px">
+        {optionsToShow.map((option) => (
           <VStack key={option.brand} align="flex-start">
             <TextSecondary opacity="0.5">{option.brand}</TextSecondary>
             {option.models.map((model) => (
