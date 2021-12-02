@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
+import { MultiSelect } from 'src/components/atoms/Selects/MultiSelect';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { selectCarKeys } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { Keys } from 'src/redux/features/auth/types';
@@ -13,7 +13,7 @@ export const HasKeySelect: React.FC<HasKeySelectProps> = ({}) => {
   const dispatch = useAppDispatch();
 
   return (
-    <SelectGeneral
+    <MultiSelect
       size="md"
       selected={[]}
       label="keys"
@@ -43,6 +43,6 @@ export const HasKeySelect: React.FC<HasKeySelectProps> = ({}) => {
           <TextRegular>No</TextRegular>
         </HStack>{' '} */}
       </SelectContent>
-    </SelectGeneral>
+    </MultiSelect>
   );
 };

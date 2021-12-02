@@ -1,6 +1,6 @@
 import { Checkbox } from '@chakra-ui/checkbox';
 import { useEffect, useState } from 'react';
-import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
+import { MultiSelect } from 'src/components/atoms/Selects/MultiSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectTypes } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SelectOptionButton } from '../../Buttons/SelectOptionButton';
@@ -32,7 +32,7 @@ export const TypeSelect: React.FC<TypeSelectProps> = ({}) => {
   };
 
   return (
-    <SelectGeneral
+    <MultiSelect
       size="md"
       selected={selected}
       label="types"
@@ -61,6 +61,6 @@ export const TypeSelect: React.FC<TypeSelectProps> = ({}) => {
           </SelectOptionButton>
         ))}
       </SelectContent>
-    </SelectGeneral>
+    </MultiSelect>
   );
 };

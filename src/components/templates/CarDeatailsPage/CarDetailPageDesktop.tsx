@@ -66,16 +66,18 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
           <CarDeailsCard variant="desktop" car={car} />
         </VStack>
         <Spacer minW="20px" />
-        <VStack
-          w="441px"
-          spacing="32px"
-          alignItems="flex-start"
-          position="sticky"
-          top={[null, null, null, '110px', '120px']}
-        >
+        <VStack position="relative" alignSelf="stretch" spacing="4">
           <CarDescriptionHeader car={car} />
-          <BidInfoCard car={car} />
-          <CalculatorDesktop children size="regular" />
+          <VStack
+            w="441px"
+            spacing="32px"
+            alignItems="flex-start"
+            position="sticky"
+            top='90px'
+          >
+            <BidInfoCard car={car} />
+            <CalculatorDesktop children size="regular" />
+          </VStack>
         </VStack>
       </Flex>
     </ContainerOuter>

@@ -88,7 +88,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
 
   const updatePlaceholder = () => {
     if (selected.length) {
-      setPlaceholder(`Models: ${allSelectedModels.join(', ')}`);
+      setPlaceholder(`${allSelectedModels.join(', ')}`);
     } else {
       setPlaceholder(`Models`);
     }
@@ -157,6 +157,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
       {/*  Input */}
       <SelectContent>
         <SelectTrigger
+          onClick={() => setAreOptionsOpen(true)}
           areOptionsSelected={!!allModelsSelected.length}
           isDisabled={isDisabled}
           areOptionsOpen={areOptionsOpen}

@@ -1,6 +1,7 @@
 import { VStack, StackDivider, HStack } from '@chakra-ui/layout';
 import { capitalize } from 'src/utils/functions/capitalize';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
+import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { NotSpecified } from '../Texts/NotSpecified';
@@ -45,12 +46,18 @@ export const CarSpecTable: React.FC<CarSpecTableProps> = ({ car }) => {
       </HStack>
       <HStack w="full" justify="space-between">
         <TextRegular opacity="0.5">Engine</TextRegular>
-        <HeadingSecondary>{car.eng || <NotSpecified />}</HeadingSecondary>
+        <HeadingSecondary>
+          {car.eng ? <>{car.eng} L</> : <NotSpecified />}
+        </HeadingSecondary>
       </HStack>
       <HStack w="full" justify="space-between">
         <TextRegular opacity="0.5">Mileage</TextRegular>
         <HeadingSecondary>
-          {car.od ? <>{car.od} km</> : <NotSpecified />}
+          {car.od ? (
+            <>{toTrippleNumber(parseInt(car.od))} km</>
+          ) : (
+            <NotSpecified />
+          )}
         </HeadingSecondary>
       </HStack>
       <HStack w="full" justify="space-between">
@@ -79,9 +86,21 @@ export const CarSpecTable: React.FC<CarSpecTableProps> = ({ car }) => {
           {car.trans ? capitalize(car.trans) : <NotSpecified />}
         </HeadingSecondary>
       </HStack>
-      <HStack w="full" justify="space-between" color="red">
-        <TextRegular opacity="0.5">Airbags</TextRegular>
-        <HeadingSecondary>need to change</HeadingSecondary>
+      <HStack w="full" justify="space-between">
+        <TextRegular opacity="0.5">Highlights:</TextRegular>
+        <HeadingSecondary>
+          {car.rd ? (
+            <>
+              {car.rd === 'DEFAULT' ? (
+                'Run and Drive'
+              ) : (
+                <>{capitalizeEach(car.rd)}</>
+              )}
+            </>
+          ) : (
+            <NotSpecified />
+          )}
+        </HeadingSecondary>
       </HStack>
     </VStack>
   );

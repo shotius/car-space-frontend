@@ -1,6 +1,6 @@
 import { Checkbox } from '@chakra-ui/checkbox';
 import { useEffect, useState } from 'react';
-import { SelectGeneral } from 'src/components/atoms/Selects/SelectGeneral';
+import { MultiSelect } from 'src/components/atoms/Selects/MultiSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectSalesStatus } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SelectOptionButton } from '../../Buttons/SelectOptionButton';
@@ -34,7 +34,7 @@ export const SalesStatusSelect: React.FC<SalesStatusSelectProps> = ({}) => {
   };
 
   return (
-    <SelectGeneral
+    <MultiSelect
       size="md"
       selected={selected}
       label="sale status"
@@ -63,6 +63,6 @@ export const SalesStatusSelect: React.FC<SalesStatusSelectProps> = ({}) => {
           </SelectOptionButton>
         ))}
       </SelectContent>
-    </SelectGeneral>
+    </MultiSelect>
   );
 };

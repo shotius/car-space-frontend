@@ -7,7 +7,7 @@ import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 
-interface TransmissionSelectProps {
+interface SelectProps {
   selected: any[];
   label: string;
   clearSelected: () => void;
@@ -15,7 +15,7 @@ interface TransmissionSelectProps {
   size?: "lg" | "md"
 }
 
-export const SelectGeneral: React.FC<TransmissionSelectProps & StackProps> = ({
+export const MultiSelect: React.FC<SelectProps & StackProps> = ({
   selected,
   label,
   children,
@@ -29,7 +29,7 @@ export const SelectGeneral: React.FC<TransmissionSelectProps & StackProps> = ({
 
   useEffect(() => {
     if (selected.length) {
-      setPlaceholder(`${label}: ${selected.join(', ')}`);
+      setPlaceholder(`${selected.join(', ')}`);
     } else {
       setPlaceholder(label);
     }

@@ -83,7 +83,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
 
   const updatePlaceholder = () => {
     if (selected.length) {
-      setPlaceholder(() => `Brands: ${selected.join(', ')}`);
+      setPlaceholder(() => `${selected.join(', ')}`);
     } else {
       setPlaceholder(() => `Brands`);
     }
@@ -111,6 +111,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
       <SelectContent>
         {/*  Input */}
         <SelectTrigger
+          onClick={() => setAreOptionsOpen(true)}
           areOptionsOpen={areOptionsOpen}
           areOptionsSelected={!!selected.length}
           clearCb={(e) => {

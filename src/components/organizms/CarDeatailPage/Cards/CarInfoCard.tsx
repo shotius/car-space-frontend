@@ -3,6 +3,7 @@ import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading'
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CarInfoCardProps {
@@ -22,12 +23,16 @@ export const CarInfoCard: React.FC<CarInfoCardProps> = ({ car }) => {
         <HStack w="full" justify="space-between">
           <VStack w="full" alignItems="flex-start" spacing="4px">
             <TextRegular opacity="0.5">Primary damage</TextRegular>
-            <HeadingSecondary>{car.dmg || <NotSpecified />}</HeadingSecondary>
+            <HeadingSecondary>
+              {car.dmg ? <>{capitalizeEach(car.dmg)}</> : <NotSpecified />}
+            </HeadingSecondary>
           </VStack>
 
           <VStack w="full" alignItems="flex-start" spacing="4px">
             <TextRegular opacity="0.5">Secondary damage</TextRegular>
-            <HeadingSecondary>{car.sDmg || <NotSpecified />}</HeadingSecondary>
+            <HeadingSecondary>
+              {car.sDmg ? <>{capitalizeEach(car.sDmg)}</> : <NotSpecified />}
+            </HeadingSecondary>
           </VStack>
         </HStack>
 

@@ -1,1 +1,3 @@
-export const NotSpecified = () => <>Not Specified</>;
+import { TextRegular } from './TextRegular';
+
+export const NotSpecified = () => <TextRegular></TextRegular>;

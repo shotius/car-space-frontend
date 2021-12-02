@@ -21,9 +21,9 @@ export const MobileEngineSelect: React.FC<MobileEngineSelectProps> = ({}) => {
       <MobileSelect
         label={
           selectedEngineFrom && selectedEngineTo
-            ? `Engine (from - to): ${selectedEngineFrom.toFixed(
+            ? `Engine (from - to): ${Number(selectedEngineFrom).toFixed(
                 1
-              )}L -  ${selectedEngineTo.toFixed(1)}L `
+              )}L -  ${Number(selectedEngineTo).toFixed(1)}L `
             : 'Engine'
         }
         onClick={onOpen}

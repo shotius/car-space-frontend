@@ -18,7 +18,7 @@ export const SelectOverlay: React.FC<SelectOverlayProps & BoxProps> = ({
       left="0"
       right="0"
       bg="rgba(0, 0, 0, 0)"
-      zIndex="0"
+      zIndex={['1', null, null, "0"]}
       display={isActive ? 'block' : 'none'}
       onClick={onClick}
       {...rest}
