@@ -1,4 +1,4 @@
-import { Center, VStack } from '@chakra-ui/layout';
+import { VStack } from '@chakra-ui/layout';
 import { useState } from 'react';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { ImportTaxCalculator } from 'src/components/molecules/Calculator/ImportTaxCalculator';
