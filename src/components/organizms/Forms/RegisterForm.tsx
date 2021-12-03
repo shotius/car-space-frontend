@@ -55,6 +55,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
                 placeholder="Password"
                 name="password"
                 type="password"
+                autoComplete="new-password"
                 h={['53px', null, '40px']}
               />
               <Field name="role">

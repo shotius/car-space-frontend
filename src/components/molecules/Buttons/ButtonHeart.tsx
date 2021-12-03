@@ -26,16 +26,16 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
 }) => {
   const [liked, setLiked] = useState(false)
   const dispatch = useAppDispatch();
-  const { username, favourites } = useAppSelector((state) => state.userInfoSlice);
+  const { username, favouriteLotNumbers } = useAppSelector((state) => state.userInfoSlice);
   const { isDesktop } = useDetectScreen();
 
   useEffect(() => {
-    if(favourites?.length && favourites.includes(lotNumber)) {
+    if(favouriteLotNumbers?.length && favouriteLotNumbers.includes(lotNumber)) {
       setLiked(true)
     } else {
       setLiked(false)
     }
-  }, [favourites])
+  }, [favouriteLotNumbers])
 
   return (
     <ButtonWithIcon

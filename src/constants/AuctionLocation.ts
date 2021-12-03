@@ -1,9 +1,8 @@
 interface AuctionObj {
-  [location: string]: {
+    location: string
     state: string;
     zipCode: string;
     cityNumber: string;
-  };
 }
 
 type Cities =
@@ -2832,11 +2831,10 @@ export const allAuctionLocations = [
 export const locObje = allAuctionLocations.reduce<AuctionObj[]>(
   (acc, curr, i) => {
     return acc.concat({
-      [curr]: {
+        location: curr,
         cityNumber: cityNumbers[i],
         zipCode: zipCodes[i],
         state: states[i],
-      },
     });
   },
   []

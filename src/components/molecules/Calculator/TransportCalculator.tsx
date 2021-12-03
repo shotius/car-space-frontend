@@ -6,6 +6,8 @@ import { SelectGrey } from '../Selects/SelectGrey';
 import { TextRegular } from '../Texts/TextRegular';
 import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
 import { CalculatorFooter } from './CalculatorFooter';
+import { Autocomplete } from '../Autocomplete';
+import { locations } from 'src/constants/AuctionLocation';
 
 interface TransportCalculatorProps {}
 
@@ -15,6 +17,7 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
   return (
     <VStack h="full">
       <InputGrey placeholder="Location" />
+      <Autocomplete placeholder="Location" options={locations}/>
       <SelectGrey placeholder="Auction Site">
         <option>one</option>
         <option>one</option>

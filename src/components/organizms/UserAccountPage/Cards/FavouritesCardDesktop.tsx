@@ -1,44 +1,72 @@
 import { Image } from '@chakra-ui/image';
 import { AspectRatio, HStack, VStack } from '@chakra-ui/layout';
+import { useHistory } from 'react-router';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
 import { ButtonHeart } from 'src/components/molecules/Buttons/ButtonHeart';
 import { Card } from 'src/components/molecules/Cards/Card';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
+import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
+import { useAppSelector } from 'src/redux/app/hook';
+import { capitalize } from 'src/utils/functions/capitalize';
+import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
 
-interface FavouritesCardDesktopProps {}
+interface FavouritesCardDesktopProps {
+  car: ICar;
+}
 
 export const UserFavouritesCardDesktop: React.FC<FavouritesCardDesktopProps> =
-  ({}) => {
+  ({ car }) => {
+    const history = useHistory();
+    const {favouriteCarsFetching} = useAppSelector(state => state.userInfoSlice)
+
+    if (favouriteCarsFetching) {
+      return <HeadingSecondary>...loading</HeadingSecondary>;
+    }
     return (
-      <Card bg="autoGrey.500" w="full" p="0">
+      <Card
+        bg="autoGrey.500"
+        w="full"
+        p="0"
+        cursor="pointer"
+        onClick={() => history.push(`/catalog/car/${car?.lN}`)}
+      >
         <HStack w="full" justify="space-between" p="16px">
-          <HStack spacing="4">
-            <AspectRatio ratio={78 / 66} w="78px">
-              <Image
-                src="https://www.1auto.co/storage/ready_for_sales/20210914113121_photo-1552519507-da3b142c6e3d.jpg"
-                borderRadius="8px"
-              />
+          <HStack spacing="4" minW="220px">
+            <AspectRatio ratio={78 / 66} minW="78px">
+              <Image src={`https://${car?.imgT}`} borderRadius="8px" />
             </AspectRatio>
             <VStack align="flex-start">
               <TextSecondary>Name</TextSecondary>
               <HeadingSecondary fontSize="16px">
-                Chevrolet Cruze
+                {capitalize(car.m)} {capitalize(car.mG)}
               </HeadingSecondary>
             </VStack>
           </HStack>
-          <VStack align="flex-start">
+          <VStack align="flex-start" w="full" maxW="80px">
             <TextSecondary>Year</TextSecondary>
-            <HeadingSecondary fontSize="16px">2018</HeadingSecondary>
+            <HeadingSecondary fontSize="16px">
+              {car.y ? <>{capitalize(car.y)}</> : <NotSpecified />}
+            </HeadingSecondary>
           </VStack>
-          <VStack align="flex-start">
+          <VStack align="flex-start" w="full">
             <TextSecondary>Damage</TextSecondary>
-            <HeadingSecondary fontSize="16px">Front End</HeadingSecondary>
+            <HeadingSecondary fontSize="16px">
+              {car.dmg ? <>{capitalize(car.dmg)}</> : <NotSpecified />}
+            </HeadingSecondary>
           </VStack>
-          <VStack align="flex-start">
+          <VStack align="flex-start" w="full">
             <TextSecondary>Location</TextSecondary>
-            <HeadingSecondary fontSize="16px">Engine</HeadingSecondary>
+            <HeadingSecondary fontSize="16px">
+              {car.lC ? <>{capitalize(car.lC)}</> : <NotSpecified />}
+            </HeadingSecondary>
           </VStack>
-          <ButtonHeart lotNumber="39029881" h="46px" w="45px" />
+          <VStack align="flex-start" w="full">
+            <TextSecondary>Engine</TextSecondary>
+            <HeadingSecondary fontSize="16px">
+              {car.eng || <NotSpecified />}
+            </HeadingSecondary>
+          </VStack>
+          <ButtonHeart lotNumber={car.lN} h="46px" w="45px" />
         </HStack>
       </Card>
     );

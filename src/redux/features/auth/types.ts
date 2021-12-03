@@ -1,10 +1,12 @@
-import { ICar, SelectedCarModel } from '../../../../../server/shared_with_front/types/types-shared';
+import {
+  ICar,
+  SelectedCarModel,
+} from '../../../../../server/shared_with_front/types/types-shared';
 import { CurrencyType, Languages, Roles } from './../../../constants/index';
-
 
 export interface ICarModel {
   brand: string;
-  models: string[]
+  models: string[];
 }
 
 export interface CarsSliceState {
@@ -13,8 +15,8 @@ export interface CarsSliceState {
   fetchingCarsError: string | undefined;
 
   fetchingSingleCar: boolean;
-  errorFetchingSingleCar: string | undefined; 
-  
+  errorFetchingSingleCar: string | undefined;
+
   brands: string[];
   models: ICarModel[];
   conditions: string[];
@@ -25,13 +27,12 @@ export interface CarsSliceState {
   cylinders: string[];
   salesStatus: string[];
   getFiltersError: boolean;
-  transmissions: string[]
+  transmissions: string[];
 }
 
 export type Transmission = 'Manual' | 'Automatic' | 'CVT';
 
 export type Keys = 'YES' | 'NO' | null;
-
 
 export interface SelectedCarFilters {
   brands: string[];
@@ -58,7 +59,7 @@ export interface SelectedCarFilters {
 
 export interface IPagination {
   totalPages: number;
-  activePage: number | null ;
+  activePage: number | null;
   queryString: string;
 }
 
@@ -71,7 +72,7 @@ export interface IFilters {
   brands: string[];
   cylinders: string[];
   salesStatus: string[];
-  transmissions: string[]
+  transmissions: string[];
 }
 
 //** Car image slice types */
@@ -81,8 +82,8 @@ export interface CarImageSliceState {
   mediumImages: Record<string, string[]>;
   errorFetchingMediums: Record<string, string | undefined>;
 
-  fetchingThumbs: Record<string, boolean>; 
-  thumbImages: Record<string, string[]>
+  fetchingThumbs: Record<string, boolean>;
+  thumbImages: Record<string, string[]>;
   errorFetchingThumbs: Record<string, any | undefined>;
 }
 
@@ -95,7 +96,7 @@ export interface ScreenSizes {
 }
 
 export interface GlobalStateSliceState {
-  catalogQuery: string | undefined; 
+  catalogQuery: string | undefined;
   lang: Languages;
   currency: CurrencyType;
   isCatalogBannerOpen: boolean;
@@ -103,7 +104,7 @@ export interface GlobalStateSliceState {
   isLoginOpen: boolean;
   isMobileRegisterLoginOpen: boolean;
   screen: ScreenSizes;
-  networkError: string | undefined
+  networkError: string | undefined;
 }
 
 //** User slice */
@@ -114,5 +115,10 @@ export interface IUser {
   role: RoleTypes | null;
   isAuthenticated: boolean;
   username: string | null;
-  favourites?: string[];
+  favouriteLotNumbers?: string[];
+
+  favouriteCars: ICar[];
+  favouriteCarsFetching: boolean;
+  favouriteCarsFetchSuccess: boolean;
+  favouriteCarsFetchError: string | null;
 }

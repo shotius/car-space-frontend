@@ -9,7 +9,7 @@ import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWr
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { getCars } from 'src/redux/features/auth/carsSlice';
-import { getAllFavouritesThunk } from 'src/redux/features/auth/userSlice';
+import { getAllFavouriteLotNumbersThunk } from 'src/redux/features/auth/userSlice';
 import { closeCatalogBanner, setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
@@ -62,7 +62,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   // If Authenticated get All favourite cars
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(getAllFavouritesThunk());
+      dispatch(getAllFavouriteLotNumbersThunk());
     }
   }, [isAuthenticated]);
 
