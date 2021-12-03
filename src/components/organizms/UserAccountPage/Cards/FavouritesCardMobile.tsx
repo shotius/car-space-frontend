@@ -43,21 +43,31 @@ export const UserFavouritesCardMobile: React.FC<FavouritesCardProps> = ({
           maxH="130px"
           gap="2"
         >
-          <AspectRatio ratio={191 / 130} w="full" gridArea="a" maxH="130px">
+          <AspectRatio
+            overflow="hidden"
+            borderRadius="8px"
+            ratio={191 / 130}
+            w="full"
+            gridArea="a"
+            maxH="130px"
+          >
             <Image
-              src={images && images.length ? images[0] : car.imgT}
+              src={images && images.length ? images[0] : `https://${car?.imgT}`}
+              filter="auto"
+              blur={images && images.length ? 'none' : '10px'}
+              saturation={0.9}
               borderRadius="8px"
             />
           </AspectRatio>
           <AspectRatio ratio={191 / 130} w="full" gridArea="b" maxH="61px">
             <Image
-              src={images && images.length ? images[1] : car.imgT}
+              src={images && images.length ? images[1] : `https://${car?.imgT}`}
               borderRadius="8px"
             />
           </AspectRatio>
           <AspectRatio ratio={191 / 130} w="full" gridArea="c" maxH="61px">
             <Image
-              src={images && images.length ? images[2] : car.imgT}
+              src={images && images.length ? images[2] : `https://${car?.imgT}`}
               borderRadius="8px"
             />
           </AspectRatio>
