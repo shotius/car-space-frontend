@@ -1,4 +1,4 @@
- 
+
 import { createIcon } from '@chakra-ui/icon';
 
 export const InstagramIcon = createIcon({
@@ -12,7 +12,7 @@ export const InstagramIcon = createIcon({
         cx="25"
         cy="25"
         r="25"
-        fill="#f4f4f5"
+        fill="none"
       />
       <path
         id="Path_41"

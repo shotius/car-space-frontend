@@ -103,6 +103,7 @@ export interface GlobalStateSliceState {
   isRegistrationOpen: boolean;
   isLoginOpen: boolean;
   isMobileRegisterLoginOpen: boolean;
+  isChangeProfilePictureOpen: boolean;
   screen: ScreenSizes;
   networkError: string | undefined;
 }

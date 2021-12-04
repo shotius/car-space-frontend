@@ -6,7 +6,6 @@ import { ButtonHeart } from 'src/components/molecules/Buttons/ButtonHeart';
 import { Card } from 'src/components/molecules/Cards/Card';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
-import { useAppSelector } from 'src/redux/app/hook';
 import { capitalize } from 'src/utils/functions/capitalize';
 import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
 
@@ -17,11 +16,6 @@ interface FavouritesCardDesktopProps {
 export const UserFavouritesCardDesktop: React.FC<FavouritesCardDesktopProps> =
   ({ car }) => {
     const history = useHistory();
-    const {favouriteCarsFetching} = useAppSelector(state => state.userInfoSlice)
-
-    if (favouriteCarsFetching) {
-      return <HeadingSecondary>...loading</HeadingSecondary>;
-    }
     return (
       <Card
         bg="autoGrey.500"

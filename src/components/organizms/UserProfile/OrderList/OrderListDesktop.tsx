@@ -54,8 +54,8 @@ export const OrderListDesktop: React.FC<OrderListDesktopProps> = ({
           </Thead>
           <Tbody>
             {orderList.map((order, i) => (
-              <Tr key={i}>
-                <Td w="full" p={[null, null, null, '2', '4']} isTruncated>
+              <Tr key={i} pt="50px">
+                <Td w="full" p={[null, null, null, '2', '8']} isTruncated>
                   <HeadingSecondary>{order.orderId}</HeadingSecondary>
                 </Td>
                 <Td max>

@@ -1,15 +1,20 @@
 import {
   AspectRatio,
+  Avatar,
+  Box,
   Image,
   ImageProps,
   Stack,
   StackProps,
   VStack,
 } from '@chakra-ui/react';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { toggleProfilePictureChangeModal } from 'src/redux/features/global/gloabalSlice';
+import { InstagramButton } from '../Buttons/InstagramButton';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 
 interface UserAvatarProps {
-  image: ImageProps['src'];
+  image?: ImageProps['src'];
   mainText?: string;
   secondaryText?: string;
   size?: ImageProps['w'];
@@ -26,6 +31,9 @@ export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
   size = ['49px', '70px'],
   ...rest
 }) => {
+  const { username } = useAppSelector((state) => state.userInfoSlice);
+  const dispatch = useAppDispatch();
+
   return (
     <Stack
       direction={direction}
@@ -34,12 +42,46 @@ export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
       w={w}
       {...rest}
     >
-      <AspectRatio ratio={1 / 1} w={size}>
-        <Image src={image} alt="delear" objectFit="cover" borderRadius="full" />
-      </AspectRatio>
+      <Box position="relative">
+        <InstagramButton
+          zIndex="1"
+          position="absolute"
+          borderRadius="100px"
+          boxSize={8}
+          bg="white"
+          top="43px"
+          right="0px"
+          _hover={{
+            transform: 'scale(1.2)',
+          }}
+          _active={{
+            transform: 'scale(1.1)',
+          }}
+          onClick={() => dispatch(toggleProfilePictureChangeModal())}
+        />
+        {image ? (
+          <AspectRatio ratio={1 / 1} w={size}>
+            <Image
+              src={image}
+              alt="delear"
+              objectFit="cover"
+              borderRadius="full"
+            />
+          </AspectRatio>
+        ) : (
+          <Avatar
+            name={username || 'default'}
+            bg="#3D405B"
+            color="#fff"
+            w={size}
+            h={size}
+          />
+        )}
+      </Box>
+
       <VStack align={['flex-start', 'center']} spacing={0}>
         <HeadingSecondary maxW="150px" isTruncated>
-          {mainText} 
+          {mainText}
         </HeadingSecondary>
         <HeadingSecondary
           fontSize="16px"

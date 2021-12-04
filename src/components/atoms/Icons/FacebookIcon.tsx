@@ -12,7 +12,7 @@ export const FbIcon = createIcon({
         cx="25"
         cy="25"
         r="25"
-        fill="#f4f4f5"
+        fill="none"
       />
       <path
         id="Icon_awesome-facebook-f"

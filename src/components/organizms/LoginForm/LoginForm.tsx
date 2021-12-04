@@ -55,12 +55,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             <VStack spacing="0" w="full">
               <FormikInput
                 name="username"
-                placeholder="username"
+                placeholder="username : user"
                 h={['53px', null, '40px']}
               />
               <FormikInput
                 name="password"
-                placeholder="password"
+                placeholder="password: 1234"
                 type="password"
                 h={['53px', null, '40px']}
               />

@@ -51,7 +51,7 @@ export const CarSpecTable: React.FC<CarSpecTableProps> = ({ car }) => {
         </HeadingSecondary>
       </HStack>
       <HStack w="full" justify="space-between">
-        <TextRegular opacity="0.5">Mileage</TextRegular>
+        <TextRegular opacity="0.5">page</TextRegular>
         <HeadingSecondary>
           {car.od ? (
             <>{toTrippleNumber(parseInt(car.od))} km</>
