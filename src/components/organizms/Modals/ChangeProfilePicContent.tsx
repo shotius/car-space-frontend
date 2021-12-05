@@ -3,31 +3,42 @@ import {
   Center,
   DrawerCloseButton,
   HStack,
-  VStack
+  VStack,
 } from '@chakra-ui/react';
 import { useCallback, useState } from 'react';
 import { ArrowPrevIcon } from 'src/components/atoms/Icons/Arrows/ArrowPrevIcon';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
+import { ProfilePictureCrop } from 'src/components/molecules/Croppers/ProfilePictureCrop';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import FileUpload from 'src/components/molecules/Inputs/FIleUpload';
 import { SliderWithConstrols } from 'src/components/molecules/Sliders/SliderWithConstrols';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { toggleProfilePictureChangeModal } from 'src/redux/features/global/gloabalSlice';
-import getCroppedImg from 'src/utils/functions/createImage';
+import getCroppedImg from 'src/utils/functions/getCroppedImg';
 
 interface ChangeProfilePicContentProps {}
 
 export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
   ({}) => {
-    const [zoom, setZoom] = useState(1);
+    const [zoom, setZoom] = useState(1.3);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [file, setFile] = useState<File | null>(null);
-    const [filePath, setFilePath] = useState('');
-    const [isEditing, setIsEditing] = useState(false)
+    const [imageUrl, setImageUrl] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
+    const [croppedImage, setCroppedImage] = useState<Blob | null>(null);
+
+    console.log('file: ', file);
 
     const dispatch = useAppDispatch();
-    const onClose = () => dispatch(toggleProfilePictureChangeModal());
+    const onClose = () => {
+      if (isEditing) {
+        setIsEditing(false);
+        setImageUrl('');
+      } else {
+        dispatch(toggleProfilePictureChangeModal());
+      }
+    };
 
     const onZoomChange = (zoom) => {
       setZoom(zoom);
@@ -38,10 +49,21 @@ export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
     }, []);
 
     const onCrop = async () => {
-      const croppedImageUrl = await getCroppedImg(filePath, croppedAreaPixels);
-      console.log('url: ', croppedImageUrl)
-      setFilePath(croppedImageUrl)
-      setZoom(1)
+      const croppedImageBlob = await getCroppedImg(imageUrl, croppedAreaPixels);
+      setZoom(1);
+      setImageUrl(URL.createObjectURL(croppedImageBlob));
+      setIsEditing(false);
+      setCroppedImage(croppedImageBlob);
+    };
+
+    const onSubmit = () => {
+      const formdata = new FormData();
+      if (croppedImage) {
+        formdata.append('profileImage', croppedImage, 'coppedImage.jpg');
+        console.log('fomrdata', formdata.get('profileImage'));
+      } else {
+        throw new Error('cropped Image is null')
+      }
     };
 
     return (
@@ -57,36 +79,43 @@ export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
           <HeadingSecondary fontSize="20px">Profile Picture</HeadingSecondary>
         </HStack>
         <VStack w="full" pt="32px" spacing="2">
-          <Center p="8" position="relative">
+          <Center p="8">
             <Box
               h="180px"
               w="180px"
               borderRadius="1000px"
               bg="autoBlue.400"
+              position="relative"
               overflow="hidden"
             >
-              <FileUpload
-                filePath={filePath}
-                setFilePath={setFilePath}
-                file={file}
-                setFile={setFile}
-                onCropComplete={onCropComplete}
-                onZoomChange={onZoomChange}
+              <ProfilePictureCrop
+                imageUrl={imageUrl}
                 zoom={zoom}
-                name="file Upload"
-                placeholder="upload"
-                acceptedFileTypes="image/*"
+                onZoomChange={onZoomChange}
+                onCropComplete={onCropComplete}
               />
             </Box>
           </Center>
-          <TextRegular fontSize="16px">Scale and Crop</TextRegular>
-         <SliderWithConstrols 
-          min={1}
-          max={3}
-          step={0.1}
-          value={zoom}
-          onChange={setZoom}
-         />
+          {!isEditing ? (
+            <FileUpload
+              setFilePath={setImageUrl}
+              setFile={setFile}
+              acceptedFileTypes="image/*"
+              setIsEditing={setIsEditing}
+            />
+          ) : (
+            <>
+              <TextRegular fontSize="16px">Scale and Crop</TextRegular>
+              <SliderWithConstrols
+                min={1}
+                max={3}
+                step={0.1}
+                value={zoom}
+                onChange={setZoom}
+              />
+            </>
+          )}
+
           <HStack w="full" pt="24px">
             <ButtonRegular
               bg="autoGrey.400"
@@ -96,9 +125,15 @@ export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
             >
               Cancel
             </ButtonRegular>
-            <ButtonRegular onClick={onCrop}>Save</ButtonRegular>
+            <ButtonRegular
+              onClick={() => {
+                isEditing ? onCrop() : onSubmit();
+              }}
+            >
+              {isEditing ? 'Crop' : 'Save'}
+            </ButtonRegular>
           </HStack>
-        </VStack>{' '}
+        </VStack>
       </>
     );
   };
