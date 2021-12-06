@@ -117,6 +117,7 @@ export interface IUser {
   isAuthenticated: boolean;
   username: string | null;
   favouriteLotNumbers?: string[];
+  avatar?: string, 
 
   favouriteCars: ICar[];
   favouriteCarsFetching: boolean;

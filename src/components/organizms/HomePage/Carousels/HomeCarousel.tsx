@@ -62,17 +62,17 @@ export const HomeCarousel = () => {
       >
         <SwiperSlide>
           <AspectRatio ratio={5 / 3} h={['279px', null, '360px']}>
-            <Image src="https://images.unsplash.com/photo-1556189250-72ba954cfc2b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" />
+            <Image src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826541/car-space/cars/wallpapers/nyboj9iq2aputtv3i5nw.webp" />
           </AspectRatio>
         </SwiperSlide>
         <SwiperSlide>
           <AspectRatio ratio={5 / 3} h={['279px', null, '360px']}>
-            <Image src="https://images.unsplash.com/photo-1560253787-9c3babc1fab2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" />
+            <Image src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826626/car-space/cars/wallpapers/kj3x5aijltis5xpir3kq.webp" />
           </AspectRatio>
         </SwiperSlide>
         <SwiperSlide>
           <AspectRatio ratio={5 / 3} h={['279px', null, '360px']}>
-            <Image src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" />
+            <Image src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp" />
           </AspectRatio>
         </SwiperSlide>
       </Swiper>

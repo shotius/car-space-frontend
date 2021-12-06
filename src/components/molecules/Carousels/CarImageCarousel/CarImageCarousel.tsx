@@ -32,6 +32,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
   return (
     <AspectRatio
       ratio={[311 / 292, null, null, 231 / 143]}
+      zIndex="0"
       w="full"
       borderRadius="8px"
       cursor="auto"

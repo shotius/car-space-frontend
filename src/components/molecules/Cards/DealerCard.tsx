@@ -27,19 +27,19 @@ export const DealerCard: React.FC<DealerCardProps> = () => {
         >
           <AspectRatio ratio={191 / 130} w="full" gridArea="a" maxH="130px">
             <Image
-              src="https://images.pexels.com/photos/3786092/pexels-photo-3786092.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+              src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826541/car-space/cars/wallpapers/nyboj9iq2aputtv3i5nw.webp"
               borderRadius="3px"
             />
           </AspectRatio>
           <AspectRatio ratio={191 / 130} w="full" gridArea="b" maxH="61px">
             <Image
-              src="https://wallpapercave.com/wp/tDYC1tp.jpg"
+              src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826626/car-space/cars/wallpapers/kj3x5aijltis5xpir3kq.webp"
               borderRadius="3px"
             />
           </AspectRatio>
           <AspectRatio ratio={191 / 130} w="full" gridArea="c" maxH="61px">
             <Image
-              src="https://images.pexels.com/photos/3786091/pexels-photo-3786091.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+              src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp"
               borderRadius="3px"
             />
           </AspectRatio>

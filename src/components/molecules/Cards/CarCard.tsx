@@ -88,11 +88,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
             maxH={['192px', null, '143px']}
           >
             <Image
-              src={
-                car
-                  ? `https://${car?.imgT}`
-                  : 'https://stat.overdrive.in/wp-content/odgallery/2020/06/57263_2020_Mercedes_Benz_GLS.jpg'
-              }
+              src={`https://${car?.imgT}`}
               alt="car white"
               filter="auto"
               blur={car ? '10px' : 'none'}
