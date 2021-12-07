@@ -1,7 +1,13 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { isApiDefaultError } from './../../../utils/functions/isApiDefaultError';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import userServices from 'src/services/userServices';
-import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
-import { IUser, RoleTypes } from './types';
+import {
+  CloudinaryResponse,
+  ICar,
+  RoleTypes,
+} from '../../../../../server/shared_with_front/types/types-shared';
+import { IUser } from './types';
+import axios from 'axios';
 
 const initialState: IUser = {
   username: null,
@@ -51,6 +57,32 @@ export const getAllFavouriteCarsThunk = createAsyncThunk<ICar[]>(
   }
 );
 
+/**
+ * @param formdata: file
+ * @returns : url of avatar or undefined, or in case of error error message
+ */
+export const setUserAvatarThunk = createAsyncThunk<
+  // CloudinaryResponse,
+  string | undefined, 
+  FormData,
+  { rejectValue: string | null }
+>('setUserAvatarThunk', async (formdata: FormData, { rejectWithValue }) => {
+  try {
+    const {results} = await userServices.setUserProfileAvatar(formdata);
+    console.log(results);
+    return results.url;
+  } catch (error) {
+    console.log('error: ', error);
+    if (axios.isAxiosError(error) && error.response) {
+      if (isApiDefaultError(error.response.data)) {
+        return rejectWithValue(error.response.data.error);
+      }
+      return rejectWithValue(error.message);
+    }
+    return rejectWithValue('some error happend' + error);
+  }
+});
+
 const userInfoSlice = createSlice({
   name: 'userInfoSlice',
   initialState,
@@ -67,14 +99,20 @@ const userInfoSlice = createSlice({
     setFavourites: (state, action: PayloadAction<string[]>) => {
       state.favouriteLotNumbers = action.payload;
     },
+    setAvatar: (state, action: PayloadAction<string>) => {
+      state.avatar = action.payload;
+    },
   },
   extraReducers: (builder) => {
+    // get all favourite lot numbers
     builder.addCase(
       getAllFavouriteLotNumbersThunk.fulfilled,
       (state, action: PayloadAction<string[]>) => {
         state.favouriteLotNumbers = action.payload;
       }
     );
+
+    // get favourite cars
     builder.addCase(getAllFavouriteCarsThunk.pending, (state) => {
       state.favouriteCarsFetching = true;
       state.favouriteCarsFetchError = null;
@@ -88,17 +126,24 @@ const userInfoSlice = createSlice({
         state.favouriteCars = action.payload;
       }
     );
-    builder.addCase(
-      getAllFavouriteCarsThunk.rejected,
-      (state, action) => {
-        state.favouriteCarsFetching = false;
-        state.favouriteCarsFetchSuccess = false;
-        state.favouriteCarsFetchError = action.payload as string;
-      }
-    );
+    builder.addCase(getAllFavouriteCarsThunk.rejected, (state, action) => {
+      state.favouriteCarsFetching = false;
+      state.favouriteCarsFetchSuccess = false;
+      state.favouriteCarsFetchError = action.payload as string;
+    });
+
+    // avatar change
+    builder.addCase(setUserAvatarThunk.fulfilled, (state, action) => {
+        state.avatar = action.payload;
+    });
   },
 });
 
-export const { setUsername, setRole, setIsAuthenticated, setFavourites } =
-  userInfoSlice.actions;
+export const {
+  setUsername,
+  setRole,
+  setIsAuthenticated,
+  setFavourites,
+  setAvatar,
+} = userInfoSlice.actions;
 export const { reducer: UserInfo } = userInfoSlice;

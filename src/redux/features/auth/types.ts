@@ -1,8 +1,9 @@
 import {
   ICar,
+  RoleTypes,
   SelectedCarModel,
 } from '../../../../../server/shared_with_front/types/types-shared';
-import { CurrencyType, Languages, Roles } from './../../../constants/index';
+import { CurrencyType, Languages } from './../../../constants/index';
 
 export interface ICarModel {
   brand: string;
@@ -106,11 +107,10 @@ export interface GlobalStateSliceState {
   isChangeProfilePictureOpen: boolean;
   screen: ScreenSizes;
   networkError: string | undefined;
+  userError?: string
 }
 
 //** User slice */
-
-export type RoleTypes = Roles.ADMIN | Roles.DEALER;
 
 export interface IUser {
   role: RoleTypes | null;

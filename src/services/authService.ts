@@ -1,11 +1,11 @@
 import { axios } from 'src/utils/axios';
-import { LoginParams } from '../../../server/shared_with_front/types/types-shared';
+import { LoginParams, SessionUser } from '../../../server/shared_with_front/types/types-shared';
 
 const baseUrl = '/api/auth';
 
-const autoLogin = async () => {
+const autoLogin = async ():Promise<Omit<SessionUser, "id">>  => {
   const { data } = await axios.get(`${baseUrl}/me`);
-  return data;
+  return data as Omit<SessionUser, "id">;
 };
 
 const login = async (credentials: LoginParams) => {

@@ -3,6 +3,7 @@ import {
   Center,
   DrawerCloseButton,
   HStack,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { useCallback, useState } from 'react';
@@ -14,8 +15,10 @@ import FileUpload from 'src/components/molecules/Inputs/FIleUpload';
 import { SliderWithConstrols } from 'src/components/molecules/Sliders/SliderWithConstrols';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch } from 'src/redux/app/hook';
+import { setUserAvatarThunk } from 'src/redux/features/auth/userSlice';
 import { toggleProfilePictureChangeModal } from 'src/redux/features/global/gloabalSlice';
 import getCroppedImg from 'src/utils/functions/getCroppedImg';
+import { showErrorNotification } from 'src/utils/functions/showNotification';
 
 interface ChangeProfilePicContentProps {}
 
@@ -23,14 +26,16 @@ export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
   ({}) => {
     const [zoom, setZoom] = useState(1.3);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-    const [file, setFile] = useState<File | null>(null);
+    const [_file, setFile] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [croppedImage, setCroppedImage] = useState<Blob | null>(null);
+    const [buttonIsLoading, setButtonIsLoading] = useState(false);
 
-    console.log('file: ', file);
+    const toast = useToast();
 
     const dispatch = useAppDispatch();
+
     const onClose = () => {
       if (isEditing) {
         setIsEditing(false);
@@ -56,13 +61,31 @@ export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
       setCroppedImage(croppedImageBlob);
     };
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
       const formdata = new FormData();
       if (croppedImage) {
-        formdata.append('profileImage', croppedImage, 'coppedImage.jpg');
-        console.log('fomrdata', formdata.get('profileImage'));
+        formdata.append('profile-avatar', croppedImage, 'coppedImage.jpg');
+        setButtonIsLoading(true);
+        dispatch(setUserAvatarThunk(formdata))
+          .unwrap()
+          .then(() => {
+            setButtonIsLoading(false);
+            onClose();
+          })
+          .catch((error) => {
+            console.log('error: ', error)
+            setButtonIsLoading(false);
+            showErrorNotification({
+              toast,
+              message: 'Unable to save photo. Please, try later',
+            });
+          });
       } else {
-        throw new Error('cropped Image is null')
+        // if not file to crop show toast message
+        showErrorNotification({
+          toast,
+          message: 'Please Choose the picture.',
+        });
       }
     };
 
@@ -126,6 +149,7 @@ export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
               Cancel
             </ButtonRegular>
             <ButtonRegular
+              isLoading={buttonIsLoading}
               onClick={() => {
                 isEditing ? onCrop() : onSubmit();
               }}

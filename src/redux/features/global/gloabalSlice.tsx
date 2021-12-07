@@ -11,7 +11,7 @@ const initialState: GlobalStateSliceState = {
   isLoginOpen: false,
   isRegistrationOpen: false,
   isMobileRegisterLoginOpen: false,
-  isChangeProfilePictureOpen: false, 
+  isChangeProfilePictureOpen: false,
   screen: {
     isDesktop: false,
     isTablet: false,
@@ -51,8 +51,8 @@ const globalStateSlice = createSlice({
         : (state.isMobileRegisterLoginOpen = true);
     },
     toggleProfilePictureChangeModal: (state) => {
-      state.isChangeProfilePictureOpen = !state.isChangeProfilePictureOpen
-    }, 
+      state.isChangeProfilePictureOpen = !state.isChangeProfilePictureOpen;
+    },
     setScreenSize: (state, action: PayloadAction<ScreenSizes>) => {
       state.screen = action.payload;
     },
@@ -61,6 +61,9 @@ const globalStateSlice = createSlice({
     },
     setCatalogQuery: (state, action: PayloadAction<string | undefined>) => {
       state.catalogQuery = action.payload;
+    },
+    setUserError: (state, action: PayloadAction<string | undefined>) => {
+      state.userError = action.payload;
     },
   },
 });
@@ -75,7 +78,8 @@ export const {
   toggleMobileAuthorization,
   setScreenSize,
   setNetworkError,
-  setCatalogQuery, 
-  toggleProfilePictureChangeModal
+  setCatalogQuery,
+  toggleProfilePictureChangeModal,
+  setUserError,
 } = globalStateSlice.actions;
 export const { reducer: globalAppState } = globalStateSlice;

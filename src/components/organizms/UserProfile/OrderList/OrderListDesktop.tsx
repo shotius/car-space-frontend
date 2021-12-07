@@ -58,7 +58,7 @@ export const OrderListDesktop: React.FC<OrderListDesktopProps> = ({
                 <Td w="full" p={[null, null, null, '2', '8']} isTruncated>
                   <HeadingSecondary>{order.orderId}</HeadingSecondary>
                 </Td>
-                <Td max>
+                <Td>
                   <TextRegular
                     noOfLines={isExpanded.includes(i) ? 5 : 1}
                     fontSize="16px"

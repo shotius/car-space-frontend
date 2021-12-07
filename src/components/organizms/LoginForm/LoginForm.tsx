@@ -10,7 +10,6 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { loginUser } from 'src/redux/features/auth/authSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
-import { ApiResponse } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface LoginFormProps {
   onClose: () => void;
@@ -32,18 +31,20 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           username: values.username,
           password: values.password,
         };
-        dispatch(loginUser(credentials)).then((data) => {
-          const result: ApiResponse = data.payload as ApiResponse;
+        dispatch(loginUser(credentials))
+          .unwrap()
+          .then((data) => {
+            const result: any = data.payload as any;
 
-          if (result.code === 422 && result.errors?.length) {
-            setErrors(toErrorMap(result.errors));
-          }
+            if (result.code === 422 && result.errors?.length) {
+              setErrors(toErrorMap(result.errors));
+            }
 
-          if (result.success) {
-            history.push(`/${result.results.role}/dashboard`);
-            onClose();
-          }
-        });
+            if (result.success) {
+              history.push(`/${result.results.role}/dashboard`);
+              onClose();
+            }
+          });
       }}
     >
       {() => (

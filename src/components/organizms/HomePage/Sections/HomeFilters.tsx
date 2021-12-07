@@ -24,11 +24,14 @@ export const HomeFilters: React.FC<SearchProps> = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const query = useQueryParams();
-  const filters = useAppSelector((state) => state.selectedCarFilters);
+  const selectedFilters = useAppSelector((state) => state.selectedCarFilters);
+  const { brands } = useAppSelector((state) => state.carsReducer);
 
   const { isDesktop } = useDetectScreen();
   useEffect(() => {
-    dispatch(getFilters());
+    if (!selectedFilters.brands) {
+      dispatch(getFilters());
+    }
   }, []);
 
   return (
@@ -56,9 +59,23 @@ export const HomeFilters: React.FC<SearchProps> = () => {
         >
           {/* Brand select  */}
           {!isDesktop ? (
-            <MobileBrandSelect w={['100%', '30%', '23%']} />
+            <MobileBrandSelect
+              w={['100%', '30%', '23%']}
+              onClick={() => {
+                if (!brands.length) {
+                  dispatch(getFilters());
+                }
+              }}
+            />
           ) : (
-            <BrandSelect w={['100%', '100%', '100%']} />
+            <BrandSelect
+              w={['100%', '100%', '100%']}
+              onClick={() => {
+                if (!brands.length) {
+                  dispatch(getFilters());
+                }
+              }}
+            />
           )}
           <DividerVertical
             height="30px"
@@ -93,7 +110,12 @@ export const HomeFilters: React.FC<SearchProps> = () => {
             minW="144px"
             onClick={() => {
               history.push({ pathname: '/catalog' });
-              submitCarSearch({ history, query, dispatch, filters });
+              submitCarSearch({
+                history,
+                query,
+                dispatch,
+                filters: selectedFilters,
+              });
             }}
           />
         </Flex>
@@ -104,7 +126,12 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           mt={['4', '3']}
           onClick={() => {
             history.push({ pathname: '/catalog' });
-            submitCarSearch({ history, query, dispatch, filters });
+            submitCarSearch({
+              history,
+              query,
+              dispatch,
+              filters: selectedFilters,
+            });
           }}
         />
         <TextButton

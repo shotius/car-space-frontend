@@ -63,7 +63,7 @@ export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
           <AspectRatio ratio={1 / 1} w={size}>
             <Image
               src={image}
-              alt="delear"
+              alt="profile avatar"
               objectFit="cover"
               borderRadius="full"
             />
