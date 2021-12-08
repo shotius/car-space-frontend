@@ -1,8 +1,3 @@
-export enum Roles {
-  ADMIN = 'admin',
-  DEALER = 'dealer',
-  USER = 'user',
-}
 
 export enum Currencies {
   GEL = '₾ Gel',

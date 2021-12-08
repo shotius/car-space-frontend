@@ -1,8 +1,7 @@
-import { isApiDefaultError } from './../../../utils/functions/isApiDefaultError';
+import { isApiDefaultError } from '../../../utils/functions/typeChecker';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import userServices from 'src/services/userServices';
 import {
-  CloudinaryResponse,
   ICar,
   RoleTypes,
 } from '../../../../../server/shared_with_front/types/types-shared';

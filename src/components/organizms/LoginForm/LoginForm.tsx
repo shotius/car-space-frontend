@@ -10,6 +10,7 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { loginUser } from 'src/redux/features/auth/authSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
+import { isApiValidationError } from 'src/utils/functions/typeChecker';
 
 interface LoginFormProps {
   onClose: () => void;
@@ -33,16 +34,17 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         };
         dispatch(loginUser(credentials))
           .unwrap()
-          .then((data) => {
-            const result: any = data.payload as any;
-
-            if (result.code === 422 && result.errors?.length) {
-              setErrors(toErrorMap(result.errors));
-            }
-
+          .then((result) => {
             if (result.success) {
               history.push(`/${result.results.role}/dashboard`);
               onClose();
+            }
+          })
+          .catch((error) => {
+            if (isApiValidationError(error)) {
+              if (error.status === 422 && error.errors?.length) {
+                setErrors(toErrorMap(error.errors));
+              }
             }
           });
       }}

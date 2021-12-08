@@ -21,7 +21,7 @@ import {
   selectTranssmision,
   selectTypes,
   selectYearFrom,
-  selectYearTo
+  selectYearTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { Transmission } from 'src/redux/features/auth/types';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';
@@ -50,11 +50,14 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     SALES_STATUS,
     FUEL_TYPE,
     CYLINDER,
-    ENGINE_FROM, 
-    ENGINE_TO
+    ENGINE_FROM,
+    ENGINE_TO,
   } = FilterQueries;
 
-  const { brands } = useAppSelector((state) => state.selectedCarFilters);
+  const { brands: selectedBrands } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
+  const { brands } = useAppSelector((state) => state.carsReducer);
   const filters = useAppSelector((state) => state.selectedCarFilters);
 
   // Parse query from url
@@ -62,7 +65,7 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     // parse selected brands from url
     const queryBrands = query.getAll('brand');
     // if we dont have brands in the url, remove models as well
-    if (!compareTwoArrays(queryBrands, brands)) {
+    if (!compareTwoArrays(queryBrands, selectedBrands)) {
       dispatch(selectBrand(queryBrands));
     }
 
@@ -96,15 +99,15 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
       dispatch(selectYearTo(parseInt(yearTo)));
     }
 
-    // restore engine from url 
-    const engineFrom = query.get(ENGINE_FROM)
+    // restore engine from url
+    const engineFrom = query.get(ENGINE_FROM);
     if (engineFrom) {
-      dispatch(selectEngineFrom(engineFrom))
+      dispatch(selectEngineFrom(engineFrom));
     }
 
-    const engineTo = query.get(ENGINE_TO)
+    const engineTo = query.get(ENGINE_TO);
     if (engineTo) {
-      dispatch(selectEnginTo(engineTo))
+      dispatch(selectEnginTo(engineTo));
     }
 
     // restore condition from url
@@ -164,8 +167,10 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
   // get filter options on the load
   useEffect(() => {
-    dispatch(getFilters());
-  }, []);
+    if (!brands.length) {
+      dispatch(getFilters());
+    }
+  }, [brands]);
 
   // apply filters to the url, create new totaly new query string
   // (removes any we had before)
