@@ -6,7 +6,7 @@ import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHea
 import { CarDetailPageDesktop } from 'src/components/templates/CarDeatailsPage/CarDetailPageDesktop';
 import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/CarDetailPageMobile';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
-import { DamCar } from 'src/DamnCard';
+import { DamnCard1 } from 'src/DamnCard';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   getImagesMediumThunk,
@@ -81,7 +81,7 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
         mt={[null, null, null, '-20px']}
         p={['0', null, null, '4']}
       >
-        <CarListCarousel car={DamCar} />
+        <CarListCarousel car={DamnCard1} />
       </ContainerOuter>
     </PublicLayout>
   );

@@ -1,3 +1,5 @@
+import { ICarDealer } from '../../server/shared_with_front/types/types-shared';
+
 export const DamCar = {
   lN: '30101141',
   m: 'RAM',
@@ -26,4 +28,35 @@ export const DamCar = {
   c: 'CHARCOAL',
   rd: 'DEFAULT',
   bin: '0.0',
+};
+
+export const DamnCard1: ICarDealer = {
+  imgUrls: [
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057528/car-space/cars/medium-sized-cars/xtfrk4nbr22jhmrqklf8.webp',
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057528/car-space/cars/medium-sized-cars/aafoiwtsolfzv7uorhe6.webp',
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057528/car-space/cars/medium-sized-cars/tyr97adfs8tqajb0uyyq.webp',
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057529/car-space/cars/medium-sized-cars/nffe6njzjz74y0p0db3t.webp',
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057528/car-space/cars/medium-sized-cars/s1y6we91gvufs5syyy79.webp',
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057528/car-space/cars/medium-sized-cars/pfhmtxxy04ujc2mifwnu.webp',
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057529/car-space/cars/medium-sized-cars/f0kxwpxqzcm3yexcljsb.webp',
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057529/car-space/cars/medium-sized-cars/hpnrvxricjyoy44pgppy.webp',
+  ],
+  bSt: 'TILT CAB',
+  price: 20000,
+  mG: "Model", 
+  c: 'GRAY',
+  cyl: 4,
+  dmg: 'NORMAL WEAR',
+  dr: 'Rear-wheel drive',
+  eng: 5.2,
+  fuel: 'DIESEL',
+  keys: 'YES',
+  lC: 'USA',
+  m: 'GMC',
+  mD: 'W4500 W450',
+  od: 399744,
+  trans: 'AUTOMATIC',
+  y: 2007,
+  imgT: 'https://res.cloudinary.com/car-space-v1/image/upload/w_200,h_200,c_limit,e_blur:400,o_90,b_black/v1639057528/car-space/cars/medium-sized-cars/xtfrk4nbr22jhmrqklf8.webp',
+  id: '61b208797674ba0135195899',
 };

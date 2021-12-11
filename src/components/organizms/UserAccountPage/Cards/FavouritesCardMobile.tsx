@@ -12,7 +12,6 @@ import { Card } from 'src/components/molecules/Cards/Card';
 import { CarCardHeading } from 'src/components/molecules/Headings/CarCardHeading';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
-import { DamCar } from 'src/DamnCard';
 import { capitalize } from 'src/utils/functions/capitalize';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
@@ -35,7 +34,11 @@ export const UserFavouritesCardMobile: React.FC<FavouritesCardProps> = ({
     >
       <VStack spacing="4">
         {/* Heading  */}
-        <CarCardHeading car={DamCar} lotNumber="39029881" />
+        <CarCardHeading
+          model={`${car.m} ${car.mG}`}
+          id={car.id}
+          year={Number(car.y)}
+        />
         {/* Images  */}
         <SimpleGrid
           gridTemplateAreas={`"a a b" "a a c"`}

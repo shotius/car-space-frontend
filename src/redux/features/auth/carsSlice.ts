@@ -26,6 +26,8 @@ const initialState: CarsSliceState = {
   salesStatus: [],
   getFiltersError: false,
   transmissions: [],
+
+  dealerCars: []
 };
 
 export const searchCars = createAsyncThunk('cars/searchCars', async () => {

@@ -1,5 +1,6 @@
 import {
   ICarCopart,
+  ICarDealer,
   RoleTypes,
   SelectedCarModel,
 } from '../../../../../server/shared_with_front/types/types-shared';
@@ -25,6 +26,8 @@ export interface CarsSliceState {
   cars: ICarCopart[];
   fethingCars: boolean;
   fetchingCarsError: string | undefined;
+
+  dealerCars: ICarDealer[], 
 
   fetchingSingleCar: boolean;
   errorFetchingSingleCar: string | undefined;

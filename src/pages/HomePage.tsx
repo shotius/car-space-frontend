@@ -1,19 +1,19 @@
 import { HStack, VStack } from '@chakra-ui/layout';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
-import { CalculatorDesktop } from 'src/components/organizms/Calculator/CalculatorDesktop';
 import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarousel/CarListCarousel';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
+import { CalculatorDesktop } from 'src/components/organizms/Calculator/CalculatorDesktop';
+import { CalculatorMobile } from 'src/components/organizms/Calculator/CalculatorMobile';
 import { CustomersReviewCarousel } from 'src/components/organizms/HomePage/Carousels/CustomersReviewCarousel';
 import { HomeCarousel } from 'src/components/organizms/HomePage/Carousels/HomeCarousel';
+import { CarImportCard } from 'src/components/organizms/HomePage/Sections/CarImportCard';
 import { DealersSection } from 'src/components/organizms/HomePage/Sections/DealersSection';
 import { HomeFilters } from 'src/components/organizms/HomePage/Sections/HomeFilters';
 import { TopBrands } from 'src/components/organizms/HomePage/Sections/TopBrands';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
-import { DamCar } from 'src/DamnCard';
+import { DamnCard1 } from 'src/DamnCard';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { CalculatorMobile } from 'src/components/organizms/Calculator/CalculatorMobile';
-import { CarImportCard } from 'src/components/organizms/HomePage/Sections/CarImportCard';
 
 interface HomeProps {}
 
@@ -37,7 +37,7 @@ export const Home: React.FC<HomeProps> = () => {
             <SectionHeader mainText="Catalog"  secondaryText="See all"/>
           </ContainerOuter>
           <ContainerOuter pr="-4" mr="-4" ml='-4' pl="0">
-            <CarListCarousel car={DamCar} />
+            <CarListCarousel car={DamnCard1} />
           </ContainerOuter>
         </VStack>
 

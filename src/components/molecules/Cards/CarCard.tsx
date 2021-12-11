@@ -75,7 +75,11 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
     >
       <VStack w="full" spacing={['19px', null, null, '14px', '15px']}>
         {/* header */}
-        <CarCardHeading car={car} lotNumber={car.lN} />
+        <CarCardHeading
+          model={`${car.m} ${car.mG}`}
+          id={car.id}
+          year={Number(car.y)}
+        />
         {/* picture swiper */}
         {displayImageCarousel ? (
           <CarImageCarousel images={mediumImages[car.lN]} />
@@ -88,7 +92,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
             maxH={['192px', null, '143px']}
           >
             <Image
-              src={`https://${car?.imgT}`}
+              src={`https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp`}
               alt="car white"
               filter="auto"
               blur={car ? '10px' : 'none'}

@@ -1,17 +1,6 @@
-import {
-  AspectRatio,
-  Box,
-  Heading,
-  HStack,
-  Image,
-  StackDivider,
-  VStack
-} from '@chakra-ui/react';
-import { useEffect, useRef, useState } from 'react';
+import { Box, Heading, HStack, StackDivider, VStack } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { useAppDispatch } from 'src/redux/app/hook';
-import { getImagesMediumThunk } from 'src/redux/features/auth/carImagesSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
@@ -23,42 +12,29 @@ interface Props {
 }
 
 export const DealerCarCard: React.FC<Props> = ({ car }) => {
-  const ref = useRef(null);
-  const [shouldHaveRef, setShouldHaveRef] = useState(true);
-
-  const dispatch = useAppDispatch();
   const history = useHistory();
-
-  useEffect(() => {
-      dispatch(getImagesMediumThunk(parseInt(car.lN)));
-      setShouldHaveRef(false);
-      // remove div from observer, it prevents rerenders
-      ref.current = null;
-    }
-  }, []);
-
-  const displayImageCarousel = car.imgUrls;
 
   return (
     <Box
       className="hoverable"
-      ref={shouldHaveRef ? ref : null}
       w={['full', null, null, null]}
       bg="white"
       borderRadius="8px"
       p="4"
       maxW={['388px', '343px', null]}
       cursor="pointer"
-      onClick={() => history.push(`/catalog/car/${car?.lN}`)}
+      onClick={() => history.push(`/catalog/car/${car.id}`)}
     >
       <VStack w="full" spacing={['19px', null, null, '14px', '15px']}>
         {/* header */}
-        <CarCardHeading car={car} lotNumber={car.lN} />
+        <CarCardHeading
+          model={`${car.m} ${car.mG || ""}`}
+          id={car.id}
+          year={Number(car.y)}
+        />
         {/* picture swiper */}
-        {displayImageCarousel ? (
-          <CarImageCarousel images={mediumImages[car.lN]} />
-        ) : (
-          <AspectRatio
+        <CarImageCarousel images={car.imgUrls.slice(0, 5)} />
+        {/* <AspectRatio
             ratio={[311 / 292, null, null, 231 / 143]}
             w="full"
             overflow="hidden"
@@ -73,8 +49,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
               saturation={0.9}
               h="192px"
             />
-          </AspectRatio>
-        )}
+          </AspectRatio> */}
 
         {/* description */}
         <VStack w="full" divider={<StackDivider />}>
@@ -112,7 +87,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
               pr={['4', '0', '4']}
               fontWeight="400"
             >
-              $ {toTrippleNumber(Math.round(Number(car.eRV) + Number(car.rC)))}
+              $ {toTrippleNumber(car.price)}
             </Heading>
           </HStack>
           <HStack justifyContent="space-between" w="full">
@@ -122,7 +97,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
               pr={['4', '0', '4']}
               fontWeight="400"
             >
-              $ {toTrippleNumber(Number(car.bin))}
+              $ {toTrippleNumber(Number(car.price))}
             </Heading>
           </HStack>
         </VStack>
