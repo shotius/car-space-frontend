@@ -1,11 +1,11 @@
 import { HStack, VStack, Heading, Icon } from "@chakra-ui/react";
 import { SeenIcon } from "src/components/atoms/Icons/SeenIcon";
-import { ICar } from "../../../../../server/shared_with_front/types/types-shared";
+import { ICarCopart } from "../../../../../server/shared_with_front/types/types-shared";
 import { ButtonHeart } from "../../molecules/Buttons/ButtonHeart";
 import { TextRegular } from "../../molecules/Texts/TextRegular";
 
 interface CarDescriptionHeaderProps {
-  car?: ICar
+  car?: ICarCopart
 }
 
 export const CarDescriptionHeader: React.FC<CarDescriptionHeaderProps> =

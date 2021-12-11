@@ -4,10 +4,10 @@ import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecon
 import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
-import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CarInfoCardProps {
-  car: ICar;
+  car: ICarCopart;
 }
 
 export const CarInfoCard: React.FC<CarInfoCardProps> = ({ car }) => {

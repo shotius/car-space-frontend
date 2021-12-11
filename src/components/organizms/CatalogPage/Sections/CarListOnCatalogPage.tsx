@@ -12,7 +12,7 @@ import { getCars } from 'src/redux/features/auth/carsSlice';
 import { getAllFavouriteLotNumbersThunk } from 'src/redux/features/auth/userSlice';
 import { closeCatalogBanner, setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
-import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CatalogLIstProps {}
 
@@ -108,7 +108,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
       {/* car list */}
       {!!cars.length ? (
         <CatalogListWrap gap="16px">
-          {cars.map((car: ICar, i) => (
+          {cars.map((car: ICarCopart, i) => (
             <Flex justify="center" key={i}>
               <CarCard car={car} />
             </Flex>

@@ -2,7 +2,7 @@ import { isApiDefaultError } from '../../../utils/functions/typeChecker';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import userServices from 'src/services/userServices';
 import {
-  ICar,
+  ICarCopart,
   RoleTypes,
 } from '../../../../../server/shared_with_front/types/types-shared';
 import { IUser } from './types';
@@ -44,7 +44,7 @@ export const getAllFavouriteLotNumbersThunk = createAsyncThunk(
   }
 );
 
-export const getAllFavouriteCarsThunk = createAsyncThunk<ICar[]>(
+export const getAllFavouriteCarsThunk = createAsyncThunk<ICarCopart[]>(
   'getAllFavouriteCarsThunk',
   async (_, { rejectWithValue }) => {
     try {
@@ -119,7 +119,7 @@ const userInfoSlice = createSlice({
     });
     builder.addCase(
       getAllFavouriteCarsThunk.fulfilled,
-      (state, action: PayloadAction<ICar[]>) => {
+      (state, action: PayloadAction<ICarCopart[]>) => {
         state.favouriteCarsFetching = false;
         state.favouriteCarsFetchSuccess = true;
         state.favouriteCars = action.payload;

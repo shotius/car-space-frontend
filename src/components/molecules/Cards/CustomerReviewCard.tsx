@@ -51,7 +51,7 @@ export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
             w={['50px', null, '80px']}
           >
             <Image
-              src="https://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX376/3eac8048-48f8-46bb-9935-d1e18b17abc6.JPG"
+              src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp"
               alt="car white"
               borderRadius="4px"
             />
@@ -61,7 +61,7 @@ export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
             w={['50px', null, '80px']}
           >
             <Image
-              src="https://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX376/3eac8048-48f8-46bb-9935-d1e18b17abc6.JPG"
+              src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp"
               alt="car white"
               borderRadius="4px"
             />
@@ -71,7 +71,7 @@ export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
             w={['50px', null, '80px']}
           >
             <Image
-              src="https://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX376/3eac8048-48f8-46bb-9935-d1e18b17abc6.JPG"
+              src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp"
               alt="car white"
               borderRadius="4px"
             />
@@ -81,7 +81,7 @@ export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
             w={['50px', null, '80px']}
           >
             <Image
-              src="https://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX376/3eac8048-48f8-46bb-9935-d1e18b17abc6.JPG"
+              src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp"
               alt="car white"
               borderRadius="4px"
             />

@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import carsService from 'src/services/carsService';
-import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
 import { setNetworkError } from '../global/gloabalSlice';
 import { setTotalPages } from './carPaginationSlice';
-import { CarsSliceState, ICarModel, IFilters } from './types';
+import { CarsSliceState, ICarCopartModel, IFilters } from './types';
 
 const initialState: CarsSliceState = {
   // cars
@@ -49,7 +49,7 @@ export const getFilters = createAsyncThunk(
 );
 
 export const getCars = createAsyncThunk<
-  ICar[],
+  ICarCopart[],
   URLSearchParams,
   {
     rejectValue: string;
@@ -76,11 +76,11 @@ export const getCars = createAsyncThunk<
 /**
  * Get models of specified brands
  * @param {string[]}: brands
- * @returns {ICarModel[]}: models
+ * @returns {ICarCopartModel[]}: models
  * @throws {string}: error
  */
 export const getModels = createAsyncThunk<
-  ICarModel[],
+  ICarCopartModel[],
   string[],
   { rejectValue: string }
 >('carFilter/getModels', async (brands: string[], { rejectWithValue }) => {
@@ -99,11 +99,11 @@ export const getModels = createAsyncThunk<
 /**
  * Get Single car
  * @param {number}: lot number
- * @returns {ICar}: car
+ * @returns {ICarCopart}: car
  * @throws {string}: api error
  */
 export const getSingleCarAsync = createAsyncThunk<
-  ICar,
+  ICarCopart,
   number,
   { rejectValue: string }
 >('getSingleCar', async (lN: number, { rejectWithValue }) => {
@@ -123,7 +123,7 @@ const carsSlice = createSlice({
   name: 'cars',
   initialState,
   reducers: {
-    setModels: (state, action: PayloadAction<ICarModel[]>) => {
+    setModels: (state, action: PayloadAction<ICarCopartModel[]>) => {
       state.models = action.payload;
     },
   },

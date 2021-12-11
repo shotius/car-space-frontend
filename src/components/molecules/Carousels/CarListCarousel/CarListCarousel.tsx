@@ -9,13 +9,13 @@ import 'swiper/css/bundle';
 import 'swiper/css/pagination';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../../../../server/shared_with_front/types/types-shared';
 import styles from './styles.module.scss';
 
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
-export const CarListCarousel = ({ car }: { car: ICar }) => {
+export const CarListCarousel = ({ car }: { car: ICarCopart }) => {
   const [isLaptopScreen] = useMediaQuery('(min-width: 1024px)');
 
   return (

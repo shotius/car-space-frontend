@@ -3,7 +3,7 @@ import { VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectTranssmision } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { Transmission } from 'src/redux/features/auth/types';
+import { Transmission, TransmissionEnum } from 'src/redux/features/auth/types';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 
 interface MobileTransmissionPopupProps {
@@ -24,7 +24,7 @@ export const MobileTransmissionPopup: React.FC<MobileTransmissionPopupProps> =
     const dispatch = useAppDispatch();
     
     // list of all gategories
-    const transmissions = ['Manual', 'Automatic', 'CVT'] as const;
+    const transmissions = Object.values(TransmissionEnum);
 
     useEffect(() => {
       setSelectedTransmissions(initialSelection);

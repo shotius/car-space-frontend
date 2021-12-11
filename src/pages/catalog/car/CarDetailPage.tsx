@@ -14,12 +14,12 @@ import {
 } from 'src/redux/features/auth/carImagesSlice';
 import { getSingleCarAsync } from 'src/redux/features/auth/carsSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface CardDetailPageProps {}
 
 export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
-  const [carInfo, setCarInfo] = useState<ICar>();
+  const [carInfo, setCarInfo] = useState<ICarCopart>();
   const [thumbs, setThumbs] = useState<string[]>([]);
   const [images, setImages] = useState<string[]>([]);
 

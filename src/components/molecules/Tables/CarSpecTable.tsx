@@ -2,13 +2,13 @@ import { VStack, StackDivider, HStack } from '@chakra-ui/layout';
 import { capitalize } from 'src/utils/functions/capitalize';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
-import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { NotSpecified } from '../Texts/NotSpecified';
 import { TextRegular } from '../Texts/TextRegular';
 
 interface CarSpecTableProps {
-  car: ICar;
+  car: ICarCopart;
 }
 
 export const CarSpecTable: React.FC<CarSpecTableProps> = ({ car }) => {

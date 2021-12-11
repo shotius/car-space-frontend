@@ -1,7 +1,7 @@
-import { ICarModel, IFilters } from './../redux/features/auth/types';
+import { ICarCopartModel, IFilters } from './../redux/features/auth/types';
 import { axios } from 'src/utils/axios';
 import { FilterQueries } from 'src/constants';
-import { ICar } from '../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../server/shared_with_front/types/types-shared';
 
 const baseURL = '/api/cars';
 
@@ -14,9 +14,9 @@ const getAllBrands = async () => {
   return data;
 };
 
-const getCars = async ({ params }): Promise<{cars: ICar[], pagesTotal: number}> => {
+const getCars = async ({ params }): Promise<{cars: ICarCopart[], pagesTotal: number}> => {
   const { data } = await axios.get(`${baseURL}`, { params });
-  return data as {cars: ICar[], pagesTotal: number};
+  return data as {cars: ICarCopart[], pagesTotal: number};
 };
 
 const getSingleCar = async (lotNum: number) => {
@@ -27,7 +27,7 @@ const getSingleCar = async (lotNum: number) => {
 const getModels = async (brands: string[]) => {
   const queries = brands.map((b) => `${FilterQueries.BRAND}=${b}`);
   const { data } = await axios.get(`${baseURL}/models?${queries.join('&')}`);
-  return data as ICarModel[];
+  return data as ICarCopartModel[];
 };
 
 const getFilters = async () => {

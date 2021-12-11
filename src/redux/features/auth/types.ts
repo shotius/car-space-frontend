@@ -1,17 +1,28 @@
 import {
-  ICar,
+  ICarCopart,
   RoleTypes,
   SelectedCarModel,
 } from '../../../../../server/shared_with_front/types/types-shared';
 import { CurrencyType, Languages } from './../../../constants/index';
 
-export interface ICarModel {
+export enum TransmissionEnum {
+  MANUAL = 'Manual',
+  AUTOMATIC = 'Automatic',
+  CVT = 'CVT',
+}
+
+export enum HasKeys {
+  YES = 'YES',
+  NO = 'NO',
+}
+
+export interface ICarCopartModel {
   brand: string;
   models: string[];
 }
 
 export interface CarsSliceState {
-  cars: ICar[];
+  cars: ICarCopart[];
   fethingCars: boolean;
   fetchingCarsError: string | undefined;
 
@@ -19,7 +30,7 @@ export interface CarsSliceState {
   errorFetchingSingleCar: string | undefined;
 
   brands: string[];
-  models: ICarModel[];
+  models: ICarCopartModel[];
   conditions: string[];
   types: string[];
   locations: string[];
@@ -31,9 +42,12 @@ export interface CarsSliceState {
   transmissions: string[];
 }
 
-export type Transmission = 'Manual' | 'Automatic' | 'CVT';
+export type Transmission =
+  | TransmissionEnum.MANUAL
+  | TransmissionEnum.AUTOMATIC
+  | TransmissionEnum.CVT;
 
-export type Keys = 'YES' | 'NO' | null;
+export type Keys = HasKeys.YES | HasKeys.NO;
 
 export interface SelectedCarFilters {
   brands: string[];
@@ -107,7 +121,7 @@ export interface GlobalStateSliceState {
   isChangeProfilePictureOpen: boolean;
   screen: ScreenSizes;
   networkError: string | undefined;
-  userError?: string
+  userError?: string;
 }
 
 //** User slice */
@@ -117,9 +131,9 @@ export interface IUser {
   isAuthenticated: boolean;
   username: string | null;
   favouriteLotNumbers?: string[];
-  avatar?: string, 
+  avatar?: string;
 
-  favouriteCars: ICar[];
+  favouriteCars: ICarCopart[];
   favouriteCarsFetching: boolean;
   favouriteCarsFetchSuccess: boolean;
   favouriteCarsFetchError: string | null;

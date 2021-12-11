@@ -1,10 +1,10 @@
 import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading';
 import { CarSpecTable } from 'src/components/molecules/Tables/CarSpecTable';
-import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CarDeailsCardProps {
   variant: 'mobile' | 'desktop';
-  car: ICar
+  car: ICarCopart
 }
 
 export const CarDeailsCard: React.FC<CarDeailsCardProps> = ({

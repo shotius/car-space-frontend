@@ -11,10 +11,10 @@ import { CarTransportationCard } from 'src/components/organizms/CarDeatailPage/C
 import { CarDetailSlider } from 'src/components/organizms/CarDeatailPage/Carousels/CarDetailSlider';
 import { CarDescriptionHeader } from 'src/components/organizms/MiniHeaders/CarDescriptionHeader';
 import { useAppSelector } from 'src/redux/app/hook';
-import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface CarDetailPageDesktopProps {
-  car: ICar;
+  car: ICarCopart;
   thumbs: string[];
   images: string[];
 }

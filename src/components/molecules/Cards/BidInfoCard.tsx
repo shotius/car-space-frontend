@@ -3,11 +3,11 @@ import { ButtonRegular } from '../Buttons/ButtonRegular';
 import { CardWithHeading } from './CardWithHeading';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { TextRegular } from '../Texts/TextRegular';
-import { ICar } from '../../../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 
 interface BidInfoCardProps {
-  car: ICar
+  car: ICarCopart
 }
 
 export const BidInfoCard: React.FC<BidInfoCardProps> = ({car}) => {

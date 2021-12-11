@@ -16,10 +16,10 @@ import { DamCar } from 'src/DamnCard';
 import { capitalize } from 'src/utils/functions/capitalize';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
-import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface FavouritesCardProps {
-  car: ICar;
+  car: ICarCopart;
 }
 
 export const UserFavouritesCardMobile: React.FC<FavouritesCardProps> = ({

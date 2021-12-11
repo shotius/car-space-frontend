@@ -5,61 +5,39 @@ import {
   HStack,
   Image,
   StackDivider,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { useAppDispatch } from 'src/redux/app/hook';
 import { getImagesMediumThunk } from 'src/redux/features/auth/carImagesSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
-import useIntersectionObserver from 'src/utils/hooks/useIntersectionObserver';
-import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
+import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 import { CarImageCarousel } from '../Carousels/CarImageCarousel/CarImageCarousel';
 import { CarCardHeading } from '../Headings/CarCardHeading';
 
-interface CarCardProps {
-  car: ICarCopart;
+interface Props {
+  car: ICarDealer;
 }
 
-export const CarCard: React.FC<CarCardProps> = ({ car }) => {
+export const DealerCarCard: React.FC<Props> = ({ car }) => {
   const ref = useRef(null);
-  const entry = useIntersectionObserver(ref, {});
   const [shouldHaveRef, setShouldHaveRef] = useState(true);
 
-  const isVisible = !!entry?.isIntersecting;
   const dispatch = useAppDispatch();
   const history = useHistory();
 
-  const { mediumImages, errorFetchingMediums: errorFetchingMediumImagess } =
-    useAppSelector((state) => state.carImages);
-
-  // if car visible and we have not fetch it yet: true, else: false
-  const shouldFetch = useMemo(() => {
-    if (isVisible && car) {
-      // if we dont have car in redux state, either in a list or in errors: true , else: false
-      if (!mediumImages[car.lN] && !errorFetchingMediumImagess[car.lN]) {
-        return true;
-      } else {
-        // if we have a car in the redux remove current from ref, it Prevents from re-renders
-        ref.current = null;
-        return false;
-      }
-    }
-    return false;
-  }, [isVisible]);
-
   useEffect(() => {
-    if (shouldFetch) {
       dispatch(getImagesMediumThunk(parseInt(car.lN)));
       setShouldHaveRef(false);
       // remove div from observer, it prevents rerenders
       ref.current = null;
     }
-  }, [shouldFetch]);
+  }, []);
 
-  const displayImageCarousel = !!mediumImages[car.lN];
+  const displayImageCarousel = car.imgUrls;
 
   return (
     <Box

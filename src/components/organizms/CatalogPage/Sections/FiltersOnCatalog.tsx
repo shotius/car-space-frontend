@@ -23,7 +23,7 @@ import {
   selectYearFrom,
   selectYearTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { Transmission } from 'src/redux/features/auth/types';
+import { HasKeys, Transmission } from 'src/redux/features/auth/types';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';
 import { parseModelQueries } from 'src/utils/functions/parseModelQueries';
 import { submitCarSearch } from 'src/utils/hooks/submitCarsSearch';
@@ -142,7 +142,7 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
     // restore keys from url
     const keys = query.get(KEYS);
-    if (keys === 'NO' || keys === 'YES') {
+    if (keys === HasKeys.NO || keys === HasKeys.YES) {
       dispatch(selectCarKeys(keys));
     }
 

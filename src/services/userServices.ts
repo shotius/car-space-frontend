@@ -2,7 +2,7 @@ import { axios } from 'src/utils/axios';
 import {
   ApiSuccessResponse,
   CloudinaryResponse,
-  ICar,
+  ICarCopart,
 } from '../../../server/shared_with_front/types/types-shared';
 
 const baseUrl = '/api/users';
@@ -19,7 +19,7 @@ const getAllLikedCars = async () => {
 
 const getAllFavouriteCars = async () => {
   const result = await axios.get(`${baseUrl}/cars/favourites`);
-  return result.data as ICar[];
+  return result.data as ICarCopart[];
 };
 const setUserProfileAvatar = async (formdata: FormData) => {
   const { data } = await axios.post(`${baseUrl}/avatar`, formdata);

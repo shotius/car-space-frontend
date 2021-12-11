@@ -5,10 +5,10 @@ import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { capitalize } from 'src/utils/functions/capitalize';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
-import { ICar } from '../../../../../../server/shared_with_front/types/types-shared';
+import { ICarCopart } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CarInfoCardMobileProps {
-  car: ICar;
+  car: ICarCopart;
 }
 
 export const CarInfoCardMobile: React.FC<CarInfoCardMobileProps> = ({

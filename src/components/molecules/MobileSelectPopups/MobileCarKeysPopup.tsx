@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectCarKeys
 } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { Keys } from 'src/redux/features/auth/types';
+import { HasKeys, Keys } from 'src/redux/features/auth/types';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 import { TextRegular } from '../Texts/TextRegular';
 
@@ -47,7 +47,7 @@ export const MobileCarKyesPopup: React.FC<MobileCarKyesPopupProps> = ({
             name="has_keys"
             value="YES"
             checked={selectedKeys === 'YES'}
-            onChange={() => setSelectedKeys('YES')}
+            onChange={() => setSelectedKeys(HasKeys.YES)}
           />
           <TextRegular>Yes</TextRegular>
         </HStack>
@@ -57,7 +57,7 @@ export const MobileCarKyesPopup: React.FC<MobileCarKyesPopupProps> = ({
             name="has_keys"
             value="NO"
             checked={selectedKeys === 'NO'}
-            onChange={() => setSelectedKeys('NO')}
+            onChange={() => setSelectedKeys(HasKeys.NO)}
           />
           <TextRegular>No</TextRegular>
         </HStack>
