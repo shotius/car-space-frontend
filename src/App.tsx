@@ -50,9 +50,9 @@ function App() {
           </Route>
           <PublicRoute path="/home" component={Home} />
 
-          <PublicRoute path="/blogs" component={BlogPage} exact />
+          <PublicRoute path="/blog" component={BlogPage} exact />
           <PublicRoute
-            path="/blogs/blog/:blogId"
+            path="/blog/:blogId"
             component={BlogDetailPage}
             exact
           />

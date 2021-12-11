@@ -1,3 +1,4 @@
+import { isApiDefaultError } from './../../../utils/functions/typeChecker';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import carsService from 'src/services/carsService';
@@ -14,9 +15,13 @@ const initialState: CarsSliceState = {
   cars: [],
   fethingCars: false,
   fetchingCarsError: undefined,
+
   // single car
   fetchingSingleCar: false,
   errorFetchingSingleCar: undefined,
+
+  addingDealerCar: false, 
+
   // filters
   brands: [],
   models: [],
@@ -31,7 +36,7 @@ const initialState: CarsSliceState = {
   transmissions: [],
 
   dealerCars: [],
-  fetchingDealerCars: false
+  fetchingDealerCars: false,
 };
 
 export const searchCars = createAsyncThunk('cars/searchCars', async () => {
@@ -61,16 +66,18 @@ export const getFilters = createAsyncThunk(
  */
 export const getDealerCars = createAsyncThunk<
   ICarDealer[],
-  URLSearchParams, 
+  URLSearchParams,
   {
     rejectValue: string;
   }
->('cars/getDealerCars', async (params, {rejectWithValue}) => {
+>('cars/getDealerCars', async (params, { rejectWithValue, dispatch }) => {
   try {
-    const {results} = await carsService.getDealerCars(params)
-    return results
-  } catch(error) {
-    return rejectWithValue('could not get dealer cars')
+    const { results } = await carsService.getDealerCars(params);
+    console.log(results);
+    dispatch(setTotalPages(results.pagesTotal));
+    return results.cars;
+  } catch (error) {
+    return rejectWithValue('could not get dealer cars');
   }
 });
 
@@ -141,6 +148,31 @@ export const getSingleCarAsync = createAsyncThunk<
     } else {
       return rejectWithValue('some Other error' + error);
     }
+  }
+});
+
+/**
+ * Function adds new dealer car 
+ * @param formData
+ * @returns newly created car or rejected error
+ */
+export const addDealerCar = createAsyncThunk<
+  ICarDealer,
+  FormData,
+  {
+    rejectValue: string;
+  }
+>('cars/addDealerCar', async (formData: FormData, { rejectWithValue }) => {
+  try {
+    const { results } = await carsService.addDealerCar(formData);
+    return results;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (isApiDefaultError(error)) {
+        return rejectWithValue('Could not add a car, error: ' + error.message);
+      }
+    }
+    return rejectWithValue('Something wrong happend ;(');
   }
 });
 
@@ -215,16 +247,28 @@ const carsSlice = createSlice({
 
     /** Get Dealers' cars */
     builder.addCase(getDealerCars.pending, (state) => {
-      state.fetchingDealerCars = true 
-
-    })
+      state.fetchingDealerCars = true;
+    });
     builder.addCase(getDealerCars.fulfilled, (state, action) => {
-      state.dealerCars = action.payload
-      state.fetchingDealerCars = false
-    })
+      state.dealerCars = action.payload;
+      state.fetchingDealerCars = false;
+    });
     builder.addCase(getDealerCars.rejected, (state) => {
-      state.fetchingDealerCars = false
+      state.fetchingDealerCars = false;
+    });
+
+    /** Add new dealer car */
+    builder.addCase(addDealerCar.pending, (state)=> {
+      state.addingDealerCar = true
+    });
+    builder.addCase(addDealerCar.fulfilled, (state) => {
+      state.addingDealerCar = false
     })
+    builder.addCase(addDealerCar.rejected, (state) => {
+      state.addingDealerCar = false
+    })
+
+    
   },
 });
 

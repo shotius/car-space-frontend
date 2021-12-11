@@ -5,6 +5,7 @@ import {
   HStack,
   Select,
   Textarea,
+  useToast,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -15,14 +16,19 @@ import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { addDealerCar, getCars } from 'src/redux/features/auth/carsSlice';
 import { TransmissionEnum } from 'src/redux/features/auth/types';
-import { axios } from 'src/utils/axios';
 import { AddCarValues } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface AdminProps {}
 
 export const AdminPage: React.FC<AdminProps> = () => {
   const transTypes = Object.values(TransmissionEnum);
+  const { addingDealerCar } = useAppSelector((state) => state.carsReducer);
+  const { catalogQuery } = useAppSelector((state) => state.globalAppState);
+  const dispatch = useAppDispatch();
+  const toast = useToast();
 
   const initialValues: AddCarValues = {
     manufacturer: '',
@@ -65,13 +71,27 @@ export const AdminPage: React.FC<AdminProps> = () => {
                   }
                 }
 
-                /**
-                 * @todo move to thunk
-                 */
-                axios
-                  .post('/api/dealers/cars', formdata)
-                  .then((data) => console.log('response: ', data))
-                  .catch((erro) => console.log('rejected', erro));
+                // add new car
+                const query = new URLSearchParams(catalogQuery);
+                dispatch(addDealerCar(formdata))
+                  .then(() => {
+                    toast({
+                      title: "New car edded successfully", 
+                      position: "top", 
+                      status: "success", 
+                      duration: 1500
+                    })
+                    dispatch(getCars(query));
+                  })
+                  .catch((error) =>
+                    toast({
+                      title: error,
+                      position: 'top',
+                      variant: 'solid',
+                      status: 'error',
+                      duration: 2000,
+                    })
+                  );
               }}
             >
               {({ values, setFieldValue }) => (
@@ -177,7 +197,12 @@ export const AdminPage: React.FC<AdminProps> = () => {
                   </Field>
 
                   {/* Sumbit button  */}
-                  <ButtonRegular type="submit" mt="4" mb="4">
+                  <ButtonRegular
+                    type="submit"
+                    mt="4"
+                    mb="4"
+                    isLoading={addingDealerCar}
+                  >
                     Add
                   </ButtonRegular>
                 </Form>

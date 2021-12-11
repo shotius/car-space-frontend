@@ -67,7 +67,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
                 noOfLines={1}
                 maxW="full"
               >
-                {car?.dmg && capitalizeEach(car?.dmg)}
+                {car?.dmg ? capitalizeEach(car?.dmg) : "-"}
               </TextRegular>
             </HStack>
             <HStack>
@@ -87,7 +87,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
               pr={['4', '0', '4']}
               fontWeight="400"
             >
-              $ {toTrippleNumber(car.price)}
+              $ {toTrippleNumber(car.price ?? 0)}
             </Heading>
           </HStack>
           <HStack justifyContent="space-between" w="full">
@@ -97,7 +97,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
               pr={['4', '0', '4']}
               fontWeight="400"
             >
-              $ {toTrippleNumber(Number(car.price))}
+              $ {car.price ? toTrippleNumber(car.price) : "0"}
             </Heading>
           </HStack>
         </VStack>

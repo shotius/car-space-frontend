@@ -20,8 +20,9 @@ const getCars = async ({ params }): Promise<{cars: ICarCopart[], pagesTotal: num
 };
 
 const getDealerCars = async (params: URLSearchParams) => {
-  const {data} = await axios.get(`${baseURL}/api/dealers/cars`, {params})
-  return data as ApiSuccessResponse<ICarDealer[]>
+  const {data} = await axios.get(`/api/dealers/cars`, {params})
+  console.log('data received', data)
+  return data as ApiSuccessResponse<{cars: ICarDealer[], pagesTotal: number}>
 }
 
 const getSingleCar = async (lotNum: number) => {
@@ -65,7 +66,13 @@ const getFilters = async () => {
   return filters;
 };
 
+const addDealerCar = async (formData:  FormData) => {
+  const {data} = await axios.post('/api/dealers/cars', formData) 
+  return data as ApiSuccessResponse<ICarDealer>
+}
+
 const carsService = {
+  addDealerCar, 
   searchCars,
   getAllBrands,
   getCars,

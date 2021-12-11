@@ -2,22 +2,26 @@ import { VStack } from '@chakra-ui/layout';
 import { Flex, Spinner, useToast } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router';
-import { CarCard } from 'src/components/molecules/Cards/CarCard';
+import { DealerCarCard } from 'src/components/molecules/Cards/DealerCarCard';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
-import { getCars } from 'src/redux/features/auth/carsSlice';
+import { getDealerCars } from 'src/redux/features/auth/carsSlice';
 import { getAllFavouriteLotNumbersThunk } from 'src/redux/features/auth/userSlice';
-import { closeCatalogBanner, setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
+import {
+  closeCatalogBanner,
+  setCatalogQuery
+} from 'src/redux/features/global/gloabalSlice';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
-import { ICarCopart } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CatalogLIstProps {}
 
 export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
-  const { cars, fethingCars } = useAppSelector((state) => state.carsReducer);
+  const { dealerCars: cars, fetchingDealerCars: fethingCars } = useAppSelector(
+    (state) => state.carsReducer
+  );
   const { totalPages, activePage } = useAppSelector(
     (state) => state.carsPagination
   );
@@ -30,7 +34,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
   useEffect(() => {
     if (networkError) {
-      addToast();
+      NetworkErrorAlert();
     }
   }, [networkError]);
 
@@ -43,20 +47,19 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   // on the first load put page query in the url and open the banner
   useEffect(() => {
     if (!catalogQuery) {
-      console.log('here', page)
       activePage
         ? query.set('page', activePage.toString())
         : query.set('page', page.toString());
 
       history.push({ search: query.toString() });
       dispatch(setActivePage(query.get('page')));
-      dispatch(setCatalogQuery(query.toString()))
+      dispatch(setCatalogQuery(query.toString()));
     } else {
       history.push({ search: catalogQuery });
     }
     return () => {
       dispatch(closeCatalogBanner());
-    }
+    };
   }, []);
 
   // If Authenticated get All favourite cars
@@ -69,9 +72,9 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   // when page number changes, get cars and scroll to top and save active page in redux
   useEffect(() => {
     if (catalogQuery !== query.toString()) {
-      console.log('back on catalog', catalogQuery, query.toString())
+      console.log('back on catalog', catalogQuery, query.toString());
       console.log('query', query.toString());
-      dispatch(getCars(query));
+      dispatch(getDealerCars(query));
       dispatch(setActivePage(query.get('page')));
       // browser back button scrolls to the bottom, this line will scroll to the top
       setTimeout(() => window.scrollTo(0, 0));
@@ -85,7 +88,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   };
 
   // if network error occurs notification will be displayed
-  const addToast = () => {
+  const NetworkErrorAlert = () => {
     toastIdRef.current = toast({
       title: networkError,
       status: 'error',
@@ -108,9 +111,9 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
       {/* car list */}
       {!!cars.length ? (
         <CatalogListWrap gap="16px">
-          {cars.map((car: ICarCopart, i) => (
+          {cars.map((car, i) => (
             <Flex justify="center" key={i}>
-              <CarCard car={car} />
+              <DealerCarCard car={car} />
             </Flex>
           ))}
         </CatalogListWrap>

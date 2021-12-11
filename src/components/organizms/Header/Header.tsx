@@ -112,12 +112,12 @@ export const Header: React.FC<HeaderProps> = () => {
           >
             <HStack spacing={[null, null, '16px', '24px', '32px']}>
               <MenuLink
-                to={`/catalog?${catalogQuery || ''}`}
+                to={`/catalog${catalogQuery ? `?${catalogQuery}` : ''}`}
                 label="Catalog"
-                activeOnlyWhenExact={true}
+                // activeOnlyWhenExact={true}
               />
               <MenuLink to="/services" label="Services" />
-              <MenuLink to="/blogs" label="Blog" activeOnlyWhenExact={true} />
+              <MenuLink to="/blog" label="Blog" activeOnlyWhenExact={true} />
             </HStack>
             {/* popovers */}
             <HStack

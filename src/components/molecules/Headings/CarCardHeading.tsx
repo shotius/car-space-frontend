@@ -26,7 +26,7 @@ export const CarCardHeading: React.FC<CarCardHeadingProps> = ({ id, model, year 
         >
           <Link to={`/car/${id}`}>{capitalizeEach(model)}</Link>
         </TextRegular>
-        <TextSecondary opacity="50%">{year}</TextSecondary>
+        <TextSecondary opacity="50%">{year || "Year: -"}</TextSecondary>
       </VStack>
       <ButtonHeart h="40px" w="36px" boxSize={5} lotNumber={id} />
     </HStack>

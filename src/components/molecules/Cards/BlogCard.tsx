@@ -15,7 +15,7 @@ export const BlogCard: React.FC<BlogCardProps> = () => {
         transition: 'all .3s',
       }}
       cursor="pointer"
-      onClick={() => history.push(`/blogs/blog/123`)}
+      onClick={() => history.push(`/blog/123`)}
     >
       <Image
         src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cm9hZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
