@@ -1,7 +1,7 @@
 import { ICarCopartModel, IFilters } from './../redux/features/auth/types';
 import { axios } from 'src/utils/axios';
 import { FilterQueries } from 'src/constants';
-import { ICarCopart } from '../../../server/shared_with_front/types/types-shared';
+import { ApiSuccessResponse, ICarCopart, ICarDealer } from '../../../server/shared_with_front/types/types-shared';
 
 const baseURL = '/api/cars';
 
@@ -19,6 +19,11 @@ const getCars = async ({ params }): Promise<{cars: ICarCopart[], pagesTotal: num
   return data as {cars: ICarCopart[], pagesTotal: number};
 };
 
+const getDealerCars = async (params: URLSearchParams) => {
+  const {data} = await axios.get(`${baseURL}/api/dealers/cars`, {params})
+  return data as ApiSuccessResponse<ICarDealer[]>
+}
+
 const getSingleCar = async (lotNum: number) => {
   const { data } = await axios.get(`${baseURL}/${lotNum}`);
   return data;
@@ -29,6 +34,7 @@ const getModels = async (brands: string[]) => {
   const { data } = await axios.get(`${baseURL}/models?${queries.join('&')}`);
   return data as ICarCopartModel[];
 };
+
 
 const getFilters = async () => {
   const results = await Promise.allSettled([
@@ -66,5 +72,6 @@ const carsService = {
   getModels,
   getSingleCar,
   getFilters,
+  getDealerCars
 };
 export default carsService;

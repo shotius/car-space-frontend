@@ -28,6 +28,7 @@ export interface CarsSliceState {
   fetchingCarsError: string | undefined;
 
   dealerCars: ICarDealer[], 
+  fetchingDealerCars: boolean;
 
   fetchingSingleCar: boolean;
   errorFetchingSingleCar: string | undefined;

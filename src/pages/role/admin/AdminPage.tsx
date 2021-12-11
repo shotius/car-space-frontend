@@ -15,34 +15,11 @@ import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
-import {
-  Keys,
-  Transmission,
-  TransmissionEnum,
-} from 'src/redux/features/auth/types';
+import { TransmissionEnum } from 'src/redux/features/auth/types';
 import { axios } from 'src/utils/axios';
+import { AddCarValues } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface AdminProps {}
-interface AddCarValues {
-  manufacturer: string;
-  modelGroup: string;
-  modelDetail: string;
-  bodyStyle: string;
-  damage: string;
-  location: string;
-  odometer: number;
-  cylinders: number;
-  drive: string;
-  engine: number;
-  transmission: Transmission | '';
-  year: string;
-  hasKeys: Keys | '';
-  fuelType: string;
-  color: string;
-  price: number;
-  description: string;
-  photos: FileList | null;
-}
 
 export const AdminPage: React.FC<AdminProps> = () => {
   const transTypes = Object.values(TransmissionEnum);
@@ -88,11 +65,9 @@ export const AdminPage: React.FC<AdminProps> = () => {
                   }
                 }
 
-                // console.log(values)
-
-                for (let enty of formdata.entries()) {
-                  console.log(enty[0] + ': ' + enty[1]);
-                }
+                /**
+                 * @todo move to thunk
+                 */
                 axios
                   .post('/api/dealers/cars', formdata)
                   .then((data) => console.log('response: ', data))

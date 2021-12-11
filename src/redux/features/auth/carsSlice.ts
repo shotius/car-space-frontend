@@ -1,7 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import carsService from 'src/services/carsService';
-import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
+import {
+  ICarCopart,
+  ICarDealer,
+} from '../../../../../server/shared_with_front/types/types-shared';
 import { setNetworkError } from '../global/gloabalSlice';
 import { setTotalPages } from './carPaginationSlice';
 import { CarsSliceState, ICarCopartModel, IFilters } from './types';
@@ -27,7 +30,8 @@ const initialState: CarsSliceState = {
   getFiltersError: false,
   transmissions: [],
 
-  dealerCars: []
+  dealerCars: [],
+  fetchingDealerCars: false
 };
 
 export const searchCars = createAsyncThunk('cars/searchCars', async () => {
@@ -49,6 +53,26 @@ export const getFilters = createAsyncThunk(
     }
   }
 );
+
+/**
+ * Function gets dealer cars
+ * @param param query string params
+ * @returns dealer cars or rejects with value
+ */
+export const getDealerCars = createAsyncThunk<
+  ICarDealer[],
+  URLSearchParams, 
+  {
+    rejectValue: string;
+  }
+>('cars/getDealerCars', async (params, {rejectWithValue}) => {
+  try {
+    const {results} = await carsService.getDealerCars(params)
+    return results
+  } catch(error) {
+    return rejectWithValue('could not get dealer cars')
+  }
+});
 
 export const getCars = createAsyncThunk<
   ICarCopart[],
@@ -188,6 +212,19 @@ const carsSlice = createSlice({
       state.fetchingSingleCar = false;
       state.errorFetchingSingleCar = aciton.payload;
     });
+
+    /** Get Dealers' cars */
+    builder.addCase(getDealerCars.pending, (state) => {
+      state.fetchingDealerCars = true 
+
+    })
+    builder.addCase(getDealerCars.fulfilled, (state, action) => {
+      state.dealerCars = action.payload
+      state.fetchingDealerCars = false
+    })
+    builder.addCase(getDealerCars.rejected, (state) => {
+      state.fetchingDealerCars = false
+    })
   },
 });
 
