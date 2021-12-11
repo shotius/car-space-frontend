@@ -1,12 +1,13 @@
-import { isApiDefaultError } from './../../../utils/functions/typeChecker';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import carsService from 'src/services/carsService';
 import {
+  ApiValidationError,
   ICarCopart,
-  ICarDealer,
+  ICarDealer
 } from '../../../../../server/shared_with_front/types/types-shared';
 import { setNetworkError } from '../global/gloabalSlice';
+import { isApiValidationError } from './../../../utils/functions/typeChecker';
 import { setTotalPages } from './carPaginationSlice';
 import { CarsSliceState, ICarCopartModel, IFilters } from './types';
 
@@ -20,6 +21,7 @@ const initialState: CarsSliceState = {
   fetchingSingleCar: false,
   errorFetchingSingleCar: undefined,
 
+  // dealer cars
   addingDealerCar: false, 
 
   // filters
@@ -73,7 +75,6 @@ export const getDealerCars = createAsyncThunk<
 >('cars/getDealerCars', async (params, { rejectWithValue, dispatch }) => {
   try {
     const { results } = await carsService.getDealerCars(params);
-    console.log(results);
     dispatch(setTotalPages(results.pagesTotal));
     return results.cars;
   } catch (error) {
@@ -160,7 +161,7 @@ export const addDealerCar = createAsyncThunk<
   ICarDealer,
   FormData,
   {
-    rejectValue: string;
+    rejectValue: string | ApiValidationError;
   }
 >('cars/addDealerCar', async (formData: FormData, { rejectWithValue }) => {
   try {
@@ -168,8 +169,8 @@ export const addDealerCar = createAsyncThunk<
     return results;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      if (isApiDefaultError(error)) {
-        return rejectWithValue('Could not add a car, error: ' + error.message);
+      if (error.response && isApiValidationError(error.response.data)) {
+        return rejectWithValue(error.response.data);
       }
     }
     return rejectWithValue('Something wrong happend ;(');

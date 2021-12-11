@@ -29,11 +29,9 @@ export const isApiDefaultError = (obj: any): obj is ApiDefaultError => {
   return false;
 };
 
-export const isApiValidationError = (
-  obj: ApiValidationError
-): obj is ApiValidationError => {
-  if (isApiBaseResponse(obj) && !obj.success && Array.isArray(obj.errors)) {
+export const isApiValidationError = (obj: any): obj is ApiValidationError => {
+  if (!obj.success && Array.isArray(obj.errors)) {
     return true;
   }
-  return false
+  return false;
 };

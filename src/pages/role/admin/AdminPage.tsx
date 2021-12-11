@@ -5,7 +5,7 @@ import {
   HStack,
   Select,
   Textarea,
-  useToast,
+  useToast
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -19,6 +19,7 @@ import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { addDealerCar, getCars } from 'src/redux/features/auth/carsSlice';
 import { TransmissionEnum } from 'src/redux/features/auth/types';
+import { isApiValidationError } from 'src/utils/functions/typeChecker';
 import { AddCarValues } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface AdminProps {}
@@ -57,7 +58,7 @@ export const AdminPage: React.FC<AdminProps> = () => {
           <Card w="500px" bg="#fff" p="4">
             <Formik
               initialValues={initialValues}
-              onSubmit={(values) => {
+              onSubmit={(values, { setFieldError }) => {
                 const { photos, ...restValues } = values;
                 const formdata = new FormData();
                 // append values to formdata
@@ -74,24 +75,32 @@ export const AdminPage: React.FC<AdminProps> = () => {
                 // add new car
                 const query = new URLSearchParams(catalogQuery);
                 dispatch(addDealerCar(formdata))
+                  .unwrap()
                   .then(() => {
                     toast({
-                      title: "New car edded successfully", 
-                      position: "top", 
-                      status: "success", 
-                      duration: 1500
-                    })
+                      title: 'New car edded successfully',
+                      position: 'top',
+                      status: 'success',
+                      duration: 1500,
+                    });
                     dispatch(getCars(query));
                   })
-                  .catch((error) =>
+                  .catch((error) => {
+                    let message: string = "";
+                    if (isApiValidationError(error)) {
+                      if (error.status === 422) {
+                        message = "Fill in required fields"
+                        setFieldError('manufacturer', 'required');
+                      }
+                    }
                     toast({
-                      title: error,
+                      title: message,
                       position: 'top',
                       variant: 'solid',
                       status: 'error',
                       duration: 2000,
-                    })
-                  );
+                    });
+                  });
               }}
             >
               {({ values, setFieldValue }) => (
