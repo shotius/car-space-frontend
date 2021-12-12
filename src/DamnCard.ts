@@ -32,14 +32,11 @@ export const DamCar = {
 
 export const DamnCard1: ICarDealer = {
   imgUrls: [
-    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057528/car-space/cars/medium-sized-cars/xtfrk4nbr22jhmrqklf8.webp',
-    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057528/car-space/cars/medium-sized-cars/aafoiwtsolfzv7uorhe6.webp',
-    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057528/car-space/cars/medium-sized-cars/tyr97adfs8tqajb0uyyq.webp',
-    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057529/car-space/cars/medium-sized-cars/nffe6njzjz74y0p0db3t.webp',
-    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057528/car-space/cars/medium-sized-cars/s1y6we91gvufs5syyy79.webp',
-    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057528/car-space/cars/medium-sized-cars/pfhmtxxy04ujc2mifwnu.webp',
-    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057529/car-space/cars/medium-sized-cars/f0kxwpxqzcm3yexcljsb.webp',
-    'https://res.cloudinary.com/car-space-v1/image/upload/v1639057529/car-space/cars/medium-sized-cars/hpnrvxricjyoy44pgppy.webp',
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639259385/car-space/cars/medium-sized-cars/kp18xjlopjrkq0tkck2z.webp', 
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639259385/car-space/cars/medium-sized-cars/kp18xjlopjrkq0tkck2z.webp', 
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639259385/car-space/cars/medium-sized-cars/kp18xjlopjrkq0tkck2z.webp', 
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639259385/car-space/cars/medium-sized-cars/kp18xjlopjrkq0tkck2z.webp', 
+    'https://res.cloudinary.com/car-space-v1/image/upload/v1639259385/car-space/cars/medium-sized-cars/kp18xjlopjrkq0tkck2z.webp'
   ],
   bSt: 'TILT CAB',
   price: 20000,

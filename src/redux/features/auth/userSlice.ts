@@ -23,10 +23,8 @@ const initialState: IUser = {
 export const likeCarThunk = createAsyncThunk(
   'user/likeCar',
   async (lotNumber: string, { dispatch }) => {
-    console.log('clicked');
     try {
       const result = await userServices.likeCar(lotNumber);
-      console.log('result: ', result);
       if (result && result.success) {
         dispatch(getAllFavouriteLotNumbersThunk());
       }

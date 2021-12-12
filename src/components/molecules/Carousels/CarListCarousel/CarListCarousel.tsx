@@ -69,8 +69,8 @@ export const CarListCarousel = ({ car }: { car: ICarDealer }) => {
           },
         }}
       >
-        {range(0, 7).map((i) => (
-          <SwiperSlide key={i}>
+        {range(0, 7).map((item, i) => (
+          <SwiperSlide key={item*i}>
             <Box w="full">
               <DealerCarCard car={car} />
             </Box>

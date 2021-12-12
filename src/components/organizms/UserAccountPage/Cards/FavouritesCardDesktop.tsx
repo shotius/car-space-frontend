@@ -16,6 +16,7 @@ interface FavouritesCardDesktopProps {
 export const UserFavouritesCardDesktop: React.FC<FavouritesCardDesktopProps> =
   ({ car }) => {
     const history = useHistory();
+    
     return (
       <Card
         bg="autoGrey.500"

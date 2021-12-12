@@ -10,8 +10,8 @@ import 'swiper/css/navigation';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { CustomerReviewCard } from '../../../molecules/Cards/CustomerReviewCard';
-import { ButtonNext } from "../../../molecules/CarouselNavigations/Deskop/ButtonNext";
-import { ButtonPrev } from "../../../molecules/CarouselNavigations/Deskop/ButtonPrev";
+import { ButtonNext } from '../../../molecules/CarouselNavigations/Deskop/ButtonNext';
+import { ButtonPrev } from '../../../molecules/CarouselNavigations/Deskop/ButtonPrev';
 import { ButtonMobile } from '../../../molecules/CarouselNavigations/Mobile/ButtonMobile';
 
 interface CustomersReviewProps {}
@@ -21,10 +21,12 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
   const nextRef = useRef<HTMLButtonElement>(null);
   const [swiper, setSwiper] = useState<SwiperCore | null>(null);
 
+  const [hideNavigation, setHideNavigation] = useState(false);
+
   const [isLastSlide, setIsLastSlide] = useState(false);
   const [isFirstSlide, setIsFirstSlide] = useState(true);
 
-  const {isDesktop} = useAppSelector(state => state.globalAppState.screen)
+  const { isDesktop } = useAppSelector((state) => state.globalAppState.screen);
   // changes on window resize
   const windowSize = useWindowSize();
 
@@ -48,11 +50,13 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
   }, [swiper, windowSize]);
 
   return (
-    <Box w="100%" position="relative" >
+    <Box w="100%" position="relative">
       <Swiper
         spaceBetween={10}
         className="mySwiper"
         loop={isDesktop}
+        onSlideChangeTransitionStart={() => setHideNavigation(true)}
+        onSlideChangeTransitionEnd={() => setHideNavigation(false)}
         onSlideChange={(swiper) => {
           setIsLastSlide(swiper.isEnd);
           setIsFirstSlide(swiper.isBeginning);
@@ -91,6 +95,8 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
           top="10px"
           right="10px"
           spacing="0"
+          opacity={hideNavigation ? '0' : '1'}
+          transition="cubic-bezier(0,1.9,1,.52) .2s"
         >
           <ButtonMobile side="right" ref={prevRef} animate={!isFirstSlide} />
           <ButtonMobile side="left" ref={nextRef} animate={!isLastSlide} />

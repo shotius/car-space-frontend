@@ -1,11 +1,12 @@
 import {
+  Button,
   Center,
   Checkbox,
   FormControl,
   HStack,
   Select,
   Textarea,
-  useToast
+  useToast,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -17,6 +18,7 @@ import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecon
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { logoutUser } from 'src/redux/features/auth/authSlice';
 import { addDealerCar, getCars } from 'src/redux/features/auth/carsSlice';
 import { TransmissionEnum } from 'src/redux/features/auth/types';
 import { isApiValidationError } from 'src/utils/functions/typeChecker';
@@ -54,6 +56,7 @@ export const AdminPage: React.FC<AdminProps> = () => {
   return (
     <PublicLayout>
       <ContainerOuter pt={['32px', null, null, '40px']}>
+        <Button onClick={() => dispatch(logoutUser())}>logout</Button>
         <Center>
           <Card w="500px" bg="#fff" p="4">
             <Formik
@@ -86,10 +89,10 @@ export const AdminPage: React.FC<AdminProps> = () => {
                     dispatch(getCars(query));
                   })
                   .catch((error) => {
-                    let message: string = "";
+                    let message: string = '';
                     if (isApiValidationError(error)) {
                       if (error.status === 422) {
-                        message = "Fill in required fields"
+                        message = 'Fill in required fields';
                         setFieldError('manufacturer', 'required');
                       }
                     }

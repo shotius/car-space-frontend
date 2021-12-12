@@ -73,7 +73,7 @@ export const OrderListCard: React.FC<OrderListCardProps> = ({ order }) => {
             {isOpen ? "See less" : "See more"}
             <Icon
               as={DropdownIcon}
-              transform={!isOpen ? "rotate(-90deg)" : "rotate(-180deg)"}
+              transform={!isOpen ? "rotate(0deg)" : "rotate(-180deg)"}
               mb="2px"
               ml="2"
               transition="all .2s"

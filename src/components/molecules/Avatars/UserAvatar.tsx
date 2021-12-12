@@ -18,6 +18,7 @@ interface UserAvatarProps {
   mainText?: string;
   secondaryText?: string;
   size?: ImageProps['w'];
+  showPhotoChange?: boolean;
 }
 
 export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
@@ -29,6 +30,7 @@ export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
   spacing = ['4', '10px'],
   w = ['full', 'auto'],
   size = ['49px', '70px'],
+  showPhotoChange = false, 
   ...rest
 }) => {
   const { username } = useAppSelector((state) => state.userInfoSlice);
@@ -57,6 +59,7 @@ export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
           _active={{
             transform: 'scale(1.1)',
           }}
+          display={showPhotoChange ? "block" : "none"}
           onClick={() => dispatch(toggleProfilePictureChangeModal())}
         />
         {image ? (

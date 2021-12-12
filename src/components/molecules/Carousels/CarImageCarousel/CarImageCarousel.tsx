@@ -63,8 +63,8 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
           swiper.navigation.update();
         }}
       >
-        {images.map((image) => (
-          <SwiperSlide key={image}>
+        {images.map((image, i) => (
+          <SwiperSlide key={i}>
             <Box
               backgroundImage={image}
               backgroundSize="cover"

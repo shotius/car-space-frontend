@@ -75,7 +75,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
               <TextRegular
                 fontFamily={['Roboto Medium', null, 'Roboto Regular']}
               >
-                {car?.od} km
+                {toTrippleNumber(car?.od)} km
               </TextRegular>
             </HStack>
           </VStack>

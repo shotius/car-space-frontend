@@ -18,6 +18,10 @@ export const UserFavouritesDesktop: React.FC<UserFavouritesDesktopProps> =
         <VStack w="full" spacing="4">
           {favouriteCarsFetching ? (
             <HeadingSecondary>...loading</HeadingSecondary>
+          ) : !favouriteCars.length ? (
+            <HeadingSecondary>
+              Your Favourite cars will appear here
+            </HeadingSecondary>
           ) : (
             favouriteCars.map((car) => (
               <UserFavouritesCardDesktop key={car.lN} car={car} />

@@ -22,6 +22,7 @@ export const UserCard: React.FC<UserCardProps> = ({}) => {
           mainText="Full Name"
           secondaryText="+995 123123 123"
           size="70px"
+          showPhotoChange={true}
         />
       </Box>
       <ChangePictureModalTemplate />

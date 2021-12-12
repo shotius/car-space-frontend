@@ -1,4 +1,4 @@
-import { Button} from '@chakra-ui/button';
+import { Button } from '@chakra-ui/button';
 import { Center } from '@chakra-ui/layout';
 import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table';
 import { useState } from 'react';
@@ -54,7 +54,15 @@ export const OrderListDesktop: React.FC<OrderListDesktopProps> = ({
           </Thead>
           <Tbody>
             {orderList.map((order, i) => (
-              <Tr key={i} pt="50px">
+              <Tr
+                key={i}
+                pt="50px"
+                onClick={() => handeExpand(i)}
+                cursor='pointer'
+                _hover={{
+                  bg: "autoGrey.100"
+                }}
+              >
                 <Td w="full" p={[null, null, null, '2', '8']} isTruncated>
                   <HeadingSecondary>{order.orderId}</HeadingSecondary>
                 </Td>
@@ -72,7 +80,7 @@ export const OrderListDesktop: React.FC<OrderListDesktopProps> = ({
                 <Td> $ {order.totalPrice}</Td>
                 <Td>{order.status} </Td>
                 <Td p="0">
-                  <Button variant="link" onClick={() => handeExpand(i)} minH="50px">
+                  <Button variant="link" minH="50px">
                     <DropdownIcon
                       transform={
                         isExpanded.includes(i) ? 'rotate(180deg)' : 'none'
