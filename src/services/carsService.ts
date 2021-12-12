@@ -27,7 +27,6 @@ const getCars = async ({
 
 const getDealerCars = async (params: URLSearchParams) => {
   const { data } = await axios.get(`/api/dealers/cars`, { params });
-  console.log('data received', data);
   return data as ApiSuccessResponse<{ cars: ICarDealer[]; pagesTotal: number }>;
 };
 

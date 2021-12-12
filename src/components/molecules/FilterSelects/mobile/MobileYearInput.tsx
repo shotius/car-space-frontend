@@ -37,6 +37,15 @@ export const MobileYearInput: React.FC<MobileYearInputProps> = ({
     }
   }, [initYearFrom, initYearTo]);
 
+  const handleSelectYearTo = (year: number) => {
+    if (year < parseInt(yearFrom)) {
+      dispatch(selectYearFrom(year));
+      dispatch(selectYearTo(year));
+    } else {
+      dispatch();
+    }
+  };
+
   return (
     <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
       <InputRegular
@@ -48,9 +57,11 @@ export const MobileYearInput: React.FC<MobileYearInputProps> = ({
         onFocus={() => setKeyboardActive(true)}
         onBlur={() => {
           setKeyboardActive(false);
-          yearFrom
-            ? dispatch(selectYearFrom(parseInt(yearFrom)))
-            : dispatch(selectYearFrom(0));
+          // if yea from is more then year to make year to equal to year from
+          if (parseInt(yearFrom) >= (parseInt(yearTo) || 0)) {
+            dispatch(selectYearTo(parseInt(yearFrom)));
+          }
+          dispatch(selectYearFrom(parseInt(yearFrom)));
         }}
       />
       <DividerVertical height="30px" />
@@ -62,7 +73,11 @@ export const MobileYearInput: React.FC<MobileYearInputProps> = ({
         onFocus={() => setKeyboardActive(true)}
         onBlur={() => {
           setKeyboardActive(false);
-          yearTo ? dispatch(selectYearTo(parseInt(yearTo))) : dispatch(selectYearFrom(0));
+          // if year to is less then year from, move year from down to equel year to
+          (parseInt(yearTo)) <= parseInt(yearFrom) &&
+            dispatch(selectYearFrom(parseInt(yearTo)));
+          // assign "0" if yearTo is null
+          dispatch(selectYearTo(parseInt(yearTo) || 0));
         }}
       />
     </HStack>

@@ -1,8 +1,8 @@
 import { FilterQueries } from 'src/constants';
-import { getCars } from 'src/redux/features/auth/carsSlice';
+import { getDealerCars } from 'src/redux/features/auth/carsSlice';
 import {
   setCatalogQuery,
-  setNetworkError,
+  setNetworkError
 } from 'src/redux/features/global/gloabalSlice';
 import { deleteQueryFromURL } from '../functions/deleteQueryFromUrl';
 
@@ -158,7 +158,7 @@ export const submitCarSearch = ({ query, dispatch, history, filters }) => {
   query.set('page', '1');
 
   history.push({ pathname: '/catalog', search: query.toString() });
-  dispatch(getCars(query));
+  dispatch(getDealerCars(query));
 
   // save catalog query in redux for caching purpose
   dispatch(setCatalogQuery(query.toString()));
