@@ -9,7 +9,7 @@ interface DealerCardProps {}
 
 export const DealerCard: React.FC<DealerCardProps> = () => {
   return (
-    <Card w="full" p="4" h="auto" className="hoverable">
+    <Card w="full" p="4" h="auto" className="hoverable" cursor="pointer">
       <VStack w="full" spacing="12px">
         <HStack w="full" justify="space-between">
           <HeadingSecondary fontSize="14px" cursor="pointer">

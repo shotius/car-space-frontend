@@ -12,7 +12,7 @@ export const MiniCategory: React.FC<MiniCategoryProps> = () => {
   return (
     <Box w="full">
       <ContainerOuter pl="4">
-        <SectionHeader mainText="Mini Category" />
+        <SectionHeader mainText="Mini Category"/>
       </ContainerOuter>
       <ContainerOuter p="0">
         <ScrollableDiv cardCount={7} pl="4" pr="4">

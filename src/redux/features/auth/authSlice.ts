@@ -36,6 +36,7 @@ export const loginUser = createAsyncThunk(
     try {
       const response: any = await authService.login(credentials);
       if (response.results) {
+        localStorage.setItem('USER_ROLE', response.results.role);
         dispatch(setUsername(response.results.username));
         dispatch(setRole(response.results.role));
         dispatch(setIsAuthenticated(true));
@@ -77,14 +78,14 @@ export const autoLogin = createAsyncThunk(
   'auth/autoLogin',
   async (_, { dispatch }) => {
     try {
-      const result = await authService.autoLogin();
-      if (result && result.isAuthenticated) {
+      const {results} = await authService.autoLogin();
+      if (results && results.isAuthenticated) {
         dispatch(setIsAuthenticated(true));
-        dispatch(setUsername(result.username));
-        dispatch(setRole(result.role));
-        dispatch(setAvatar(result.avatar));
+        dispatch(setUsername(results.username));
+        dispatch(setRole(results.role));
+        dispatch(setAvatar(results.avatar));
       }
-      return result;
+      return results;
     } catch (error) {
       dispatch(setUsername(null));
       dispatch(setRole(null));
@@ -102,9 +103,7 @@ const authSlice = createSlice({
     builder.addCase(loginUser.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      const payload: any = action.payload as any;
-      localStorage.setItem('USER_ROLE', payload.results.role);
+    builder.addCase(loginUser.fulfilled, (state) => {
       state.loginSuccess = true;
       state.loading = false;
     });

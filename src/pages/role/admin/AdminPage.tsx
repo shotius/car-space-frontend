@@ -6,7 +6,7 @@ import {
   HStack,
   Select,
   Textarea,
-  useToast,
+  useToast
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -19,7 +19,7 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { logoutUser } from 'src/redux/features/auth/authSlice';
-import { addDealerCar, getCars } from 'src/redux/features/auth/carsSlice';
+import { addDealerCar, getDealerCars } from 'src/redux/features/auth/carsSlice';
 import { TransmissionEnum } from 'src/redux/features/auth/types';
 import { isApiValidationError } from 'src/utils/functions/typeChecker';
 import { AddCarValues } from '../../../../../server/shared_with_front/types/types-shared';
@@ -80,13 +80,13 @@ export const AdminPage: React.FC<AdminProps> = () => {
                 dispatch(addDealerCar(formdata))
                   .unwrap()
                   .then(() => {
+                    dispatch(getDealerCars(query));
                     toast({
                       title: 'New car edded successfully',
                       position: 'top',
                       status: 'success',
                       duration: 1500,
                     });
-                    dispatch(getCars(query));
                   })
                   .catch((error) => {
                     let message: string = '';

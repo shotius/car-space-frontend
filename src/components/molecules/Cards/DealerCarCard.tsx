@@ -34,22 +34,6 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
         />
         {/* picture swiper */}
         <CarImageCarousel images={car.imgUrls.slice(0, 5)} />
-        {/* <AspectRatio
-            ratio={[311 / 292, null, null, 231 / 143]}
-            w="full"
-            overflow="hidden"
-            borderRadius="md"
-            maxH={['192px', null, '143px']}
-          >
-            <Image
-              src={`https://${car?.imgT}`}
-              alt="car white"
-              filter="auto"
-              blur={car ? '10px' : 'none'}
-              saturation={0.9}
-              h="192px"
-            />
-          </AspectRatio> */}
 
         {/* description */}
         <VStack w="full" divider={<StackDivider />}>

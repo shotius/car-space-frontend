@@ -34,7 +34,7 @@ export const Home: React.FC<HomeProps> = () => {
 
         <VStack w="full">
           <ContainerOuter>
-            <SectionHeader mainText="Catalog"  secondaryText="See all"/>
+            <SectionHeader mainText="Catalog"  secondaryText="See all" to="/catalog"/>
           </ContainerOuter>
           <ContainerOuter pr="-4" mr="-4" ml='-4' pl="0">
             <CarListCarousel car={DamnCard1} />

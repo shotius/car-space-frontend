@@ -1,7 +1,11 @@
 import { ICarCopartModel, IFilters } from './../redux/features/auth/types';
 import { axios } from 'src/utils/axios';
 import { FilterQueries } from 'src/constants';
-import { ApiSuccessResponse, ICarCopart, ICarDealer } from '../../../server/shared_with_front/types/types-shared';
+import {
+  ApiSuccessResponse,
+  ICarCopart,
+  ICarDealer,
+} from '../../../server/shared_with_front/types/types-shared';
 
 const baseURL = '/api/cars';
 
@@ -14,16 +18,18 @@ const getAllBrands = async () => {
   return data;
 };
 
-const getCars = async ({ params }): Promise<{cars: ICarCopart[], pagesTotal: number}> => {
+const getCars = async ({
+  params,
+}): Promise<{ cars: ICarCopart[]; pagesTotal: number }> => {
   const { data } = await axios.get(`${baseURL}`, { params });
-  return data as {cars: ICarCopart[], pagesTotal: number};
+  return data as { cars: ICarCopart[]; pagesTotal: number };
 };
 
 const getDealerCars = async (params: URLSearchParams) => {
-  const {data} = await axios.get(`/api/dealers/cars`, {params})
-  console.log('data received', data)
-  return data as ApiSuccessResponse<{cars: ICarDealer[], pagesTotal: number}>
-}
+  const { data } = await axios.get(`/api/dealers/cars`, { params });
+  console.log('data received', data);
+  return data as ApiSuccessResponse<{ cars: ICarDealer[]; pagesTotal: number }>;
+};
 
 const getSingleCar = async (lotNum: number) => {
   const { data } = await axios.get(`${baseURL}/${lotNum}`);
@@ -35,7 +41,6 @@ const getModels = async (brands: string[]) => {
   const { data } = await axios.get(`${baseURL}/models?${queries.join('&')}`);
   return data as ICarCopartModel[];
 };
-
 
 const getFilters = async () => {
   const results = await Promise.allSettled([
@@ -66,19 +71,27 @@ const getFilters = async () => {
   return filters;
 };
 
-const addDealerCar = async (formData:  FormData) => {
-  const {data} = await axios.post('/api/dealers/cars', formData) 
-  return data as ApiSuccessResponse<ICarDealer>
-}
+const addDealerCar = async (formData: FormData) => {
+  const { data } = await axios.post('/api/dealers/cars', formData);
+  return data as ApiSuccessResponse<ICarDealer[]>;
+};
+
+const removeSingleCar = async (carId: string) => {
+  const { data } = await axios.delete('/api/dealers/cars', {
+    data: { id: carId },
+  });
+  return data as ApiSuccessResponse<string>
+};
 
 const carsService = {
-  addDealerCar, 
+  removeSingleCar, 
+  addDealerCar,
   searchCars,
   getAllBrands,
   getCars,
   getModels,
   getSingleCar,
   getFilters,
-  getDealerCars
+  getDealerCars,
 };
 export default carsService;

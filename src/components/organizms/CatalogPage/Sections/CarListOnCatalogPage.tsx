@@ -72,8 +72,6 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   // when page number changes, get cars and scroll to top and save active page in redux
   useEffect(() => {
     if (catalogQuery !== query.toString()) {
-      console.log('back on catalog', catalogQuery, query.toString());
-      console.log('query', query.toString());
       dispatch(getDealerCars(query));
       dispatch(setActivePage(query.get('page')));
       // browser back button scrolls to the bottom, this line will scroll to the top

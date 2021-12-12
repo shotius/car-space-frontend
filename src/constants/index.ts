@@ -13,7 +13,6 @@ export const MOBILE_SCREEN_SIZE = 480;
 // export const MOBILE_SCREEN_SIZE = 766
 export const TABLET_SCREEN_SIZE = 1135;
 
-
 /** Queries */
 export enum FilterQueries {
   BRAND = 'brand',

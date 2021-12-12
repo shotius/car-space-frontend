@@ -2,7 +2,7 @@ import { Suspense, useEffect } from 'react';
 import { Route, RouteProps, useHistory } from 'react-router-dom';
 import ErrorBoundary from 'src/components/molecules/Errors/ErrorBoundary';
 import { useAppSelector } from 'src/redux/app/hook';
-import { Roles } from '../../../../server/shared_with_front/types/types-shared';
+import { Roles } from '../../../../server/shared_with_front/contants';
 
 interface PrivateRouteProps {
   component: React.FC;

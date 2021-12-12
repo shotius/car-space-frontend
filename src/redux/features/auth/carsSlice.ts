@@ -4,7 +4,7 @@ import carsService from 'src/services/carsService';
 import {
   ApiValidationError,
   ICarCopart,
-  ICarDealer
+  ICarDealer,
 } from '../../../../../server/shared_with_front/types/types-shared';
 import { setNetworkError } from '../global/gloabalSlice';
 import { isApiValidationError } from './../../../utils/functions/typeChecker';
@@ -22,7 +22,7 @@ const initialState: CarsSliceState = {
   errorFetchingSingleCar: undefined,
 
   // dealer cars
-  addingDealerCar: false, 
+  addingDealerCar: false,
 
   // filters
   brands: [],
@@ -153,12 +153,12 @@ export const getSingleCarAsync = createAsyncThunk<
 });
 
 /**
- * Function adds new dealer car 
+ * Function adds new dealer car
  * @param formData
  * @returns newly created car or rejected error
  */
 export const addDealerCar = createAsyncThunk<
-  ICarDealer,
+  ICarDealer[],
   FormData,
   {
     rejectValue: string | ApiValidationError;
@@ -176,6 +176,19 @@ export const addDealerCar = createAsyncThunk<
     return rejectWithValue('Something wrong happend ;(');
   }
 });
+
+/**
+ * FUnction removes car from db
+ * @param id: car id
+ * @returns boolean or throws an error
+ */
+export const removeSingleCar = createAsyncThunk<boolean, string>(
+  'cars/removeSingleCar',
+  async (id: string) => {
+    await carsService.removeSingleCar(id);
+    return true;
+  }
+);
 
 /** Main reducer */
 const carsSlice = createSlice({
@@ -259,17 +272,16 @@ const carsSlice = createSlice({
     });
 
     /** Add new dealer car */
-    builder.addCase(addDealerCar.pending, (state)=> {
-      state.addingDealerCar = true
+    builder.addCase(addDealerCar.pending, (state) => {
+      state.addingDealerCar = true;
     });
-    builder.addCase(addDealerCar.fulfilled, (state) => {
-      state.addingDealerCar = false
-    })
+    builder.addCase(addDealerCar.fulfilled, (state, action) => {
+      state.dealerCars = action.payload;
+      state.addingDealerCar = false;
+    });
     builder.addCase(addDealerCar.rejected, (state) => {
-      state.addingDealerCar = false
-    })
-
-    
+      state.addingDealerCar = false;
+    });
   },
 });
 
