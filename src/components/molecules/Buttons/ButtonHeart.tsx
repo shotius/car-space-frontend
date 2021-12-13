@@ -33,7 +33,6 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
   const { isDesktop } = useDetectScreen();
   const toast = useToast();
 
-  console.log('favourite cars ids', favouriteCarIds)
   useEffect(() => {
     if (favouriteCarIds?.length && favouriteCarIds.includes(carId)) {
       setLiked(true);

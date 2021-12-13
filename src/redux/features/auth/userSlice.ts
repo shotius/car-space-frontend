@@ -4,7 +4,7 @@ import userServices from 'src/services/userServices';
 import {
   ICarDealer,
   IUser,
-  RoleTypes
+  RoleTypes,
 } from '../../../../../server/shared_with_front/types/types-shared';
 import { isApiDefaultError } from './../../../utils/functions/typeChecker';
 import { UsertInfoState } from './types';
@@ -41,13 +41,14 @@ export const likeCarThunk = createAsyncThunk<
   return rejectWithValue('Could not like a car ;(');
 });
 
-export const getAllFavouriteLotNumbersThunk = createAsyncThunk<
+export const getFavouriteCarIds = createAsyncThunk<
   string[],
-  any, 
+  any,
   { rejectValue: string }
 >('user/getFavourites', async (_, { rejectWithValue }) => {
   try {
     const { results } = await userServices.getAllLikedCars();
+    console.log('result of ids: ', results)
     return results;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -55,7 +56,7 @@ export const getAllFavouriteLotNumbersThunk = createAsyncThunk<
         return rejectWithValue('Could on');
       }
     }
-    return rejectWithValue('COuld not get favourite car ids')
+    return rejectWithValue('COuld not get favourite car ids');
   }
 });
 
@@ -120,12 +121,9 @@ const userInfoSlice = createSlice({
   },
   extraReducers: (builder) => {
     // get all favourite lot numbers
-    builder.addCase(
-      getAllFavouriteLotNumbersThunk.fulfilled,
-      (state, action: PayloadAction<string[]>) => {
-        state.favouriteCarIds = action.payload;
-      }
-    );
+    builder.addCase(getFavouriteCarIds.fulfilled, (state, action) => {
+      state.favouriteCarIds = action.payload;
+    });
 
     // get favourite cars
     builder.addCase(getAllFavouriteCarsThunk.pending, (state) => {
@@ -149,17 +147,19 @@ const userInfoSlice = createSlice({
       state.avatar = action.payload;
     });
 
-    // like a car 
+    // like a car
     builder.addCase(likeCarThunk.pending, (state) => {
-      state.likingCar = true
-    })
+      state.likingCar = true;
+    });
     builder.addCase(likeCarThunk.fulfilled, (state, action) => {
-      state.likingCar = false
-      state.favouriteCarIds = action.payload.favourites.map(id => id.toString())
-    })
+      state.likingCar = false;
+      state.favouriteCarIds = action.payload.favourites.map((id) =>
+        id.toString()
+      );
+    });
     builder.addCase(likeCarThunk.rejected, (state) => {
-      state.likingCar = false
-    })
+      state.likingCar = false;
+    });
   },
 });
 

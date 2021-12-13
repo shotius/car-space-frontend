@@ -136,7 +136,7 @@ export interface UsertInfoState {
   role: RoleTypes | null;
   isAuthenticated: boolean;
   username: string | null;
-  favouriteCarIds?: string[];
+  favouriteCarIds: string[];
   avatar?: string;
 
   favouriteCars: ICarDealer[];
