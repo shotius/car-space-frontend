@@ -106,7 +106,7 @@ export const CarCardHeading: React.FC<CarCardHeadingProps> = ({
           }}
         />
       ) : (
-        <ButtonHeart h="40px" w="36px" boxSize={5} lotNumber={id} />
+        <ButtonHeart h="40px" w="36px" boxSize={5} carId={id} />
       )}
     </HStack>
   );

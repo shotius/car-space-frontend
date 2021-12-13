@@ -12,8 +12,8 @@ export const FavouritesTemplate: React.FC<FavouritesProps> = ({}) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-      dispatch(getAllFavouriteCarsThunk());
-      dispatch(getAllFavouriteLotNumbersThunk())
+      dispatch(getAllFavouriteCarsThunk(''));
+      dispatch(getAllFavouriteLotNumbersThunk(''))
   }, []);
 
 

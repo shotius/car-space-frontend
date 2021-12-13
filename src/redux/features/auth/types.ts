@@ -2,7 +2,7 @@ import {
   ICarCopart,
   ICarDealer,
   RoleTypes,
-  SelectedCarModel,
+  SelectedCarModel
 } from '../../../../../server/shared_with_front/types/types-shared';
 import { CurrencyType, Languages } from './../../../constants/index';
 
@@ -132,15 +132,17 @@ export interface GlobalStateSliceState {
 
 //** User slice */
 
-export interface IUser {
+export interface UsertInfoState {
   role: RoleTypes | null;
   isAuthenticated: boolean;
   username: string | null;
-  favouriteLotNumbers?: string[];
+  favouriteCarIds?: string[];
   avatar?: string;
 
-  favouriteCars: ICarCopart[];
+  favouriteCars: ICarDealer[];
   favouriteCarsFetching: boolean;
   favouriteCarsFetchSuccess: boolean;
   favouriteCarsFetchError: string | null;
+
+  likingCar: boolean;
 }

@@ -65,7 +65,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   // If Authenticated get All favourite cars
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(getAllFavouriteLotNumbersThunk());
+      dispatch(getAllFavouriteLotNumbersThunk);
     }
   }, [isAuthenticated]);
 

@@ -37,15 +37,6 @@ export const MobileYearInput: React.FC<MobileYearInputProps> = ({
     }
   }, [initYearFrom, initYearTo]);
 
-  const handleSelectYearTo = (year: number) => {
-    if (year < parseInt(yearFrom)) {
-      dispatch(selectYearFrom(year));
-      dispatch(selectYearTo(year));
-    } else {
-      dispatch();
-    }
-  };
-
   return (
     <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
       <InputRegular

@@ -24,7 +24,7 @@ export const UserFavouritesDesktop: React.FC<UserFavouritesDesktopProps> =
             </HeadingSecondary>
           ) : (
             favouriteCars.map((car) => (
-              <UserFavouritesCardDesktop key={car.lN} car={car} />
+              <UserFavouritesCardDesktop key={car.id} car={car} />
             ))
           )}
         </VStack>

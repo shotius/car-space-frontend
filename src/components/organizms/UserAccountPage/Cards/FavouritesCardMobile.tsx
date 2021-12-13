@@ -1,10 +1,6 @@
 import {
-  VStack,
-  SimpleGrid,
-  AspectRatio,
-  StackDivider,
-  HStack,
-  Image,
+  AspectRatio, HStack,
+  Image, SimpleGrid, StackDivider, VStack
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
@@ -15,22 +11,22 @@ import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
 import { capitalize } from 'src/utils/functions/capitalize';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
-import { ICarCopart } from '../../../../../../server/shared_with_front/types/types-shared';
+import { ICarDealer } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface FavouritesCardProps {
-  car: ICarCopart;
+  car: ICarDealer;
 }
 
 export const UserFavouritesCardMobile: React.FC<FavouritesCardProps> = ({
   car,
 }) => {
-  const images = car.imgsM;
+  const images = car.imgUrls;
   const history = useHistory();
   return (
     <Card
       w="full"
       p="4"
-      onClick={() => history.push(`/catalog/car/${car?.lN}`)}
+      onClick={() => history.push(`/catalog/car/${car.id}`)}
     >
       <VStack spacing="4">
         {/* Heading  */}
@@ -86,7 +82,7 @@ export const UserFavouritesCardMobile: React.FC<FavouritesCardProps> = ({
           <HStack w="full" justify="space-between">
             <TextSecondary>Mileage</TextSecondary>
             <HeadingSecondary>
-              {car.od ? toTrippleNumber(parseInt(car.od)) : <NotSpecified />}
+              {car.od ? toTrippleNumber(car.od) : <NotSpecified />}
             </HeadingSecondary>
           </HStack>
           <HStack w="full" justify="space-between">
@@ -98,14 +94,14 @@ export const UserFavouritesCardMobile: React.FC<FavouritesCardProps> = ({
           <HStack w="full" justify="space-between">
             <TextSecondary>Engine</TextSecondary>
             <HeadingSecondary>
-              {car.eng ? capitalize(car.eng) : <NotSpecified />}
+              {car.eng ? capitalize(car.eng.toString()) : <NotSpecified />}
             </HeadingSecondary>
           </HStack>
           <HStack w="full" justify="space-between">
             <TextSecondary>Esimate Price</TextSecondary>
             <HeadingSecondary>
-              {car.eRV ? (
-                <>$ {toTrippleNumber(parseInt(car.eRV))}</>
+              {car.price ? (
+                <>$ {toTrippleNumber(car.price)}</>
               ) : (
                 <NotSpecified />
               )}

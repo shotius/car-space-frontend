@@ -7,40 +7,41 @@ import { Card } from 'src/components/molecules/Cards/Card';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
 import { capitalize } from 'src/utils/functions/capitalize';
-import { ICarCopart } from '../../../../../../server/shared_with_front/types/types-shared';
+import { ICarDealer } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface FavouritesCardDesktopProps {
-  car: ICarCopart;
+  car: ICarDealer;
 }
 
 export const UserFavouritesCardDesktop: React.FC<FavouritesCardDesktopProps> =
   ({ car }) => {
     const history = useHistory();
-    
+
     return (
       <Card
         bg="autoGrey.500"
         w="full"
         p="0"
         cursor="pointer"
-        onClick={() => history.push(`/catalog/car/${car?.lN}`)}
+        onClick={() => history.push(`/catalog/car/${car.id}`)}
       >
         <HStack w="full" justify="space-between" p="16px">
           <HStack spacing="4" minW="220px">
             <AspectRatio ratio={78 / 66} minW="78px">
-              <Image src={`https://${car?.imgT}`} borderRadius="8px" />
+              <Image src={car?.imgUrls[0]} borderRadius="8px" />
             </AspectRatio>
             <VStack align="flex-start">
               <TextSecondary>Name</TextSecondary>
               <HeadingSecondary fontSize="16px">
-                {capitalize(car.m)} {capitalize(car.mG)}
+                {car.m ? capitalize(car.m) : <NotSpecified />}{' '}
+                {car.mG ? capitalize(car.mG) : <NotSpecified />}
               </HeadingSecondary>
             </VStack>
           </HStack>
           <VStack align="flex-start" w="full" maxW="80px">
             <TextSecondary>Year</TextSecondary>
             <HeadingSecondary fontSize="16px">
-              {car.y ? <>{capitalize(car.y)}</> : <NotSpecified />}
+              {car.y || <NotSpecified />}
             </HeadingSecondary>
           </VStack>
           <VStack align="flex-start" w="full">
@@ -61,7 +62,7 @@ export const UserFavouritesCardDesktop: React.FC<FavouritesCardDesktopProps> =
               {car.eng || <NotSpecified />}
             </HeadingSecondary>
           </VStack>
-          <ButtonHeart lotNumber={car.lN} h="46px" w="45px" />
+          <ButtonHeart carId={car.id} h="46px" w="45px" />
         </HStack>
       </Card>
     );

@@ -11,7 +11,7 @@ export const UserFavouritesMobile: React.FC<UserProfileFavourites_MobileProps> =
     return (
       <CatalogListWrap pt="48px">
         {favouriteCars.map((car) => (
-          <UserFavouritesCardMobile key={car.lN} car={car} />
+          <UserFavouritesCardMobile key={car.id} car={car} />
         ))}
       </CatalogListWrap>
     );
