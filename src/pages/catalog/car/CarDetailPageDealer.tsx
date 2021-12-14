@@ -8,7 +8,7 @@ import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/Ca
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamnCard1 } from 'src/DamnCard';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import {  getSingleDealerCar } from 'src/redux/features/auth/carsSlice';
+import {  getSingleDealerCarThunk } from 'src/redux/features/auth/carsSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 
@@ -29,7 +29,7 @@ export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
     if (carInCache) {
       setCar(carInCache);
     } else {
-      dispatch(getSingleDealerCar(carId))
+      dispatch(getSingleDealerCarThunk(carId))
         .unwrap()
         .then((data) => setCar(data));
     }

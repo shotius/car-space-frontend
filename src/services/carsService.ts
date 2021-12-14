@@ -75,7 +75,7 @@ const addDealerCar = async (formData: FormData) => {
   return data as ApiSuccessResponse<ICarDealer[]>;
 };
 
-const getSingleDealerCar = async (carId: string) => {
+const getSingleDealerCarThunk = async (carId: string) => {
   const {data} = await axios.get(`/api/dealers/cars/${carId}`)
   return data as ApiSuccessResponse<ICarDealer>
 }
@@ -97,6 +97,6 @@ const carsService = {
   getSingleCar,
   getFilters,
   getDealerCars,
-  getSingleDealerCar
+  getSingleDealerCarThunk
 };
 export default carsService;

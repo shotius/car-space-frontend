@@ -153,13 +153,13 @@ export const getSingleCarAsync = createAsyncThunk<
   }
 });
 
-export const getSingleDealerCar = createAsyncThunk<
+export const getSingleDealerCarThunk = createAsyncThunk<
   ICarDealer,
   string,
   { rejectValue: string }
->('getSingleCar', async (carId: string, { rejectWithValue }) => {
+>('cars/getSingleDealerCar', async (carId: string, { rejectWithValue }) => {
   try {
-    const { results } = await carsService.getSingleDealerCar(carId);
+    const { results } = await carsService.getSingleDealerCarThunk(carId);
     return results;
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
@@ -302,16 +302,17 @@ const carsSlice = createSlice({
     });
 
     // --Dealer car
-    // builder.addCase(getSingleDealerCar.pending, (state) => {
-    //   state.fetchingDealerCar = true;
-    // });
-    // builder.addCase(getSingleDealerCar.fulfilled, (state, action) => {
-    //   state.fetchingDealerCar = false;
-    //   state.dealerCars = state.dealerCars.concat(action.payload);
-    // });
-    // builder.addCase(getSingleDealerCar.rejected, (state) => {
-    //   state.fetchingDealerCar = false;
-    // });
+
+    builder.addCase(getSingleDealerCarThunk.pending, (state) => {
+      state.fetchingDealerCar = true;
+    });    
+    builder.addCase(getSingleDealerCarThunk.fulfilled, (state, action) => {
+      state.fetchingDealerCar = false;
+      state.dealerCars = state.dealerCars.concat(action.payload);
+    });
+    builder.addCase(getSingleDealerCarThunk.rejected, (state) => {
+      state.fetchingDealerCar = false;
+    });
   },
 });
 
