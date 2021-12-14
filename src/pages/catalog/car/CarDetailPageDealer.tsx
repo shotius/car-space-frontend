@@ -8,7 +8,8 @@ import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/Ca
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamnCard1 } from 'src/DamnCard';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import {  getSingleDealerCarThunk } from 'src/redux/features/auth/carsSlice';
+import { getSingleDealerCarThunk } from 'src/redux/features/auth/carsSlice';
+import { getFavouriteCarIds } from 'src/redux/features/auth/userSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 
@@ -24,6 +25,7 @@ export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
   const { isDesktop } = useDetectScreen();
 
   useEffect(() => {
+    dispatch(getFavouriteCarIds(''))    
     const carInCache = cars.find((car) => car.id === carId);
     // if car is not in the cache fetch it
     if (carInCache) {

@@ -16,7 +16,7 @@ export const CarDescriptionHeader: React.FC<CarDescriptionHeaderProps> = ({
     <HStack w="full" justify="space-between">
       <VStack spacing="0" alignItems="flex-start">
         <Heading fontSize="20px" lineHeight="26px" fontWeight="light">
-          {carInfo?.y || <NotSpecified children=""/>} {carInfo?.m} {carInfo?.mG}
+          {carInfo?.y || ''} {carInfo?.m} {carInfo?.mG}
         </Heading>
         <HStack>
           <TextRegular opacity="0.5">Lot #</TextRegular>
