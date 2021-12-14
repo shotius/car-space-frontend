@@ -5,7 +5,7 @@ import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecon
 import { CarDeailsCard } from 'src/components/organizms/CarDeatailPage/Cards/CarDeailsCard';
 import { CarTrasportationInfo } from 'src/components/organizms/CarDeatailPage/Cards/CarTrasportationInfo';
 import { useAppSelector } from 'src/redux/app/hook';
-import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
+import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 import { ContainerOuter } from '../../atoms/Containers/ContainerOuter';
 import { BidInfoCard } from '../../molecules/Cards/BidInfoCard';
 import { TextRegular } from '../../molecules/Texts/TextRegular';
@@ -14,15 +14,11 @@ import { CarDetailSliderMobile } from '../../organizms/CarDeatailPage/Carousels/
 import { CarDescriptionHeader } from '../../organizms/MiniHeaders/CarDescriptionHeader';
 
 interface CarDetailPageMobileProps {
-  car: ICarCopart;
-  thumbs: string[];
-  images: string[];
+  car: ICarDealer;
 }
 
 export const CarDetailPageMobile: React.FC<CarDetailPageMobileProps> = ({
   car,
-  images,
-  thumbs,
 }) => {
   const { fetchingMediums, fetchingThumbs } = useAppSelector(
     (state) => state.carImages
@@ -42,14 +38,14 @@ export const CarDetailPageMobile: React.FC<CarDetailPageMobileProps> = ({
           </>
         ) : (
           <>
-            {!(thumbs.length && images.length) ? (
+            {!car.imgUrls.length ? (
               <AspectRatio ratio={3 / 2} width="full">
                 <Box bg="autoGrey.400">
                   <HeadingSecondary>No photos available</HeadingSecondary>
                 </Box>
               </AspectRatio>
             ) : (
-              <CarDetailSliderMobile thumbs={thumbs} images={images} />
+              <CarDetailSliderMobile images={car.imgUrls} />
             )}
           </>
         )}

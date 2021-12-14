@@ -1,6 +1,5 @@
-import { AspectRatio, Box, VStack } from '@chakra-ui/layout';
-import { Flex, Spacer, Spinner } from '@chakra-ui/react';
-import { useParams } from 'react-router';
+import { AspectRatio, VStack } from '@chakra-ui/layout';
+import { Flex, Spacer } from '@chakra-ui/react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BidInfoCard } from 'src/components/molecules/Cards/BidInfoCard';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
@@ -10,25 +9,15 @@ import { CarInfoCard } from 'src/components/organizms/CarDeatailPage/Cards/CarIn
 import { CarTransportationCard } from 'src/components/organizms/CarDeatailPage/Cards/CarTransportationCard';
 import { CarDetailSlider } from 'src/components/organizms/CarDeatailPage/Carousels/CarDetailSlider';
 import { CarDescriptionHeader } from 'src/components/organizms/MiniHeaders/CarDescriptionHeader';
-import { useAppSelector } from 'src/redux/app/hook';
-import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
+import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface CarDetailPageDesktopProps {
-  car: ICarCopart;
-  thumbs: string[];
-  images: string[];
+  car: ICarDealer;
 }
 
 export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
   car,
-  thumbs,
-  images,
 }) => {
-  const { fetchingMediums, fetchingThumbs } = useAppSelector(
-    (state) => state.carImages
-  );
-  const { lotNumber } = useParams<{ lotNumber: string }>();
-
   return (
     <ContainerOuter>
       <Flex
@@ -39,28 +28,15 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
       >
         <VStack spacing="49px" w="579px">
           {/* If there are not images show fallback, if feching images show spinner */}
-          {fetchingMediums[lotNumber] || fetchingThumbs[lotNumber] ? (
-            <>
+            {!car.imgUrls.length ? (
               <AspectRatio ratio={579 / 364} width="579px">
-                <Box bg="autoGrey.400" borderRadius="8px">
-                  <Spinner />
-                </Box>
+                <VStack bg="autoGrey.400" borderRadius="8px">
+                  <HeadingSecondary>No photos available</HeadingSecondary>
+                </VStack>
               </AspectRatio>
-            </>
-          ) : (
-            <>
-              {!thumbs.length || !images.length ? (
-                <AspectRatio ratio={579 / 364} width="579px">
-                  <VStack bg="autoGrey.400" borderRadius="8px">
-                    <HeadingSecondary>No photos available</HeadingSecondary>
-                  </VStack>
-                </AspectRatio>
-              ) : (
-                <CarDetailSlider thumbs={thumbs} images={images} />
-              )}
-            </>
-          )}
-
+            ) : (
+              <CarDetailSlider images={car.imgUrls} />
+            )}
           <CarInfoCard car={car} />
           <CarTransportationCard />
           <CarDeailsCard variant="desktop" car={car} />
@@ -73,7 +49,7 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> = ({
             spacing="32px"
             alignItems="flex-start"
             position="sticky"
-            top='90px'
+            top="90px"
           >
             <BidInfoCard car={car} />
             <CalculatorDesktop children size="regular" />

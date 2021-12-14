@@ -1,14 +1,14 @@
-import { VStack, StackDivider, HStack } from '@chakra-ui/layout';
+import { HStack, StackDivider, VStack } from '@chakra-ui/layout';
 import { capitalize } from 'src/utils/functions/capitalize';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
-import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
+import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { NotSpecified } from '../Texts/NotSpecified';
 import { TextRegular } from '../Texts/TextRegular';
 
 interface CarSpecTableProps {
-  car: ICarCopart;
+  car: ICarDealer;
 }
 
 export const CarSpecTable: React.FC<CarSpecTableProps> = ({ car }) => {
@@ -16,7 +16,10 @@ export const CarSpecTable: React.FC<CarSpecTableProps> = ({ car }) => {
     <VStack divider={<StackDivider />} w="full" spacing="2.5">
       <HStack w="full" justify="space-between">
         <TextRegular opacity="0.5">VIN number</TextRegular>
-        <HeadingSecondary>{car.lN || <NotSpecified />}</HeadingSecondary>
+        <HeadingSecondary>
+          {' '}
+          <NotSpecified />
+        </HeadingSecondary>
       </HStack>
       <HStack w="full" justify="space-between">
         <TextRegular opacity="0.5">Manufacturer</TextRegular>
@@ -53,11 +56,7 @@ export const CarSpecTable: React.FC<CarSpecTableProps> = ({ car }) => {
       <HStack w="full" justify="space-between">
         <TextRegular opacity="0.5">page</TextRegular>
         <HeadingSecondary>
-          {car.od ? (
-            <>{toTrippleNumber(parseInt(car.od))} km</>
-          ) : (
-            <NotSpecified />
-          )}
+          {car.od ? <>{toTrippleNumber(car.od)} km</> : <NotSpecified />}
         </HeadingSecondary>
       </HStack>
       <HStack w="full" justify="space-between">
@@ -89,12 +88,12 @@ export const CarSpecTable: React.FC<CarSpecTableProps> = ({ car }) => {
       <HStack w="full" justify="space-between">
         <TextRegular opacity="0.5">Highlights:</TextRegular>
         <HeadingSecondary>
-          {car.rd ? (
+          {car.dr ? (
             <>
-              {car.rd === 'DEFAULT' ? (
+              {car.dr === 'DEFAULT' ? (
                 'Run and Drive'
               ) : (
-                <>{capitalizeEach(car.rd)}</>
+                <>{capitalizeEach(car.dr)}</>
               )}
             </>
           ) : (

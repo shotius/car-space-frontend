@@ -8,69 +8,42 @@ import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/Ca
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamnCard1 } from 'src/DamnCard';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import {
-  getImagesMediumThunk,
-  getThumbs,
-} from 'src/redux/features/auth/carImagesSlice';
-import { getSingleCarAsync } from 'src/redux/features/auth/carsSlice';
+import {  getSingleDealerCar } from 'src/redux/features/auth/carsSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
+import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface CardDetailPageProps {}
 
 export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
-  const [carInfo, setCarInfo] = useState<ICarCopart>();
-  const [thumbs, setThumbs] = useState<string[]>([]);
-  const [images, setImages] = useState<string[]>([]);
+  const [car, setCar] = useState<ICarDealer>();
 
-  const { cars } = useAppSelector((state) => state.carsReducer);
-  const { thumbImages, mediumImages } = useAppSelector(
-    (state) => state.carImages
-  );
+  const { dealerCars: cars } = useAppSelector((state) => state.carsReducer);
   const dispatch = useAppDispatch();
 
-  const { lotNumber } = useParams<{ lotNumber: string }>();
+  const { carId } = useParams<{ carId: string }>();
   const { isDesktop } = useDetectScreen();
 
   useEffect(() => {
-    // if Images are not in the cache fethc them
-    if (!mediumImages[lotNumber]) {
-      dispatch(getImagesMediumThunk(parseInt(lotNumber)))
-        .unwrap()
-        .then((data) => setImages(data));
-    } else {
-      setImages(mediumImages[lotNumber]);
-    }
-
-    // if thumbs are not in the cache fetch them
-    if (!thumbImages[lotNumber]) {
-      dispatch(getThumbs(parseInt(lotNumber)))
-        .unwrap()
-        .then((data) => setThumbs(data));
-    } else {
-      setThumbs(thumbImages[lotNumber]);
-    }
-
-    const carInCache = cars.find((car) => car.lN === lotNumber);
+    const carInCache = cars.find((car) => car.id === carId);
     // if car is not in the cache fetch it
     if (carInCache) {
-      setCarInfo(carInCache);
+      setCar(carInCache);
     } else {
-      dispatch(getSingleCarAsync(Number(lotNumber)))
+      dispatch(getSingleDealerCar(carId))
         .unwrap()
-        .then((data) => setCarInfo(data));
+        .then((data) => setCar(data));
     }
   }, []);
 
-  if (!carInfo) {
+  if (!car) {
     return <>...loading car info</>;
   }
   return (
     <PublicLayout>
       {isDesktop ? (
-        <CarDetailPageDesktop car={carInfo} thumbs={thumbs} images={images} />
+        <CarDetailPageDesktop car={car} />
       ) : (
-        <CarDetailPageMobile car={carInfo} thumbs={thumbs} images={images} />
+        <CarDetailPageMobile car={car} />
       )}
 
       {/* similar vehicles*/}

@@ -1,8 +1,6 @@
 import { AspectRatio, Box, Center, Image, Spinner } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useParams } from 'react-router';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { useAppSelector } from 'src/redux/app/hook';
 // import Swiper core and required modules
 import SwiperCore, { FreeMode, Navigation, Thumbs } from 'swiper';
 // Import Swiper styles
@@ -19,19 +17,12 @@ SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
 interface CarDetailSliderProps {
   images: string[];
-  thumbs: string[];
 }
 
 export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({
-  thumbs,
   images,
 }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
-  const { fetchingThumbs, fetchingMediums } = useAppSelector(
-    (state) => state.carImages
-  );
-  const { lotNumber } = useParams<{ lotNumber: string }>();
-
   const fallbackArray = Array(5).fill(0);
 
   return (
@@ -42,7 +33,7 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({
           thumbs={{ swiper: thumbsSwiper }}
           className="mySwiper2"
         >
-          {fetchingMediums[lotNumber] ? (
+          {!images.length ? (
             <>
               {fallbackArray.map((img) => (
                 <SwiperSlide key={img}>
@@ -114,7 +105,7 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({
           watchSlidesProgress={true}
         >
           {/* if fetching thubnneils falback will be shown  */}
-          {fetchingThumbs[lotNumber] ? (
+          {!images.length ? (
             <>
               {Array(5)
                 .fill(0)
@@ -130,7 +121,7 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({
             </>
           ) : (
             <>
-              {thumbs.slice(0, thumbs.length - 1).map((thumb) => (
+              {images.slice(0, images.length - 1).map((thumb) => (
                 <SwiperSlide key={thumb}>
                   <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
                     <Image src={thumb} borderRadius="8px" width="88px" />
@@ -142,7 +133,7 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({
                 <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
                   <Box borderRadius="8px">
                     <Image
-                      src={thumbs[thumbs.length - 1]}
+                      src={images[images.length - 1]}
                       width="full"
                       h="full"
                     />

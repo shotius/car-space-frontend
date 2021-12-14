@@ -3,14 +3,12 @@ import { useParams } from 'react-router-dom';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarousel/CarListCarousel';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
-import { CarDetailPageDesktop } from 'src/components/templates/CarDeatailsPage/CarDetailPageDesktop';
-import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/CarDetailPageMobile';
 import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamnCard1 } from 'src/DamnCard';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   getImagesMediumThunk,
-  getThumbs,
+  getThumbs
 } from 'src/redux/features/auth/carImagesSlice';
 import { getSingleCarAsync } from 'src/redux/features/auth/carsSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
@@ -20,8 +18,8 @@ interface CardDetailPageProps {}
 
 export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
   const [carInfo, setCarInfo] = useState<ICarCopart>();
-  const [thumbs, setThumbs] = useState<string[]>([]);
-  const [images, setImages] = useState<string[]>([]);
+  const [_thumbs, setThumbs] = useState<string[]>([]);
+  const [_images, setImages] = useState<string[]>([]);
 
   const { cars } = useAppSelector((state) => state.carsReducer);
   const { thumbImages, mediumImages } = useAppSelector(
@@ -68,9 +66,11 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
   return (
     <PublicLayout>
       {isDesktop ? (
-        <CarDetailPageDesktop car={carInfo} thumbs={thumbs} images={images} />
+        <>cardeatil</>
+        // <CarDetailPageDesktop car={carInfo} thumbs={thumbs} images={images} />
       ) : (
-        <CarDetailPageMobile car={carInfo} thumbs={thumbs} images={images} />
+        // <CarDetailPageMobile car={carInfo} thumbs={thumbs} images={images} />
+        <>cardetail mobile</>
       )}
 
       {/* similar vehicles*/}

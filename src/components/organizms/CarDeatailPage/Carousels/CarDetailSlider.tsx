@@ -17,10 +17,9 @@ SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
 interface Props {
   images: string[];
-  thumbs: string[];
 }
 
-export const CarDetailSlider: React.FC<Props> = ({ thumbs, images }) => {
+export const CarDetailSlider: React.FC<Props> = ({ images }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
 
   return (
@@ -49,7 +48,7 @@ export const CarDetailSlider: React.FC<Props> = ({ thumbs, images }) => {
           watchSlidesProgress={true}
           className="mySwiper"
         >
-          {thumbs.slice(0, thumbs.length - 1).map((thumb) => (
+          {images.slice(0, images.length - 1).map((thumb) => (
             <SwiperSlide key={thumb}>
               <AspectRatio ratio={103 / 70} cursor="pointer" width="103px">
                 <Image src={thumb} borderRadius="8px" width="103px" />
@@ -60,7 +59,7 @@ export const CarDetailSlider: React.FC<Props> = ({ thumbs, images }) => {
           <SwiperSlide style={{ position: 'relative' }}>
             <AspectRatio ratio={103 / 70} cursor="pointer" width="103px">
               <Box borderRadius="8px">
-                <Image src={thumbs[thumbs.length - 1]} width="103px" />
+                <Image src={images[images.length - 1]} width="103px" />
                 <Box
                   position="absolute"
                   top="0"

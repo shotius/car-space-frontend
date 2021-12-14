@@ -31,6 +31,7 @@ export interface CarsSliceState {
   errorFetchingSingleCar: string | undefined;
 
   addingDealerCar: boolean;
+  fetchingDealerCar: boolean;
 
   brands: string[];
   models: ICarCopartModel[];

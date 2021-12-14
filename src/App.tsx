@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom';
 import 'src/App.css';
 import { StyledApp } from 'src/components/organizms/Wrappers/StyledApp';
@@ -12,8 +12,10 @@ import { useAppDispatch } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
+const CarDetailPageDealer = lazy(
+  () => import('./pages/catalog/car/CarDetailPageDealer')
+);
 const UserProfilePage = lazy(() => import('./pages/role/user/UserProfilePage'));
-const CarDetailPage = lazy(() => import('./pages/catalog/car/CarDetailPage'));
 const BlogPage = lazy(() => import('./pages/blogs/BlogPage'));
 const CatalogPage = lazy(() => import('./pages/catalog/CatalogPage'));
 const AdminPage = lazy(() => import('./pages/role/admin/AdminPage'));
@@ -51,16 +53,12 @@ function App() {
           <PublicRoute path="/home" component={Home} />
 
           <PublicRoute path="/blog" component={BlogPage} exact />
-          <PublicRoute
-            path="/blog/:blogId"
-            component={BlogDetailPage}
-            exact
-          />
+          <PublicRoute path="/blog/:blogId" component={BlogDetailPage} exact />
 
           <PublicRoute path="/catalog" component={CatalogPage} exact />
           <PublicRoute
-            path="/catalog/car/:lotNumber"
-            component={CarDetailPage}
+            path="/catalog/car/:carId"
+            component={CarDetailPageDealer}
             exact
           />
 

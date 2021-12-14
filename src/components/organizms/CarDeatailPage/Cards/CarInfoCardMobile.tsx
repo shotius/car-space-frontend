@@ -4,11 +4,10 @@ import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecon
 import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { capitalize } from 'src/utils/functions/capitalize';
-import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
-import { ICarCopart } from '../../../../../../server/shared_with_front/types/types-shared';
+import { ICarDealer } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CarInfoCardMobileProps {
-  car: ICarCopart;
+  car: ICarDealer;
 }
 
 export const CarInfoCardMobile: React.FC<CarInfoCardMobileProps> = ({
@@ -26,13 +25,15 @@ export const CarInfoCardMobile: React.FC<CarInfoCardMobileProps> = ({
         <HStack w="full" justify="space-between">
           <TextRegular opacity="0.5">Secondary damage</TextRegular>
           <HeadingSecondary textAlign="end" w="40%">
-            {car.sDmg ? capitalizeEach(car.sDmg) : <NotSpecified />}
+            {/* {car.sDmg ? capitalizeEach(car.sDmg) : <NotSpecified />} */}
+            <NotSpecified />
           </HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">
           <TextRegular opacity="0.5">Sales Status</TextRegular>
           <HeadingSecondary>
-            {car.sS ? capitalizeEach(car.sS) : <NotSpecified />}
+            {/* {car.sS ? capitalizeEach(car.sS) : <NotSpecified />} */}
+            <NotSpecified />
           </HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">

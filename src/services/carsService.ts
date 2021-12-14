@@ -75,6 +75,11 @@ const addDealerCar = async (formData: FormData) => {
   return data as ApiSuccessResponse<ICarDealer[]>;
 };
 
+const getSingleDealerCar = async (carId: string) => {
+  const {data} = await axios.get(`/api/dealers/cars/${carId}`)
+  return data as ApiSuccessResponse<ICarDealer>
+}
+
 const removeSingleCar = async (carId: string) => {
   const { data } = await axios.delete('/api/dealers/cars', {
     data: { id: carId },
@@ -92,5 +97,6 @@ const carsService = {
   getSingleCar,
   getFilters,
   getDealerCars,
+  getSingleDealerCar
 };
 export default carsService;

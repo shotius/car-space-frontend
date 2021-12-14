@@ -1,13 +1,13 @@
-import { VStack, HStack } from '@chakra-ui/react';
+import { HStack, VStack } from '@chakra-ui/react';
 import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
-import { ICarCopart } from '../../../../../../server/shared_with_front/types/types-shared';
+import { ICarDealer } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CarInfoCardProps {
-  car: ICarCopart;
+  car: ICarDealer;
 }
 
 export const CarInfoCard: React.FC<CarInfoCardProps> = ({ car }) => {
@@ -26,20 +26,6 @@ export const CarInfoCard: React.FC<CarInfoCardProps> = ({ car }) => {
             <HeadingSecondary>
               {car.dmg ? <>{capitalizeEach(car.dmg)}</> : <NotSpecified />}
             </HeadingSecondary>
-          </VStack>
-
-          <VStack w="full" alignItems="flex-start" spacing="4px">
-            <TextRegular opacity="0.5">Secondary damage</TextRegular>
-            <HeadingSecondary>
-              {car.sDmg ? <>{capitalizeEach(car.sDmg)}</> : <NotSpecified />}
-            </HeadingSecondary>
-          </VStack>
-        </HStack>
-
-        <HStack w="full" justify="space-between">
-          <VStack w="full" alignItems="flex-start" spacing="4px">
-            <TextRegular opacity="0.5">Sales Status</TextRegular>
-            <HeadingSecondary>{car.sS || <NotSpecified />}</HeadingSecondary>
           </VStack>
 
           <VStack w="full" alignItems="flex-start" spacing="4px">
