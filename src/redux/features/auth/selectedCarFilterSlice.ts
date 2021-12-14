@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrencyType } from 'src/constants';
-import { SelectedCarModel } from '../../../../../server/shared_with_front/types/types-shared';
-import { Keys, SelectedCarFilters } from './types';
+import { Keys, SelectedCarModel } from '../../../../../server/shared_with_front/types/types-shared';
+import { SelectedCarFilters } from './types';
 
 const initialState: SelectedCarFilters = {
   brands: [],
@@ -78,7 +78,7 @@ const selectedCarFilterSlice = createSlice({
     selectCylinders: (state, action) => {
       state.cylinders = action.payload;
     },
-    selectCarKeys: (state, action: PayloadAction<Keys>) => {
+    selectCarKeys: (state, action: PayloadAction<Keys | null>) => {
       state.keys = action.payload
     }, 
     selectSalesStatus: (state, action: PayloadAction<string[]>) => {

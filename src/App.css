@@ -15,17 +15,17 @@ input[type='radio'] {
   width:16px;
   height:16px;
   border:2px solid #928a8a;
-  border-radius:50%;
+  border-radius:100px;
   outline:none;
 }
 
 input[type='radio']:before {
   content:'';
   display:block;
-  width:66%;
-  height:66%;
-  margin: 18% auto;    
-  border-radius:50%;    
+  width: 8px;
+  margin: 2px auto;    
+  height: 8px;
+  border-radius:100px;    
 }
 
 input[type='radio']:checked:before {

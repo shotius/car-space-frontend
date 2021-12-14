@@ -13,7 +13,6 @@ const likeCar = async (carId: string) => {
 
 const getAllLikedCars = async () => {
   const {data} = await axios.get(`${baseUrl}/favourites/carIds`);
-  console.log('data: ', data)
   return data as ApiSuccessResponse<string[]> ;
 };
 

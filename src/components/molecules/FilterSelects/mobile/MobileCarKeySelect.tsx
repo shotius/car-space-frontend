@@ -3,7 +3,7 @@ import { MobileCarKyesPopup } from 'src/components/molecules/MobileSelectPopups/
 import { MobileSelect } from 'src/components/molecules/Selects/MobileSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectCarKeys } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { HasKeys } from 'src/redux/features/auth/types';
+import { HasKeys } from '../../../../../../server/shared_with_front/contants';
 
 interface MobileCarKeysSelectProps {}
 

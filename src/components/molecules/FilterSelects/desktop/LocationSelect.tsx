@@ -35,7 +35,7 @@ export const LocationSelect: React.FC<LocationSelectProps> = ({}) => {
     <MultiSelect
       size="md"
       selected={selected}
-      label="Location"
+      label="location"
       clearSelected={() => {
         setSelected([]);
         dispatch(selectLocations([]));

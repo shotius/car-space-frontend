@@ -7,8 +7,12 @@ import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { CurrencyType } from 'src/constants';
-import { useAppDispatch } from 'src/redux/app/hook';
-import { selectCurrency, selectPriseFrom, selectPriseTo } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import {
+  selectCurrency,
+  selectPriseFrom,
+  selectPriseTo,
+} from 'src/redux/features/auth/selectedCarFilterSlice';
 import { CurrencySwitcherButtons } from '../../CurrencySwitcherButtons';
 import { InputGrey } from '../../Inputs/InputGrey';
 
@@ -18,25 +22,41 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
   const [currency, setCurrency] = useState<CurrencyType>('GEL');
   const [placeholder, setPlaceholder] = useState<string>('');
-  const [priceFrom, setPriceFrom] = useState<string | undefined>(undefined);
-  const [priceTo, setPriceTo] = useState<string | undefined>(undefined);
+  const [priceFrom, setPriceFrom] = useState<string>('');
+  const [priceTo, setPriceTo] = useState<string>('');
+
+  const { priceFrom: initPriceFrom, priceTo: initPriceTo } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
 
   const dispatch = useAppDispatch();
 
   const detectIcon = () => {
-    switch(currency) {
-      case "GEL": return "₾";
-      case "EUR": return "€";
-      case "USD": return "$";
+    switch (currency) {
+      case 'GEL':
+        return '₾';
+      case 'EUR':
+        return '€';
+      case 'USD':
+        return '$';
     }
-  }
+  };
 
+  // set initial values
+  useEffect(() => {
+    initPriceFrom && setPriceFrom(initPriceFrom);
+    initPriceTo && setPriceTo(initPriceTo);
+  }, [initPriceFrom, initPriceTo]);
 
   // when ever selected value changes, placeholder changes as well
   useEffect(() => {
     if (priceTo && priceFrom) {
-      setPlaceholder(`price: ${detectIcon()} ${priceFrom} - ${priceTo} `);
-    } else {
+      setPlaceholder(` ${detectIcon()} ${priceFrom} - ${priceTo} `);
+    } else if (priceFrom) {
+      setPlaceholder(`from: ${currency} ${priceFrom}`)
+    } else  if (priceTo) {
+      setPlaceholder(`to: ${currency} ${priceTo}`)
+    }else {
       setPlaceholder(`price`);
     }
   }, [priceFrom, priceTo, currency]);
@@ -47,9 +67,9 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);
-          dispatch(selectPriseFrom(priceFrom))
-          dispatch(selectPriseTo(priceTo))
-          dispatch(selectCurrency(currency))
+          dispatch(selectPriseFrom(priceFrom));
+          dispatch(selectPriseTo(priceTo));
+          dispatch(selectCurrency(currency));
         }}
       />
       <SelectContent>
@@ -58,10 +78,10 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
           areOptionsOpen={areOptionsOpen}
           clearCb={(e) => {
             if (e.stopPropagation) e.stopPropagation();
-            dispatch(selectPriseFrom());
-            dispatch(selectPriseTo());
-            setPriceFrom(undefined)
-            setPriceTo(undefined)
+            dispatch(selectPriseFrom(''));
+            dispatch(selectPriseTo(''));
+            setPriceFrom('');
+            setPriceTo('');
             setPlaceholder('Price');
             setAreOptionsOpen(false);
           }}

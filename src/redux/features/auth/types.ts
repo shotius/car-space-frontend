@@ -1,6 +1,7 @@
 import {
   ICarCopart,
   ICarDealer,
+  Keys,
   RoleTypes,
   SelectedCarModel
 } from '../../../../../server/shared_with_front/types/types-shared';
@@ -12,10 +13,6 @@ export enum TransmissionEnum {
   CVT = 'CVT',
 }
 
-export enum HasKeys {
-  YES = 'YES',
-  NO = 'NO',
-}
 
 export interface ICarCopartModel {
   brand: string;
@@ -53,7 +50,6 @@ export type Transmission =
   | TransmissionEnum.AUTOMATIC
   | TransmissionEnum.CVT;
 
-export type Keys = HasKeys.YES | HasKeys.NO;
 
 export interface SelectedCarFilters {
   brands: string[];

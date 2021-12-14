@@ -4,7 +4,8 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectCarKeys
 } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { HasKeys, Keys } from 'src/redux/features/auth/types';
+import { HasKeys } from '../../../../../server/shared_with_front/contants';
+import { Keys } from '../../../../../server/shared_with_front/types/types-shared';
 import { MobileFilterPopup } from '../Popups/MobileFIlterPopup';
 import { TextRegular } from '../Texts/TextRegular';
 

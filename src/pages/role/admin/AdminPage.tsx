@@ -6,7 +6,7 @@ import {
   HStack,
   Select,
   Textarea,
-  useToast
+  useToast,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -22,6 +22,7 @@ import { logoutUser } from 'src/redux/features/auth/authSlice';
 import { addDealerCar, getDealerCars } from 'src/redux/features/auth/carsSlice';
 import { TransmissionEnum } from 'src/redux/features/auth/types';
 import { isApiValidationError } from 'src/utils/functions/typeChecker';
+import { HasKeys } from '../../../../../server/shared_with_front/contants';
 import { AddCarValues } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface AdminProps {}
@@ -46,7 +47,7 @@ export const AdminPage: React.FC<AdminProps> = () => {
     engine: 0,
     transmission: '',
     year: '',
-    hasKeys: '',
+    keys: '',
     fuelType: '',
     color: '',
     price: 0,
@@ -62,7 +63,7 @@ export const AdminPage: React.FC<AdminProps> = () => {
             <Formik
               initialValues={initialValues}
               onSubmit={(values, { setFieldError }) => {
-                const { photos, ...restValues } = values;
+                const { photos, keys, ...restValues } = values;
                 const formdata = new FormData();
                 // append values to formdata
                 for (let key in restValues) {
@@ -75,6 +76,13 @@ export const AdminPage: React.FC<AdminProps> = () => {
                   }
                 }
 
+                if (keys) {
+                  formdata.append('keys', HasKeys.YES);
+                }
+
+                console.log(formdata.get('keys'))
+
+                console.log(restValues);
                 // add new car
                 const query = new URLSearchParams(catalogQuery);
                 dispatch(addDealerCar(formdata))
@@ -166,14 +174,13 @@ export const AdminPage: React.FC<AdminProps> = () => {
                     type="number"
                     value={values.price || ''}
                   />
-                  <Field name="hasKeys">
+                  <Field name="keys">
                     {({ field }) => (
                       <FormControl pt="2">
                         <HStack>
                           <Checkbox
                             colorScheme="autoOrange"
-                            name="hasKeys"
-                            value="YES"
+                            name="kes"
                             {...field}
                           />
                           <TextRegular>Has keys</TextRegular>

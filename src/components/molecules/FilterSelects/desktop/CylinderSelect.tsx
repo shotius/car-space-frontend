@@ -12,16 +12,20 @@ interface CylinderSelectProps {}
 export const CylinderSelect: React.FC<CylinderSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
   const { cylinders } = useAppSelector((state) => state.carsReducer);
-  const { cylinders: initSelection} = useAppSelector(state=> state.selectedCarFilters)
+  const { cylinders: initSelection } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
   const dispatch = useAppDispatch();
 
-  const cylindersToShow = cylinders.filter((cylinder) => cylinder);
+  const cylindersToShow = cylinders
+    .filter((cylinder) => cylinder)
+    .map((c) => c.toString());
 
   useEffect(() => {
     if (initSelection.length) {
-      setSelected(initSelection)
+      setSelected(initSelection);
     }
-  }, [initSelection])
+  }, [initSelection]);
 
   const handleSelect = (cylinder: string) => {
     if (selected.includes(cylinder)) {

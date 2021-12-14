@@ -48,7 +48,6 @@ export const getFavouriteCarIds = createAsyncThunk<
 >('user/getFavourites', async (_, { rejectWithValue }) => {
   try {
     const { results } = await userServices.getAllLikedCars();
-    console.log('result of ids: ', results)
     return results;
   } catch (error) {
     if (axios.isAxiosError(error)) {

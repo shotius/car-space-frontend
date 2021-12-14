@@ -17,18 +17,21 @@ import {
   selectFuels,
   selectLocations,
   selectModels,
+  selectPriseFrom,
+  selectPriseTo,
   selectSalesStatus,
   selectTranssmision,
   selectTypes,
   selectYearFrom,
   selectYearTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { HasKeys, Transmission } from 'src/redux/features/auth/types';
+import { Transmission } from 'src/redux/features/auth/types';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';
 import { parseModelQueries } from 'src/utils/functions/parseModelQueries';
 import { submitCarSearch } from 'src/utils/hooks/submitCarsSearch';
 import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
+import { HasKeys } from '../../../../../../server/shared_with_front/contants';
 
 interface CatalogLIstProps {}
 
@@ -52,6 +55,8 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     CYLINDER,
     ENGINE_FROM,
     ENGINE_TO,
+    PRICE_FROM,
+    PRICE_TO,
   } = FilterQueries;
 
   const { brands: selectedBrands } = useAppSelector(
@@ -108,6 +113,17 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     const engineTo = query.get(ENGINE_TO);
     if (engineTo) {
       dispatch(selectEnginTo(engineTo));
+    }
+
+    //PRICE
+    const priceFrom = query.get(PRICE_FROM);
+    if (priceFrom) {
+      dispatch(selectPriseFrom(priceFrom));
+    }
+
+    const priceTo = query.get(PRICE_TO);
+    if (priceTo) {
+      dispatch(selectPriseTo(priceTo));
     }
 
     // restore condition from url
