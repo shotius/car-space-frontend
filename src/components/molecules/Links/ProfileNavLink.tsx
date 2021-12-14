@@ -30,6 +30,7 @@ export const ProfileNavLink: React.FC<ProfileNavLinkProps & ButtonProps> = ({
       display="flex"
       justifyContent={["start", null, null, 'center']}
       p="32px 32px"
+      fontWeight="500"
       bg={active ? activeBg : '#fff'}
       color={active ? activeColor : '#000'}
       _hover={{

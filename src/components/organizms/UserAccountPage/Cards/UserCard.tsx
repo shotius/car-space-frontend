@@ -1,4 +1,5 @@
 import { Box, VStack } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { UserAvatar } from 'src/components/molecules/Avatars/UserAvatar';
 import { Card } from 'src/components/molecules/Cards/Card';
@@ -10,12 +11,20 @@ import { logoutUser } from 'src/redux/features/auth/authSlice';
 interface UserCardProps {}
 
 export const UserCard: React.FC<UserCardProps> = ({}) => {
+  const [avatar, setAvatar] = useState('');
   const { path } = useRouteMatch();
   const dispatch = useAppDispatch();
-  const {avatar} = useAppSelector(state => state.userInfoSlice)
+  const { avatar: initAvatar } = useAppSelector((state) => state.userInfoSlice);
+
+  // sometimes user photo does not apper so this effect shoulb be here
+  useEffect(() => {
+    if (initAvatar) {
+      setAvatar(initAvatar);
+    }
+  }, [initAvatar]);
 
   return (
-    <Card bg="white" p="0" w={["full", null, null, '200px']} maxH="400px">
+    <Card bg="white" p="0" w={['full', null, null, '200px']} maxH="400px">
       <Box p="32px">
         <UserAvatar
           image={avatar}

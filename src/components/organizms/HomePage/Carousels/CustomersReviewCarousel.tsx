@@ -55,8 +55,12 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
         spaceBetween={10}
         className="mySwiper"
         loop={isDesktop}
+        // when using arrows
         onSlideChangeTransitionStart={() => setHideNavigation(true)}
         onSlideChangeTransitionEnd={() => setHideNavigation(false)}
+        // when swiping
+        onSliderFirstMove={() => setHideNavigation(true)}
+        onSlideResetTransitionEnd={() => setHideNavigation(false)}
         onSlideChange={(swiper) => {
           setIsLastSlide(swiper.isEnd);
           setIsFirstSlide(swiper.isBeginning);
@@ -95,8 +99,10 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
           top="10px"
           right="10px"
           spacing="0"
-          opacity={hideNavigation ? '0' : '1'}
-          transition="cubic-bezier(0,1.9,1,.52) .2s"
+          display={hideNavigation ? 'none' : 'block'}
+          // display="none"
+
+          // transition="cubic-bezier(0,1.9,1,.52) .2s"
         >
           <ButtonMobile side="right" ref={prevRef} animate={!isFirstSlide} />
           <ButtonMobile side="left" ref={nextRef} animate={!isLastSlide} />

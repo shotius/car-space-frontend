@@ -91,6 +91,7 @@ export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
           isTruncated
           maxW="150px"
           opacity="0.5"
+          pt="1"
         >
           {secondaryText}
         </HeadingSecondary>

@@ -129,7 +129,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
                   },
                 }}
               >
-                {range(1980, 2021).map((num) => (
+                {range(1980, 2021).reverse().map((num) => (
                   <TextButton
                     fontSize="14px"
                     key={num}
@@ -158,7 +158,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
                   },
                 }}
               >
-                {range(1980, 2021).map((num) => (
+                {range(1980, 2021).reverse().map((num) => (
                   <TextButton
                     fontSize="14px"
                     p="2"

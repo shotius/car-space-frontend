@@ -1,4 +1,12 @@
-import { Box, Heading, HStack, StackDivider, VStack } from '@chakra-ui/react';
+import {
+  AspectRatio,
+  Box,
+  Heading,
+  HStack,
+  Image,
+  StackDivider,
+  VStack,
+} from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
@@ -28,12 +36,24 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
       <VStack w="full" spacing={['19px', null, null, '14px', '15px']}>
         {/* header */}
         <CarCardHeading
-          model={`${car.m} ${car.mG || ""}`}
+          model={`${car.m} ${car.mG || ''}`}
           id={car.id}
           year={Number(car.y)}
         />
         {/* picture swiper */}
-        <CarImageCarousel images={car.imgUrls.slice(0, 5)} />
+        {car.imgUrls.length ? (
+          <CarImageCarousel images={car.imgUrls.slice(0, 5)} />
+        ) : (
+          <AspectRatio
+            ratio={[311 / 292, null, null, 231 / 143]}
+            w="full"
+            maxH={['192px', null, '143px']}
+            borderRadius="8px"
+            overflow={"hidden"}
+          >
+            <Image src="https://via.placeholder.com/150" />
+          </AspectRatio>
+        )}
 
         {/* description */}
         <VStack w="full" divider={<StackDivider />}>
@@ -51,7 +71,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
                 noOfLines={1}
                 maxW="full"
               >
-                {car?.dmg ? capitalizeEach(car?.dmg) : "-"}
+                {car?.dmg ? capitalizeEach(car?.dmg) : '-'}
               </TextRegular>
             </HStack>
             <HStack>
@@ -81,7 +101,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
               pr={['4', '0', '4']}
               fontWeight="400"
             >
-              $ {car.price ? toTrippleNumber(car.price) : "0"}
+              $ {car.price ? toTrippleNumber(car.price) : '0'}
             </Heading>
           </HStack>
         </VStack>

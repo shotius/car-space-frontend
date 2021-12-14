@@ -27,7 +27,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
               position="sticky"
               top="225px"
               h="full"
-              spacing="24px"
+              spacing="0px"
             >
               <BlogCardLittle />
               <BlogCardLittle />

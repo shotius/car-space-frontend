@@ -1,6 +1,7 @@
 // Import Swiper React components
-import { AspectRatio, Box } from '@chakra-ui/layout';
+import { AspectRatio } from '@chakra-ui/layout';
 import { useMediaQuery } from '@chakra-ui/media-query';
+import { Image } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 // import styles from './styles.module.css';
 // import Swiper core and required modules
@@ -47,9 +48,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
     >
       <Swiper
         className={
-          buttonsVisible
-            ? style.CarImagesSwiperHover
-            : style.CarImagesSwiper
+          buttonsVisible ? style.CarImagesSwiperHover : style.CarImagesSwiper
         }
         slidesPerView={1}
         spaceBetween={3}
@@ -65,13 +64,9 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
       >
         {images.map((image, i) => (
           <SwiperSlide key={i}>
-            <Box
-              backgroundImage={image}
-              backgroundSize="cover"
-              backgroundPosition="center"
-              w="full"
-              h="full"
-            />
+            <AspectRatio>
+              <Image src={image} fallbackSrc={'https://via.placeholder.com/150'}/>
+            </AspectRatio>
           </SwiperSlide>
         ))}
 

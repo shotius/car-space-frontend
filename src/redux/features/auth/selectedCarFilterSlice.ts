@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrencyType } from 'src/constants';
-import { Keys, SelectedCarModel } from '../../../../../server/shared_with_front/types/types-shared';
+import {
+  Keys,
+  SelectedCarModel,
+} from '../../../../../server/shared_with_front/types/types-shared';
 import { SelectedCarFilters } from './types';
 
 const initialState: SelectedCarFilters = {
@@ -21,9 +24,9 @@ const initialState: SelectedCarFilters = {
   fuels: [],
   cylinders: [],
   isAdvancedFiltersOpen: false,
-  keys: null, 
+  keys: null,
   salesStatus: [],
-  queryString: ''
+  queryString: '',
 };
 
 const selectedCarFilterSlice = createSlice({
@@ -79,17 +82,17 @@ const selectedCarFilterSlice = createSlice({
       state.cylinders = action.payload;
     },
     selectCarKeys: (state, action: PayloadAction<Keys | null>) => {
-      state.keys = action.payload
-    }, 
+      state.keys = action.payload;
+    },
     selectSalesStatus: (state, action: PayloadAction<string[]>) => {
-      state.salesStatus = action.payload
-    }, 
+      state.salesStatus = action.payload;
+    },
     setFilterQueryString: (state, action: PayloadAction<string>) => {
-      state.queryString = action.payload
-    }, 
+      state.queryString = action.payload;
+    },
     closeAdvacedFilters: (state) => {
-      state.isAdvancedFiltersOpen = false
-    }, 
+      state.isAdvancedFiltersOpen = false;
+    },
     toggleAdvancedFilters: (state) => {
       if (state.isAdvancedFiltersOpen) {
         state.isAdvancedFiltersOpen = false;
@@ -100,7 +103,28 @@ const selectedCarFilterSlice = createSlice({
     openAdvancedFilters: (state) => {
       state.isAdvancedFiltersOpen = true;
     },
-    
+    resetFilters: (state) => {
+      state.brands =  []
+      state.models =  []
+      state.yearFrom =  0
+      state.yearTo =  0
+      state.priceFrom =  undefined
+      state.priceTo =  undefined
+      state.engineFrom =  null
+      state.engineTo =  null
+      state.transmission =  []
+      state.currency =  'GEL'
+      state.conditions =  []
+      state.types =  []
+      state.locations =  []
+      state.drives =  []
+      state.fuels =  []
+      state.cylinders =  []
+      state.isAdvancedFiltersOpen =  false
+      state.keys =  null
+      state.salesStatus =  []
+      state.queryString =  ''
+    }
   },
 });
 
@@ -123,9 +147,10 @@ export const {
   toggleAdvancedFilters,
   openAdvancedFilters,
   selectCylinders,
-  selectCarKeys, 
-  selectSalesStatus, 
+  selectCarKeys,
+  selectSalesStatus,
   setFilterQueryString,
-  closeAdvacedFilters
+  closeAdvacedFilters,
+  resetFilters
 } = selectedCarFilterSlice.actions;
 export const { reducer: selectedCarFilters } = selectedCarFilterSlice;

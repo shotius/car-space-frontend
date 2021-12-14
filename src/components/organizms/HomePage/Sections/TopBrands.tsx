@@ -21,7 +21,7 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
   return (
     <Box w="full">
       <ContainerOuter>
-        <SectionHeader mainText="Top Brands" secondaryText="See all" />
+        <SectionHeader mainText="Top Brands" />
       </ContainerOuter>
       <ContainerOuter p="0">
         <ScrollableDiv
