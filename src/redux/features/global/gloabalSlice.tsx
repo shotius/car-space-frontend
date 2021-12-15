@@ -8,6 +8,7 @@ const initialState: GlobalStateSliceState = {
   lang: 'Eng',
   currency: 'GEL',
   isCatalogBannerOpen: false,
+  isMobileMenuOpen: false, 
   isLoginOpen: false,
   isRegistrationOpen: false,
   isMobileRegisterLoginOpen: false,
@@ -35,6 +36,9 @@ const globalStateSlice = createSlice({
     closeCatalogBanner: (state) => {
       state.isCatalogBannerOpen = false;
     },
+    toggleMobileMenu: (state) => {
+      state.isMobileMenuOpen = !state.isMobileMenuOpen
+    }, 
     toggleLogin: (state) => {
       state.isLoginOpen
         ? (state.isLoginOpen = false)
@@ -74,6 +78,7 @@ export const {
   openCatalogBanner,
   closeCatalogBanner,
   toggleLogin,
+  toggleMobileMenu, 
   toggleRegistration,
   toggleMobileAuthorization,
   setScreenSize,

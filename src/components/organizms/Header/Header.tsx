@@ -18,11 +18,11 @@ import { logoutUser } from 'src/redux/features/auth/authSlice';
 import {
   toggleLogin,
   toggleMobileAuthorization,
+  toggleMobileMenu,
   toggleRegistration,
 } from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { LoginRegisterDrawer } from '../Drawers/LoginRegisterDrawer';
-import { MenuMobile } from '../LoginForm/MenuMobile';
 import { LoginModal } from '../Modals/LoginModal';
 import { RegisterModal } from '../Modals/RegisterModal';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
@@ -31,16 +31,18 @@ import { LanguagePopover } from '../PopOvers/LanguagePopover';
 interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [safeDocument, setSafeDocument] = useState<Document | null>(document);
+  const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const {
     isLoginOpen,
     isRegistrationOpen,
     isMobileRegisterLoginOpen,
     catalogQuery,
+    isMobileMenuOpen: menuOpen
   } = useAppSelector((state) => state.globalAppState);
- 
+
   const { isAuthenticated, role, username } = useAppSelector(
     (state) => state.userInfoSlice
   );
@@ -48,8 +50,8 @@ export const Header: React.FC<HeaderProps> = () => {
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
   const USER = localStorage.getItem('USER_ROLE');
 
-  const dispatch = useAppDispatch();
-  const history = useHistory();
+  // Toggle mobile menu
+  const toggleMenu = () => dispatch(toggleMobileMenu());
 
   // if mobile menu is open stop body scroll
   useEffect(() => {
@@ -83,18 +85,12 @@ export const Header: React.FC<HeaderProps> = () => {
   } = useDisclosure();
 
   return (
-    <ContainerOuter
-      zIndex="13"
-      boxShadow={menuOpen ? 'md' : 'none'}
-      h="full"
-      bg="white"
-    >
+    <ContainerOuter boxShadow={menuOpen ? 'md' : 'none'} h="full" bg="white">
       {/* desktop view */}
-      <Flex h="full" alignItems="center" zIndex="10">
-        {/* // Logo  */}
+      <Flex h="full" alignItems="center">
         <CarSpaceLogo
           onClick={() => {
-            setMenuOpen(false);
+            toggleMenu();
             history.push('/home');
           }}
         />
@@ -231,7 +227,7 @@ export const Header: React.FC<HeaderProps> = () => {
               aria-label="menu"
               icon={<BurgerIcon boxSize="6" />}
               bg="transparent"
-              onClick={() => setMenuOpen(true)}
+              onClick={() => toggleMenu()}
               display={menuOpen ? 'none' : 'inline-block'}
             />
 
@@ -239,12 +235,11 @@ export const Header: React.FC<HeaderProps> = () => {
               aria-label="close menu"
               icon={<CloseIcon boxSize="6" />}
               display={menuOpen ? 'block' : 'none'}
-              onClick={() => setMenuOpen(false)}
+              onClick={() => toggleMenu()}
               bg="transparent"
               opacity={menuOpen ? '1' : '0'}
               transition="all ease .2"
             />
-            <MenuMobile menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
           </HStack>
         ) : null}
       </Flex>

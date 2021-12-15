@@ -2,6 +2,7 @@ import { Box, Container } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { Footer } from 'src/components/organizms/Footer/Footer';
 import { Header } from 'src/components/organizms/Header';
+import { MenuMobile } from 'src/components/organizms/LoginForm/MenuMobile';
 
 interface PublicLayoutProps {}
 
@@ -13,7 +14,8 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
   return (
     <Box w="full" direction="column" minH="100vh" bg="#e8e8e8">
       <Box
-        position="sticky"
+        position="fixed"
+        w="full"
         h={['50px', '60px', '70px', null, '80px']}
         top="0"
         bg="white"
@@ -31,6 +33,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
         pr="0"
       >
         {children}
+        <MenuMobile />
       </Container>
       <Footer />
     </Box>

@@ -118,6 +118,7 @@ export interface GlobalStateSliceState {
   lang: Languages;
   currency: CurrencyType;
   isCatalogBannerOpen: boolean;
+  isMobileMenuOpen: boolean;
   isRegistrationOpen: boolean;
   isLoginOpen: boolean;
   isMobileRegisterLoginOpen: boolean;
