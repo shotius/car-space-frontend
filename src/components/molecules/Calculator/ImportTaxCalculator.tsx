@@ -16,6 +16,10 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
             <TextRegular opacity="0.4">Electric</TextRegular>
           </HStack>
           <HStack>
+            <input type="radio" name="car_type" value="hybrid" />
+            <TextRegular opacity="0.4">Electric</TextRegular>
+          </HStack> 
+          <HStack>
             <input type="radio" name="car_type" value="electric" />
             <TextRegular opacity="0.4">Hybrid</TextRegular>
           </HStack>

@@ -8,8 +8,7 @@ h1 {
   transition: all .4s;
 }
 
-
-input[type='radio'] {
+/* input[type='radio'] {
   -webkit-appearance:none;
   cursor: pointer;
   width:16px;
@@ -26,10 +25,11 @@ input[type='radio']:before {
   margin: 2px auto;    
   height: 8px;
   border-radius:100px;    
-}
+} */
 
 input[type='radio']:checked:before {
-  background:#FB5607;
+  /* background:#FB5607; */ 
+  background-color: #3D405B;
 }
 
 
