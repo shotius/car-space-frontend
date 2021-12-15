@@ -19,11 +19,13 @@ export const TextButton: React.FC<TextButtonProps & ButtonProps> = ({
   fontWeight = 'light',
   fontSize = ['16px', null, '14px'],
   font = 'Regular',
+  display = 'block',
   children,
   ...rest
 }) => {
   return (
     <Button
+      display={display}
       variant={variant}
       padding={p}
       bg={bg}

@@ -7,33 +7,30 @@ import { CarListOnCatalogPage } from 'src/components/organizms/CatalogPage/Secti
 import { FiltersOnCatalogPage } from 'src/components/organizms/CatalogPage/Sections/FiltersOnCatalog';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { resetFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { PublicLayout } from '../Layouts/PublicLayout';
 
 interface CatalogTemplateProps {}
 
 export const CatalogTemplate: React.FC<CatalogTemplateProps> = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   useEffect(() => {
     return () => {
-      dispatch(resetFilters())
-    }
-  }, [])
+      dispatch(resetFilters());
+    };
+  }, []);
   return (
-    <PublicLayout>
-      <ContainerOuter pt={['4', '6', null, '8']}>
-        <VStack w="full" spacing={['66px']}>
-          {/* filters */}
-          <FilterWrap>
-            <FiltersOnCatalogPage />
-          </FilterWrap>
+    <ContainerOuter pt={['4', '6', null, '8']}>
+      <VStack w="full" spacing={['66px']}>
+        {/* filters */}
+        <FilterWrap>
+          <FiltersOnCatalogPage />
+        </FilterWrap>
 
-          {/* Banner  */}
-          <BannerCard />
+        {/* Banner  */}
+        <BannerCard />
 
-          {/* car list */}
-          <CarListOnCatalogPage />
-        </VStack>
-      </ContainerOuter>
-    </PublicLayout>
+        {/* car list */}
+        <CarListOnCatalogPage />
+      </VStack>
+    </ContainerOuter>
   );
 };

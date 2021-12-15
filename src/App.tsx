@@ -12,6 +12,7 @@ import { useAppDispatch } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
+import { PublicLayout } from './components/templates/Layouts/PublicLayout';
 const CarDetailPageDealer = lazy(
   () => import('./pages/catalog/car/CarDetailPageDealer')
 );
@@ -32,55 +33,50 @@ function App() {
     localStorage.setItem('windowHeight', String(window.innerHeight));
   }, [dispatch]);
 
-  // if (loading) {
-  //   return (
-  // <Center w="full" bg="white" h="100vh">
-  //   <VStack spacing="0">
-  //     <Icon as={LogoIcon} boxSize={['150px', null, null, '200px']} />
-  //     <Spinner h="30px" w="30px" thickness="1px" />
-  //   </VStack>
-  // </Center>
-  //   );
-  // }
-
   return (
     <StyledApp>
       <Router>
-        <Switch>
-          <Route path="/" exact>
-            <Redirect to="/home" />
-          </Route>
-          <PublicRoute path="/home" component={Home} />
+        <PublicLayout>
+          <Switch>
+            <Route path="/" exact>
+              <Redirect to="/home" />
+            </Route>
+            <PublicRoute path="/home" component={Home} />
 
-          <PublicRoute path="/blog" component={BlogPage} exact />
-          <PublicRoute path="/blog/:blogId" component={BlogDetailPage} exact />
+            <PublicRoute path="/blog" component={BlogPage} exact />
+            <PublicRoute
+              path="/blog/:blogId"
+              component={BlogDetailPage}
+              exact
+            />
 
-          <PublicRoute path="/catalog" component={CatalogPage} exact />
-          <PublicRoute
-            path="/catalog/car/:carId"
-            component={CarDetailPageDealer}
-            exact
-          />
+            <PublicRoute path="/catalog" component={CatalogPage} exact />
+            <PublicRoute
+              path="/catalog/car/:carId"
+              component={CarDetailPageDealer}
+              exact
+            />
 
-          <PublicRoute path="/services" component={ServicesPage} />
+            <PublicRoute path="/services" component={ServicesPage} />
 
-          <PrivateRoute
-            path="/admin/dashboard"
-            component={AdminPage}
-            role="admin"
-          />
-          <PrivateRoute
-            path="/dealer/dashboard"
-            role="dealer"
-            component={DealerDashboard}
-          />
-          <PrivateRoute
-            path="/user/dashboard"
-            role="user"
-            component={UserProfilePage}
-          />
-          <Route path="*" render={() => <ErrorPage />} />
-        </Switch>
+            <PrivateRoute
+              path="/admin/dashboard"
+              component={AdminPage}
+              role="admin"
+            />
+            <PrivateRoute
+              path="/dealer/dashboard"
+              role="dealer"
+              component={DealerDashboard}
+            />
+            <PrivateRoute
+              path="/user/dashboard"
+              role="user"
+              component={UserProfilePage}
+            />
+            <Route path="*" render={() => <ErrorPage />} />
+          </Switch>
+        </PublicLayout>
       </Router>
     </StyledApp>
   );

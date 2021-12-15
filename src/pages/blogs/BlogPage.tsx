@@ -2,12 +2,11 @@ import { Box, Heading, SimpleGrid } from '@chakra-ui/layout';
 import { Center } from '@chakra-ui/react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BlogCard } from 'src/components/molecules/Cards/BlogCard';
-import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 interface BlogPageProps {}
 
 export const BlogPage: React.FC<BlogPageProps> = () => {
   return (
-    <PublicLayout>
+    <>
       <ContainerOuter p="0" pt={[null, null, null, '48px']}>
         <Box
           p="0"
@@ -44,7 +43,7 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
           <BlogCard />
         </SimpleGrid>
       </ContainerOuter>
-    </PublicLayout>
+    </>
   );
 };
 

@@ -2,7 +2,17 @@ import { Button, ButtonProps } from '@chakra-ui/react';
 import { forwardRef } from 'react';
 
 export const ButtonRect = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ fontSize = '16px',bg="white", w="full", fontWeight="400",  children,  ...rest }, ref) => {
+  (
+    {
+      fontSize = '16px',
+      bg = 'white',
+      w = 'full',
+      fontWeight = '400',
+      children,
+      ...rest
+    },
+    ref
+  ) => {
     return (
       <Button
         bg={bg}
@@ -12,6 +22,9 @@ export const ButtonRect = forwardRef<HTMLButtonElement, ButtonProps>(
         fontWeight={fontWeight}
         _hover={{
           bg: 'autoGrey.100',
+        }}
+        _active={{
+          bg: 'autoGrey.200',
         }}
         ref={ref}
         {...rest}

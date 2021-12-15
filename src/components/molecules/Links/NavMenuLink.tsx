@@ -1,9 +1,6 @@
 import { Button } from '@chakra-ui/button';
-import { Flex } from '@chakra-ui/layout';
-import { GTArrow } from 'src/components/atoms/Icons/GTArrow';
-import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
-
 import { useHistory } from 'react-router-dom';
+import { TextRegular } from '../Texts/TextRegular';
 
 interface NavMenuLinkProps {
   heading: string;
@@ -16,19 +13,22 @@ export const NavMenuLink: React.FC<NavMenuLinkProps> = ({
   to,
   onClick,
 }) => {
-  const history = useHistory()
+  const history = useHistory();
   const handleClick = () => {
-    onClick()
-    history.push(to)
-  }
+    onClick();
+    history.push(to);
+  };
   return (
-    <Button onClick={handleClick} w="full" bg="white" p='0'>
-      <Flex justifyContent="space-between" alignItems="center" px="35px" py="2" w="full">
-        <TextSecondary opacity="100%" color="black" fontWeight="light">
-          {heading}
-        </TextSecondary>
-        <GTArrow />
-      </Flex>
+    <Button
+      onClick={handleClick}
+      w="full"
+      bg="white"
+      py="12px"
+      textAlign="end"
+    >
+      <TextRegular fontWeight="light" fontSize={18} w="full">
+        {heading}
+      </TextRegular>
     </Button>
   );
 };

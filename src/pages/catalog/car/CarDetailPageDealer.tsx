@@ -5,7 +5,6 @@ import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarou
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import { CarDetailPageDesktop } from 'src/components/templates/CarDeatailsPage/CarDetailPageDesktop';
 import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/CarDetailPageMobile';
-import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamnCard1 } from 'src/DamnCard';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getSingleDealerCarThunk } from 'src/redux/features/auth/carsSlice';
@@ -41,7 +40,7 @@ export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
     return <>...loading car info</>;
   }
   return (
-    <PublicLayout>
+    <>
       {isDesktop ? (
         <CarDetailPageDesktop car={car} />
       ) : (
@@ -58,7 +57,7 @@ export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
       >
         <CarListCarousel car={DamnCard1} />
       </ContainerOuter>
-    </PublicLayout>
+    </>
   );
 };
 

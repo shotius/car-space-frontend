@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarousel/CarListCarousel';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
-import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamnCard1 } from 'src/DamnCard';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
@@ -64,7 +63,7 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
     return <>...loading car info</>;
   }
   return (
-    <PublicLayout>
+    <>
       {isDesktop ? (
         <>cardeatil</>
         // <CarDetailPageDesktop car={carInfo} thumbs={thumbs} images={images} />
@@ -83,7 +82,7 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
       >
         <CarListCarousel car={DamnCard1} />
       </ContainerOuter>
-    </PublicLayout>
+    </>
   );
 };
 

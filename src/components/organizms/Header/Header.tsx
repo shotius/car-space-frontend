@@ -40,7 +40,7 @@ export const Header: React.FC<HeaderProps> = () => {
     isRegistrationOpen,
     isMobileRegisterLoginOpen,
     catalogQuery,
-    isMobileMenuOpen: menuOpen
+    isMobileMenuOpen: menuOpen,
   } = useAppSelector((state) => state.globalAppState);
 
   const { isAuthenticated, role, username } = useAppSelector(
@@ -85,12 +85,11 @@ export const Header: React.FC<HeaderProps> = () => {
   } = useDisclosure();
 
   return (
-    <ContainerOuter boxShadow={menuOpen ? 'md' : 'none'} h="full" bg="white">
+    <ContainerOuter h="full" bg="white">
       {/* desktop view */}
       <Flex h="full" alignItems="center">
         <CarSpaceLogo
           onClick={() => {
-            toggleMenu();
             history.push('/home');
           }}
         />
