@@ -11,6 +11,7 @@ import { addCustomerReview } from 'src/redux/features/customer/customerSlice';
 import { isApiValidationError } from 'src/utils/functions/typeChecker';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { NewReviwForm } from 'src/components/organizms/Forms/newReviewForm';
 
 interface AddNewReviewProps {}
 
@@ -52,93 +53,7 @@ export const AddNewReview: React.FC<AddNewReviewProps> = ({}) => {
     <ContainerOuter pt={['32px', null, null, '40px']}>
       <Center>
         <Card w="500px" p="4">
-          <HeadingSecondary pb="4">Add new Review</HeadingSecondary>
-          <Formik
-            initialValues={initialState}
-            onSubmit={(values, { setErrors }) => {
-              console.log(values);
-              const formdata = new FormData();
-              for (let [key, value] of Object.entries(values)) {
-                console.log(key, value);
-                formdata.append(key, value);
-              }
-
-              dispatch(addCustomerReview(formdata))
-                .unwrap()
-                .then(() =>
-                  toast({
-                    title: 'New Review added',
-                    duration: 2000,
-                    status: 'success',
-                    position: "top"
-                  })
-                )
-                .catch((error) => {
-                  if (isApiValidationError(error)) {
-                    if (error.status === 422 && error.errors?.length) {
-                      setErrors(toErrorMap(error.errors));
-                    }
-                  }
-                });
-            }}
-          >
-            {({ setFieldValue }) => (
-              <Form>
-                <Field name="userId" validate={validateUserId}>
-                  {({ field, form }) => (
-                    <>
-                      <UserSearchSelect
-                        {...field}
-                        name="userId"
-                        onSelect={(userId: string) => {
-                          console.log('userId', userId);
-                          setFieldValue('userId', userId);
-                        }}
-                      />
-                      {
-                        <TextRegular as="span" color="red">
-                          {form.errors.userId}
-                        </TextRegular>
-                      }
-                    </>
-                  )}
-                </Field>
-                <Field name="text">
-                  {({ field }) => (
-                    <Textarea
-                      mt="2"
-                      {...field}
-                      placeholder="Write Description"
-                      size="sm"
-                      as={TextareaAutosize}
-                      maxRows={10}
-                    />
-                  )}
-                </Field>
-                <Field name="photos" validate={validatePhotos}>
-                  {({ field, form }) => (
-                    <>
-                      <input
-                        {...field}
-                        type="file"
-                        multiple
-                        value={undefined}
-                        onChange={(e) => {
-                          setFieldValue('photos', e.currentTarget.files);
-                        }}
-                      />
-                      <TextRegular as="span" display="block" color="red">
-                        {form.errors.photos}
-                      </TextRegular>
-                    </>
-                  )}
-                </Field>
-                <ButtonRegular type="submit" mt="4">
-                  Add Review
-                </ButtonRegular>
-              </Form>
-            )}
-          </Formik>
+          <NewReviwForm />
         </Card>
       </Center>
     </ContainerOuter>

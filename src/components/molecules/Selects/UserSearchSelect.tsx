@@ -1,9 +1,18 @@
-import { Button, StackProps, useDisclosure } from '@chakra-ui/react';
+import {
+    AspectRatio,
+    HStack,
+    Image,
+    StackProps,
+    useDisclosure,
+    useToast
+} from '@chakra-ui/react';
 import { useState } from 'react';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { getUsers } from 'src/redux/features/auth/userSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { IUser } from '../../../../../server/shared_with_front/types/types-shared';
+import { ButtonRect } from '../Buttons/ButtonRect';
+import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { SelectSearch } from '../Inputs/SelectSearch';
 import { CustomOverlay } from '../overlays/CustomOverlay';
 import { SelectTrigger } from '../triggerers/SelectTrigger';
@@ -21,12 +30,13 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
   name,
   ...rest
 }) => {
-  const { isOpen, onToggle, onOpen } = useDisclosure();
+  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<IUser>();
   const [placeholder, setPlaceholder] = useState('');
   const [searchWord, setSearchWord] = useState('');
   const [userList, setUserList] = useState<IUser[]>([]);
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   // -- Placehodler update
   const updatePlaceholder = () => {
@@ -39,10 +49,16 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
     dispatch(getUsers(value))
       .unwrap()
       .then((data) => {
-        setUserList(data)
-        console.log('data: ', data)
+        setUserList(data);
       })
-      .catch((error) => console.log(error));
+      .catch(() =>
+        toast({
+          title: 'Could not fetch users',
+          position: 'top',
+          status: 'error',
+          duration: 2000,
+        })
+      );
   };
 
   const usersToShow = userList.filter((user) =>
@@ -51,15 +67,11 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
 
   return (
     <SelectWrapper areOptionsOpen={isOpen} {...rest}>
-      <CustomOverlay onClick={onToggle} isActive={isOpen} />
+      <CustomOverlay onClick={onClose} isActive={isOpen} />
       <SelectContent>
         <SelectTrigger
-          onClick={onOpen}
           areOptionsOpen={isOpen}
           areOptionsSelected={!!selectedUser}
-          onFocus={() => {
-            onToggle();
-          }}
           clearCb={() => {
             setSelectedUser(undefined);
           }}
@@ -74,13 +86,15 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
               selectedUser ? capitalizeEach(selectedUser.name) : searchWord
             }
             onChange={(e) => {
-              getUserAsync(e.currentTarget.value);
-              setSearchWord(e.currentTarget.value);
-              onOpen();
+              const value = e.currentTarget.value;
+              getUserAsync(value);
+              setSearchWord(value);
+              setSelectedUser(undefined);
+              if (value) {
+                onOpen();
+              }
             }}
             onFocus={() => {
-              // onFocus open Options
-              onToggle();
               // if something is selected, display in placeholder
               updatePlaceholder();
             }}
@@ -88,17 +102,29 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
         </SelectTrigger>
         <SelectOptions isOpen={isOpen}>
           {usersToShow.map((user) => (
-            <Button
+            <ButtonRect
+              h="80px"
               onClick={() => {
                 setPlaceholder(user.name);
                 onToggle();
                 onSelect(user.id);
-                setSelectedUser(user)
+                setSelectedUser(user);
               }}
               key={user.id}
             >
-              {user.name}
-            </Button>
+              <HStack w="full">
+                <AspectRatio ratio={1 / 1} w="50px">
+                  <Image
+                    w="full"
+                    h="full"
+                    src={user.avatar}
+                    fallbackSrc="https://image.shutterstock.com/image-vector/profile-picture-avatar-icon-vector-260nw-1760295569.jpg"
+                    borderRadius="100px"
+                  />
+                </AspectRatio>
+                <HeadingSecondary>{user.name}</HeadingSecondary>
+              </HStack>
+            </ButtonRect>
           ))}
         </SelectOptions>
       </SelectContent>
