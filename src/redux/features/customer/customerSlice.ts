@@ -1,11 +1,14 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import customerService from 'src/services/customerService';
 import { isApiValidationError } from 'src/utils/functions/typeChecker';
-import { ApiValidationError, INewReview } from '../../../../../server/shared_with_front/types/types-shared';
+import {
+  ApiValidationError, ICustomerReviewFront,
+  INewReview
+} from '../../../../../server/shared_with_front/types/types-shared';
 
 interface ICustomerSliceState {
-  reviews: INewReview[];
+  reviews: ICustomerReviewFront[];
   fetchingReviews: boolean;
   addingReview: boolean;
 }
@@ -20,18 +23,17 @@ const initialState: ICustomerSliceState = {
  * Function fetches customer reviews
  * @returns {INewReview[]} list of customer reviews
  */
-export const getCustomerReviews = createAsyncThunk<
-  INewReview[],
-  any,
-  { rejectValue: string }
->('customer/getCustomerReviews', async (_, { rejectWithValue }) => {
-  try {
-    const { results } = await customerService.getReviews();
-    return results;
-  } catch (error) {
-    return rejectWithValue('Could not get review');
+export const getCustomerReviews = createAsyncThunk<ICustomerReviewFront[]>(
+  'customer/getCustomerReviews',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { results } = await customerService.getReviews();
+      return results;
+    } catch (error) {
+      return rejectWithValue('Could not get review');
+    }
   }
-});
+);
 
 export const addCustomerReview = createAsyncThunk<
   INewReview,

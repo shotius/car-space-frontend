@@ -6,7 +6,7 @@ import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecon
 import { UserSearchSelect } from 'src/components/molecules/Selects/UserSearchSelect';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { addCustomerReview } from 'src/redux/features/customer/customerSlice';
+import { addCustomerReview, getCustomerReviews } from 'src/redux/features/customer/customerSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
 import { isApiValidationError } from 'src/utils/functions/typeChecker';
 
@@ -50,21 +50,31 @@ export const NewReviwForm: React.FC<AddNewReviewProps> = ({}) => {
     <Formik
       initialValues={initialState}
       onSubmit={(values, { setErrors }) => {
+        const { photos, ...restValues } = values;
         const formdata = new FormData();
-        for (let [key, value] of Object.entries(values)) {
+
+        // add photos
+        if (photos) {
+          for (let photo of photos) {
+            formdata.append('photo[]', photo);
+          }
+        }
+        // add rest of values
+        for (let [key, value] of Object.entries(restValues)) {
           formdata.append(key, value);
         }
 
         dispatch(addCustomerReview(formdata))
           .unwrap()
-          .then(() =>
+          .then(() => {
+            dispatch(getCustomerReviews())
             toast({
               title: 'New Review added',
               duration: 2000,
               status: 'success',
               position: 'top',
-            })
-          )
+            });
+          })
           .catch((error) => {
             if (isApiValidationError(error)) {
               if (error.status === 422 && error.errors?.length) {

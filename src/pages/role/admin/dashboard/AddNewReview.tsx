@@ -1,60 +1,51 @@
-import { Center, Textarea, useToast } from '@chakra-ui/react';
-import TextareaAutosize from 'react-textarea-autosize';
-import { Field, Form, Formik } from 'formik';
+import { AspectRatio, Center, HStack, Image, VStack } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
-import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { Card } from 'src/components/molecules/Cards/Card';
-import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
-import { UserSearchSelect } from 'src/components/molecules/Selects/UserSearchSelect';
-import { useAppDispatch } from 'src/redux/app/hook';
-import { addCustomerReview } from 'src/redux/features/customer/customerSlice';
-import { isApiValidationError } from 'src/utils/functions/typeChecker';
-import { toErrorMap } from 'src/utils/functions/toErrorMap';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { NewReviwForm } from 'src/components/organizms/Forms/newReviewForm';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { getCustomerReviews } from 'src/redux/features/customer/customerSlice';
 
 interface AddNewReviewProps {}
 
-interface InitialState {
-  text: string;
-  userId: string;
-  photos: FileList | null;
-}
-
 export const AddNewReview: React.FC<AddNewReviewProps> = ({}) => {
+  const { reviews } = useAppSelector((state) => state.customers);
   const dispatch = useAppDispatch();
-  const toast = useToast();
 
-  const initialState: InitialState = {
-    text: '',
-    userId: '',
-    photos: null,
-  };
-
-  const validateUserId = (userId: string) => {
-    let error: string = '';
-    if (!userId) {
-      error = 'Required';
-    } else if (userId.length !== 24) {
-      error = 'Invalid length';
-    }
-    return error;
-  };
-
-  const validatePhotos = (photos: FileList) => {
-    let error = '';
-    if (photos && photos.length > 4) {
-      error = 'Photos must be less then 4';
-    }
-    return error;
-  };
+  useEffect(() => {
+    dispatch(getCustomerReviews());
+  }, []);
 
   return (
     <ContainerOuter pt={['32px', null, null, '40px']}>
       <Center>
-        <Card w="500px" p="4">
-          <NewReviwForm />
-        </Card>
+        <VStack>
+          <Card w="500px" p="4">
+            <NewReviwForm />
+          </Card>
+          <Card>
+            <VStack>
+              {reviews.length ? reviews.map((review, id) => (
+                <HStack key={id} bg="autoGrey.200" w="full" p="4" borderRadius="8">
+                  <AspectRatio ratio={1/1} w="80px">
+                    <Image
+                      src={ review.user && review.user.avatar}
+                      fallbackSrc="https://image.shutterstock.com/image-vector/profile-picture-avatar-icon-vector-260nw-1760295569.jpg"
+                      borderRadius="100px"
+                    />
+                  </AspectRatio>
+                  <TextRegular>{review.text}</TextRegular>
+                  {review.photos && review.photos.map((photo) => (
+                    <AspectRatio key={photo} ratio={1 / 1} w="60px">
+                      <Image src={photo} />
+                    </AspectRatio>
+                  ))}
+                </HStack>
+              )) : <>{console.log(reviews)}</>}
+            </VStack>
+          </Card>
+        </VStack>
       </Center>
     </ContainerOuter>
   );
