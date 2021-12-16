@@ -7,7 +7,7 @@ import {
 import { useState } from 'react';
 import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
-import { SelectOverlay } from '../overlays/SelectOverlay';
+import { CustomOverlay } from '../overlays/CustomOverlay';
 import { SelectContent } from '../Wrappers/SelectContent';
 import { SelectOptions } from '../Wrappers/SelectOptions';
 import { SelectWrapper } from '../Wrappers/SelectWrapper';
@@ -25,7 +25,7 @@ export const SingleSelect: React.FC<SingleSelectProps & StackProps> = ({
 
   return (
     <SelectWrapper areOptionsOpen={areOptionsOpen}>
-      <SelectOverlay
+      <CustomOverlay
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);

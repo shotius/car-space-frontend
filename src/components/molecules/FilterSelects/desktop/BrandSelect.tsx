@@ -13,7 +13,7 @@ import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { TopBrandCard } from 'src/components/molecules/Cards/TopBrandCard';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { SelectSearch } from 'src/components/molecules/Inputs/SelectSearch';
-import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
+import { CustomOverlay } from 'src/components/molecules/overlays/CustomOverlay';
 import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger';
 import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
@@ -96,7 +96,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
 
   return (
     <SelectWrapper {...rest} areOptionsOpen={areOptionsOpen}>
-      <SelectOverlay
+      <CustomOverlay
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);

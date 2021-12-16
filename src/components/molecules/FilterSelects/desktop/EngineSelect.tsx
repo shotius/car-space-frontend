@@ -7,7 +7,7 @@ import {
   selectEnginTo
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { TextButton } from '../../Buttons/TextButton';
-import { SelectOverlay } from '../../overlays/SelectOverlay';
+import { CustomOverlay } from '../../overlays/CustomOverlay';
 import { TextRegular } from '../../Texts/TextRegular';
 import { SelectTrigger } from '../../triggerers/SelectTrigger';
 import { SelectContent } from '../../Wrappers/SelectContent';
@@ -63,7 +63,7 @@ export const EngineSelect: React.FC<EngineSelectProps & StackProps> = ({
       bg="white"
       borderRadius="8px"
     >
-      <SelectOverlay
+      <CustomOverlay
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);

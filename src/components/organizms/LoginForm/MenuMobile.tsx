@@ -4,7 +4,7 @@ import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 import { ButtonRect } from 'src/components/molecules/Buttons/ButtonRect';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { NavMenuLink } from 'src/components/molecules/Links/NavMenuLink';
-import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
+import { CustomOverlay } from 'src/components/molecules/overlays/CustomOverlay';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
@@ -43,7 +43,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({}) => {
 
   return (
     <>
-      <SelectOverlay
+      <CustomOverlay
         onClick={() => onToggle()}
         isActive={menuOpen}
         bg="black"

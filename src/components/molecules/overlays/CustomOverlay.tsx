@@ -1,11 +1,11 @@
 import { Box, BoxProps } from '@chakra-ui/layout';
 
-interface SelectOverlayProps {
+interface CustomOverlayProps {
   isActive: boolean;
   onClick: () => void;
 }
 
-export const SelectOverlay: React.FC<SelectOverlayProps & BoxProps> = ({
+export const CustomOverlay: React.FC<CustomOverlayProps & BoxProps> = ({
   isActive,
   onClick, 
   ...rest

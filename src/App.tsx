@@ -19,7 +19,7 @@ const CarDetailPageDealer = lazy(
 const UserProfilePage = lazy(() => import('./pages/role/user/UserProfilePage'));
 const BlogPage = lazy(() => import('./pages/blogs/BlogPage'));
 const CatalogPage = lazy(() => import('./pages/catalog/CatalogPage'));
-const AdminPage = lazy(() => import('./pages/role/admin/AdminPage'));
+const AdminPage = lazy(() => import('./pages/role/admin/dashboard/AdminPage'));
 const DealerDashboard = lazy(() => import('./pages/role/dealer/DealerPage'));
 const Home = lazy(() => import('./pages/HomePage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));

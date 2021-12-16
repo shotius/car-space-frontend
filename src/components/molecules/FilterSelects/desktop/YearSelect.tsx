@@ -1,7 +1,7 @@
 import { HStack, StackDivider, StackProps, VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
-import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
+import { CustomOverlay } from 'src/components/molecules/overlays/CustomOverlay';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger';
 import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
@@ -74,7 +74,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
 
   return (
     <SelectWrapper {...rest} areOptionsOpen={areOptionsOpen}>
-      <SelectOverlay
+      <CustomOverlay
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);

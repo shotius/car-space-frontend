@@ -6,6 +6,7 @@ import { carsPagination } from '../features/auth/carPaginationSlice';
 import { carImages } from '../features/auth/carImagesSlice';
 import { globalAppState } from '../features/global/gloabalSlice';
 import { UserInfo } from '../features/auth/userSlice';
+import { customersReducer } from '../features/customer/customerSlice';
 
 const reducer = {
   authReducer,
@@ -15,6 +16,7 @@ const reducer = {
   carImages,
   globalAppState,
   userInfoSlice: UserInfo,
+  customers: customersReducer
 };
 
 export const store = configureStore({

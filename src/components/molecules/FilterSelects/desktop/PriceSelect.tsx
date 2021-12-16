@@ -1,6 +1,6 @@
 import { HStack, VStack } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
-import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
+import { CustomOverlay } from 'src/components/molecules/overlays/CustomOverlay';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger';
 import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
@@ -63,7 +63,7 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
 
   return (
     <SelectWrapper areOptionsOpen={areOptionsOpen}>
-      <SelectOverlay
+      <CustomOverlay
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);

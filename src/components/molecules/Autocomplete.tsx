@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ButtonRect } from './Buttons/ButtonRect';
 import { InputGrey } from './Inputs/InputGrey';
-import { SelectOverlay } from './overlays/SelectOverlay';
+import { CustomOverlay } from './overlays/CustomOverlay';
 import { SelectContent } from './Wrappers/SelectContent';
 import { SelectOptions } from './Wrappers/SelectOptions';
 import { SelectWrapper } from './Wrappers/SelectWrapper';
@@ -21,7 +21,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
   const optionsToShow = options.filter(opt => opt.toLowerCase().includes(value.toLowerCase()))
   return (
     <SelectWrapper areOptionsOpen={areOptionsOpen}>
-      <SelectOverlay isActive={areOptionsOpen} onClick={() => setAreOptionsOpen(false)}/>
+      <CustomOverlay isActive={areOptionsOpen} onClick={() => setAreOptionsOpen(false)}/>
       <SelectContent>
         <InputGrey
           value={value}

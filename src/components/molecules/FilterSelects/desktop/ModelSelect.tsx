@@ -1,7 +1,7 @@
 import { Button, Checkbox, StackProps, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { SelectSearch } from 'src/components/molecules/Inputs/SelectSearch';
-import { SelectOverlay } from 'src/components/molecules/overlays/SelectOverlay';
+import { CustomOverlay } from 'src/components/molecules/overlays/CustomOverlay';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger';
 import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
@@ -149,7 +149,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
       {...rest}
       areOptionsOpen={areOptionsOpen}
     >
-      <SelectOverlay
+      <CustomOverlay
         isActive={areOptionsOpen}
         onClick={() => {
           setAreOptionsOpen(false);

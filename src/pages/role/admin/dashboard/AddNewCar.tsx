@@ -1,5 +1,4 @@
 import {
-  Button,
   Center,
   Checkbox,
   FormControl,
@@ -17,16 +16,15 @@ import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { logoutUser } from 'src/redux/features/auth/authSlice';
 import { addDealerCar, getDealerCars } from 'src/redux/features/auth/carsSlice';
 import { TransmissionEnum } from 'src/redux/features/auth/types';
 import { isApiValidationError } from 'src/utils/functions/typeChecker';
-import { HasKeys } from '../../../../../server/shared_with_front/contants';
-import { AddCarValues } from '../../../../../server/shared_with_front/types/types-shared';
+import { HasKeys } from '../../../../../../server/shared_with_front/contants';
+import { AddCarValues } from '../../../../../../server/shared_with_front/types/types-shared';
 
-interface AdminProps {}
+interface NewCarProps {}
 
-export const AdminPage: React.FC<AdminProps> = () => {
+export const AddNewCar: React.FC<NewCarProps> = () => {
   const transTypes = Object.values(TransmissionEnum);
   const { addingDealerCar } = useAppSelector((state) => state.carsReducer);
   const { catalogQuery } = useAppSelector((state) => state.globalAppState);
@@ -55,7 +53,6 @@ export const AdminPage: React.FC<AdminProps> = () => {
   };
   return (
     <ContainerOuter pt={['32px', null, null, '40px']}>
-      <Button onClick={() => dispatch(logoutUser())}>logout</Button>
       <Center>
         <Card w="500px" bg="#fff" p="4">
           <Formik
@@ -78,9 +75,6 @@ export const AdminPage: React.FC<AdminProps> = () => {
                 formdata.append('keys', HasKeys.YES);
               }
 
-              console.log(formdata.get('keys'));
-
-              console.log(restValues);
               // add new car
               const query = new URLSearchParams(catalogQuery);
               dispatch(addDealerCar(formdata))
@@ -231,4 +225,4 @@ export const AdminPage: React.FC<AdminProps> = () => {
   );
 };
 
-export default AdminPage;
+export default AddNewCar;

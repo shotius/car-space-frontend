@@ -19,7 +19,7 @@ export const CarSpecTable: React.FC<CarSpecTableProps> = ({ car }) => {
         <HeadingSecondary>
           {' '}
           <NotSpecified />
-        </HeadingSecondary>
+        `</HeadingSecondary>
       </HStack>
       <HStack w="full" justify="space-between">
         <TextRegular opacity="0.5">Manufacturer</TextRegular>

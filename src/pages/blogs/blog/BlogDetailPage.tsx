@@ -23,7 +23,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
           <VStack
             w="500px"
             position="sticky"
-            top="225px"
+            top={['184px', null, null, "215px", "220px"]}
             h="full"
             spacing="0px"
           >
