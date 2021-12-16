@@ -1,5 +1,7 @@
 import { Button, StackProps, useDisclosure } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useAppDispatch } from 'src/redux/app/hook';
+import { getUsers } from 'src/redux/features/auth/userSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { IUser } from '../../../../../server/shared_with_front/types/types-shared';
 import { SelectSearch } from '../Inputs/SelectSearch';
@@ -23,6 +25,8 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
   const [selectedUser, setSelectedUser] = useState<IUser>();
   const [placeholder, setPlaceholder] = useState('');
   const [searchWord, setSearchWord] = useState('');
+  const [userList, setUserList] = useState<IUser[]>([]);
+  const dispatch = useAppDispatch();
 
   // -- Placehodler update
   const updatePlaceholder = () => {
@@ -31,10 +35,18 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
       : setPlaceholder('Search for user...');
   };
 
-  const list = ['adsf', 'adf,', '123'];
+  const getUserAsync = (value: string) => {
+    dispatch(getUsers(value))
+      .unwrap()
+      .then((data) => {
+        setUserList(data)
+        console.log('data: ', data)
+      })
+      .catch((error) => console.log(error));
+  };
 
-  const usersToShow = list.filter((user) =>
-    user.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
+  const usersToShow = userList.filter((user) =>
+    user.name.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
   );
 
   return (
@@ -62,6 +74,7 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
               selectedUser ? capitalizeEach(selectedUser.name) : searchWord
             }
             onChange={(e) => {
+              getUserAsync(e.currentTarget.value);
               setSearchWord(e.currentTarget.value);
               onOpen();
             }}
@@ -74,16 +87,17 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
           />
         </SelectTrigger>
         <SelectOptions isOpen={isOpen}>
-          {usersToShow.map((item) => (
+          {usersToShow.map((user) => (
             <Button
               onClick={() => {
-                setPlaceholder(item)
-                onToggle()
-                onSelect(item);
+                setPlaceholder(user.name);
+                onToggle();
+                onSelect(user.id);
+                setSelectedUser(user)
               }}
-              key={item}
+              key={user.id}
             >
-              {item}
+              {user.name}
             </Button>
           ))}
         </SelectOptions>

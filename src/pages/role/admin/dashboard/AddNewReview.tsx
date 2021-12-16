@@ -1,4 +1,4 @@
-import { Center, Textarea } from '@chakra-ui/react';
+import { Center, Textarea, useToast } from '@chakra-ui/react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { Field, Form, Formik } from 'formik';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
@@ -22,6 +22,7 @@ interface InitialState {
 
 export const AddNewReview: React.FC<AddNewReviewProps> = ({}) => {
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   const initialState: InitialState = {
     text: '',
@@ -41,7 +42,7 @@ export const AddNewReview: React.FC<AddNewReviewProps> = ({}) => {
 
   const validatePhotos = (photos: FileList) => {
     let error = '';
-    if (photos.length > 4) {
+    if (photos && photos.length > 4) {
       error = 'Photos must be less then 4';
     }
     return error;
@@ -64,7 +65,14 @@ export const AddNewReview: React.FC<AddNewReviewProps> = ({}) => {
 
               dispatch(addCustomerReview(formdata))
                 .unwrap()
-                .then((data) => console.log('data: ', data))
+                .then(() =>
+                  toast({
+                    title: 'New Review added',
+                    duration: 2000,
+                    status: 'success',
+                    position: "top"
+                  })
+                )
                 .catch((error) => {
                   if (isApiValidationError(error)) {
                     if (error.status === 422 && error.errors?.length) {
@@ -119,7 +127,9 @@ export const AddNewReview: React.FC<AddNewReviewProps> = ({}) => {
                           setFieldValue('photos', e.currentTarget.files);
                         }}
                       />
-                      <TextRegular as="span" display="block" color="red">{form.errors.photos}</TextRegular>
+                      <TextRegular as="span" display="block" color="red">
+                        {form.errors.photos}
+                      </TextRegular>
                     </>
                   )}
                 </Field>

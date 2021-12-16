@@ -98,6 +98,22 @@ export const setUserAvatarThunk = createAsyncThunk<
   }
 });
 
+/**
+ * Function gets list of users
+ * @returns {IUser[]}
+ */
+export const getUsers = createAsyncThunk<IUser[], string>(
+  'users/getUser',
+  async (searchWord, { rejectWithValue }) => {
+    try {
+      const { results } = await userServices.getUsers(searchWord);
+      return results;
+    } catch (error) {
+      return rejectWithValue('Could not get Users');
+    }
+  }
+);
+
 const userInfoSlice = createSlice({
   name: 'userInfoSlice',
   initialState,
