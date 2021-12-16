@@ -1,6 +1,15 @@
-import { AspectRatio, Center, HStack, Image, VStack } from '@chakra-ui/react';
+import {
+  AspectRatio,
+  Button,
+  Center,
+  HStack,
+  IconButton,
+  Image,
+  VStack,
+} from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
+import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
 import { Card } from 'src/components/molecules/Cards/Card';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { NewReviwForm } from 'src/components/organizms/Forms/newReviewForm';
@@ -20,29 +29,46 @@ export const AddNewReview: React.FC<AddNewReviewProps> = ({}) => {
   return (
     <ContainerOuter pt={['32px', null, null, '40px']}>
       <Center>
-        <VStack>
-          <Card w="500px" p="4">
+        <VStack spacing="32px">
+          <Card maxW="500px" p="4">
             <NewReviwForm />
           </Card>
-          <Card>
-            <VStack>
-              {reviews.length ? reviews.map((review, id) => (
-                <HStack key={id} bg="autoGrey.200" w="full" p="4" borderRadius="8">
-                  <AspectRatio ratio={1/1} w="80px">
-                    <Image
-                      src={ review.user && review.user.avatar}
-                      fallbackSrc="https://image.shutterstock.com/image-vector/profile-picture-avatar-icon-vector-260nw-1760295569.jpg"
-                      borderRadius="100px"
+          <Card w="full" maxW="500px">
+            <VStack w="full">
+              {reviews.length ? (
+                reviews.map((review, id) => (
+                  <HStack
+                    key={id}
+                    bg="autoGrey.200"
+                    w="full"
+                    p="4"
+                    borderRadius="8"
+                  >
+                    <IconButton
+                      icon={<CloseIcon />}
+                      aria-label="remove review"
                     />
-                  </AspectRatio>
-                  <TextRegular>{review.text}</TextRegular>
-                  {review.photos && review.photos.map((photo) => (
-                    <AspectRatio key={photo} ratio={1 / 1} w="60px">
-                      <Image src={photo} />
+                    <AspectRatio ratio={1 / 1} minW="80px">
+                      <Image
+                        src={review.user && review.user.avatar}
+                        fallbackSrc="https://image.shutterstock.com/image-vector/profile-picture-avatar-icon-vector-260nw-1760295569.jpg"
+                        borderRadius="100px"
+                      />
                     </AspectRatio>
-                  ))}
-                </HStack>
-              )) : <>{console.log(reviews)}</>}
+                    <TextRegular overflowWrap="anywhere">
+                      {review.text}
+                    </TextRegular>
+                    {review.photos &&
+                      review.photos.map((photo) => (
+                        <AspectRatio key={photo} ratio={1 / 1} minW="60px">
+                          <Image src={photo} />
+                        </AspectRatio>
+                      ))}
+                  </HStack>
+                ))
+              ) : (
+                <>No Review Yet</>
+              )}
             </VStack>
           </Card>
         </VStack>
