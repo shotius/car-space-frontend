@@ -1,6 +1,7 @@
 import { Box, HStack } from '@chakra-ui/layout';
 import { useEffect, useRef, useState } from 'react';
-import { useAppSelector } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { getCustomerReviews } from 'src/redux/features/customer/customerSlice';
 import useWindowSize from 'src/utils/hooks/useWindowSize';
 // import Swiper core and required modules
 import SwiperCore from 'swiper';
@@ -30,6 +31,9 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
   // changes on window resize
   const windowSize = useWindowSize();
 
+  const { reviews } = useAppSelector((state) => state.customers);
+  const dispatch = useAppDispatch();
+
   // swiper initialize function
   // extracted in function because we use it in useEffect
   const initSwiper = (swiper: SwiperCore) => {
@@ -42,12 +46,17 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
     swiper.navigation.update();
   };
 
+  // get customer reviews on the mount
+  useEffect(() => {
+    dispatch(getCustomerReviews(''));
+  }, []);
+
   // reinitialize swiper when windos is resized
   useEffect(() => {
-    if (swiper) {
+    if (swiper && reviews) {
       initSwiper(swiper);
     }
-  }, [swiper, windowSize]);
+  }, [swiper, windowSize, reviews]);
 
   return (
     <Box w="100%" position="relative" borderRadius="4px">
@@ -58,7 +67,7 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
         // when using arrows
         onSlideChangeTransitionStart={() => setHideNavigation(true)}
         onSlideChangeTransitionEnd={() => setHideNavigation(false)}
-        // when swiping
+        // when swiping on mobile
         onSliderFirstMove={() => setHideNavigation(true)}
         onSlideResetTransitionEnd={() => setHideNavigation(false)}
         onSlideChange={(swiper) => {
@@ -72,21 +81,11 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
           });
         }}
       >
-        <SwiperSlide>
-          <CustomerReviewCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CustomerReviewCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CustomerReviewCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CustomerReviewCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CustomerReviewCard />
-        </SwiperSlide>
+        {reviews.map((review) => (
+          <SwiperSlide key={review.id}>
+            <CustomerReviewCard review={review} />
+          </SwiperSlide>
+        ))}
       </Swiper>
 
       {/* navigation buttons */}
@@ -100,9 +99,6 @@ export const CustomersReviewCarousel: React.FC<CustomersReviewProps> = () => {
           right="10px"
           spacing="0"
           display={hideNavigation ? 'none' : 'block'}
-          // display="none"
-
-          // transition="cubic-bezier(0,1.9,1,.52) .2s"
         >
           <ButtonMobile side="right" ref={prevRef} animate={!isFirstSlide} />
           <ButtonMobile side="left" ref={nextRef} animate={!isLastSlide} />

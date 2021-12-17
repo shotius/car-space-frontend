@@ -11,30 +11,39 @@ interface ICustomerSliceState {
   reviews: ICustomerReviewFront[];
   fetchingReviews: boolean;
   addingReview: boolean;
+  removingReview: boolean;
+  error?: string;
 }
 
 const initialState: ICustomerSliceState = {
   reviews: [],
   fetchingReviews: false,
   addingReview: false,
+  removingReview: false,
 };
 
 /**
  * Function fetches customer reviews
  * @returns {INewReview[]} list of customer reviews
  */
-export const getCustomerReviews = createAsyncThunk<ICustomerReviewFront[]>(
-  'customer/getCustomerReviews',
-  async (_, { rejectWithValue }) => {
-    try {
-      const { results } = await customerService.getReviews();
-      return results;
-    } catch (error) {
-      return rejectWithValue('Could not get review');
-    }
+export const getCustomerReviews = createAsyncThunk<
+  ICustomerReviewFront[],
+  any,
+  { rejectValue: string }
+>('customer/getCustomerReviews', async (_, { rejectWithValue }) => {
+  try {
+    const { results } = await customerService.getReviews();
+    return results;
+  } catch (error) {
+    return rejectWithValue('Could not get review');
   }
-);
+});
 
+/**
+ * Function adds new Review
+ * @param {FormData} formdata request datas
+ * @returns {ICustomerReviewFront} repsponse is added review
+ */
 export const addCustomerReview = createAsyncThunk<
   ICustomerReviewFront,
   FormData,
@@ -53,6 +62,24 @@ export const addCustomerReview = createAsyncThunk<
   }
 });
 
+/**
+ * Function deletes review from
+ * @param {string} reviewId
+ * @returns {string} success message or error
+ */
+export const deleteReview = createAsyncThunk<string, string>(
+  'customer/deleteReview',
+  async (reviewId, { rejectWithValue, dispatch }) => {
+    try {
+      const { results } = await customerService.removeReview(reviewId);
+      dispatch(getCustomerReviews(''));
+      return results;
+    } catch (error) {
+      return rejectWithValue('Could not delete a review');
+    }
+  }
+);
+
 const customerSlice = createSlice({
   name: 'customerSlice',
   initialState,
@@ -66,8 +93,9 @@ const customerSlice = createSlice({
       state.fetchingReviews = false;
       state.reviews = action.payload;
     });
-    builder.addCase(getCustomerReviews.rejected, (state) => {
+    builder.addCase(getCustomerReviews.rejected, (state, action) => {
       state.fetchingReviews = false;
+      state.error = action.payload;
     });
 
     // -- Add Review
@@ -80,6 +108,17 @@ const customerSlice = createSlice({
     });
     builder.addCase(addCustomerReview.rejected, (state) => {
       state.addingReview = false;
+    });
+
+    // -- Removing Review
+    builder.addCase(deleteReview.pending, (state) => {
+      state.removingReview = true;
+    });
+    builder.addCase(deleteReview.fulfilled, (state) => {
+      state.removingReview = false;
+    });
+    builder.addCase(deleteReview.rejected, (state) => {
+      state.removingReview = false;
     });
   },
 });

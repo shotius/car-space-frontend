@@ -16,7 +16,7 @@ const reducer = {
   carImages,
   globalAppState,
   userInfoSlice: UserInfo,
-  customers: customersReducer
+  customers: customersReducer,
 };
 
 export const store = configureStore({

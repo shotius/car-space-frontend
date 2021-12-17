@@ -5,8 +5,11 @@ import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { UserSearchSelect } from 'src/components/molecules/Selects/UserSearchSelect';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { useAppDispatch } from 'src/redux/app/hook';
-import { addCustomerReview, getCustomerReviews } from 'src/redux/features/customer/customerSlice';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import {
+  addCustomerReview,
+  getCustomerReviews,
+} from 'src/redux/features/customer/customerSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
 import { isApiValidationError } from 'src/utils/functions/typeChecker';
 
@@ -21,6 +24,8 @@ interface InitialState {
 export const NewReviwForm: React.FC<AddNewReviewProps> = ({}) => {
   const dispatch = useAppDispatch();
   const toast = useToast();
+
+  const { addingReview } = useAppSelector((state) => state.customers);
 
   const initialState: InitialState = {
     text: '',
@@ -67,7 +72,7 @@ export const NewReviwForm: React.FC<AddNewReviewProps> = ({}) => {
         dispatch(addCustomerReview(formdata))
           .unwrap()
           .then(() => {
-            dispatch(getCustomerReviews())
+            dispatch(getCustomerReviews(''));
             toast({
               title: 'New Review added',
               duration: 2000,
@@ -135,7 +140,7 @@ export const NewReviwForm: React.FC<AddNewReviewProps> = ({}) => {
               </>
             )}
           </Field>
-          <ButtonRegular type="submit" mt="4">
+          <ButtonRegular type="submit" mt="4" isLoading={addingReview}>
             Add Review
           </ButtonRegular>
         </Form>

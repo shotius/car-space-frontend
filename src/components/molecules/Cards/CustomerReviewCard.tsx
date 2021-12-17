@@ -1,15 +1,16 @@
-import {
-  AspectRatio, Image,
-  SimpleGrid,
-  Stack
-} from '@chakra-ui/react';
+import { AspectRatio, Image, SimpleGrid, Stack } from '@chakra-ui/react';
+import { ICustomerReviewFront } from '../../../../../server/shared_with_front/types/types-shared';
 import { UserAvatar } from '../Avatars/UserAvatar';
 import { TextRegular } from '../Texts/TextRegular';
 import { Card } from './Card';
 
-interface CustomerReviewCardProps {}
+interface CustomerReviewCardProps {
+  review: ICustomerReviewFront;
+}
 
-export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
+export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = ({
+  review,
+}) => {
   return (
     <Card p={['4', '8', '48px']}>
       <Stack
@@ -18,21 +19,18 @@ export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
         align={['center', 'center']}
         justify="space-around"
         w="full"
-
       >
         {/* user photo and name */}
         <UserAvatar
-          image="https://www.elitesingles.co.uk/wp-content/uploads/sites/59/2019/11/2b_en_articleslide_sm2-350x264.jpg"
-          mainText="Full name123"
-          w={["full", null, "450px"]}
+          username={review.user.username}
+          image={review.user.avatar}
+          mainText={review.user.name}
+          w={['full', null, '450px']}
         />
 
         {/* descripttion */}
         <TextRegular opacity="0.8" noOfLines={[4, null, 5]} h="full">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
-          explicabo consectetur illum vel harum numquam, natus cupiditate.
-          Ipsam, quam quis, cum expedita dolorum itaque iste necessitatibus ipsa
-          numquam, natus cupiditate.
+          {review.text}
         </TextRegular>
 
         {/* photos of cars in a grid */}
@@ -46,46 +44,15 @@ export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = () => {
             'repeat(2, 80px)',
           ]}
         >
-          <AspectRatio
-            ratio={[50 / 42, null, 80 / 56]}
-            w={['50px', null, '80px']}
-          >
-            <Image
-              src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp"
-              alt="car white"
-              borderRadius="4px"
-            />
-          </AspectRatio>
-          <AspectRatio
-            ratio={[50 / 42, null, 80 / 56]}
-            w={['50px', null, '80px']}
-          >
-            <Image
-              src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp"
-              alt="car white"
-              borderRadius="4px"
-            />
-          </AspectRatio>
-          <AspectRatio
-            ratio={[50 / 42, null, 80 / 56]}
-            w={['50px', null, '80px']}
-          >
-            <Image
-              src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp"
-              alt="car white"
-              borderRadius="4px"
-            />
-          </AspectRatio>
-          <AspectRatio
-            ratio={[50 / 42, null, 80 / 56]}
-            w={['50px', null, '80px']}
-          >
-            <Image
-              src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp"
-              alt="car white"
-              borderRadius="4px"
-            />
-          </AspectRatio>
+          {review.photos.map((photo) => (
+            <AspectRatio
+              ratio={[50 / 42, null, 80 / 56]}
+              w={['50px', null, '80px']}
+              key={photo}
+            >
+              <Image src={photo} alt="car white" borderRadius="4px" />
+            </AspectRatio>
+          ))}
         </SimpleGrid>
       </Stack>
     </Card>

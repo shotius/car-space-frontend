@@ -6,15 +6,16 @@ import {
   ImageProps,
   Stack,
   StackProps,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { useAppDispatch } from 'src/redux/app/hook';
 import { toggleProfilePictureChangeModal } from 'src/redux/features/global/gloabalSlice';
 import { InstagramButton } from '../Buttons/InstagramButton';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 
 interface UserAvatarProps {
   image?: ImageProps['src'];
+  username: string | null;
   mainText?: string;
   secondaryText?: string;
   size?: ImageProps['w'];
@@ -23,6 +24,7 @@ interface UserAvatarProps {
 
 export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
   image,
+  username, 
   mainText,
   secondaryText,
   direction = ['row', 'column'],
@@ -33,7 +35,6 @@ export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
   showPhotoChange = false, 
   ...rest
 }) => {
-  const { username } = useAppSelector((state) => state.userInfoSlice);
   const dispatch = useAppDispatch();
 
   return (
