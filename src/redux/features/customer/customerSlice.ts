@@ -3,8 +3,8 @@ import axios from 'axios';
 import customerService from 'src/services/customerService';
 import { isApiValidationError } from 'src/utils/functions/typeChecker';
 import {
-  ApiValidationError, ICustomerReviewFront,
-  INewReview
+  ApiValidationError,
+  ICustomerReviewFront,
 } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface ICustomerSliceState {
@@ -36,7 +36,7 @@ export const getCustomerReviews = createAsyncThunk<ICustomerReviewFront[]>(
 );
 
 export const addCustomerReview = createAsyncThunk<
-  INewReview,
+  ICustomerReviewFront,
   FormData,
   { rejectValue: string | ApiValidationError }
 >('customer/addCustomerReview', async (formdata, { rejectWithValue }) => {

@@ -1,5 +1,5 @@
 import { axios } from "src/utils/axios"
-import { ApiSuccessResponse, ICustomerReviewFront, INewReview } from "../../../server/shared_with_front/types/types-shared"
+import { ApiSuccessResponse, ICustomerReviewFront } from "../../../server/shared_with_front/types/types-shared"
 
 const baseUrl = '/api/customer-reviews'
 
@@ -10,7 +10,7 @@ const getReviews = async () => {
 
 const addReview = async (formdata: FormData) => {
   const {data} = await axios.post(baseUrl, formdata)
-  return data as ApiSuccessResponse<INewReview>
+  return data as ApiSuccessResponse<ICustomerReviewFront>
 }
 
 const customerService = {

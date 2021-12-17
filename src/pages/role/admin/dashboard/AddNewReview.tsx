@@ -1,6 +1,5 @@
 import {
   AspectRatio,
-  Button,
   Center,
   HStack,
   IconButton,
