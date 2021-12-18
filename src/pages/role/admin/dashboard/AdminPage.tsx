@@ -12,6 +12,8 @@ export const AdminPage: React.FC<AdminProps> = () => {
   const { path } = useRouteMatch();
   const dispatch = useAppDispatch();
 
+  console.log(path)
+
   return (
     <ContainerOuter>
       <HStack w="full" justify="center" pt="4">

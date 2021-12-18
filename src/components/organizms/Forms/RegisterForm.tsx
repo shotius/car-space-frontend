@@ -1,19 +1,19 @@
-import { VStack, HStack } from '@chakra-ui/layout';
+import { HStack, VStack } from '@chakra-ui/layout';
 import {
   FormControl,
+  FormErrorMessage,
   InputGroup,
   InputLeftAddon,
-  FormErrorMessage,
-  Checkbox,
 } from '@chakra-ui/react';
-import { Formik, Form, Field } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
+import { FormikCheckbox } from 'src/components/molecules/formik/FormikCheckbox';
 import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { InputGrey } from 'src/components/molecules/Inputs/InputGrey';
-import { SelectGrey } from 'src/components/molecules/Selects/SelectGrey';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import * as Yup from 'yup';
 
 interface RegisterFormProps {
   onClose: () => void;
@@ -21,6 +21,29 @@ interface RegisterFormProps {
 }
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
+  // function validatePhone(value) {
+  //   let error = '';
+  //   if (value.length < 9) {
+  //     error = 'Georgian number should have 9 numbers';
+  //   }
+
+  //   if (value.lenght > 9) {
+  //     error = 'Woow, Too long';
+  //   }
+  //   return error;
+  // }
+  const SignupSchema = Yup.object().shape({
+    fullName: Yup.string()
+      .min(2, 'Too Short')
+      .matches(/[?^\s]/, 'Missing last name'),
+    email: Yup.string().email('Invalid mail').required('Required'),
+    password: Yup.string().min(4, 'Too short').required('Required'),
+    phoneNum: Yup.string()
+      .min(9, 'Georgian number should have 9 numbers')
+      .max(9, 'Woow, Too long'),
+    privacy: Yup.boolean().oneOf([true], 'Must Accept Privacy Policy'),
+  });
+
   return (
     <Formik
       initialValues={{
@@ -29,7 +52,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
         password: '',
         role: '',
         phoneNum: '',
+        privacy: false,
       }}
+      validationSchema={SignupSchema}
       onSubmit={(values) => {
         console.log('values: ', values);
       }}
@@ -39,17 +64,19 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
           <HeadingSecondary pb={['80px', null, '40px']} fontSize="24px">
             Register
           </HeadingSecondary>
-          <VStack spacing="25px" pb="20px">
+          <VStack spacing="22px" pb="4">
             <VStack w="full" spacing="0">
               <FormikInput
                 placeholder="Full name"
                 name="fullName"
                 h={['53px', null, '40px']}
+                isRequired
               />
               <FormikInput
                 placeholder="Email"
                 name="email"
                 h={['53px', null, '40px']}
+                isRequired
               />
               <FormikInput
                 placeholder="Password"
@@ -58,54 +85,47 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
                 autoComplete="new-password"
                 h={['53px', null, '40px']}
               />
-              <Field name="role">
-                {({ field }) => (
-                  <FormControl pt="2">
-                    <SelectGrey
-                      {...field}
-                      placeholder="Choose Role"
-                      h={['53px', null, '40px']}
-                    >
-                      <option>Simple User</option>
-                      <option>Dealer</option>
-                    </SelectGrey>
-                  </FormControl>
-                )}
-              </Field>
               <Field name="phoneNum">
                 {({ field, form }) => (
                   <FormControl
-                    isInvalid={form.errors.name && form.touched.name}
-                    pt="8px"
+                    isInvalid={form.errors.phoneNum && form.touched.phoneNum}
+                    py="8px"
                   >
                     <InputGroup>
-                      <InputLeftAddon children="+995" h={['53px',null, '40px']} bg="#F4F4F4"/>
+                      <InputLeftAddon
+                        children="+995"
+                        h={['53px', null, '40px']}
+                        bg="#F4F4F4"
+                      />
                       <InputGrey
                         {...field}
                         type="number"
                         placeholder="Phone Number"
-                        h={['53px',null, '40px']}
+                        h={['53px', null, '40px']}
                         borderLeftRadius="none"
+                        isRequired
                       />
-                      {form.error && (
-                        <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                      )}
                     </InputGroup>
+                    {form.errors && (
+                      <FormErrorMessage as="p">
+                        {form.errors.phoneNum}
+                      </FormErrorMessage>
+                    )}
                   </FormControl>
                 )}
               </Field>
+
+              <FormikCheckbox name="role" label="I'm a dealer" />
+
+              <FormikCheckbox name="privacy" isRequired>
+                <TextRegular fontSize="14px">I agree to </TextRegular>
+                <TextButton color="#427AD6" fontSize="14px">
+                  Privacy Policy
+                </TextButton>
+              </FormikCheckbox>
             </VStack>
-            <HStack w="full">
-              <Checkbox
-                colorScheme="autoOrange"
-                boxShadow="none"
-                _active={{ boxShadow: 'none' }}
-              />
-              <TextRegular fontSize="14px">I agree to </TextRegular>
-              <TextButton color="#427AD6" fontSize="14px">
-                Privacy Policy
-              </TextButton>
-            </HStack>
+
+            {/* Submit button  */}
             <ButtonRegular type="submit">Create an account</ButtonRegular>
             <HStack w="full">
               <TextRegular>Already a member?</TextRegular>
