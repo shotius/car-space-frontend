@@ -42,7 +42,7 @@ export const Home: React.FC<HomeProps> = () => {
 
         <ContainerOuter>
           <VStack w="full">
-            <SectionHeader mainText="Customer review" />
+            <SectionHeader mainText="Customer reviews" />
             <CustomersReviewCarousel />
           </VStack>
         </ContainerOuter>

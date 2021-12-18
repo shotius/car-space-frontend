@@ -4,6 +4,7 @@ import {
   FormErrorMessage,
   InputGroup,
   InputLeftAddon,
+  useToast,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
@@ -13,7 +14,13 @@ import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { InputGrey } from 'src/components/molecules/Inputs/InputGrey';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { registerUser } from 'src/redux/features/auth/authSlice';
+import { toErrorMap } from 'src/utils/functions/toErrorMap';
+import { isApiValidationError } from 'src/utils/functions/typeChecker';
 import * as Yup from 'yup';
+import { Roles } from '../../../../../server/shared_with_front/contants';
+import { RegisterParams } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface RegisterFormProps {
   onClose: () => void;
@@ -21,17 +28,10 @@ interface RegisterFormProps {
 }
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
-  // function validatePhone(value) {
-  //   let error = '';
-  //   if (value.length < 9) {
-  //     error = 'Georgian number should have 9 numbers';
-  //   }
+  const { registering } = useAppSelector((state) => state.authReducer);
+  const dispatch = useAppDispatch();
+  const toast = useToast();
 
-  //   if (value.lenght > 9) {
-  //     error = 'Woow, Too long';
-  //   }
-  //   return error;
-  // }
   const SignupSchema = Yup.object().shape({
     fullName: Yup.string()
       .min(2, 'Too Short')
@@ -44,19 +44,37 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
     privacy: Yup.boolean().oneOf([true], 'Must Accept Privacy Policy'),
   });
 
+  const initState: RegisterParams = {
+    fullName: '',
+    email: '',
+    password: '',
+    role: Roles.USER,
+    phone: '',
+    privacy: false,
+  };
+
   return (
     <Formik
-      initialValues={{
-        fullName: '',
-        email: '',
-        password: '',
-        role: '',
-        phoneNum: '',
-        privacy: false,
-      }}
+      initialValues={initState}
       validationSchema={SignupSchema}
-      onSubmit={(values) => {
+      onSubmit={(values, { setErrors }) => {
         console.log('values: ', values);
+        dispatch(registerUser(values))
+          .unwrap()
+          .then((data) => {
+            toast({
+              title: `${data.fullName} registered successfully`,
+              position: 'top',
+              status: 'success',
+              duration: 3000,
+            });
+            openLogin();
+          })
+          .catch((error) => {
+            if (isApiValidationError(error)) {
+              setErrors(toErrorMap(error.errors));
+            }
+          });
       }}
     >
       {() => (
@@ -85,7 +103,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
                 autoComplete="new-password"
                 h={['53px', null, '40px']}
               />
-              <Field name="phoneNum">
+              <Field name="phone">
                 {({ field, form }) => (
                   <FormControl
                     isInvalid={form.errors.phoneNum && form.touched.phoneNum}
@@ -126,7 +144,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
             </VStack>
 
             {/* Submit button  */}
-            <ButtonRegular type="submit">Create an account</ButtonRegular>
+            <ButtonRegular type="submit" isLoading={registering}>
+              Create an account
+            </ButtonRegular>
             <HStack w="full">
               <TextRegular>Already a member?</TextRegular>
               <TextButton color="#427AD6" onClick={openLogin}>

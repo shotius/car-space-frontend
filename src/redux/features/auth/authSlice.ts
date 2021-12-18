@@ -24,6 +24,7 @@ interface authState {
   loginSuccess: boolean;
   autoLoginLoading: boolean;
   autoLoginSuccess: boolean;
+  registering: boolean;
 }
 
 const initialState: authState = {
@@ -32,6 +33,7 @@ const initialState: authState = {
   loginSuccess: false,
   autoLoginLoading: false,
   autoLoginSuccess: false,
+  registering: false,
 };
 
 export const loginUser = createAsyncThunk<
@@ -87,7 +89,8 @@ export const autoLogin = createAsyncThunk(
   'auth/autoLogin',
   async (_, { dispatch }) => {
     try {
-      const { results } = await authService.autoLogin();
+      const { results } = await authService.me();
+      console.log('results: ', results);
       if (results) {
         dispatch(setIsAuthenticated(true));
         dispatch(setUsername(results.fullName));
@@ -166,6 +169,17 @@ const authSlice = createSlice({
       state.error = 'autoLogin failed';
       state.autoLoginLoading = false;
       state.autoLoginSuccess = false;
+    });
+
+    /** Register */
+    builder.addCase(registerUser.pending, (state) => {
+      state.registering = true;
+    });
+    builder.addCase(registerUser.fulfilled, (state) => {
+      state.registering = false;
+    });
+    builder.addCase(registerUser.rejected, (state) => {
+      state.registering = false;
     });
   },
 });

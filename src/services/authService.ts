@@ -10,7 +10,7 @@ import {
 
 const baseUrl = '/api/auth';
 
-const autoLogin = async () => {
+const me = async () => {
   const { data } = await axios.get(`${baseUrl}/me`);
   return data as ApiSuccessResponse<MeResponse>;
 };
@@ -31,7 +31,7 @@ const logout = async () => {
 };
 
 const authService = {
-  autoLogin,
+  me,
   login,
   register,
   logout,
