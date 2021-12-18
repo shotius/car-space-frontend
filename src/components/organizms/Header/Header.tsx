@@ -43,7 +43,7 @@ export const Header: React.FC<HeaderProps> = () => {
     isMobileMenuOpen: menuOpen,
   } = useAppSelector((state) => state.globalAppState);
 
-  const { isAuthenticated, role, username } = useAppSelector(
+  const { isAuthenticated, role, fullName } = useAppSelector(
     (state) => state.userInfoSlice
   );
 
@@ -146,7 +146,7 @@ export const Header: React.FC<HeaderProps> = () => {
                 }}
               >
                 <Icon as={PersonIcon} boxSize="4" mr="2" />
-                {username}
+                {fullName}
               </ButtonOutline>
             ) : (
               <HStack spacing={[null, null, '0', '2', null, '4']} ml="-15px">

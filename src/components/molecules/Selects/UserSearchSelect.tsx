@@ -41,7 +41,7 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
   // -- Placehodler update
   const updatePlaceholder = () => {
     selectedUser
-      ? setPlaceholder(selectedUser.name)
+      ? setPlaceholder(selectedUser.fullName)
       : setPlaceholder('Search for user...');
   };
 
@@ -62,7 +62,7 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
   };
 
   const usersToShow = userList.filter((user) =>
-    user.name.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
+    user.fullName.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
   );
 
   return (
@@ -83,7 +83,7 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
             label="Search for user..."
             placeholder={placeholder}
             value={
-              selectedUser ? capitalizeEach(selectedUser.name) : searchWord
+              selectedUser ? capitalizeEach(selectedUser.fullName) : searchWord
             }
             onChange={(e) => {
               const value = e.currentTarget.value;
@@ -105,7 +105,7 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
             <ButtonRect
               h="80px"
               onClick={() => {
-                setPlaceholder(user.name);
+                setPlaceholder(user.fullName);
                 onToggle();
                 onSelect(user.id);
                 setSelectedUser(user);
@@ -122,7 +122,7 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
                     borderRadius="100px"
                   />
                 </AspectRatio>
-                <HeadingSecondary>{user.name}</HeadingSecondary>
+                <HeadingSecondary>{user.fullName}</HeadingSecondary>
               </HStack>
             </ButtonRect>
           ))}

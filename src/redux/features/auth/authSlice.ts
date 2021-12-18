@@ -1,18 +1,22 @@
+import { isApiValidationError } from 'src/utils/functions/typeChecker';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import authService from 'src/services/authService';
-import { axios } from 'src/utils/axios';
+import {
+  ApiValidationError,
+  LoginParams,
+  LoginResponse,
+  RegisterParams,
+  RegisterResponse,
+} from '../../../../../server/shared_with_front/types/types-shared';
 import {
   setAvatar,
   setFavourites,
   setIsAuthenticated,
+  setPhone,
   setRole,
-  setUsername
+  setUsername,
 } from './userSlice';
-
-interface loginCredentials {
-  username: string;
-  password: string;
-}
+import axios from 'axios';
 
 interface authState {
   loading: boolean;
@@ -30,18 +34,23 @@ const initialState: authState = {
   autoLoginSuccess: false,
 };
 
-export const loginUser = createAsyncThunk(
+export const loginUser = createAsyncThunk<
+  LoginResponse,
+  LoginParams,
+  { rejectValue: string }
+>(
   'auth/login',
-  async (credentials: loginCredentials, { rejectWithValue, dispatch }) => {
+  async (credentials: LoginParams, { rejectWithValue, dispatch }) => {
     try {
-      const response: any = await authService.login(credentials);
-      if (response.results) {
-        localStorage.setItem('USER_ROLE', response.results.role);
-        dispatch(setUsername(response.results.username));
-        dispatch(setRole(response.results.role));
+      const { results } = await authService.login(credentials);
+      if (results) {
+        localStorage.setItem('USER_ROLE', results.role);
+        dispatch(setUsername(results.fullName));
+        dispatch(setRole(results.role));
         dispatch(setIsAuthenticated(true));
+        dispatch(setPhone(results.phone));
       }
-      return response;
+      return results;
     } catch (error: any) {
       if (error.response) {
         dispatch(setUsername(null));
@@ -59,7 +68,7 @@ export const logoutUser = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue, dispatch }) => {
     try {
-      await axios.get('/api/auth/logout');
+      await authService.logout();
       dispatch(setIsAuthenticated(false));
       dispatch(setUsername(null));
       dispatch(setRole(null));
@@ -78,10 +87,10 @@ export const autoLogin = createAsyncThunk(
   'auth/autoLogin',
   async (_, { dispatch }) => {
     try {
-      const {results} = await authService.autoLogin();
-      if (results && results.isAuthenticated) {
+      const { results } = await authService.autoLogin();
+      if (results) {
         dispatch(setIsAuthenticated(true));
-        dispatch(setUsername(results.username));
+        dispatch(setUsername(results.fullName));
         dispatch(setRole(results.role));
         dispatch(setAvatar(results.avatar));
       }
@@ -94,6 +103,31 @@ export const autoLogin = createAsyncThunk(
   }
 );
 
+/**
+ * Function registers the user
+ * @param {RegistParams} credentilas
+ * @returns {RegisterResponse}
+ */
+export const registerUser = createAsyncThunk<
+  RegisterResponse,
+  RegisterParams,
+  { rejectValue: string | ApiValidationError }
+>('auth/registerUser', async (credentials, { rejectWithValue }) => {
+  try {
+    const { results } = await authService.register(credentials);
+    return results;
+  } catch (error) {
+    if (isApiValidationError(error)) {
+      return rejectWithValue(error);
+    }
+    if (axios.isAxiosError(error) && error.response) {
+      return rejectWithValue(error.response.data);
+    }
+    return rejectWithValue('Could not register the user');
+  }
+});
+
+// -- Reducer
 const authSlice = createSlice({
   name: 'auth',
   initialState,

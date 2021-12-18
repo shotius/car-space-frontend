@@ -10,7 +10,7 @@ import { isApiDefaultError } from './../../../utils/functions/typeChecker';
 import { UsertInfoState } from './types';
 
 const initialState: UsertInfoState = {
-  username: null,
+  fullName: null,
   role: null,
   isAuthenticated: false,
   favouriteCarIds: [],
@@ -119,7 +119,7 @@ const userInfoSlice = createSlice({
   initialState,
   reducers: {
     setUsername: (state, action: PayloadAction<string | null>) => {
-      state.username = action.payload;
+      state.fullName = action.payload;
     },
     setRole: (state, action: PayloadAction<RoleTypes | null>) => {
       state.role = action.payload;
@@ -132,6 +132,9 @@ const userInfoSlice = createSlice({
     },
     setAvatar: (state, action: PayloadAction<string>) => {
       state.avatar = action.payload;
+    },
+    setPhone: (state, action: PayloadAction<string>) => {
+      state.phone = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -181,6 +184,7 @@ const userInfoSlice = createSlice({
 export const {
   setUsername,
   setRole,
+  setPhone, 
   setIsAuthenticated,
   setFavourites,
   setAvatar,

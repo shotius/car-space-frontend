@@ -85,7 +85,7 @@ export const UserAvatar: React.FC<UserAvatarProps & StackProps> = ({
 
       <VStack align={['flex-start', 'center']} spacing={0}>
         <HeadingSecondary maxW="150px" isTruncated>
-          {mainText}
+          {username}
         </HeadingSecondary>
         <HeadingSecondary
           fontSize="16px"

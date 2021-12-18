@@ -27,7 +27,7 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
 }) => {
   const [liked, setLiked] = useState(false);
   const dispatch = useAppDispatch();
-  const { username, favouriteCarIds, likingCar } = useAppSelector(
+  const { fullName, favouriteCarIds, likingCar } = useAppSelector(
     (state) => state.userInfoSlice
   );
   const { isDesktop } = useDetectScreen();
@@ -49,7 +49,7 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
       disabled={likingCar}
       onClick={(event) => {
         if (event.stopPropagation) event.stopPropagation();
-        if (username) {
+        if (fullName) {
           dispatch(likeCarThunk(carId))
             .unwrap()
             .catch((error) =>

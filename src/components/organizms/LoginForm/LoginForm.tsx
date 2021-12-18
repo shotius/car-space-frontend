@@ -10,7 +10,9 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { loginUser } from 'src/redux/features/auth/authSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
-import { isApiValidationError } from 'src/utils/functions/typeChecker';
+import {
+  isApiValidationError
+} from 'src/utils/functions/typeChecker';
 
 interface LoginFormProps {
   onClose: () => void;
@@ -26,19 +28,17 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 
   return (
     <Formik
-      initialValues={{ username: '', password: '' }}
+      initialValues={{ email: '', password: '' }}
       onSubmit={(values, { setErrors }) => {
         const credentials = {
-          username: values.username,
+          email: values.email,
           password: values.password,
         };
         dispatch(loginUser(credentials))
           .unwrap()
           .then((result) => {
-            if (result.success) {
-              history.push(`/${result.results.role}/dashboard`);
-              onClose();
-            }
+            history.push(`/${result.role}/dashboard`);
+            onClose();
           })
           .catch((error) => {
             if (isApiValidationError(error)) {
@@ -57,8 +57,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           <VStack spacing="32px" pb="10px">
             <VStack spacing="0" w="full">
               <FormikInput
-                name="username"
-                placeholder="username : user"
+                name="email"
+                placeholder="email : shootius@gmail.com"
                 h={['53px', null, '40px']}
               />
               <FormikInput

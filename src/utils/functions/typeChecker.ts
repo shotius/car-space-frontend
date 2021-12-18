@@ -35,3 +35,8 @@ export const isApiValidationError = (obj: any): obj is ApiValidationError => {
   }
   return false;
 };
+
+
+export const isString = (text: unknown): text is string => {
+  return typeof text === 'string' || text instanceof String;
+};

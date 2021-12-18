@@ -133,9 +133,10 @@ export interface GlobalStateSliceState {
 export interface UsertInfoState {
   role: RoleTypes | null;
   isAuthenticated: boolean;
-  username: string | null;
+  fullName: string | null;
   favouriteCarIds: string[];
   avatar?: string;
+  phone?: string; 
 
   favouriteCars: ICarDealer[];
   favouriteCarsFetching: boolean;

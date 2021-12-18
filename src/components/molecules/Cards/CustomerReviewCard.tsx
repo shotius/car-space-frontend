@@ -22,9 +22,9 @@ export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = ({
       >
         {/* user photo and name */}
         <UserAvatar
-          username={review.user.username}
+          username={review.user.fullName}
           image={review.user.avatar}
-          mainText={review.user.name}
+          mainText={review.user.fullName}
           w={['full', null, '450px']}
         />
 
