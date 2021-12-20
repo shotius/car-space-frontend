@@ -135,6 +135,7 @@ export const Header: React.FC<HeaderProps> = () => {
             {/* if user is authenticated login and register buttons are not shown */}
             {isAuthenticated ? (
               <ButtonOutline
+                px="0"
                 onClick={() => {
                   // if USER is deleted from localstorage logout
                   if (!USER) {
@@ -145,7 +146,11 @@ export const Header: React.FC<HeaderProps> = () => {
                 }}
               >
                 <Icon as={PersonIcon} boxSize="4" mr="2" />
-                <TextRegular fontSize="16px" w="full">{fullName?.split(' ')[0]}</TextRegular>
+                <TextRegular
+                  fontSize="16px"
+                  w="55px"
+                  isTruncated
+                >{`${fullName}`}</TextRegular>
               </ButtonOutline>
             ) : (
               <HStack spacing={[null, null, '0', '2', null, '4']} ml="-15px">

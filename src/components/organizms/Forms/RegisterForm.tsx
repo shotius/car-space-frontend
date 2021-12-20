@@ -4,9 +4,10 @@ import {
   FormErrorMessage,
   InputGroup,
   InputLeftAddon,
-  useToast
+  useToast,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
+import { useState } from 'react';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { FormikCheckbox } from 'src/components/molecules/formik/FormikCheckbox';
@@ -28,9 +29,23 @@ interface RegisterFormProps {
 }
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
+  const [verificationInfoShown, setVerificationInfoShown] = useState(false);
+  const [email, setEmail] = useState('example@gmail.com');
+
   const { registering } = useAppSelector((state) => state.authReducer);
   const dispatch = useAppDispatch();
   const toast = useToast();
+
+  if (verificationInfoShown) {
+    return (
+      <VStack h="500px" justify="center">
+        <HeadingSecondary color="autoOrange.500" fontSize="24px">
+          Verification link is sent to
+        </HeadingSecondary>
+        <HeadingSecondary fontSize="24px">{email}</HeadingSecondary>
+      </VStack>
+    );
+  }
 
   const SignupSchema = Yup.object().shape({
     fullName: Yup.string()
@@ -58,11 +73,12 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
       initialValues={initState}
       validationSchema={SignupSchema}
       onSubmit={(values, { setErrors }) => {
-        console.log('values: ', values);
         dispatch(registerUser(values))
           .unwrap()
           .then((data) => {
-            openLogin();
+            setEmail(data.email);
+            setVerificationInfoShown(true);
+            setTimeout(() => setVerificationInfoShown(false), 15000);
             toast({
               title: `Verification link is sent to '${data.email}'`,
               position: 'top',
