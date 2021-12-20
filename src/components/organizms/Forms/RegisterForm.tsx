@@ -4,7 +4,7 @@ import {
   FormErrorMessage,
   InputGroup,
   InputLeftAddon,
-  useToast,
+  useToast
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
@@ -62,13 +62,13 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
         dispatch(registerUser(values))
           .unwrap()
           .then((data) => {
+            openLogin();
             toast({
-              title: `${data.fullName} registered successfully`,
+              title: `Verification link is sent to '${data.email}'`,
               position: 'top',
               status: 'success',
-              duration: 3000,
+              duration: 10000,
             });
-            openLogin();
           })
           .catch((error) => {
             if (isApiValidationError(error)) {

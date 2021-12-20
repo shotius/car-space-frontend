@@ -109,7 +109,6 @@ export const Header: React.FC<HeaderProps> = () => {
               <MenuLink
                 to={`/catalog${catalogQuery ? `?${catalogQuery}` : ''}`}
                 label="Catalog"
-                // activeOnlyWhenExact={true}
               />
               <MenuLink to="/services" label="Services" />
               <MenuLink to="/blog" label="Blog" activeOnlyWhenExact={true} />
@@ -146,7 +145,7 @@ export const Header: React.FC<HeaderProps> = () => {
                 }}
               >
                 <Icon as={PersonIcon} boxSize="4" mr="2" />
-                {fullName}
+                <TextRegular fontSize="16px" w="full">{fullName?.split(' ')[0]}</TextRegular>
               </ButtonOutline>
             ) : (
               <HStack spacing={[null, null, '0', '2', null, '4']} ml="-15px">
@@ -155,6 +154,7 @@ export const Header: React.FC<HeaderProps> = () => {
                   variant="ghost"
                   fontWeight="light"
                   fontSize="16px"
+                  ml="1"
                   onClick={() => dispatch(toggleLogin())}
                   _hover={{
                     bg: 'autoGrey.200',

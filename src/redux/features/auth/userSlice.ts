@@ -4,6 +4,7 @@ import userServices from 'src/services/userServices';
 import {
   ICarDealer,
   IUser,
+  LoginResponse,
   RoleTypes,
 } from '../../../../../server/shared_with_front/types/types-shared';
 import { isApiDefaultError } from './../../../utils/functions/typeChecker';
@@ -136,6 +137,21 @@ const userInfoSlice = createSlice({
     setPhone: (state, action: PayloadAction<string>) => {
       state.phone = action.payload;
     },
+    setUserInfo: (state, action: PayloadAction<LoginResponse>) => {
+      const { phone, fullName, role, avatar, isAuthenticated } = action.payload;
+      state.phone = phone;
+      state.fullName = fullName;
+      state.avatar = avatar;
+      state.role = role;
+      state.isAuthenticated = isAuthenticated;
+    },
+    resetUserInfo: (state) => {
+      state.phone = '';
+      state.fullName = '';
+      state.avatar = '';
+      state.role = null;
+      state.isAuthenticated = false;
+    },
   },
   extraReducers: (builder) => {
     // get all favourite lot numbers
@@ -184,9 +200,11 @@ const userInfoSlice = createSlice({
 export const {
   setUsername,
   setRole,
-  setPhone, 
+  setPhone,
   setIsAuthenticated,
   setFavourites,
   setAvatar,
+  setUserInfo,
+  resetUserInfo
 } = userInfoSlice.actions;
 export const { reducer: UserInfo } = userInfoSlice;

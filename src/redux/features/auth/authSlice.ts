@@ -1,22 +1,17 @@
-import { isApiValidationError } from 'src/utils/functions/typeChecker';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 import authService from 'src/services/authService';
+import { isApiValidationError } from 'src/utils/functions/typeChecker';
 import {
   ApiValidationError,
   LoginParams,
   LoginResponse,
   RegisterParams,
-  RegisterResponse,
+  RegisterResponse
 } from '../../../../../server/shared_with_front/types/types-shared';
 import {
-  setAvatar,
-  setFavourites,
-  setIsAuthenticated,
-  setPhone,
-  setRole,
-  setUsername,
+  resetUserInfo, setAvatar, setIsAuthenticated, setRole, setUserInfo, setUsername
 } from './userSlice';
-import axios from 'axios';
 
 interface authState {
   loading: boolean;
@@ -47,17 +42,12 @@ export const loginUser = createAsyncThunk<
       const { results } = await authService.login(credentials);
       if (results) {
         localStorage.setItem('USER_ROLE', results.role);
-        dispatch(setUsername(results.fullName));
-        dispatch(setRole(results.role));
-        dispatch(setIsAuthenticated(true));
-        dispatch(setPhone(results.phone));
+        dispatch(setUserInfo(results));
       }
       return results;
     } catch (error: any) {
       if (error.response) {
-        dispatch(setUsername(null));
-        dispatch(setRole(null));
-        dispatch(setIsAuthenticated(false));
+        dispatch(resetUserInfo());
         return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
@@ -71,10 +61,8 @@ export const logoutUser = createAsyncThunk(
   async (_, { rejectWithValue, dispatch }) => {
     try {
       await authService.logout();
-      dispatch(setIsAuthenticated(false));
-      dispatch(setUsername(null));
-      dispatch(setRole(null));
-      dispatch(setFavourites([]));
+      localStorage.removeItem('USER_ROLE');
+      dispatch(resetUserInfo())
     } catch (error: any) {
       if (error.response) {
         return rejectWithValue(error.response);
@@ -150,7 +138,6 @@ const authSlice = createSlice({
     });
     /** logout */
     builder.addCase(logoutUser.fulfilled, (state) => {
-      localStorage.removeItem('USER_ROLE');
       state.error = '';
     });
     builder.addCase(logoutUser.rejected, (state, action) => {
