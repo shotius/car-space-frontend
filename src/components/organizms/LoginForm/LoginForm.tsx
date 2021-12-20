@@ -10,9 +10,7 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { loginUser } from 'src/redux/features/auth/authSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
-import {
-  isApiValidationError
-} from 'src/utils/functions/typeChecker';
+import { isApiValidationError } from 'src/utils/functions/typeChecker';
 
 interface LoginFormProps {
   onClose: () => void;
@@ -58,12 +56,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             <VStack spacing="0" w="full">
               <FormikInput
                 name="email"
-                placeholder="email : user@gmail.com"
+                placeholder="email"
                 h={['53px', null, '40px']}
               />
               <FormikInput
                 name="password"
-                placeholder="password: user"
+                placeholder="password"
                 type="password"
                 h={['53px', null, '40px']}
               />

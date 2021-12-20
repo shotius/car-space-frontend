@@ -4,9 +4,12 @@ import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { TextRegular } from '../Texts/TextRegular';
 import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
 
-interface CalculatroFooterProps {}
+interface CalculatroFooterProps {
+  total?: number
+}
 
 export const CalculatorFooter: React.FC<CalculatroFooterProps & StackProps> = ({
+  total=0, 
   children,
   ...rest
 }) => {
@@ -28,7 +31,7 @@ export const CalculatorFooter: React.FC<CalculatroFooterProps & StackProps> = ({
             color="autoOrange.500"
             fontSize={size === 'regular' ? '16px' : '20px'}
           >
-            $ 200
+            $ {total}
           </HeadingSecondary>
         </HStack>
       )}

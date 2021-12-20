@@ -14,7 +14,11 @@ export const UserCard: React.FC<UserCardProps> = ({}) => {
   const [avatar, setAvatar] = useState('');
   const { path } = useRouteMatch();
   const dispatch = useAppDispatch();
-  const { avatar: initAvatar, fullName } = useAppSelector((state) => state.userInfoSlice);
+  const {
+    avatar: initAvatar,
+    fullName,
+    phone,
+  } = useAppSelector((state) => state.userInfoSlice);
 
   // sometimes user photo does not apper so this effect shoulb be here
   useEffect(() => {
@@ -29,7 +33,7 @@ export const UserCard: React.FC<UserCardProps> = ({}) => {
         <UserAvatar
           username={fullName}
           image={avatar}
-          secondaryText="+995 123123 123"
+          secondaryText={`+995 ${phone}`}
           size="70px"
           showPhotoChange={true}
         />
