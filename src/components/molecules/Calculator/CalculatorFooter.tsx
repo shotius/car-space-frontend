@@ -20,16 +20,16 @@ export const CalculatorFooter: React.FC<CalculatroFooterProps & StackProps> = ({
       w="full"
       position="absolute"
       bottom={['-15px', null, '0px']}
-      p={size === 'regular' ? '0px 32px 32px' : '0 82px 82px'}
+      p={size === 'regular' ? '0px 32px 32px' : [null, '60px 40px', '0 82px 82px']}
       {...rest}
     >
-      <Divider />
+      <Divider w="full" />
       {children || (
-        <HStack w="full" justify="space-between">
+        <HStack w="full" justify="space-between" bg="white">
           <TextRegular>Total</TextRegular>
           <HeadingSecondary
             color="autoOrange.500"
-            fontSize={size === 'regular' ? '16px' : '20px'}
+            fontSize={size === 'regular' ? '20px' : '20px'}
           >
             $ {total}
           </HeadingSecondary>

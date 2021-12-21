@@ -1,4 +1,5 @@
 import {
+  Flex,
   HStack,
   InputGroup,
   InputRightElement,
@@ -29,19 +30,20 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
     <VStack w="full" spacing={['24px', null, '32px']}>
       <VStack w="full" align="flex-start">
         <TextRegular opacity="0.5">Duration</TextRegular>
-        <HStack w="full" spacing="30px" justify="space-between">
+        <Flex w="full" spacing="30px" justify="space-between" flexWrap="nowrap" style={{gap: 16}}>
           <SliderBlue
             defaultValue={months}
             min={1}
             max={12}
             step={1}
             onChange={(val) => setMonths(val)}
-            w="70%"
+            flex={["1", '0']}
+            flexBasis={[null, "60%", "67%"]}
           />
-          <TextRegular w="120px" textAlign="end">
+          <TextRegular textAlign="end" minW="96px" wordBreak="keep-all">
             ( {months} Months)
           </TextRegular>
-        </HStack>
+        </Flex>
       </VStack>
       <VStack w="full">
         <InputGroup>

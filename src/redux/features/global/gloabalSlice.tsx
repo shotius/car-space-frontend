@@ -10,6 +10,7 @@ const initialState: GlobalStateSliceState = {
   isCatalogBannerOpen: false,
   isMobileMenuOpen: false, 
   isLoginOpen: false,
+  carDetailModalShown: false, 
   isRegistrationOpen: false,
   isMobileRegisterLoginOpen: false,
   isChangeProfilePictureOpen: false,
@@ -69,6 +70,15 @@ const globalStateSlice = createSlice({
     setUserError: (state, action: PayloadAction<string | undefined>) => {
       state.userError = action.payload;
     },
+    toggleCarDetailModal: (state) => {
+      state.carDetailModalShown = !state.carDetailModalShown
+    }, 
+    closeCarDetailModal: (state) => {
+      state.carDetailModalShown = false
+    }, 
+    openCarDetailModal: (state) => {
+      state.carDetailModalShown
+    }
   },
 });
 
@@ -77,14 +87,17 @@ export const {
   setAppLanguage,
   openCatalogBanner,
   closeCatalogBanner,
+  closeCarDetailModal, 
   toggleLogin,
   toggleMobileMenu, 
   toggleRegistration,
+  openCarDetailModal, 
   toggleMobileAuthorization,
   setScreenSize,
   setNetworkError,
   setCatalogQuery,
   toggleProfilePictureChangeModal,
   setUserError,
+  toggleCarDetailModal, 
 } = globalStateSlice.actions;
 export const { reducer: globalAppState } = globalStateSlice;

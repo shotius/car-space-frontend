@@ -126,6 +126,7 @@ export interface GlobalStateSliceState {
   screen: ScreenSizes;
   networkError: string | undefined;
   userError?: string;
+  carDetailModalShown: boolean;
 }
 
 //** User slice */

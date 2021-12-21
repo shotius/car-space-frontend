@@ -82,7 +82,7 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps & TabsProps> =
               </VStack>
             </TabList>
             <TabPanels
-              p={size === 'regular' ? '8px 16px 24px 8px' : '70px'}
+              p={size === 'regular' ? '8px 16px 24px 8px' : [null, '50px 20px', '70px']}
               position="relative"
             >
               <TabPanel h="full">

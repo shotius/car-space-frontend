@@ -1,7 +1,9 @@
 import { AspectRatio, Box, Center, Image } from '@chakra-ui/react';
 import { useState } from 'react';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-// import './styles.css';
+import { useAppDispatch } from 'src/redux/app/hook';
+import { toggleCarDetailModal } from 'src/redux/features/global/gloabalSlice';
+import styles from './styles.module.scss';
 // import Swiper core and required modules
 import SwiperCore, { FreeMode, Navigation, Thumbs } from 'swiper';
 // Import Swiper styles
@@ -21,6 +23,7 @@ interface Props {
 
 export const CarDetailSlider: React.FC<Props> = ({ images }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
+  const dispatch = useAppDispatch();
 
   return (
     <Box w="full">
@@ -46,9 +49,9 @@ export const CarDetailSlider: React.FC<Props> = ({ images }) => {
           slidesPerView={5}
           freeMode={true}
           watchSlidesProgress={true}
-          className="mySwiper"
+          className={styles.thumbsSliderDesktop}
         >
-          {images.slice(0, images.length - 1).map((thumb) => (
+          {images.slice(0, 4).map((thumb) => (
             <SwiperSlide key={thumb}>
               <AspectRatio ratio={103 / 70} cursor="pointer" width="103px">
                 <Image src={thumb} borderRadius="8px" width="103px" />
@@ -56,29 +59,32 @@ export const CarDetailSlider: React.FC<Props> = ({ images }) => {
             </SwiperSlide>
           ))}
           {/* last all picture slide  */}
-          <SwiperSlide style={{ position: 'relative' }}>
-            <AspectRatio ratio={103 / 70} cursor="pointer" width="103px">
-              <Box borderRadius="8px">
-                <Image src={images[images.length - 1]} width="103px" />
-                <Box
-                  position="absolute"
-                  top="0"
-                  right="0"
-                  bottom="0"
-                  left="0"
-                  cursor="pointer"
-                  background="rgba(0, 0, 0,0.5)"
-                  zIndex="1"
-                >
-                  <Center h="full">
-                    <TextRegular fontSize="24px" color="white" opacity="1">
-                      +6
-                    </TextRegular>
-                  </Center>
-                </Box>
+          <AspectRatio
+            ratio={103 / 60}
+            cursor="pointer"
+            flexBasis="100%"
+            onClick={() => dispatch(toggleCarDetailModal())}
+          >
+            <Box borderRadius="8px" h="full" w="full">
+              <Image src={images[images.length - 1]} width="full" h="full" />
+              <Box
+                position="absolute"
+                right="0"
+                top="0"
+                bottom="0"
+                left="0"
+                cursor="pointer"
+                background="rgba(0, 0, 0,0.5)"
+                zIndex="1"
+              >
+                <Center h="full">
+                  <TextRegular fontSize="24px" color="white" opacity="1">
+                    +6
+                  </TextRegular>
+                </Center>
               </Box>
-            </AspectRatio>
-          </SwiperSlide>
+            </Box>
+          </AspectRatio>
         </Swiper>
       </Box>
     </Box>

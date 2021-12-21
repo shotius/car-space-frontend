@@ -1,6 +1,5 @@
-import { AspectRatio, Box, Center, Image, Spinner } from '@chakra-ui/react';
+import { AspectRatio, Box, Image } from '@chakra-ui/react';
 import { useState } from 'react';
-import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 // import Swiper core and required modules
 import SwiperCore, { FreeMode, Navigation, Thumbs } from 'swiper';
 // Import Swiper styles
@@ -23,8 +22,6 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({
   images,
 }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
-  const fallbackArray = Array(5).fill(0);
-
   return (
     <Box w="full">
       <Box borderRadius="8px">
@@ -33,29 +30,13 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({
           thumbs={{ swiper: thumbsSwiper }}
           className="mySwiper2"
         >
-          {!images.length ? (
-            <>
-              {fallbackArray.map((img) => (
-                <SwiperSlide key={img}>
-                  <AspectRatio ratio={3 / 2} width="full">
-                    <Box bg="autoGrey.400">
-                      <Spinner />
-                    </Box>
-                  </AspectRatio>
-                </SwiperSlide>
-              ))}
-            </>
-          ) : (
-            <>
-              {images.map((img) => (
-                <SwiperSlide key={img}>
-                  <AspectRatio ratio={3 / 2} width="full">
-                    <Image src={img} />
-                  </AspectRatio>
-                </SwiperSlide>
-              ))}
-            </>
-          )}
+          {images.map((img) => (
+            <SwiperSlide key={img}>
+              <AspectRatio ratio={3 / 2} width="full">
+                <Image src={img} />
+              </AspectRatio>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </Box>
       <Box pt="4" pl="4">
@@ -104,61 +85,13 @@ export const CarDetailSliderMobile: React.FC<CarDetailSliderProps> = ({
           freeMode={true}
           watchSlidesProgress={true}
         >
-          {/* if fetching thubnneils falback will be shown  */}
-          {!images.length ? (
-            <>
-              {Array(5)
-                .fill(0)
-                .map((img) => (
-                  <SwiperSlide key={img}>
-                    <AspectRatio ratio={3 / 2} width="full">
-                      <Box bg="autoGrey.400" borderRadius="8px">
-                        <Spinner />
-                      </Box>
-                    </AspectRatio>
-                  </SwiperSlide>
-                ))}
-            </>
-          ) : (
-            <>
-              {images.slice(0, images.length - 1).map((thumb) => (
-                <SwiperSlide key={thumb}>
-                  <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
-                    <Image src={thumb} borderRadius="8px" width="88px" />
-                  </AspectRatio>
-                </SwiperSlide>
-              ))}
-              {/* last all picture slide  */}
-              <SwiperSlide style={{ position: 'relative' }}>
-                <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
-                  <Box borderRadius="8px">
-                    <Image
-                      src={images[images.length - 1]}
-                      width="full"
-                      h="full"
-                    />
-                    <Box
-                      position="absolute"
-                      top="0"
-                      right="0"
-                      bottom="0"
-                      left="0"
-                      borderRadius="8px"
-                      cursor="pointer"
-                      background="rgba(0, 0, 0,0.5)"
-                      zIndex="1"
-                    >
-                      <Center h="full">
-                        <TextRegular fontSize="24px" color="white" opacity="1">
-                          +6
-                        </TextRegular>
-                      </Center>
-                    </Box>
-                  </Box>
-                </AspectRatio>
-              </SwiperSlide>
-            </>
-          )}
+          {images.map((thumb) => (
+            <SwiperSlide key={thumb}>
+              <AspectRatio ratio={88 / 70} cursor="pointer" width="88px">
+                <Image src={thumb} borderRadius="8px" width="88px" />
+              </AspectRatio>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </Box>
     </Box>

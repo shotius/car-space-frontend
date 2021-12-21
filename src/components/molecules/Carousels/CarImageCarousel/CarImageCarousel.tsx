@@ -80,19 +80,6 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
           ref={prevRef}
           aria-label="previous slide"
         />
-
-        {/* <SwiperButton
-          isVisible={buttonsVisible}
-          ref={nextRef}
-          side="right"
-          
-        /> */}
-        {/* <SwiperButton
-          isVisible={buttonsVisible}
-          ref={prevRef}
-          side="left"
-          aria-label="previous slide"
-        /> */}
       </Swiper>
     </AspectRatio>
   );

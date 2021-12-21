@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarousel/CarListCarousel';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
+import { CarImageSliderModal } from 'src/components/organizms/Modals/CarImageSliderModal';
 import { CarDetailPageDesktop } from 'src/components/templates/CarDeatailsPage/CarDetailPageDesktop';
 import { CarDetailPageMobile } from 'src/components/templates/CarDeatailsPage/CarDetailPageMobile';
 import { DamnCard1 } from 'src/DamnCard';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getSingleDealerCarThunk } from 'src/redux/features/auth/carsSlice';
 import { getFavouriteCarIds } from 'src/redux/features/auth/userSlice';
+import { CarContext } from 'src/utils/contexts/CarContext';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 
@@ -24,7 +26,7 @@ export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
   const { isDesktop } = useDetectScreen();
 
   useEffect(() => {
-    dispatch(getFavouriteCarIds(''))    
+    dispatch(getFavouriteCarIds(''));
     const carInCache = cars.find((car) => car.id === carId);
     // if car is not in the cache fetch it
     if (carInCache) {
@@ -40,9 +42,12 @@ export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
     return <>...loading car info</>;
   }
   return (
-    <>
+    <CarContext.Provider value={{ car }}>
       {isDesktop ? (
-        <CarDetailPageDesktop car={car} />
+        <>
+          <CarDetailPageDesktop />
+          <CarImageSliderModal />
+        </>
       ) : (
         <CarDetailPageMobile car={car} />
       )}
@@ -57,7 +62,7 @@ export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
       >
         <CarListCarousel car={DamnCard1} />
       </ContainerOuter>
-    </>
+    </CarContext.Provider>
   );
 };
 
