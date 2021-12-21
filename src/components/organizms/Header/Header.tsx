@@ -70,19 +70,10 @@ export const Header: React.FC<HeaderProps> = () => {
   }, [menuOpen]);
 
   // curency change popover
-  const {
-    // onOpen: openCurr,
-    onClose: closeCurr,
-    onToggle: toggleCurr,
-    isOpen: isCurrOpen,
-  } = useDisclosure();
+  const { onClose: closeCurr } = useDisclosure();
 
   // language change popover
-  const {
-    onToggle: toggleLang,
-    onClose: closeLang,
-    isOpen: isLangOpen,
-  } = useDisclosure();
+  const { onClose: closeLang } = useDisclosure();
 
   return (
     <ContainerOuter h="full" bg="white">
@@ -119,17 +110,9 @@ export const Header: React.FC<HeaderProps> = () => {
               mr={[null, null, '-20px', '-15px']}
             >
               {/* choose currency */}
-              <CurrencyPopover
-                isOpen={isCurrOpen}
-                closePopover={closeCurr}
-                togglePopover={toggleCurr}
-              />
+              <CurrencyPopover closePopover={closeCurr} />
               {/* choose languages */}
-              <LanguagePopover
-                isOpen={isLangOpen}
-                closePopover={closeLang}
-                togglePopover={toggleLang}
-              />
+              <LanguagePopover closePopover={closeLang} />
             </HStack>
 
             {/* if user is authenticated login and register buttons are not shown */}

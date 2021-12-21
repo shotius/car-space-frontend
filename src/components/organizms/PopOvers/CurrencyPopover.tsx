@@ -15,14 +15,10 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppSelector } from 'src/redux/app/hook';
 
 interface CurrencyPopoverProps {
-  isOpen: boolean;
-  togglePopover: () => void;
   closePopover: () => void;
 }
 
 export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
-  isOpen,
-  togglePopover,
   closePopover,
 }) => {
   const { currency } = useAppSelector((state) => state.globalAppState);
@@ -59,7 +55,7 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
   };
 
   return (
-    <Popover isOpen={isOpen} placement="bottom">
+    <Popover placement="bottom">
       <PopoverTrigger>
         <Button
           borderRadius="none"
@@ -75,7 +71,6 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
           _active={{
             bg: 'transparent',
           }}
-          onClick={togglePopover}
         >
           {triggerContent()}
         </Button>

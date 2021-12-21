@@ -6,7 +6,7 @@ import {
   PopoverArrow,
   PopoverBody,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from '@chakra-ui/react';
 import { GeoIcon } from 'src/components/atoms/Icons/GeoIcon';
 import { RusIcon } from 'src/components/atoms/Icons/RusIcon';
@@ -16,17 +16,13 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppSelector } from 'src/redux/app/hook';
 
 interface LanguagePopoverProps {
-  isOpen: boolean;
   closePopover: () => void;
-  togglePopover: () => void;
 }
 
 export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
-  isOpen,
   closePopover,
-  togglePopover,
 }) => {
-  const {lang} = useAppSelector(state => state.globalAppState)
+  const { lang } = useAppSelector((state) => state.globalAppState);
 
   const icon = () => {
     switch (lang) {
@@ -40,14 +36,13 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
   };
 
   return (
-    <Popover isOpen={isOpen} placement="bottom">
+    <Popover placement="bottom">
       <PopoverTrigger>
         {/* here <Text /> is given instead of <TextRegular /> because of ref error */}
         <HStack spacing="2" cursor="pointer">
           <Button
             mr="4"
             w="50px"
-            onClick={togglePopover}
             variant="ghost"
             fontWeight="light"
             _hover={{
@@ -67,9 +62,7 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
       <PopoverContent w="70px" outline="none">
         <PopoverArrow />
         <PopoverBody p="0">
-          <LanguageSwitcher
-            closePopover={closePopover}
-          />
+          <LanguageSwitcher closePopover={closePopover} />
         </PopoverBody>
       </PopoverContent>
     </Popover>

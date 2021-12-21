@@ -30,23 +30,13 @@ interface RegisterFormProps {
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
   const [verificationInfoShown, setVerificationInfoShown] = useState(false);
-  const [email, setEmail] = useState('example@gmail.com');
+  const [email, setEmail] = useState('');
 
   const { registering } = useAppSelector((state) => state.authReducer);
   const dispatch = useAppDispatch();
   const toast = useToast();
 
-  if (verificationInfoShown) {
-    return (
-      <VStack h="500px" justify="center">
-        <HeadingSecondary color="autoOrange.500" fontSize="24px">
-          Verification link is sent to
-        </HeadingSecondary>
-        <HeadingSecondary fontSize="24px">{email}</HeadingSecondary>
-      </VStack>
-    );
-  }
-
+  // form validation
   const SignupSchema = Yup.object().shape({
     fullName: Yup.string()
       .min(2, 'Too Short')
@@ -59,6 +49,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
     privacy: Yup.boolean().oneOf([true], 'Must Accept Privacy Policy'),
   });
 
+  // form initial state
   const initState: RegisterParams = {
     fullName: '',
     email: '',
@@ -67,6 +58,18 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
     phone: '',
     privacy: false,
   };
+
+  // registration is successfull this message will be desplayed
+  if (verificationInfoShown) {
+    return (
+      <VStack h="500px" justify="center">
+        <HeadingSecondary color="autoOrange.500" fontSize="24px">
+          Verification link is sent to
+        </HeadingSecondary>
+        <HeadingSecondary fontSize="24px">{email}</HeadingSecondary>
+      </VStack>
+    );
+  }
 
   return (
     <Formik
