@@ -12,7 +12,6 @@ import { DealersSection } from 'src/components/organizms/HomePage/Sections/Deale
 import { HomeFilters } from 'src/components/organizms/HomePage/Sections/HomeFilters';
 import { TopBrands } from 'src/components/organizms/HomePage/Sections/TopBrands';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
-import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamnCard1 } from 'src/DamnCard';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 
@@ -24,7 +23,7 @@ export const Home: React.FC<HomeProps> = () => {
   useEffect(() => window.scrollTo(0, 0), []);
 
   return (
-    <PublicLayout>
+    <>
       <ContainerOuter pt={['0', null, '0', '48px']} p={['0', null, null, '4']}>
         <HomeCarousel />
       </ContainerOuter>
@@ -70,7 +69,7 @@ export const Home: React.FC<HomeProps> = () => {
           )}
         </ContainerOuter>
       </VStack>
-    </PublicLayout>
+    </>
   );
 };
 export default Home;

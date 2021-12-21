@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom';
 import 'src/App.css';
 import { StyledApp } from 'src/components/organizms/Wrappers/StyledApp';
@@ -12,6 +12,7 @@ import { useAppDispatch } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
+import { PublicLayout } from './components/templates/Layouts/PublicLayout';
 const CarDetailPageDealer = lazy(
   () => import('./pages/catalog/car/CarDetailPageDealer')
 );
@@ -29,48 +30,53 @@ function App() {
 
   useEffect(() => {
     dispatch(autoLogin());
-    document.body.scrollTop = 0;
     localStorage.setItem('windowHeight', String(window.innerHeight));
   }, [dispatch]);
 
   return (
     <StyledApp>
       <Router>
-        <Switch>
-          <Route path="/" exact>
-            <Redirect to="/home" />
-          </Route>
-          <PublicRoute path="/home" component={Home} />
+        <PublicLayout>
+          <Switch>
+            <Route path="/" exact>
+              <Redirect to="/home" />
+            </Route>
+            <PublicRoute path="/home" component={Home} />
 
-          <PublicRoute path="/blog" component={BlogPage} exact />
-          <PublicRoute path="/blog/:blogId" component={BlogDetailPage} exact />
+            <PublicRoute path="/blog" component={BlogPage} exact />
+            <PublicRoute
+              path="/blog/:blogId"
+              component={BlogDetailPage}
+              exact
+            />
 
-          <PublicRoute path="/catalog" component={CatalogPage} exact />
-          <PublicRoute
-            path="/catalog/car/:carId"
-            component={CarDetailPageDealer}
-            exact
-          />
+            <PublicRoute path="/catalog" component={CatalogPage} exact />
+            <PublicRoute
+              path="/catalog/car/:carId"
+              component={CarDetailPageDealer}
+              exact
+            />
 
-          <PublicRoute path="/services" component={ServicesPage} />
+            <PublicRoute path="/services" component={ServicesPage} />
 
-          <PrivateRoute
-            path="/admin/dashboard"
-            component={AdminPage}
-            role="admin"
-          />
-          <PrivateRoute
-            path="/dealer/dashboard"
-            role="dealer"
-            component={DealerDashboard}
-          />
-          <PrivateRoute
-            path="/user/dashboard"
-            role="user"
-            component={UserProfilePage}
-          />
-          <Route path="*" render={() => <ErrorPage />} />
-        </Switch>
+            <PrivateRoute
+              path="/admin/dashboard"
+              component={AdminPage}
+              role="admin"
+            />
+            <PrivateRoute
+              path="/dealer/dashboard"
+              role="dealer"
+              component={DealerDashboard}
+            />
+            <PrivateRoute
+              path="/user/dashboard"
+              role="user"
+              component={UserProfilePage}
+            />
+            <Route path="*" render={() => <ErrorPage />} />
+          </Switch>
+        </PublicLayout>
       </Router>
     </StyledApp>
   );
