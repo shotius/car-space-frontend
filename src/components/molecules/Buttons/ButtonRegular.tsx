@@ -33,6 +33,7 @@ export const ButtonRegular = forwardRef<
         fontSize={fontSize}
         borderRadius={borderRadius}
         _hover={{
+          opacity: "0.8", 
           bg: bg,
         }}
         _active={{

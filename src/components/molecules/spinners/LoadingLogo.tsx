@@ -5,7 +5,7 @@ interface loadingLogoProps {}
 
 export const LoadingLogo: React.FC<loadingLogoProps> = ({}) => {
   return (
-    <Center w="full" bg="white" h="100vh">
+    <Center w="full" h="100vh">
       <VStack spacing="0">
         <Icon as={LogoIcon} boxSize={['150px', null, null, '200px']} />
         <Spinner h="30px" w="30px" thickness="1px" />

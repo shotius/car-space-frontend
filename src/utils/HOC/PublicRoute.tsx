@@ -14,6 +14,7 @@ export const PublicRoute: React.FC<PublicRouteProps & RouteProps> = ({
   ...rest
 }) => {
   const { pathname } = useLocation();
+  
   return (
     <ErrorBoundary>
       <Suspense

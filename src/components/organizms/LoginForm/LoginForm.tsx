@@ -1,5 +1,5 @@
 import { VStack } from '@chakra-ui/layout';
-import { HStack } from '@chakra-ui/react';
+import { HStack, useToast } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
@@ -10,7 +10,10 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { loginUser } from 'src/redux/features/auth/authSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
-import { isApiValidationError } from 'src/utils/functions/typeChecker';
+import {
+  isApiDefaultError,
+  isApiValidationError,
+} from 'src/utils/functions/typeChecker';
 
 interface LoginFormProps {
   onClose: () => void;
@@ -23,6 +26,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const history = useHistory();
+  const toast = useToast();
 
   return (
     <Formik
@@ -43,6 +47,20 @@ export const LoginForm: React.FC<LoginFormProps> = ({
               if (error.status === 422 && error.errors?.length) {
                 setErrors(toErrorMap(error.errors));
               }
+            } else if (isApiDefaultError(error)) {
+              toast({
+                title: error.error,
+                position: 'top',
+                duration: 3000,
+                status: 'error',
+              });
+            } else {
+              toast({
+                title: 'something bad happend :{ sorry.. try later',
+                position: 'top',
+                duration: 3000,
+                status: 'error',
+              });
             }
           });
       }}

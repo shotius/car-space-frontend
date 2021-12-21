@@ -40,6 +40,7 @@ export const SearchButton = forwardRef<
         fontSize={fontSize}
         borderRadius={borderRadius}
         _hover={{
+          opacity: "0.8", 
           bg: 'autoOrange.500',
         }}
         _active={{

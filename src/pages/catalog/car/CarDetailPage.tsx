@@ -1,15 +1,24 @@
+/////////////////////////////////////////////////////////////////////////////
+/// THis page is depricated do to insuficient data from Copart
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarousel/CarListCarousel';
+import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import { DamnCard1 } from 'src/DamnCard';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   getImagesMediumThunk,
-  getThumbs
+  getThumbs,
 } from 'src/redux/features/auth/carImagesSlice';
 import { getSingleCarAsync } from 'src/redux/features/auth/carsSlice';
+import { isApiDefaultError } from 'src/utils/functions/typeChecker';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ICarCopart } from '../../../../../server/shared_with_front/types/types-shared';
 
@@ -19,6 +28,7 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
   const [carInfo, setCarInfo] = useState<ICarCopart>();
   const [_thumbs, setThumbs] = useState<string[]>([]);
   const [_images, setImages] = useState<string[]>([]);
+  const [error, setError] = useState('');
 
   const { cars } = useAppSelector((state) => state.carsReducer);
   const { thumbImages, mediumImages } = useAppSelector(
@@ -37,6 +47,13 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
         .then((data) => setImages(data));
     } else {
       setImages(mediumImages[lotNumber]);
+
+      /////////////////////////////////////////////////////////////////////////////
+      /// THis page is depricated do to insuficient data from Copart
+      //////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////
     }
 
     // if thumbs are not in the cache fetch them
@@ -55,19 +72,44 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
     } else {
       dispatch(getSingleCarAsync(Number(lotNumber)))
         .unwrap()
-        .then((data) => setCarInfo(data));
+        .then((data) => setCarInfo(data))
+        .catch((error) => {
+          if (isApiDefaultError(error)) {
+            setError(error.error || 'Car Info not found');
+          } else {
+            setError('Some thing bad happend :(, Try later...');
+          }
+        });
     }
   }, []);
+
+  /////////////////////////////////////////////////////////////////////////////
+  /// THis page is depricated do to insuficient data from Copart
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
 
   if (!carInfo) {
     return <>...loading car info</>;
   }
+
+  if (error) {
+    return <HeadingSecondary>{error}</HeadingSecondary>;
+  }
+  /////////////////////////////////////////////////////////////////////////////
+  /// THis page is depricated do to insuficient data from Copart
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
+
   return (
     <>
       {isDesktop ? (
         <>cardeatil</>
-        // <CarDetailPageDesktop car={carInfo} thumbs={thumbs} images={images} />
       ) : (
+        // <CarDetailPageDesktop car={carInfo} thumbs={thumbs} images={images} />
         // <CarDetailPageMobile car={carInfo} thumbs={thumbs} images={images} />
         <>cardetail mobile</>
       )}

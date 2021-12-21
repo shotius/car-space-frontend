@@ -1,4 +1,5 @@
 import { HStack, VStack } from '@chakra-ui/layout';
+import { useEffect } from 'react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarousel/CarListCarousel';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
@@ -11,6 +12,7 @@ import { DealersSection } from 'src/components/organizms/HomePage/Sections/Deale
 import { HomeFilters } from 'src/components/organizms/HomePage/Sections/HomeFilters';
 import { TopBrands } from 'src/components/organizms/HomePage/Sections/TopBrands';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
+import { PublicLayout } from 'src/components/templates/Layouts/PublicLayout';
 import { DamnCard1 } from 'src/DamnCard';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 
@@ -18,9 +20,12 @@ interface HomeProps {}
 
 export const Home: React.FC<HomeProps> = () => {
   const { isMobile, isDesktop } = useDetectScreen();
+
+  useEffect(() => window.scrollTo(0, 0), []);
+
   return (
-    <>
-      <ContainerOuter pt={['0', null, '0', '48px']} p={["0", null, null, '4']}>
+    <PublicLayout>
+      <ContainerOuter pt={['0', null, '0', '48px']} p={['0', null, null, '4']}>
         <HomeCarousel />
       </ContainerOuter>
 
@@ -35,7 +40,7 @@ export const Home: React.FC<HomeProps> = () => {
           <ContainerOuter>
             <SectionHeader mainText="Catalog" />
           </ContainerOuter>
-          <ContainerOuter pr="-4" mr="-4" ml='-4' pl="0">
+          <ContainerOuter pr="-4" mr="-4" ml="-4" pl="0">
             <CarListCarousel car={DamnCard1} />
           </ContainerOuter>
         </VStack>
@@ -65,7 +70,7 @@ export const Home: React.FC<HomeProps> = () => {
           )}
         </ContainerOuter>
       </VStack>
-    </>
+    </PublicLayout>
   );
 };
 export default Home;

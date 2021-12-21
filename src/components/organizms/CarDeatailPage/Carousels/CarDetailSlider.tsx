@@ -59,32 +59,34 @@ export const CarDetailSlider: React.FC<Props> = ({ images }) => {
             </SwiperSlide>
           ))}
           {/* last all picture slide  */}
-          <AspectRatio
-            ratio={103 / 60}
-            cursor="pointer"
-            flexBasis="100%"
-            onClick={() => dispatch(toggleCarDetailModal())}
-          >
-            <Box borderRadius="8px" h="full" w="full">
-              <Image src={images[images.length - 1]} width="full" h="full" />
-              <Box
-                position="absolute"
-                right="0"
-                top="0"
-                bottom="0"
-                left="0"
-                cursor="pointer"
-                background="rgba(0, 0, 0,0.5)"
-                zIndex="1"
-              >
-                <Center h="full">
-                  <TextRegular fontSize="24px" color="white" opacity="1">
-                    +6
-                  </TextRegular>
-                </Center>
+          <SwiperSlide>
+            <AspectRatio
+              ratio={103 / 70}
+              cursor="pointer"
+              width="103px"
+              onClick={() => dispatch(toggleCarDetailModal())}
+            >
+              <Box borderRadius="8px" h="full" w="full">
+                <Image src={images[images.length - 1]} width="full" h="full" />
+                <Box
+                  position="absolute"
+                  right="0"
+                  top="0"
+                  bottom="0"
+                  left="0"
+                  cursor="pointer"
+                  background="rgba(0, 0, 0,0.5)"
+                  zIndex="1"
+                >
+                  <Center h="full">
+                    <TextRegular fontSize="18px" color="white" opacity="1">
+                      {images.length > 5 ? `+${images.length - 5}` : 'See all'}
+                    </TextRegular>
+                  </Center>
+                </Box>
               </Box>
-            </Box>
-          </AspectRatio>
+            </AspectRatio>
+          </SwiperSlide>
         </Swiper>
       </Box>
     </Box>

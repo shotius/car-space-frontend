@@ -38,6 +38,7 @@ export const CarImageSliderModal: React.FC<CarImageSliderModalProps> = ({}) => {
       >
         <ModalCloseButton
           color="white"
+          zIndex="modal"
           onClick={() => {
             console.log('pressed');
             onClose();
