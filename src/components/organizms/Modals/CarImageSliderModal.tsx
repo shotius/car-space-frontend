@@ -1,5 +1,4 @@
 import {
-  Center,
   Modal,
   ModalBody,
   ModalCloseButton,

@@ -10,7 +10,7 @@ import 'swiper/css/thumbs';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { NavigationButton } from './NavigationButton';
-// import styles from './styles.module.scss';
+import styles from './styles.module.scss';
 
 // install Swiper modules
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
@@ -35,6 +35,7 @@ export const SliderWIthThumbs: React.FC<Props> = ({ images }) => {
               spaceBetween={4}
               thumbs={{ swiper: thumbsSwiper }}
               className="mySwiper2"
+              initialSlide={3}
               onInit={(swiper) => {
                 // @ts-ignore
                 swiper.params.navigation.prevEl = prevRef.current;
@@ -60,10 +61,11 @@ export const SliderWIthThumbs: React.FC<Props> = ({ images }) => {
               freeMode={true}
               watchSlidesProgress={true}
               slidesPerView={7}
+              className={styles['thumb-slider']}
             >
               {images.map((thumb) => (
                 <SwiperSlide key={thumb}>
-                  <AspectRatio ratio={103 / 70} cursor="pointer" width="103px">
+                  <AspectRatio ratio={103 / 70} cursor="pointer" minW="103px">
                     <Image src={thumb} borderRadius="8px" width="103px" />
                   </AspectRatio>
                 </SwiperSlide>

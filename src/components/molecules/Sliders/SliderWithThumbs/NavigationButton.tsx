@@ -17,7 +17,7 @@ export const NavigationButton = forwardRef<
       right={role === 'next' ? '0' : 'none'}
       top="0"
       h="100vh"
-      w="100px"
+      w="10%"
       bg="transparent"
       zIndex="modal"
       _hover={{ bg: 'transparent' }}
@@ -26,7 +26,7 @@ export const NavigationButton = forwardRef<
         <DropdownIcon
           boxSize={10}
           transform={role === 'prev' ? 'rotate(90deg)' : 'rotate(-90deg)'}
-          fill="autoGrey.400"
+          fill="autoGrey.200"
         />
       }
       ref={ref}

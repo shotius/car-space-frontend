@@ -82,7 +82,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
         />
         {/* picture swiper */}
         {displayImageCarousel ? (
-          <CarImageCarousel images={mediumImages[car.lN]} />
+          <CarImageCarousel images={mediumImages[car.lN]} to=''/>
         ) : (
           <AspectRatio
             ratio={[311 / 292, null, null, 231 / 143]}

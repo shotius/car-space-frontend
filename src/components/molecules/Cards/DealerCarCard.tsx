@@ -42,14 +42,17 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
         />
         {/* picture swiper */}
         {car.imgUrls.length ? (
-          <CarImageCarousel images={car.imgUrls.slice(0, 5)} />
+          <CarImageCarousel
+            images={car.imgUrls.slice(0, 5)}
+            to={`/catalog/car/${car.id}`}
+          />
         ) : (
           <AspectRatio
             ratio={[311 / 292, null, null, 231 / 143]}
             w="full"
             maxH={['192px', null, '143px']}
             borderRadius="8px"
-            overflow={"hidden"}
+            overflow={'hidden'}
           >
             <Image src="https://via.placeholder.com/150" />
           </AspectRatio>
