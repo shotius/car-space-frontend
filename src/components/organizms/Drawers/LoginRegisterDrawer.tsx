@@ -9,6 +9,7 @@ import { Center, Flex } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { LoginForm } from '../LoginForm';
 import { RegisterForm } from '../Forms/RegisterForm';
+import { ForgotPassword } from '../Forms/ForgotPassword';
 
 interface LoginRegisterDrawerProps {
   isOpen: boolean;
@@ -20,7 +21,30 @@ export const LoginRegisterDrawer: React.FC<LoginRegisterDrawerProps> = ({
   onClose,
 }) => {
   const btnRef = useRef<HTMLButtonElement>(null);
-  const [form, setForm] = useState<'login' | 'register'>('login');
+  const [form, setForm] = useState<'login' | 'register' | 'forget-password'>(
+    'login'
+  );
+
+  const chooseForm = () => {
+    switch (form) {
+      case 'forget-password':
+        return <ForgotPassword closeForgetPassword={onClose} />;
+
+      case 'login':
+        return (
+          <LoginForm
+            onClose={onClose}
+            openRegister={() => setForm('register')}
+            openForgetPassword={() => setForm('forget-password')}
+          />
+        );
+
+      case 'register':
+        return (
+          <RegisterForm onClose={onClose} openLogin={() => setForm('login')} />
+        );
+    }
+  };
 
   return (
     <Drawer
@@ -35,23 +59,8 @@ export const LoginRegisterDrawer: React.FC<LoginRegisterDrawerProps> = ({
         <DrawerCloseButton />
         <DrawerBody>
           <Center h={form == 'login' ? 'md' : '2xl'} mt="50px">
-            <Flex
-              direction="column"
-              maxW="450px"
-              w="full"
-              justify="center"
-            >
-              {form === 'login' ? (
-                <LoginForm
-                  onClose={onClose}
-                  openRegister={() => setForm('register')}
-                />
-              ) : (
-                <RegisterForm
-                  onClose={onClose}
-                  openLogin={() => setForm('login')}
-                />
-              )}
+            <Flex direction="column" maxW="450px" w="full" justify="center">
+              {chooseForm()}
             </Flex>
           </Center>
         </DrawerBody>

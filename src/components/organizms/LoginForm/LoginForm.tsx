@@ -12,17 +12,19 @@ import { loginUser } from 'src/redux/features/auth/authSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
 import {
   isApiDefaultError,
-  isApiValidationError,
+  isApiValidationError
 } from 'src/utils/functions/typeChecker';
 
 interface LoginFormProps {
   onClose: () => void;
   openRegister: () => void;
+  openForgetPassword: () => void;
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({
   onClose,
   openRegister,
+  openForgetPassword,
 }) => {
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -92,14 +94,25 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             >
               Log in
             </ButtonRegular>
-            <HStack w="full">
-              <TextRegular fontSize="14px">Don’t have an account?</TextRegular>
+            <HStack w="full" justify="space-between">
+              <HStack>
+                <TextRegular fontSize="14px">
+                  Don’t have an account?
+                </TextRegular>
+                <TextButton
+                  color="#427AD6"
+                  onClick={openRegister}
+                  fontSize="14px"
+                >
+                  Register
+                </TextButton>
+              </HStack>
               <TextButton
                 color="#427AD6"
-                onClick={openRegister}
-                fontSize="14px"
+                onClick={openForgetPassword}
+                fontSize="13px"
               >
-                Register
+                Forgot password?
               </TextButton>
             </HStack>
           </VStack>
