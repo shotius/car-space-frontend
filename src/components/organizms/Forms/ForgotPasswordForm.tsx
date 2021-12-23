@@ -5,13 +5,13 @@ import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { useAppDispatch } from 'src/redux/app/hook';
 import { forgotPassword } from 'src/redux/features/auth/authSlice';
 import { openLoginModal } from 'src/redux/features/global/gloabalSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
 import {
   isApiDefaultError,
-  isApiValidationError,
+  isApiValidationError
 } from 'src/utils/functions/typeChecker';
 
 interface ForgotPasswordProps {

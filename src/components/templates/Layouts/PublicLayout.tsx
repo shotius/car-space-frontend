@@ -1,5 +1,6 @@
 import { Box, Container } from '@chakra-ui/react';
 import { useEffect } from 'react';
+import { AuthDrawer } from 'src/components/organizms/Drawers/AuthDrawer';
 import { Footer } from 'src/components/organizms/Footer/Footer';
 import { Header } from 'src/components/organizms/Header';
 import { MenuMobile } from 'src/components/organizms/LoginForm/MenuMobile';
@@ -36,7 +37,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
         pl="0"
         pr="0"
       >
-        {isDesktop && <AuthModal />}
+        {isDesktop ? <AuthModal /> : <AuthDrawer />}
         {children}
         {!isDesktop && <MenuMobile />}
       </Container>

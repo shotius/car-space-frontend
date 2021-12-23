@@ -1,10 +1,9 @@
-import { string } from 'prop-types';
 import {
   ICarCopart,
   ICarDealer,
   Keys,
   RoleTypes,
-  SelectedCarModel,
+  SelectedCarModel
 } from '../../../../../server/shared_with_front/types/types-shared';
 import { CurrencyType, Languages } from './../../../constants/index';
 
@@ -119,7 +118,6 @@ export interface GlobalStateSliceState {
   currency: CurrencyType;
   isCatalogBannerOpen: boolean;
   isMobileMenuOpen: boolean;
-  isMobileRegisterLoginOpen: boolean;
   isChangeProfilePictureOpen: boolean;
   screen: ScreenSizes;
   networkError: string | undefined;

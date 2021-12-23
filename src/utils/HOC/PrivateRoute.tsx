@@ -1,6 +1,7 @@
-import { Suspense, useEffect } from 'react';
-import { Route, RouteProps, useHistory } from 'react-router-dom';
+import { Suspense, useEffect, useState } from 'react';
+import { Redirect, Route, RouteProps } from 'react-router-dom';
 import ErrorBoundary from 'src/components/molecules/Errors/ErrorBoundary';
+import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { useAppSelector } from 'src/redux/app/hook';
 import { Roles } from '../../../../server/shared_with_front/contants';
 
@@ -15,34 +16,44 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
   role,
   ...rest
 }) => {
-  const { loading: gettingUserInfo } = useAppSelector(
-    (state) => state.authReducer
+  const gettingUserInfo = useAppSelector((state) => state.authReducer.loading);
+  const isAuthenticated = useAppSelector(
+    (state) => state.userInfoSlice.isAuthenticated
   );
-  const { isAuthenticated, role: userRole } = useAppSelector(
-    (state) => state.userInfoSlice
-  );
+  const { role: userRole } = useAppSelector((state) => state.userInfoSlice);
+
+  const [shouldGoHome, setShouldGoHome] = useState(false);
+  const [shouldOpenProfile, setShouldOpenProfile] = useState(false);
+
   const USER = localStorage.getItem('USER_ROLE');
-  const history = useHistory();
 
   useEffect(() => {
     if (userRole) {
       // if not authenticated redirect to home page
-      if (!isAuthenticated) {
-        history.push('/home');
-      }
+      !isAuthenticated && setShouldGoHome(true);
       // if private route role and USER role don't match redirect
-      if (USER !== userRole) {
-        history.push(`/${userRole}/dashboard`);
-      }
+      USER !== userRole && setShouldOpenProfile(true);
     }
   }, [isAuthenticated, userRole]);
 
   if (gettingUserInfo) {
-    return <h1>Loading Private page here</h1>;
+    return (
+      <HeadingSecondary textAlign="center" pt="100px">
+        Loading Profile...
+      </HeadingSecondary>
+    );
   }
+
   // user is not in localstorage redirect to home
   if (!USER || USER !== role) {
-    history.push('/home');
+    return <Redirect to="/" />
+  }
+
+  if(shouldGoHome) {
+    return <Redirect to="/" />
+  }
+  if (shouldOpenProfile) {
+    return <Redirect to={`/${userRole}/dashboard`} />
   }
 
   return (

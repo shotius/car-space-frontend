@@ -12,7 +12,6 @@ const initialState: GlobalStateSliceState = {
   isCatalogBannerOpen: false,
   isMobileMenuOpen: false,
   carDetailModalShown: false,
-  isMobileRegisterLoginOpen: false,
   isChangeProfilePictureOpen: false,
   screen: {
     isDesktop: false,
@@ -42,11 +41,6 @@ const globalStateSlice = createSlice({
     },
     toggleAuthModal: (state) => {
       state.isAuthFormOpen = !state.isAuthFormOpen;
-    },
-    toggleMobileAuthorization: (state) => {
-      state.isMobileRegisterLoginOpen
-        ? (state.isMobileRegisterLoginOpen = false)
-        : (state.isMobileRegisterLoginOpen = true);
     },
     toggleProfilePictureChangeModal: (state) => {
       state.isChangeProfilePictureOpen = !state.isChangeProfilePictureOpen;
@@ -108,7 +102,6 @@ export const {
   closeCarDetailModal,
   toggleMobileMenu,
   openCarDetailModal,
-  toggleMobileAuthorization,
   setScreenSize,
   setNetworkError,
   setCatalogQuery,

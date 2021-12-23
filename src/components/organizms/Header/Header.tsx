@@ -17,11 +17,10 @@ import { logoutUser } from 'src/redux/features/auth/authSlice';
 import {
   openLoginModal,
   openRegisterModal,
-  toggleMobileAuthorization,
-  toggleMobileMenu,
+  toggleAuthModal,
+  toggleMobileMenu
 } from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { LoginRegisterDrawer } from '../Drawers/LoginRegisterDrawer';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 
@@ -38,9 +37,6 @@ export const Header: React.FC<HeaderProps> = () => {
   const menuOpen = useAppSelector(
     (state) => state.globalAppState.isMobileMenuOpen
   );
-  const isMobileRegisterLoginOpen = useAppSelector(
-    (state) => state.globalAppState.isMobileRegisterLoginOpen
-  );
   const catalogQuery = useAppSelector(
     (state) => state.globalAppState.catalogQuery
   );
@@ -49,7 +45,6 @@ export const Header: React.FC<HeaderProps> = () => {
   );
   const role = useAppSelector((state) => state.userInfoSlice.role);
   const fullName = useAppSelector((state) => state.userInfoSlice.fullName);
-  
 
   // Toggle mobile menu
   const toggleMenu = () => dispatch(toggleMobileMenu());
@@ -173,20 +168,14 @@ export const Header: React.FC<HeaderProps> = () => {
               bg="transparent"
               onClick={() => {
                 // if authenticated: redirect to you page, else open login
-                if (!USER) {
-                  dispatch(toggleMobileAuthorization());
-                } else if (isAuthenticated) {
+                if (USER && isAuthenticated) {
                   history.push(`/${role}/dashboard`);
                 } else {
-                  dispatch(toggleMobileAuthorization());
+                  dispatch(toggleAuthModal());
                 }
               }}
             />
 
-            <LoginRegisterDrawer
-              isOpen={isMobileRegisterLoginOpen}
-              onClose={() => dispatch(toggleMobileAuthorization())}
-            />
             <IconButton
               aria-label="menu"
               icon={<BurgerIcon boxSize="6" />}

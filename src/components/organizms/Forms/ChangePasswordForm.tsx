@@ -50,11 +50,11 @@ export const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({}) => {
             .unwrap()
             .then(() => {
               toast({
-                title: "Password changed successfully", 
-                position: "top", 
-                status: "success"
-              })
-              history.push('/')
+                title: 'Password changed successfully',
+                position: 'top',
+                status: 'success',
+              });
+              history.push('/');
               setSubmitting(false);
               resetForm();
             })
@@ -72,8 +72,12 @@ export const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({}) => {
                 });
               } else if (isApiValidationError(error)) {
                 error.errors.map((error) => {
+                  // if server express validator validates the token display error
+                  error.msg === 'Token is invalid' &&
+                    setError('Token is invalid');
+                  // and alerts all of the validatation
                   toast({
-                    title: error,
+                    title: error.msg,
                     status: 'error',
                     position: 'top',
                   });
@@ -107,7 +111,7 @@ export const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({}) => {
             />
             {error && (
               <HStack>
-                <TextRegular>{error}</TextRegular>
+                <TextRegular color="red">{error}</TextRegular>
                 <TextButton
                   onClick={() => dispatch(openForgotPasswordModal())}
                   color="#427AD6"

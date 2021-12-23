@@ -6,24 +6,28 @@ import {
   DrawerOverlay,
 } from '@chakra-ui/modal';
 import { Center, Flex } from '@chakra-ui/react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { LoginForm } from '../LoginForm';
 import { RegisterForm } from '../Forms/RegisterForm';
 import { ForgotPasswordForm } from '../Forms/ForgotPasswordForm';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import {
+  chooseAuthForm,
+  closeAuthModal,
+} from 'src/redux/features/global/gloabalSlice';
+import { AuthForm } from 'src/redux/features/auth/types';
 
-interface LoginRegisterDrawerProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+interface AuthDrawerProps {}
 
-export const LoginRegisterDrawer: React.FC<LoginRegisterDrawerProps> = ({
-  isOpen,
-  onClose,
-}) => {
+export const AuthDrawer: React.FC<AuthDrawerProps> = ({}) => {
   const btnRef = useRef<HTMLButtonElement>(null);
-  const [form, setForm] = useState<'login' | 'register' | 'forget-password'>(
-    'login'
-  );
+  const form = useAppSelector((state) => state.globalAppState.chosenAuthForm);
+  const isOpen = useAppSelector((state) => state.globalAppState.isAuthFormOpen);
+
+  const dispatch = useAppDispatch();
+
+  const onClose = () => dispatch(closeAuthModal());
+  const setForm = (form: AuthForm) => dispatch(chooseAuthForm(form));
 
   const chooseForm = () => {
     switch (form) {

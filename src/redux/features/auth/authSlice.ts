@@ -89,7 +89,6 @@ export const autoLogin = createAsyncThunk(
   async (_, { dispatch }) => {
     try {
       const { results } = await authService.me();
-      console.log('results: ', results);
       if (results) {
         dispatch(setIsAuthenticated(true));
         dispatch(setUsername(results.fullName));
