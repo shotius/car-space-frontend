@@ -16,15 +16,13 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { logoutUser } from 'src/redux/features/auth/authSlice';
 import {
-  toggleLogin,
+  openLoginModal,
+  openRegisterModal,
   toggleMobileAuthorization,
   toggleMobileMenu,
-  toggleRegistration,
 } from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { LoginRegisterDrawer } from '../Drawers/LoginRegisterDrawer';
-import { LoginModal } from '../Modals/LoginModal';
-import { RegisterModal } from '../Modals/RegisterModal';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 
@@ -36,8 +34,6 @@ export const Header: React.FC<HeaderProps> = () => {
   const history = useHistory();
 
   const {
-    isLoginOpen,
-    isRegistrationOpen,
     isMobileRegisterLoginOpen,
     catalogQuery,
     isMobileMenuOpen: menuOpen,
@@ -143,25 +139,16 @@ export const Header: React.FC<HeaderProps> = () => {
                   fontWeight="light"
                   fontSize="16px"
                   ml="1"
-                  onClick={() => dispatch(toggleLogin())}
+                  onClick={() => dispatch(openLoginModal())}
                   _hover={{
                     bg: 'autoGrey.200',
                   }}
                 >
                   <TextRegular>Log in</TextRegular>
                 </Button>
-                {/* Login modal  */}
-                <LoginModal
-                  isOpen={isLoginOpen}
-                  onClose={() => dispatch(toggleLogin())}
-                  openRegister={() => {
-                    dispatch(toggleLogin());
-                    dispatch(toggleRegistration());
-                  }}
-                />
                 {/* Register Button  */}
                 <ButtonOutline
-                  onClick={() => dispatch(toggleRegistration())}
+                  onClick={() => dispatch(openRegisterModal())}
                   transition="all 0.5s"
                 >
                   <Icon as={PersonIcon} boxSize="4" />
@@ -169,15 +156,6 @@ export const Header: React.FC<HeaderProps> = () => {
                     Register
                   </TextRegular>
                 </ButtonOutline>
-                {/* Register modal  */}
-                <RegisterModal
-                  isOpen={isRegistrationOpen}
-                  onClose={() => dispatch(toggleRegistration())}
-                  openLogin={() => {
-                    dispatch(toggleRegistration());
-                    dispatch(toggleLogin());
-                  }}
-                />
               </HStack>
             )}
           </HStack>

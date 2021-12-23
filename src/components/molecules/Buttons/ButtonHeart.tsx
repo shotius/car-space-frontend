@@ -6,10 +6,7 @@ import { HeartFilled } from 'src/components/atoms/Icons/HeartFilledIcon';
 import { HeartIcon } from 'src/components/atoms/Icons/HeatIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { likeCarThunk } from 'src/redux/features/auth/userSlice';
-import {
-  toggleLogin,
-  toggleMobileAuthorization,
-} from 'src/redux/features/global/gloabalSlice';
+import { openLoginModal, toggleMobileAuthorization } from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ButtonWithIcon } from './IconWithButton';
 
@@ -62,7 +59,7 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
             );
         } else {
           isDesktop
-            ? dispatch(toggleLogin())
+            ? dispatch(openLoginModal())
             : dispatch(toggleMobileAuthorization());
         }
       }}

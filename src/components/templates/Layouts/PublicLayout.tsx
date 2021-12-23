@@ -3,12 +3,13 @@ import { useEffect } from 'react';
 import { Footer } from 'src/components/organizms/Footer/Footer';
 import { Header } from 'src/components/organizms/Header';
 import { MenuMobile } from 'src/components/organizms/LoginForm/MenuMobile';
+import { AuthModal } from 'src/components/organizms/Modals/AuthModal';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 
 interface PublicLayoutProps {}
 
 export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
-  const {isDesktop} = useDetectScreen()
+  const { isDesktop } = useDetectScreen();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,6 +36,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
         pl="0"
         pr="0"
       >
+        {isDesktop && <AuthModal />}
         {children}
         {!isDesktop && <MenuMobile />}
       </Container>

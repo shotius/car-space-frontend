@@ -3,7 +3,7 @@ import {
   ICarDealer,
   Keys,
   RoleTypes,
-  SelectedCarModel
+  SelectedCarModel,
 } from '../../../../../server/shared_with_front/types/types-shared';
 import { CurrencyType, Languages } from './../../../constants/index';
 
@@ -12,7 +12,6 @@ export enum TransmissionEnum {
   AUTOMATIC = 'Automatic',
   CVT = 'CVT',
 }
-
 
 export interface ICarCopartModel {
   brand: string;
@@ -24,7 +23,7 @@ export interface CarsSliceState {
   fethingCars: boolean;
   fetchingCarsError: string | undefined;
 
-  dealerCars: ICarDealer[], 
+  dealerCars: ICarDealer[];
   fetchingDealerCars: boolean;
 
   fetchingSingleCar: boolean;
@@ -50,7 +49,6 @@ export type Transmission =
   | TransmissionEnum.MANUAL
   | TransmissionEnum.AUTOMATIC
   | TransmissionEnum.CVT;
-
 
 export interface SelectedCarFilters {
   brands: string[];
@@ -113,20 +111,22 @@ export interface ScreenSizes {
   isDesktop: boolean;
 }
 
+export type AuthForm = 'login' | 'forget-password' | 'register';
 export interface GlobalStateSliceState {
   catalogQuery: string | undefined;
   lang: Languages;
   currency: CurrencyType;
   isCatalogBannerOpen: boolean;
   isMobileMenuOpen: boolean;
-  isRegistrationOpen: boolean;
-  isLoginOpen: boolean;
   isMobileRegisterLoginOpen: boolean;
   isChangeProfilePictureOpen: boolean;
   screen: ScreenSizes;
   networkError: string | undefined;
   userError?: string;
   carDetailModalShown: boolean;
+
+  chosenAuthForm: AuthForm;
+  isAuthFormOpen: boolean;
 }
 
 //** User slice */
@@ -137,7 +137,7 @@ export interface UsertInfoState {
   fullName: string | null;
   favouriteCarIds: string[];
   avatar?: string;
-  phone?: string; 
+  phone?: string;
 
   favouriteCars: ICarDealer[];
   favouriteCarsFetching: boolean;

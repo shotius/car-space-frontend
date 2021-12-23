@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrencyType, Languages } from 'src/constants';
-import { GlobalStateSliceState, ScreenSizes } from '../auth/types';
+import { AuthForm, GlobalStateSliceState, ScreenSizes } from '../auth/types';
 
 const initialState: GlobalStateSliceState = {
+  isAuthFormOpen: false,
+  chosenAuthForm: 'login',
   catalogQuery: undefined,
   networkError: undefined,
   lang: 'Eng',
   currency: 'GEL',
   isCatalogBannerOpen: false,
-  isMobileMenuOpen: false, 
-  isLoginOpen: false,
-  carDetailModalShown: false, 
-  isRegistrationOpen: false,
+  isMobileMenuOpen: false,
+  carDetailModalShown: false,
   isMobileRegisterLoginOpen: false,
   isChangeProfilePictureOpen: false,
   screen: {
@@ -38,17 +38,10 @@ const globalStateSlice = createSlice({
       state.isCatalogBannerOpen = false;
     },
     toggleMobileMenu: (state) => {
-      state.isMobileMenuOpen = !state.isMobileMenuOpen
-    }, 
-    toggleLogin: (state) => {
-      state.isLoginOpen
-        ? (state.isLoginOpen = false)
-        : (state.isLoginOpen = true);
+      state.isMobileMenuOpen = !state.isMobileMenuOpen;
     },
-    toggleRegistration: (state) => {
-      state.isRegistrationOpen
-        ? (state.isRegistrationOpen = false)
-        : (state.isRegistrationOpen = true);
+    toggleAuthModal: (state) => {
+      state.isAuthFormOpen = !state.isAuthFormOpen;
     },
     toggleMobileAuthorization: (state) => {
       state.isMobileRegisterLoginOpen
@@ -71,33 +64,51 @@ const globalStateSlice = createSlice({
       state.userError = action.payload;
     },
     toggleCarDetailModal: (state) => {
-      state.carDetailModalShown = !state.carDetailModalShown
-    }, 
+      state.carDetailModalShown = !state.carDetailModalShown;
+    },
+    chooseAuthForm: (state, action: PayloadAction<AuthForm>) => {
+      state.chosenAuthForm = action.payload;
+    },
     closeCarDetailModal: (state) => {
-      state.carDetailModalShown = false
-    }, 
+      state.carDetailModalShown = false;
+    },
     openCarDetailModal: (state) => {
-      state.carDetailModalShown
+      state.carDetailModalShown;
+    },
+    openRegisterModal: (state) => {
+      state.isAuthFormOpen = true;
+      state.chosenAuthForm = 'register';
+    },
+    openLoginModal: (state) => {
+      state.isAuthFormOpen = true;
+      state.chosenAuthForm = 'login';
+    },
+    closeAuthModal: (state) => {
+      state.isAuthFormOpen = false
     }
   },
 });
 
 export const {
+  toggleAuthModal,
+  openLoginModal,
+  openRegisterModal,
+  chooseAuthForm,
+  closeAuthModal, 
+
   setAppCurrency,
   setAppLanguage,
   openCatalogBanner,
   closeCatalogBanner,
-  closeCarDetailModal, 
-  toggleLogin,
-  toggleMobileMenu, 
-  toggleRegistration,
-  openCarDetailModal, 
+  closeCarDetailModal,
+  toggleMobileMenu,
+  openCarDetailModal,
   toggleMobileAuthorization,
   setScreenSize,
   setNetworkError,
   setCatalogQuery,
   toggleProfilePictureChangeModal,
   setUserError,
-  toggleCarDetailModal, 
+  toggleCarDetailModal,
 } = globalStateSlice.actions;
 export const { reducer: globalAppState } = globalStateSlice;
