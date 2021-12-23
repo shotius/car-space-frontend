@@ -1,6 +1,8 @@
+import { ChangePasswordProps } from 'src/redux/features/auth/types';
 import { axios } from 'src/utils/axios';
 import {
   ApiSuccessResponse,
+  IUser,
   LoginParams,
   LoginResponse,
   MeResponse,
@@ -30,11 +32,23 @@ const logout = async () => {
   return data;
 };
 
+const forgetPassword = async (email: string) => {
+  const { data } = await axios.post(`${baseUrl}/forgot-password`, { email });
+  return data as ApiSuccessResponse<string>;
+};
+
+const changePassword = async (props: ChangePasswordProps) => {
+  const { data } = await axios.post(`${baseUrl}/change-password`, { ...props });
+  return data as ApiSuccessResponse<IUser>;
+};
+
 const authService = {
   me,
   login,
   register,
   logout,
+  forgetPassword,
+  changePassword,
 };
 
 export default authService;

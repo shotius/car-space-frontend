@@ -8,7 +8,7 @@ import {
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { AuthForm } from 'src/redux/features/auth/types';
 import { chooseAuthForm, closeAuthModal, toggleAuthModal } from 'src/redux/features/global/gloabalSlice';
-import { ForgotPassword } from '../Forms/ForgotPassword';
+import { ForgotPasswordForm } from '../Forms/ForgotPasswordForm';
 import { RegisterForm } from '../Forms/RegisterForm';
 import { LoginForm } from '../LoginForm';
 
@@ -35,7 +35,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({}) => {
           />
         );
       case 'forget-password':
-        return <ForgotPassword closeForgetPassword={() => setForm('login')} />;
+        return <ForgotPasswordForm closeForgetPassword={() => setForm('login')} />;
       case 'register':
         return (
           <RegisterForm onClose={onToggle} openLogin={() => setForm('login')} />

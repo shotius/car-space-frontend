@@ -9,7 +9,7 @@ import { Center, Flex } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { LoginForm } from '../LoginForm';
 import { RegisterForm } from '../Forms/RegisterForm';
-import { ForgotPassword } from '../Forms/ForgotPassword';
+import { ForgotPasswordForm } from '../Forms/ForgotPasswordForm';
 
 interface LoginRegisterDrawerProps {
   isOpen: boolean;
@@ -28,7 +28,7 @@ export const LoginRegisterDrawer: React.FC<LoginRegisterDrawerProps> = ({
   const chooseForm = () => {
     switch (form) {
       case 'forget-password':
-        return <ForgotPassword closeForgetPassword={onClose} />;
+        return <ForgotPasswordForm closeForgetPassword={onClose} />;
 
       case 'login':
         return (

@@ -15,8 +15,6 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
     window.scrollTo(0, 0);
   }, []);
 
-  console.log('publc layout')
-
   return (
     <Box w="full" direction="column" minH="100vh" bg="#e8e8e8">
       <Box

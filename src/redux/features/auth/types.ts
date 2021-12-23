@@ -1,3 +1,4 @@
+import { string } from 'prop-types';
 import {
   ICarCopart,
   ICarDealer,
@@ -145,4 +146,10 @@ export interface UsertInfoState {
   favouriteCarsFetchError: string | null;
 
   likingCar: boolean;
+}
+
+
+export interface ChangePasswordProps {
+  token: string; 
+  password: string
 }

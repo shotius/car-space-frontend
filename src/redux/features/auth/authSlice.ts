@@ -1,16 +1,26 @@
+import { ChangePasswordProps } from 'src/redux/features/auth/types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import authService from 'src/services/authService';
-import { isApiValidationError } from 'src/utils/functions/typeChecker';
+import {
+  isApiValidationError,
+  isApiDefaultError,
+} from 'src/utils/functions/typeChecker';
 import {
   ApiValidationError,
+  IUser,
   LoginParams,
   LoginResponse,
   RegisterParams,
-  RegisterResponse
+  RegisterResponse,
 } from '../../../../../server/shared_with_front/types/types-shared';
 import {
-  resetUserInfo, setAvatar, setIsAuthenticated, setRole, setUserInfo, setUsername
+  resetUserInfo,
+  setAvatar,
+  setIsAuthenticated,
+  setRole,
+  setUserInfo,
+  setUsername,
 } from './userSlice';
 
 interface authState {
@@ -20,6 +30,7 @@ interface authState {
   autoLoginLoading: boolean;
   autoLoginSuccess: boolean;
   registering: boolean;
+  sendingRecoveryMail?: boolean;
 }
 
 const initialState: authState = {
@@ -62,7 +73,7 @@ export const logoutUser = createAsyncThunk(
     try {
       await authService.logout();
       localStorage.removeItem('USER_ROLE');
-      dispatch(resetUserInfo())
+      dispatch(resetUserInfo());
     } catch (error: any) {
       if (error.response) {
         return rejectWithValue(error.response);
@@ -117,6 +128,54 @@ export const registerUser = createAsyncThunk<
     return rejectWithValue('Could not register the user');
   }
 });
+
+export const forgotPassword = createAsyncThunk<string, string>(
+  'auth/forgotPassword',
+  async (email, { rejectWithValue }) => {
+    try {
+      const { results } = await authService.forgetPassword(email);
+      return results;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (
+          error.response &&
+          (isApiDefaultError(error.response.data) ||
+            isApiValidationError(error.response.data))
+        ) {
+          return rejectWithValue(error.response.data);
+        }
+      }
+      return rejectWithValue('Something went wrong ;(');
+    }
+  }
+);
+
+/**
+ * Function changes user account password
+ * @param token
+ * @param password
+ * @returns {IUser} user
+ */
+export const changePassword = createAsyncThunk<IUser, ChangePasswordProps>(
+  'auth/changePassword',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { results } = await authService.changePassword(credentials);
+      return results;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (
+          error.response &&
+          (isApiDefaultError(error.response.data) ||
+            isApiValidationError(error.response.data))
+        ) {
+          return rejectWithValue(error.response.data);
+        }
+      }
+      return rejectWithValue('Something went wrong :(');
+    }
+  }
+);
 
 // -- Reducer
 const authSlice = createSlice({

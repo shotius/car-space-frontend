@@ -79,6 +79,10 @@ const globalStateSlice = createSlice({
       state.isAuthFormOpen = true;
       state.chosenAuthForm = 'register';
     },
+    openForgotPasswordModal: (state) => {
+      state.isAuthFormOpen = true
+      state.chosenAuthForm = 'forget-password'
+    }, 
     openLoginModal: (state) => {
       state.isAuthFormOpen = true;
       state.chosenAuthForm = 'login';
@@ -94,6 +98,7 @@ export const {
   chooseAuthForm,
   closeAuthModal, 
   openLoginModal,
+  openForgotPasswordModal, 
   openRegisterModal,
 
   setAppCurrency,
