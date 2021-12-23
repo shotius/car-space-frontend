@@ -14,14 +14,10 @@ import { CurrencySwitcher } from 'src/components/molecules/PopoverBodies/Currenc
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppSelector } from 'src/redux/app/hook';
 
-interface CurrencyPopoverProps {
-  closePopover: () => void;
-}
+interface CurrencyPopoverProps {}
 
-export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
-  closePopover,
-}) => {
-  const { currency } = useAppSelector((state) => state.globalAppState);
+export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({}) => {
+  const currency  = useAppSelector((state) => state.globalAppState.currency);
 
   // based on currency will return different content for trigger button
   const triggerContent = () => {
@@ -78,7 +74,7 @@ export const CurrencyPopover: React.FC<CurrencyPopoverProps> = ({
       <PopoverContent w="80px" outline="none">
         <PopoverArrow />
         <PopoverBody p="0">
-          <CurrencySwitcher closeCurrencyPopover={closePopover} />
+          <CurrencySwitcher />
         </PopoverBody>
       </PopoverContent>
     </Popover>

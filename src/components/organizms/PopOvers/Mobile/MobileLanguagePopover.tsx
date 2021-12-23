@@ -22,7 +22,7 @@ export const MobileLanguagePopover: React.FC<MobileLanguagePopoverProps> = ({
   popupDiv,
 }) => {
   const { lang } = useAppSelector((state) => state.globalAppState);
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { isOpen, onToggle } = useDisclosure();
 
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -44,10 +44,10 @@ export const MobileLanguagePopover: React.FC<MobileLanguagePopoverProps> = ({
           w="40%"
           bg="autoGrey.200"
           _hover={{
-            bg: "autoGrey.100"
+            bg: 'autoGrey.100',
           }}
           _active={{
-            bg: "autoGrey.200"
+            bg: 'autoGrey.200',
           }}
           ref={triggerRef}
           onClick={() => {
@@ -60,12 +60,15 @@ export const MobileLanguagePopover: React.FC<MobileLanguagePopoverProps> = ({
       </PopoverTrigger>
       <PopoverContent
         border="none"
-        w={triggerRef.current ? `calc(${triggerRef.current.clientWidth}px + 25px)` : '150px'}
+        w={
+          triggerRef.current
+            ? `calc(${triggerRef.current.clientWidth}px + 25px)`
+            : '150px'
+        }
         mt="-8px"
       >
         <PopoverBody>
           <LanguageSwitcher
-            closePopover={onClose}
             boxShadow="0px 4px 17px #00000029"
             borderRadius="8px"
             p="8px 16px"

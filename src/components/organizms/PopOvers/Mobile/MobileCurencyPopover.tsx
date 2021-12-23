@@ -13,7 +13,7 @@ interface MobileCurencyPopupverProps {
 export const MobileCurencyPopover: React.FC<MobileCurencyPopupverProps> = ({
   popoverDiv,
 }) => {
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { isOpen, onToggle } = useDisclosure();
   const { currency } = useAppSelector((state) => state.globalAppState);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -26,10 +26,10 @@ export const MobileCurencyPopover: React.FC<MobileCurencyPopupverProps> = ({
           w="40%"
           bg="autoGrey.200"
           _hover={{
-            bg: "autoGrey.100"
+            bg: 'autoGrey.100',
           }}
           _active={{
-            bg: "autoGrey.200"
+            bg: 'autoGrey.200',
           }}
           onClick={() => {
             // scoll bottom to appear popover on bottom of the button
@@ -46,7 +46,6 @@ export const MobileCurencyPopover: React.FC<MobileCurencyPopupverProps> = ({
       >
         <PopoverBody p="0">
           <CurrencySwitcher
-            closeCurrencyPopover={onClose}
             boxShadow="0px 4px 17px #00000029"
             borderRadius="8px"
             p="8px 16px"

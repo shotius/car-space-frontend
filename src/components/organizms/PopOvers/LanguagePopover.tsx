@@ -15,14 +15,10 @@ import { LanguageSwitcher } from 'src/components/molecules/PopoverBodies/Languag
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppSelector } from 'src/redux/app/hook';
 
-interface LanguagePopoverProps {
-  closePopover: () => void;
-}
+interface LanguagePopoverProps {}
 
-export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
-  closePopover,
-}) => {
-  const { lang } = useAppSelector((state) => state.globalAppState);
+export const LanguagePopover: React.FC<LanguagePopoverProps> = ({}) => {
+  const lang = useAppSelector((state) => state.globalAppState.lang);
 
   const icon = () => {
     switch (lang) {
@@ -62,7 +58,7 @@ export const LanguagePopover: React.FC<LanguagePopoverProps> = ({
       <PopoverContent w="70px" outline="none">
         <PopoverArrow />
         <PopoverBody p="0">
-          <LanguageSwitcher closePopover={closePopover} />
+          <LanguageSwitcher />
         </PopoverBody>
       </PopoverContent>
     </Popover>

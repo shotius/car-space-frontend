@@ -91,10 +91,10 @@ const globalStateSlice = createSlice({
 
 export const {
   toggleAuthModal,
-  openLoginModal,
-  openRegisterModal,
   chooseAuthForm,
   closeAuthModal, 
+  openLoginModal,
+  openRegisterModal,
 
   setAppCurrency,
   setAppLanguage,

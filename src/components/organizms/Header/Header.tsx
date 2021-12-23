@@ -1,5 +1,4 @@
 import { Button, IconButton } from '@chakra-ui/button';
-import { useDisclosure } from '@chakra-ui/hooks';
 import Icon from '@chakra-ui/icon';
 import { Flex, HStack, StackDivider } from '@chakra-ui/layout';
 import { Center } from '@chakra-ui/react';
@@ -29,22 +28,28 @@ import { LanguagePopover } from '../PopOvers/LanguagePopover';
 interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = () => {
+  const USER = localStorage.getItem('USER_ROLE');
+
   const [safeDocument, setSafeDocument] = useState<Document | null>(document);
   const dispatch = useAppDispatch();
   const history = useHistory();
 
-  const {
-    isMobileRegisterLoginOpen,
-    catalogQuery,
-    isMobileMenuOpen: menuOpen,
-  } = useAppSelector((state) => state.globalAppState);
-
-  const { isAuthenticated, role, fullName } = useAppSelector(
-    (state) => state.userInfoSlice
-  );
-
   const { isDesktop, isMobile, isTablet } = useDetectScreen();
-  const USER = localStorage.getItem('USER_ROLE');
+  const menuOpen = useAppSelector(
+    (state) => state.globalAppState.isMobileMenuOpen
+  );
+  const isMobileRegisterLoginOpen = useAppSelector(
+    (state) => state.globalAppState.isMobileRegisterLoginOpen
+  );
+  const catalogQuery = useAppSelector(
+    (state) => state.globalAppState.catalogQuery
+  );
+  const isAuthenticated = useAppSelector(
+    (state) => state.userInfoSlice.isAuthenticated
+  );
+  const role = useAppSelector((state) => state.userInfoSlice.role);
+  const fullName = useAppSelector((state) => state.userInfoSlice.fullName);
+  
 
   // Toggle mobile menu
   const toggleMenu = () => dispatch(toggleMobileMenu());
@@ -64,12 +69,6 @@ export const Header: React.FC<HeaderProps> = () => {
       setSafeDocument(null);
     };
   }, [menuOpen]);
-
-  // curency change popover
-  const { onClose: closeCurr } = useDisclosure();
-
-  // language change popover
-  const { onClose: closeLang } = useDisclosure();
 
   return (
     <ContainerOuter h="full" bg="white">
@@ -106,9 +105,9 @@ export const Header: React.FC<HeaderProps> = () => {
               mr={[null, null, '-20px', '-15px']}
             >
               {/* choose currency */}
-              <CurrencyPopover closePopover={closeCurr} />
+              <CurrencyPopover />
               {/* choose languages */}
-              <LanguagePopover closePopover={closeLang} />
+              <LanguagePopover />
             </HStack>
 
             {/* if user is authenticated login and register buttons are not shown */}
