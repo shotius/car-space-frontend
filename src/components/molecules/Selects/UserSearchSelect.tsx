@@ -21,15 +21,15 @@ import { SelectOptions } from '../Wrappers/SelectOptions';
 import { SelectWrapper } from '../Wrappers/SelectWrapper';
 
 interface UserSelectProps {
-  onSelect: (item: string) => void;
-  onItemSelect?: (val: string) => void;
+  onSelect: (user: string) => void;
+  onUserSelect?: (user: IUser) => void;
   name?: string;
 }
 
 export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
   onSelect,
   name,
-  onItemSelect,
+  onUserSelect,
   ...rest
 }) => {
   const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
@@ -108,7 +108,9 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
         </SelectTrigger>
         <SelectOptions isOpen={isOpen}>
           {fetching ? (
-            <HeadingSecondary textAlign="center" w="full">Fetching ... </HeadingSecondary>
+            <HeadingSecondary textAlign="center" w="full">
+              Fetching ...{' '}
+            </HeadingSecondary>
           ) : (
             usersToShow.map((user) => (
               <ButtonRect
@@ -117,7 +119,7 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
                   setPlaceholder(user.fullName);
                   onToggle();
                   onSelect(user.id);
-                  onItemSelect && onItemSelect(user.id);
+                  onUserSelect && onUserSelect(user);
                   setSelectedUser(user);
                 }}
                 key={user.id}

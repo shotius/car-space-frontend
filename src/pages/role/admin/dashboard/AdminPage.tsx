@@ -1,4 +1,4 @@
-import { Button, Divider, HStack, Stack } from '@chakra-ui/react';
+import { Button, Stack } from '@chakra-ui/react';
 import { Link, Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { DividerVertical } from 'src/components/atoms/Divider';

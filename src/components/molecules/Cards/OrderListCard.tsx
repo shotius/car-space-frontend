@@ -30,7 +30,7 @@ export const OrderListCard: React.FC<OrderListCardProps> = ({ order }) => {
       <VStack w="full" p="2">
         <HStack w="full" justify="space-between">
           <TextSecondary>Order Id</TextSecondary>
-          <HeadingSecondary>{order.id}</HeadingSecondary>
+          <HeadingSecondary isTruncated>{order.id}</HeadingSecondary>
         </HStack>
         <Divider w="full" />
         <HStack w="full" justify="space-between">
@@ -41,13 +41,13 @@ export const OrderListCard: React.FC<OrderListCardProps> = ({ order }) => {
         <HStack w="full" justify="space-between">
           <TextSecondary>Created</TextSecondary>
           <HeadingSecondary>
-            {cD ? dateToDMY(cD) : <NotSpecified />}
+            {cD ? dateToDMY(cD.toString()) : <NotSpecified />}
           </HeadingSecondary>
         </HStack>
         <Divider w="full" />
         <HStack w="full" justify="space-between">
           <TextSecondary>Dealivery</TextSecondary>
-          <HeadingSecondary>{dD && dateToDMY(dD)}</HeadingSecondary>
+          <HeadingSecondary>{dD && dateToDMY(dD.toString())}</HeadingSecondary>
         </HStack>
         <Divider w="full" />
         <Box w="full">

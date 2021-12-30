@@ -77,14 +77,14 @@ export const OrderListDesktop: React.FC<OrderListDesktopProps> = ({
                 </Td>
                 <Td>
                   {order.createdAt ? (
-                    dateToDMY(order.createdAt)
+                    dateToDMY(order.createdAt.toString())
                   ) : (
                     <NotSpecified />
                   )}{' '}
                 </Td>
                 <Td>
                   {order.deliveryAt ? (
-                    dateToDMY(order.deliveryAt)
+                    dateToDMY(order.deliveryAt.toString())
                   ) : (
                     <NotSpecified />
                   )}{' '}
