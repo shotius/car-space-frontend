@@ -1,5 +1,5 @@
 import { VStack } from '@chakra-ui/layout';
-import { HStack, useToast } from '@chakra-ui/react';
+import { HStack, Stack, useToast } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
@@ -94,7 +94,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             >
               Log in
             </ButtonRegular>
-            <HStack w="full" justify="space-between">
+            <Stack w="full" align="flex-start" direction={['column', 'row']} justify="space-between">
               <HStack>
                 <TextRegular fontSize="14px">
                   Don’t have an account?
@@ -114,7 +114,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
               >
                 Forgot password?
               </TextButton>
-            </HStack>
+            </Stack>
           </VStack>
         </Form>
       )}

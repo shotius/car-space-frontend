@@ -5,12 +5,13 @@ import { useState } from 'react';
 import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 import { Card } from 'src/components/molecules/Cards/Card';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
+import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { IOrderData } from 'src/pages/role/user/dashboard/OrderListPage';
 import { dateToDMY } from 'src/utils/functions/dateToDMY';
+import { IOrderedCar } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface OrderListDesktopProps {
-  orderList: IOrderData[];
+  orderList: IOrderedCar[];
 }
 
 export const OrderListDesktop: React.FC<OrderListDesktopProps> = ({
@@ -58,26 +59,38 @@ export const OrderListDesktop: React.FC<OrderListDesktopProps> = ({
                 key={i}
                 pt="50px"
                 onClick={() => handeExpand(i)}
-                cursor='pointer'
+                cursor="pointer"
                 _hover={{
-                  bg: "autoGrey.100"
+                  bg: 'autoGrey.100',
                 }}
               >
                 <Td w="full" p={[null, null, null, '2', '8']} isTruncated>
-                  <HeadingSecondary>{order.orderId}</HeadingSecondary>
+                  <HeadingSecondary>{order.id}</HeadingSecondary>
                 </Td>
                 <Td>
                   <TextRegular
                     noOfLines={isExpanded.includes(i) ? 5 : 1}
                     fontSize="16px"
                   >
-                    {order.name}
+                    {order.carName}
                   </TextRegular>
                 </Td>
-                <Td>{dateToDMY(order.createdDate)} </Td>
-                <Td>{dateToDMY(order.deliveryDate)} </Td>
+                <Td>
+                  {order.createdAt ? (
+                    dateToDMY(order.createdAt)
+                  ) : (
+                    <NotSpecified />
+                  )}{' '}
+                </Td>
+                <Td>
+                  {order.deliveryAt ? (
+                    dateToDMY(order.deliveryAt)
+                  ) : (
+                    <NotSpecified />
+                  )}{' '}
+                </Td>
                 <Td p={[null, null, null, '2', '4']}>{order.location} </Td>
-                <Td> $ {order.totalPrice}</Td>
+                <Td> $ {order.price}</Td>
                 <Td>{order.status} </Td>
                 <Td p="0">
                   <Button variant="link" minH="50px">

@@ -1,9 +1,9 @@
 import { VStack } from '@chakra-ui/react';
 import { OrderListCard } from 'src/components/molecules/Cards/OrderListCard';
-import { IOrderData } from 'src/pages/role/user/dashboard/OrderListPage';
+import { IOrderedCar } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface OrderListMobileProps {
-  orderList: IOrderData[];
+  orderList: IOrderedCar[];
 }
 
 export const OrderListMobile: React.FC<OrderListMobileProps> = ({

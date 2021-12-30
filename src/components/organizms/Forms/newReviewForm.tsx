@@ -98,7 +98,7 @@ export const NewReviwForm: React.FC<AddNewReviewProps> = ({}) => {
                 <UserSearchSelect
                   {...field}
                   name="userId"
-                  onSelect={(userId: string) => {
+                  onItemSelect={(userId: string) => {
                     setFieldValue('userId', userId);
                   }}
                 />

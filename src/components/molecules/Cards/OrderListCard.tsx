@@ -11,42 +11,45 @@ import {
 } from '@chakra-ui/react';
 import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
-import { IOrderData } from 'src/pages/role/user/dashboard/OrderListPage';
 import { dateToDMY } from 'src/utils/functions/dateToDMY';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
+import { IOrderedCar } from '../../../../../server/shared_with_front/types/types-shared';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
+import { NotSpecified } from '../Texts/NotSpecified';
 import { Card } from './Card';
 
 interface OrderListCardProps {
-  order: IOrderData;
+  order: IOrderedCar;
 }
 
 export const OrderListCard: React.FC<OrderListCardProps> = ({ order }) => {
-  const { createdDate: cD, deliveryDate: dD } = order;
+  const { createdAt: cD, deliveryAt: dD } = order;
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Card w="full" pb="0">
       <VStack w="full" p="2">
         <HStack w="full" justify="space-between">
           <TextSecondary>Order Id</TextSecondary>
-          <HeadingSecondary>{order.orderId}</HeadingSecondary>
+          <HeadingSecondary>{order.id}</HeadingSecondary>
         </HStack>
-        <Divider w="full"/> 
+        <Divider w="full" />
         <HStack w="full" justify="space-between">
           <TextSecondary>Name</TextSecondary>
-          <HeadingSecondary>{order.name}</HeadingSecondary>
+          <HeadingSecondary>{order.carName}</HeadingSecondary>
         </HStack>
-        <Divider w="full"/> 
+        <Divider w="full" />
         <HStack w="full" justify="space-between">
           <TextSecondary>Created</TextSecondary>
-          <HeadingSecondary>{dateToDMY(cD)}</HeadingSecondary>
+          <HeadingSecondary>
+            {cD ? dateToDMY(cD) : <NotSpecified />}
+          </HeadingSecondary>
         </HStack>
-        <Divider w="full"/> 
+        <Divider w="full" />
         <HStack w="full" justify="space-between">
           <TextSecondary>Dealivery</TextSecondary>
-          <HeadingSecondary>{dateToDMY(dD)}</HeadingSecondary>
+          <HeadingSecondary>{dD && dateToDMY(dD)}</HeadingSecondary>
         </HStack>
-        <Divider w="full"/> 
+        <Divider w="full" />
         <Box w="full">
           <Collapse in={isOpen}>
             <VStack divider={<StackDivider />}>
@@ -57,7 +60,7 @@ export const OrderListCard: React.FC<OrderListCardProps> = ({ order }) => {
               <HStack w="full" justify="space-between">
                 <TextSecondary>Total Price</TextSecondary>
                 <HeadingSecondary>
-                  {toTrippleNumber(order.totalPrice)} USD
+                  {toTrippleNumber(order.price)} USD
                 </HeadingSecondary>
               </HStack>
               <HStack w="full" justify="space-between">
@@ -67,13 +70,13 @@ export const OrderListCard: React.FC<OrderListCardProps> = ({ order }) => {
             </VStack>
           </Collapse>
         </Box>
-        <Divider w="full" display={isOpen ? "block" : "none"}/> 
+        <Divider w="full" display={isOpen ? 'block' : 'none'} />
         <HStack>
           <Button variant="ghost" bg="transparent" onClick={onToggle}>
-            {isOpen ? "See less" : "See more"}
+            {isOpen ? 'See less' : 'See more'}
             <Icon
               as={DropdownIcon}
-              transform={!isOpen ? "rotate(0deg)" : "rotate(-180deg)"}
+              transform={!isOpen ? 'rotate(0deg)' : 'rotate(-180deg)'}
               mb="2px"
               ml="2"
               transition="all .2s"

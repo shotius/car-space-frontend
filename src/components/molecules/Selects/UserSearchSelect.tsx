@@ -1,10 +1,10 @@
 import {
-    AspectRatio,
-    HStack,
-    Image,
-    StackProps,
-    useDisclosure,
-    useToast
+  AspectRatio,
+  HStack,
+  Image,
+  StackProps,
+  useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useAppDispatch } from 'src/redux/app/hook';
@@ -22,12 +22,14 @@ import { SelectWrapper } from '../Wrappers/SelectWrapper';
 
 interface UserSelectProps {
   onSelect: (item: string) => void;
+  onItemSelect?: (val: string) => void;
   name?: string;
 }
 
 export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
   onSelect,
   name,
+  onItemSelect,
   ...rest
 }) => {
   const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
@@ -35,6 +37,7 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
   const [placeholder, setPlaceholder] = useState('');
   const [searchWord, setSearchWord] = useState('');
   const [userList, setUserList] = useState<IUser[]>([]);
+  const [fetching, setFetching] = useState(false);
   const dispatch = useAppDispatch();
   const toast = useToast();
 
@@ -46,19 +49,22 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
   };
 
   const getUserAsync = (value: string) => {
+    setFetching(true);
     dispatch(getUsers(value))
       .unwrap()
       .then((data) => {
         setUserList(data);
+        setFetching(false);
       })
-      .catch(() =>
+      .catch(() => {
         toast({
           title: 'Could not fetch users',
           position: 'top',
           status: 'error',
           duration: 2000,
-        })
-      );
+        });
+        setFetching(false);
+      });
   };
 
   const usersToShow = userList.filter((user) =>
@@ -101,31 +107,36 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
           />
         </SelectTrigger>
         <SelectOptions isOpen={isOpen}>
-          {usersToShow.map((user) => (
-            <ButtonRect
-              h="80px"
-              onClick={() => {
-                setPlaceholder(user.fullName);
-                onToggle();
-                onSelect(user.id);
-                setSelectedUser(user);
-              }}
-              key={user.id}
-            >
-              <HStack w="full">
-                <AspectRatio ratio={1 / 1} w="50px">
-                  <Image
-                    w="full"
-                    h="full"
-                    src={user.avatar}
-                    fallbackSrc="https://image.shutterstock.com/image-vector/profile-picture-avatar-icon-vector-260nw-1760295569.jpg"
-                    borderRadius="100px"
-                  />
-                </AspectRatio>
-                <HeadingSecondary>{user.fullName}</HeadingSecondary>
-              </HStack>
-            </ButtonRect>
-          ))}
+          {fetching ? (
+            <HeadingSecondary textAlign="center" w="full">Fetching ... </HeadingSecondary>
+          ) : (
+            usersToShow.map((user) => (
+              <ButtonRect
+                h="80px"
+                onClick={() => {
+                  setPlaceholder(user.fullName);
+                  onToggle();
+                  onSelect(user.id);
+                  onItemSelect && onItemSelect(user.id);
+                  setSelectedUser(user);
+                }}
+                key={user.id}
+              >
+                <HStack w="full">
+                  <AspectRatio ratio={1 / 1} w="50px">
+                    <Image
+                      w="full"
+                      h="full"
+                      src={user.avatar}
+                      fallbackSrc="https://image.shutterstock.com/image-vector/profile-picture-avatar-icon-vector-260nw-1760295569.jpg"
+                      borderRadius="100px"
+                    />
+                  </AspectRatio>
+                  <HeadingSecondary>{user.fullName}</HeadingSecondary>
+                </HStack>
+              </ButtonRect>
+            ))
+          )}
         </SelectOptions>
       </SelectContent>
     </SelectWrapper>

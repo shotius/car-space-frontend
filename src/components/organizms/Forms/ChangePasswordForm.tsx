@@ -44,6 +44,7 @@ export const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({}) => {
             password: 'passwords does not patch',
             retypePassword: 'passwords does not match',
           });
+          setSubmitting(false);
         } else {
           // else submit the form
           dispatch(changePassword({ token, password }))

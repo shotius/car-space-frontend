@@ -1,10 +1,11 @@
 import { OrderListDesktop } from 'src/components/organizms/UserProfile/OrderList/OrderListDesktop';
 import { OrderListMobile } from 'src/components/organizms/UserProfile/OrderList/OrderListMobile';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { IOrderedCar } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface OrderListPageProps {}
 export interface IOrderData {
-  orderId: number;
+  id: number;
   name: string;
   createdDate: Date;
   deliveryDate: Date;
@@ -14,50 +15,50 @@ export interface IOrderData {
 }
 
 export const OrderListPage: React.FC<OrderListPageProps> = ({}) => {
-  const data: IOrderData[] = [
+  const data: IOrderedCar[] = [
     {
-      orderId: 123123,
-      name: 'Chevrolet Cruze',
-      createdDate: new Date(),
-      deliveryDate: new Date(2021, 12, 12),
+      id: '123123',
+      carName: 'Chevrolet Cruze',
+      createdAt: new Date(),
+      deliveryAt: new Date(2021, 12, 12),
       location: 'USA',
-      totalPrice: 20000,
+      price: 20000,
       status: 'Completed',
     },
     {
-      orderId: 123123,
-      name: 'Chevrolet Cruze Chevrolet',
-      createdDate: new Date(),
-      deliveryDate: new Date(2021, 12, 12),
+      id: '123123',
+      carName: 'Chevrolet Cruze Chevrolet',
+      createdAt: new Date(),
+      deliveryAt: new Date(2021, 12, 12),
       location: 'USA',
-      totalPrice: 20000,
+      price: 20000,
       status: 'Completed',
     },
     {
-      orderId: 123123,
-      name: 'Chevrolet Cruze',
-      createdDate: new Date(),
-      deliveryDate: new Date(2021, 12, 12),
+      id: '123123',
+      carName: 'Chevrolet Cruze',
+      createdAt: new Date(),
+      deliveryAt: new Date(2021, 12, 12),
       location: 'USA',
-      totalPrice: 20000,
+      price: 20000,
       status: 'Completed',
     },
     {
-      orderId: 123123,
-      name: 'Chevrolet Cruze',
-      createdDate: new Date(),
-      deliveryDate: new Date(2021, 12, 12),
+      id: '123123',
+      carName: 'Chevrolet Cruze',
+      createdAt: new Date(),
+      deliveryAt: new Date(2021, 12, 12),
       location: 'USA',
-      totalPrice: 20000,
+      price: 20000,
       status: 'Completed',
     },
     {
-      orderId: 123123,
-      name: 'Chevrolet Cruze',
-      createdDate: new Date(),
-      deliveryDate: new Date(2021, 12, 12),
+      id: '123123',
+      carName: 'Chevrolet Cruze',
+      createdAt: new Date(),
+      deliveryAt: new Date(2021, 12, 12),
       location: 'USA',
-      totalPrice: 20000,
+      price: 20000,
       status: 'Completed',
     },
   ];
