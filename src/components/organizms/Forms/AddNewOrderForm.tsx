@@ -110,7 +110,7 @@ export const AddNewOrderForm: React.FC<AddNewOrderFormProps> = ({
             label={`Delivery at:  dd/mm/yyyy`}
           />
           <ButtonRegular mt="4" type="submit" isLoading={isSubmitting}>
-            Add Car
+            {operation === "modifying" ? "Update car" : "Add Car"}
           </ButtonRegular>
         </Form>
       )}

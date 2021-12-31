@@ -10,10 +10,12 @@ import axios from 'axios';
 
 interface InitState {
   cars: IOrderedCar[];
+  fetching: boolean;
 }
 
 const initialState: InitState = {
   cars: [],
+  fetching: false,
 };
 
 /**
@@ -112,6 +114,17 @@ const orderedCarSlice = createSlice({
   name: 'orderedCarSlice',
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getUserOrderedCars.pending, (state) => {
+      state.fetching = true;
+    });
+    builder.addCase(getUserOrderedCars.fulfilled, (state) => {
+      state.fetching = false;
+    });
+    builder.addCase(getUserOrderedCars.rejected, (state) => {
+      state.fetching = false;
+    });
+  },
 });
 
 export const { reducer: orderedCarReducer } = orderedCarSlice;

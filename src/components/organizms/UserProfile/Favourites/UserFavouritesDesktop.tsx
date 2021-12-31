@@ -1,4 +1,5 @@
 import { VStack } from '@chakra-ui/layout';
+import { Center, Spinner } from '@chakra-ui/react';
 import { Card } from 'src/components/molecules/Cards/Card';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { useAppSelector } from 'src/redux/app/hook';
@@ -17,10 +18,12 @@ export const UserFavouritesDesktop: React.FC<UserFavouritesDesktopProps> =
       <Card w="full" p="32px">
         <VStack w="full" spacing="4">
           {favouriteCarsFetching ? (
-            <HeadingSecondary>...loading</HeadingSecondary>
+            <Center w="full" h="300px">
+              <Spinner />
+            </Center>
           ) : !favouriteCars.length ? (
             <HeadingSecondary>
-              Your Favourite cars will appear here
+              Your Favourites list is empty
             </HeadingSecondary>
           ) : (
             favouriteCars.map((car) => (

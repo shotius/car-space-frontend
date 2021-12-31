@@ -9,7 +9,6 @@ interface HeaderProps {}
 export const BlogHeader: React.FC<HeaderProps> = ({}) => {
   const toast = useToast();
   const url = window.location;
-  // const wSize = useWindowSize()
 
   return (
     <Box w="full">

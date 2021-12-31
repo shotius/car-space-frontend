@@ -132,6 +132,7 @@ export interface GlobalStateSliceState {
 //** User slice */
 
 export interface UsertInfoState {
+  id: string; 
   role: RoleTypes | null;
   isAuthenticated: boolean;
   fullName: string | null;

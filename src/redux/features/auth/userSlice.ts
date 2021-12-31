@@ -11,6 +11,7 @@ import { isApiDefaultError } from './../../../utils/functions/typeChecker';
 import { UsertInfoState } from './types';
 
 const initialState: UsertInfoState = {
+  id: '', 
   fullName: null,
   role: null,
   isAuthenticated: false,
@@ -137,6 +138,9 @@ const userInfoSlice = createSlice({
     setPhone: (state, action: PayloadAction<string>) => {
       state.phone = action.payload;
     },
+    setUserId: (state, action: PayloadAction<string>) => {
+      state.id = action.payload
+    }, 
     setUserInfo: (state, action: PayloadAction<LoginResponse>) => {
       const { phone, fullName, role, avatar, isAuthenticated } = action.payload;
       state.phone = phone;
@@ -205,6 +209,7 @@ export const {
   setFavourites,
   setAvatar,
   setUserInfo,
-  resetUserInfo
+  resetUserInfo,
+  setUserId
 } = userInfoSlice.actions;
 export const { reducer: UserInfo } = userInfoSlice;

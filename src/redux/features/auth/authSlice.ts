@@ -18,7 +18,9 @@ import {
   resetUserInfo,
   setAvatar,
   setIsAuthenticated,
+  setPhone,
   setRole,
+  setUserId,
   setUserInfo,
   setUsername,
 } from './userSlice';
@@ -94,6 +96,8 @@ export const autoLogin = createAsyncThunk(
         dispatch(setUsername(results.fullName));
         dispatch(setRole(results.role));
         dispatch(setAvatar(results.avatar));
+        dispatch(setPhone(results.phone));
+        dispatch(setUserId(results.id));
       }
       return results;
     } catch (error) {
