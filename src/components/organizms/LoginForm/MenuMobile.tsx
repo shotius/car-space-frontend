@@ -58,7 +58,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({}) => {
         top={['50px', null, '60px']}
         right={menuOpen ? '0px' : '-270px'}
         w="270px"
-        transition="box-shadow .3s,right 0.7s "
+        transition="box-shadow .3s,right 0.5s "
         bg="white"
         pt="30%"
         align="flex-end"
@@ -90,7 +90,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({}) => {
                 transform={isLangOpen ? 'rotate(-180deg)' : ''}
                 transition="all 0.3s"
               />
-              <TextRegular>{language()}</TextRegular>
+              <TextRegular fontSize="18px">{language()}</TextRegular>
             </HStack>
           </ButtonRect>
           <Collapse in={isLangOpen}>
@@ -130,7 +130,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({}) => {
                 transform={isCurrOpen ? 'rotate(-180deg)' : ''}
                 transition="all 0.3s"
               />
-              <TextRegular>{capitalize(currency)}</TextRegular>
+              <TextRegular fontSize="inherit">{capitalize(currency)}</TextRegular>
             </HStack>
           </ButtonRect>
           <Collapse in={isCurrOpen}>
