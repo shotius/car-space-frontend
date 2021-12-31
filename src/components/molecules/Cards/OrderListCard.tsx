@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { DropdownIcon } from 'src/components/atoms/Icons/DropdownIcon';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
-import { dateToDMY } from 'src/utils/functions/dateToDMY';
+import { dateToYMD } from 'src/utils/functions/dateToYMD';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import { IOrderedCar } from '../../../../../server/shared_with_front/types/types-shared';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
@@ -41,13 +41,13 @@ export const OrderListCard: React.FC<OrderListCardProps> = ({ order }) => {
         <HStack w="full" justify="space-between">
           <TextSecondary>Created</TextSecondary>
           <HeadingSecondary>
-            {cD ? dateToDMY(cD.toString()) : <NotSpecified />}
+            {cD ? dateToYMD(cD.toString()) : <NotSpecified />}
           </HeadingSecondary>
         </HStack>
         <Divider w="full" />
         <HStack w="full" justify="space-between">
           <TextSecondary>Dealivery</TextSecondary>
-          <HeadingSecondary>{dD && dateToDMY(dD.toString())}</HeadingSecondary>
+          <HeadingSecondary>{dD && dateToYMD(dD.toString())}</HeadingSecondary>
         </HStack>
         <Divider w="full" />
         <Box w="full">

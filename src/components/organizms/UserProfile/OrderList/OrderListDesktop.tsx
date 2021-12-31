@@ -7,7 +7,7 @@ import { Card } from 'src/components/molecules/Cards/Card';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { dateToDMY } from 'src/utils/functions/dateToDMY';
+import { dateToYMD } from 'src/utils/functions/dateToYMD';
 import { IOrderedCar } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface OrderListDesktopProps {
@@ -77,14 +77,14 @@ export const OrderListDesktop: React.FC<OrderListDesktopProps> = ({
                 </Td>
                 <Td>
                   {order.createdAt ? (
-                    dateToDMY(order.createdAt.toString())
+                    dateToYMD(order.createdAt.toString())
                   ) : (
                     <NotSpecified />
                   )}{' '}
                 </Td>
                 <Td>
                   {order.deliveryAt ? (
-                    dateToDMY(order.deliveryAt.toString())
+                    dateToYMD(order.deliveryAt.toString())
                   ) : (
                     <NotSpecified />
                   )}{' '}

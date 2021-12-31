@@ -2,26 +2,69 @@ import { FormControl, Select } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
-import { IOrderedCar } from '../../../../../server/shared_with_front/types/types-shared';
+import { useAppDispatch } from 'src/redux/app/hook';
+import { addOrder } from 'src/redux/features/orders/orderedCarSlice';
+import { dateToYMD } from 'src/utils/functions/dateToYMD';
+import {
+  IOrderCarBase,
+  IOrderedCar,
+} from '../../../../../server/shared_with_front/types/types-shared';
 
-interface AddNewOrderFormProps {}
+interface AddNewOrderFormProps {
+  operation: 'modifying' | 'adding';
+  userId: string;
+  closeDrawer: () => void;
+  car?: IOrderedCar;
+}
 
-export const AddNewOrderForm: React.FC<AddNewOrderFormProps> = ({}) => {
-  const initialValues: Omit<IOrderedCar, 'id'> = {
-    carName: '',
-    // deliveryAt?: Date,
-    location: '',
-    price: 0,
-    status: '',
-  };
+export const AddNewOrderForm: React.FC<AddNewOrderFormProps> = ({
+  operation,
+  userId,
+  car,
+  closeDrawer
+}) => {
+  const dispatch = useAppDispatch();
+
+  let initialValues: IOrderCarBase;
+
+  car && operation === 'modifying'
+    ? (initialValues = {
+        carName: car.carName,
+        //@ts-ignore
+        deliveryAt: car.deliveryAt
+          ? dateToYMD(car!.deliveryAt!.toString(), '-')
+          : new Date(),
+        location: car.location,
+        price: car.price,
+        status: car.status,
+      })
+    : (initialValues = {
+        carName: '',
+        deliveryAt: new Date(),
+        location: '',
+        price: 0,
+        status: '',
+      });
+
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => {
-        console.log('values: ', values);
+      onSubmit={(values, { setSubmitting }) => {
+        dispatch(addOrder({ ...values, userId }))
+          .unwrap()
+          .then((data) => {
+            console.log(data);
+            setSubmitting(false);
+            closeDrawer()
+          })
+          .catch((error) => {
+            console.log(error);
+            setSubmitting(false);
+            closeDrawer()
+          });
       }}
     >
-      {() => (
+      {({ isSubmitting }) => (
         <Form>
           <FormikInput name="carName" placeholder="car name" />
           <FormikInput name="location" placeholder="Location" />
@@ -41,7 +84,17 @@ export const AddNewOrderForm: React.FC<AddNewOrderFormProps> = ({}) => {
               </FormControl>
             )}
           </Field>
-          <ButtonRegular mt="4" type="submit">Add Car</ButtonRegular>
+          <FormikInput
+            name="deliveryAt"
+            bg="#EAEAEB"
+            opacity="0.5"
+            placeholder="Status"
+            type="date"
+            label={`Delivery at:  dd/mm/yyyy`}
+          />
+          <ButtonRegular mt="4" type="submit" isLoading={isSubmitting}>
+            Add Car
+          </ButtonRegular>
         </Form>
       )}
     </Formik>

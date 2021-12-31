@@ -7,18 +7,25 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  HStack,
+  IconButton,
   Spinner,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
+import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
 import { Card } from 'src/components/molecules/Cards/Card';
 import { OrderListCard } from 'src/components/molecules/Cards/OrderListCard';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { UserSearchSelect } from 'src/components/molecules/Selects/UserSearchSelect';
 import { AddNewOrderForm } from 'src/components/organizms/Forms/AddNewOrderForm';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { getUserOrderedCars } from 'src/redux/features/orders/orderedCarSlice';
+import {
+  deleteOrderedCar,
+  getUserOrderedCars,
+} from 'src/redux/features/orders/orderedCarSlice';
 import {
   IOrderedCar,
   IUser,
@@ -29,9 +36,13 @@ interface AddOrderedCarProps {}
 export const AddOrderedCar: React.FC<AddOrderedCarProps> = ({}) => {
   const [orderedCars, setOrderedCars] = useState<IOrderedCar[]>([]);
   const [fetching, setFetching] = useState(false);
-  const [selectUser, setSelectedUserId] = useState<IUser>();
+  const [selectedUser, setSelectedUserId] = useState<IUser>();
   const [isEditing, setIsEditing] = useState(false);
-  // const [selectedCar, setSelectedCar] = useState<ICarDealer>()
+  const [operationOnTheCar, setOperationOnTheCar] = useState<
+    'adding' | 'modifying'
+  >('adding');
+  const [selectedCar, setSelectedCar] = useState<IOrderedCar>();
+  const toast = useToast();
 
   const dispatch = useAppDispatch();
 
@@ -41,10 +52,24 @@ export const AddOrderedCar: React.FC<AddOrderedCarProps> = ({}) => {
       .unwrap()
       .then((data) => {
         setOrderedCars(data);
-        console.log(data);
         setFetching(false);
       })
       .catch(() => setFetching(false));
+  }
+
+  function handleDeleteOrder(carId: string) {
+    dispatch(deleteOrderedCar(carId))
+      .unwrap()
+      .then(() => {
+        selectedUser && getUserOrders(selectedUser!.id);
+      })
+      .catch((error) =>
+        toast({
+          title: error,
+          position: 'top',
+          status: 'error',
+        })
+      );
   }
 
   return (
@@ -63,9 +88,15 @@ export const AddOrderedCar: React.FC<AddOrderedCarProps> = ({}) => {
               }}
             />
             <VStack pt="4" w="full">
-              {selectUser && (
-                <Button onClick={() => setIsEditing(true)}>
-                  + add new Car for {selectUser.fullName}
+              {selectedUser && (
+                <Button
+                  mb="2"
+                  onClick={() => {
+                    setIsEditing(true);
+                    setOperationOnTheCar('adding');
+                  }}
+                >
+                  + add new Car for {selectedUser.fullName}
                 </Button>
               )}
               {fetching ? (
@@ -80,11 +111,27 @@ export const AddOrderedCar: React.FC<AddOrderedCarProps> = ({}) => {
                     w="full"
                     key={car.id}
                     boxShadow="0px 0px 10px lightgrey"
+
                   >
                     <VStack>
-                      <Button variant="ghost" color="autoOrange.500">
-                        Modify order
-                      </Button>
+                      <HStack w="full" justify="space-between">
+                        <Button
+                          variant="ghost"
+                          color="autoOrange.500"
+                          onClick={() => {
+                            setIsEditing(true);
+                            setOperationOnTheCar('modifying');
+                            setSelectedCar(car);
+                          }}
+                        >
+                          Modify order
+                        </Button>
+                        <IconButton
+                          onClick={() => handleDeleteOrder(car.id)}
+                          icon={<CloseIcon />}
+                          aria-label="delete order"
+                        />
+                      </HStack>
                       <OrderListCard order={car} />
                     </VStack>
                   </Card>
@@ -103,7 +150,12 @@ export const AddOrderedCar: React.FC<AddOrderedCarProps> = ({}) => {
               <DrawerCloseButton />
               <DrawerHeader>Change/Add a Car</DrawerHeader>
               <DrawerBody>
-                <AddNewOrderForm />
+                <AddNewOrderForm
+                  operation={operationOnTheCar}
+                  userId={selectedUser ? selectedUser.id : ''}
+                  car={selectedCar}
+                  closeDrawer={() => setIsEditing(false)}
+                />
               </DrawerBody>
             </DrawerContent>
           </Drawer>
