@@ -1,6 +1,10 @@
 import {
-  AspectRatio, HStack,
-  Image, SimpleGrid, StackDivider, VStack
+  AspectRatio,
+  HStack,
+  Image,
+  SimpleGrid,
+  StackDivider,
+  VStack,
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
@@ -22,12 +26,9 @@ export const UserFavouritesCardMobile: React.FC<FavouritesCardProps> = ({
 }) => {
   const images = car.imgUrls;
   const history = useHistory();
+
   return (
-    <Card
-      w="full"
-      p="4"
-      onClick={() => history.push(`/catalog/car/${car.id}`)}
-    >
+    <Card w="full" p="4" onClick={() => history.push(`/catalog/car/${car.id}`)}>
       <VStack spacing="4">
         {/* Heading  */}
         <CarCardHeading
@@ -51,22 +52,19 @@ export const UserFavouritesCardMobile: React.FC<FavouritesCardProps> = ({
             maxH="130px"
           >
             <Image
-              src={images && images.length ? images[0] : `https://${car?.imgT}`}
-              filter="auto"
-              blur={images && images.length ? 'none' : '10px'}
-              saturation={0.9}
+              src={images && images.length ? images[0] : "https://via.placeholder.com/150" }
               borderRadius="8px"
             />
           </AspectRatio>
           <AspectRatio ratio={191 / 130} w="full" gridArea="b" maxH="61px">
             <Image
-              src={images && images.length ? images[1] : `https://${car?.imgT}`}
+              src={images && images.length ? images[1] : "https://via.placeholder.com/150"}
               borderRadius="8px"
             />
           </AspectRatio>
           <AspectRatio ratio={191 / 130} w="full" gridArea="c" maxH="61px">
             <Image
-              src={images && images.length ? images[2] : `https://${car?.imgT}`}
+              src={images && images.length ? images[2] : "https://via.placeholder.com/150"}
               borderRadius="8px"
             />
           </AspectRatio>

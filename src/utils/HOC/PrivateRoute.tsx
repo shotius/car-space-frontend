@@ -1,3 +1,4 @@
+import { Center } from '@chakra-ui/react';
 import { Suspense, useEffect, useState } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import ErrorBoundary from 'src/components/molecules/Errors/ErrorBoundary';
@@ -38,27 +39,37 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
 
   if (gettingUserInfo) {
     return (
-      <HeadingSecondary textAlign="center" pt="100px">
-        Loading Profile...
-      </HeadingSecondary>
+      <Center w="full" h="100vh" bg="red">
+        <HeadingSecondary color="red">
+          Loading Profile...
+        </HeadingSecondary>
+      </Center>
     );
   }
 
   // user is not in localstorage redirect to home
   if (!USER || USER !== role) {
-    return <Redirect to="/" />
+    return <Redirect to="/" />;
   }
 
-  if(shouldGoHome) {
-    return <Redirect to="/" />
+  if (shouldGoHome) {
+    return <Redirect to="/" />;
   }
   if (shouldOpenProfile) {
-    return <Redirect to={`/${userRole}/dashboard`} />
+    return <Redirect to={`/${userRole}/dashboard`} />;
   }
 
   return (
     <ErrorBoundary>
-      <Suspense fallback={<h1>Loading Private page</h1>}>
+      <Suspense
+        fallback={
+          <Center w="full" h="full" pt="40px">
+            <HeadingSecondary>
+              Loading Profile ...
+            </HeadingSecondary>
+          </Center>
+        }
+      >
         <Route exact {...rest} render={() => <Component />} />
       </Suspense>
     </ErrorBoundary>
