@@ -1,3 +1,4 @@
+import { IUpdateOrderedCar } from './../auth/types';
 import { isApiDefaultError } from './../../../utils/functions/typeChecker';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import orderedCarsService from 'src/services/orderedCarsService';
@@ -54,9 +55,32 @@ export const addOrder = createAsyncThunk<IOrderedCar, INewOrderCar>(
         return rejectWithValue(error.error);
       }
       if (axios.isAxiosError(error)) {
-        return rejectWithValue(error.response);
+        return rejectWithValue(error.message);
       }
       return rejectWithValue('Something went wrong :(');
+    }
+  }
+);
+
+/**
+ * Function updates ordered car
+ * @param {IUpdateOrderedCar}
+ * @returns {IOrderedCar}
+ */
+export const updateOrderCar = createAsyncThunk<IOrderedCar, IUpdateOrderedCar>(
+  'orderedCar/updateOrderCar',
+  async (props, { rejectWithValue }) => {
+    try {
+      const { results } = await orderedCarsService.updateOrder(props);
+      return results;
+    } catch (error) {
+      if (isApiDefaultError(error)) {
+        return rejectWithValue(error.error);
+      }
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Something went Wrong ;(');
     }
   }
 );

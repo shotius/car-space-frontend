@@ -17,12 +17,24 @@ const addOrder = async (props: INewOrderCar) => {
   return data as ApiSuccessResponse<IOrderedCar>;
 };
 
+const updateOrder = async ({
+  carId,
+  props,
+}: {
+  carId: string;
+  props: INewOrderCar;
+}) => {
+  const { data } = await axios.put(`${baseUrl}/${carId}`, props);
+  return data as ApiSuccessResponse<IOrderedCar>;
+};
+
 const deleteOrder = async (carid) => {
   const { data } = await axios.delete(`${baseUrl}/${carid}`);
   return data as ApiSuccessResponse<boolean>;
 };
 
 const orderedCarsService = {
+  updateOrder,
   deleteOrder,
   getUserOrderedCars,
   addOrder,

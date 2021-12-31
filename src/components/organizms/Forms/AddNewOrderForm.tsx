@@ -1,9 +1,12 @@
-import { FormControl, Select } from '@chakra-ui/react';
+import { FormControl, Select, useToast } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { addOrder } from 'src/redux/features/orders/orderedCarSlice';
+import {
+  addOrder,
+  updateOrderCar,
+} from 'src/redux/features/orders/orderedCarSlice';
 import { dateToYMD } from 'src/utils/functions/dateToYMD';
 import {
   IOrderCarBase,
@@ -21,9 +24,10 @@ export const AddNewOrderForm: React.FC<AddNewOrderFormProps> = ({
   operation,
   userId,
   car,
-  closeDrawer
+  closeDrawer,
 }) => {
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   let initialValues: IOrderCarBase;
 
@@ -50,18 +54,31 @@ export const AddNewOrderForm: React.FC<AddNewOrderFormProps> = ({
     <Formik
       initialValues={initialValues}
       onSubmit={(values, { setSubmitting }) => {
-        dispatch(addOrder({ ...values, userId }))
-          .unwrap()
-          .then((data) => {
-            console.log(data);
-            setSubmitting(false);
-            closeDrawer()
-          })
-          .catch((error) => {
-            console.log(error);
-            setSubmitting(false);
-            closeDrawer()
-          });
+        operation === 'modifying' && car
+          ? dispatch(
+              updateOrderCar({ carId: car.id, props: { ...values, userId } })
+            )
+              .unwrap()
+              .then(() => {
+                setSubmitting(false);
+                closeDrawer();
+              })
+              .catch((error) => {
+                setSubmitting(false);
+                toast({ title: error, status: 'error', position: 'top' });
+                closeDrawer();
+              })
+          : dispatch(addOrder({ ...values, userId }))
+              .unwrap()
+              .then(() => {
+                setSubmitting(false);
+                closeDrawer();
+              })
+              .catch((error) => {
+                toast({ title: error, status: 'error', position: 'top' });
+                setSubmitting(false);
+                closeDrawer();
+              });
       }}
     >
       {({ isSubmitting }) => (

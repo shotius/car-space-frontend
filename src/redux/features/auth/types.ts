@@ -1,9 +1,10 @@
 import {
   ICarCopart,
   ICarDealer,
+  INewOrderCar,
   Keys,
   RoleTypes,
-  SelectedCarModel
+  SelectedCarModel,
 } from '../../../../../server/shared_with_front/types/types-shared';
 import { CurrencyType, Languages } from './../../../constants/index';
 
@@ -146,8 +147,12 @@ export interface UsertInfoState {
   likingCar: boolean;
 }
 
-
 export interface ChangePasswordProps {
-  token: string; 
-  password: string
+  token: string;
+  password: string;
+}
+
+export interface IUpdateOrderedCar {
+  carId: string;
+  props: INewOrderCar;
 }

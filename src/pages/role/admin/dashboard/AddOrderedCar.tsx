@@ -46,7 +46,7 @@ export const AddOrderedCar: React.FC<AddOrderedCarProps> = ({}) => {
 
   const dispatch = useAppDispatch();
 
-  function getUserOrders(userId: string) {
+  function handleGetUserOrders(userId: string) {
     setFetching(true);
     dispatch(getUserOrderedCars(userId))
       .unwrap()
@@ -61,7 +61,7 @@ export const AddOrderedCar: React.FC<AddOrderedCarProps> = ({}) => {
     dispatch(deleteOrderedCar(carId))
       .unwrap()
       .then(() => {
-        selectedUser && getUserOrders(selectedUser!.id);
+        selectedUser && handleGetUserOrders(selectedUser!.id);
       })
       .catch((error) =>
         toast({
@@ -83,7 +83,7 @@ export const AddOrderedCar: React.FC<AddOrderedCarProps> = ({}) => {
             <UserSearchSelect
               onSelect={() => {}}
               onUserSelect={(user: IUser) => {
-                getUserOrders(user.id);
+                handleGetUserOrders(user.id);
                 setSelectedUserId(user);
               }}
             />
@@ -111,7 +111,6 @@ export const AddOrderedCar: React.FC<AddOrderedCarProps> = ({}) => {
                     w="full"
                     key={car.id}
                     boxShadow="0px 0px 10px lightgrey"
-
                   >
                     <VStack>
                       <HStack w="full" justify="space-between">
@@ -142,7 +141,9 @@ export const AddOrderedCar: React.FC<AddOrderedCarProps> = ({}) => {
           <Drawer
             isOpen={isEditing}
             placement="right"
-            onClose={() => setIsEditing(false)}
+            onClose={() => {
+              setIsEditing(false);
+            }}
             size="md"
           >
             <DrawerOverlay />
@@ -154,7 +155,10 @@ export const AddOrderedCar: React.FC<AddOrderedCarProps> = ({}) => {
                   operation={operationOnTheCar}
                   userId={selectedUser ? selectedUser.id : ''}
                   car={selectedCar}
-                  closeDrawer={() => setIsEditing(false)}
+                  closeDrawer={() => {
+                    setIsEditing(false);
+                    selectedUser && handleGetUserOrders(selectedUser.id);
+                  }}
                 />
               </DrawerBody>
             </DrawerContent>
