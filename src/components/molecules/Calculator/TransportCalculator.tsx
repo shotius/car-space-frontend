@@ -1,40 +1,125 @@
 import { HStack, VStack } from '@chakra-ui/react';
-import { useContext } from 'react';
-import { HeadingSecondary } from '../Headings/HeadingSecondary';
-import { InputGrey } from '../Inputs/InputGrey';
-import { SelectGrey } from '../Selects/SelectGrey';
-import { TextRegular } from '../Texts/TextRegular';
+import { useContext, useMemo, useState } from 'react';
+import {
+  auctions,
+  cities,
+  prices,
+  states,
+  zips,
+} from 'src/constants/TransportData';
+import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
-import { CalculatorFooter } from './CalculatorFooter';
 import { Autocomplete } from '../Autocomplete';
-import { locations } from 'src/constants/AuctionLocation';
+import { HeadingSecondary } from '../Headings/HeadingSecondary';
+import { TextRegular } from '../Texts/TextRegular';
+import { CalculatorFooter } from './CalculatorFooter';
 
 interface TransportCalculatorProps {}
 
+interface IDataObject {
+  city: string;
+  auction: string;
+  price: number;
+  state: string;
+  zip: string;
+}
+
 export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
   const size = useContext(SizeContext);
+  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedAuction, setSelectedAuction] = useState('');
+
+  // this is a dictionary with all info about auctions
+  const auctionDictionary = useMemo(() => {
+    return cities.map<IDataObject>((city, i) => {
+      return {
+        city,
+        auction: auctions[i],
+        price: prices[i],
+        state: states[i],
+        zip: zips[i],
+      };
+    });
+  }, [cities]);
+
+  // calculate state based on selected city
+  const state =
+    selectedCity && selectedAuction
+      ? auctionDictionary.find(
+          (dict) =>
+            dict.city === selectedCity && dict.auction === selectedAuction
+        )?.state
+      : '';
+
+  // take zip based on selected city
+  // const zip =
+  //   selectedCity && selectedAuction
+  //     ? auctionDictionary.find(
+  //         (dict) =>
+  //           dict.city === selectedCity && dict.auction === selectedAuction
+  //       )?.zip
+  //     : '';
+
+  const price =
+    selectedCity && selectedAuction
+      ? auctionDictionary.find(
+          (dict) =>
+            dict.city === selectedCity && dict.auction === selectedAuction
+        )?.price
+      : 0;
+
+  // get unique cities and auctions
+  const uniqueCities = [...new Set(cities)];
+  const uniqueAuctions = [...new Set(auctions)];
+
+  // filter cities if auction is selected
+  const citiesToShow = selectedAuction
+    ? auctionDictionary
+        .filter((auction) => auction.auction === selectedAuction)
+        .map((auction) => {
+          return auction.city;
+        })
+    : uniqueCities;
+
+  // filter auctions if city is selected
+  const auctionsToShow = selectedCity
+    ? auctionDictionary
+        .filter((auction) => auction.city === selectedCity)
+        .map((auction) => auction.auction)
+    : uniqueAuctions;
 
   return (
     <VStack h="full">
-      <InputGrey placeholder="Location" />
-      <Autocomplete placeholder="Location" options={locations}/>
-      <SelectGrey placeholder="Auction Site">
-        <option>one</option>
-        <option>one</option>
-        <option>one</option>
-      </SelectGrey>
+      <Autocomplete
+        placeholder="City"
+        options={citiesToShow}
+        value={selectedCity}
+        onChange={setSelectedCity}
+        capitalize={true}
+      />
+
+      <Autocomplete
+        placeholder="Auction"
+        options={auctionsToShow}
+        value={selectedAuction}
+        onChange={setSelectedAuction}
+      />
       <CalculatorFooter>
         <HStack w="full" justifyContent="space-between">
           <TextRegular>State</TextRegular>
-          <TextRegular>_</TextRegular>
+          <TextRegular>{state || '_'}</TextRegular>
         </HStack>
+        {/* <HStack w="full" justifyContent="space-between">
+          <TextRegular>Zip</TextRegular>
+          <TextRegular>{zip || `_`}</TextRegular>
+        </HStack> */}
         <HStack w="full" justifyContent="space-between">
           <TextRegular>Total</TextRegular>
           <HeadingSecondary
             color="autoOrange.500"
             fontSize={size === 'regular' ? '16px' : '20px'}
           >
-            $ 200
+            $ {price ? toTrippleNumber(price) : 0}
           </HeadingSecondary>
         </HStack>
       </CalculatorFooter>
