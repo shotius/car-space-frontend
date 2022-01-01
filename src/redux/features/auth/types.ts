@@ -139,6 +139,7 @@ export interface UsertInfoState {
   favouriteCarIds: string[];
   avatar?: string;
   phone?: string;
+  email: string;
 
   favouriteCars: ICarDealer[];
   favouriteCarsFetching: boolean;

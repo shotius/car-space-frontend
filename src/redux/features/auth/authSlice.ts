@@ -1,29 +1,20 @@
-import { ChangePasswordProps } from 'src/redux/features/auth/types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { ChangePasswordProps } from 'src/redux/features/auth/types';
 import authService from 'src/services/authService';
 import {
-  isApiValidationError,
   isApiDefaultError,
+  isApiValidationError,
 } from 'src/utils/functions/typeChecker';
 import {
   ApiValidationError,
   IUser,
+  IUserInfo,
   LoginParams,
-  LoginResponse,
   RegisterParams,
   RegisterResponse,
 } from '../../../../../server/shared_with_front/types/types-shared';
-import {
-  resetUserInfo,
-  setAvatar,
-  setIsAuthenticated,
-  setPhone,
-  setRole,
-  setUserId,
-  setUserInfo,
-  setUsername,
-} from './userSlice';
+import { resetUserInfo, setUserInfo } from './userSlice';
 
 interface authState {
   loading: boolean;
@@ -45,7 +36,7 @@ const initialState: authState = {
 };
 
 export const loginUser = createAsyncThunk<
-  LoginResponse,
+  IUserInfo,
   LoginParams,
   { rejectValue: string }
 >(
@@ -90,20 +81,13 @@ export const autoLogin = createAsyncThunk(
   'auth/autoLogin',
   async (_, { dispatch }) => {
     try {
-      const { results } = await authService.me();
-      if (results) {
-        dispatch(setIsAuthenticated(true));
-        dispatch(setUsername(results.fullName));
-        dispatch(setRole(results.role));
-        dispatch(setAvatar(results.avatar));
-        dispatch(setPhone(results.phone));
-        dispatch(setUserId(results.id));
+      const { results: user } = await authService.me();
+      if (user) {
+        dispatch(setUserInfo(user));
       }
-      return results;
+      return user;
     } catch (error) {
-      dispatch(setUsername(null));
-      dispatch(setRole(null));
-      dispatch(setIsAuthenticated(false));
+      dispatch(resetUserInfo());
     }
   }
 );

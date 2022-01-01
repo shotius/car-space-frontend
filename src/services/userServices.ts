@@ -33,10 +33,16 @@ const getUsers = async (searchWord: string) => {
   return data as ApiSuccessResponse<IUser[]>;
 };
 
+const sendMesage = async (body: any) => {
+  const {data} = await axios.post(`${baseUrl}/sendMessage`, body)
+  return data as ApiSuccessResponse<boolean>
+}
+
 export default {
   getUsers,
   likeCar,
   getAllLikedCars,
   getAllFavouriteCars,
   setUserProfileAvatar,
+  sendMesage
 };

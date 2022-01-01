@@ -1,21 +1,23 @@
+import { isApiDefaultError, isApiValidationError } from 'src/utils/functions/typeChecker';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import userServices from 'src/services/userServices';
 import {
   ICarDealer,
+  IMessageBody,
   IUser,
-  LoginResponse,
+  IUserInfo,
   RoleTypes,
 } from '../../../../../server/shared_with_front/types/types-shared';
-import { isApiDefaultError } from './../../../utils/functions/typeChecker';
 import { UsertInfoState } from './types';
 
 const initialState: UsertInfoState = {
-  id: '', 
+  id: '',
   fullName: null,
   role: null,
   isAuthenticated: false,
   favouriteCarIds: [],
+  email: '',
 
   favouriteCars: [],
   favouriteCarsFetching: false,
@@ -89,7 +91,6 @@ export const setUserAvatarThunk = createAsyncThunk<
     console.log(results);
     return results.url;
   } catch (error) {
-    console.log('error: ', error);
     if (axios.isAxiosError(error) && error.response) {
       if (isApiDefaultError(error.response.data)) {
         return rejectWithValue(error.response.data.error);
@@ -112,6 +113,31 @@ export const getUsers = createAsyncThunk<IUser[], string>(
       return results;
     } catch (error) {
       return rejectWithValue('Could not get Users');
+    }
+  }
+);
+
+/**
+ * Function send user message
+ * @param {IMessageBody}
+ * @returns {boolean}
+ */
+export const sendMessage = createAsyncThunk<boolean, IMessageBody>(
+  'userSlice/sendMessage',
+  async (props, { rejectWithValue }) => {
+    try {
+      const { results } = await userServices.sendMesage(props);
+      return results;
+    } catch (error) {
+      if (isApiDefaultError(error)) {
+        return rejectWithValue(error.error);
+      }
+      if (axios.isAxiosError(error)) {
+        if (error.response && isApiValidationError(error.response.data)) {
+          return rejectWithValue(error.response.data);
+        }
+      }
+      return rejectWithValue('Something went wrong please try later :(');
     }
   }
 );
@@ -139,15 +165,20 @@ const userInfoSlice = createSlice({
       state.phone = action.payload;
     },
     setUserId: (state, action: PayloadAction<string>) => {
-      state.id = action.payload
-    }, 
-    setUserInfo: (state, action: PayloadAction<LoginResponse>) => {
-      const { phone, fullName, role, avatar, isAuthenticated } = action.payload;
+      state.id = action.payload;
+    },
+    setEmail: (state, action: PayloadAction<string>) => {
+      state.email = action.payload;
+    },
+    setUserInfo: (state, action: PayloadAction<IUserInfo>) => {
+      const { phone, fullName, role, email, avatar, isAuthenticated } =
+        action.payload;
       state.phone = phone;
       state.fullName = fullName;
       state.avatar = avatar;
       state.role = role;
       state.isAuthenticated = isAuthenticated;
+      state.email = email;
     },
     resetUserInfo: (state) => {
       state.phone = '';
@@ -155,6 +186,7 @@ const userInfoSlice = createSlice({
       state.avatar = '';
       state.role = null;
       state.isAuthenticated = false;
+      state.email = '';
     },
   },
   extraReducers: (builder) => {
@@ -210,6 +242,7 @@ export const {
   setAvatar,
   setUserInfo,
   resetUserInfo,
-  setUserId
+  setUserId,
+  setEmail,
 } = userInfoSlice.actions;
 export const { reducer: UserInfo } = userInfoSlice;

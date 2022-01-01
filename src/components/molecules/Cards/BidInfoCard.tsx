@@ -11,8 +11,6 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { ContactForm } from 'src/components/organizms/Forms/ContactForm';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { toggleAuthModal } from 'src/redux/features/global/gloabalSlice';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 import { ButtonRegular } from '../Buttons/ButtonRegular';
@@ -26,9 +24,7 @@ interface BidInfoCardProps {
 }
 
 export const BidInfoCard: React.FC<BidInfoCardProps> = ({ car }) => {
-  const isAuth = useAppSelector((state) => state.userInfoSlice.isAuthenticated);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -60,13 +56,7 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({ car }) => {
           pt="4"
           minChildWidth="170px"
         >
-          <ButtonRegular
-            onClick={() => {
-              !isAuth ? dispatch(toggleAuthModal()) : onOpen();
-            }}
-          >
-            Contact
-          </ButtonRegular>
+          <ButtonRegular onClick={onOpen}>Contact</ButtonRegular>
           <ButtonRegular
             color="#000"
             gridRow={1}
@@ -78,7 +68,6 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({ car }) => {
             <HStack>
               <TextRegular>Buy it now</TextRegular>
               <TextRegular opacity="0.5" ml="4">
-                {' '}
                 $ {toTrippleNumber(car.price)}
               </TextRegular>
             </HStack>
@@ -89,12 +78,9 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({ car }) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>
-            Contact
-          </DrawerHeader>
+          <DrawerHeader>Contact Form</DrawerHeader>
           <DrawerBody>
-            <HeadingSecondary>Write you message here</HeadingSecondary>
-            <ContactForm />
+            <ContactForm onClose={onClose} />
           </DrawerBody>
         </DrawerContent>
       </Drawer>

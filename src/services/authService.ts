@@ -4,8 +4,7 @@ import {
   ApiSuccessResponse,
   IUser,
   LoginParams,
-  LoginResponse,
-  MeResponse,
+  IUserInfo,
   RegisterParams,
   RegisterResponse,
 } from '../../../server/shared_with_front/types/types-shared';
@@ -14,12 +13,12 @@ const baseUrl = '/api/auth';
 
 const me = async () => {
   const { data } = await axios.get(`${baseUrl}/me`);
-  return data as ApiSuccessResponse<MeResponse>;
+  return data as ApiSuccessResponse<IUserInfo>;
 };
 
 const login = async (credentials: LoginParams) => {
   const { data } = await axios.post(`${baseUrl}/login`, credentials);
-  return data as ApiSuccessResponse<LoginResponse>;
+  return data as ApiSuccessResponse<IUserInfo>;
 };
 
 const register = async (credentials: RegisterParams) => {
