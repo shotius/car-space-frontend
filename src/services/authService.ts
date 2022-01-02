@@ -41,7 +41,13 @@ const changePassword = async (props: ChangePasswordProps) => {
   return data as ApiSuccessResponse<IUser>;
 };
 
+const verifyAccount = async (hash: string) => {
+  const { data } = await axios.get(`/api/user-verification/${hash}`);
+  return data as ApiSuccessResponse<IUserInfo>;
+};
+
 const authService = {
+  verifyAccount,
   me,
   login,
   register,

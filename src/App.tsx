@@ -13,6 +13,7 @@ import { autoLogin } from 'src/redux/features/auth/authSlice';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
 import { PublicLayout } from './components/templates/Layouts/PublicLayout';
+const AccountActivation = lazy(() => import('./pages/AccountActivation'));
 const ChangePassword = lazy(() => import('./pages/ChangePassword'));
 const CarDetailPageDealer = lazy(
   () => import('./pages/catalog/car/CarDetailPageDealer')
@@ -63,6 +64,11 @@ function App() {
             <PublicRoute
               path="/change-password/:token"
               component={ChangePassword}
+            />
+
+            <PublicRoute
+              path="/account-activation/:hash"
+              component={AccountActivation}
             />
 
             <PrivateRoute
