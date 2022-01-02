@@ -12,7 +12,7 @@ import { loginUser } from 'src/redux/features/auth/authSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
 import {
   isApiDefaultError,
-  isApiValidationError
+  isApiValidationError,
 } from 'src/utils/functions/typeChecker';
 
 interface LoginFormProps {
@@ -73,18 +73,28 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             Log in
           </HeadingSecondary>
           <VStack spacing="32px" pb="10px">
-            <VStack spacing="0" w="full">
+            <VStack spacing="0" w="full" align="start">
               <FormikInput
                 name="email"
-                placeholder="email"
+                placeholder="Email"
                 h={['53px', null, '40px']}
               />
               <FormikInput
                 name="password"
-                placeholder="password"
+                placeholder="Password"
                 type="password"
                 h={['53px', null, '40px']}
               />
+              <HStack>
+                <TextButton
+                  color="#427AD6"
+                  onClick={openForgetPassword}
+                  fontSize="13px"
+                  pt="8px"
+                >
+                  Forgot password?
+                </TextButton>
+              </HStack>
             </VStack>
             <ButtonRegular
               variant="solid"
@@ -94,7 +104,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             >
               Log in
             </ButtonRegular>
-            <Stack w="full" align="flex-start" direction={['column', 'row']} justify="space-between">
+            <Stack
+              w="full"
+              align="flex-start"
+              direction={['column', 'row']}
+              justify="space-between"
+            >
               <HStack>
                 <TextRegular fontSize="14px">
                   Don’t have an account?
@@ -107,13 +122,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({
                   Register
                 </TextButton>
               </HStack>
-              <TextButton
-                color="#427AD6"
-                onClick={openForgetPassword}
-                fontSize="13px"
-              >
-                Forgot password?
-              </TextButton>
             </Stack>
           </VStack>
         </Form>

@@ -9,8 +9,10 @@ import {
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { useAppSelector } from 'src/redux/app/hook';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
+import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
 import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 import { CarImageCarousel } from '../Carousels/CarImageCarousel/CarImageCarousel';
 import { CarCardHeading } from '../Headings/CarCardHeading';
@@ -21,6 +23,8 @@ interface Props {
 
 export const DealerCarCard: React.FC<Props> = ({ car }) => {
   const history = useHistory();
+  const icon = useCurrencyIcon();
+  const price = useAppSelector((state) => state.globalAppState.currencyPrice);
 
   return (
     <Box
@@ -94,7 +98,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
               pr={['4', '0', '4']}
               fontWeight="400"
             >
-              $ {toTrippleNumber(car.price ?? 0)}
+              {icon} {toTrippleNumber(Math.round(car.price * price) ?? 0)}
             </Heading>
           </HStack>
           <HStack justifyContent="space-between" w="full">
@@ -104,7 +108,8 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
               pr={['4', '0', '4']}
               fontWeight="400"
             >
-              $ {car.price ? toTrippleNumber(car.price) : '0'}
+              {icon}{' '}
+              {car.price ? toTrippleNumber(Math.round(car.price * price)) : '0'}
             </Heading>
           </HStack>
         </VStack>

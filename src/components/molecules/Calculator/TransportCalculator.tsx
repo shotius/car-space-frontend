@@ -5,9 +5,10 @@ import {
   cities,
   prices,
   states,
-  zips,
+  zips
 } from 'src/constants/TransportData';
-import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
+import { useAppSelector } from 'src/redux/app/hook';
+import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
 import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
 import { Autocomplete } from '../Autocomplete';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
@@ -28,6 +29,10 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
   const size = useContext(SizeContext);
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedAuction, setSelectedAuction] = useState('');
+  const icon = useCurrencyIcon();
+  const currPrice = useAppSelector(
+    (state) => state.globalAppState.currencyPrice
+  );
 
   // this is a dictionary with all info about auctions
   const auctionDictionary = useMemo(() => {
@@ -119,7 +124,7 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
             color="autoOrange.500"
             fontSize={size === 'regular' ? '16px' : '20px'}
           >
-            $ {price ? toTrippleNumber(price) : 0}
+            {icon} {price ? (price * currPrice).toFixed(4) : 0}
           </HeadingSecondary>
         </HStack>
       </CalculatorFooter>

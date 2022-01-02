@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrencyType, Languages } from 'src/constants';
+import currencyPrice from 'src/utils/functions/converCurrency';
 import { AuthForm, GlobalStateSliceState, ScreenSizes } from '../auth/types';
 
 const initialState: GlobalStateSliceState = {
@@ -8,7 +9,10 @@ const initialState: GlobalStateSliceState = {
   catalogQuery: undefined,
   networkError: undefined,
   lang: 'Eng',
-  currency: 'GEL',
+
+  currency: 'USD',
+  currencyPrice: 1,
+
   isCatalogBannerOpen: false,
   isMobileMenuOpen: false,
   carDetailModalShown: false,
@@ -19,6 +23,18 @@ const initialState: GlobalStateSliceState = {
     isMobile: false,
   },
 };
+
+// Function gets GEL price of currency in relation with USD
+export const detectCurrencyPrice = createAsyncThunk<number, CurrencyType>(
+  'globalState/detectCurrencyPrice',
+  async (currency, { rejectWithValue }) => {
+    try {
+      return await currencyPrice(currency);
+    } catch (error) {
+      return rejectWithValue(1);
+    }
+  }
+);
 
 const globalStateSlice = createSlice({
   name: 'globalStateSlice',
@@ -74,25 +90,30 @@ const globalStateSlice = createSlice({
       state.chosenAuthForm = 'register';
     },
     openForgotPasswordModal: (state) => {
-      state.isAuthFormOpen = true
-      state.chosenAuthForm = 'forget-password'
-    }, 
+      state.isAuthFormOpen = true;
+      state.chosenAuthForm = 'forget-password';
+    },
     openLoginModal: (state) => {
       state.isAuthFormOpen = true;
       state.chosenAuthForm = 'login';
     },
     closeAuthModal: (state) => {
-      state.isAuthFormOpen = false
-    }
+      state.isAuthFormOpen = false;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(detectCurrencyPrice.fulfilled, (state, action) => {
+      state.currencyPrice = action.payload;
+    });
   },
 });
 
 export const {
   toggleAuthModal,
   chooseAuthForm,
-  closeAuthModal, 
+  closeAuthModal,
   openLoginModal,
-  openForgotPasswordModal, 
+  openForgotPasswordModal,
   openRegisterModal,
 
   setAppCurrency,

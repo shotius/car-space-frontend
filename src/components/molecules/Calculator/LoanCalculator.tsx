@@ -2,15 +2,15 @@ import {
   Flex,
   InputGroup,
   InputRightElement,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useAppSelector } from 'src/redux/app/hook';
+import { safeSum } from '../../../utils/functions/safeOperations';
 import { InputGrey } from '../Inputs/InputGrey';
 import { SliderBlue } from '../Sliders/SliderBlue';
 import { TextRegular } from '../Texts/TextRegular';
 import { CalculatorFooter } from './CalculatorFooter';
-import { safeSum } from '../../../utils/functions/safeOperations';
 
 interface LoanCalculatorProps {}
 

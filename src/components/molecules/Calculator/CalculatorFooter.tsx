@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { TextRegular } from '../Texts/TextRegular';
 import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
+import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
+import { useAppSelector } from 'src/redux/app/hook';
 
 interface CalculatroFooterProps {
   total?: number
@@ -14,6 +16,8 @@ export const CalculatorFooter: React.FC<CalculatroFooterProps & StackProps> = ({
   ...rest
 }) => {
   const size = useContext(SizeContext);
+  const icon = useCurrencyIcon()
+  const price = useAppSelector(state => state.globalAppState.currencyPrice)
 
   return (
     <VStack
@@ -31,7 +35,7 @@ export const CalculatorFooter: React.FC<CalculatroFooterProps & StackProps> = ({
             color="autoOrange.500"
             fontSize={size === 'regular' ? '20px' : '20px'}
           >
-            $ {total}
+            {icon} {(total * price)}
           </HeadingSecondary>
         </HStack>
       )}

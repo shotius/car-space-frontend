@@ -116,7 +116,10 @@ export type AuthForm = 'login' | 'forget-password' | 'register';
 export interface GlobalStateSliceState {
   catalogQuery: string | undefined;
   lang: Languages;
+
   currency: CurrencyType;
+  currencyPrice: number; 
+
   isCatalogBannerOpen: boolean;
   isMobileMenuOpen: boolean;
   isChangeProfilePictureOpen: boolean;
