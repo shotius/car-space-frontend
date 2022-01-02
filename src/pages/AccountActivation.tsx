@@ -2,6 +2,7 @@ import { Button, Center, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
+import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setUserInfo } from 'src/redux/features/auth/userSlice';
 import authService from 'src/services/authService';
@@ -17,11 +18,15 @@ export const AccountActivation: React.FC<AccountActivationProps> = ({}) => {
   const role = useAppSelector((state) => state.userInfoSlice.role);
   const isAuth = useAppSelector((state) => state.userInfoSlice.isAuthenticated);
   const history = useHistory();
-
-  console.log('role: ', role);
+  const [countDown, setCountDown] = useState(5);
+  const [showCountDown, setShowCountDown] = useState(false);
 
   useEffect(() => {
-    isAuth && setTimeout(() => history.replace(`/${role}/dashboard`), 2000);
+    if (isAuth) {
+      setShowCountDown(true);
+      setTimeout(() => history.replace(`/${role}/dashboard`), 5000);
+      setInterval(() => setCountDown((prev) => prev - 1), 1000);
+    }
   }, [isAuth]);
 
   useEffect(() => {
@@ -68,6 +73,12 @@ export const AccountActivation: React.FC<AccountActivationProps> = ({}) => {
             <Link to="/home">go to home</Link>
           )}
         </Button>
+        {showCountDown && (
+          <TextRegular>
+            redirecting in <span style={{ color: 'red' }}>{countDown}</span>{' '}
+            seconds
+          </TextRegular>
+        )}
       </VStack>
     </Center>
   );
