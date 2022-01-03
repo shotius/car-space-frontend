@@ -1,4 +1,4 @@
-import { createContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { DesktopFiltersOnCatalogPage } from 'src/components/molecules/FilterSelects/DesktopFilters';
 import { MobileFiltersOnCatalogPage } from 'src/components/molecules/FilterSelects/MobileFilters';
 import { FilterQueries } from 'src/constants';
@@ -21,7 +21,7 @@ import {
   selectTranssmision,
   selectTypes,
   selectYearFrom,
-  selectYearTo
+  selectYearTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { Transmission } from 'src/redux/features/auth/types';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';

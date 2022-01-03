@@ -5,11 +5,15 @@ import { MobileSelect } from 'src/components/molecules/Selects/MobileSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectBrand } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
+import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 
-interface MobileBrandSelectProps {}
+interface MobileBrandSelectProps {
+  searchOnClear?: boolean;
+}
 
 export const MobileBrandSelect: React.FC<MobileBrandSelectProps & BoxProps> = ({
-  w="full",
+  searchOnClear = true,
+  w = 'full',
   ...rest
 }) => {
   const searchButtonRef = useRef(null);
@@ -18,6 +22,9 @@ export const MobileBrandSelect: React.FC<MobileBrandSelectProps & BoxProps> = ({
   const { brands: selectedBrands } = useAppSelector(
     (state) => state.selectedCarFilters
   );
+  const filters = useAppSelector((state) => state.selectedCarFilters);
+
+  const onSubmit = useOnSubmit();
 
   // brand drawer
   const {
@@ -32,7 +39,10 @@ export const MobileBrandSelect: React.FC<MobileBrandSelectProps & BoxProps> = ({
         onClick={openBrand}
         label={capitalizeEach(selectedBrands.join(', ')) || 'Brands'}
         hasValue={!!selectedBrands.length}
-        onClear={() => dispatch(selectBrand([]))}
+        onClear={() => {
+          dispatch(selectBrand([]));
+          searchOnClear && onSubmit({ ...filters, brands: [] });
+        }}
       />
       <MobileBrandPopup
         finalFocusRef={searchButtonRef}

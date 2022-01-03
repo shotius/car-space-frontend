@@ -7,9 +7,7 @@ import { MobileYearSelect } from 'src/components/molecules/FilterSelects/mobile/
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getFilters } from 'src/redux/features/auth/carsSlice';
 import { openAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { submitCarSearch } from 'src/utils/hooks/submitCarsSearch';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 import { SearchButton } from '../../../molecules/Buttons/SearchButton';
 import { Card } from '../../../molecules/Cards/Card';
 import { BrandSelect } from '../../../molecules/FilterSelects/desktop/BrandSelect';
@@ -23,7 +21,6 @@ interface SearchProps {}
 export const HomeFilters: React.FC<SearchProps> = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const query = useQueryParams();
   const selectedFilters = useAppSelector((state) => state.selectedCarFilters);
   const { brands } = useAppSelector((state) => state.carsReducer);
 
@@ -61,6 +58,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           {!isDesktop ? (
             <MobileBrandSelect
               w={['100%', '30%', '23%']}
+              searchOnClear = {false}
               onClick={() => {
                 if (!brands.length) {
                   dispatch(getFilters());
@@ -70,6 +68,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           ) : (
             <BrandSelect
               w={['100%', '100%', '100%']}
+              searchOnClear={false}
               onClick={() => {
                 if (!brands.length) {
                   dispatch(getFilters());
@@ -89,7 +88,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           {!isDesktop ? (
             <MobileModelSelect w={['100%', '30%', '23%']} />
           ) : (
-            <ModelSelect w="full" />
+            <ModelSelect w="full" searchOnClear={false} />
           )}
           <DividerVertical
             height="30px"
@@ -103,20 +102,15 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           {!isDesktop ? (
             <MobileYearSelect w={['100%', '30%', '23%']} />
           ) : (
-            <YearSelect w={['100%', '100%', '100%']} />
+            <YearSelect w={['100%', '100%', '100%']} searchOnClear={false} />
           )}
           <SearchButton
             display={['none', 'none', 'block']}
             minW="144px"
             onClick={() => {
+              // since we have onSubmit function when catalog page loads
+              // it is enough to just redirect
               history.push({ pathname: '/catalog' });
-              submitCarSearch({
-                history,
-                query,
-                dispatch,
-                filters: selectedFilters,
-                currencyPrice: 1,
-              });
             }}
           />
         </Flex>
@@ -126,14 +120,9 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           h={['44px', null, null, '50px', '62px']}
           mt={['4', '3']}
           onClick={() => {
+            // since we have onSubmit function when catalog page loads
+            // it is enough to just redirect
             history.push({ pathname: '/catalog' });
-            submitCarSearch({
-              history,
-              query,
-              dispatch,
-              filters: selectedFilters,
-              currencyPrice: 1,
-            });
           }}
         />
         <TextButton

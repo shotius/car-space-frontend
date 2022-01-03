@@ -39,6 +39,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<
   ...rest
 }) => {
   const dispatch = useAppDispatch();
+  const filters = useAppSelector(state => state.selectedCarFilters)
 
   const { isAdvancedFiltersOpen: isOpen } = useAppSelector(
     (state) => state.selectedCarFilters
@@ -77,7 +78,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<
             w={{ md: '140px', lg: '144px', '2xl': '211px' }}
             ml={[null, null, '0px', '16px']}
             mr="2"
-            onClick={onSubmit}
+            onClick={() => onSubmit(filters)}
           />
           {!isOpen ? (
             <IconButton

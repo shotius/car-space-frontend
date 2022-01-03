@@ -12,11 +12,13 @@ interface CatalogTemplateProps {}
 
 export const CatalogTemplate: React.FC<CatalogTemplateProps> = () => {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     return () => {
       dispatch(resetFilters());
     };
   }, []);
+  
   return (
     <ContainerOuter pt={['4', '6', null, '8']}>
       <VStack w="full" spacing={['66px']}>

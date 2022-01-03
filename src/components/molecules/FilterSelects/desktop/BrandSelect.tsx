@@ -30,6 +30,7 @@ import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 
 interface BrandSelectProps {
   labelPadding?: BoxProps['p'];
+  searchOnClear?: boolean;
 }
 
 // In the compont I have 4 different variables
@@ -39,6 +40,7 @@ interface BrandSelectProps {
 //4. selected: are Selected options, used to keep track of other three variables
 export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
   labelPadding,
+  searchOnClear = true,
   ...rest
 }) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
@@ -52,6 +54,8 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
   const initSelection = useAppSelector(
     (state) => state.selectedCarFilters.brands
   );
+
+  const filters = useAppSelector((state) => state.selectedCarFilters);
 
   const onSubmit = useOnSubmit();
 
@@ -69,9 +73,8 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
       setSelected(initSelection);
     } else {
       setSelected([]);
-      console.log('onSubmit: ', initSelection)
       // This call back will fire when field is cleared
-      onSubmit();
+      // onSubmit();
     }
   }, [initSelection]);
 
@@ -126,9 +129,10 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
             setValue('');
             setPlaceholder('');
             setAreOptionsOpen(false);
-            dispatch(selectBrand([]));
             dispatch(setModels([]));
+            dispatch(selectBrand([])).payload;
             dispatch(selectModels([]));
+            searchOnClear && onSubmit({ ...filters, brands: [], models: [] });
           }}
         >
           <SelectSearch

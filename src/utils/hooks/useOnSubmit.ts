@@ -1,11 +1,12 @@
 import { useHistory } from 'react-router-dom';
 import { FilterQueries } from 'src/constants';
-import { useAppSelector, useAppDispatch } from 'src/redux/app/hook';
+import { useAppDispatch } from 'src/redux/app/hook';
 import { getDealerCars } from 'src/redux/features/auth/carsSlice';
 import { closeAdvacedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { SelectedCarFilters } from 'src/redux/features/auth/types';
 import {
   setCatalogQuery,
-  setNetworkError,
+  setNetworkError
 } from 'src/redux/features/global/gloabalSlice';
 import currencyPrice from '../functions/converCurrency';
 import { deleteQueryFromURL } from '../functions/deleteQueryFromUrl';
@@ -18,27 +19,6 @@ export const useOnSubmit = () => {
   const history = useHistory();
 
   const { isLargerThan: isLargerThen737 } = useMediaQueryMin(737);
-
-  const {
-    brands: selectedBrands,
-    models: selectedModels,
-    yearFrom,
-    yearTo,
-    engineFrom,
-    engineTo,
-    conditions,
-    types,
-    locations,
-    transmission,
-    keys,
-    drives,
-    salesStatus,
-    fuels,
-    cylinders,
-    priceFrom,
-    priceTo,
-    currency,
-  } = useAppSelector((state) => state.selectedCarFilters);
 
   const {
     BRAND,
@@ -62,9 +42,29 @@ export const useOnSubmit = () => {
   } = FilterQueries;
 
   // this function clears the url and fills with new query strings
-  async function onSubmit() {
+  async function onSubmit(filters: SelectedCarFilters) {
 
-    console.log('brands: ', selectedBrands)
+    const {
+      brands: selectedBrands,
+      models: selectedModels,
+      yearFrom,
+      yearTo,
+      engineFrom,
+      engineTo,
+      conditions,
+      types,
+      locations,
+      transmission,
+      keys,
+      drives,
+      salesStatus,
+      fuels,
+      cylinders,
+      priceFrom,
+      priceTo,
+      currency,
+    } = filters;
+  
     const currPrice = await currencyPrice(currency);
     // before creating query, i delete all query filters in the url
     query.delete(BRAND);
@@ -141,7 +141,7 @@ export const useOnSubmit = () => {
     }
 
     // qurency price
-    query.set(CURRENCY_PRICE, currPrice);
+    query.set(CURRENCY_PRICE, currPrice.toString());
 
     // condition
     conditions.map((c) => {

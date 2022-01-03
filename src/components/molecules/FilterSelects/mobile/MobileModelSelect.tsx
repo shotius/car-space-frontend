@@ -3,10 +3,14 @@ import { MobileModelsPopup } from 'src/components/molecules/MobileSelectPopups/M
 import { MobileSelect } from 'src/components/molecules/Selects/MobileSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
+import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 
-interface MobileModelSelectProps {}
+interface MobileModelSelectProps {
+  saerchOnClear?: boolean;
+}
 
 export const MobileModelSelect: React.FC<MobileModelSelectProps & BoxProps> = ({
+  saerchOnClear = true,
   w = 'full',
   ...rest
 }) => {
@@ -17,6 +21,9 @@ export const MobileModelSelect: React.FC<MobileModelSelectProps & BoxProps> = ({
   const { models: selection } = useAppSelector(
     (state) => state.selectedCarFilters
   );
+
+  const filters = useAppSelector((state) => state.selectedCarFilters);
+  const onSubmit = useOnSubmit();
 
   // if models are not fetched make it desabled
   const handleModelSelect = () => {
@@ -39,7 +46,10 @@ export const MobileModelSelect: React.FC<MobileModelSelectProps & BoxProps> = ({
         }
         isDisabled={!!!ModelFilters.length}
         hasValue={!!selection.length}
-        onClear={() => dispatch(selectModels([]))}
+        onClear={() => {
+          dispatch(selectModels([]));
+          saerchOnClear && onSubmit({ ...filters, models: [] });
+        }}
       />
       <MobileModelsPopup
         isOpen={isOpen}

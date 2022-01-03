@@ -8,12 +8,12 @@ import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
-import { getDealerCars } from 'src/redux/features/auth/carsSlice';
 import { getFavouriteCarIds } from 'src/redux/features/auth/userSlice';
 import {
   closeCatalogBanner,
   setCatalogQuery
 } from 'src/redux/features/global/gloabalSlice';
+import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 
 interface CatalogLIstProps {}
@@ -31,6 +31,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   const { networkError, catalogQuery } = useAppSelector(
     (state) => state.globalAppState
   );
+  const filters = useAppSelector(state => state.selectedCarFilters)
 
   useEffect(() => {
     if (networkError) {
@@ -43,6 +44,8 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   const query = useQueryParams();
 
   const page = Number(query.get('page')) || 1;
+
+  const onSubmit = useOnSubmit()
 
   // on the first load put page query in the url and open the banner
   useEffect(() => {
@@ -72,7 +75,8 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   // when page number changes, get cars and scroll to top and save active page in redux
   useEffect(() => {
     if (catalogQuery !== query.toString()) {
-      dispatch(getDealerCars(query));
+      // dispatch(getDealerCars(query));
+      onSubmit(filters)
       dispatch(setActivePage(query.get('page')));
       // browser back button scrolls to the bottom, this line will scroll to the top
       setTimeout(() => window.scrollTo(0, 0));

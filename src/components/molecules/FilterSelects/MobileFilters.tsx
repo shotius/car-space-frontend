@@ -30,6 +30,7 @@ interface ThreeMobileSelectsProps {}
 export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
   ({}) => {
     const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
+    const filters = useAppSelector(state => state.selectedCarFilters)
 
     const onSubmit = useOnSubmit()
 
@@ -118,7 +119,7 @@ export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
             <SearchButton
               w="full"
               isKeyboardActive={keyboardActive}
-              onClick={onSubmit}
+              onClick={() => onSubmit(filters)}
             />
           </WithMobileKeyboard>
           <Button

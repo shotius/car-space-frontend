@@ -16,9 +16,12 @@ import {
 import { range } from 'src/utils/functions/range';
 import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 
-interface YearSelectProps {}
+interface YearSelectProps {
+  searchOnClear?: boolean;
+}
 
 export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
+  searchOnClear = true,
   ...rest
 }) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
@@ -28,9 +31,10 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
   const { yearFrom: initYearFrom, yearTo: initYearTo } = useAppSelector(
     (state) => state.selectedCarFilters
   );
+  const filters = useAppSelector((state) => state.selectedCarFilters);
   const dispatch = useAppDispatch();
 
-  const onSubmit = useOnSubmit()
+  const onSubmit = useOnSubmit();
 
   // when ever selected value changes, placeholder changes as well
   useEffect(() => {
@@ -49,7 +53,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
       setYearTo(Number(initYearTo));
     }
     if (initYearFrom === 0 && initYearTo === 0) {
-      onSubmit()
+      // onSubmit()
     }
   }, [initYearFrom, initYearTo]);
 
@@ -99,6 +103,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
             dispatch(selectYearTo(0));
             setPlaceholder('');
             setAreOptionsOpen(false);
+            searchOnClear && onSubmit({ ...filters, yearFrom: 0, yearTo: 0 });
           }}
           areOptionsSelected={!!(yearFrom || yearTo)}
           onClick={() => setAreOptionsOpen((open) => !open)}
@@ -135,22 +140,24 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
                   },
                 }}
               >
-                {range(1980, 2021).reverse().map((num) => (
-                  <TextButton
-                    fontSize="14px"
-                    key={num}
-                    p="2"
-                    lineHeight="21px"
-                    w="full"
-                    color={yearFrom === num ? 'autoOrange.400' : '#000'}
-                    onClick={() => handleSelectYearFrom(num)}
-                    _hover={{
-                      bg: 'autoGrey.100',
-                    }}
-                  >
-                    {num}
-                  </TextButton>
-                ))}
+                {range(1980, 2021)
+                  .reverse()
+                  .map((num) => (
+                    <TextButton
+                      fontSize="14px"
+                      key={num}
+                      p="2"
+                      lineHeight="21px"
+                      w="full"
+                      color={yearFrom === num ? 'autoOrange.400' : '#000'}
+                      onClick={() => handleSelectYearFrom(num)}
+                      _hover={{
+                        bg: 'autoGrey.100',
+                      }}
+                    >
+                      {num}
+                    </TextButton>
+                  ))}
               </VerticalScrollable>
             </VStack>
             <VStack h="full" w="full" spacing="2">
@@ -164,22 +171,24 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
                   },
                 }}
               >
-                {range(1980, 2021).reverse().map((num) => (
-                  <TextButton
-                    fontSize="14px"
-                    p="2"
-                    key={num}
-                    lineHeight="21px"
-                    w="full"
-                    color={yearTo === num ? 'autoOrange.400' : '#000'}
-                    onClick={() => handleSelectYearTo(num)}
-                    _hover={{
-                      bg: 'autoGrey.100',
-                    }}
-                  >
-                    {num}
-                  </TextButton>
-                ))}
+                {range(1980, 2021)
+                  .reverse()
+                  .map((num) => (
+                    <TextButton
+                      fontSize="14px"
+                      p="2"
+                      key={num}
+                      lineHeight="21px"
+                      w="full"
+                      color={yearTo === num ? 'autoOrange.400' : '#000'}
+                      onClick={() => handleSelectYearTo(num)}
+                      _hover={{
+                        bg: 'autoGrey.100',
+                      }}
+                    >
+                      {num}
+                    </TextButton>
+                  ))}
               </VerticalScrollable>
             </VStack>
           </HStack>

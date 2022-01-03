@@ -14,7 +14,9 @@ import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 import { SelectedCarModel } from '../../../../../../server/shared_with_front/types/types-shared';
 
-interface ModelSelectProps {}
+interface ModelSelectProps {
+  searchOnClear?: boolean
+}
 
 // In the compont I have 4 different variables
 //1. Value: is used to display selected option
@@ -22,6 +24,7 @@ interface ModelSelectProps {}
 //3. searchWord: when user writing in search box, search word is changing
 //4. selected: are Selected options, used to keep track of other three variables
 export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
+  searchOnClear = true, 
   ...rest
 }) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
@@ -41,7 +44,9 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
     (state) => state.selectedCarFilters
   );
 
-  const onSubmit = useOnSubmit()
+  const filters = useAppSelector((state) => state.selectedCarFilters);
+
+  const onSubmit = useOnSubmit();
 
   // whenever models change in the redux store do this
   useEffect(() => {
@@ -81,8 +86,6 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
       setIsDisabled(false);
     } else {
       setSelected([]);
-      // This call back will fire when field is cleared
-      onSubmit()
     }
   }, [initSelection]);
 
@@ -143,7 +146,9 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
     .map((option) => {
       return {
         brand: option.brand,
-        models: option.models.filter((model) => model.toLowerCase().includes(searchWord.toLowerCase())),
+        models: option.models.filter((model) =>
+          model.toLowerCase().includes(searchWord.toLowerCase())
+        ),
       };
     })
     .filter((option) => option.models.length);
@@ -190,6 +195,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
             setPlaceholder('');
             dispatch(selectModels([]));
             setAreOptionsOpen(false);
+            searchOnClear && onSubmit({ ...filters, models: [] });
           }}
         >
           <SelectSearch
