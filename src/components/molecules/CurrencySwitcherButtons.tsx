@@ -24,17 +24,6 @@ export const CurrencySwitcherButtons: React.FC<CurencySwitcherButtonsProps> = ({
       p="7px"
     >
       <ButtonRound
-        onClick={() => setCurrency('GEL')}
-        active={currency === 'GEL'}
-      >
-        <Icon
-          as={GelIcon}
-          fill={currency === 'GEL' ? '#fff' : '#000'}
-          boxSize={7}
-          fontWeight="400"
-        />
-      </ButtonRound>
-      <ButtonRound
         onClick={() => setCurrency('USD')}
         active={currency === 'USD'}
       >
@@ -45,6 +34,18 @@ export const CurrencySwitcherButtons: React.FC<CurencySwitcherButtonsProps> = ({
           fill={currency === 'USD' ? '#fff' : '#000'}
         />
       </ButtonRound>
+      <ButtonRound
+        onClick={() => setCurrency('GEL')}
+        active={currency === 'GEL'}
+      >
+        <Icon
+          as={GelIcon}
+          fill={currency === 'GEL' ? '#fff' : '#000'}
+          boxSize={7}
+          fontWeight="400"
+        />
+      </ButtonRound>
+
       <ButtonRound
         onClick={() => setCurrency('EUR')}
         active={currency === 'EUR'}

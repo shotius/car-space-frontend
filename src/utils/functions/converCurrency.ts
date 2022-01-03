@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { CurrencyType } from 'src/constants';
 
 /**
@@ -7,11 +6,13 @@ import { CurrencyType } from 'src/constants';
  * @returns {Number}
  */
 export const currencyPrice = async (currency: CurrencyType) => {
-  const { data } = await axios.get(
-    `https://free.currconv.com/api/v7/convert?q=USD_${currency}&compact=ultra&apiKey=322ae8baa27381c61e79`
-  );
+  // const { data } = await axios.get(
+  //   `https://free.currconv.com/api/v7/convert?q=USD_${currency}&compact=ultra&apiKey=322ae8baa27381c61e79`
+  // );
 
-  return data[`USD_${currency}`];
+  // return data[`USD_${currency}`];
+  console.log(currency);
+  return 1
 };
 
 export default currencyPrice;

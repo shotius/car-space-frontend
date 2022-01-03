@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
 import { selectModels } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
+import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 import { SelectedCarModel } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface ModelSelectProps {}
@@ -39,6 +40,8 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
   const { brands: selectedBrands } = useAppSelector(
     (state) => state.selectedCarFilters
   );
+
+  const onSubmit = useOnSubmit()
 
   // whenever models change in the redux store do this
   useEffect(() => {
@@ -78,6 +81,8 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
       setIsDisabled(false);
     } else {
       setSelected([]);
+      // This call back will fire when field is cleared
+      onSubmit()
     }
   }, [initSelection]);
 

@@ -1,12 +1,10 @@
-import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { createContext, useEffect } from 'react';
 import { DesktopFiltersOnCatalogPage } from 'src/components/molecules/FilterSelects/DesktopFilters';
 import { MobileFiltersOnCatalogPage } from 'src/components/molecules/FilterSelects/MobileFilters';
 import { FilterQueries } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getFilters } from 'src/redux/features/auth/carsSlice';
 import {
-  closeAdvacedFilters,
   selectBrand,
   selectCarKeys,
   selectConditions,
@@ -23,12 +21,11 @@ import {
   selectTranssmision,
   selectTypes,
   selectYearFrom,
-  selectYearTo,
+  selectYearTo
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { Transmission } from 'src/redux/features/auth/types';
 import { compareTwoArrays } from 'src/utils/functions/compareTwoArrays';
 import { parseModelQueries } from 'src/utils/functions/parseModelQueries';
-import { submitCarSearch } from 'src/utils/hooks/submitCarsSearch';
 import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 import { HasKeys } from '../../../../../../server/shared_with_front/contants';
@@ -39,7 +36,7 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   const { isLargerThan: isLargerThen737 } = useMediaQueryMin(737);
   const query = useQueryParams();
   const dispatch = useAppDispatch();
-  const history = useHistory();
+
   const {
     MODEL,
     YEAR_FROM,
@@ -59,11 +56,10 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     PRICE_TO,
   } = FilterQueries;
 
-  const { brands: selectedBrands } = useAppSelector(
-    (state) => state.selectedCarFilters
+  const selectedBrands = useAppSelector(
+    (state) => state.selectedCarFilters.brands
   );
-  const { brands } = useAppSelector((state) => state.carsReducer);
-  const filters = useAppSelector((state) => state.selectedCarFilters);
+  const brands = useAppSelector((state) => state.carsReducer.brands);
 
   // Parse query from url
   useEffect(() => {
@@ -188,20 +184,12 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     }
   }, [brands]);
 
-  // apply filters to the url, create new totaly new query string
-  // (removes any we had before)
-  const onSubmit = () => {
-    submitCarSearch({ dispatch, query, history, filters });
-    // if screen is small close advanced filters
-    !isLargerThen737 && dispatch(closeAdvacedFilters());
-  };
-
   return (
     <>
       {!isLargerThen737 ? (
-        <MobileFiltersOnCatalogPage onSubmit={onSubmit} />
+        <MobileFiltersOnCatalogPage />
       ) : (
-        <DesktopFiltersOnCatalogPage onSubmit={onSubmit} />
+        <DesktopFiltersOnCatalogPage />
       )}
     </>
   );

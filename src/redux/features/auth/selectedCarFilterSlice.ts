@@ -16,7 +16,7 @@ const initialState: SelectedCarFilters = {
   engineFrom: null,
   engineTo: null,
   transmission: [],
-  currency: 'GEL',
+  currency: 'USD',
   conditions: [],
   types: [],
   locations: [],

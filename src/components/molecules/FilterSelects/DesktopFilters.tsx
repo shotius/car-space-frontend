@@ -4,13 +4,14 @@ import {
   IconButton,
   SimpleGrid,
   Stack,
-  StackProps
+  StackProps,
 } from '@chakra-ui/react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CloseOutlineIcon } from 'src/components/atoms/Icons/CloseOutline';
 import { FiltersIcon } from 'src/components/atoms/Icons/FiltersIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 import { SearchButton } from '../Buttons/SearchButton';
 import { BrandSelect } from './desktop/BrandSelect';
 import { ConditionSelect } from './desktop/ConditionSelect';
@@ -26,9 +27,7 @@ import { TransmissionSelect } from './desktop/TransmissionSelect';
 import { TypeSelect } from './desktop/TypeSelect';
 import { YearSelect } from './desktop/YearSelect';
 
-interface ThreeHDSelectsProps {
-  onSubmit: () => void;
-}
+interface ThreeHDSelectsProps {}
 
 export const DesktopFiltersOnCatalogPage: React.FC<
   ThreeHDSelectsProps & StackProps
@@ -37,7 +36,6 @@ export const DesktopFiltersOnCatalogPage: React.FC<
   bg = '#fff',
   direction = 'row',
   borderRadius = 'md',
-  onSubmit,
   ...rest
 }) => {
   const dispatch = useAppDispatch();
@@ -47,6 +45,8 @@ export const DesktopFiltersOnCatalogPage: React.FC<
   );
 
   const onToggle = () => dispatch(toggleAdvancedFilters());
+
+  const onSubmit = useOnSubmit();
 
   return (
     <>

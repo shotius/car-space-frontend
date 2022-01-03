@@ -115,6 +115,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
                 query,
                 dispatch,
                 filters: selectedFilters,
+                currencyPrice: 1,
               });
             }}
           />
@@ -131,6 +132,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
               query,
               dispatch,
               filters: selectedFilters,
+              currencyPrice: 1,
             });
           }}
         />

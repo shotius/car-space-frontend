@@ -85,16 +85,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({
                 type="password"
                 h={['53px', null, '40px']}
               />
-              <HStack>
-                <TextButton
-                  color="#427AD6"
-                  onClick={openForgetPassword}
-                  fontSize="13px"
-                  pt="8px"
-                >
-                  Forgot password?
-                </TextButton>
-              </HStack>
             </VStack>
             <ButtonRegular
               variant="solid"
@@ -122,6 +112,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({
                   Register
                 </TextButton>
               </HStack>
+                <TextButton
+                  color="#427AD6"
+                  onClick={openForgetPassword}
+                  fontSize="13px"
+                  pt={[null, null, "3px"]}
+                >
+                  Forgot password?
+                </TextButton>
             </Stack>
           </VStack>
         </Form>

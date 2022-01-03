@@ -20,16 +20,22 @@ interface PriceSelectProps {}
 
 export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
   const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
-  const [currency, setCurrency] = useState<CurrencyType>('GEL');
+
   const [placeholder, setPlaceholder] = useState<string>('');
   const [priceFrom, setPriceFrom] = useState<string>('');
   const [priceTo, setPriceTo] = useState<string>('');
 
-  const { priceFrom: initPriceFrom, priceTo: initPriceTo } = useAppSelector(
-    (state) => state.selectedCarFilters
-  );
+  const {
+    priceFrom: initPriceFrom,
+    priceTo: initPriceTo,
+    currency,
+  } = useAppSelector((state) => state.selectedCarFilters);
 
   const dispatch = useAppDispatch();
+
+  function handleCurrencyChange(val: CurrencyType) {
+    dispatch(selectCurrency(val));
+  }
 
   const detectIcon = () => {
     switch (currency) {
@@ -53,10 +59,10 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
     if (priceTo && priceFrom) {
       setPlaceholder(` ${detectIcon()} ${priceFrom} - ${priceTo} `);
     } else if (priceFrom) {
-      setPlaceholder(`from: ${currency} ${priceFrom}`)
-    } else  if (priceTo) {
-      setPlaceholder(`to: ${currency} ${priceTo}`)
-    }else {
+      setPlaceholder(`from: ${currency} ${priceFrom}`);
+    } else if (priceTo) {
+      setPlaceholder(`to: ${currency} ${priceTo}`);
+    } else {
       setPlaceholder(`price`);
     }
   }, [priceFrom, priceTo, currency]);
@@ -108,7 +114,7 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
           <VStack p="0px 16px 16px" align="flex-start">
             <CurrencySwitcherButtons
               currency={currency}
-              setCurrency={setCurrency}
+              setCurrency={handleCurrencyChange}
             />
             <VStack>
               <InputGrey

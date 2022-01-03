@@ -26,6 +26,7 @@ import {
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
+import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 
 interface BrandSelectProps {
   labelPadding?: BoxProps['p'];
@@ -47,10 +48,12 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
   const [searchWord, setSearchWord] = useState<string>('');
   const dispatch = useAppDispatch();
 
-  const { brands: options } = useAppSelector((state) => state.carsReducer);
-  const { brands: initSelection } = useAppSelector(
-    (state) => state.selectedCarFilters
+  const options = useAppSelector((state) => state.carsReducer.brands);
+  const initSelection = useAppSelector(
+    (state) => state.selectedCarFilters.brands
   );
+
+  const onSubmit = useOnSubmit();
 
   // whenever selected values change change value and placeholder
   useEffect(() => {
@@ -66,6 +69,9 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
       setSelected(initSelection);
     } else {
       setSelected([]);
+      console.log('onSubmit: ', initSelection)
+      // This call back will fire when field is cleared
+      onSubmit();
     }
   }, [initSelection]);
 

@@ -32,4 +32,5 @@ export enum FilterQueries {
   PRICE_TO = 'price_to', 
   ENGINE_FROM = 'engine_from', 
   ENGINE_TO = 'engine_to', 
+  CURRENCY_PRICE = 'CURRENCY_PRICE'
 }

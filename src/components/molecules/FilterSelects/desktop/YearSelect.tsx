@@ -14,6 +14,7 @@ import {
   selectYearTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { range } from 'src/utils/functions/range';
+import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 
 interface YearSelectProps {}
 
@@ -28,6 +29,8 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
     (state) => state.selectedCarFilters
   );
   const dispatch = useAppDispatch();
+
+  const onSubmit = useOnSubmit()
 
   // when ever selected value changes, placeholder changes as well
   useEffect(() => {
@@ -44,6 +47,9 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
     }
     if (initYearTo) {
       setYearTo(Number(initYearTo));
+    }
+    if (initYearFrom === 0 && initYearTo === 0) {
+      onSubmit()
     }
   }, [initYearFrom, initYearTo]);
 
