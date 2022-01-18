@@ -122,7 +122,7 @@ export const CarDetailPage: React.FC<CardDetailPageProps> = () => {
         mt={[null, null, null, '-20px']}
         p={['0', null, null, '4']}
       >
-        <CarListCarousel car={DamnCard1} />
+        <CarListCarousel cars={[DamnCard1]} />
       </ContainerOuter>
     </>
   );
