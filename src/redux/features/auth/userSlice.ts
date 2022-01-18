@@ -1,4 +1,7 @@
-import { isApiDefaultError, isApiValidationError } from 'src/utils/functions/typeChecker';
+import {
+  isApiDefaultError,
+  isApiValidationError,
+} from 'src/utils/functions/typeChecker';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import userServices from 'src/services/userServices';

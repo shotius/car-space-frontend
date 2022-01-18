@@ -25,6 +25,11 @@ const getCars = async ({
   return data as { cars: ICarCopart[]; pagesTotal: number };
 };
 
+const getRecentCars = async () => {
+  const { data } = await axios.get(`api/dealers/cars/recents`);
+  return data as ApiSuccessResponse<ICarDealer[]>;
+};
+
 const getDealerCars = async (params: URLSearchParams) => {
   const { data } = await axios.get(`/api/dealers/cars`, { params });
   return data as ApiSuccessResponse<{ cars: ICarDealer[]; pagesTotal: number }>;
@@ -76,27 +81,28 @@ const addDealerCar = async (formData: FormData) => {
 };
 
 const getSingleDealerCarThunk = async (carId: string) => {
-  const {data} = await axios.get(`/api/dealers/cars/${carId}`)
-  return data as ApiSuccessResponse<ICarDealer>
-}
+  const { data } = await axios.get(`/api/dealers/cars/${carId}`);
+  return data as ApiSuccessResponse<ICarDealer>;
+};
 
 const removeSingleCar = async (carId: string) => {
   const { data } = await axios.delete('/api/dealers/cars', {
     data: { id: carId },
   });
-  return data as ApiSuccessResponse<string>
+  return data as ApiSuccessResponse<string>;
 };
 
 const carsService = {
-  removeSingleCar, 
+  removeSingleCar,
   addDealerCar,
   searchCars,
+  getRecentCars,
   getAllBrands,
   getCars,
   getModels,
   getSingleCar,
   getFilters,
   getDealerCars,
-  getSingleDealerCarThunk
+  getSingleDealerCarThunk,
 };
 export default carsService;

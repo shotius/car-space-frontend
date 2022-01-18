@@ -1,7 +1,8 @@
 import { HStack, VStack } from '@chakra-ui/layout';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarousel/CarListCarousel';
+import { ScrollToTop } from 'src/components/molecules/ScrollToTop';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import { CalculatorDesktop } from 'src/components/organizms/Calculator/CalculatorDesktop';
 import { CalculatorMobile } from 'src/components/organizms/Calculator/CalculatorMobile';
@@ -12,22 +13,35 @@ import { DealersSection } from 'src/components/organizms/HomePage/Sections/Deale
 import { HomeFilters } from 'src/components/organizms/HomePage/Sections/HomeFilters';
 import { TopBrands } from 'src/components/organizms/HomePage/Sections/TopBrands';
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
-import { DamnCard1 } from 'src/DamnCard';
+import { useAppDispatch } from 'src/redux/app/hook';
+import { getRecentCars } from 'src/redux/features/auth/carsSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { ICarDealer } from '../../../server/shared_with_front/types/types-shared';
 
 interface HomeProps {}
 
 export const Home: React.FC<HomeProps> = () => {
-  const { isMobile, isDesktop } = useDetectScreen();
+  const [recentCars, setRecentCars] = useState<ICarDealer[]>([]);
 
-  useEffect(() => window.scrollTo(0, 0), []);
+  const { isMobile, isDesktop } = useDetectScreen();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getRecentCars())
+      .unwrap()
+      .then((data) => setRecentCars(data));
+  }, []);
+
+  console.log(recentCars)
 
   return (
     <>
+      <ScrollToTop />
       <ContainerOuter pt={['0', null, '0', '48px']} p={['0', null, null, '4']}>
         <HomeCarousel />
       </ContainerOuter>
 
+      {/* Filters  */}
       <ContainerOuter>
         <HomeFilters />
       </ContainerOuter>
@@ -35,15 +49,17 @@ export const Home: React.FC<HomeProps> = () => {
       <VStack w="full" alignItems="center" spacing="64px">
         <MiniCategory />
 
+         {/* Catalog  */}
         <VStack w="full">
           <ContainerOuter>
             <SectionHeader mainText="Catalog" />
           </ContainerOuter>
           <ContainerOuter pr="-4" mr="-4" ml="-4" pl="0">
-            <CarListCarousel car={DamnCard1} />
+            <CarListCarousel cars={recentCars} />
           </ContainerOuter>
         </VStack>
 
+        {/* Customer review  */}
         <ContainerOuter>
           <VStack w="full">
             <SectionHeader mainText="Customer reviews" />

@@ -153,6 +153,20 @@ export const getSingleCarAsync = createAsyncThunk<
   }
 });
 
+/** Returns recent added cars */
+export const getRecentCars = createAsyncThunk<ICarDealer[]>(
+  'getRecentCars',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { results } = await carsService.getRecentCars();
+      return results;
+    } catch (error) {
+      return rejectWithValue(error + '');
+    }
+  }
+);
+
+
 export const getSingleDealerCarThunk = createAsyncThunk<
   ICarDealer,
   string,
@@ -305,7 +319,7 @@ const carsSlice = createSlice({
 
     builder.addCase(getSingleDealerCarThunk.pending, (state) => {
       state.fetchingDealerCar = true;
-    });    
+    });
     builder.addCase(getSingleDealerCarThunk.fulfilled, (state, action) => {
       state.fetchingDealerCar = false;
       state.dealerCars = state.dealerCars.concat(action.payload);

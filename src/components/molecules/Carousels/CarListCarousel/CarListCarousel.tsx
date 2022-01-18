@@ -16,7 +16,7 @@ import styles from './styles.module.scss';
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
-export const CarListCarousel = ({ car }: { car: ICarDealer }) => {
+export const CarListCarousel = ({ cars }: { cars: ICarDealer[] }) => {
   const [isLaptopScreen] = useMediaQuery('(min-width: 1024px)');
 
   return (
@@ -69,8 +69,8 @@ export const CarListCarousel = ({ car }: { car: ICarDealer }) => {
           },
         }}
       >
-        {range(0, 7).map((item, i) => (
-          <SwiperSlide key={item*i}>
+        {cars.map((car) => (
+          <SwiperSlide key={car.id}>
             <Box w="full">
               <DealerCarCard car={car} />
             </Box>

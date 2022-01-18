@@ -66,7 +66,7 @@ export const Header: React.FC<HeaderProps> = () => {
   }, [menuOpen]);
 
   return (
-    <ContainerOuter h="full" bg="white">
+    <ContainerOuter h="full" bg="white" >
       {/* desktop view */}
       <Flex h="full" alignItems="center">
         <CarSpaceLogo
