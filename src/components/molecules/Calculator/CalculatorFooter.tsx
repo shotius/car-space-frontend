@@ -1,10 +1,9 @@
-import { Divider, HStack, VStack, StackProps } from '@chakra-ui/react';
+import { Divider, HStack, StackProps, VStack } from '@chakra-ui/react';
 import { useContext } from 'react';
+import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
+import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { TextRegular } from '../Texts/TextRegular';
-import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
-import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
-import { useAppSelector } from 'src/redux/app/hook';
 
 interface CalculatroFooterProps {
   total?: number
@@ -17,7 +16,6 @@ export const CalculatorFooter: React.FC<CalculatroFooterProps & StackProps> = ({
 }) => {
   const size = useContext(SizeContext);
   const icon = useCurrencyIcon()
-  const price = useAppSelector(state => state.globalAppState.currencyPrice)
 
   return (
     <VStack
@@ -35,7 +33,7 @@ export const CalculatorFooter: React.FC<CalculatroFooterProps & StackProps> = ({
             color="autoOrange.500"
             fontSize={size === 'regular' ? '20px' : '20px'}
           >
-            {icon} {(total * price)}
+            {icon} {(total).toFixed(3)}
           </HeadingSecondary>
         </HStack>
       )}

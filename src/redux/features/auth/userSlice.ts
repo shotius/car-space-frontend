@@ -174,7 +174,7 @@ const userInfoSlice = createSlice({
       state.email = action.payload;
     },
     setUserInfo: (state, action: PayloadAction<IUserInfo>) => {
-      const { phone, fullName, role, email, avatar, isAuthenticated } =
+      const { id, phone, fullName, role, email, avatar, isAuthenticated } =
         action.payload;
       state.phone = phone;
       state.fullName = fullName;
@@ -182,6 +182,7 @@ const userInfoSlice = createSlice({
       state.role = role;
       state.isAuthenticated = isAuthenticated;
       state.email = email;
+      state.id = id
     },
     resetUserInfo: (state) => {
       state.phone = '';

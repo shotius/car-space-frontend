@@ -28,6 +28,7 @@ export const getUserOrderedCars = createAsyncThunk<IOrderedCar[], string>(
   async (userId, { rejectWithValue }) => {
     try {
       const { results } = await orderedCarsService.getUserOrderedCars(userId);
+      console.log('orderList', results)
       return results;
     } catch (error) {
       if (isApiDefaultError(error)) {

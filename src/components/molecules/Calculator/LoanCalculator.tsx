@@ -1,9 +1,4 @@
-import {
-  Flex,
-  InputGroup,
-  InputRightElement,
-  VStack
-} from '@chakra-ui/react';
+import { Flex, InputGroup, InputRightElement, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useAppSelector } from 'src/redux/app/hook';
 import { safeSum } from '../../../utils/functions/safeOperations';
@@ -19,25 +14,32 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
   const [loanAmount, setLoanAmount] = useState<number>(0);
   // const [percentage, setPercentage] = useState<number>(0);
 
-  const { currency } = useAppSelector((state) => state.globalAppState);
+  const currency = useAppSelector((state) => state.globalAppState.currency);
+  const price = useAppSelector(state => state.globalAppState.currencyPrice)
 
   const total = loanAmount
-    ? safeSum((loanAmount * months * 1.7) / 100, loanAmount)
+    ? safeSum(safeSum((loanAmount * months * 1.7) / 100, loanAmount), 50 * price)
     : 0;
 
   return (
     <VStack w="full" spacing={['24px', null, '32px']}>
       <VStack w="full" align="flex-start">
         <TextRegular opacity="0.5">Duration</TextRegular>
-        <Flex w="full" spacing="30px" justify="space-between" flexWrap="nowrap" style={{gap: 16}}>
+        <Flex
+          w="full"
+          spacing="30px"
+          justify="space-between"
+          flexWrap="nowrap"
+          style={{ gap: 16 }}
+        >
           <SliderBlue
             defaultValue={months}
             min={1}
             max={12}
             step={1}
             onChange={(val) => setMonths(val)}
-            flex={["1", '0']}
-            flexBasis={[null, "60%", "67%"]}
+            flex={['1', '0']}
+            flexBasis={[null, '60%', '67%']}
           />
           <TextRegular textAlign="end" minW="96px" wordBreak="keep-all">
             ( {months} Months)
