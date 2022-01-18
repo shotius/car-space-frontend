@@ -1,6 +1,5 @@
 import { Box } from '@chakra-ui/layout';
 import { useMediaQuery } from '@chakra-ui/media-query';
-import { range } from 'src/utils/functions/range';
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 // Import Swiper styles

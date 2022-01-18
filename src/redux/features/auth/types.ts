@@ -88,7 +88,6 @@ export interface IFilters {
   fuels: string[];
   brands: string[];
   cylinders: string[];
-  salesStatus: string[];
   transmissions: string[];
 }
 

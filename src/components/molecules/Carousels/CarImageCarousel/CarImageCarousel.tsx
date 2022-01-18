@@ -36,7 +36,7 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
 
   return (
     <AspectRatio
-      ratio={[311 / 292, null, null, 231 / 143]}
+      ratio={[311 / 220, null, null, 231 / 143]}
       zIndex="0"
       w="full"
       borderRadius="8px"
@@ -79,10 +79,10 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
 
         {/* this is a box in the middle of the image to redirect on detail page */}
         <Box
-          w={['140px', "100px"]}
+          w={['140px', '100px']}
           h="full"
           bg="transparent"
-          display={['none', null, null,  'block']}
+          display={['none', null, null, 'block']}
           zIndex="1"
           position="absolute"
           cursor="pointer"

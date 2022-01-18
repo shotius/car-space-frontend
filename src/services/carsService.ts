@@ -3,11 +3,10 @@ import { axios } from 'src/utils/axios';
 import { FilterQueries } from 'src/constants';
 import {
   ApiSuccessResponse,
-  ICarCopart,
   ICarDealer,
 } from '../../../server/shared_with_front/types/types-shared';
 
-const baseURL = '/api/cars';
+const baseURL = '/api/dealers/cars';
 
 const searchCars = async () => {
   return await axios.get(`${baseURL}`);
@@ -18,20 +17,13 @@ const getAllBrands = async () => {
   return data;
 };
 
-const getCars = async ({
-  params,
-}): Promise<{ cars: ICarCopart[]; pagesTotal: number }> => {
-  const { data } = await axios.get(`${baseURL}`, { params });
-  return data as { cars: ICarCopart[]; pagesTotal: number };
-};
-
 const getRecentCars = async () => {
-  const { data } = await axios.get(`api/dealers/cars/recents`);
+  const { data } = await axios.get(`${baseURL}/recents`);
   return data as ApiSuccessResponse<ICarDealer[]>;
 };
 
 const getDealerCars = async (params: URLSearchParams) => {
-  const { data } = await axios.get(`/api/dealers/cars`, { params });
+  const { data } = await axios.get(`${baseURL}`, { params });
   return data as ApiSuccessResponse<{ cars: ICarDealer[]; pagesTotal: number }>;
 };
 
@@ -55,7 +47,6 @@ const getFilters = async () => {
     axios.get(`${baseURL}/fuels`),
     axios.get(`${baseURL}/brands`),
     axios.get(`${baseURL}/cylinders`),
-    axios.get(`${baseURL}/sales_status`),
     axios.get(`${baseURL}/transmissions`),
   ]);
 
@@ -67,26 +58,25 @@ const getFilters = async () => {
     fuels: results[4].status === 'fulfilled' ? results[4].value.data : [],
     brands: results[5].status === 'fulfilled' ? results[5].value.data : [],
     cylinders: results[6].status === 'fulfilled' ? results[6].value.data : [],
-    salesStatus: results[7].status === 'fulfilled' ? results[7].value.data : [],
     transmissions:
-      results[8].status === 'fulfilled' ? results[8].value.data : [],
+      results[7].status === 'fulfilled' ? results[7].value.data : [],
   };
 
   return filters;
 };
 
 const addDealerCar = async (formData: FormData) => {
-  const { data } = await axios.post('/api/dealers/cars', formData);
+  const { data } = await axios.post(`${baseURL}`, formData);
   return data as ApiSuccessResponse<ICarDealer[]>;
 };
 
 const getSingleDealerCarThunk = async (carId: string) => {
-  const { data } = await axios.get(`/api/dealers/cars/${carId}`);
+  const { data } = await axios.get(`${baseURL}/${carId}`);
   return data as ApiSuccessResponse<ICarDealer>;
 };
 
 const removeSingleCar = async (carId: string) => {
-  const { data } = await axios.delete('/api/dealers/cars', {
+  const { data } = await axios.delete(`${baseURL}`, {
     data: { id: carId },
   });
   return data as ApiSuccessResponse<string>;
@@ -98,7 +88,6 @@ const carsService = {
   searchCars,
   getRecentCars,
   getAllBrands,
-  getCars,
   getModels,
   getSingleCar,
   getFilters,

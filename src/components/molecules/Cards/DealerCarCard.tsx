@@ -52,7 +52,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
           />
         ) : (
           <AspectRatio
-            ratio={[311 / 292, null, null, 231 / 143]}
+            ratio={[311 / 220, null, null, 231 / 143]}
             w="full"
             maxH={['192px', null, '143px']}
             borderRadius="8px"

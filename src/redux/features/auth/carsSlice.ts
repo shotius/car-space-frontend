@@ -6,7 +6,6 @@ import {
   ICarCopart,
   ICarDealer,
 } from '../../../../../server/shared_with_front/types/types-shared';
-import { setNetworkError } from '../global/gloabalSlice';
 import { isApiValidationError } from './../../../utils/functions/typeChecker';
 import { setTotalPages } from './carPaginationSlice';
 import { CarsSliceState, ICarCopartModel, IFilters } from './types';
@@ -80,31 +79,6 @@ export const getDealerCars = createAsyncThunk<
     return results.cars;
   } catch (error) {
     return rejectWithValue('could not get dealer cars');
-  }
-});
-
-export const getCars = createAsyncThunk<
-  ICarCopart[],
-  URLSearchParams,
-  {
-    rejectValue: string;
-  }
->('cars/getCars', async (params, { rejectWithValue, dispatch }) => {
-  try {
-    const result = await carsService.getCars({ params });
-    dispatch(setTotalPages(result.pagesTotal));
-    return result.cars;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.code === 'ECONNABORTED') {
-        dispatch(setNetworkError('Network error'));
-      }
-      return rejectWithValue(error.response?.data.message as string);
-    } else {
-      return rejectWithValue(
-        'Internal error happend while fetching cars' + error
-      );
-    }
   }
 });
 
@@ -236,21 +210,6 @@ const carsSlice = createSlice({
       console.log(state, action);
     });
 
-    /** Fetch cars */
-    builder.addCase(getCars.pending, (state) => {
-      state.fethingCars = true;
-      state.fetchingCarsError = undefined;
-    });
-    builder.addCase(getCars.fulfilled, (state, action) => {
-      state.cars = action.payload;
-      state.fethingCars = false;
-      state.fetchingCarsError = undefined;
-    });
-    builder.addCase(getCars.rejected, (state, action) => {
-      state.fetchingCarsError = action.payload;
-      state.fethingCars = false;
-    });
-
     /** Get models */
     builder.addCase(getModels.fulfilled, (state, action) => {
       state.models = action.payload;
@@ -269,7 +228,6 @@ const carsSlice = createSlice({
       state.drives = filters.drives;
       state.fuels = filters.fuels;
       state.cylinders = filters.cylinders;
-      state.salesStatus = filters.salesStatus;
       state.transmissions = filters.transmissions;
     });
     builder.addCase(getFilters.rejected, (state) => {

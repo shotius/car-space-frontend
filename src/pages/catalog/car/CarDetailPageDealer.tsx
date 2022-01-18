@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CarListCarousel } from 'src/components/molecules/Carousels/CarListCarousel/CarListCarousel';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
+import { ScrollToTop } from 'src/components/molecules/ScrollToTop';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import { CarImageSliderModal } from 'src/components/organizms/Modals/CarImageSliderModal';
 import { CarDetailPageDesktop } from 'src/components/templates/CarDeatailsPage/CarDetailPageDesktop';
@@ -66,6 +67,7 @@ export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
 
   return (
     <CarContext.Provider value={{ car }}>
+      <ScrollToTop />
       {isDesktop ? (
         <>
           <CarDetailPageDesktop />
