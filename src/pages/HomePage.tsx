@@ -32,8 +32,6 @@ export const Home: React.FC<HomeProps> = () => {
       .then((data) => setRecentCars(data));
   }, []);
 
-  console.log(recentCars)
-
   return (
     <>
       <ScrollToTop />
