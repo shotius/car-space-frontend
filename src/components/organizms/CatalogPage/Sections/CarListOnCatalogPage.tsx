@@ -8,10 +8,12 @@ import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
+import { setFetchingCars } from 'src/redux/features/auth/carsSlice';
+import { resetFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { getFavouriteCarIds } from 'src/redux/features/auth/userSlice';
 import {
   closeCatalogBanner,
-  setCatalogQuery
+  setCatalogQuery,
 } from 'src/redux/features/global/gloabalSlice';
 import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
@@ -19,19 +21,26 @@ import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 interface CatalogLIstProps {}
 
 export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
-  const { dealerCars: cars, fetchingDealerCars: fethingCars } = useAppSelector(
-    (state) => state.carsReducer
+  const cars = useAppSelector((state) => state.carsReducer.dealerCars);
+  const activePage = useAppSelector((state) => state.carsPagination.activePage);
+  const totalPages = useAppSelector((state) => state.carsPagination.totalPages);
+
+  const fethingCars = useAppSelector(
+    (state) => state.carsReducer.fetchingDealerCars
   );
-  const { totalPages, activePage } = useAppSelector(
-    (state) => state.carsPagination
+  const isAuthenticated = useAppSelector(
+    (state) => state.userInfoSlice.isAuthenticated
   );
-  const { isAuthenticated } = useAppSelector((state) => state.userInfoSlice);
+  const networkError = useAppSelector(
+    (state) => state.globalAppState.networkError
+  );
+  const catalogQuery = useAppSelector(
+    (state) => state.globalAppState.catalogQuery
+  );
+
   const toast = useToast();
   const toastIdRef = useRef<any>();
-  const { networkError, catalogQuery } = useAppSelector(
-    (state) => state.globalAppState
-  );
-  const filters = useAppSelector(state => state.selectedCarFilters)
+  const filters = useAppSelector((state) => state.selectedCarFilters);
 
   useEffect(() => {
     if (networkError) {
@@ -45,7 +54,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
   const page = Number(query.get('page')) || 1;
 
-  const onSubmit = useOnSubmit()
+  const onSubmit = useOnSubmit();
 
   // on the first load put page query in the url and open the banner
   useEffect(() => {
@@ -56,12 +65,19 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
       history.push({ search: query.toString() });
       dispatch(setActivePage(query.get('page')));
+      console.log(query.toString())
       dispatch(setCatalogQuery(query.toString()));
+      dispatch(setFetchingCars(true))
     } else {
       history.push({ search: catalogQuery });
     }
+
     return () => {
       dispatch(closeCatalogBanner());
+      // reset filters when catalog page is left
+      dispatch(resetFilters());
+      dispatch(setCatalogQuery(''));
+      // dispatch(setDealer)
     };
   }, []);
 
@@ -75,11 +91,8 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   // when page number changes, get cars and scroll to top and save active page in redux
   useEffect(() => {
     if (catalogQuery !== query.toString()) {
-      // dispatch(getDealerCars(query));
-      onSubmit(filters)
+      onSubmit(filters);
       dispatch(setActivePage(query.get('page')));
-      // browser back button scrolls to the bottom, this line will scroll to the top
-      setTimeout(() => window.scrollTo(0, 0));
     }
   }, [page, catalogQuery]);
 
@@ -100,6 +113,7 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     });
   };
 
+  console.log(fethingCars)
   if (fethingCars) {
     return (
       <VStack h="100vh" w="full">

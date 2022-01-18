@@ -140,7 +140,6 @@ export const getRecentCars = createAsyncThunk<ICarDealer[]>(
   }
 );
 
-
 export const getSingleDealerCarThunk = createAsyncThunk<
   ICarDealer,
   string,
@@ -203,6 +202,9 @@ const carsSlice = createSlice({
   reducers: {
     setModels: (state, action: PayloadAction<ICarCopartModel[]>) => {
       state.models = action.payload;
+    },
+    setFetchingCars: (state, action: PayloadAction<boolean>) => {
+      state.fetchingDealerCars = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -288,5 +290,5 @@ const carsSlice = createSlice({
   },
 });
 
-export const { setModels } = carsSlice.actions;
+export const { setModels, setFetchingCars } = carsSlice.actions;
 export const { reducer: carsReducer } = carsSlice;

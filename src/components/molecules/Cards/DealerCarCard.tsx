@@ -91,20 +91,10 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
             </HStack>
           </VStack>
           <HStack justifyContent="space-between" w="full">
-            <TextRegular opacity="63%">Estimate Price</TextRegular>
+            <TextRegular opacity="63%">Price</TextRegular>
             <Heading
               fontSize={['20px', null, '16px']}
               color="autoOrange.500"
-              pr={['4', '0', '4']}
-              fontWeight="400"
-            >
-              {icon} {toTrippleNumber(Math.round(car.price * price) ?? 0)}
-            </Heading>
-          </HStack>
-          <HStack justifyContent="space-between" w="full">
-            <TextRegular opacity="63%">Buy it now price</TextRegular>
-            <Heading
-              fontSize={['20px', null, '16px']}
               pr={['4', '0', '4']}
               fontWeight="400"
             >

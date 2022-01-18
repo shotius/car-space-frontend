@@ -6,37 +6,43 @@ import { useAppDispatch } from 'src/redux/app/hook';
 import { openCatalogBanner } from 'src/redux/features/global/gloabalSlice';
 import { Card } from './Card';
 
-interface MiniCategoryCardProps {}
+interface MiniCategoryCardProps {
+  categoryTitle: string;
+}
 
-export const MiniCategoryCard: React.FC<MiniCategoryCardProps & BoxProps> = ({...rest}) => {
-
-  const history = useHistory()
-  const dispatch = useAppDispatch()
+export const MiniCategoryCard: React.FC<MiniCategoryCardProps & BoxProps> = ({
+  categoryTitle,
+  ...rest
+}) => {
+  const history = useHistory();
+  const dispatch = useAppDispatch();
   return (
     <Card
       className="hoverable"
       cursor="pointer"
       w={['137px', null, null, '143px']}
       h={['130px', null, null, '132px']}
-      onClick={()=> {
-        history.push('/catalog')
-        dispatch(openCatalogBanner())
+      onClick={() => {
+        history.push('/catalog');
+        dispatch(openCatalogBanner());
       }}
       {...rest}
     >
       <Center h="full">
-        <VStack spacing='0'>
+        <VStack spacing="0">
           <Image
-          cursor="pointer"
+            cursor="pointer"
             src={CarSmall}
             w={['55px', null, null, '52px']}
             h={['55px', null, null, '52px']}
           />
           <VStack spacing="0" pt="2">
             <Heading fontSize="16px" fontWeight="400" cursor="pointer">
-              Sertified Car
+              {categoryTitle}
             </Heading>
-            <TextSecondary opacity="50%" fontSize="14px" >500 cars</TextSecondary>
+            <TextSecondary opacity="50%" fontSize="14px">
+              500 cars
+            </TextSecondary>
           </VStack>
         </VStack>
       </Center>

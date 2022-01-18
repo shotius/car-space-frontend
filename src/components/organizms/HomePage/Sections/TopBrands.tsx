@@ -1,12 +1,13 @@
 import { Box } from '@chakra-ui/layout';
 import { useHistory } from 'react-router-dom';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
-import { AudiIcon } from 'src/components/atoms/Icons/AudiIcon';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
+import { FordIcon } from 'src/components/atoms/Icons/FordIcon';
 import { HiundayIcon } from 'src/components/atoms/Icons/HyundayIcon';
+import { LexusIcon } from 'src/components/atoms/Icons/LexusIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
+import { ShevroletIcon } from 'src/components/atoms/Icons/ShevroletIcon';
 import { ToyotaIcon } from 'src/components/atoms/Icons/ToyotaIcon';
-import { VolkswagenIcon } from 'src/components/atoms/Icons/VoltswagenIcon';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import { ScrollableDiv } from 'src/components/molecules/Wrappers/ScrollableDiv';
 import { useAppDispatch } from 'src/redux/app/hook';
@@ -17,18 +18,17 @@ import { TopBrandCard } from '../../../molecules/Cards/TopBrandCard';
 interface TopBrandsProps {}
 
 export const TopBrands: React.FC<TopBrandsProps> = () => {
-  const history = useHistory()
+  const history = useHistory();
 
   const windowSize = useWindowSize();
-  const dispatch = useAppDispatch()
-
+  const dispatch = useAppDispatch();
 
   let wW = windowSize?.width || 200;
 
   return (
     <Box w="full">
       <ContainerOuter>
-        <SectionHeader mainText="Top Brands" />
+        <SectionHeader mainText="Brands" />
       </ContainerOuter>
       <ContainerOuter p="0">
         <ScrollableDiv
@@ -40,8 +40,8 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
           <TopBrandCard
             className="hoverable"
             onClick={() => {
-              dispatch(selectBrand(["BMW"]))
-              history.push('/catalog')
+              dispatch(selectBrand(['BMW']));
+              history.push('/catalog');
             }}
             icon={BmwIcon}
             w={wW ? wW / 4.1 : '88px'}
@@ -51,29 +51,9 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             className="hoverable"
             icon={MercedesIcon}
             onClick={() => {
-              dispatch(selectBrand(["Mercedes"]))
-              history.push('/catalog')
+              dispatch(selectBrand(['Mercedes']));
+              history.push('/catalog');
             }}
-            w={wW ? wW / 4.1 : '88px'}
-            h={wW ? wW / 4.9 : '88px'}
-          />
-          <TopBrandCard
-            className="hoverable"
-            icon={VolkswagenIcon}
-            w={wW ? wW / 4.1 : '88px'}
-            h={wW ? wW / 4.9 : '88px'}
-          />
-          <TopBrandCard
-            className="hoverable"
-            icon={AudiIcon}
-            mr="1px"
-            w={wW ? wW / 4.1 : '88px'}
-            h={wW ? wW / 4.9 : '88px'}
-          />
-          <TopBrandCard
-            className="hoverable"
-            icon={HiundayIcon}
-            mr="1px"
             w={wW ? wW / 4.1 : '88px'}
             h={wW ? wW / 4.9 : '88px'}
           />
@@ -85,8 +65,31 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             h={wW ? wW / 4.9 : '88px'}
           />
           <TopBrandCard
+            boxSize={[ 36, null, 48]}
+            className="hoverable"
+            icon={ShevroletIcon}
+            w={wW ? wW / 4.1 : '88px'}
+            h={wW ? wW / 4.9 : '88px'}
+          />
+          <TopBrandCard
             className="hoverable"
             icon={HiundayIcon}
+            mr="1px"
+            w={wW ? wW / 4.1 : '88px'}
+            h={wW ? wW / 4.9 : '88px'}
+          />
+          <TopBrandCard
+            className="hoverable"
+            icon={FordIcon}
+            boxSize={[14, null, null, 20]}
+            mr="1px"
+            w={wW ? wW / 4.1 : '88px'}
+            h={wW ? wW / 4.9 : '88px'}
+          />
+          <TopBrandCard
+            className="hoverable"
+            icon={LexusIcon}
+            boxSize={[16, null, 20, null, 24]}
             w={wW ? wW / 4.1 : '88px'}
             h={wW ? wW / 4.9 : '88px'}
           />

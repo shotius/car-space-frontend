@@ -1,4 +1,3 @@
-// import { Box, BoxProps } from '@chakra-ui/layout';
 
 export const CarImportIcon = () => {
   return (
@@ -7,7 +6,7 @@ export const CarImportIcon = () => {
         data-name="Group 929"
         xmlns="http://www.w3.org/2000/svg"
         width="211"
-        height="154"
+        height="110"
         viewBox="0 0 211 154"
       >
         <path

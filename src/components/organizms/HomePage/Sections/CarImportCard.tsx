@@ -8,19 +8,15 @@ interface CarImportCardProps {}
 
 export const CarImportCard: React.FC<CarImportCardProps> = ({}) => {
   return (
-    <Card
-      p="32px"
-      w={['full', null, null, '417px']}
-      h="407px"
-    >
+    <Card p="32px" w={['full', null, null, '417px']} h="407px">
       <VStack w="full" spacing="24px">
-        <Icon as={CarImportIcon} />
+        <Icon as={CarImportIcon}/>
         <HeadingSecondary>Car Importing</HeadingSecondary>
-        <TextRegular noOfLines={4} lineHeight="24px" opacity="0.8">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea
-          consequatur, necessitatibus illo nostrum explicabo architecto,
-          repudiandae magnam officiis rerum fugit corrupti excepturi quam iure
-          est quaerat eveniet ipsum pariatur placeat.
+        <TextRegular lineHeight="24px" opacity="0.8" textAlign="center">
+          მანქანის ჩამოყვანა რამდენიმი ტიპის კალკულაციასთანაა დაკავშირებული.
+          გთავაზობთ ამერიკიდან ტრანსპორტირების, განბაჟების, შიდა დაფინანსებისა
+          და ლიზინგის კალკულატორებს, რომელიც დაგეხმარებათ დეტალურად დაიანგარიშოთ
+          ყველა შესაძლო ხარჯი, რაც მანქანის ჩამოყვანასთანაა დაკავშირებული.
         </TextRegular>
       </VStack>
     </Card>
