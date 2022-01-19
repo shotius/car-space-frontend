@@ -24,17 +24,21 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
     isAuthenticated: isAuth,
     phone,
     fullName,
-    email,
   } = useAppSelector((state) => state.userInfoSlice);
 
   const dispatch = useAppDispatch();
   const toast = useToast();
+  const url = window.location.toString()
+
+  console.log('url: ', url)
+
+
 
   const initialValues: IMessageBody = {
     name: isAuth && fullName ? fullName : '',
     phone: isAuth && phone ? phone : '',
-    email: isAuth ? email : '',
     message: '',
+    link: window.location.toString(), 
   };
 
   return (
@@ -83,7 +87,6 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
             <>
               <FormikInput name="name" placeholder="Name" />
               <FormikInput name="phone" placeholder="Phone" type="number" />
-              <FormikInput name="email" placeholder="Email" type="email" />
             </>
           )}
           <Field name="message" vali>
@@ -98,13 +101,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
                   maxRows={10}
                   isInvalid={form.errors.message}
                 />
-                {console.log(form.errors)}
                 <TextRegular color="red">{form.errors.message}</TextRegular>
               </>
             )}
           </Field>
           <ButtonRegular type="submit" mt="4" isLoading={isSubmitting}>
-            Submit
+            Ask for call
           </ButtonRegular>
         </Form>
       )}

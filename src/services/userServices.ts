@@ -3,6 +3,7 @@ import {
   ApiSuccessResponse,
   CloudinaryResponse,
   ICarDealer,
+  IMessageBody,
   IUser,
 } from '../../../server/shared_with_front/types/types-shared';
 
@@ -33,7 +34,7 @@ const getUsers = async (searchWord: string) => {
   return data as ApiSuccessResponse<IUser[]>;
 };
 
-const sendMesage = async (body: any) => {
+const sendMesage = async (body: IMessageBody) => {
   const {data} = await axios.post(`${baseUrl}/sendMessage`, body)
   return data as ApiSuccessResponse<boolean>
 }

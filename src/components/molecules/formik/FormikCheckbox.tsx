@@ -3,7 +3,7 @@ import {
   CheckboxProps,
   FormControl,
   FormErrorMessage,
-  HStack
+  HStack,
 } from '@chakra-ui/react';
 import { useField } from 'formik';
 import { TextRegular } from '../Texts/TextRegular';
@@ -20,6 +20,7 @@ export const FormikCheckbox: React.FC<FormikCheckboxProps & CheckboxProps> = ({
   ...rest
 }) => {
   const [field, { error, touched }] = useField(name);
+
   return (
     <FormControl isInvalid={!!(error && touched)}>
       <HStack w="full" pt="2">

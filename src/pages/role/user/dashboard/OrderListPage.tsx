@@ -20,7 +20,6 @@ export const OrderListPage: React.FC<OrderListPageProps> = ({}) => {
 
   useEffect(() => {
     if (userId) {
-      console.log('order list page')
       dispatch(getUserOrderedCars(userId))
         .unwrap()
         .then((data) => setData(data))

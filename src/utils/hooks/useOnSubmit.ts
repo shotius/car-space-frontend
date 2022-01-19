@@ -1,3 +1,4 @@
+import { useAppSelector } from './../../redux/app/hook';
 import { useHistory } from 'react-router-dom';
 import { FilterQueries } from 'src/constants';
 import { useAppDispatch } from 'src/redux/app/hook';
@@ -6,9 +7,8 @@ import { closeAdvacedFilters } from 'src/redux/features/auth/selectedCarFilterSl
 import { SelectedCarFilters } from 'src/redux/features/auth/types';
 import {
   setCatalogQuery,
-  setNetworkError
+  setNetworkError,
 } from 'src/redux/features/global/gloabalSlice';
-import currencyPrice from '../functions/converCurrency';
 import { deleteQueryFromURL } from '../functions/deleteQueryFromUrl';
 import { useMediaQueryMin } from './useMediaQueryMin';
 import { useQueryParams } from './useQueryParams';
@@ -17,6 +17,10 @@ export const useOnSubmit = () => {
   const query = useQueryParams();
   const dispatch = useAppDispatch();
   const history = useHistory();
+  
+  const currPrice = useAppSelector(
+    (state) => state.globalAppState.currencyPrice
+  );
 
   const { isLargerThan: isLargerThen737 } = useMediaQueryMin(737);
 
@@ -43,7 +47,6 @@ export const useOnSubmit = () => {
 
   // this function clears the url and fills with new query strings
   async function onSubmit(filters: SelectedCarFilters) {
-
     const {
       brands: selectedBrands,
       models: selectedModels,
@@ -62,10 +65,8 @@ export const useOnSubmit = () => {
       cylinders,
       priceFrom,
       priceTo,
-      currency,
     } = filters;
-  
-    const currPrice = await currencyPrice(currency);
+
     // before creating query, i delete all query filters in the url
     query.delete(BRAND);
     query.delete(YEAR_FROM);

@@ -3,7 +3,7 @@ import { Icon } from '@chakra-ui/react';
 import { GelIcon } from 'src/components/atoms/Icons/GelIcon';
 import { UsdIcon } from 'src/components/atoms/Icons/UsdIcon';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { setAppCurrency } from 'src/redux/features/global/gloabalSlice';
+import { changeCurrency } from 'src/redux/features/global/gloabalSlice';
 import { ButtonRect } from '../Buttons/ButtonRect';
 import { TextRegular } from '../Texts/TextRegular';
 
@@ -18,19 +18,19 @@ export const CurrencySwitcher: React.FC<CurrencySwitcherProps & StackProps> = ({
 
   return (
     <VStack spacing={spacing} p={p} {...rest}>
-      <ButtonRect onClick={() => dispatch(setAppCurrency('GEL'))}>
+      <ButtonRect onClick={() => dispatch(changeCurrency('GEL'))}>
         <Icon as={GelIcon} boxSize={6} />
         <TextRegular fontSize="16px" pt="3px">
           Gel
         </TextRegular>
       </ButtonRect>
-      <ButtonRect onClick={() => dispatch(setAppCurrency('USD'))}>
+      <ButtonRect onClick={() => dispatch(changeCurrency('USD'))}>
         <Icon as={UsdIcon} boxSize={6} />
         <TextRegular fontSize="16px" mt="2px">
           Usd
         </TextRegular>
       </ButtonRect>
-      <ButtonRect onClick={() => dispatch(setAppCurrency('EUR'))}>
+      <ButtonRect onClick={() => dispatch(changeCurrency('EUR'))}>
         <HStack pt="1px" pl="1">
           <TextRegular fontSize="18px">€</TextRegular>
           <TextRegular fontSize="16px">Eur</TextRegular>

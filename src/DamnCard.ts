@@ -56,4 +56,6 @@ export const DamnCard1: ICarDealer = {
   y: 2007,
   imgT: 'https://res.cloudinary.com/car-space-v1/image/upload/w_200,h_200,c_limit,e_blur:400,o_90,b_black/v1639057528/car-space/cars/medium-sized-cars/xtfrk4nbr22jhmrqklf8.webp',
   id: '61b208797674ba0135195899',
+  dealername: "S S", 
+  mostDemand: false
 };

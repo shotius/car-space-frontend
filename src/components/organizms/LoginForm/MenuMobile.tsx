@@ -8,7 +8,7 @@ import { CustomOverlay } from 'src/components/molecules/overlays/CustomOverlay';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
-  setAppCurrency,
+  changeCurrency,
   setAppLanguage,
   toggleMobileMenu,
 } from 'src/redux/features/global/gloabalSlice';
@@ -130,14 +130,16 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({}) => {
                 transform={isCurrOpen ? 'rotate(-180deg)' : ''}
                 transition="all 0.3s"
               />
-              <TextRegular fontSize="inherit">{capitalize(currency)}</TextRegular>
+              <TextRegular fontSize="inherit">
+                {capitalize(currency)}
+              </TextRegular>
             </HStack>
           </ButtonRect>
           <Collapse in={isCurrOpen}>
             <VStack w="full" align="end" px="8" py="2" spacing={4}>
               <TextButton
                 onClick={() => {
-                  dispatch(setAppCurrency('GEL'));
+                  dispatch(changeCurrency('GEL'));
                   toggleCurr();
                 }}
               >
@@ -145,7 +147,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({}) => {
               </TextButton>
               <TextButton
                 onClick={() => {
-                  dispatch(setAppCurrency('EUR'));
+                  dispatch(changeCurrency('EUR'));
                   toggleCurr();
                 }}
               >
@@ -153,7 +155,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({}) => {
               </TextButton>
               <TextButton
                 onClick={() => {
-                  dispatch(setAppCurrency('USD'));
+                  dispatch(changeCurrency('USD'));
                   toggleCurr();
                 }}
               >

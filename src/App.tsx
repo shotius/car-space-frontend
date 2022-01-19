@@ -3,17 +3,16 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom';
 import 'src/App.css';
 import { StyledApp } from 'src/components/organizms/Wrappers/StyledApp';
 import { ErrorPage } from 'src/pages/ErrorPage';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { useAppDispatch } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
 import { PublicLayout } from './components/templates/Layouts/PublicLayout';
-import { detectCurrencyPrice } from './redux/features/global/gloabalSlice';
 const AccountActivation = lazy(() => import('./pages/AccountActivation'));
 const ChangePassword = lazy(() => import('./pages/ChangePassword'));
 const CarDetailPageDealer = lazy(
@@ -30,18 +29,11 @@ const BlogDetailPage = lazy(() => import('./pages/blogs/blog/BlogDetailPage'));
 
 function App() {
   const dispatch = useAppDispatch();
-  const currency = useAppSelector((state) => state.globalAppState.currency);
 
   useEffect(() => {
     dispatch(autoLogin());
     localStorage.setItem('windowHeight', String(window.innerHeight));
   }, [dispatch]);
-
-  useEffect(() => {
-    if (currency) {
-      dispatch(detectCurrencyPrice(currency));
-    }
-  }, [currency]);
 
   return (
     <StyledApp>

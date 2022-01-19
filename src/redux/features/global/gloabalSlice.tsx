@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrencyType, Languages } from 'src/constants';
-import currencyPrice from 'src/utils/functions/converCurrency';
+import localStorageServise from 'src/services/localStorage.service';
+import getCurrencyPrice from 'src/utils/functions/getCurrencyPrice';
 import { AuthForm, GlobalStateSliceState, ScreenSizes } from '../auth/types';
 
 const initialState: GlobalStateSliceState = {
@@ -25,11 +26,28 @@ const initialState: GlobalStateSliceState = {
 };
 
 // Function gets GEL price of currency in relation with USD
-export const detectCurrencyPrice = createAsyncThunk<number, CurrencyType>(
+export const changeCurrency = createAsyncThunk<number, CurrencyType>(
   'globalState/detectCurrencyPrice',
-  async (currency, { rejectWithValue }) => {
+  async (currency, { rejectWithValue, dispatch }) => {
     try {
-      return await currencyPrice(currency);
+      // if we have currency saved in the localstorage return it
+      const cachedCurrency = localStorageServise.getItem(currency);
+      if (cachedCurrency) {
+        dispatch(setAppCurrency(currency));
+        return parseFloat(cachedCurrency);
+      
+      } else {
+        // else use live api and get the currency
+        const price = await getCurrencyPrice(currency);
+        localStorageServise.setItem({
+          key: currency,
+          value: price.toString(),
+          ttl: 1000 * 60 * 60 * 24, // will expire in one day
+        });
+        
+        dispatch(setAppCurrency(currency));
+        return price;
+      }
     } catch (error) {
       return rejectWithValue(1);
     }
@@ -45,6 +63,9 @@ const globalStateSlice = createSlice({
     },
     setAppCurrency: (state, action: PayloadAction<CurrencyType>) => {
       state.currency = action.payload;
+    },
+    setCurrencyPrice: (state, action: PayloadAction<number>) => {
+      state.currencyPrice = action.payload;
     },
     openCatalogBanner: (state) => {
       state.isCatalogBannerOpen = true;
@@ -102,12 +123,16 @@ const globalStateSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(detectCurrencyPrice.fulfilled, (state, action) => {
+    builder.addCase(changeCurrency.fulfilled, (state, action) => {
       state.currencyPrice = action.payload;
     });
   },
 });
 
+// this action is not exported outside of the slice
+const { setAppCurrency } = globalStateSlice.actions;
+
+/**Exports */
 export const {
   toggleAuthModal,
   chooseAuthForm,
@@ -116,7 +141,6 @@ export const {
   openForgotPasswordModal,
   openRegisterModal,
 
-  setAppCurrency,
   setAppLanguage,
   openCatalogBanner,
   closeCatalogBanner,
@@ -129,5 +153,7 @@ export const {
   toggleProfilePictureChangeModal,
   setUserError,
   toggleCarDetailModal,
+  setCurrencyPrice,
 } = globalStateSlice.actions;
+
 export const { reducer: globalAppState } = globalStateSlice;

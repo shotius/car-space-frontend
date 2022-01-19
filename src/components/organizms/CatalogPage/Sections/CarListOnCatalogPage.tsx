@@ -65,9 +65,8 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
       history.push({ search: query.toString() });
       dispatch(setActivePage(query.get('page')));
-      console.log(query.toString())
+      dispatch(setFetchingCars(true));
       dispatch(setCatalogQuery(query.toString()));
-      dispatch(setFetchingCars(true))
     } else {
       history.push({ search: catalogQuery });
     }
@@ -77,7 +76,6 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
       // reset filters when catalog page is left
       dispatch(resetFilters());
       dispatch(setCatalogQuery(''));
-      // dispatch(setDealer)
     };
   }, []);
 
@@ -113,7 +111,6 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     });
   };
 
-  console.log(fethingCars)
   if (fethingCars) {
     return (
       <VStack h="100vh" w="full">

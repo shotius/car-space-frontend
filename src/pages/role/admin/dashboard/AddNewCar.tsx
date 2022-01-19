@@ -5,19 +5,21 @@ import {
   HStack,
   Select,
   Textarea,
-  useToast
+  useToast,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import TextareaAutosize from 'react-textarea-autosize';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { Card } from 'src/components/molecules/Cards/Card';
+import { FormikCheckbox } from 'src/components/molecules/formik/FormikCheckbox';
 import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { addDealerCar, getDealerCars } from 'src/redux/features/auth/carsSlice';
 import { TransmissionEnum } from 'src/redux/features/auth/types';
+import { toErrorMap } from 'src/utils/functions/toErrorMap';
 import { isApiValidationError } from 'src/utils/functions/typeChecker';
 import { HasKeys } from '../../../../../../server/shared_with_front/contants';
 import { AddCarValues } from '../../../../../../server/shared_with_front/types/types-shared';
@@ -50,20 +52,25 @@ export const AddNewCar: React.FC<NewCarProps> = () => {
     price: 0,
     description: '',
     photos: null,
+    dealerName: '',
+    mostDemand: false,
   };
+
   return (
     <ContainerOuter pt={['32px', null, null, '40px']}>
       <Center>
         <Card w="500px" bg="#fff" p="4">
           <Formik
             initialValues={initialValues}
-            onSubmit={(values, { setFieldError }) => {
+            onSubmit={(values, { setFieldError, setErrors }) => {
               const { photos, keys, ...restValues } = values;
               const formdata = new FormData();
+
               // append values to formdata
               for (let key in restValues) {
                 formdata.append(key, values[key]);
               }
+
               // append photos to the formdata
               if (photos) {
                 for (let photo of photos) {
@@ -89,26 +96,35 @@ export const AddNewCar: React.FC<NewCarProps> = () => {
                   });
                 })
                 .catch((error) => {
-                  let message: string = '';
                   if (isApiValidationError(error)) {
                     if (error.status === 422) {
-                      message = 'Fill in required fields';
-                      setFieldError('manufacturer', 'required');
+                      setErrors(toErrorMap(error.errors));
+                      error.errors.forEach(({ msg }) =>
+                        toast({
+                          title: msg,
+                          position: 'top',
+                          variant: 'solid',
+                          status: 'error',
+                          duration: 2000,
+                        })
+                      );
                     }
+                  } else {
+                    toast({
+                      title: 'Error occured!',
+                      position: 'top',
+                      variant: 'solid',
+                      status: 'error',
+                      duration: 2000,
+                    });
                   }
-                  toast({
-                    title: message,
-                    position: 'top',
-                    variant: 'solid',
-                    status: 'error',
-                    duration: 2000,
-                  });
                 });
             }}
           >
             {({ values, setFieldValue }) => (
               <Form>
                 <HeadingSecondary>Add Car</HeadingSecondary>
+                <FormikInput name="dealerName" placeholder="Dealer name" />
                 <FormikInput name="manufacturer" placeholder="Manufacturer" />
                 <FormikInput name="modelGroup" placeholder="Model group" />
                 <FormikInput name="modelDetail" placeholder="Model detail" />
@@ -166,20 +182,8 @@ export const AddNewCar: React.FC<NewCarProps> = () => {
                   type="number"
                   value={values.price || ''}
                 />
-                <Field name="keys">
-                  {({ field }) => (
-                    <FormControl pt="2">
-                      <HStack>
-                        <Checkbox
-                          colorScheme="autoOrange"
-                          name="kes"
-                          {...field}
-                        />
-                        <TextRegular>Has keys</TextRegular>
-                      </HStack>
-                    </FormControl>
-                  )}
-                </Field>
+                <FormikCheckbox name="keys" label="Has keys" />
+                <FormikCheckbox name="mostDemand" label="Most demand" />
                 <Field name="description">
                   {({ field }) => (
                     <Textarea
@@ -199,6 +203,7 @@ export const AddNewCar: React.FC<NewCarProps> = () => {
                       {...field}
                       multiple
                       value={undefined}
+                      style={{ marginTop: '12px' }}
                       onChange={(e) => {
                         const files = e.currentTarget.files;
                         setFieldValue('photos', files);

@@ -4,6 +4,7 @@ import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecon
 import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { capitalize } from 'src/utils/functions/capitalize';
+import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { ICarDealer } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface CarInfoCardMobileProps {
@@ -30,10 +31,9 @@ export const CarInfoCardMobile: React.FC<CarInfoCardMobileProps> = ({
           </HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">
-          <TextRegular opacity="0.5">Sales Status</TextRegular>
+          <TextRegular opacity="0.5">Dealer</TextRegular>
           <HeadingSecondary>
-            {/* {car.sS ? capitalizeEach(car.sS) : <NotSpecified />} */}
-            <NotSpecified />
+            {car.dealername ? capitalizeEach(car.dealername) : <NotSpecified />}
           </HeadingSecondary>
         </HStack>
         <HStack w="full" justify="space-between">
