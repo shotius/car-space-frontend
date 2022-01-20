@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { getUsers } from 'src/redux/features/auth/userSlice';
+import { searchUsers } from 'src/redux/features/auth/userSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { IUser } from '../../../../../server/shared_with_front/types/types-shared';
 import { ButtonRect } from '../Buttons/ButtonRect';
@@ -19,6 +19,7 @@ import { SelectTrigger } from '../triggerers/SelectTrigger';
 import { SelectContent } from '../Wrappers/SelectContent';
 import { SelectOptions } from '../Wrappers/SelectOptions';
 import { SelectWrapper } from '../Wrappers/SelectWrapper';
+import userIcon from 'src/assets/png/user.png';
 
 interface UserSelectProps {
   onSelect: (user: string) => void;
@@ -50,7 +51,7 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
 
   const getUserAsync = (value: string) => {
     setFetching(true);
-    dispatch(getUsers(value))
+    dispatch(searchUsers(value))
       .unwrap()
       .then((data) => {
         setUserList(data);
@@ -124,13 +125,13 @@ export const UserSearchSelect: React.FC<UserSelectProps & StackProps> = ({
                 }}
                 key={user.id}
               >
-                <HStack w="full">
+                <HStack w="full" py="2">
                   <AspectRatio ratio={1 / 1} w="50px">
                     <Image
                       w="full"
                       h="full"
                       src={user.avatar}
-                      fallbackSrc="https://image.shutterstock.com/image-vector/profile-picture-avatar-icon-vector-260nw-1760295569.jpg"
+                      fallbackSrc={userIcon}
                       borderRadius="100px"
                     />
                   </AspectRatio>

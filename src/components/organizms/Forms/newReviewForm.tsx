@@ -130,6 +130,7 @@ export const NewReviwForm: React.FC<AddNewReviewProps> = ({}) => {
                   type="file"
                   multiple
                   value={undefined}
+                  style={{marginTop: "12px"}}
                   onChange={(e) => {
                     setFieldValue('photos', e.currentTarget.files);
                   }}

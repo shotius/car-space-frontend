@@ -2,6 +2,7 @@ import {
   ICarCopart,
   ICarDealer,
   INewOrderCar,
+  IUser,
   Keys,
   RoleTypes,
   SelectedCarModel,
@@ -72,8 +73,8 @@ export interface SelectedCarFilters {
   keys: Keys | null;
   salesStatus: string[];
   queryString: string;
-  mostDemand: boolean; 
-  dealer?: string; 
+  mostDemand: boolean;
+  dealer?: string;
 }
 
 export interface IPagination {
@@ -119,7 +120,7 @@ export interface GlobalStateSliceState {
   lang: Languages;
 
   currency: CurrencyType;
-  currencyPrice: number; 
+  currencyPrice: number;
 
   isCatalogBannerOpen: boolean;
   isMobileMenuOpen: boolean;
@@ -136,7 +137,7 @@ export interface GlobalStateSliceState {
 //** User slice */
 
 export interface UsertInfoState {
-  id: string; 
+  id: string;
   role: RoleTypes | null;
   isAuthenticated: boolean;
   fullName: string | null;
@@ -151,6 +152,8 @@ export interface UsertInfoState {
   favouriteCarsFetchError: string | null;
 
   likingCar: boolean;
+
+  userList?: IUser[];
 }
 
 export interface ChangePasswordProps {

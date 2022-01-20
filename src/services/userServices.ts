@@ -29,21 +29,27 @@ const setUserProfileAvatar = async (formdata: FormData) => {
   return data as ApiSuccessResponse<CloudinaryResponse>;
 };
 
-const getUsers = async (searchWord: string) => {
-  const { data } = await axios.get(`${baseUrl}?s=${searchWord}`);
+const searchUsers = async (searchWord: string) => {
+  const { data } = await axios.get(`${baseUrl}/search?s=${searchWord}`);
   return data as ApiSuccessResponse<IUser[]>;
 };
 
 const sendMesage = async (body: IMessageBody) => {
-  const {data} = await axios.post(`${baseUrl}/sendMessage`, body)
-  return data as ApiSuccessResponse<boolean>
-}
+  const { data } = await axios.post(`${baseUrl}/sendMessage`, body);
+  return data as ApiSuccessResponse<boolean>;
+};
+
+const getUsers = async (query: string) => {
+  const { data } = await axios.get(`${baseUrl}?${query}`);
+  return data as ApiSuccessResponse<{ users: IUser[]; totalPages: number }>;
+};
 
 export default {
   getUsers,
+  searchUsers,
   likeCar,
   getAllLikedCars,
   getAllFavouriteCars,
   setUserProfileAvatar,
-  sendMesage
+  sendMesage,
 };

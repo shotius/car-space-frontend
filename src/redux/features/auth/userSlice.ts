@@ -108,17 +108,32 @@ export const setUserAvatarThunk = createAsyncThunk<
  * Function gets list of users
  * @returns {IUser[]}
  */
-export const getUsers = createAsyncThunk<IUser[], string>(
-  'users/getUser',
+export const searchUsers = createAsyncThunk<IUser[], string>(
+  'users/searchUsers',
   async (searchWord, { rejectWithValue }) => {
     try {
-      const { results } = await userServices.getUsers(searchWord);
+      const { results } = await userServices.searchUsers(searchWord);
       return results;
     } catch (error) {
       return rejectWithValue('Could not get Users');
     }
   }
 );
+
+export const getUsers = createAsyncThunk<
+  { users: IUser[]; totalPages: number },
+  string,
+  {
+    rejectValue: string;
+  }
+>('users/getUser', async (query, { rejectWithValue }) => {
+  try {
+    const { results } = await userServices.getUsers(query);
+    return results;
+  } catch (error) {
+    return rejectWithValue('Could not get Users');
+  }
+});
 
 /**
  * Function send user message
@@ -182,7 +197,7 @@ const userInfoSlice = createSlice({
       state.role = role;
       state.isAuthenticated = isAuthenticated;
       state.email = email;
-      state.id = id
+      state.id = id;
     },
     resetUserInfo: (state) => {
       state.phone = '';
