@@ -28,17 +28,13 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
 
   const dispatch = useAppDispatch();
   const toast = useToast();
-  const url = window.location.toString()
-
-  console.log('url: ', url)
-
-
+  const url = window.location.toString();
 
   const initialValues: IMessageBody = {
     name: isAuth && fullName ? fullName : '',
     phone: isAuth && phone ? phone : '',
     message: '',
-    link: window.location.toString(), 
+    link: window.location.toString(),
   };
 
   return (

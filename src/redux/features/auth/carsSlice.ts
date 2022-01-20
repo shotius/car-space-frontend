@@ -82,6 +82,22 @@ export const getDealerCars = createAsyncThunk<
   }
 });
 
+/** Returns dealer cars count on a spefic filter */
+export const getDealerCarsCount = createAsyncThunk<
+  number,
+  URLSearchParams,
+  {
+    rejectValue: string;
+  }
+>('cars/getDealerCars', async (params, { rejectWithValue, dispatch }) => {
+  try {
+    const { results } = await carsService.getDealerCarsCount(params);
+    return results;
+  } catch (error) {
+    return rejectWithValue('could not get dealer cars count');
+  }
+});
+
 /**
  * Get models of specified brands
  * @param {string[]}: brands

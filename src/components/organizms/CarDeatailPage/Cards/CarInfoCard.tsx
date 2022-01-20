@@ -33,6 +33,25 @@ export const CarInfoCard: React.FC<CarInfoCardProps> = ({ car }) => {
             <HeadingSecondary>{car.lC || <NotSpecified />}</HeadingSecondary>
           </VStack>
         </HStack>
+        <HStack w="full" justify="space-between">
+          <VStack w="full" alignItems="flex-start" spacing="4px">
+            <TextRegular opacity="0.5">Car dealder</TextRegular>
+            <HeadingSecondary>
+              {car.dealername ? (
+                <>{capitalizeEach(car.dealername)}</>
+              ) : (
+                <NotSpecified />
+              )}
+            </HeadingSecondary>
+          </VStack>
+
+          <VStack w="full" alignItems="flex-start" spacing="4px">
+            <TextRegular opacity="0.5">In Most demand cars</TextRegular>
+            <HeadingSecondary>
+              {car.mostDemand ? 'Yes' : <NotSpecified />}
+            </HeadingSecondary>
+          </VStack>
+        </HStack>
       </VStack>
     </CardWithHeading>
   );

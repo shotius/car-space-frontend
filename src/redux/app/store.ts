@@ -8,6 +8,7 @@ import { globalAppState } from '../features/global/gloabalSlice';
 import { UserInfo } from '../features/auth/userSlice';
 import { customersReducer } from '../features/customer/customerSlice';
 import { orderedCarReducer } from '../features/orders/orderedCarSlice';
+import { miniCategoryReducer } from '../features/miniCategory/miniCategorySlice';
 
 const reducer = {
   authReducer,
@@ -19,6 +20,7 @@ const reducer = {
   userInfoSlice: UserInfo,
   customers: customersReducer,
   orderedCars: orderedCarReducer,
+  miniCategory: miniCategoryReducer, 
 };
 
 export const store = configureStore({

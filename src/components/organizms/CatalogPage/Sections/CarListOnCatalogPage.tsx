@@ -73,9 +73,6 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
     return () => {
       dispatch(closeCatalogBanner());
-      // reset filters when catalog page is left
-      dispatch(resetFilters());
-      dispatch(setCatalogQuery(''));
     };
   }, []);
 

@@ -15,6 +15,8 @@ import { TopBrands } from 'src/components/organizms/HomePage/Sections/TopBrands'
 import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { getRecentCars } from 'src/redux/features/auth/carsSlice';
+import { resetFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ICarDealer } from '../../../server/shared_with_front/types/types-shared';
 
@@ -27,9 +29,14 @@ export const Home: React.FC<HomeProps> = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    // get most recent added cars
     dispatch(getRecentCars())
       .unwrap()
       .then((data) => setRecentCars(data));
+
+    // reset filters when home page is loaded
+    dispatch(resetFilters());
+    dispatch(setCatalogQuery(''));
   }, []);
 
   return (
@@ -47,7 +54,7 @@ export const Home: React.FC<HomeProps> = () => {
       <VStack w="full" alignItems="center" spacing="64px">
         <MiniCategory />
 
-         {/* Catalog  */}
+        {/* Catalog  */}
         <VStack w="full">
           <ContainerOuter>
             <SectionHeader mainText="Catalog" />

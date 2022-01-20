@@ -27,6 +27,7 @@ const initialState: SelectedCarFilters = {
   keys: null,
   salesStatus: [],
   queryString: '',
+  mostDemand: false,
 };
 
 const selectedCarFilterSlice = createSlice({
@@ -87,6 +88,10 @@ const selectedCarFilterSlice = createSlice({
     selectSalesStatus: (state, action: PayloadAction<string[]>) => {
       state.salesStatus = action.payload;
     },
+    setMostDemand: (state, action: PayloadAction<boolean>) => {
+      console.log('clicked')
+      state.mostDemand = action.payload;
+    },
     setFilterQueryString: (state, action: PayloadAction<string>) => {
       state.queryString = action.payload;
     },
@@ -104,27 +109,28 @@ const selectedCarFilterSlice = createSlice({
       state.isAdvancedFiltersOpen = true;
     },
     resetFilters: (state) => {
-      state.brands =  []
-      state.models =  []
-      state.yearFrom =  0
-      state.yearTo =  0
-      state.priceFrom =  undefined
-      state.priceTo =  undefined
-      state.engineFrom =  null
-      state.engineTo =  null
-      state.transmission =  []
-      state.currency =  'GEL'
-      state.conditions =  []
-      state.types =  []
-      state.locations =  []
-      state.drives =  []
-      state.fuels =  []
-      state.cylinders =  []
-      state.isAdvancedFiltersOpen =  false
-      state.keys =  null
-      state.salesStatus =  []
-      state.queryString =  ''
-    }
+      state.brands = [];
+      state.models = [];
+      state.yearFrom = 0;
+      state.yearTo = 0;
+      state.priceFrom = undefined;
+      state.priceTo = undefined;
+      state.engineFrom = null;
+      state.engineTo = null;
+      state.transmission = [];
+      state.currency = 'GEL';
+      state.conditions = [];
+      state.types = [];
+      state.locations = [];
+      state.drives = [];
+      state.fuels = [];
+      state.cylinders = [];
+      state.isAdvancedFiltersOpen = false;
+      state.keys = null;
+      state.salesStatus = [];
+      state.queryString = '';
+      state.mostDemand = false;
+    },
   },
 });
 
@@ -144,6 +150,7 @@ export const {
   selectFuels,
   selectTypes,
   selectLocations,
+  setMostDemand,
   toggleAdvancedFilters,
   openAdvancedFilters,
   selectCylinders,
@@ -151,6 +158,6 @@ export const {
   selectSalesStatus,
   setFilterQueryString,
   closeAdvacedFilters,
-  resetFilters
+  resetFilters,
 } = selectedCarFilterSlice.actions;
 export const { reducer: selectedCarFilters } = selectedCarFilterSlice;

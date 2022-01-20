@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { resetFilters, toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 import { SearchButton } from '../Buttons/SearchButton';
+import { TextButton } from '../Buttons/TextButton';
 import { CurrencySwitcherButtons } from '../CurrencySwitcherButtons';
 import { InputRegular } from '../Inputs/InputRegular';
 import { TextRegular } from '../Texts/TextRegular';
@@ -43,7 +45,18 @@ export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
     const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
 
     return (
-      <Stack>
+      <Stack >
+        <TextButton
+            _hover={{ textDecoration: 'underline' }}
+            pr="4"
+            alignSelf="flex-end"
+            onClick={() => {
+              dispatch(resetFilters());
+              dispatch(setCatalogQuery(''));
+            }}
+          >
+            reset all filters
+          </TextButton>
         {/* mobile select opens drawer */}
         <MobileBrandSelect />
 

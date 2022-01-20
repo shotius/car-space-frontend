@@ -17,7 +17,7 @@ export const useOnSubmit = () => {
   const query = useQueryParams();
   const dispatch = useAppDispatch();
   const history = useHistory();
-  
+
   const currPrice = useAppSelector(
     (state) => state.globalAppState.currencyPrice
   );
@@ -43,6 +43,7 @@ export const useOnSubmit = () => {
     ENGINE_FROM,
     ENGINE_TO,
     CURRENCY_PRICE,
+    MOST_DEMAND,
   } = FilterQueries;
 
   // this function clears the url and fills with new query strings
@@ -64,6 +65,7 @@ export const useOnSubmit = () => {
       fuels,
       cylinders,
       priceFrom,
+      mostDemand,
       priceTo,
     } = filters;
 
@@ -84,6 +86,7 @@ export const useOnSubmit = () => {
     query.delete(CYLINDER);
     query.delete(ENGINE_FROM);
     query.delete(ENGINE_TO);
+    query.delete(MOST_DEMAND);
 
     deleteQueryFromURL({ query, queryName: MODEL }); // remote models
     // clear if there was network error
@@ -139,6 +142,11 @@ export const useOnSubmit = () => {
 
     if (engineTo) {
       query.set(ENGINE_TO, engineTo.toString());
+    }
+
+    // MOST DEMAND
+    if (mostDemand) {
+      query.set(MOST_DEMAND, mostDemand + '');
     }
 
     // qurency price

@@ -8,10 +8,12 @@ import { Card } from './Card';
 
 interface MiniCategoryCardProps {
   categoryTitle: string;
+  carCount: number;
 }
 
 export const MiniCategoryCard: React.FC<MiniCategoryCardProps & BoxProps> = ({
   categoryTitle,
+  carCount, 
   ...rest
 }) => {
   const history = useHistory();
@@ -41,7 +43,7 @@ export const MiniCategoryCard: React.FC<MiniCategoryCardProps & BoxProps> = ({
               {categoryTitle}
             </Heading>
             <TextSecondary opacity="50%" fontSize="14px">
-              500 cars
+              {carCount} cars
             </TextSecondary>
           </VStack>
         </VStack>

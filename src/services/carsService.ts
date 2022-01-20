@@ -27,6 +27,11 @@ const getDealerCars = async (params: URLSearchParams) => {
   return data as ApiSuccessResponse<{ cars: ICarDealer[]; pagesTotal: number }>;
 };
 
+const getDealerCarsCount = async (params: URLSearchParams) => {
+  const { data } = await axios.get(`${baseURL}/count`, { params });
+  return data as ApiSuccessResponse<number>;
+};
+
 const getSingleCar = async (lotNum: number) => {
   const { data } = await axios.get(`${baseURL}/${lotNum}`);
   return data;
@@ -93,5 +98,6 @@ const carsService = {
   getFilters,
   getDealerCars,
   getSingleDealerCarThunk,
+  getDealerCarsCount,
 };
 export default carsService;
