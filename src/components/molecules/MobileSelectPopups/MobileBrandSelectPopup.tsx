@@ -25,6 +25,9 @@ import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { ScrollableDiv } from '../Wrappers/ScrollableDiv';
 import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { ToyotaIcon } from 'src/components/atoms/Icons/ToyotaIcon';
+import { ShevroletIcon } from 'src/components/atoms/Icons/ShevroletIcon';
+import { FordIcon } from 'src/components/atoms/Icons/FordIcon';
 
 interface BrandSelectProps {
   isOpen: boolean;
@@ -119,7 +122,7 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
             <SectionHeader
               mainText="Top Brands"
               mainFontSize="16px"
-              display={isMobile && topBrandsVisible ? 'block' : 'none'}
+              display={isMobile && topBrandsVisible ? 'flex' : 'none'}
             />
 
             {/* top brand icons */}
@@ -131,10 +134,16 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
               gap="10px"
             >
               <TopBrandCard
-                icon={MercedesIcon}
-                maxW={["38px", '50px']}
-                maxH={["38px", '50px']}
+                icon={BmwIcon}
+                maxW={['38px', '50px']}
+                maxH={['38px', '50px']}
                 boxSize={5}
+                bg={
+                  selectedBrands.includes('BMW')
+                    ? 'autoOrange.100'
+                    : 'autoGrey.600'
+                }
+                onClick={() => handleSelect('BMW')}
               />
               <TopBrandCard
                 icon={MercedesIcon}
@@ -142,52 +151,55 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
                 maxH={['38px', '50px']}
                 boxSize={5}
                 bg={
-                  selectedBrands.includes('MERCEDES') ? 'autoOrange.100' : 'autoGrey.600'
+                  selectedBrands.includes('MERCEDES')
+                    ? 'autoOrange.100'
+                    : 'autoGrey.600'
                 }
                 onClick={() => handleSelect('MERCEDES')}
               />
               <TopBrandCard
-                icon={BmwIcon}
-                maxW={['38px', '50px']}
-                maxH={['38px', '50px']}
-                boxSize={5}bg={
-                  selectedBrands.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
-                }
-                onClick={() => handleSelect('BMW')}
-              />
-              <TopBrandCard
-                icon={BmwIcon}
+                icon={ToyotaIcon}
                 maxW={['38px', '50px']}
                 maxH={['38px', '50px']}
                 boxSize={5}
                 bg={
-                  selectedBrands.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
+                  selectedBrands.includes('TOYOTA')
+                    ? 'autoOrange.100'
+                    : 'autoGrey.600'
                 }
-                onClick={() => handleSelect('BMW')}
+                onClick={() => handleSelect('TOYOTA')}
               />
               <TopBrandCard
-                icon={BmwIcon}
+                icon={ShevroletIcon}
+                maxW={['38px', '50px']}
+                maxH={['38px', '50px']}
+                boxSize={20}
+                bg={
+                  selectedBrands.includes('SHEVROLET')
+                    ? 'autoOrange.100'
+                    : 'autoGrey.600'
+                }
+                onClick={() => handleSelect('SHEVROLET')}
+              />
+              <TopBrandCard
+                icon={FordIcon}
                 maxW={['38px', '50px']}
                 maxH={['38px', '50px']}
                 boxSize={5}
                 bg={
-                  selectedBrands.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
+                  selectedBrands.includes('FORD')
+                    ? 'autoOrange.100'
+                    : 'autoGrey.600'
                 }
-              />
-              <TopBrandCard
-                icon={BmwIcon}
-                maxW={['38px', '50px']}
-                maxH={['38px', '50px']}
-                boxSize={5}
-                bg={
-                  selectedBrands.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
-                }
+                onClick={() => handleSelect('FORD')}
               />
             </ScrollableDiv>
           </VStack>
         </DrawerHeader>
         {/* drawer body */}
-        <DrawerBody p="0" css={{
+        <DrawerBody
+          p="0"
+          css={{
             '&::-webkit-scrollbar': {
               width: '6px',
             },
@@ -209,14 +221,9 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
               width: '6px',
             },
           }}
->
+        >
           {/* list of car brands */}
-          <VStack
-            alignItems="flex-start"
-            w="full"
-            spacing="2"
-            pt="4"
-          >
+          <VStack alignItems="flex-start" w="full" spacing="2" pt="4">
             {brandsToShow.map((brand) => (
               <Box key={brand} p="0">
                 {brand.length === 1 ? (

@@ -1,6 +1,6 @@
-import { BoxProps, Center, Heading, Image, VStack } from '@chakra-ui/react';
+import { BoxProps, Center, Heading, Icon, VStack } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
-import CarSmall from 'src/assets/png/car with bg-1.png';
+import { CarIcon } from 'src/components/atoms/Icons/CarIcon';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { openCatalogBanner } from 'src/redux/features/global/gloabalSlice';
@@ -13,7 +13,7 @@ interface MiniCategoryCardProps {
 
 export const MiniCategoryCard: React.FC<MiniCategoryCardProps & BoxProps> = ({
   categoryTitle,
-  carCount, 
+  carCount,
   ...rest
 }) => {
   const history = useHistory();
@@ -32,12 +32,15 @@ export const MiniCategoryCard: React.FC<MiniCategoryCardProps & BoxProps> = ({
     >
       <Center h="full">
         <VStack spacing="0">
-          <Image
-            cursor="pointer"
-            src={CarSmall}
+          <Center
             w={['55px', null, null, '52px']}
             h={['55px', null, null, '52px']}
-          />
+            bg="#E8E8E861"
+            borderRadius="100%"
+          >
+            <Icon as={CarIcon} boxSize={6} />
+          </Center>
+
           <VStack spacing="0" pt="2">
             <Heading fontSize="16px" fontWeight="400" cursor="pointer">
               {categoryTitle}

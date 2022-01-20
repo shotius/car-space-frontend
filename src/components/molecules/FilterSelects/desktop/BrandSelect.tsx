@@ -8,7 +8,10 @@ import {
 } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
+import { FordIcon } from 'src/components/atoms/Icons/FordIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
+import { ShevroletIcon } from 'src/components/atoms/Icons/ShevroletIcon';
+import { ToyotaIcon } from 'src/components/atoms/Icons/ToyotaIcon';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { TopBrandCard } from 'src/components/molecules/Cards/TopBrandCard';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
@@ -192,6 +195,16 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
               }}
             >
               <TopBrandCard
+                icon={BmwIcon}
+                maxW="37px"
+                maxH="40px"
+                bg={
+                  selected.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
+                }
+                boxSize={5}
+                onClick={() => handleSelect('BMW')}
+              />
+              <TopBrandCard
                 icon={MercedesIcon}
                 maxW="37px"
                 maxH="40px"
@@ -204,42 +217,43 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
                 onClick={() => handleSelect('Mercedes')}
               />
               <TopBrandCard
-                icon={MercedesIcon}
+                icon={ShevroletIcon}
                 maxW="37px"
                 maxH="40px"
-                boxSize={4}
-                onClick={() => handleSelect('Mercedes')}
-              />
-              <TopBrandCard
-                icon={BmwIcon}
-                maxW="37px"
-                maxH="40px"
+                boxSize={20}
                 bg={
-                  selected.includes('BMW') ? 'autoOrange.100' : 'autoGrey.600'
+                  selected.includes('SHEVROLET')
+                    ? 'autoOrange.100'
+                    : 'autoGrey.600'
                 }
-                boxSize={5}
-                onClick={() => handleSelect('BMW')}
+                onClick={() => handleSelect('SHEVROLET')}
               />
               <TopBrandCard
-                icon={BmwIcon}
+                icon={FordIcon}
                 maxW="37px"
                 maxH="40px"
-                boxSize={5}
-                onClick={() => handleSelect('BMW')}
+                boxSize={6}
+                bg={
+                  selected.includes('FORD') ? 'autoOrange.100' : 'autoGrey.600'
+                }
+                onClick={() => handleSelect('FORD')}
               />
               <TopBrandCard
-                icon={BmwIcon}
+                icon={ToyotaIcon}
                 maxW="37px"
                 maxH="40px"
-                boxSize={5}
-                onClick={() => handleSelect('BMW')}
-              />
-              <TopBrandCard
-                icon={BmwIcon}
-                maxW="37px"
-                maxH="40px"
-                boxSize={5}
-                onClick={() => handleSelect('BMW')}
+                boxSize={6}
+                onClick={() => handleSelect('TOYOTA')}
+                bg={
+                  selected.includes('TOYOTA')
+                    ? 'autoOrange.100'
+                    : 'autoGrey.600'
+                }
+                display={
+                  window.location.toString().includes('/catalog')
+                    ? 'flex'
+                    : 'none'
+                }
               />
             </Flex>
             {optionsToShow.map((opt) => (

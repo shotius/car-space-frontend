@@ -25,6 +25,8 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
 
   let wW = windowSize?.width || 200;
 
+  const redirect = () => history.push('/catalog')
+
   return (
     <Box w="full">
       <ContainerOuter>
@@ -41,7 +43,7 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             className="hoverable"
             onClick={() => {
               dispatch(selectBrand(['BMW']));
-              history.push('/catalog');
+              redirect()
             }}
             icon={BmwIcon}
             w={wW ? wW / 4.1 : '88px'}
@@ -51,8 +53,8 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             className="hoverable"
             icon={MercedesIcon}
             onClick={() => {
-              dispatch(selectBrand(['Mercedes']));
-              history.push('/catalog');
+              dispatch(selectBrand(['MERCEDES']));
+              redirect()
             }}
             w={wW ? wW / 4.1 : '88px'}
             h={wW ? wW / 4.9 : '88px'}
@@ -63,6 +65,10 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             mr="1px"
             w={wW ? wW / 4.1 : '88px'}
             h={wW ? wW / 4.9 : '88px'}
+            onClick={() => {
+              dispatch(selectBrand(['TOYOTA']));
+              redirect()
+            }}
           />
           <TopBrandCard
             boxSize={[ 36, null, 48]}
@@ -70,6 +76,10 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             icon={ShevroletIcon}
             w={wW ? wW / 4.1 : '88px'}
             h={wW ? wW / 4.9 : '88px'}
+            onClick={() => {
+              dispatch(selectBrand(['SHEVROLET']));
+              redirect()
+            }}
           />
           <TopBrandCard
             className="hoverable"
@@ -77,6 +87,10 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             mr="1px"
             w={wW ? wW / 4.1 : '88px'}
             h={wW ? wW / 4.9 : '88px'}
+            onClick={() => {
+              dispatch(selectBrand(['HYUNDAI']));
+              redirect()
+            }}
           />
           <TopBrandCard
             className="hoverable"
@@ -85,6 +99,10 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             mr="1px"
             w={wW ? wW / 4.1 : '88px'}
             h={wW ? wW / 4.9 : '88px'}
+            onClick={() => {
+              dispatch(selectBrand(['FORD']));
+              redirect()
+            }}
           />
           <TopBrandCard
             className="hoverable"
@@ -92,6 +110,10 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             boxSize={[16, null, 20, null, 24]}
             w={wW ? wW / 4.1 : '88px'}
             h={wW ? wW / 4.9 : '88px'}
+            onClick={() => {
+              dispatch(selectBrand(['LEXUS']));
+              redirect()
+            }}
           />
         </ScrollableDiv>
       </ContainerOuter>
