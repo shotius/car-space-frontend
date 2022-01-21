@@ -1,5 +1,5 @@
 // Import Swiper React components
-import { AspectRatio, Box, Image } from '@chakra-ui/react';
+import { AspectRatio, Box, Center, Image, Spinner } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { ButtonNext } from 'src/components/molecules/CarouselNavigations/Deskop/ButtonNext';
 import { ButtonPrev } from 'src/components/molecules/CarouselNavigations/Deskop/ButtonPrev';
@@ -21,7 +21,13 @@ export const HomeCarousel = () => {
 
   const [swiper, setSwiper] = useState<SwiperCore | null>(null);
   const windowWidth = useWindowSize();
-  const {isDesktop} = useAppSelector(state => state.globalAppState.screen)
+  const isDesktop = useAppSelector(
+    (state) => state.globalAppState.screen.isDesktop
+  );
+  const banners = useAppSelector((state) => state.banners.banners);
+  const fetching = useAppSelector((state) => state.banners.fetchingBanners);
+
+  const sortedBanners = banners.length ? [...banners].sort((a, b) => a.place - b.place) : [];
 
   // swiper initialize function
   // extracted in function because we use it in useEffect
@@ -47,6 +53,9 @@ export const HomeCarousel = () => {
       borderRadius={[null, null, null, '28px']}
       borderBottomRadius={['3%', '24px']}
       overflow="hidden"
+      minH={['279px', null, '360px']}
+      opacity={fetching ? '0' : '1'}
+      transition="all .2s"
     >
       <Swiper
         className="mySwiper"
@@ -60,21 +69,13 @@ export const HomeCarousel = () => {
           });
         }}
       >
-        <SwiperSlide>
-          <AspectRatio ratio={5 / 3} h={['279px', null, '360px']}>
-            <Image src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826541/car-space/cars/wallpapers/nyboj9iq2aputtv3i5nw.webp" />
-          </AspectRatio>
-        </SwiperSlide>
-        <SwiperSlide>
-          <AspectRatio ratio={5 / 3} h={['279px', null, '360px']}>
-            <Image src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826626/car-space/cars/wallpapers/kj3x5aijltis5xpir3kq.webp" />
-          </AspectRatio>
-        </SwiperSlide>
-        <SwiperSlide>
-          <AspectRatio ratio={5 / 3} h={['279px', null, '360px']}>
-            <Image src="https://res.cloudinary.com/car-space-v1/image/upload/v1638826664/car-space/cars/wallpapers/ajk7g36whhjsx0cpic6k.webp" />
-          </AspectRatio>
-        </SwiperSlide>
+        {sortedBanners.map((banner) => (
+          <SwiperSlide key={banner.id}>
+            <AspectRatio ratio={5 / 3} h={['279px', null, '360px']}>
+              <Image src={banner.img} />
+            </AspectRatio>
+          </SwiperSlide>
+        ))}
       </Swiper>
 
       {/*  Navigation  */}

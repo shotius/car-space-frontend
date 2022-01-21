@@ -15,7 +15,6 @@ import { Card } from 'src/components/molecules/Cards/Card';
 import { FormikCheckbox } from 'src/components/molecules/formik/FormikCheckbox';
 import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
-import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { addDealerCar, getDealerCars } from 'src/redux/features/auth/carsSlice';
 import { TransmissionEnum } from 'src/redux/features/auth/types';

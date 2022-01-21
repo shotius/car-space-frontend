@@ -56,7 +56,7 @@ export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
     const onCrop = async () => {
       const croppedImageBlob = await getCroppedImg(imageUrl, croppedAreaPixels);
       setZoom(1);
-      setImageUrl(URL.createObjectURL(croppedImageBlob));
+      setImageUrl(URL.createObjectURL(croppedImageBlob!));
       setIsEditing(false);
       setCroppedImage(croppedImageBlob);
     };

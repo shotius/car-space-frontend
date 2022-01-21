@@ -9,6 +9,7 @@ import { UserInfo } from '../features/auth/userSlice';
 import { customersReducer } from '../features/customer/customerSlice';
 import { orderedCarReducer } from '../features/orders/orderedCarSlice';
 import { miniCategoryReducer } from '../features/miniCategory/miniCategorySlice';
+import { bannerReducer } from '../features/banners/bannerSlice';
 
 const reducer = {
   authReducer,
@@ -21,6 +22,7 @@ const reducer = {
   customers: customersReducer,
   orderedCars: orderedCarReducer,
   miniCategory: miniCategoryReducer, 
+  banners: bannerReducer
 };
 
 export const store = configureStore({

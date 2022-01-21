@@ -16,6 +16,7 @@ import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory
 import { useAppDispatch } from 'src/redux/app/hook';
 import { getRecentCars } from 'src/redux/features/auth/carsSlice';
 import { resetFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { getBanners } from 'src/redux/features/banners/bannerSlice';
 import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ICarDealer } from '../../../server/shared_with_front/types/types-shared';
@@ -29,6 +30,9 @@ export const Home: React.FC<HomeProps> = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    // get banners 
+    dispatch(getBanners())
+    
     // get most recent added cars
     dispatch(getRecentCars())
       .unwrap()
@@ -37,6 +41,7 @@ export const Home: React.FC<HomeProps> = () => {
     // reset filters when home page is loaded
     dispatch(resetFilters());
     dispatch(setCatalogQuery(''));
+
   }, []);
 
   return (

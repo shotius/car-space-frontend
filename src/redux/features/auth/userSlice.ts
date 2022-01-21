@@ -91,7 +91,6 @@ export const setUserAvatarThunk = createAsyncThunk<
 >('setUserAvatarThunk', async (formdata: FormData, { rejectWithValue }) => {
   try {
     const { results } = await userServices.setUserProfileAvatar(formdata);
-    console.log(results);
     return results.url;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {

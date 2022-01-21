@@ -4,6 +4,7 @@ import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { logoutUser } from 'src/redux/features/auth/authSlice';
+import AddBanners from './AddBanners';
 import AddNewCar from './AddNewCar';
 import { AddNewReview } from './AddNewReview';
 import { AddOrderedCar } from './AddOrderedCar';
@@ -25,19 +26,25 @@ export const AdminPage: React.FC<AdminProps> = () => {
       >
         <Button variant="link">
           <Link to={`${path}/add-car`} style={{ color: 'black' }}>
-            add new car
+            Car
           </Link>
         </Button>
         <DividerVertical height="20px" borderColor="black" display={['none', null, 'block']}/>
         <Button variant="link">
           <Link style={{ color: 'black' }} to={`${path}/add-review`}>
-            add new Review
+            Review
           </Link>
         </Button>
         <DividerVertical height="20px" borderColor="black" display={['none', null, 'block']}/>
         <Button variant="link">
           <Link style={{ color: 'black' }} to={`${path}/add-order`}>
-            Add/change Ordered Car
+            Ordereds
+          </Link>
+        </Button>
+        <DividerVertical height="20px" borderColor="black" display={['none', null, 'block']}/>
+        <Button variant="link">
+          <Link style={{ color: 'black' }} to={`${path}/banners`}>
+            Banners
           </Link>
         </Button>
         <DividerVertical height="20px" borderColor="black" display={['none', null, 'block']}/>
@@ -62,6 +69,11 @@ export const AdminPage: React.FC<AdminProps> = () => {
         <Route
           path={`${path}/add-order`}
           render={() => <AddOrderedCar />}
+          exact
+        />
+        <Route
+          path={`${path}/banners`}
+          render={() => <AddBanners />}
           exact
         />
       </Switch>
