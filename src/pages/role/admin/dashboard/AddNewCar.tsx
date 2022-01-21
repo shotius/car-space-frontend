@@ -1,11 +1,7 @@
 import {
-  Center,
-  Checkbox,
-  FormControl,
-  HStack,
-  Select,
+  Center, FormControl, Select,
   Textarea,
-  useToast,
+  useToast
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -61,7 +57,7 @@ export const AddNewCar: React.FC<NewCarProps> = () => {
         <Card w="500px" bg="#fff" p="4">
           <Formik
             initialValues={initialValues}
-            onSubmit={(values, { setFieldError, setErrors }) => {
+            onSubmit={(values, {  setErrors }) => {
               const { photos, keys, ...restValues } = values;
               const formdata = new FormData();
 

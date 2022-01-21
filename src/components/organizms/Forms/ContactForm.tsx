@@ -28,7 +28,6 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
 
   const dispatch = useAppDispatch();
   const toast = useToast();
-  const url = window.location.toString();
 
   const initialValues: IMessageBody = {
     name: isAuth && fullName ? fullName : '',

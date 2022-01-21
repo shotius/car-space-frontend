@@ -89,7 +89,7 @@ export const getDealerCarsCount = createAsyncThunk<
   {
     rejectValue: string;
   }
->('cars/getDealerCars', async (params, { rejectWithValue, dispatch }) => {
+>('cars/getDealerCars', async (params, { rejectWithValue }) => {
   try {
     const { results } = await carsService.getDealerCarsCount(params);
     return results;

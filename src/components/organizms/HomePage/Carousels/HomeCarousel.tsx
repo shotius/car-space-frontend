@@ -1,5 +1,5 @@
 // Import Swiper React components
-import { AspectRatio, Box, Center, Image, Spinner } from '@chakra-ui/react';
+import { AspectRatio, Box, Image } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { ButtonNext } from 'src/components/molecules/CarouselNavigations/Deskop/ButtonNext';
 import { ButtonPrev } from 'src/components/molecules/CarouselNavigations/Deskop/ButtonPrev';

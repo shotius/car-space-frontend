@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import carsService from 'src/services/carsService';
-import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 
 type IMiniCategoryInitState = {
   suvs: number;

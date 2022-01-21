@@ -9,7 +9,6 @@ import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWr
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { setFetchingCars } from 'src/redux/features/auth/carsSlice';
-import { resetFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { getFavouriteCarIds } from 'src/redux/features/auth/userSlice';
 import {
   closeCatalogBanner,

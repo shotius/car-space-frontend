@@ -1,5 +1,4 @@
 import { VStack } from '@chakra-ui/layout';
-import { Button } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
