@@ -8,7 +8,7 @@ import { Roles } from '../../../../server/shared_with_front/contants';
 
 interface PrivateRouteProps {
   component: React.FC;
-  role: `${Roles}`;
+  role: `${Roles}`[];
 }
 
 export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
@@ -48,7 +48,7 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
   }
 
   // user is not in localstorage redirect to home
-  if (!USER || USER !== role) {
+  if (!USER || !role.includes(USER as Roles)) {
     return <Redirect to="/" />;
   }
 

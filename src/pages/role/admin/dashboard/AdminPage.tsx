@@ -2,6 +2,7 @@ import { Button, Stack } from '@chakra-ui/react';
 import { Link, Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { DividerVertical } from 'src/components/atoms/Divider';
+import { ScrollToTop } from 'src/components/molecules/ScrollToTop';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { logoutUser } from 'src/redux/features/auth/authSlice';
 import AddBanners from './AddBanners';
@@ -17,6 +18,7 @@ export const AdminPage: React.FC<AdminProps> = () => {
 
   return (
     <ContainerOuter>
+      <ScrollToTop />
       <Stack
         w="full"
         justify="center"

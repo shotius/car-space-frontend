@@ -14,6 +14,7 @@ import {
   isApiDefaultError,
   isApiValidationError,
 } from 'src/utils/functions/typeChecker';
+import { Roles } from '../../../../../server/shared_with_front/contants';
 
 interface LoginFormProps {
   onClose: () => void;
@@ -41,7 +42,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         dispatch(loginUser(credentials))
           .unwrap()
           .then((result) => {
-            history.push(`/${result.role}/dashboard`);
+            history.push(
+              `/${
+                result.role === Roles.ADMIN ? Roles.ADMIN : Roles.USER
+              }/dashboard`
+            );
             onClose();
           })
           .catch((error) => {
@@ -112,14 +117,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({
                   Register
                 </TextButton>
               </HStack>
-                <TextButton
-                  color="#427AD6"
-                  onClick={openForgetPassword}
-                  fontSize="13px"
-                  pt={[null, null, "3px"]}
-                >
-                  Forgot password?
-                </TextButton>
+              <TextButton
+                color="#427AD6"
+                onClick={openForgetPassword}
+                fontSize="13px"
+                pt={[null, null, '3px']}
+              >
+                Forgot password?
+              </TextButton>
             </Stack>
           </VStack>
         </Form>

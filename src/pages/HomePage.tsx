@@ -16,23 +16,31 @@ import { MiniCategory } from 'src/components/organizms/MiniCategory/MiniCategory
 import { useAppDispatch } from 'src/redux/app/hook';
 import { getRecentCars } from 'src/redux/features/auth/carsSlice';
 import { resetFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { getDealers } from 'src/redux/features/auth/userSlice';
 import { getBanners } from 'src/redux/features/banners/bannerSlice';
 import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
-import { ICarDealer } from '../../../server/shared_with_front/types/types-shared';
+import {
+  ICarDealer,
+  IUser,
+} from '../../../server/shared_with_front/types/types-shared';
 
 interface HomeProps {}
 
 export const Home: React.FC<HomeProps> = () => {
   const [recentCars, setRecentCars] = useState<ICarDealer[]>([]);
+  const [dealers, setDealers] = useState<IUser[]>([]);
 
   const { isMobile, isDesktop } = useDetectScreen();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // get banners 
-    dispatch(getBanners())
-    
+    // get banners
+    dispatch(getBanners());
+    dispatch(getDealers('withCars=true'))
+      .unwrap()
+      .then((data) => setDealers(data));
+
     // get most recent added cars
     dispatch(getRecentCars())
       .unwrap()
@@ -41,7 +49,6 @@ export const Home: React.FC<HomeProps> = () => {
     // reset filters when home page is loaded
     dispatch(resetFilters());
     dispatch(setCatalogQuery(''));
-
   }, []);
 
   return (
@@ -80,7 +87,7 @@ export const Home: React.FC<HomeProps> = () => {
         <TopBrands />
 
         <ContainerOuter>
-          <DealersSection />
+          <DealersSection dealers={dealers} />
 
           {isMobile ? (
             <VStack w="full" pt="64px">

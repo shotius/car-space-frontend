@@ -12,6 +12,7 @@ import { useAppDispatch } from 'src/redux/app/hook';
 import { autoLogin } from 'src/redux/features/auth/authSlice';
 import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
+import { Roles } from '../../server/shared_with_front/contants';
 import { PublicLayout } from './components/templates/Layouts/PublicLayout';
 const AccountActivation = lazy(() => import('./pages/AccountActivation'));
 const ChangePassword = lazy(() => import('./pages/ChangePassword'));
@@ -22,10 +23,10 @@ const UserProfilePage = lazy(() => import('./pages/role/user/UserProfilePage'));
 const BlogPage = lazy(() => import('./pages/blogs/BlogPage'));
 const CatalogPage = lazy(() => import('./pages/catalog/CatalogPage'));
 const AdminPage = lazy(() => import('./pages/role/admin/dashboard/AdminPage'));
-const DealerDashboard = lazy(() => import('./pages/role/dealer/DealerPage'));
 const Home = lazy(() => import('./pages/HomePage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const BlogDetailPage = lazy(() => import('./pages/blogs/blog/BlogDetailPage'));
+// const DealerDashboard = lazy(() => import('./pages/role/dealer/DealerPage'));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -74,16 +75,22 @@ function App() {
             <PrivateRoute
               path="/admin/dashboard"
               component={AdminPage}
-              role="admin"
+              role={[Roles.ADMIN]}
             />
-            <PrivateRoute
+
+            <Route path="/dealer/dashboard">
+              <Redirect to="/user/dashboard" />
+            </Route>
+
+            {/* <PrivateRoute
               path="/dealer/dashboard"
               role="dealer"
               component={DealerDashboard}
-            />
+            /> */}
+
             <PrivateRoute
               path="/user/dashboard"
-              role="user"
+              role={[Roles.USER, Roles.DEALER]}
               component={UserProfilePage}
             />
             <Route path="*" render={() => <ErrorPage />} />

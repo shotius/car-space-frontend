@@ -17,6 +17,7 @@ import {
 import {
   setFourToSix_k,
   setFour_k,
+  setHachbacks,
   setMostDemandCount,
   setSedans,
   setSixToTen_k,
@@ -59,7 +60,7 @@ export const MiniCategory: React.FC<MiniCategoryProps> = () => {
     query.set(TYPE, 'hachback');
     dispatch(getDealerCarsCount(query))
       .unwrap()
-      .then((count) => dispatch(setSuvs(count)));
+      .then((count) => dispatch(setHachbacks(count)));
   };
 
   const getSedans = () => {

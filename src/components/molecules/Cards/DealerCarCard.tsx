@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { FALLBACK_IMG } from 'src/constants';
 import { useAppSelector } from 'src/redux/app/hook';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
@@ -58,7 +59,7 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
             borderRadius="8px"
             overflow={'hidden'}
           >
-            <Image src="https://via.placeholder.com/150" />
+            <Image src={FALLBACK_IMG} />
           </AspectRatio>
         )}
 

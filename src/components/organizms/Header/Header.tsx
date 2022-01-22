@@ -18,9 +18,10 @@ import {
   openLoginModal,
   openRegisterModal,
   toggleAuthModal,
-  toggleMobileMenu
+  toggleMobileMenu,
 } from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import { Roles } from '../../../../../server/shared_with_front/contants';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 
@@ -66,7 +67,7 @@ export const Header: React.FC<HeaderProps> = () => {
   }, [menuOpen]);
 
   return (
-    <ContainerOuter h="full" bg="white" >
+    <ContainerOuter h="full" bg="white">
       {/* desktop view */}
       <Flex h="full" alignItems="center">
         <CarSpaceLogo
@@ -114,7 +115,11 @@ export const Header: React.FC<HeaderProps> = () => {
                   if (!USER) {
                     dispatch(logoutUser());
                   } else {
-                    history.push(`/${role}/dashboard`);
+                    history.push(
+                      `/${
+                        role === Roles.ADMIN ? Roles.ADMIN : Roles.USER
+                      }/dashboard`
+                    );
                   }
                 }}
               >
@@ -169,7 +174,11 @@ export const Header: React.FC<HeaderProps> = () => {
               onClick={() => {
                 // if authenticated: redirect to you page, else open login
                 if (USER && isAuthenticated) {
-                  history.push(`/${role}/dashboard`);
+                  history.push(
+                    `/${
+                      role === Roles.ADMIN ? Roles.ADMIN : Roles.USER
+                    }/dashboard`
+                  );
                 } else {
                   dispatch(toggleAuthModal());
                 }

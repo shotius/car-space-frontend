@@ -34,3 +34,5 @@ export enum FilterQueries {
   CURRENCY_PRICE = 'CURRENCY_PRICE',
   MOST_DEMAND = 'mostdemand',
 }
+
+export const FALLBACK_IMG = 'https://via.placeholder.com/150'

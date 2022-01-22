@@ -6,6 +6,7 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setUserInfo } from 'src/redux/features/auth/userSlice';
 import authService from 'src/services/authService';
+import { Roles } from '../../../server/shared_with_front/contants';
 
 interface AccountActivationProps {}
 
@@ -68,7 +69,7 @@ export const AccountActivation: React.FC<AccountActivationProps> = ({}) => {
         </HeadingSecondary>
         <Button variant="link" color="black">
           {role ? (
-            <Link to={`/${role}/dashboard`}>go to profile</Link>
+            <Link to={`/${Roles.USER}/dashboard`}>go to profile</Link>
           ) : (
             <Link to="/home">go to home</Link>
           )}

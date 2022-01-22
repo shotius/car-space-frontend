@@ -1,5 +1,6 @@
 import { VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { ListAvatarItem } from 'src/components/molecules/ListAvatarItem';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { getDealers } from 'src/redux/features/auth/userSlice';
@@ -18,24 +19,29 @@ export const DealerList: React.FC<DealerListProps> = ({ onSelect }) => {
   }, []);
 
   function fetchDealers() {
-    dispatch(getDealers())
+    dispatch(getDealers(''))
       .unwrap()
       .then((data) => setDealers(data));
   }
 
   return (
     <VStack w="full">
-      {dealers.map((dealer) => (
-        <ListAvatarItem
-          avatar={dealer.avatar}
-          mainText={dealer.fullName}
-          secondaryText={dealer.role}
-          verified={dealer.verified}
-          onClick={() => {
-            onSelect(dealer);
-          }}
-        />
-      ))}
+      {!dealers.length ? (
+        <HeadingSecondary py="4">Dealers will Appear here</HeadingSecondary>
+      ) : (
+        dealers.map((dealer) => (
+          <ListAvatarItem
+            key={dealer.id}
+            avatar={dealer.avatar}
+            mainText={dealer.fullName}
+            secondaryText={dealer.role}
+            verified={dealer.verified}
+            onClick={() => {
+              onSelect(dealer);
+            }}
+          />
+        ))
+      )}
     </VStack>
   );
 };

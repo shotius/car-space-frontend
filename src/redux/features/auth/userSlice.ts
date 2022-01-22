@@ -119,11 +119,11 @@ export const searchUsers = createAsyncThunk<IUser[], string>(
   }
 );
 
-export const getDealers = createAsyncThunk<IUser[]>(
+export const getDealers = createAsyncThunk<IUser[], string>(
   'users/getDealers',
-  async (_, { rejectWithValue }) => {
+  async (query, { rejectWithValue }) => {
     try {
-      const { results } = await userServices.getDealers();
+      const { results } = await userServices.getDealers(query);
       return results;
     } catch (error) {
       return rejectWithValue('could not get dealers');
