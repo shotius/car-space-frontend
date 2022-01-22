@@ -44,7 +44,13 @@ const getUsers = async (query: string) => {
   return data as ApiSuccessResponse<{ users: IUser[]; totalPages: number }>;
 };
 
+const getDealers = async () => {
+  const { data } = await axios.get(`${baseUrl}/dealers`);
+  return data as ApiSuccessResponse<IUser[]>;
+};
+
 export default {
+  getDealers,
   getUsers,
   searchUsers,
   likeCar,

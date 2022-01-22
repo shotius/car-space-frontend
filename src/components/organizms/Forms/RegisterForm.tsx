@@ -32,7 +32,6 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
   const [verificationInfoShown, setVerificationInfoShown] = useState(false);
   const [email, setEmail] = useState('');
 
-  const { registering } = useAppSelector((state) => state.authReducer);
   const dispatch = useAppDispatch();
   const toast = useToast();
 
@@ -46,7 +45,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
     phoneNum: Yup.string()
       .min(9, 'Georgian number should have 9 numbers')
       .max(9, 'Woow, Too long'),
-    privacy: Yup.boolean().oneOf([true], 'Must Accept Privacy Policy'),
+    // privacy: Yup.boolean().oneOf([true], 'Must Accept Privacy Policy'),
   });
 
   // form initial state
@@ -56,7 +55,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
     password: '',
     role: Roles.USER,
     phone: '',
-    privacy: false,
+    // privacy: true,
   };
 
   // registration is successfull this message will be desplayed
@@ -75,10 +74,15 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
     <Formik
       initialValues={initState}
       validationSchema={SignupSchema}
-      onSubmit={(values, { setErrors }) => {
-        dispatch(registerUser(values))
+      onSubmit={(values, { setErrors, setSubmitting }) => {
+        // if "I'm a delaer is checked"
+        const role = Array.isArray(values.role) ? Roles.DEALER : Roles.USER;
+
+        // submit
+        dispatch(registerUser({ ...values, role }))
           .unwrap()
           .then((data) => {
+            setSubmitting(false);
             setEmail(data.email);
             setVerificationInfoShown(true);
             setTimeout(() => setVerificationInfoShown(false), 15000);
@@ -90,13 +94,14 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
             });
           })
           .catch((error) => {
+            setSubmitting(false);
             if (isApiValidationError(error)) {
               setErrors(toErrorMap(error.errors));
             }
           });
       }}
     >
-      {() => (
+      {({ isSubmitting }) => (
         <Form>
           <HeadingSecondary pb={['80px', null, '40px']} fontSize="24px">
             Register
@@ -154,18 +159,16 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
 
               <FormikCheckbox name="role" label="I'm a dealer" />
 
-              <FormikCheckbox name="privacy" isRequired>
+              {/* <FormikCheckbox name="privacy" isRequired>
                 <TextRegular fontSize="14px">I agree to </TextRegular>
                 <TextButton color="#427AD6" fontSize="14px">
                   Privacy Policy
                 </TextButton>
-              </FormikCheckbox>
+              </FormikCheckbox> */}
             </VStack>
 
             {/* Submit button  */}
-            <ButtonRegular type="submit" isLoading={registering}>
-              Create an account
-            </ButtonRegular>
+            <ButtonRegular type="submit" isLoading={isSubmitting}>Create an account</ButtonRegular>
             <HStack w="full">
               <TextRegular>Already a member?</TextRegular>
               <TextButton color="#427AD6" onClick={openLogin}>

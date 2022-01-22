@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import userIcon from 'src/assets/png/user.png';
+import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { getUsers } from 'src/redux/features/auth/userSlice';
@@ -24,7 +25,7 @@ export const UserList: React.FC<UserListProps> = ({ setSelectedUser }) => {
 
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const limit = 4;
+  const limit = 20;
 
   const dispatch = useAppDispatch();
 
@@ -72,8 +73,16 @@ export const UserList: React.FC<UserListProps> = ({ setSelectedUser }) => {
               fallbackSrc={userIcon}
             />
           </AspectRatio>
-          <VStack>
+          <VStack align="flex-start" spacing={'0'}>
             <TextRegular>{user.fullName}</TextRegular>
+            <HStack>
+              <TextSecondary>{user.role}</TextSecondary>
+              {user.verified ? (
+                <TextSecondary color="green">verified</TextSecondary>
+              ) : (
+                <TextRegular color="red">no verified</TextRegular>
+              )}
+            </HStack>
           </VStack>
         </HStack>
       ))}

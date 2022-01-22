@@ -22,7 +22,6 @@ interface authState {
   loginSuccess: boolean;
   autoLoginLoading: boolean;
   autoLoginSuccess: boolean;
-  registering: boolean;
   sendingRecoveryMail?: boolean;
 }
 
@@ -32,7 +31,6 @@ const initialState: authState = {
   loginSuccess: false,
   autoLoginLoading: false,
   autoLoginSuccess: false,
-  registering: false,
 };
 
 export const loginUser = createAsyncThunk<
@@ -164,7 +162,6 @@ export const changePassword = createAsyncThunk<IUser, ChangePasswordProps>(
   }
 );
 
-
 // -- Reducer
 const authSlice = createSlice({
   name: 'auth',
@@ -203,17 +200,6 @@ const authSlice = createSlice({
       state.error = 'autoLogin failed';
       state.autoLoginLoading = false;
       state.autoLoginSuccess = false;
-    });
-
-    /** Register */
-    builder.addCase(registerUser.pending, (state) => {
-      state.registering = true;
-    });
-    builder.addCase(registerUser.fulfilled, (state) => {
-      state.registering = false;
-    });
-    builder.addCase(registerUser.rejected, (state) => {
-      state.registering = false;
     });
   },
 });
