@@ -1,16 +1,6 @@
-import {
-  AspectRatio,
-  Button,
-  Center,
-  HStack,
-  Image,
-  Spinner,
-  VStack,
-} from '@chakra-ui/react';
+import { Button, Center, HStack, Spinner, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import userIcon from 'src/assets/png/user.png';
-import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
-import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { ListAvatarItem } from 'src/components/molecules/ListAvatarItem';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { getUsers } from 'src/redux/features/auth/userSlice';
 import { IUser } from '../../../../../server/shared_with_front/types/types-shared';
@@ -30,7 +20,6 @@ export const UserList: React.FC<UserListProps> = ({ setSelectedUser }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log('page changed');
     fetchUsers(page);
   }, [page]);
 
@@ -53,38 +42,15 @@ export const UserList: React.FC<UserListProps> = ({ setSelectedUser }) => {
         </Center>
       )}
       {users.map((user, i) => (
-        <HStack
+        <ListAvatarItem
           key={user.id}
-          cursor={'pointer'}
-          transition="all .2s"
-          _hover={{ bg: 'autoGrey.200' }}
-          w="full"
-          py="4"
-          px="2"
+          index={(page - 1) * limit + i + 1}
           onClick={() => setSelectedUser(user)}
-        >
-          <TextRegular alignSelf={'flex-end'}>
-            {(page - 1) * limit + i + 1}.
-          </TextRegular>
-          <AspectRatio w="40px" ratio={1 / 1} borderRadius={'100px'} bg="white">
-            <Image
-              src={user.avatar}
-              borderRadius="100px"
-              fallbackSrc={userIcon}
-            />
-          </AspectRatio>
-          <VStack align="flex-start" spacing={'0'}>
-            <TextRegular>{user.fullName}</TextRegular>
-            <HStack>
-              <TextSecondary>{user.role}</TextSecondary>
-              {user.verified ? (
-                <TextSecondary color="green">verified</TextSecondary>
-              ) : (
-                <TextRegular color="red">no verified</TextRegular>
-              )}
-            </HStack>
-          </VStack>
-        </HStack>
+          avatar={user.avatar}
+          mainText={user.fullName}
+          secondaryText={user.role}
+          verified={user.verified}
+        />
       ))}
       <HStack w="full" justify={'space-between'} px="2" py="4">
         <Button
