@@ -12,6 +12,7 @@ import { Card } from 'src/components/molecules/Cards/Card';
 import { CarCardHeading } from 'src/components/molecules/Headings/CarCardHeading';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
+import { FALLBACK_IMG } from 'src/constants';
 import { capitalize } from 'src/utils/functions/capitalize';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
@@ -52,19 +53,22 @@ export const UserFavouritesCardMobile: React.FC<FavouritesCardProps> = ({
             maxH="130px"
           >
             <Image
-              src={images && images.length ? images[0] : "https://via.placeholder.com/150" }
+              src={images[0] ? images[0] : undefined }
+              fallbackSrc={FALLBACK_IMG}
               borderRadius="8px"
             />
           </AspectRatio>
           <AspectRatio ratio={191 / 130} w="full" gridArea="b" maxH="61px">
             <Image
-              src={images && images.length ? images[1] : "https://via.placeholder.com/150"}
+              src={images[1] ? images[1] : undefined }
+              fallbackSrc={FALLBACK_IMG}
               borderRadius="8px"
             />
           </AspectRatio>
           <AspectRatio ratio={191 / 130} w="full" gridArea="c" maxH="61px">
             <Image
-              src={images && images.length ? images[2] : "https://via.placeholder.com/150"}
+              src={images[2] ? images[2] : undefined }
+              fallbackSrc={FALLBACK_IMG}
               borderRadius="8px"
             />
           </AspectRatio>

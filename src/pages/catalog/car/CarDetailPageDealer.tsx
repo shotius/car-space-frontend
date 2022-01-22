@@ -23,16 +23,19 @@ interface CardDetailPageProps {}
 export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
   const [car, setCar] = useState<ICarDealer>();
   const [error, setError] = useState('');
-  const history = useHistory()
+  const history = useHistory();
 
   const { dealerCars: cars } = useAppSelector((state) => state.carsReducer);
+  const isAuthenticated = useAppSelector(
+    (state) => state.userInfoSlice.isAuthenticated
+  );
   const dispatch = useAppDispatch();
 
   const { carId } = useParams<{ carId: string }>();
   const { isDesktop } = useDetectScreen();
 
   useEffect(() => {
-    dispatch(getFavouriteCarIds(''));
+    isAuthenticated && dispatch(getFavouriteCarIds(''));
     const carInCache = cars.find((car) => car.id === carId);
     // if car is not in the cache fetch it
     if (carInCache) {
@@ -55,8 +58,12 @@ export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
     return (
       <Center h="80vh">
         <VStack>
-          <HeadingSecondary color="autoOrange.500" fontSize="24px">{error}</HeadingSecondary>
-          <Button variant="link" onClick={() => history.goBack()}>Go back</Button>
+          <HeadingSecondary color="autoOrange.500" fontSize="24px">
+            {error}
+          </HeadingSecondary>
+          <Button variant="link" onClick={() => history.goBack()}>
+            Go back
+          </Button>
         </VStack>
       </Center>
     );
