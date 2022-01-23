@@ -75,6 +75,7 @@ export interface SelectedCarFilters {
   queryString: string;
   mostDemand: boolean;
   dealer?: string;
+  dealerId?: string; 
 }
 
 export interface IPagination {

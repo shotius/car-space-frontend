@@ -44,6 +44,7 @@ export const useOnSubmit = () => {
     ENGINE_TO,
     CURRENCY_PRICE,
     MOST_DEMAND,
+    DEALER_ID,
   } = FilterQueries;
 
   // this function clears the url and fills with new query strings
@@ -67,6 +68,7 @@ export const useOnSubmit = () => {
       priceFrom,
       mostDemand,
       priceTo,
+      dealerId,
     } = filters;
 
     // before creating query, i delete all query filters in the url
@@ -87,6 +89,7 @@ export const useOnSubmit = () => {
     query.delete(ENGINE_FROM);
     query.delete(ENGINE_TO);
     query.delete(MOST_DEMAND);
+    query.delete(DEALER_ID);
 
     deleteQueryFromURL({ query, queryName: MODEL }); // remote models
     // clear if there was network error
@@ -147,6 +150,11 @@ export const useOnSubmit = () => {
     // MOST DEMAND
     if (mostDemand) {
       query.set(MOST_DEMAND, mostDemand + '');
+    }
+
+    // DEALER ID
+    if (dealerId) {
+      query.set(DEALER_ID, dealerId);
     }
 
     // qurency price

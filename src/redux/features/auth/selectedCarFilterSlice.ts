@@ -89,8 +89,10 @@ const selectedCarFilterSlice = createSlice({
       state.salesStatus = action.payload;
     },
     setMostDemand: (state, action: PayloadAction<boolean>) => {
-      console.log('clicked')
       state.mostDemand = action.payload;
+    },
+    setDealerId: (state, action: PayloadAction<string>) => {
+      state.dealerId = action.payload;
     },
     setFilterQueryString: (state, action: PayloadAction<string>) => {
       state.queryString = action.payload;
@@ -130,6 +132,7 @@ const selectedCarFilterSlice = createSlice({
       state.salesStatus = [];
       state.queryString = '';
       state.mostDemand = false;
+      state.dealerId = undefined;
     },
   },
 });
@@ -146,6 +149,7 @@ export const {
   selectYearTo,
   selectCurrency,
   selectConditions,
+  setDealerId,
   selectDrives,
   selectFuels,
   selectTypes,

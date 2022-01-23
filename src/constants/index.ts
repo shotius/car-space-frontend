@@ -33,6 +33,7 @@ export enum FilterQueries {
   ENGINE_TO = 'engine_to',
   CURRENCY_PRICE = 'CURRENCY_PRICE',
   MOST_DEMAND = 'mostdemand',
+  DEALER_ID = "dealerId"
 }
 
 export const FALLBACK_IMG = 'https://via.placeholder.com/150'

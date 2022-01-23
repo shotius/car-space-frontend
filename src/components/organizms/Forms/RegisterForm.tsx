@@ -4,7 +4,7 @@ import {
   FormErrorMessage,
   InputGroup,
   InputLeftAddon,
-  useToast,
+  useToast
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
@@ -15,7 +15,7 @@ import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { InputGrey } from 'src/components/molecules/Inputs/InputGrey';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
+import { useAppDispatch } from 'src/redux/app/hook';
 import { registerUser } from 'src/redux/features/auth/authSlice';
 import { toErrorMap } from 'src/utils/functions/toErrorMap';
 import { isApiValidationError } from 'src/utils/functions/typeChecker';

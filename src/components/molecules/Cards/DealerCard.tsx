@@ -1,7 +1,10 @@
 import { Image } from '@chakra-ui/image';
 import { AspectRatio, VStack } from '@chakra-ui/layout';
 import { HStack, SimpleGrid } from '@chakra-ui/react';
+import { useHistory } from 'react-router-dom';
 import { FALLBACK_IMG } from 'src/constants';
+import { useAppDispatch } from 'src/redux/app/hook';
+import { setDealerId } from 'src/redux/features/auth/selectedCarFilterSlice';
 import {
   ICarDealer,
   IUser,
@@ -16,11 +19,23 @@ interface DealerCardProps {
 
 export const DealerCard: React.FC<DealerCardProps> = ({ dealer }) => {
   const cars = dealer.addedCars as unknown as ICarDealer[];
-  const carImages = cars[0].imgUrls
+  const carImages = cars[0].imgUrls;
 
+  const history = useHistory();
+  const dispatch = useAppDispatch();
 
   return (
-    <Card w="full" p="4" h="auto" className="hoverable" cursor="pointer">
+    <Card
+      w="full"
+      p="4"
+      h="auto"
+      className="hoverable"
+      cursor="pointer"
+      onClick={() => {
+        dispatch(setDealerId(dealer.id));
+        history.push('/catalog');
+      }}
+    >
       <VStack w="full" spacing="12px">
         <HStack w="full" justify="space-between">
           <HeadingSecondary fontSize="14px" cursor="pointer">
