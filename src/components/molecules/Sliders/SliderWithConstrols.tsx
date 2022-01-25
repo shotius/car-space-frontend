@@ -32,6 +32,7 @@ export const SliderWithConstrols: React.FC<SliderWithConstrolsProps> = ({
         -
       </ButtonRound>
       <SliderBlue
+        sliderValue={value}
         value={value}
         min={min}
         max={max}

@@ -33,6 +33,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
           style={{ gap: 16 }}
         >
           <SliderBlue
+            sliderValue={months}
             defaultValue={months}
             min={1}
             max={12}

@@ -14,6 +14,7 @@ import {
   selectTypes,
   setMostDemand,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { openCatalogBanner } from 'src/redux/features/global/gloabalSlice';
 import {
   setFourToSix_k,
   setFour_k,
@@ -116,7 +117,10 @@ export const MiniCategory: React.FC<MiniCategoryProps> = () => {
     getMostDemands();
   }, []);
 
-  const redirect = () => history.push('/catalog');
+  const redirect = () => {
+    history.push('/catalog')
+    dispatch(openCatalogBanner())
+  };
 
   return (
     <Box w="full">

@@ -5,7 +5,7 @@ import {
   cities,
   prices,
   states,
-  zips
+  zips,
 } from 'src/constants/TransportData';
 import { useAppSelector } from 'src/redux/app/hook';
 import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
@@ -55,15 +55,6 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
             dict.city === selectedCity && dict.auction === selectedAuction
         )?.state
       : '';
-
-  // take zip based on selected city
-  // const zip =
-  //   selectedCity && selectedAuction
-  //     ? auctionDictionary.find(
-  //         (dict) =>
-  //           dict.city === selectedCity && dict.auction === selectedAuction
-  //       )?.zip
-  //     : '';
 
   const price =
     selectedCity && selectedAuction

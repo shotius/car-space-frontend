@@ -56,6 +56,8 @@ export const HomeCarousel = () => {
       minH={['279px', null, '360px']}
       opacity={fetching ? '0' : '1'}
       transition="all .2s"
+      cursor="pointer"
+      onClick={() => console.log('banner click')}
     >
       <Swiper
         className="mySwiper"
