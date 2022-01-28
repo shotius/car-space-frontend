@@ -56,6 +56,7 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
         )?.state
       : '';
 
+  // calculate price 
   const price =
     selectedCity && selectedAuction
       ? auctionDictionary.find(
@@ -105,10 +106,6 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
           <TextRegular>State</TextRegular>
           <TextRegular>{state || '_'}</TextRegular>
         </HStack>
-        {/* <HStack w="full" justifyContent="space-between">
-          <TextRegular>Zip</TextRegular>
-          <TextRegular>{zip || `_`}</TextRegular>
-        </HStack> */}
         <HStack w="full" justifyContent="space-between">
           <TextRegular>Total</TextRegular>
           <HeadingSecondary

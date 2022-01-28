@@ -5,7 +5,6 @@ import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { resetFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { closeCatalogBanner } from 'src/redux/features/global/gloabalSlice';
-import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ButtonWithIcon } from '../Buttons/IconWithButton';
 import { TextRegular } from '../Texts/TextRegular';
 import { Card } from './Card';
@@ -18,10 +17,6 @@ export const BannerCard: React.FC<BannerCardProps> = ({}) => {
   );
 
   const dispatch = useAppDispatch();
-
-  console.log('catalag banner: ', isOpen);
-  const { isDesktop } = useDetectScreen();
-  console.log('Desctop: ', isDesktop);
 
   return (
     <Card w="full" p="30px" display={isOpen ? 'block' : 'none'}>
@@ -36,7 +31,7 @@ export const BannerCard: React.FC<BannerCardProps> = ({}) => {
           _active={{ bg: 'autoGrey.400' }}
           onClick={() => {
             dispatch(closeCatalogBanner());
-            dispatch(resetFilters())
+            dispatch(resetFilters());
           }}
         />
         <VStack alignItems="flex-start">

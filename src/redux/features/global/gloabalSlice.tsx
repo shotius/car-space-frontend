@@ -35,7 +35,6 @@ export const changeCurrency = createAsyncThunk<number, CurrencyType>(
       if (cachedCurrency) {
         dispatch(setAppCurrency(currency));
         return parseFloat(cachedCurrency);
-      
       } else {
         // else use live api and get the currency
         const price = await getCurrencyPrice(currency);
@@ -44,7 +43,7 @@ export const changeCurrency = createAsyncThunk<number, CurrencyType>(
           value: price.toString(),
           ttl: 1000 * 60 * 60 * 24, // will expire in one day
         });
-        
+
         dispatch(setAppCurrency(currency));
         return price;
       }

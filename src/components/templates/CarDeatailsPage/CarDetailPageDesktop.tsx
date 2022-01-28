@@ -37,7 +37,7 @@ export const CarDetailPageDesktop: React.FC<CarDetailPageDesktopProps> =
               <CarDetailSlider images={car.imgUrls} />
             )}
             <CarInfoCard car={car} />
-            <CarTransportationCard />
+            {false && <CarTransportationCard />}
             <CarDeailsCard variant="desktop" car={car} />
           </VStack>
           <Spacer minW="20px" />

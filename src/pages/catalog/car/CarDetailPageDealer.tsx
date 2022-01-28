@@ -77,10 +77,12 @@ export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
       <ScrollToTop />
       {isDesktop ? (
         <>
+          {/* Desctop version  */}
           <CarDetailPageDesktop />
           <CarImageSliderModal />
         </>
       ) : (
+        // Mobile version 
         <CarDetailPageMobile car={car} />
       )}
 

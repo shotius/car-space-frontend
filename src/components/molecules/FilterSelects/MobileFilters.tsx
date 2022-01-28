@@ -2,9 +2,12 @@ import { HStack, Stack } from '@chakra-ui/layout';
 import { Button, Collapse, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
-import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { resetFilters, toggleAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import {
+  resetFilters, selectPriseFrom,
+  selectPriseTo,
+  toggleAdvancedFilters
+} from 'src/redux/features/auth/selectedCarFilterSlice';
 import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 import { SearchButton } from '../Buttons/SearchButton';
@@ -31,32 +34,32 @@ interface ThreeMobileSelectsProps {}
 
 export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
   ({}) => {
-    const [chosenCurrency, setChosenCurrency] = useState<CurrencyType>('GEL');
-    const filters = useAppSelector(state => state.selectedCarFilters)
-
-    const onSubmit = useOnSubmit()
+    const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
+    const [priceFrom, setPriceFrom] = useState('');
+    const [priceTo, setPriceTo] = useState('');
 
     // redux variables
-    const { isAdvancedFiltersOpen } = useAppSelector(
-      (state) => state.selectedCarFilters
+    const filters = useAppSelector((state) => state.selectedCarFilters);
+    const isAdvancedFiltersOpen = useAppSelector(
+      (state) => state.selectedCarFilters.isAdvancedFiltersOpen
     );
-    const dispatch = useAppDispatch();
 
-    const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
+    const onSubmit = useOnSubmit();
 
     return (
-      <Stack >
+      <Stack>
         <TextButton
-            _hover={{ textDecoration: 'underline' }}
-            pr="4"
-            alignSelf="flex-end"
-            onClick={() => {
-              dispatch(resetFilters());
-              dispatch(setCatalogQuery(''));
-            }}
-          >
-            reset all filters
-          </TextButton>
+          _hover={{ textDecoration: 'underline' }}
+          pr="4"
+          alignSelf="flex-end"
+          onClick={() => {
+            dispatch(resetFilters());
+            dispatch(setCatalogQuery(''));
+          }}
+        >
+          reset all filters
+        </TextButton>
         {/* mobile select opens drawer */}
         <MobileBrandSelect />
 
@@ -73,22 +76,29 @@ export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
               pr="2"
               placeholder="Price from"
               type="number"
+              value={priceFrom}
+              onChange={(e) => setPriceFrom(e.currentTarget.value)}
               onFocus={() => setKeyboardActive(true)}
-              onBlur={() => setKeyboardActive(false)}
+              onBlur={() => {
+                setKeyboardActive(false);
+                dispatch(selectPriseFrom(priceFrom));
+              }}
             />
             <DividerVertical height="30px" />
             <InputRegular
               placeholder="Price to"
               type="number"
+              value={priceTo}
+              onChange={(e) => setPriceTo(e.currentTarget.value)}
               onFocus={() => setKeyboardActive(true)}
-              onBlur={() => setKeyboardActive(false)}
+              onBlur={() => {
+                setKeyboardActive(false);
+                dispatch(selectPriseTo(priceTo));
+              }}
             />
           </HStack>
           {/* currency */}
-          <CurrencySwitcherButtons
-            currency={chosenCurrency}
-            setCurrency={setChosenCurrency}
-          />
+          <CurrencySwitcherButtons />
         </HStack>
 
         {/* colapsable selects */}

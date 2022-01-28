@@ -6,12 +6,11 @@ import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger
 import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
-import { CurrencyType } from 'src/constants';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectCurrency,
   selectPriseFrom,
-  selectPriseTo,
+  selectPriseTo
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { CurrencySwitcherButtons } from '../../CurrencySwitcherButtons';
 import { InputGrey } from '../../Inputs/InputGrey';
@@ -32,10 +31,6 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
   } = useAppSelector((state) => state.selectedCarFilters);
 
   const dispatch = useAppDispatch();
-
-  function handleCurrencyChange(val: CurrencyType) {
-    dispatch(selectCurrency(val));
-  }
 
   const detectIcon = () => {
     switch (currency) {
@@ -112,10 +107,7 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
         {/* Options  */}
         <SelectOptions isOpen={areOptionsOpen} w="full" top="35px">
           <VStack p="0px 16px 16px" align="flex-start">
-            <CurrencySwitcherButtons
-              currency={currency}
-              setCurrency={handleCurrencyChange}
-            />
+            <CurrencySwitcherButtons />
             <VStack>
               <InputGrey
                 placeholder="From"

@@ -46,7 +46,7 @@ export const CarInfoCard: React.FC<CarInfoCardProps> = ({ car }) => {
           </VStack>
 
           <VStack w="full" alignItems="flex-start" spacing="4px">
-            <TextRegular opacity="0.5">In Most demand cars</TextRegular>
+            <TextRegular opacity="0.5">Is Most demand</TextRegular>
             <HeadingSecondary>
               {car.mostDemand ? 'Yes' : <NotSpecified />}
             </HeadingSecondary>

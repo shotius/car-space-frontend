@@ -78,12 +78,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
       {({ isSubmitting }) => (
         <Form>
           <HeadingSecondary> Write you message here</HeadingSecondary>
-          {!isAuth && (
-            <>
-              <FormikInput name="name" placeholder="Name" />
-              <FormikInput name="phone" placeholder="Phone" type="number" />
-            </>
-          )}
+          <FormikInput name="name" placeholder="Name" />
+          <FormikInput name="phone" placeholder="Phone" type="number" />
           <Field name="message" vali>
             {({ field, form }) => (
               <>
