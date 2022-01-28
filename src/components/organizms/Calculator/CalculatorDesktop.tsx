@@ -7,14 +7,15 @@ import {
   TabsProps,
   VStack,
 } from '@chakra-ui/react';
-import { HeadingSecondary } from '../../molecules/Headings/HeadingSecondary';
-import { TabBlue } from '../../molecules/Tabs/TabBlue';
-import { TextRegular } from '../../molecules/Texts/TextRegular';
+import { createContext } from 'react';
+import { CurrencySwitcherButtons } from 'src/components/molecules/CurrencySwitcherButtons';
 import { ImportTaxCalculator } from '../../molecules/Calculator/ImportTaxCalculator';
 import { LeasingCalculator } from '../../molecules/Calculator/LeasingCalculator';
 import { LoanCalculator } from '../../molecules/Calculator/LoanCalculator';
 import { TransportCalculator } from '../../molecules/Calculator/TransportCalculator';
-import { createContext } from 'react';
+import { HeadingSecondary } from '../../molecules/Headings/HeadingSecondary';
+import { TabBlue } from '../../molecules/Tabs/TabBlue';
+import { TextRegular } from '../../molecules/Texts/TextRegular';
 
 interface CalculatorDesktopProps {
   size: 'regular' | 'large';
@@ -50,7 +51,7 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps & TabsProps> =
             borderRadius="8px"
           >
             <TabList
-              w={size === 'regular' ?"156px" : '226px'}
+              w={size === 'regular' ? '156px' : '226px'}
               bg="#F8F8F8"
               border="none"
               borderLeftRadius="8px"
@@ -59,7 +60,7 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps & TabsProps> =
                 <HeadingSecondary
                   p={
                     size === 'regular'
-                    ? "24px 0px 16px 16px"
+                      ? '24px 0px 16px 16px'
                       : '24px 0px 50px 16px'
                   }
                   w="full"
@@ -78,10 +79,15 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps & TabsProps> =
                 <TabBlue>
                   <TextRegular>Leasing</TextRegular>
                 </TabBlue>
+                <CurrencySwitcherButtons alignSelf={'flex-start'} />
               </VStack>
             </TabList>
             <TabPanels
-              p={size === 'regular' ? '8px 16px 24px 8px' : [null, '50px 20px', '70px']}
+              p={
+                size === 'regular'
+                  ? '8px 16px 24px 8px'
+                  : [null, '50px 20px', '70px']
+              }
               position="relative"
             >
               <TabPanel h="full">
