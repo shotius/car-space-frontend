@@ -15,8 +15,8 @@ export const ServiceCard: React.FC<ServiceCardProps & BoxProps> = ({
   ...rest
 }) => {
   return (
-  <Card p={["16px", null, "32px"]} {...rest}>
-      <HStack spacing="4">
+  <Card p={["4", "8"]} {...rest}>
+      <HStack spacing={["0", null, "4"]}>
         {/* desktop dispaly icon  */}
         <Icon
           as={Icon}

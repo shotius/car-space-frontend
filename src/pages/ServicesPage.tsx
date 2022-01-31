@@ -1,4 +1,4 @@
-import { Box, Flex, SimpleGrid, VStack } from '@chakra-ui/react';
+import { Box, Image, SimpleGrid } from '@chakra-ui/react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CarLeftSideIcon } from 'src/components/atoms/Icons/CarLeftSideIcon';
 import { FilesStackIcon } from 'src/components/atoms/Icons/FilesStackIcon';
@@ -85,6 +85,43 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
           />
         </SimpleGrid>
       </ContainerOuter>
+      {/* banner divider */}
+      <Box
+        position="relative"
+        bg="autoBlue.400"
+        mt={['80px', '100px', '120', '160px']}
+        px={['4', '8']}
+        py={['32px', null, '48px']}
+      >
+        <ContainerOuter>
+          <Box maxW={['full', null, '40%']}>
+            <TextRegular
+              fontSize={'22px'}
+              color="white"
+              pb="32px"
+              fontWeight={'bold'}
+              lineHeight={'29px'}
+            >
+              ადგილობრივი მიწოდება
+            </TextRegular>
+            <TextRegular color="white" lineHeight={'24px'} fontSize={'14px'}>
+              ჩვენ გთავაზობთ შიდა ტრანსპორტირების (საქართველოში) სერვისს, რაც
+              გულისხმობს იმპორტირებული ავტომობილის ტრანსპორტირებას საქართველოს
+              მასშტაბით ნებისმიერ ადგილას.
+            </TextRegular>
+          </Box>
+          <Image
+            position={'absolute'}
+            display={['none', null, 'block']}
+            maxW="55%"
+            h="100%"
+            right={0}
+            top={0}
+            clipPath={'polygon(20% 0, 100% 0%, 100% 100%, 0% 100%)'}
+            src="https://res.cloudinary.com/car-space-v1/image/upload/v1643631477/car-space/services/pexels-photo-97079_2x-min_yotvt0.png"
+          />
+        </ContainerOuter>
+      </Box>
     </>
   );
 };
