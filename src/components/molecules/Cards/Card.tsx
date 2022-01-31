@@ -6,9 +6,7 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps & BoxProps> = ({
-  // minW = ['140px', '166px'],
   minW, 
-  // minH = ['115px', '130px', null, '132px', '189px'],
   minH, 
   bg = 'white',
   p = '2.5',
