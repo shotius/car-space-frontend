@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { CarIcon } from 'src/components/atoms/Icons/CarIcon';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
 import { useAppDispatch } from 'src/redux/app/hook';
-import { openCatalogBanner } from 'src/redux/features/global/gloabalSlice';
+import { openCatalogBanner } from 'src/redux/features/banners/CatalogBannerSlice';
 import { Card } from './Card';
 
 interface MiniCategoryCardProps {

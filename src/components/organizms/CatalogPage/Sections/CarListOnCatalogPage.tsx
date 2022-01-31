@@ -10,8 +10,8 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { setFetchingCars } from 'src/redux/features/auth/carsSlice';
 import { getFavouriteCarIds } from 'src/redux/features/auth/userSlice';
+import { closeCatalogBanner } from 'src/redux/features/banners/CatalogBannerSlice';
 import {
-  closeCatalogBanner,
   setCatalogQuery,
 } from 'src/redux/features/global/gloabalSlice';
 import useOnSubmit from 'src/utils/hooks/useOnSubmit';

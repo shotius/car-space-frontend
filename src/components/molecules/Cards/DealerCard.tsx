@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { FALLBACK_IMG } from 'src/constants';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { setDealerId } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { openCatalogBanner, setCatalogBannerDealerImage, setCatalogBannerDealerName } from 'src/redux/features/banners/CatalogBannerSlice';
 import {
   ICarDealer,
   IUser,
@@ -33,6 +34,9 @@ export const DealerCard: React.FC<DealerCardProps> = ({ dealer }) => {
       cursor="pointer"
       onClick={() => {
         dispatch(setDealerId(dealer.id));
+        dispatch(setCatalogBannerDealerName(dealer.fullName))
+        dispatch(setCatalogBannerDealerImage(dealer.avatar))
+        dispatch(openCatalogBanner())
         history.push('/catalog');
       }}
     >

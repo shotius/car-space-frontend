@@ -14,7 +14,6 @@ const initialState: GlobalStateSliceState = {
   currency: 'USD',
   currencyPrice: 1,
 
-  isCatalogBannerOpen: false,
   isMobileMenuOpen: false,
   carDetailModalShown: false,
   isChangeProfilePictureOpen: false,
@@ -65,12 +64,6 @@ const globalStateSlice = createSlice({
     },
     setCurrencyPrice: (state, action: PayloadAction<number>) => {
       state.currencyPrice = action.payload;
-    },
-    openCatalogBanner: (state) => {
-      state.isCatalogBannerOpen = true;
-    },
-    closeCatalogBanner: (state) => {
-      state.isCatalogBannerOpen = false;
     },
     toggleMobileMenu: (state) => {
       state.isMobileMenuOpen = !state.isMobileMenuOpen;
@@ -141,8 +134,6 @@ export const {
   openRegisterModal,
 
   setAppLanguage,
-  openCatalogBanner,
-  closeCatalogBanner,
   closeCarDetailModal,
   toggleMobileMenu,
   openCarDetailModal,

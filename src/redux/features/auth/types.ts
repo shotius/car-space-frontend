@@ -123,7 +123,6 @@ export interface GlobalStateSliceState {
   currency: CurrencyType;
   currencyPrice: number;
 
-  isCatalogBannerOpen: boolean;
   isMobileMenuOpen: boolean;
   isChangeProfilePictureOpen: boolean;
   screen: ScreenSizes;

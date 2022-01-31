@@ -10,7 +10,7 @@ export const CloseIcon = createIcon({
         data-name="Rectangle 339"
         width="24"
         height="24"
-        fill="none"
+        fill="transparent"
       />
       <path
         id="Path_1582"

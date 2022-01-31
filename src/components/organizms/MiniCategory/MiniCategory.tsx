@@ -14,7 +14,7 @@ import {
   selectTypes,
   setMostDemand,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { openCatalogBanner } from 'src/redux/features/global/gloabalSlice';
+import { openCatalogBanner } from 'src/redux/features/banners/CatalogBannerSlice';
 import {
   setFourToSix_k,
   setFour_k,

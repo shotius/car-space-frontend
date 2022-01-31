@@ -10,6 +10,7 @@ import { customersReducer } from '../features/customer/customerSlice';
 import { orderedCarReducer } from '../features/orders/orderedCarSlice';
 import { miniCategoryReducer } from '../features/miniCategory/miniCategorySlice';
 import { bannerReducer } from '../features/banners/bannerSlice';
+import CatalogBannerSlice from '../features/banners/CatalogBannerSlice';
 
 const reducer = {
   authReducer,
@@ -21,8 +22,9 @@ const reducer = {
   userInfoSlice: UserInfo,
   customers: customersReducer,
   orderedCars: orderedCarReducer,
-  miniCategory: miniCategoryReducer, 
-  banners: bannerReducer
+  miniCategory: miniCategoryReducer,
+  banners: bannerReducer,
+  catalogBanner: CatalogBannerSlice,
 };
 
 export const store = configureStore({

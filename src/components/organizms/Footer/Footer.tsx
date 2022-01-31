@@ -85,8 +85,8 @@ export const Footer: React.FC<FooterProps> = () => {
             >
               <Text>ქ. თბილისი, შროშის ქ. N1</Text>
               <Text>Tel: 032 2 988 687</Text>
-              <Text>+995 555 48 45 86</Text>
-              <Text>info@carspace.ge</Text>
+              <Text>Mobile: +995 555 48 45 86</Text>
+              <Text>Email: info@carspace.ge</Text>
             </VStack>
           </Collapse>
         </VStack>
