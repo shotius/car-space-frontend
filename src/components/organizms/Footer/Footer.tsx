@@ -14,7 +14,7 @@ interface FooterProps {}
 export const Footer: React.FC<FooterProps> = () => {
   // when screen is larger then 768px open all the colapsable info
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
-  const history = useHistory()
+  const history = useHistory();
 
   // open close Service info
   const { isOpen: isServicesOpen, onToggle: onServicesToggle } = useDisclosure({
@@ -40,8 +40,8 @@ export const Footer: React.FC<FooterProps> = () => {
       >
         <Stack>
           <CarSpaceLogo
-          mb={["32px", null, '0px']}
-          imgW={['100px', null, '167px']}
+            mb={['32px', null, '0px']}
+            imgW={['100px', null, '167px']}
             onClick={() => {
               history.push('/home');
             }}
@@ -49,10 +49,7 @@ export const Footer: React.FC<FooterProps> = () => {
           <SocialLinks display={['none', 'none', 'flex']} />
         </Stack>
 
-        <VStack
-          spacing="0"
-          alignItems={['center', null, 'flex-start']}
-        >
+        <VStack spacing="0" alignItems={['center', null, 'flex-start']}>
           <Button
             fontWeight="bold"
             mb="4"
@@ -68,18 +65,15 @@ export const Footer: React.FC<FooterProps> = () => {
               spacing={0}
               mb="6"
             >
-              <Text>
-                <Link to="/services">Services</Link>
-              </Text>
-              <Text>info@example.com</Text>
+              <Text> <Link to="/services">ლიზინგი</Link></Text>
+              <Text> <Link to="/services">შიდა დაზღვევა</Link></Text>
+              <Text> <Link to="/services">მანქანის იმპორტი</Link></Text>
+              <Text> <Link to="/services">მანქანის შერჩევა</Link></Text>
             </VStack>
           </Collapse>
         </VStack>
 
-        <VStack
-          spacing={0}
-          alignItems={['center', null, 'flex-start']}
-        >
+        <VStack spacing={0} alignItems={['center', null, 'flex-start']}>
           <Button variant="link" color="#000" onClick={onContactToggle} mb="4">
             Contact
           </Button>
@@ -89,17 +83,15 @@ export const Footer: React.FC<FooterProps> = () => {
               spacing={0}
               mb="6"
             >
-              <Text>Address</Text>
-              <Text>+995 12123123</Text>
-              <Text>info@example.com</Text>
+              <Text>ქ. თბილისი, შროშის ქ. N1</Text>
+              <Text>Tel: 032 2 988 687</Text>
+              <Text>+995 555 48 45 86</Text>
+              <Text>info@carspace.ge</Text>
             </VStack>
           </Collapse>
         </VStack>
 
-        <VStack
-          spacing="0"
-          alignItems={['center', null, 'flex-start']}
-        >
+        <VStack spacing="0" alignItems={['center', null, 'flex-start']}>
           <Button variant="link" color="#000" onClick={onLegalToggle} mb="4">
             Legal
           </Button>
@@ -110,10 +102,12 @@ export const Footer: React.FC<FooterProps> = () => {
               mb="6"
             >
               <Text>
-                <Link to="/privacy">Privacy Policy</Link>
+                Privacy Policy
+                {/* <Link to="/">Privacy Policy</Link> */}
               </Text>
               <Text>
-                <Link to="/terms">Terms & conditions</Link>
+                Terms & conditions
+                {/* <Link to="/">Terms & conditions</Link> */}
               </Text>
             </VStack>
           </Collapse>

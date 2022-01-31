@@ -1,10 +1,19 @@
-import { Box, Image, SimpleGrid } from '@chakra-ui/react';
+import {
+  AspectRatio,
+  Box,
+  Image,
+  SimpleGrid,
+  Stack,
+  VStack,
+} from '@chakra-ui/react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { CarLeftSideIcon } from 'src/components/atoms/Icons/CarLeftSideIcon';
 import { FilesStackIcon } from 'src/components/atoms/Icons/FilesStackIcon';
 import { FolersQueueIcon } from 'src/components/atoms/Icons/FoldersQueueIcon';
 import { ShipIcon } from 'src/components/atoms/Icons/ShipIcon';
+import { Card } from 'src/components/molecules/Cards/Card';
 import { ServiceCard } from 'src/components/molecules/Cards/ServiceCard';
+import { ScrollToTop } from 'src/components/molecules/ScrollToTop';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 
 interface ServicesPageProps {}
@@ -12,6 +21,7 @@ interface ServicesPageProps {}
 export const ServicesPage: React.FC<ServicesPageProps> = () => {
   return (
     <>
+      <ScrollToTop />
       <Box
         w="full"
         h={['164px', '200px', '300px']}
@@ -85,16 +95,17 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
           />
         </SimpleGrid>
       </ContainerOuter>
+
       {/* banner divider */}
       <Box
         position="relative"
         bg="autoBlue.400"
         mt={['80px', '100px', '120', '160px']}
-        px={['4', '8']}
+        px={['4']}
         py={['32px', null, '48px']}
       >
         <ContainerOuter>
-          <Box maxW={['full', null, '40%']}>
+          <Box maxW={['full', null, '40%']} pl={['0', '4', '8']}>
             <TextRegular
               fontSize={'22px'}
               color="white"
@@ -113,7 +124,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
           <Image
             position={'absolute'}
             display={['none', null, 'block']}
-            maxW="55%"
+            w="55%"
             h="100%"
             right={0}
             top={0}
@@ -122,6 +133,103 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
           />
         </ContainerOuter>
       </Box>
+
+      {/* Services  */}
+      <ContainerOuter p={['0', null, '4']}>
+        <VStack
+          mt={['80px', null, '120px', '160px']}
+          w="full"
+          bg={['transparent', null, null, 'white']}
+          borderRadius={'8'}
+          px={[null, null, '48px', '90px']}
+          py={[null, null, '63px']}
+        >
+          <Card w="full" bg="transparent" p="4">
+            <Stack
+              w="full"
+              align="flex-start"
+              spacing={['24px', null, '63px', '120px']}
+              direction={['column', null, 'row']}
+            >
+              <AspectRatio
+                ratio={[7 / 3, null, 448 / 314]}
+                minW={['full', null, '328px', '418px']}
+              >
+                <Image
+                  borderRadius={'8px'}
+                  src="https://res.cloudinary.com/car-space-v1/image/upload/v1643566568/car-space/services/photo-1518306727298-4c17e1bf6942_3x-min_gpqdb0.png"
+                  // src="https://res.cloudinary.com/car-space-v1/image/upload/v1643566568/car-space/services/photo-1518306727298-4c17e1bf6942_2x-min_oblo5g.png"
+                  // src={
+                  //   'https://res.cloudinary.com/car-space-v1/image/upload/v1643566567/car-space/services/photo-1518306727298-4c17e1bf6942-min_kz67bp.png'
+                  // }
+                />
+              </AspectRatio>
+              <VStack
+                alignSelf="stretch"
+                justify="center"
+                align="flex-start"
+                spacing={'28px'}
+              >
+                <TextRegular
+                  fontSize={'18px'}
+                  color="#3D405B"
+                  lineHeight={'24px'}
+                  fontWeight={'bold'}
+                >
+                  ვიზუალური დაზღვევა
+                </TextRegular>
+                <TextRegular fontSize={'14px'}>
+                  ჩვენ ვაზღვევთ ყველა ისეთ ვიზუალურ დეფექტს, რომელიც ავტომობილის
+                  შეძენისას ჩანდა, რომ არ არსებობდა და ტრანსპორტირებისას
+                  დაემატა. ანაზღაურება ხდება ნებისმიერი მოცულობს თანხაზე
+                  $100-დან.
+                </TextRegular>
+              </VStack>
+            </Stack>
+          </Card>
+
+          <Card w="full" bg="transparent" p="4">
+            <Stack
+              w="full"
+              align="flex-start"
+              spacing={['24px', null, '63px', '120px']}
+              direction={['column', null, 'row-reverse']}
+              pt={['32px', null, '48px']}
+            >
+              <AspectRatio
+                ratio={[7 / 3, null, 448 / 314]}
+                minW={['full', null, '328px', '418px']}
+              >
+                <Image
+                  borderRadius={'8px'}
+                  src="https://res.cloudinary.com/car-space-v1/image/upload/v1643566607/car-space/services/photo-1606750957664-896c163bed2d_3x-min_gzyqos.png"
+                />
+              </AspectRatio>
+              <VStack
+                alignSelf="stretch"
+                justify="center"
+                align="flex-start"
+                spacing={'28px'}
+              >
+                <TextRegular
+                  fontSize={'18px'}
+                  color="#3D405B"
+                  lineHeight={'24px'}
+                  fontWeight={'bold'}
+                >
+                  შიდა ნაწილების დაზღვევა
+                </TextRegular>
+                <TextRegular fontSize={'14px'}>
+                  ჩვენ ვაზღვევთ ნებისმიერ დეფექტს ძრავზე, კატალიზატორზე,
+                  გადაცრემათა კოლოფსა და ხიდზე, რაც არ იყო ცნობილი მანქანის
+                  შეძენისას. ანაზღაურება ხდება ნებისმიერი მოცულობს თანხაზე
+                  $100-დან.
+                </TextRegular>
+              </VStack>
+            </Stack>
+          </Card>
+        </VStack>
+      </ContainerOuter>
     </>
   );
 };
