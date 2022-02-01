@@ -45,7 +45,7 @@ export const CalculatorFooter: React.FC<CalculatroFooterProps & StackProps> = ({
               color="autoOrange.500"
               fontSize={size === 'regular' ? '20px' : '20px'}
             >
-              {icon} {total.toFixed(3)}
+            {total.toFixed(3)}
             </HeadingSecondary>
           </HStack>
         </HStack>

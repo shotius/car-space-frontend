@@ -84,6 +84,7 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps & TabsProps> =
                   alignSelf={'flex-start'}
                   maxH={'40px'}
                   mt="-10px"
+                  bg="transparent"
                 />
               </VStack>
             </TabList>

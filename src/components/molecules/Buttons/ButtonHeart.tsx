@@ -6,7 +6,10 @@ import { HeartFilled } from 'src/components/atoms/Icons/HeartFilledIcon';
 import { HeartIcon } from 'src/components/atoms/Icons/HeatIcon';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { likeCarThunk } from 'src/redux/features/auth/userSlice';
-import { openLoginModal, toggleAuthModal } from 'src/redux/features/global/gloabalSlice';
+import {
+  openLoginModal,
+  toggleAuthModal,
+} from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ButtonWithIcon } from './IconWithButton';
 
@@ -24,9 +27,8 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
 }) => {
   const [liked, setLiked] = useState(false);
   const dispatch = useAppDispatch();
-  const { fullName, favouriteCarIds, likingCar } = useAppSelector(
-    (state) => state.userInfoSlice
-  );
+  const { favouriteCarIds, likingCar, isAuthenticated } =
+    useAppSelector((state) => state.userInfoSlice);
   const { isDesktop } = useDetectScreen();
   const toast = useToast();
 
@@ -43,24 +45,28 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
       icon={liked ? HeartFilled : HeartIcon}
       boxSize={boxSize}
       bg={liked ? '#FB560729' : buttonInactiveColor}
-      disabled={likingCar}
       onClick={(event) => {
         if (event.stopPropagation) event.stopPropagation();
-        if (fullName) {
-          dispatch(likeCarThunk(carId))
-            .unwrap()
-            .catch((error) =>
-              toast({
-                title: error,
-                position: 'top',
-                duration: 2000,
-                status: 'error',
-              })
-            );
+        setLiked(!liked);
+        // if not authenticated, modal will open
+        if (isAuthenticated) {
+          // if like a car request is not on the way like a car
+          if (!likingCar) {
+            dispatch(likeCarThunk(carId))
+              .unwrap()
+              .then(() => setLiked(true))
+              .catch((error) => {
+                setLiked(false);
+                toast({
+                  title: error,
+                  position: 'top',
+                  duration: 2000,
+                  status: 'error',
+                });
+              });
+          }
         } else {
-          isDesktop
-            ? dispatch(openLoginModal())
-            : dispatch(toggleAuthModal());
+          isDesktop ? dispatch(openLoginModal()) : dispatch(toggleAuthModal());
         }
       }}
       _hover={{

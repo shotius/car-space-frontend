@@ -16,7 +16,8 @@ export const ScrollableDiv: React.FC<ScrollableDivProps & SimpleGridProps> = ({
 }) => {
   return (
     <SimpleGrid
-      overflow="auto"
+      overflowX="auto"
+      overflowY={'hidden'}
       p={p}
       gap={spacing}
       gridTemplateColumns={[

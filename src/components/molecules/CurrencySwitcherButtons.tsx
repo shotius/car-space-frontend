@@ -11,7 +11,7 @@ interface CurencySwitcherButtonsProps {}
 
 export const CurrencySwitcherButtons: React.FC<
   CurencySwitcherButtonsProps & StackProps
-> = ({ ...rest }) => {
+> = ({ bg = 'white', ...rest }) => {
   const currency = useAppSelector((state) => state.globalAppState.currency);
   const dispatch = useAppDispatch();
 
@@ -22,7 +22,7 @@ export const CurrencySwitcherButtons: React.FC<
   return (
     <HStack
       borderRadius="8px"
-      bg="transparent"
+      bg={bg}
       spacing="2px"
       flexBasis="30%"
       justify="space-between"

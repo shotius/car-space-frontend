@@ -25,7 +25,6 @@ import { MobileEngineSelect } from './mobile/MobileEngineSelect';
 import { MobileFuelsSelect } from './mobile/MobileFuelsSelect';
 import { MobileLocationSelect } from './mobile/MobileLocationSelect';
 import { MobileModelSelect } from './mobile/MobileModelSelect';
-import { MobileSalesStatusSelect } from './mobile/MobileSalesStatusSelect';
 import { MobileTransmissionSelect } from './mobile/MobileTransmissionSelect';
 import { MobileTypesSelect } from './mobile/MobileTypesSelect';
 import { MobileYearInput } from './mobile/MobileYearInput';
@@ -124,9 +123,6 @@ export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
 
             {/* drive */}
             <MobileDriveSelect />
-
-            {/* Sales Status */}
-            <MobileSalesStatusSelect />
 
             {/* Fuels */}
             <MobileFuelsSelect />
