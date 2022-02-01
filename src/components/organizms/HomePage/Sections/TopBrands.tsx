@@ -12,18 +12,13 @@ import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHea
 import { ScrollableDiv } from 'src/components/molecules/Wrappers/ScrollableDiv';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { selectBrand } from 'src/redux/features/auth/selectedCarFilterSlice';
-import useWindowSize from 'src/utils/hooks/useWindowSize';
 import { TopBrandCard } from '../../../molecules/Cards/TopBrandCard';
 
 interface TopBrandsProps {}
 
 export const TopBrands: React.FC<TopBrandsProps> = () => {
   const history = useHistory();
-
-  const windowSize = useWindowSize();
   const dispatch = useAppDispatch();
-
-  let wW = windowSize?.width || 200;
 
   const redirect = () => history.push('/catalog');
 
@@ -40,31 +35,22 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
           w="full"
         >
           <TopBrandCard
-            className="hoverable"
             onClick={() => {
               dispatch(selectBrand(['BMW']));
               redirect();
             }}
             icon={BmwIcon}
-            w={wW ? wW / 4.1 : '88px'}
-            h={wW ? wW / 4.9 : '88px'}
           />
-           <TopBrandCard
-            className="hoverable"
+          <TopBrandCard
             icon={MercedesIcon}
             onClick={() => {
               dispatch(selectBrand(['MERCEDES']));
               redirect();
             }}
-            w={wW ? wW / 4.1 : '88px'}
-            h={wW ? wW / 4.9 : '88px'}
           />
           <TopBrandCard
-            className="hoverable"
             icon={ToyotaIcon}
             mr="1px"
-            w={wW ? wW / 4.1 : '88px'}
-            h={wW ? wW / 4.9 : '88px'}
             onClick={() => {
               dispatch(selectBrand(['TOYOTA']));
               redirect();
@@ -72,44 +58,33 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
           />
           <TopBrandCard
             boxSize={[36, null, 48]}
-            className="hoverable"
             icon={ShevroletIcon}
-            w={wW ? wW / 4.1 : '88px'}
-            h={wW ? wW / 4.9 : '88px'}
             onClick={() => {
               dispatch(selectBrand(['SHEVROLET']));
               redirect();
             }}
           />
           <TopBrandCard
-            className="hoverable"
             icon={HiundayIcon}
             mr="1px"
-            w={wW ? wW / 4.1 : '88px'}
-            h={wW ? wW / 4.9 : '88px'}
             onClick={() => {
               dispatch(selectBrand(['HYUNDAI']));
               redirect();
             }}
-          />{/**/}
+          />
+          {/**/}
           <TopBrandCard
-            className="hoverable"
             icon={FordIcon}
             boxSize={[14, null, null, 20]}
             mr="1px"
-            w={wW ? wW / 4.1 : '88px'}
-            h={wW ? wW / 4.9 : '88px'}
             onClick={() => {
               dispatch(selectBrand(['FORD']));
               redirect();
             }}
-          /> 
+          />
           <TopBrandCard
-            className="hoverable"
             icon={LexusIcon}
             boxSize={[16, null, 20, null, 24]}
-            w={wW ? wW / 4.1 : '88px'}
-            h={wW ? wW / 4.9 : '88px'}
             onClick={() => {
               dispatch(selectBrand(['LEXUS']));
               redirect();

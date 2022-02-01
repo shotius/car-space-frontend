@@ -14,6 +14,7 @@ import { useAppSelector } from 'src/redux/app/hook';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
+import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { ICarDealer } from '../../../../../server/shared_with_front/types/types-shared';
 import { CarImageCarousel } from '../Carousels/CarImageCarousel/CarImageCarousel';
 import { CarCardHeading } from '../Headings/CarCardHeading';
@@ -26,10 +27,11 @@ export const DealerCarCard: React.FC<Props> = ({ car }) => {
   const history = useHistory();
   const icon = useCurrencyIcon();
   const price = useAppSelector((state) => state.globalAppState.currencyPrice);
+  const { isDesktop } = useDetectScreen();
 
   return (
     <Box
-      className="hoverable"
+      className={`${isDesktop && 'hoverable'} `}
       w={['full', null, null, null]}
       bg="white"
       borderRadius="8px"

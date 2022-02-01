@@ -1,5 +1,7 @@
 import Icon, { IconProps } from '@chakra-ui/icon';
 import { BoxProps, Center } from '@chakra-ui/layout';
+import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
+import useWindowSize from 'src/utils/hooks/useWindowSize';
 import { Card } from './Card';
 
 interface TopBrandCardProps {
@@ -11,8 +13,6 @@ interface TopBrandCardProps {
 
 export const TopBrandCard: React.FC<TopBrandCardProps & BoxProps> = ({
   icon,
-  w = ['88px', '115px', '125px', '143px'],
-  h = ['80px', '110px', '125px', '132px'],
   maxW = ['120px', '130px', '140px', '143px'],
   maxH = ['90px', '120px', '135px', '132px'],
   imageWidth = ['41px', null, null, '56px'],
@@ -21,16 +21,19 @@ export const TopBrandCard: React.FC<TopBrandCardProps & BoxProps> = ({
   className,
   ...rest
 }) => {
+  const { isDesktop } = useDetectScreen();
+  const windowSize = useWindowSize();
+  let wW = windowSize?.width || 200;
   return (
     <Card
       bg={cardColor}
-      h={h}
-      w={w}
       {...rest}
-      className={className}
       cursor="pointer"
       maxW={maxW}
       maxH={maxH}
+      className={`${isDesktop && 'hoverable'} ${className}`}
+      w={wW ? wW / 4.1 : '88px'}
+      h={wW ? wW / 4.9 : '88px'}
     >
       <Center h="full" w="full">
         <Icon as={icon} boxSize={boxSize} />
