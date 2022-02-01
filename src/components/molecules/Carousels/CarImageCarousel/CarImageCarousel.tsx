@@ -52,7 +52,11 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
     >
       <Swiper
         className={
-          buttonsVisible ? style.CarImagesSwiperHover : style.CarImagesSwiper
+          !isLaptopScreen
+            ? style.CarImagesSwiperHover
+            : buttonsVisible
+            ? style.CarImagesSwiperHover
+            : style.CarImagesSwiper
         }
         slidesPerView={1}
         spaceBetween={0}
