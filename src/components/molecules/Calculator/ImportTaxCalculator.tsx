@@ -1,4 +1,4 @@
-import { HStack, RadioGroup, VStack } from '@chakra-ui/react';
+import { Flex, HStack, RadioGroup, VStack } from '@chakra-ui/react';
 import { InputGrey } from '../Inputs/InputGrey';
 import { TextRegular } from '../Texts/TextRegular';
 import { CalculatorFooter } from './CalculatorFooter';
@@ -10,7 +10,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
   return (
     <VStack w="full" h="full" spacing="25px">
       <RadioGroup w="full">
-        <HStack w="full" spacing="38px">
+        <Flex w="full" spacing="38px" gridGap={'4'}>
           <HStack>
             <input type="radio" name="car_type" value="hybrid" />
             <TextRegular opacity="0.4">Electric</TextRegular>
@@ -23,7 +23,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
             <input type="radio" name="car_type" value="electric" />
             <TextRegular opacity="0.4">Hybrid</TextRegular>
           </HStack>
-        </HStack>
+        </Flex>
       </RadioGroup>
       <VStack w="full">
         <InputGrey placeholder="Year" type="number" />

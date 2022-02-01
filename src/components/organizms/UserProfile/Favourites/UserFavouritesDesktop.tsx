@@ -22,9 +22,9 @@ export const UserFavouritesDesktop: React.FC<UserFavouritesDesktopProps> =
               <Spinner />
             </Center>
           ) : !favouriteCars.length ? (
-            <HeadingSecondary>
-              Your Favourites list is empty
-            </HeadingSecondary>
+            <Center w="full" h="300px">
+              <HeadingSecondary>Your Favourites list is empty</HeadingSecondary>
+            </Center>
           ) : (
             favouriteCars.map((car) => (
               <UserFavouritesCardDesktop key={car.id} car={car} />

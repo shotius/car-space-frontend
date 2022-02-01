@@ -6,8 +6,8 @@ import { Collapse } from '@chakra-ui/transition';
 import { Link, useHistory } from 'react-router-dom';
 import { CarSpaceLogo } from 'src/components/atoms/CarSpaceLogo';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
-import { Text } from 'src/components/atoms/Text';
 import { SocialLinks } from 'src/components/molecules/Links/SocialLinks';
+import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 
 interface FooterProps {}
 
@@ -65,10 +65,22 @@ export const Footer: React.FC<FooterProps> = () => {
               spacing={0}
               mb="6"
             >
-              <Text> <Link to="/services">ლიზინგი</Link></Text>
-              <Text> <Link to="/services">შიდა დაზღვევა</Link></Text>
-              <Text> <Link to="/services">მანქანის იმპორტი</Link></Text>
-              <Text> <Link to="/services">მანქანის შერჩევა</Link></Text>
+              <TextRegular fontSize={'14px'}>
+                {' '}
+                <Link to="/services">ლიზინგი</Link>
+              </TextRegular>
+              <TextRegular fontSize={'14px'}>
+                {' '}
+                <Link to="/services">შიდა დაზღვევა</Link>
+              </TextRegular>
+              <TextRegular fontSize={'14px'}>
+                {' '}
+                <Link to="/services">მანქანის იმპორტი</Link>
+              </TextRegular>
+              <TextRegular fontSize={'14px'}>
+                {' '}
+                <Link to="/services">მანქანის შერჩევა</Link>
+              </TextRegular>
             </VStack>
           </Collapse>
         </VStack>
@@ -83,10 +95,16 @@ export const Footer: React.FC<FooterProps> = () => {
               spacing={0}
               mb="6"
             >
-              <Text>ქ. თბილისი, შროშის ქ. N1</Text>
-              <Text>Tel: 032 2 988 687</Text>
-              <Text>Mobile: +995 555 48 45 86</Text>
-              <Text>Email: info@carspace.ge</Text>
+              <TextRegular fontSize={'14px'}>
+                ქ. თბილისი, შროშის ქ. N1
+              </TextRegular>
+              <TextRegular fontSize={'14px'}>Tel: 032 2 988 687</TextRegular>
+              <TextRegular fontSize={'14px'}>
+                Mobile: +995 555 48 45 86
+              </TextRegular>
+              <TextRegular fontSize={'14px'}>
+                Email: info@carspace.ge
+              </TextRegular>
             </VStack>
           </Collapse>
         </VStack>
@@ -101,14 +119,14 @@ export const Footer: React.FC<FooterProps> = () => {
               spacing={0}
               mb="6"
             >
-              <Text>
+              <TextRegular fontSize={'14px'}>
                 Privacy Policy
                 {/* <Link to="/">Privacy Policy</Link> */}
-              </Text>
-              <Text>
+              </TextRegular>
+              <TextRegular fontSize={'14px'}>
                 Terms & conditions
                 {/* <Link to="/">Terms & conditions</Link> */}
-              </Text>
+              </TextRegular>
             </VStack>
           </Collapse>
           <SocialLinks display={['flex', 'flex', 'none']} />

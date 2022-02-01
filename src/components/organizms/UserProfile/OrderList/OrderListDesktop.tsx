@@ -156,7 +156,7 @@ export const OrderListDesktop: React.FC<OrderListDesktopProps> = ({
           </Tbody>
         </Table>
       ) : (
-        <Center>
+        <Center w="full" h="full">
           <HeadingSecondary>Your order list is empty</HeadingSecondary>
         </Center>
       )}

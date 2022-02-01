@@ -1,6 +1,8 @@
 import {
   AspectRatio,
   Box,
+  Center,
+  Heading,
   Image,
   SimpleGrid,
   Stack,
@@ -22,44 +24,43 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
   return (
     <>
       <ScrollToTop />
-      <Box
-        w="full"
-        h={['164px', '200px', '300px']}
-        backgroundRepeat={'no-repeat'}
-        objectFit={'cover'}
-        bgPos={'center'}
-        position="relative"
-        backgroundImage={[
-          'https://res.cloudinary.com/car-space-v1/image/upload/v1643566591/car-space/services/photo-1554415707-6e8cfc93fe23-min_xdd4vs.png',
-          'https://res.cloudinary.com/car-space-v1/image/upload/v1643566592/car-space/services/photo-1554415707-6e8cfc93fe23_2x-min_hlwoyy.png',
-          'https://res.cloudinary.com/car-space-v1/image/upload/v1643566592/car-space/services/photo-1554415707-6e8cfc93fe23_3x-min_sit0rx.png',
-        ]}
-      >
-        {/* Overlay  */}
+      <ContainerOuter p={["0",null, null, "4"]} pt={[null, null, null, '42px']}>
         <Box
-          bg="rgba(0, 0, 0, 0.25)"
-          position="absolute"
-          top="0"
-          right="0"
-          bottom="0"
-          left="0"
-        />
-        {/* Text  */}
-        <TextRegular
-          position="absolute"
-          top="50%"
-          left="50%"
-          fontSize={['36px', null, '40px', '50px']}
-          color="white"
-          fontWeight={'bold'}
-          wordBreak={'unset'}
-          transform="translateX(-50%) translateY(-50%)"
+          p="0"
+          position={'relative'}
           w="full"
-          textAlign={'center'}
+          h={['300px', null, null, '289px']}
+          bgPos="center"
+          objectFit="cover"
+          borderRadius={{ lg: '8' }}
+          backgroundRepeat={'no-repeat'}
+          zIndex={0}
+          backgroundImage={[
+            'https://res.cloudinary.com/car-space-v1/image/upload/v1643566592/car-space/services/photo-1554415707-6e8cfc93fe23_2x-min_hlwoyy.png',
+            'https://res.cloudinary.com/car-space-v1/image/upload/v1643566592/car-space/services/photo-1554415707-6e8cfc93fe23_3x-min_sit0rx.png',
+          ]}
         >
-          ჩვენი სერვისები
-        </TextRegular>
-      </Box>
+          <Box
+            position="absolute"
+            background="rgba(0, 0, 0, 0.3)"
+            top="0"
+            right={0}
+            zIndex={-1}
+            bottom="0"
+            left="0"
+            borderRadius={{ lg: '8' }}
+          />
+          <Center h="full" zIndex={100}>
+            <Heading
+              color="white"
+              fontSize={['36px', null, '40px', '50px']}
+              isTruncated
+            >
+              ჩვენი სერვისები
+            </Heading>
+          </Center>
+        </Box>
+      </ContainerOuter>
       <ContainerOuter>
         <SimpleGrid columns={[1, null, 2]} spacing="4" mt="32px">
           {/* Installment  */}

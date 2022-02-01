@@ -6,7 +6,7 @@ import {
   useToast,
   VStack,
 } from '@chakra-ui/react';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ArrowPrevIcon } from 'src/components/atoms/Icons/Arrows/ArrowPrevIcon';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { ProfilePictureCrop } from 'src/components/molecules/Croppers/ProfilePictureCrop';
@@ -14,7 +14,7 @@ import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecon
 import FileUpload from 'src/components/molecules/Inputs/FIleUpload';
 import { SliderWithConstrols } from 'src/components/molecules/Sliders/SliderWithConstrols';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { useAppDispatch } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setUserAvatarThunk } from 'src/redux/features/auth/userSlice';
 import { toggleProfilePictureChangeModal } from 'src/redux/features/global/gloabalSlice';
 import getCroppedImg from 'src/utils/functions/getCroppedImg';
@@ -31,6 +31,8 @@ export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
     const [isEditing, setIsEditing] = useState(false);
     const [croppedImage, setCroppedImage] = useState<Blob | null>(null);
     const [buttonIsLoading, setButtonIsLoading] = useState(false);
+
+    const avatar = useAppSelector((state) => state.userInfoSlice.avatar);
 
     const toast = useToast();
 
@@ -61,6 +63,14 @@ export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
       setCroppedImage(croppedImageBlob);
     };
 
+    // set avatar image if in cropp area
+    useEffect(() => {
+      if (avatar) {
+        setImageUrl(avatar);
+        setIsEditing(true);
+      }
+    }, []);
+
     const onSubmit = async () => {
       const formdata = new FormData();
       if (croppedImage) {
@@ -73,7 +83,7 @@ export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
             onClose();
           })
           .catch((error) => {
-            console.log('error: ', error)
+            console.log('error: ', error);
             setButtonIsLoading(false);
             showErrorNotification({
               toast,
@@ -119,14 +129,13 @@ export const ChangeProfilePicContent: React.FC<ChangeProfilePicContentProps> =
               />
             </Box>
           </Center>
-          {!isEditing ? (
-            <FileUpload
-              setFilePath={setImageUrl}
-              setFile={setFile}
-              acceptedFileTypes="image/*"
-              setIsEditing={setIsEditing}
-            />
-          ) : (
+          <FileUpload
+            setFilePath={setImageUrl}
+            setFile={setFile}
+            acceptedFileTypes="image/*"
+            setIsEditing={setIsEditing}
+          />
+          {isEditing && (
             <>
               <TextRegular fontSize="16px">Scale and Crop</TextRegular>
               <SliderWithConstrols

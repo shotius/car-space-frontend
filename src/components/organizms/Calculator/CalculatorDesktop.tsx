@@ -79,7 +79,12 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps & TabsProps> =
                 <TabBlue>
                   <TextRegular>Leasing</TextRegular>
                 </TabBlue>
-                <CurrencySwitcherButtons alignSelf={'flex-start'} />
+                {/* Calculator  */}
+                <CurrencySwitcherButtons
+                  alignSelf={'flex-start'}
+                  maxH={'40px'}
+                  mt="-10px"
+                />
               </VStack>
             </TabList>
             <TabPanels

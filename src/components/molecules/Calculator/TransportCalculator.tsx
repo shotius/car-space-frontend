@@ -56,7 +56,7 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
         )?.state
       : '';
 
-  // calculate price 
+  // calculate price
   const price =
     selectedCity && selectedAuction
       ? auctionDictionary.find(
@@ -108,12 +108,21 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
         </HStack>
         <HStack w="full" justifyContent="space-between">
           <TextRegular>Total</TextRegular>
-          <HeadingSecondary
-            color="autoOrange.500"
-            fontSize={size === 'regular' ? '16px' : '20px'}
-          >
-            {icon} {price ? (price * currPrice).toFixed(4) : 0}
-          </HeadingSecondary>
+          <HStack>
+            <HeadingSecondary
+              color="autoOrange.500"
+              fontSize={size === 'regular' ? '16px' : '20px'}
+              fontWeight={icon === '₾' ? '600' : '400'}
+            >
+              {icon}
+            </HeadingSecondary>
+            <HeadingSecondary
+              color="autoOrange.500"
+              fontSize={size === 'regular' ? '16px' : '20px'}
+            >
+              {price ? (price * currPrice).toFixed(4) : 0}
+            </HeadingSecondary>
+          </HStack>
         </HStack>
       </CalculatorFooter>
     </VStack>
