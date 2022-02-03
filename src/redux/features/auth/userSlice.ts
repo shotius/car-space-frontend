@@ -84,7 +84,6 @@ export const getAllFavouriteCarsThunk = createAsyncThunk<
  * @returns : url of avatar or undefined, or in case of error error message
  */
 export const setUserAvatarThunk = createAsyncThunk<
-  // CloudinaryResponse,
   string | undefined,
   FormData,
   { rejectValue: string | null }

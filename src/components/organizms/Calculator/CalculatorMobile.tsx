@@ -1,4 +1,4 @@
-import { VStack } from '@chakra-ui/layout';
+import { Flex, HStack, VStack } from '@chakra-ui/layout';
 import { useState } from 'react';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { ImportTaxCalculator } from 'src/components/molecules/Calculator/ImportTaxCalculator';
@@ -6,6 +6,7 @@ import { LeasingCalculator } from 'src/components/molecules/Calculator/LeasingCa
 import { LoanCalculator } from 'src/components/molecules/Calculator/LoanCalculator';
 import { TransportCalculator } from 'src/components/molecules/Calculator/TransportCalculator';
 import { Card } from 'src/components/molecules/Cards/Card';
+import { CurrencySwitcherButtons } from 'src/components/molecules/CurrencySwitcherButtons';
 import { SingleSelect } from 'src/components/molecules/Selects/SingleSelect';
 import './styles.css';
 
@@ -38,17 +39,22 @@ export const CalculatorMobile: React.FC<CalculatorMobileProps> = ({}) => {
 
   return (
     <Card w="full" h="321px" position="relative" p="16px 32px">
-      <SingleSelect selected={calcType} w="130px" mb="4">
-        <VStack m="auto" align="flex-start" spacing="4" p="3">
-          {options
-            .filter((opt) => opt !== calcType)
-            .map((opt) => (
-              <TextButton key={opt} onClick={() => setCalcType(opt)}>
-                {opt}
-              </TextButton>
-            ))}
-        </VStack>
-      </SingleSelect>
+      <HStack w="full" alignItems={"center"} mb="4" justify="space-between">
+        <Flex w="100px">
+          <SingleSelect selected={calcType} w="130px">
+            <VStack m="auto" align="flex-start" spacing="4" p="3">
+              {options
+                .filter((opt) => opt !== calcType)
+                .map((opt) => (
+                  <TextButton key={opt} onClick={() => setCalcType(opt)}>
+                    {opt}
+                  </TextButton>
+                ))}
+            </VStack>
+          </SingleSelect>
+        </Flex>
+          <CurrencySwitcherButtons p="0" />
+      </HStack>
       {CalcType()}
     </Card>
   );
