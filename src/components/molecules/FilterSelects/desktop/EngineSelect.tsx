@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectEngineFrom,
-  selectEnginTo
+  selectEnginTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { TextButton } from '../../Buttons/TextButton';
 import { CustomOverlay } from '../../overlays/CustomOverlay';
@@ -41,9 +41,13 @@ export const EngineSelect: React.FC<EngineSelectProps & StackProps> = ({
   useEffect(() => {
     if (initEngineFrom) {
       setEngineFrom(Number(initEngineFrom));
+    } else {
+      setEngineFrom(0);
     }
     if (initEngineTo) {
       setEngineTo(Number(initEngineTo));
+    } else {
+      setEngineTo(0);
     }
   }, [initEngineFrom, initEngineTo]);
 
@@ -141,9 +145,7 @@ export const EngineSelect: React.FC<EngineSelectProps & StackProps> = ({
               </VStack>
             </VStack>
             <VStack h="full" w="full" spacing="4">
-              <TextRegular fontSize="16px">
-                To
-              </TextRegular>
+              <TextRegular fontSize="16px">To</TextRegular>
               <VStack
                 h="full"
                 w="full"

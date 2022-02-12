@@ -82,20 +82,24 @@ export const CarDetailPageDealer: React.FC<CardDetailPageProps> = () => {
           <CarImageSliderModal />
         </>
       ) : (
-        // Mobile version 
+        // Mobile version
         <CarDetailPageMobile car={car} />
       )}
 
-      {/* similar vehicles*/}
-      <ContainerOuter mt="65px">
-        <SectionHeader mainText="Similar vehicles" />
-      </ContainerOuter>
-      <ContainerOuter
-        mt={[null, null, null, '-20px']}
-        p={['0', null, null, '4']}
-      >
-        <CarListCarousel cars={[DamnCard1]} />
-      </ContainerOuter>
+      {false && (
+        <>
+          {/* similar vehicles*/}
+          <ContainerOuter mt="65px" display={''}>
+            <SectionHeader mainText="Similar vehicles" />
+          </ContainerOuter>
+          <ContainerOuter
+            mt={[null, null, null, '-20px']}
+            p={['0', null, null, '4']}
+          >
+            <CarListCarousel cars={[DamnCard1]} />
+          </ContainerOuter>
+        </>
+      )}
     </CarContext.Provider>
   );
 };

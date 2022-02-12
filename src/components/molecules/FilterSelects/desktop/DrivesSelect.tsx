@@ -12,16 +12,16 @@ interface DrivesSelectProps {}
 export const DrivesSelect: React.FC<DrivesSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
   const { drives } = useAppSelector((state) => state.carsReducer);
-  const { drives: initSelection} = useAppSelector(state => state.selectedCarFilters)
+  const { drives: initSelection } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
   const dispatch = useAppDispatch();
 
   const drivesToShow = drives.filter((el) => el);
 
   useEffect(() => {
-    if (initSelection.length) {
-      setSelected(initSelection)
-    }
-  }, [initSelection])
+    initSelection.length ? setSelected(initSelection) : setSelected([]);
+  }, [initSelection]);
 
   const handleSelect = (drive: string) => {
     if (selected.includes(drive)) {

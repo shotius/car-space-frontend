@@ -46,15 +46,8 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
   }, [yearFrom, yearTo]);
 
   useEffect(() => {
-    if (initYearFrom) {
-      setYearFrom(Number(initYearFrom));
-    }
-    if (initYearTo) {
-      setYearTo(Number(initYearTo));
-    }
-    if (initYearFrom === 0 && initYearTo === 0) {
-      // onSubmit()
-    }
+    initYearFrom ? setYearFrom(Number(initYearFrom)) : setYearFrom(0);
+    initYearTo ? setYearTo(Number(initYearTo)) : setYearTo(0);
   }, [initYearFrom, initYearTo]);
 
   // handler year from select

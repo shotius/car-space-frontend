@@ -47,7 +47,9 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
       bg={liked ? '#FB560729' : buttonInactiveColor}
       onClick={(event) => {
         if (event.stopPropagation) event.stopPropagation();
-        setLiked(!liked);
+
+        isAuthenticated && setLiked(!liked);
+        
         // if not authenticated, modal will open
         if (isAuthenticated) {
           // if like a car request is not on the way like a car

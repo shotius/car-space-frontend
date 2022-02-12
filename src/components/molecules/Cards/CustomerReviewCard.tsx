@@ -12,26 +12,33 @@ export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = ({
   review,
 }) => {
   return (
-    <Card p={['4', '8', '48px']}>
+    <Card p={['4', '8', '48px']}  display={"flex"} alignItems={"center"}>
       <Stack
         spacing={['4', '8', '48px']}
-        direction={['column', 'row']}
-        align={['center', 'center']}
-        justify="space-around"
+        direction={['column', null, 'row']}
+        align={['space-between', 'center']}
+        justify={['space-between', null, 'space-between']}
         w="full"
+        minH={["209px", null, null, '140px']}
       >
-        {/* user photo and name */}
-        <UserAvatar
-          username={review.user.fullName}
-          image={review.user.avatar}
-          mainText={review.user.fullName}
-          w={['full', null, '450px']}
-        />
+        <Stack
+          direction={['column', null, 'row']}
+          w="full"
+          align={[null, null, 'center']}
+        >
+          {/* user photo and name */}
+          <UserAvatar
+            username={review.user.fullName}
+            image={review.user.avatar}
+            mainText={review.user.fullName}
+            minW={['full', '180px']}
+          />
 
-        {/* descripttion */}
-        <TextRegular opacity="0.8" noOfLines={[4, null, 5]} h="full">
-          {review.text}
-        </TextRegular>
+          {/* descripttion */}
+          <TextRegular opacity="0.8" noOfLines={[4, null, 5]} h="full">
+            {review.text}
+          </TextRegular>
+        </Stack>
 
         {/* photos of cars in a grid */}
         <SimpleGrid

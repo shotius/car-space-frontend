@@ -43,12 +43,3 @@ const theme = extendTheme({
 });
 
 export default theme;
-
-// withDefaultColorScheme({
-//   colorScheme: 'brand',
-//   components: ['Checkbox'],
-// }),
-// withDefaultVariant({
-//   variant: 'filled',
-//   components: ['Input', 'Select'],
-// })

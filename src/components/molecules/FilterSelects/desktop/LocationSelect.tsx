@@ -12,16 +12,16 @@ interface LocationSelectProps {}
 export const LocationSelect: React.FC<LocationSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
   const { locations } = useAppSelector((state) => state.carsReducer);
-  const {locations: initSelection} = useAppSelector(state => state.selectedCarFilters)
+  const { locations: initSelection } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
   const dispatch = useAppDispatch();
 
   const locationsToShow = locations.filter((location) => location);
 
   useEffect(() => {
-    if (initSelection.length) {
-      setSelected(initSelection)
-    }
-  }, [initSelection])
+    initSelection.length ? setSelected(initSelection) : setSelected([]);
+  }, [initSelection]);
 
   const handleSelect = (location: string) => {
     if (selected.includes(location)) {

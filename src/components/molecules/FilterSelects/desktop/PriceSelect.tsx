@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   selectCurrency,
   selectPriseFrom,
-  selectPriseTo
+  selectPriseTo,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { CurrencySwitcherButtons } from '../../CurrencySwitcherButtons';
 import { InputGrey } from '../../Inputs/InputGrey';
@@ -45,8 +45,8 @@ export const PriceSelect: React.FC<PriceSelectProps> = ({}) => {
 
   // set initial values
   useEffect(() => {
-    initPriceFrom && setPriceFrom(initPriceFrom);
-    initPriceTo && setPriceTo(initPriceTo);
+    initPriceFrom ? setPriceFrom(initPriceFrom) : setPriceFrom('');
+    initPriceTo ? setPriceTo(initPriceTo) : setPriceTo('');
   }, [initPriceFrom, initPriceTo]);
 
   // when ever selected value changes, placeholder changes as well

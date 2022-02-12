@@ -1,10 +1,6 @@
 import axios from 'axios';
 import { CurrencyType } from 'src/constants';
 
-// web site: https://freecurrencyapi.net/dashboard
-// api account email : fonovib850@nabajin.com
-// password: 123123123
-
 /**
  *  Function returns price of the currency in comparison to USD
  * @param currency

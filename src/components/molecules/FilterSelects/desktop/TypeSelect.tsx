@@ -12,16 +12,20 @@ interface TypeSelectProps {}
 export const TypeSelect: React.FC<TypeSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
   const { types } = useAppSelector((state) => state.carsReducer);
-  const { types: initSelection} = useAppSelector(state => state.selectedCarFilters)
+  const { types: initSelection } = useAppSelector(
+    (state) => state.selectedCarFilters
+  );
   const dispatch = useAppDispatch();
 
   const typesToShow = types.filter((condition) => condition);
 
   useEffect(() => {
     if (initSelection.length) {
-      setSelected(initSelection)
+      setSelected(initSelection);
+    } else {
+      setSelected([]);
     }
-  }, [initSelection])
+  }, [initSelection]);
 
   const handleSelect = (type: string) => {
     if (selected.includes(type)) {

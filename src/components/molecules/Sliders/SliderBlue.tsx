@@ -42,7 +42,7 @@ export const SliderBlue: React.FC<SliderBlueProps & SliderProps> = ({
           </TextRegular>
         }
       >
-        <SliderThumb boxSize={4} bg="autoBlue.400" />
+        <SliderThumb boxSize={4} bg="autoBlue.400" zIndex={'0'} />
       </Tooltip>
     </Slider>
   );

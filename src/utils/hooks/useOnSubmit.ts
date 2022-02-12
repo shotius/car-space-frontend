@@ -1,16 +1,14 @@
-import { useAppSelector } from './../../redux/app/hook';
 import { useHistory } from 'react-router-dom';
 import { FilterQueries } from 'src/constants';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { getDealerCars } from 'src/redux/features/auth/carsSlice';
-import { closeAdvacedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { SelectedCarFilters } from 'src/redux/features/auth/types';
 import {
   setCatalogQuery,
-  setNetworkError,
+  setNetworkError
 } from 'src/redux/features/global/gloabalSlice';
 import { deleteQueryFromURL } from '../functions/deleteQueryFromUrl';
-import { useMediaQueryMin } from './useMediaQueryMin';
+import { useAppSelector } from './../../redux/app/hook';
 import { useQueryParams } from './useQueryParams';
 
 export const useOnSubmit = () => {
@@ -21,8 +19,6 @@ export const useOnSubmit = () => {
   const currPrice = useAppSelector(
     (state) => state.globalAppState.currencyPrice
   );
-
-  const { isLargerThan: isLargerThen737 } = useMediaQueryMin(737);
 
   const {
     BRAND,
@@ -206,7 +202,7 @@ export const useOnSubmit = () => {
     dispatch(setCatalogQuery(query.toString()));
 
     // if screen is small close advanced filters
-    !isLargerThen737 && dispatch(closeAdvacedFilters());
+    // !isLargerThen737 && dispatch(closeAdvacedFilters());
   }
 
   return onSubmit;

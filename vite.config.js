@@ -30,13 +30,13 @@ export default defineConfig({
   // during build vendor chunk will be split
   build: {
     sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-router-dom', 'react-dom'],
-          ...renderChunks(dependencies),
-        },
-      },
-    },
+    // rollupOptions: {
+    //   output: {
+    //     manualChunks: {
+    //       vendor: ['react', 'react-router-dom', 'react-dom'],
+    //       ...renderChunks(dependencies),
+    //     },
+    //   },
+    // },
   },
 });

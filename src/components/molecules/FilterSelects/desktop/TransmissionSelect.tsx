@@ -12,17 +12,15 @@ interface TransmissionSelectProps {}
 export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
   const dispatch = useAppDispatch();
-  const {transmissions} = useAppSelector(state => state.carsReducer)
+  const { transmissions } = useAppSelector((state) => state.carsReducer);
   const { transmission: initSelection } = useAppSelector(
     (state) => state.selectedCarFilters
   );
 
-  const transToShow = transmissions.filter(t => t)
+  const transToShow = transmissions.filter((t) => t);
 
   useEffect(() => {
-    if (initSelection.length) {
-      setSelected(initSelection);
-    }
+    initSelection.length ? setSelected(initSelection) : setSelected([]);
   }, [initSelection]);
 
   const handleSelect = (transmission: string) => {

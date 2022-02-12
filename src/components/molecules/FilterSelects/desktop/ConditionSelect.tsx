@@ -22,6 +22,8 @@ export const ConditionSelect: React.FC<ConditionSelectProps> = ({}) => {
   useEffect(() => {
     if (initSelection.length) {
       setSelected(initSelection);
+    } else {
+      setSelected([]);
     }
   }, [initSelection]);
 

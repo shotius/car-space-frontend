@@ -7,7 +7,7 @@ interface CatalogBannerState {
 }
 
 const initialState: CatalogBannerState = {
-  isCatalogBannerOpen: true,
+  isCatalogBannerOpen: false,
   // catalogBannerImage: 'https://images.news18.com/ibnlive/uploads/2021/06/1622715559_disha.jpg',
   catalogBannerImage: undefined,
   catalogBannerDealerName: 'Dealer Name',

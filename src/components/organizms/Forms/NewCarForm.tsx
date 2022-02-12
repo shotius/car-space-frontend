@@ -28,7 +28,7 @@ export const NewCarForm: React.FC<NewCarFormProps> = ({ dealer }) => {
   const toast = useToast();
 
   const initialValues: AddCarValues = {
-    manufacturer: 'Toyouta',
+    manufacturer: '',
     modelGroup: '',
     modelDetail: '',
     bodyStyle: '',

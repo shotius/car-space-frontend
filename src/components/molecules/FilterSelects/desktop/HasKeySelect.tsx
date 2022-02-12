@@ -12,13 +12,13 @@ interface HasKeySelectProps {}
 
 export const HasKeySelect: React.FC<HasKeySelectProps> = ({}) => {
   const [selected, setSelected] = useState<Keys | null>(null);
-  const {keys} = useAppSelector(state => state.selectedCarFilters)
+  const initSelection = useAppSelector(
+    (state) => state.selectedCarFilters.keys
+  );
 
   useEffect(() => {
-    if (keys) {
-      setSelected(keys)
-    }
-  }, [keys])
+    initSelection ? setSelected(initSelection) : setSelected(null);
+  }, [initSelection]);
 
   const dispatch = useAppDispatch();
 
@@ -26,10 +26,10 @@ export const HasKeySelect: React.FC<HasKeySelectProps> = ({}) => {
     <MultiSelect
       size="md"
       selected={selected ? [selected] : []}
-      label={selected || "keys"}
+      label={selected || 'keys'}
       clearSelected={() => {
-        setSelected(null)
-        dispatch(selectCarKeys(null))
+        setSelected(null);
+        dispatch(selectCarKeys(null));
       }}
       onApply={() => selected && dispatch(selectCarKeys(selected))}
       top="35px"

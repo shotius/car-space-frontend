@@ -76,8 +76,6 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
       setSelected(initSelection);
     } else {
       setSelected([]);
-      // This call back will fire when field is cleared
-      // onSubmit();
     }
   }, [initSelection]);
 

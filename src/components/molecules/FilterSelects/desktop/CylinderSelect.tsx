@@ -22,11 +22,10 @@ export const CylinderSelect: React.FC<CylinderSelectProps> = ({}) => {
     .map((c) => c.toString());
 
   useEffect(() => {
-    if (initSelection.length) {
-      setSelected(initSelection);
-    }
+    initSelection.length ? setSelected(initSelection) : setSelected([]);
   }, [initSelection]);
 
+  
   const handleSelect = (cylinder: string) => {
     if (selected.includes(cylinder)) {
       setSelected(selected.filter((trans) => trans !== cylinder));

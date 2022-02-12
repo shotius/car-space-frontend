@@ -42,7 +42,7 @@ export const CalculatorMobile: React.FC<CalculatorMobileProps> = ({}) => {
       <HStack w="full" alignItems={"center"} mb="4" justify="space-between">
         <Flex w="100px">
           <SingleSelect selected={calcType} w="130px">
-            <VStack m="auto" align="flex-start" spacing="4" p="3">
+            <VStack m="auto" align="flex-start" spacing="4" p="3" zIndex={"10000"}>
               {options
                 .filter((opt) => opt !== calcType)
                 .map((opt) => (

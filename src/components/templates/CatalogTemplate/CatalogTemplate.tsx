@@ -35,8 +35,8 @@ export const CatalogTemplate: React.FC<CatalogTemplateProps> = () => {
             _hover={{ textDecoration: 'underline' }}
             pr="4"
             onClick={() => {
-              dispatch(resetFilters());
               dispatch(setCatalogQuery(''));
+              dispatch(resetFilters());
             }}
           >
             reset all filters

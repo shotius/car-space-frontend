@@ -3,6 +3,7 @@ import { CardWithHeading } from 'src/components/molecules/Cards/CardWithHeading'
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { NotSpecified } from 'src/components/molecules/Texts/NotSpecified';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { capitalize } from 'src/utils/functions/capitalize';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { ICarDealer } from '../../../../../../server/shared_with_front/types/types-shared';
 
@@ -13,11 +14,8 @@ interface CarInfoCardProps {
 export const CarInfoCard: React.FC<CarInfoCardProps> = ({ car }) => {
   return (
     <CardWithHeading heading="Car information">
-      <TextRegular pb="30px" lineHeight="27px">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci autem
-        deserunt doloribus reprehenderit quibusdam facere laudantium, neque
-        nostrum nisi pariatur molestias ducimus esse quo in quis, accusamus
-        excepturi assumenda modi?
+      <TextRegular pb={'30px'} lineHeight="27px" w="full">
+        {car.desc ? capitalize(car.desc) : 'No description'}
       </TextRegular>
       <VStack w="full" p="24px" borderRadius="8px" bg="#F4F4F4" spacing="41px">
         <HStack w="full" justify="space-between">

@@ -12,9 +12,8 @@ import {
   selectPriseFrom,
   selectPriseTo,
   selectTypes,
-  setMostDemand,
+  setMostDemand
 } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { openCatalogBanner } from 'src/redux/features/banners/CatalogBannerSlice';
 import {
   setFourToSix_k,
   setFour_k,
@@ -22,7 +21,7 @@ import {
   setMostDemandCount,
   setSedans,
   setSixToTen_k,
-  setSuvs,
+  setSuvs
 } from 'src/redux/features/miniCategory/miniCategorySlice';
 import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
 import { useQueryParams } from 'src/utils/hooks/useQueryParams';
@@ -118,8 +117,7 @@ export const MiniCategory: React.FC<MiniCategoryProps> = () => {
   }, []);
 
   const redirect = () => {
-    history.push('/catalog')
-    dispatch(openCatalogBanner())
+    history.push('/catalog');
   };
 
   return (

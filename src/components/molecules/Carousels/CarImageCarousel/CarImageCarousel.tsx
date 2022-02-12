@@ -41,7 +41,6 @@ export const CarImageCarousel: React.FC<CarImageCarouselProps> = ({
       w="full"
       borderRadius="8px"
       cursor="auto"
-      maxH={['192px', null, '143px']}
       onClick={(e) => {
         if (e.stopPropagation) e.stopPropagation();
       }}
