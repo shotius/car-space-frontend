@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { MultiSelect } from 'src/components/atoms/Selects/MultiSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectTranssmision } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { SelectOptionButton } from '../../Buttons/SelectOptionButton';
 import { TextRegular } from '../../Texts/TextRegular';
 import { SelectContent } from '../../Wrappers/SelectContent';
@@ -12,9 +13,12 @@ interface TransmissionSelectProps {}
 export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
   const [selected, setSelected] = useState<string[]>([]);
   const dispatch = useAppDispatch();
-  const { transmissions } = useAppSelector((state) => state.carsReducer);
-  const { transmission: initSelection } = useAppSelector(
-    (state) => state.selectedCarFilters
+  
+  const transmissions = useAppSelector(
+    (state) => state.carsReducer.transmissions
+  );
+  const initSelection = useAppSelector(
+    (state) => state.selectedCarFilters.transmission
   );
 
   const transToShow = transmissions.filter((t) => t);
@@ -55,7 +59,7 @@ export const TransmissionSelect: React.FC<TransmissionSelectProps> = ({}) => {
               colorScheme="autoOrange"
               isChecked={selected?.includes(trans)}
             >
-              <TextRegular>{trans}</TextRegular>
+              <TextRegular>{capitalizeEach(trans)}</TextRegular>
             </Checkbox>
           </SelectOptionButton>
         ))}

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { MultiSelect } from 'src/components/atoms/Selects/MultiSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectFuels } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { SelectOptionButton } from '../../Buttons/SelectOptionButton';
 import { TextRegular } from '../../Texts/TextRegular';
 import { SelectContent } from '../../Wrappers/SelectContent';
@@ -56,7 +57,7 @@ export const FuelSelect: React.FC<FuelSelectProps> = ({}) => {
               colorScheme="autoOrange"
               isChecked={selected?.includes(fuel)}
             >
-              <TextRegular w="full">{fuel}</TextRegular>
+              <TextRegular w="full">{capitalizeEach(fuel)}</TextRegular>
             </Checkbox>
           </SelectOptionButton>
         ))}

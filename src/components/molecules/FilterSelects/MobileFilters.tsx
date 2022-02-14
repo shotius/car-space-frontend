@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { DividerVertical } from 'src/components/atoms/Divider';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
-  resetFilters, selectPriseFrom,
+  closeAdvacedFilters,
+  resetFilters,
+  selectPriseFrom,
   selectPriseTo,
-  toggleAdvancedFilters
+  toggleAdvancedFilters,
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import useOnSubmit from 'src/utils/hooks/useOnSubmit';
@@ -25,17 +27,17 @@ import { MobileEngineSelect } from './mobile/MobileEngineSelect';
 import { MobileFuelsSelect } from './mobile/MobileFuelsSelect';
 import { MobileLocationSelect } from './mobile/MobileLocationSelect';
 import { MobileModelSelect } from './mobile/MobileModelSelect';
+import { MobilePriceSelect } from './mobile/MobilePriceSelect';
 import { MobileTransmissionSelect } from './mobile/MobileTransmissionSelect';
 import { MobileTypesSelect } from './mobile/MobileTypesSelect';
 import { MobileYearInput } from './mobile/MobileYearInput';
+import { MobileYearSelect } from './mobile/MobileYearSelect';
 
 interface ThreeMobileSelectsProps {}
 
 export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
   ({}) => {
     const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
-    const [priceFrom, setPriceFrom] = useState('');
-    const [priceTo, setPriceTo] = useState('');
 
     // redux variables
     const filters = useAppSelector((state) => state.selectedCarFilters);
@@ -66,36 +68,12 @@ export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
         <MobileModelSelect />
 
         {/* year */}
-        <MobileYearInput setKeyboardActive={setKeyboardActive} />
+        {/* <MobileYearInput setKeyboardActive={setKeyboardActive} /> */}
+        <MobileYearSelect />
 
         {/* price */}
         <HStack justify="space-between">
-          <HStack borderRadius="8px" bg="white" spacing={0} flex="1" p="2px">
-            <InputRegular
-              pr="2"
-              placeholder="Price from"
-              type="number"
-              value={priceFrom}
-              onChange={(e) => setPriceFrom(e.currentTarget.value)}
-              onFocus={() => setKeyboardActive(true)}
-              onBlur={() => {
-                setKeyboardActive(false);
-                dispatch(selectPriseFrom(priceFrom));
-              }}
-            />
-            <DividerVertical height="30px" />
-            <InputRegular
-              placeholder="Price to"
-              type="number"
-              value={priceTo}
-              onChange={(e) => setPriceTo(e.currentTarget.value)}
-              onFocus={() => setKeyboardActive(true)}
-              onBlur={() => {
-                setKeyboardActive(false);
-                dispatch(selectPriseTo(priceTo));
-              }}
-            />
-          </HStack>
+          <MobilePriceSelect setKeyboardActive={setKeyboardActive} />
           {/* currency */}
           <CurrencySwitcherButtons />
         </HStack>
@@ -138,7 +116,10 @@ export const MobileFiltersOnCatalogPage: React.FC<ThreeMobileSelectsProps> =
             <SearchButton
               w="full"
               isKeyboardActive={keyboardActive}
-              onClick={() => onSubmit(filters)}
+              onClick={() => {
+                onSubmit(filters);
+                dispatch(closeAdvacedFilters());
+              }}
             />
           </WithMobileKeyboard>
           <Button

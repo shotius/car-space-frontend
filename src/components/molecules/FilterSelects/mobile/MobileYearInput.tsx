@@ -17,24 +17,17 @@ export const MobileYearInput: React.FC<MobileYearInputProps> = ({
 }) => {
   const [yearFrom, setYearFrom] = useState<string>('');
   const [yearTo, setYearTo] = useState<string>('');
-
-  const { yearFrom: initYearFrom, yearTo: initYearTo } = useAppSelector(
-    (state) => state.selectedCarFilters
-  );
   const dispatch = useAppDispatch();
 
+  const initYearFrom = useAppSelector(
+    (state) => state.selectedCarFilters.yearFrom
+  );
+  const initYearTo = useAppSelector((state) => state.selectedCarFilters.yearTo);
+
+  // if we have filters saved in redux assign them to components state
   useEffect(() => {
-    // if we have filters saved in redux assign them to components state
-    if (initYearFrom) {
-      setYearFrom(initYearFrom.toString());
-    } else {
-      setYearFrom('');
-    }
-    if (initYearTo) {
-      setYearTo(initYearTo.toString());
-    } else {
-      setYearTo('');
-    }
+    initYearFrom ? setYearFrom(initYearFrom.toString()) : setYearFrom('');
+    initYearTo ? setYearTo(initYearTo.toString()) : setYearTo('');
   }, [initYearFrom, initYearTo]);
 
   return (
@@ -65,7 +58,7 @@ export const MobileYearInput: React.FC<MobileYearInputProps> = ({
         onBlur={() => {
           setKeyboardActive(false);
           // if year to is less then year from, move year from down to equel year to
-          (parseInt(yearTo)) <= parseInt(yearFrom) &&
+          parseInt(yearTo) <= parseInt(yearFrom) &&
             dispatch(selectYearFrom(parseInt(yearTo)));
           // assign "0" if yearTo is null
           dispatch(selectYearTo(parseInt(yearTo) || 0));

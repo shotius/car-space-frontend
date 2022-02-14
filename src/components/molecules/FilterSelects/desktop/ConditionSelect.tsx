@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { MultiSelect } from 'src/components/atoms/Selects/MultiSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectConditions } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { SelectOptionButton } from '../../Buttons/SelectOptionButton';
 import { TextRegular } from '../../Texts/TextRegular';
 import { SelectContent } from '../../Wrappers/SelectContent';
@@ -60,7 +61,7 @@ export const ConditionSelect: React.FC<ConditionSelectProps> = ({}) => {
               colorScheme="autoOrange"
               isChecked={selected?.includes(condition)}
             >
-              <TextRegular w="full">{condition}</TextRegular>
+              <TextRegular w="full">{capitalizeEach(condition)}</TextRegular>
             </Checkbox>
           </SelectOptionButton>
         ))}

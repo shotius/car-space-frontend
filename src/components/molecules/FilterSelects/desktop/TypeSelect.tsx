@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { MultiSelect } from 'src/components/atoms/Selects/MultiSelect';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectTypes } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { SelectOptionButton } from '../../Buttons/SelectOptionButton';
 import { TextRegular } from '../../Texts/TextRegular';
 import { SelectContent } from '../../Wrappers/SelectContent';
@@ -60,7 +61,7 @@ export const TypeSelect: React.FC<TypeSelectProps> = ({}) => {
               colorScheme="autoOrange"
               isChecked={selected?.includes(type)}
             >
-              <TextRegular w="full">{type}</TextRegular>
+              <TextRegular w="full">{capitalizeEach(type)}</TextRegular>
             </Checkbox>
           </SelectOptionButton>
         ))}
