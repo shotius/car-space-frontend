@@ -8,6 +8,7 @@ import {
   zips,
 } from 'src/constants/TransportData';
 import { useAppSelector } from 'src/redux/app/hook';
+import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
 import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
 import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
 import { Autocomplete } from '../Autocomplete';
@@ -120,7 +121,7 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
               color="autoOrange.500"
               fontSize={size === 'regular' ? '16px' : '20px'}
             >
-              {price ? (price * currPrice).toFixed(4) : 0}
+              {price ? roundFloatTo(price * currPrice, 4) : 0}
             </HeadingSecondary>
           </HStack>
         </HStack>

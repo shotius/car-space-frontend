@@ -1,5 +1,6 @@
 import { Divider, HStack, StackProps, VStack } from '@chakra-ui/react';
 import { useContext } from 'react';
+import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
 import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
 import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
@@ -45,7 +46,7 @@ export const CalculatorFooter: React.FC<CalculatroFooterProps & StackProps> = ({
               color="autoOrange.500"
               fontSize={size === 'regular' ? '20px' : '20px'}
             >
-            {total.toFixed(3)}
+              {roundFloatTo(total, 3)}
             </HeadingSecondary>
           </HStack>
         </HStack>
