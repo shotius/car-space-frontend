@@ -100,7 +100,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({}) => {
               </HStack>
             </ButtonRect>
             <Collapse in={isLangOpen}>
-              <VStack w="full" align="end" px="8" py="2" spacing={4}>
+              <VStack w="full" align="flex-end" px="8" py="2" spacing={4}>
                 <TextButton
                   onClick={() => {
                     toggleLang();
@@ -143,7 +143,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({}) => {
               </HStack>
             </ButtonRect>
             <Collapse in={isCurrOpen}>
-              <VStack w="full" align="end" px="8" py="2" spacing={4}>
+              <VStack w="full" align="flex-end" px="8" py="2" spacing={4}>
                 <TextButton
                   onClick={() => {
                     dispatch(changeCurrency('GEL'));

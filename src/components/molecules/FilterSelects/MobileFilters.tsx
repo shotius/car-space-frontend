@@ -1,21 +1,16 @@
 import { HStack, Stack } from '@chakra-ui/layout';
 import { Button, Collapse, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
-import { DividerVertical } from 'src/components/atoms/Divider';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   closeAdvacedFilters,
-  resetFilters,
-  selectPriseFrom,
-  selectPriseTo,
-  toggleAdvancedFilters,
+  resetFilters, toggleAdvancedFilters
 } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import useOnSubmit from 'src/utils/hooks/useOnSubmit';
 import { SearchButton } from '../Buttons/SearchButton';
 import { TextButton } from '../Buttons/TextButton';
 import { CurrencySwitcherButtons } from '../CurrencySwitcherButtons';
-import { InputRegular } from '../Inputs/InputRegular';
 import { TextRegular } from '../Texts/TextRegular';
 import { WithMobileKeyboard } from '../Wrappers/WithMobileKeyboard';
 import { MobileBrandSelect } from './mobile/MobileBrandSelect';
@@ -30,7 +25,6 @@ import { MobileModelSelect } from './mobile/MobileModelSelect';
 import { MobilePriceSelect } from './mobile/MobilePriceSelect';
 import { MobileTransmissionSelect } from './mobile/MobileTransmissionSelect';
 import { MobileTypesSelect } from './mobile/MobileTypesSelect';
-import { MobileYearInput } from './mobile/MobileYearInput';
 import { MobileYearSelect } from './mobile/MobileYearSelect';
 
 interface ThreeMobileSelectsProps {}
