@@ -39,9 +39,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
     <Formik
       initialValues={initState}
       validationSchema={SignupSchema}
-      onSubmit={(values, { setErrors, setSubmitting }) =>
-        onSubmit({ values, setErrors, setSubmitting })
-      }
+      onSubmit={onSubmit}
     >
       {({ isSubmitting }) => (
         <Form>

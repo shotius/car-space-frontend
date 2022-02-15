@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { ChangePasswordProps } from 'src/redux/features/auth/types';
 import authService from 'src/services/authService';
@@ -23,6 +23,7 @@ interface authState {
   autoLoginLoading: boolean;
   autoLoginSuccess: boolean;
   sendingRecoveryMail?: boolean;
+  emailInput?: string;
 }
 
 const initialState: authState = {
@@ -166,7 +167,11 @@ export const changePassword = createAsyncThunk<IUser, ChangePasswordProps>(
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setInputEmail: (state, action: PayloadAction<string>) => {
+      state.emailInput = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     /** login */
     builder.addCase(loginUser.pending, (state) => {
@@ -204,4 +209,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { setInputEmail } = authSlice.actions;
 export const { reducer: authReducer } = authSlice;

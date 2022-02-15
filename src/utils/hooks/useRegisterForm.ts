@@ -14,6 +14,15 @@ export const useRegisterForm = () => {
 
   const dispatch = useAppDispatch();
   const toast = useToast();
+  
+  // form initial state
+  const initState: RegisterParams = {
+    fullName: '',
+    email: '',
+    password: '',
+    role: Roles.USER,
+    phoneNum: '',
+  };
 
   // form validation
   const SignupSchema = Yup.object().shape({
@@ -27,16 +36,7 @@ export const useRegisterForm = () => {
       .max(9, 'Woow, Too long'),
   });
 
-  // form initial state
-  const initState: RegisterParams = {
-    fullName: '',
-    email: '',
-    password: '',
-    role: Roles.USER,
-    phoneNum: '',
-  };
-
-  const onSubmit = ({ values, setErrors, setSubmitting }) => {
+  const onSubmit = (values, { setErrors, setSubmitting }) => {
     // if "I'm a delaer is checked"
     const role = Array.isArray(values.role) ? Roles.DEALER : Roles.USER;
 
