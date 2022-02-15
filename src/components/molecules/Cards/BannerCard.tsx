@@ -2,10 +2,7 @@ import { AspectRatio, Heading, HStack } from '@chakra-ui/layout';
 import { Image, VStack } from '@chakra-ui/react';
 import userIcon from 'src/assets/png/user.png';
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { resetFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
-import { closeCatalogBanner } from 'src/redux/features/banners/CatalogBannerSlice';
-import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
+import { useBannerCard } from 'src/utils/hooks/useBannerCard';
 import { ButtonWithIcon } from '../Buttons/IconWithButton';
 import { TextRegular } from '../Texts/TextRegular';
 import { Card } from './Card';
@@ -13,19 +10,7 @@ import { Card } from './Card';
 interface BannerCardProps {}
 
 export const BannerCard: React.FC<BannerCardProps> = ({}) => {
-  const isOpen = useAppSelector(
-    (state) => state.catalogBanner.isCatalogBannerOpen
-  );
-
-  const dealerName = useAppSelector(
-    (state) => state.catalogBanner.catalogBannerDealerName
-  );
-
-  const dealerImage = useAppSelector(
-    (state) => state.catalogBanner.catalogBannerImage
-  );
-
-  const dispatch = useAppDispatch();
+  const { isOpen, dealerImage, dealerName, closeBanner } = useBannerCard();
 
   return (
     <Card w="full" p={['4', '30px']} display={isOpen ? 'block' : 'none'}>
@@ -50,11 +35,7 @@ export const BannerCard: React.FC<BannerCardProps> = ({}) => {
           top={['50%', '-2']}
           transform={['translateY(-50%)', 'translateY(0%)']}
           _active={{ bg: 'autoGrey.400' }}
-          onClick={() => {
-            dispatch(resetFilters());
-            dispatch(setCatalogQuery(''));
-            dispatch(closeCatalogBanner());
-          }}
+          onClick={closeBanner}
         />
         <VStack alignItems="flex-start">
           <Heading fontSize="16px">{dealerName}</Heading>

@@ -5,7 +5,7 @@ import { getDealerCars } from 'src/redux/features/auth/carsSlice';
 import { SelectedCarFilters } from 'src/redux/features/auth/types';
 import {
   setCatalogQuery,
-  setNetworkError
+  setNetworkError,
 } from 'src/redux/features/global/gloabalSlice';
 import { deleteQueryFromURL } from '../functions/deleteQueryFromUrl';
 import { useAppSelector } from './../../redux/app/hook';
@@ -15,6 +15,8 @@ export const useOnSubmit = () => {
   const query = useQueryParams();
   const dispatch = useAppDispatch();
   const history = useHistory();
+
+  const startQuery = query.toString();
 
   const currPrice = useAppSelector(
     (state) => state.globalAppState.currencyPrice
@@ -192,7 +194,11 @@ export const useOnSubmit = () => {
     // we need to see first page on search
     query.set('page', '1');
 
-    history.push({ pathname: '/catalog', search: query.toString() });
+    // if query changed redirect
+    if (startQuery !== query.toString()) {
+      history.push({ pathname: '/catalog', search: query.toString() });
+    }
+
     dispatch(getDealerCars(query));
 
     // save catalog query in redux for caching purpose
@@ -200,9 +206,6 @@ export const useOnSubmit = () => {
 
     // save catalog query in redux for caching purpose
     dispatch(setCatalogQuery(query.toString()));
-
-    // if screen is small close advanced filters
-    // !isLargerThen737 && dispatch(closeAdvacedFilters());
   }
 
   return onSubmit;

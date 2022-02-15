@@ -28,6 +28,7 @@ const initialState: SelectedCarFilters = {
   salesStatus: [],
   queryString: '',
   mostDemand: false,
+  baseQueryString: '',
 };
 
 const selectedCarFilterSlice = createSlice({
