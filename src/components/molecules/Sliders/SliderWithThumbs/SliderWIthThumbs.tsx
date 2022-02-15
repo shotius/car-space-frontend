@@ -35,7 +35,6 @@ export const SliderWIthThumbs: React.FC<Props> = ({ images }) => {
               spaceBetween={4}
               thumbs={{ swiper: thumbsSwiper }}
               className="mySwiper2"
-              initialSlide={3}
               onInit={(swiper) => {
                 // @ts-ignore
                 swiper.params.navigation.prevEl = prevRef.current;

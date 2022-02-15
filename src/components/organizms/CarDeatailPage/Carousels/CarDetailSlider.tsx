@@ -36,7 +36,12 @@ export const CarDetailSlider: React.FC<Props> = ({ images }) => {
           {images.map((img) => (
             <SwiperSlide key={img}>
               <AspectRatio ratio={579 / 364} width="579px">
-                <Image src={img} borderRadius="8px" />
+                <Image
+                  src={img}
+                  borderRadius="8px"
+                  onClick={() => dispatch(toggleCarDetailModal())}
+                  cursor="pointer"
+                />
               </AspectRatio>
             </SwiperSlide>
           ))}
