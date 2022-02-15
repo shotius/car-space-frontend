@@ -4,7 +4,7 @@ import {
   FormErrorMessage,
   InputGroup,
   InputLeftAddon,
-  useToast
+  useToast,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
@@ -45,7 +45,6 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
     phoneNum: Yup.string()
       .min(9, 'Georgian number should have 9 numbers')
       .max(9, 'Woow, Too long'),
-    // privacy: Yup.boolean().oneOf([true], 'Must Accept Privacy Policy'),
   });
 
   // form initial state
@@ -54,8 +53,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
     email: '',
     password: '',
     role: Roles.USER,
-    phone: '',
-    // privacy: true,
+    phoneNum: '',
   };
 
   // registration is successfull this message will be desplayed
@@ -127,7 +125,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
                 autoComplete="new-password"
                 h={['53px', null, '40px']}
               />
-              <Field name="phone">
+              <Field name="phoneNum">
                 {({ field, form }) => (
                   <FormControl
                     isInvalid={form.errors.phoneNum && form.touched.phoneNum}
@@ -141,11 +139,12 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
                       />
                       <InputGrey
                         {...field}
-                        type="number"
+                        type="tel"
                         placeholder="Phone Number"
                         h={['53px', null, '40px']}
                         borderLeftRadius="none"
                         isRequired
+                        autoCapitalize="phone"
                       />
                     </InputGroup>
                     {form.errors && (
@@ -158,17 +157,12 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
               </Field>
 
               <FormikCheckbox name="role" label="I'm a dealer" />
-
-              {/* <FormikCheckbox name="privacy" isRequired>
-                <TextRegular fontSize="14px">I agree to </TextRegular>
-                <TextButton color="#427AD6" fontSize="14px">
-                  Privacy Policy
-                </TextButton>
-              </FormikCheckbox> */}
             </VStack>
 
             {/* Submit button  */}
-            <ButtonRegular type="submit" isLoading={isSubmitting}>Create an account</ButtonRegular>
+            <ButtonRegular type="submit" isLoading={isSubmitting}>
+              Create an account
+            </ButtonRegular>
             <HStack w="full">
               <TextRegular>Already a member?</TextRegular>
               <TextButton color="#427AD6" onClick={openLogin}>

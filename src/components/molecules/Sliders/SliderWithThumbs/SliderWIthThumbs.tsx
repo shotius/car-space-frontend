@@ -28,7 +28,7 @@ export const SliderWIthThumbs: React.FC<Props> = ({ images }) => {
     <Box w="full">
       <NavigationButton ref={prevRef} aria-label="previous photo" role="prev" />
       <NavigationButton ref={nextRef} aria-label="previous photo" role="next" />
-      <Center h="100vh" w="70%" maxW="750px" margin="auto">
+      <Center h="100vh" w="70%" maxW="950px" margin="auto">
         <Box w="full">
           <Box borderRadius="8px" overflow="hidden">
             <Swiper
@@ -46,7 +46,7 @@ export const SliderWIthThumbs: React.FC<Props> = ({ images }) => {
             >
               {images.map((img) => (
                 <SwiperSlide key={img}>
-                  <AspectRatio ratio={579 / 364} width="full">
+                  <AspectRatio ratio={5/3} width="full">
                     <Image src={img} borderRadius="8px" />
                   </AspectRatio>
                 </SwiperSlide>
