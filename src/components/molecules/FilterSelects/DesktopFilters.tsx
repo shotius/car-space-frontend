@@ -39,14 +39,12 @@ export const DesktopFiltersOnCatalogPage: React.FC<
   ...rest
 }) => {
   const dispatch = useAppDispatch();
-  const filters = useAppSelector(state => state.selectedCarFilters)
-
-  const { isAdvancedFiltersOpen: isOpen } = useAppSelector(
-    (state) => state.selectedCarFilters
+  const filters = useAppSelector((state) => state.selectedCarFilters);
+  const isOpen = useAppSelector(
+    (state) => state.selectedCarFilters.isAdvancedFiltersOpen
   );
 
   const onToggle = () => dispatch(toggleAdvancedFilters());
-
   const onSubmit = useOnSubmit();
 
   return (
