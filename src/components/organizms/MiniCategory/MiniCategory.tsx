@@ -12,17 +12,15 @@ export const MiniCategory: React.FC<MiniCategoryProps> = () => {
   const {
     suvs,
     hachbackes,
-    redirectCarType,
     sedans,
     four_k,
     fourToSix_k,
     sixToTen_k,
     icon,
     mostDemands,
-    fourKRedirect,
-    fourToSixKRedirect,
+    redirectInPriceRange,
+    redirectCarType,
     mostDemandRedict,
-    sixToTenRedirect,
   } = useMiniCategory();
 
   return (
@@ -49,21 +47,21 @@ export const MiniCategory: React.FC<MiniCategoryProps> = () => {
           />
           <MiniCategoryCard
             carCount={four_k}
-            onClick={() => fourKRedirect()}
+            onClick={() => redirectInPriceRange({ to: 4000 })}
             categoryTitle={`${icon}4k`}
             mr="1px"
           />
           <MiniCategoryCard
+            mr="1px"
             carCount={fourToSix_k}
             categoryTitle={`${icon}4-6k`}
-            mr="1px"
-            onClick={() => fourToSixKRedirect()}
+            onClick={() => redirectInPriceRange({ to: 6000, from: 4000 })}
           />
           <MiniCategoryCard
-            carCount={sixToTen_k}
-            onClick={() => sixToTenRedirect()}
-            categoryTitle={`${icon}6-10k`}
             mr="1px"
+            carCount={sixToTen_k}
+            categoryTitle={`${icon}6-10k`}
+            onClick={() => redirectInPriceRange({ from: 6000, to: 10000 })}
           />
           <MiniCategoryCard
             carCount={mostDemands}

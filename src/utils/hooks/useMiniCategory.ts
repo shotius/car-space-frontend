@@ -21,6 +21,11 @@ import {
 import useCurrencyIcon from './useCurrencyIcon';
 import { useQueryParams } from './useQueryParams';
 
+interface PriceRange {
+  from?: number;
+  to: number;
+}
+
 export const useMiniCategory = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -108,43 +113,32 @@ export const useMiniCategory = () => {
     getMostDemands();
   }, []);
 
-  const redirect = () => {
-    history.push('/catalog?CURRENCY_PRICE=1&page=1&type=HACHBACK');
+  const redirect = (q: string) => {
+    history.push(`/catalog?CURRENCY_PRICE=1&page=1&${q}`);
   };
 
   const redirectCarType = (type: string[]) => {
     dispatch(selectTypes(type));
-    redirect();
+    redirect(`type=${type}`);
   };
 
-  const fourKRedirect = () => {
-    dispatch(selectPriseTo((4000 / currencyPrice).toFixed()));
-    redirect();
-  };
-
-  const fourToSixKRedirect = () => {
-    dispatch(selectPriseFrom('4000'));
-    dispatch(selectPriseTo('6000'));
-    redirect();
-  };
-
-  const sixToTenRedirect = () => {
-    dispatch(selectPriseFrom('6000'));
-    dispatch(selectPriseTo('10000'));
-    redirect();
+  const redirectInPriceRange = ({ from = 0, to }: PriceRange) => {
+    const query = !from
+      ? `price_to=${to}`
+      : `price_from=${from}&price_to=${to}`;
+    from && dispatch(selectPriseFrom(from.toString()));
+    dispatch(selectPriseTo(to.toString()));
+    redirect(query);
   };
 
   const mostDemandRedict = () => {
     dispatch(setMostDemand(true));
-    history.push('/catalog');
+    redirect('mostdemand=true');
   };
 
   return {
     redirectCarType,
-    sixToTenRedirect,
     mostDemandRedict,
-    fourToSixKRedirect,
-    fourKRedirect,
     hachbackes,
     sedans,
     currencyPrice,
@@ -154,5 +148,6 @@ export const useMiniCategory = () => {
     fourToSix_k,
     sixToTen_k,
     mostDemands,
+    redirectInPriceRange,
   };
 };
