@@ -6,7 +6,6 @@ import {
   StackProps,
   VStack,
 } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
 import { BmwIcon } from 'src/components/atoms/Icons/BmwIcon';
 import { FordIcon } from 'src/components/atoms/Icons/FordIcon';
 import { MercedesIcon } from 'src/components/atoms/Icons/MercedesIcon';
@@ -21,102 +20,37 @@ import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger
 import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { getModels, setModels } from 'src/redux/features/auth/carsSlice';
-import {
-  selectBrand,
-  selectModels,
-} from 'src/redux/features/auth/selectedCarFilterSlice';
-import { addLettersToSortedArray } from 'src/utils/functions/addLettersToSortedArray';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
-import useOnSubmit from 'src/utils/hooks/useOnSubmit';
+import { useBrandSelect } from 'src/utils/hooks/useBrandSelect';
 
 interface BrandSelectProps {
   labelPadding?: BoxProps['p'];
   searchOnClear?: boolean;
 }
 
-// In the compont I have 4 different variables
-//1. Value: is used to display selected option
-//2. Placeholder: is displayed when not searching
-//3. searchWord: when user writing in search box, search word is changing
-//4. selected: are Selected options, used to keep track of other three variables
 export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
   labelPadding,
   searchOnClear = true,
   ...rest
 }) => {
-  const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<string[]>([]);
-  const [placeholder, setPlaceholder] = useState<string>('');
-  const [value, setValue] = useState<string>('');
-  const [searchWord, setSearchWord] = useState<string>('');
-  const dispatch = useAppDispatch();
-
-  const options = useAppSelector((state) => state.carsReducer.brands);
-  const initSelection = useAppSelector(
-    (state) => state.selectedCarFilters.brands
-  );
-
-  const filters = useAppSelector((state) => state.selectedCarFilters);
-
-  const onSubmit = useOnSubmit();
-
-  // whenever selected values change change value and placeholder
-  useEffect(() => {
-    if (areOptionsOpen) {
-      setValue(selected.join(', '));
-    }
-
-    updatePlaceholder();
-  }, [selected.length]);
-
-  useEffect(() => {
-    if (initSelection.length) {
-      setSelected(initSelection);
-    } else {
-      setSelected([]);
-    }
-  }, [initSelection]);
-
-  // handle option select
-  const handleSelect = (opt: string) => {
-    // search keyword will be cleared
-    // if option is in selected values remove, else include
-    if (selected.includes(opt)) {
-      setSelected(selected.filter((o) => o !== opt));
-      setValue(selected.join(', '));
-    } else {
-      setSelected([opt].concat(selected));
-    }
-  };
-
-  const updatePlaceholder = () => {
-    if (selected.length) {
-      setPlaceholder(() => `${selected.join(', ')}`);
-    } else {
-      setPlaceholder(() => `Brands`);
-    }
-  };
-
-  // filter options when searchWord is specified
-  const optionsToShow = addLettersToSortedArray(options).filter((option) => {
-    return option.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase());
-  });
+  const {
+    areOptionsOpen,
+    setAreOptionsOpen,
+    handleClose,
+    selected,
+    clearCb,
+    placeholder,
+    value,
+    onFocus,
+    searchWord,
+    setSearchWord,
+    handleSelect,
+    optionsToShow,
+  } = useBrandSelect({ searchOnClear });
 
   return (
     <SelectWrapper {...rest} areOptionsOpen={areOptionsOpen}>
-      <CustomOverlay
-        isActive={areOptionsOpen}
-        onClick={() => {
-          setAreOptionsOpen(false);
-          updatePlaceholder();
-          dispatch(selectBrand(selected));
-          dispatch(getModels(selected));
-          setValue('');
-          setSearchWord('');
-        }}
-      />
+      <CustomOverlay isActive={areOptionsOpen} onClick={handleClose} />
       {/* Content  */}
       <SelectContent>
         {/*  Input */}
@@ -124,17 +58,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
           onClick={() => setAreOptionsOpen(true)}
           areOptionsOpen={areOptionsOpen}
           areOptionsSelected={!!selected.length}
-          clearCb={(e) => {
-            if (e.stopPropagation) e.stopPropagation();
-            setSelected([]);
-            setValue('');
-            setPlaceholder('');
-            setAreOptionsOpen(false);
-            dispatch(setModels([]));
-            dispatch(selectBrand([])).payload;
-            dispatch(selectModels([]));
-            searchOnClear && onSubmit({ ...filters, brands: [], models: [] });
-          }}
+          clearCb={clearCb}
         >
           <SelectSearch
             labelPadding={labelPadding}
@@ -142,14 +66,7 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
             placeholder={placeholder}
             value={value ? capitalizeEach(value) : searchWord}
             onChange={(e) => setSearchWord(e.currentTarget.value)}
-            onFocus={() => {
-              // onFocus open Options
-              setAreOptionsOpen(true);
-              // if something is selected, display in placeholder
-              updatePlaceholder();
-              // clear value in the search field
-              setValue('');
-            }}
+            onFocus={onFocus}
           />
         </SelectTrigger>
 

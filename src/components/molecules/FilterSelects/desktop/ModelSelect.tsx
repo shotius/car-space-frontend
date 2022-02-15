@@ -199,7 +199,7 @@ export const ModelSelect: React.FC<ModelSelectProps & StackProps> = ({
           }}
         >
           <SelectSearch
-            label="Model"
+            label="Models"
             isDisabled={isDisabled}
             placeholder={placeholder}
             value={value ? capitalizeEach(value) : searchWord}

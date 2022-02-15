@@ -1,26 +1,26 @@
-import { capitalizeEach } from "src/utils/functions/capitalizeEach";
-import { InputGrey } from "./InputGrey";
+import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
+import { InputGrey } from './InputGrey';
 
-type OtherProps = React.ComponentProps<typeof InputGrey>
+type OtherProps = React.ComponentProps<typeof InputGrey>;
 
 interface SelectSearchProps {
   isDisabled?: boolean;
   placeholder: string;
   label: string;
-  labelPadding?:  OtherProps['p']
+  labelPadding?: OtherProps['p'];
 }
-
 
 export const SelectSearch: React.FC<SelectSearchProps & OtherProps> = ({
   label,
   placeholder,
   isDisabled,
-  labelPadding, 
+  labelPadding,
+  value,
   ...rest
 }) => {
   return (
     <InputGrey
-      pl={labelPadding || "4"}
+      pl={labelPadding || '4'}
       cursor={isDisabled ? 'not-allowed' : 'text'}
       bg="transparent"
       isDisabled={isDisabled}
@@ -32,7 +32,10 @@ export const SelectSearch: React.FC<SelectSearchProps & OtherProps> = ({
         bg: 'white',
       }}
       _hover={{
-        bg: "autoGrey.200"
+        bg: 'autoGrey.200',
+      }}
+      _placeholder={{
+        color: value || label !== placeholder ? 'black' : 'grey',
       }}
       pr="32px"
       {...rest}

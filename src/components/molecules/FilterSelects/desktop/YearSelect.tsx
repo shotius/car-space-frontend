@@ -1,5 +1,4 @@
 import { HStack, StackDivider, StackProps, VStack } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { CustomOverlay } from 'src/components/molecules/overlays/CustomOverlay';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
@@ -8,13 +7,8 @@ import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
 import { VerticalScrollable } from 'src/components/molecules/Wrappers/VerticalScrollable';
-import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import {
-  selectYearFrom,
-  selectYearTo,
-} from 'src/redux/features/auth/selectedCarFilterSlice';
 import { range } from 'src/utils/functions/range';
-import useOnSubmit from 'src/utils/hooks/useOnSubmit';
+import { useYearSelect } from 'src/utils/hooks/useYearSelect';
 
 interface YearSelectProps {
   searchOnClear?: boolean;
@@ -24,80 +18,28 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
   searchOnClear = true,
   ...rest
 }) => {
-  const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
-  const [yearFrom, setYearFrom] = useState<number>(0);
-  const [yearTo, setYearTo] = useState<number>(0);
-  const [placeholder, setPlaceholder] = useState<string>('');
-  const { yearFrom: initYearFrom, yearTo: initYearTo } = useAppSelector(
-    (state) => state.selectedCarFilters
-  );
-  const filters = useAppSelector((state) => state.selectedCarFilters);
-  const dispatch = useAppDispatch();
-
-  const onSubmit = useOnSubmit();
-
-  // when ever selected value changes, placeholder changes as well
-  useEffect(() => {
-    if (yearFrom || yearTo) {
-      setPlaceholder(`${yearFrom} - ${yearTo}`);
-    } else {
-      setPlaceholder(`Year`);
-    }
-  }, [yearFrom, yearTo]);
-
-  useEffect(() => {
-    initYearFrom ? setYearFrom(Number(initYearFrom)) : setYearFrom(0);
-    initYearTo ? setYearTo(Number(initYearTo)) : setYearTo(0);
-  }, [initYearFrom, initYearTo]);
-
-  // handler year from select
-  const handleSelectYearFrom = (num: number) => {
-    if (yearFrom === num) {
-      setYearFrom(0);
-    } else if (num >= yearTo) {
-      setYearFrom(num);
-      setYearTo(num);
-    } else {
-      setYearFrom(num);
-    }
-  };
-
-  // hander year to select
-  const handleSelectYearTo = (num: number) => {
-    if (yearTo === num) {
-      setYearTo(0);
-      setYearFrom(0);
-    } else if (num <= yearFrom) {
-      setYearFrom(num);
-      setYearTo(num);
-    } else {
-      setYearTo(num);
-    }
-  };
+  const {
+    areOptionsOpen,
+    setAreOptionsOpen,
+    yearFrom,
+    yearTo,
+    handleClose,
+    placeholder,
+    handleSelectYearFrom,
+    handleSelectYearTo,
+    isBlack,
+    clearCb,
+  } = useYearSelect({
+    searchOnClear,
+  });
 
   return (
     <SelectWrapper {...rest} areOptionsOpen={areOptionsOpen}>
-      <CustomOverlay
-        isActive={areOptionsOpen}
-        onClick={() => {
-          setAreOptionsOpen(false);
-          dispatch(selectYearFrom(yearFrom));
-          dispatch(selectYearTo(yearTo));
-        }}
-      />
+      <CustomOverlay isActive={areOptionsOpen} onClick={handleClose} />
       <SelectContent>
         <SelectTrigger
           areOptionsOpen={areOptionsOpen}
-          clearCb={(e) => {
-            if (e.stopPropagation) e.stopPropagation();
-            setYearTo(0);
-            setYearFrom(0);
-            dispatch(selectYearFrom(0));
-            dispatch(selectYearTo(0));
-            setPlaceholder('');
-            setAreOptionsOpen(false);
-            searchOnClear && onSubmit({ ...filters, yearFrom: 0, yearTo: 0 });
-          }}
+          clearCb={clearCb}
           areOptionsSelected={!!(yearFrom || yearTo)}
           onClick={() => setAreOptionsOpen((open) => !open)}
         >
@@ -110,7 +52,10 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
             }}
             borderRadius="8px"
           >
-            <TextRegular opacity={areOptionsOpen ? '1' : '0.5'}>
+            <TextRegular
+              opacity={isBlack ? '1' : '0.5'}
+              _placeholder={{ color: 'red' }}
+            >
               {placeholder}
             </TextRegular>
           </HStack>
@@ -133,7 +78,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
                   },
                 }}
               >
-                {range(1980, 2021)
+                {range(1960, 2021)
                   .reverse()
                   .map((num) => (
                     <TextButton
@@ -164,7 +109,7 @@ export const YearSelect: React.FC<YearSelectProps & StackProps> = ({
                   },
                 }}
               >
-                {range(1980, 2021)
+                {range(1960, 2021)
                   .reverse()
                   .map((num) => (
                     <TextButton
