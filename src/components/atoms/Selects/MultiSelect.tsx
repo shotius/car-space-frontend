@@ -6,13 +6,14 @@ import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger
 import { SelectContent } from 'src/components/molecules/Wrappers/SelectContent';
 import { SelectOptions } from 'src/components/molecules/Wrappers/SelectOptions';
 import { SelectWrapper } from 'src/components/molecules/Wrappers/SelectWrapper';
+import { useMultiSelect } from 'src/utils/hooks/useMultiSelect';
 
 interface SelectProps {
   selected: any[];
   label: string;
   clearSelected: () => void;
   onApply: () => void;
-  size?: "lg" | "md"
+  size?: 'lg' | 'md';
 }
 
 export const MultiSelect: React.FC<SelectProps & StackProps> = ({
@@ -21,41 +22,33 @@ export const MultiSelect: React.FC<SelectProps & StackProps> = ({
   children,
   clearSelected,
   onApply,
-  size, 
+  size,
   ...rest
 }) => {
-  const [areOptionsOpen, setAreOptionsOpen] = useState<boolean>(false);
-  const [placeholder, setPlaceholder] = useState<string>('');
-
-  useEffect(() => {
-    if (selected.length) {
-      setPlaceholder(`${selected.join(', ')}`);
-    } else {
-      setPlaceholder(label);
-    }
-  }, [selected]);
-
-  const closeOptions = () => setAreOptionsOpen(false);
+  const {
+    areOptionsOpen,
+    setAreOptionsOpen,
+    placeholder,
+    clearCb,
+    handeClose,
+    areOptionsSelected,
+    isBlack,
+  } = useMultiSelect({
+    selected,
+    label,
+    onApply,
+    clearSelected,
+  });
 
   return (
     <SelectWrapper areOptionsOpen={areOptionsOpen}>
-      <CustomOverlay
-        isActive={areOptionsOpen}
-        onClick={() => {
-          closeOptions();
-          onApply();
-        }}
-      />
+      <CustomOverlay isActive={areOptionsOpen} onClick={handeClose} />
       <SelectContent>
         <SelectTrigger
           size={size}
           areOptionsOpen={areOptionsOpen}
-          clearCb={(e) => {
-            if (e.stopPropagation) e.stopPropagation();
-            clearSelected();
-            setAreOptionsOpen(false);
-          }}
-          areOptionsSelected={!!selected.length}
+          clearCb={clearCb}
+          areOptionsSelected={areOptionsSelected}
           onClick={() => setAreOptionsOpen((open) => !open)}
         >
           <HStack
@@ -69,7 +62,7 @@ export const MultiSelect: React.FC<SelectProps & StackProps> = ({
             }}
             borderRadius="8px"
           >
-            <TextRegular opacity={areOptionsOpen ? '1' : '0.5'} noOfLines={1}>
+            <TextRegular opacity={isBlack ? '1' : '0.5'} noOfLines={1}>
               {placeholder}
             </TextRegular>
           </HStack>
