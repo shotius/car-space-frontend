@@ -1,7 +1,6 @@
 import { VStack } from '@chakra-ui/layout';
 import { HStack, Stack, useToast } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
-import { useHistory } from 'react-router-dom';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
@@ -14,7 +13,6 @@ import {
   isApiDefaultError,
   isApiValidationError,
 } from 'src/utils/functions/typeChecker';
-import { Roles } from '../../../../../server/shared_with_front/contants';
 
 interface LoginFormProps {
   onClose: () => void;
@@ -28,7 +26,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   openForgetPassword,
 }) => {
   const dispatch = useAppDispatch();
-  const history = useHistory();
   const toast = useToast();
 
   return (
@@ -41,14 +38,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         };
         dispatch(loginUser(credentials))
           .unwrap()
-          .then((result) => {
-            history.push(
-              `/${
-                result.role === Roles.ADMIN ? Roles.ADMIN : Roles.USER
-              }/dashboard`
-            );
-            onClose();
-          })
+          .then(onClose)
           .catch((error) => {
             if (isApiValidationError(error)) {
               if (error.status === 422 && error.errors?.length) {
