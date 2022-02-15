@@ -45,7 +45,7 @@ export const AuthDrawer: React.FC<AuthDrawerProps> = ({}) => {
 
       case 'register':
         return (
-          <RegisterForm onClose={onClose} openLogin={() => setForm('login')} />
+          <RegisterForm openLogin={() => setForm('login')} />
         );
     }
   };

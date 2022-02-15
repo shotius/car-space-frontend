@@ -1,18 +1,12 @@
 import { VStack } from '@chakra-ui/layout';
-import { HStack, Stack, useToast } from '@chakra-ui/react';
+import { HStack, Stack } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
-import { useAppDispatch } from 'src/redux/app/hook';
-import { loginUser } from 'src/redux/features/auth/authSlice';
-import { toErrorMap } from 'src/utils/functions/toErrorMap';
-import {
-  isApiDefaultError,
-  isApiValidationError,
-} from 'src/utils/functions/typeChecker';
+import { useLoginForm } from 'src/utils/hooks/useLoginForm';
 
 interface LoginFormProps {
   onClose: () => void;
@@ -25,44 +19,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   openRegister,
   openForgetPassword,
 }) => {
-  const dispatch = useAppDispatch();
-  const toast = useToast();
-
+  const { onSubmit, initState, saveEmail } = useLoginForm({ onClose });
   return (
-    <Formik
-      initialValues={{ email: '', password: '' }}
-      onSubmit={(values, { setErrors }) => {
-        const credentials = {
-          email: values.email,
-          password: values.password,
-        };
-        dispatch(loginUser(credentials))
-          .unwrap()
-          .then(onClose)
-          .catch((error) => {
-            if (isApiValidationError(error)) {
-              if (error.status === 422 && error.errors?.length) {
-                setErrors(toErrorMap(error.errors));
-              }
-            } else if (isApiDefaultError(error)) {
-              toast({
-                title: error.error,
-                position: 'top',
-                duration: 3000,
-                status: 'error',
-              });
-            } else {
-              toast({
-                title: 'something bad happend :{ sorry.. try later',
-                position: 'top',
-                duration: 3000,
-                status: 'error',
-              });
-            }
-          });
-      }}
-    >
-      {() => (
+    <Formik initialValues={initState} onSubmit={onSubmit}>
+      {(props) => (
         <Form>
           <HeadingSecondary fontSize="24px" pb={['80px', null, '48px']}>
             Log in
@@ -89,6 +49,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             >
               Log in
             </ButtonRegular>
+
+            {/* Other forms  */}
             <Stack
               w="full"
               align="flex-start"
@@ -101,7 +63,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({
                 </TextRegular>
                 <TextButton
                   color="#427AD6"
-                  onClick={openRegister}
+                  onClick={() => {
+                    saveEmail(props.values.email);
+                    openRegister();
+                  }}
                   fontSize="14px"
                 >
                   Register
@@ -109,9 +74,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({
               </HStack>
               <TextButton
                 color="#427AD6"
-                onClick={openForgetPassword}
+                onClick={() => {
+                  saveEmail(props.values.email);
+                  openForgetPassword();
+                }}
                 fontSize="13px"
-                pt={[null, null, '3px']}
               >
                 Forgot password?
               </TextButton>

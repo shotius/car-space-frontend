@@ -1,3 +1,4 @@
+import { useAppSelector } from './../../redux/app/hook';
 import { useToast } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useAppDispatch } from 'src/redux/app/hook';
@@ -11,14 +12,15 @@ import { isApiValidationError } from '../functions/typeChecker';
 export const useRegisterForm = () => {
   const [verificationInfoShown, setVerificationInfoShown] = useState(false);
   const [email, setEmail] = useState('');
+  const initEmail = useAppSelector((state) => state.authReducer.emailInput);
 
   const dispatch = useAppDispatch();
   const toast = useToast();
-  
+
   // form initial state
   const initState: RegisterParams = {
     fullName: '',
-    email: '',
+    email: initEmail || '',
     password: '',
     role: Roles.USER,
     phoneNum: '',
