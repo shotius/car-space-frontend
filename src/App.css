@@ -3,56 +3,19 @@ h1 {
 }
 
 .hoverable:hover {
-  /* cursor: pointer; */
   box-shadow: 0px 3px 10px #00000029;
   transition: all .4s;
 }
 
-/* input[type='radio'] {
-  -webkit-appearance:none;
-  cursor: pointer;
-  width:16px;
-  height:16px;
-  border:2px solid #928a8a;
-  border-radius:100px;
-  outline:none;
-}
-
-input[type='radio']:before {
-  content:'';
-  display:block;
-  width: 8px;
-  margin: 2px auto;    
-  height: 8px;
-  border-radius:100px;    
-} */
 
 input[type='radio']:checked:before {
-  /* background:#FB5607; */ 
   background-color: #3D405B;
 }
 
 
-/** for styling scollbar*/ 
-/* // css={{
-  // '&::-webkit-scrollbar': {
-  //   width: '6px',
-  // },
-  // '&::-webkit-scrollbar-track': {
-  // width: '6px',
-  // overflow: 'hidden',
-  // marginTop: "10px"
-  // },
-  // '&::-webkit-scrollbar-thumb': {
-  //   background: '#DEDEE0',
-  //   borderRadius: '100px',
-  // },
-  // '::-webkit-scrollbar-button': {
-  //   backgroundColor: 'white',
-  //   display: 'block',
-  //   visibility: 'hidden',
-  //   borderStyle: 'solid',
-  //   height: '3px',
-  //   width: '6px',
-  // },
-  // }} */
+.radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}

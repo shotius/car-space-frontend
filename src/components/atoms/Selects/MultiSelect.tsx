@@ -1,5 +1,4 @@
 import { HStack, StackProps } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
 import { CustomOverlay } from 'src/components/molecules/overlays/CustomOverlay';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { SelectTrigger } from 'src/components/molecules/triggerers/SelectTrigger';
