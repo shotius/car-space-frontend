@@ -37,7 +37,7 @@ export const BidInfoCard: React.FC<BidInfoCardProps> = ({ car }) => {
             </HeadingSecondary>
           </HStack>
           {/* Contact Button  */}
-          <ButtonRegular maxW={'150px'} onClick={onOpen}>
+          <ButtonRegular maxW={['150px', null, null, '190px']} onClick={onOpen}>
             Contact
           </ButtonRegular>
         </HStack>

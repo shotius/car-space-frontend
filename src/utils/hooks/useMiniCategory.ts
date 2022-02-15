@@ -114,7 +114,7 @@ export const useMiniCategory = () => {
   }, []);
 
   const redirect = (q: string) => {
-    history.push(`/catalog?CURRENCY_PRICE=1&page=1&${q}`);
+    history.push(`/catalog?CURRENCY_PRICE=${currencyPrice}&page=1&${q}`);
   };
 
   const redirectCarType = (type: string[]) => {

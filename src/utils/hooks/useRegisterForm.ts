@@ -23,7 +23,7 @@ export const useRegisterForm = () => {
     email: initEmail || '',
     password: '',
     role: Roles.USER,
-    phoneNum: '',
+    phone: '',
   };
 
   // form validation
@@ -33,9 +33,7 @@ export const useRegisterForm = () => {
       .matches(/[?^\s]/, 'Missing last name'),
     email: Yup.string().email('Invalid mail').required('Required'),
     password: Yup.string().min(4, 'Too short').required('Required'),
-    phoneNum: Yup.string()
-      .min(9, 'Georgian number should have 9 numbers')
-      .max(9, 'Woow, Too long'),
+    phone: Yup.string().matches(/^\d{9}$/, 'Should include 9 numbers'),
   });
 
   const onSubmit = (values, { setErrors, setSubmitting }) => {

@@ -53,7 +53,6 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
           })
           .catch((error) => {
             setSubmitting(false);
-            console.log(isApiValidationError(error), error);
             if (isApiValidationError(error)) {
               if (error.status === 422 && error.errors?.length) {
                 setErrors(toErrorMap(error.errors));

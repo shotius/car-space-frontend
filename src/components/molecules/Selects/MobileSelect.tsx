@@ -25,6 +25,7 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
   textOpacity = '0.4',
   ...rest
 }) => {
+  const opacity = hasValue ? '1' : !isDisabled ? textOpacity : '0.2';
   return (
     <HStack
       h={['44px', null, '40px', null, null, '62px']}
@@ -40,7 +41,7 @@ export const MobileSelect: React.FC<MobileSelectProps & StackProps> = ({
       {...rest}
     >
       <TextRegular
-        opacity={!isDisabled ? textOpacity : '0.2'}
+        opacity={opacity}
         fontSize={['16px', null, null, '18px', null, '24px']}
         isTruncated
       >

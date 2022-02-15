@@ -34,6 +34,7 @@ export const MobilePriceSelect: React.FC<MobilePriceSelectProps> = ({
       <InputRegular
         pr="2"
         placeholder="Price from"
+        opacity={priceFrom ? "1" : "0.7"}
         type="number"
         value={priceFrom}
         onChange={(e) => setPriceFrom(e.currentTarget.value)}
@@ -47,6 +48,7 @@ export const MobilePriceSelect: React.FC<MobilePriceSelectProps> = ({
       <InputRegular
         placeholder="Price to"
         type="number"
+        opacity={priceFrom ? "1" : "0.7"}
         value={priceTo}
         onChange={(e) => setPriceTo(e.currentTarget.value)}
         onFocus={() => setKeyboardActive(true)}

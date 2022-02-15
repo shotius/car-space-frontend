@@ -46,7 +46,7 @@ export const searchCars = createAsyncThunk('cars/searchCars', async () => {
     const result = await carsService.searchCars();
     return result;
   } catch (error) {
-    console.log('error while fetching', error);
+    console.log('error while fetching Cars', error);
   }
 });
 
@@ -224,10 +224,6 @@ const carsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(searchCars.fulfilled, (state, action) => {
-      console.log(state, action);
-    });
-
     /** Get models */
     builder.addCase(getModels.fulfilled, (state, action) => {
       state.models = action.payload;

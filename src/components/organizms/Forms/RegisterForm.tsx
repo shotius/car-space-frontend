@@ -1,17 +1,11 @@
 import { HStack, VStack } from '@chakra-ui/layout';
-import {
-  FormControl,
-  FormErrorMessage,
-  InputGroup,
-  InputLeftAddon,
-} from '@chakra-ui/react';
-import { Field, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { TextButton } from 'src/components/molecules/Buttons/TextButton';
 import { FormikCheckbox } from 'src/components/molecules/formik/FormikCheckbox';
 import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
+import { FormikTelInput } from 'src/components/molecules/FormikInput/FormikTelInput';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
-import { InputGrey } from 'src/components/molecules/Inputs/InputGrey';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useRegisterForm } from 'src/utils/hooks/useRegisterForm';
 
@@ -67,36 +61,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ openLogin }) => {
                 autoComplete="new-password"
                 h={['53px', null, '40px']}
               />
-              <Field name="phoneNum">
-                {({ field, form }) => (
-                  <FormControl
-                    isInvalid={form.errors.phoneNum && form.touched.phoneNum}
-                    py="8px"
-                  >
-                    <InputGroup>
-                      <InputLeftAddon
-                        children="+995"
-                        h={['53px', null, '40px']}
-                        bg="#F4F4F4"
-                      />
-                      <InputGrey
-                        {...field}
-                        type="tel"
-                        placeholder="Phone Number"
-                        h={['53px', null, '40px']}
-                        borderLeftRadius="none"
-                        isRequired
-                        autoCapitalize="phone"
-                      />
-                    </InputGroup>
-                    {form.errors && (
-                      <FormErrorMessage as="p">
-                        {form.errors.phoneNum}
-                      </FormErrorMessage>
-                    )}
-                  </FormControl>
-                )}
-              </Field>
+              <FormikTelInput name="phone" />
 
               <FormikCheckbox name="role" label="I'm a dealer" />
             </VStack>
