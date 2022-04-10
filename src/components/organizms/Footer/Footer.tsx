@@ -3,7 +3,8 @@ import { useDisclosure } from '@chakra-ui/hooks';
 import { Stack, VStack } from '@chakra-ui/layout';
 import { useMediaQuery } from '@chakra-ui/media-query';
 import { Collapse } from '@chakra-ui/transition';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import { CarSpaceLogo } from 'src/components/atoms/CarSpaceLogo';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { SocialLinks } from 'src/components/molecules/Links/SocialLinks';
@@ -67,19 +68,19 @@ export const Footer: React.FC<FooterProps> = () => {
             >
               <TextRegular fontSize={'14px'}>
                 {' '}
-                <Link to="/services">ლიზინგი</Link>
+                <HashLink to="/services#leasing">ლიზინგი</HashLink>
               </TextRegular>
               <TextRegular fontSize={'14px'}>
                 {' '}
-                <Link to="/services">შიდა დაზღვევა</Link>
+                <HashLink to="/services#installment">შიდა დაზღვევა</HashLink>
               </TextRegular>
               <TextRegular fontSize={'14px'}>
                 {' '}
-                <Link to="/services">მანქანის იმპორტი</Link>
+                <HashLink to="/services#carimport">მანქანის იმპორტი</HashLink>
               </TextRegular>
               <TextRegular fontSize={'14px'}>
                 {' '}
-                <Link to="/services">მანქანის შერჩევა</Link>
+                <HashLink to="/services#carimport">მანქანის შერჩევა</HashLink>
               </TextRegular>
             </VStack>
           </Collapse>

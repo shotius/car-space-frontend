@@ -24,7 +24,10 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
   return (
     <>
       <ScrollToTop />
-      <ContainerOuter p={["0",null, null, "4"]} pt={[null, null, null, '42px']}>
+      <ContainerOuter
+        p={['0', null, null, '4']}
+        pt={[null, null, null, '42px']}
+      >
         <Box
           p="0"
           position={'relative'}
@@ -65,6 +68,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
         <SimpleGrid columns={[1, null, 2]} spacing="4" mt="32px">
           {/* Installment  */}
           <ServiceCard
+            id="installment"
             Icon={FilesStackIcon}
             heading="შიდა განვადება"
             content="მომხმარებლებს ვთავაზობთ მანქანის დაფინანსებას, მის საქართველოში
@@ -76,6 +80,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
 
           {/* Leasing  */}
           <ServiceCard
+            id="leasing"
             Icon={FolersQueueIcon}
             heading="ლიზინგი"
             content="მანქანის ჩამოყვანა რამდენიმი ტიპის კალკულაციასთანაა დაკავშირებული. გთავაზობთ ამერიკიდან ტრანსპორტირების, განბაჟების, შიდა დაფინანსებისა და ლიზინგის კალკულატორებს, რომელიც დაგეხმარებათ დეტალურად დაიანგარიშოთ ყველა შესაძლო ხარჯი, რაც მანქანის ჩამოყვანასთანაა დაკავშირებული."
@@ -83,13 +88,14 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
 
           {/* Car import  */}
           <ServiceCard
+            id="carimport"
             Icon={ShipIcon}
             heading="მანქანის ჩამოყვანა"
             content="ბაზარზე არსებული მრავალწლოვანი გამოცდილებიდან გამომდინარე, გვყავს საერთაშორისო პარტნიორები, რომელთა დახმარებითაც მანქანის ჩამოყვანის სერვისი ხდება საერთაშორისო ხარისხით. ავტომობილები ჩამოგვყავს უმოკლეს დროში და შესაძლო მინიმალურ ფასად."
           />
           {/* Choose a car  */}
-
           <ServiceCard
+            id="carChoose"
             Icon={CarLeftSideIcon}
             heading="მანქანის შერჩევა"
             content="ჩვენი პროფესიონალი ავტო ასისტენტი დაგეხმარებათ თქვენთვის სასურველი ავტომობილის შერჩევაში. შეისწავლის ამ არჩეული ავტომობილის ისტორიას, დაზიანებებს და ზოგად მდგომარეობას. ამ ინფორმაციაზე დაყრდნობით დაგეხმარებათ კონკრეტული გადაწყვეტილების მიღებაში, რაზეც აიღებს შესაბამის პასუხისმგებლობას."
