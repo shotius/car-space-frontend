@@ -17,7 +17,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
   }, []);
 
   return (
-    <Box w="full" direction="column" minH="100vh" bg="#e8e8e8">
+    <Box w="full" minH="100vh" bg="#e8e8e8">
       <Box
         position="sticky"
         w="full"

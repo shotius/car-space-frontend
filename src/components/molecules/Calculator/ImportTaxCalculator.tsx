@@ -10,7 +10,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
   return (
     <VStack w="full" h="full" spacing="25px">
       <RadioGroup w="full">
-        <Flex w="full" spacing="38px" gridGap={'4'}>
+        <Flex w="full" gridGap={'4'}>
           <label htmlFor="electric" className="radio-label">
             <input
               type="radio"

@@ -15,10 +15,13 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
   // const [percentage, setPercentage] = useState<number>(0);
 
   const currency = useAppSelector((state) => state.globalAppState.currency);
-  const price = useAppSelector(state => state.globalAppState.currencyPrice)
+  const price = useAppSelector((state) => state.globalAppState.currencyPrice);
 
   const total = loanAmount
-    ? safeSum(safeSum((loanAmount * months * 1.7) / 100, loanAmount), 50 * price)
+    ? safeSum(
+        safeSum((loanAmount * months * 1.7) / 100, loanAmount),
+        50 * price
+      )
     : 0;
 
   return (
@@ -27,7 +30,6 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
         <TextRegular opacity="0.5">Duration</TextRegular>
         <Flex
           w="full"
-          spacing="30px"
           justify="space-between"
           flexWrap="nowrap"
           style={{ gap: 16 }}

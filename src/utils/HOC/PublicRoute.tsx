@@ -16,6 +16,7 @@ export const PublicRoute: React.FC<PublicRouteProps & RouteProps> = ({
   const { pathname } = useLocation();
   
   return (
+    //@ts-ignore
     <ErrorBoundary>
       <Suspense
         fallback={

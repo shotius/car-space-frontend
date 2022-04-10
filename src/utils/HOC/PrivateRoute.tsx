@@ -60,6 +60,7 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
   }
 
   return (
+    //@ts-ignore
     <ErrorBoundary>
       <Suspense
         fallback={
