@@ -15,9 +15,9 @@ export const getCurrencyPrice = async (
   }
 
   const { data } = await axios.get(
-    `https://freecurrencyapi.net/api/v2/latest?apikey=76d033b0-7935-11ec-9e6b-8d25570c7533&base_currency=USD`
+    'https://api.currencyapi.com/v3/latest?apikey=76d033b0-7935-11ec-9e6b-8d25570c7533&base_currency=USD'
   );
-  return data.data[currency];
+  return data.data[currency].value;
 };
 
 export default getCurrencyPrice;

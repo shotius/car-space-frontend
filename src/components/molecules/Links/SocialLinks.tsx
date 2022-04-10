@@ -6,18 +6,24 @@ import { InstagramButton } from '../Buttons/InstagramButton';
 
 interface SocialLinksProps {}
 
-export const 
-SocialLinks: React.FC<SocialLinksProps & StackProps> = ({...rest}) => {
+export const SocialLinks: React.FC<SocialLinksProps & StackProps> = ({
+  ...rest
+}) => {
+  const redirectToFb = () => {
+    window.open('https://www.facebook.com/carspace.ge', '_blank');
+  };
+  
   return (
     <HStack pt="8" spacing="4" {...rest}>
-      <InstagramButton bg="#f4f4f5"/>      
+      <InstagramButton bg="#f4f4f5" />
       <IconButton
-        icon={<TwitterIcon boxSize="12" bg="#f4f4f5" borderRadius="100px"/>}
+        icon={<TwitterIcon boxSize="12" bg="#f4f4f5" borderRadius="100px" />}
         aria-label="Twitter link"
         bg="transparent"
       />
       <IconButton
-        icon={<FbIcon boxSize="12" bg="#f4f4f5" borderRadius="100px"/>}
+        onClick={redirectToFb}
+        icon={<FbIcon boxSize="12" bg="#f4f4f5" borderRadius="100px" />}
         aria-label="facebook link"
         bg="transparent"
       />
