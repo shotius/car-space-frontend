@@ -99,12 +99,14 @@ export const Footer: React.FC<FooterProps> = () => {
               <TextRegular fontSize={'14px'}>
                 ქ. თბილისი, შროშის ქ. N1
               </TextRegular>
-              <TextRegular fontSize={'14px'}>Tel: 032 2 988 687</TextRegular>
               <TextRegular fontSize={'14px'}>
-                Mobile: +995 555 48 45 86
+                <a href="tel:032-2-988-687">Tel: 032 2 988 687</a>
               </TextRegular>
               <TextRegular fontSize={'14px'}>
-                Email: info@carspace.ge
+                <a href="tel:+995-555-48-45-86">Mobile: +995 555 48 45 86</a>
+              </TextRegular>
+              <TextRegular fontSize={'14px'}>
+                <a href="mailto:info@carspace.ge">Email: info@carspace.ge</a>
               </TextRegular>
             </VStack>
           </Collapse>
