@@ -44,7 +44,7 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
     <ButtonWithIcon
       icon={liked ? HeartFilled : HeartIcon}
       boxSize={boxSize}
-      bg={liked ? '#FB560729' : buttonInactiveColor}
+      bg={liked ? 'autoOrange.100' : buttonInactiveColor}
       onClick={(event) => {
         if (event.stopPropagation) event.stopPropagation();
 
@@ -72,8 +72,8 @@ export const ButtonHeart: React.FC<ButtonHeartProps & ButtonProps> = ({
         }
       }}
       _hover={{
-        fill: 'red',
-        bg: '#FB560729',
+        fill: 'autoOrange.600',
+        bg: 'autoOrange.200',
       }}
       {...rest}
     />
