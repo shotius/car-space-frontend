@@ -37,8 +37,9 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
           <SliderBlue
             sliderValue={months}
             defaultValue={months}
+            showMarks
             min={1}
-            max={12}
+            max={6}
             step={1}
             onChange={(val) => setMonths(val)}
             flex={['1', '0']}
