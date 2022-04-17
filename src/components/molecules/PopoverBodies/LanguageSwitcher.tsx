@@ -1,6 +1,4 @@
 import { Icon, StackProps, VStack } from '@chakra-ui/react';
-import { GeoIcon } from 'src/components/atoms/Icons/GeoIcon';
-import { RusIcon } from 'src/components/atoms/Icons/RusIcon';
 import { UKIcon } from 'src/components/atoms/Icons/UKIcon';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { setAppLanguage } from 'src/redux/features/global/gloabalSlice';
@@ -22,14 +20,14 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps & StackProps> = ({
         <Icon as={UKIcon} mr="2" />
         <TextRegular fontWeight="light">Eng</TextRegular>
       </ButtonRect>
-      <ButtonRect onClick={() => dispatch(setAppLanguage('Geo'))}>
-        <Icon as={GeoIcon} mr="2" />
-        <TextRegular fontWeight="light">Geo</TextRegular>
-      </ButtonRect>
-      <ButtonRect onClick={() => dispatch(setAppLanguage('Rus'))}>
-        <Icon as={RusIcon} mr="2" />
-        <TextRegular fontWeight="light">Rus</TextRegular>
-      </ButtonRect>
+      {/* <ButtonRect onClick={() => dispatch(setAppLanguage('Geo'))}> */}
+        {/* <Icon as={GeoIcon} mr="2" /> */}
+        {/* <TextRegular fontWeight="light">Geo</TextRegular> */}
+      {/* </ButtonRect> */}
+      {/* <ButtonRect onClick={() => dispatch(setAppLanguage('Rus'))}> */}
+        {/* <Icon as={RusIcon} mr="2" /> */}
+        {/* <TextRegular fontWeight="light">Rus</TextRegular> */}
+      {/* </ButtonRect> */}
     </VStack>
   );
 };
