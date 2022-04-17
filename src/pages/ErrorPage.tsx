@@ -11,14 +11,14 @@ export const ErrorPage: React.FC<ErrorPageProps> = () => {
   return (
     <Center h="100vh">
       <VStack p="4">
-        <Heading textAlign="center" fontSize="133px" color="#FB5607">
+        <Heading textAlign="center" fontSize="133px" color="autoOrange.500">
           404
         </Heading>
         <TextRegular textAlign="center">
           OOPS, PAGE YOU ARE LOOKING FOR CAN NOT BE FOUND
         </TextRegular>
         <TextButton fontFamily="Roboto Medium" onClick={() => history.replace('/home')} color="#427AD6">
-          Back To Home
+          Back To Home Page
         </TextButton>
       </VStack>
     </Center>

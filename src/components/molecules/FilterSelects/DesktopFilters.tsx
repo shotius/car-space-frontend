@@ -1,3 +1,4 @@
+import "./filters.style.css"
 import {
   Collapse,
   HStack,
@@ -108,7 +109,7 @@ export const DesktopFiltersOnCatalogPage: React.FC<
         </HStack>
       </Stack>
       {/* this colapsable filters will appear on tablet and laptop screens */}
-      <Collapse in={isOpen}>
+      <Collapse in={isOpen} className="collapsableFilters">
         <SimpleGrid
           templateColumns={[
             null,
