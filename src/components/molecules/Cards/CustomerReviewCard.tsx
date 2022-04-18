@@ -11,6 +11,8 @@ interface CustomerReviewCardProps {
 export const CustomerReviewCard: React.FC<CustomerReviewCardProps> = ({
   review,
 }) => {
+
+  console.log('username: ', review)
   return (
     <Card p={['4', '8', '48px']}  display={"flex"} alignItems={"center"}>
       <Stack

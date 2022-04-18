@@ -85,7 +85,7 @@ export const AddNewReview: React.FC<AddNewReviewProps> = ({}) => {
                     />
                     <AspectRatio ratio={1 / 1} minW="80px">
                       <Image
-                        src={review.user && review.user.avatar}
+                        src={review.user?.avatar}
                         fallbackSrc="https://image.shutterstock.com/image-vector/profile-picture-avatar-icon-vector-260nw-1760295569.jpg"
                         borderRadius="100px"
                       />

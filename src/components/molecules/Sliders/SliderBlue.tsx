@@ -23,10 +23,9 @@ export const SliderBlue: React.FC<SliderBlueProps & SliderProps> = ({
   ...rest
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const numberForMarks = useMemo(
-    () => (rest.max ? rest.max - 1 : 1),
-    [rest.max]
-  );
+  const numberForMarks = useMemo(() => (rest.max ? rest.max : 1), [rest.max]);
+
+  const thumbPosition = Math.round(((sliderValue! - 1) / (rest.max! - 1)) * 94);
 
   return (
     <Slider
@@ -37,11 +36,15 @@ export const SliderBlue: React.FC<SliderBlueProps & SliderProps> = ({
       {/* Marks  */}
       {showMarks
         ? range(1, numberForMarks).map((value) => (
-            <CustomSliderMark value={value} key={value} />
+            <CustomSliderMark
+              className="loanSliderMark"
+              value={(value * 95) / 100}
+              key={value}
+            />
           ))
         : null}
       {/* Track  */}
-      <SliderTrack bg="#77798c" h="2px">
+      <SliderTrack bg="#77798c" className="LoanSliderTrack_" h="3px">
         <Box position="relative" right={10} />
         <SliderFilledTrack bg="#77798c" />
       </SliderTrack>
@@ -54,7 +57,12 @@ export const SliderBlue: React.FC<SliderBlueProps & SliderProps> = ({
           </TextRegular>
         }
       >
-        <SliderThumb boxSize={4} bg="autoBlue.400" zIndex={'0'} />
+        <SliderThumb
+          left={`${thumbPosition}% !important`}
+          boxSize={4}
+          bg="autoBlue.400"
+          zIndex={'0'}
+        />
       </SliderToolptip>
     </Slider>
   );

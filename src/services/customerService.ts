@@ -8,6 +8,7 @@ const baseUrl = '/api/customer-reviews';
 
 const getReviews = async () => {
   const { data } = await axios.get(baseUrl);
+  console.log('revews: ', data)
   return data as ApiSuccessResponse<ICustomerReviewFront[]>;
 };
 

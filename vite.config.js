@@ -20,7 +20,7 @@ export default defineConfig({
     jsxInject: `import React from 'react'`,
   },
   plugins: [
-    reactRefresh(),
+    // reactRefresh(),
     tsconfigPaths(),
     react(),
     checker({ typescript: true }),
