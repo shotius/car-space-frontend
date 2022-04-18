@@ -10,7 +10,7 @@ interface ProfileNavLinkProps {
 
 export const ProfileNavLink: React.FC<ProfileNavLinkProps & ButtonProps> = ({
   activeBg = 'autoOrange.100',
-  activeColor = '#FB5607',
+  activeColor = 'autoOrange.500',
   to,
   clickCallback,
   children,

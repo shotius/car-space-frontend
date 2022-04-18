@@ -7,14 +7,14 @@ interface LogoProps {
 
 export const CarSpaceLogo: React.FC<CenterProps & LogoProps> = ({
   cursor = 'pointer',
-  h = 'full',
+  h = ['20px', '25px', null, '25px'],
   onClick,
   imgW = ['100px', '130px', '143px'],
   ...rest
 }) => {
   return (
     <Center h={h} cursor={cursor} onClick={onClick} w={imgW} {...rest}>
-      <Icon as={LogoIcon} w={'300px'} h={['20px', '25px', null, '25px']} ml="26px" />
+      <Icon as={LogoIcon} w={'300px'} h={h} ml="26px" />
     </Center>
   );
 };

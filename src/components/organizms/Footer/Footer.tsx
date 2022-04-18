@@ -43,6 +43,7 @@ export const Footer: React.FC<FooterProps> = () => {
           <CarSpaceLogo
             mb={['32px', null, '0px']}
             imgW={['100px', null, '167px']}
+            h={ ['20px', '25px', null, '30px']}
             onClick={() => {
               history.push('/home');
             }}
