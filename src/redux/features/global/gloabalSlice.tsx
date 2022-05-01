@@ -11,7 +11,7 @@ const initialState: GlobalStateSliceState = {
   networkError: undefined,
   lang: 'Eng',
 
-  currency: 'GEL',
+  currency: 'USD',
   currencyPrice: 1,
 
   isMobileMenuOpen: false,
@@ -42,7 +42,6 @@ export const changeCurrency = createAsyncThunk<number, CurrencyType>(
           value: price.toString(),
           ttl: 1000 * 60 * 60 * 24, // will expire in one day
         });
-
         dispatch(setAppCurrency(currency));
         return price;
       }
