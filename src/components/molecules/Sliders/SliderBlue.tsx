@@ -38,7 +38,7 @@ export const SliderBlue: React.FC<SliderBlueProps & SliderProps> = ({
         ? range(1, numberForMarks).map((value) => (
             <CustomSliderMark
               className="loanSliderMark"
-              value={(value * 95) / 100}
+              value={(value * 96) / 100}
               key={value}
             />
           ))

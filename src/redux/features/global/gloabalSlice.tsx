@@ -11,7 +11,7 @@ const initialState: GlobalStateSliceState = {
   networkError: undefined,
   lang: 'Eng',
 
-  currency: 'USD',
+  currency: 'GEL',
   currencyPrice: 1,
 
   isMobileMenuOpen: false,

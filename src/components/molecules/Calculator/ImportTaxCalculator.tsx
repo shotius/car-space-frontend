@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import { safeSum } from '../../../utils/functions/safeOperations';
 import { Flex, RadioGroup, VStack } from '@chakra-ui/react';
 import { InputGrey } from '../Inputs/InputGrey';
 import { TextRegular } from '../Texts/TextRegular';
@@ -7,6 +10,26 @@ import './styles.css';
 interface ImportTaxCalculatroProps {}
 
 export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
+  const [year, setYear] = useState<string>('');
+  const [engine, setEngine] = useState<string>('');
+
+  function handleYearChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setYear(e.currentTarget.value);
+  }
+  function handleEngineChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setEngine(e.currentTarget.value);
+  }
+
+  function getAge(year: number) {
+    const now = new Date().getFullYear();
+    return now - year;
+  }
+
+  const importTax =
+    engine && year
+      ? safeSum(+engine * 1000 * 0.05, +engine * 1000 * getAge(+year) * 0.0025)
+      : 0;
+
   return (
     <VStack w="full" h="full" spacing="25px">
       <RadioGroup w="full">
@@ -38,10 +61,20 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
         </Flex>
       </RadioGroup>
       <VStack w="full">
-        <InputGrey placeholder="Year" type="number" />
-        <InputGrey placeholder="Engine" type="number" />
+        <InputGrey
+          placeholder="Year"
+          type="number"
+          value={year}
+          onChange={handleYearChange}
+        />
+        <InputGrey
+          placeholder="Engine"
+          type="number"
+          value={engine}
+          onChange={handleEngineChange}
+        />
       </VStack>
-      <CalculatorFooter />
+      <CalculatorFooter total={importTax} />
     </VStack>
   );
 };

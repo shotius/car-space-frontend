@@ -11,15 +11,14 @@ interface LoanCalculatorProps {}
 
 export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
   const [months, setMonths] = useState<number>(3);
-  const [loanAmount, setLoanAmount] = useState<number>(0);
-  // const [percentage, setPercentage] = useState<number>(0);
+  const [loanAmount, setLoanAmount] = useState('');
 
   const currency = useAppSelector((state) => state.globalAppState.currency);
   const price = useAppSelector((state) => state.globalAppState.currencyPrice);
 
   const total = loanAmount
     ? safeSum(
-        safeSum((loanAmount * months * 1.7) / 100, loanAmount),
+        safeSum((+loanAmount * months * 1.7) / 100, +loanAmount),
         50 * price
       )
     : 0;
@@ -50,13 +49,13 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
           </TextRegular>
         </Flex>
       </VStack>
-      <VStack w="full">
+      <VStack w="full" spacing={4}>
         <InputGroup>
           <InputGrey
             placeholder="Loan amount"
-            value={loanAmount || ''}
+            value={loanAmount}
             type="number"
-            onChange={(e) => setLoanAmount(parseInt(e.currentTarget.value))}
+            onChange={(e) => setLoanAmount(e.currentTarget.value)}
           />
           <InputRightElement
             children={currency}
@@ -64,24 +63,13 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
             opacity={loanAmount ? '0.7' : '0'}
           />
         </InputGroup>
-        {/* <InputGroup>
-          <InputGrey
-            placeholder="Percentage"
-            value={percentage || ''}
-            type="number"
-            onChange={(e) => {
-              // percentages are in [0, 100] range
-              const val = parseInt(e.currentTarget.value);
-              if (val > 0 && val <= 100) {
-                setPercentage(val);
-              } else if (e.currentTarget.value === '') {
-                setPercentage(0);
-              }
-            }}
-          />
-          <InputRightElement children="%" opacity={percentage ? '0.7' : '0'} />
-        </InputGroup> */}
+
+        <TextRegular>
+          <b>Loan Amount * months * 2.7 / 100</b>+<b>Loan Amount</b>+
+          <b>50 * price</b>
+        </TextRegular>
       </VStack>
+
       <CalculatorFooter total={total} />
     </VStack>
   );
