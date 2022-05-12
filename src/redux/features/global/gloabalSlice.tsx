@@ -29,22 +29,9 @@ export const changeCurrency = createAsyncThunk<number, CurrencyType>(
   'globalState/detectCurrencyPrice',
   async (currency, { rejectWithValue, dispatch }) => {
     try {
-      // if we have currency saved in the localstorage return it
-      const cachedCurrency = localStorageServise.getItem(currency);
-      if (cachedCurrency) {
-        dispatch(setAppCurrency(currency));
-        return parseFloat(cachedCurrency);
-      } else {
-        // else use live api and get the currency
-        const price = await getCurrencyPrice(currency);
-        localStorageServise.setItem({
-          key: currency,
-          value: price.toString(),
-          ttl: 1000 * 60 * 60 * 24, // will expire in one day
-        });
-        dispatch(setAppCurrency(currency));
-        return price;
-      }
+      const price = await getCurrencyPrice(currency);
+      dispatch(setAppCurrency(currency));
+      return price;
     } catch (error) {
       return rejectWithValue(1);
     }

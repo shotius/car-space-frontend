@@ -1,5 +1,4 @@
-import { TooltipProps, Tooltip } from '@chakra-ui/react';
-import { TextRegular } from '../Texts/TextRegular';
+import { Tooltip, TooltipProps } from '@chakra-ui/react';
 
 interface SliderToolptipProps {}
 

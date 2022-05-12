@@ -1,3 +1,4 @@
+import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
 import axios from 'axios';
 import { CurrencyType } from 'src/constants';
 import localStorageServise from 'src/services/localStorage.service';
@@ -8,6 +9,7 @@ async function getCurrencyByApiCall(currency: CurrencyType) {
   );
   return data.data[currency].value;
 }
+
 function getCurrencyPriceFromCache(currency: CurrencyType) {
   return localStorageServise.getItem(currency);
 }
@@ -19,6 +21,7 @@ function saveCurrencyPriceInCache(currency: CurrencyType, price: number) {
     ttl: 1000 * 60 * 60 * 24, // will expire in one day
   });
 }
+
 /**
  *  Function returns price of the currency in comparison to USD
  * @param currency
@@ -31,13 +34,12 @@ export const getCurrencyPrice = async (
   if (currency === 'USD') {
     return 1;
   }
-  
   const cachedCurrency = getCurrencyPriceFromCache(currency);
   if (cachedCurrency) {
     return parseFloat(cachedCurrency);
   } else {
     const price = await getCurrencyByApiCall(currency);
-    saveCurrencyPriceInCache(currency, price)
+    saveCurrencyPriceInCache(currency, price);
     return price;
   }
 };
@@ -45,5 +47,18 @@ export const getCurrencyPrice = async (
 export const getLariPrice = async () => {
   return await getCurrencyPrice('GEL');
 };
+
+interface convertPriceProps {
+  from: CurrencyType;
+  to: CurrencyType;
+  amount: number;
+}
+/**Convert one currency amount in to another */
+export async function converCurrencyPrice({ from, to, amount }: convertPriceProps) {
+  const fromCurrencyPrice = await getCurrencyPrice(from)
+  const toCurrencyPrice = await getCurrencyPrice(to)
+  const result = amount/fromCurrencyPrice*toCurrencyPrice
+  return roundFloatTo(result, 3)
+}
 
 export default getCurrencyPrice;

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAppSelector } from 'src/redux/app/hook';
 import { safeSum } from '../../../utils/functions/safeOperations';
 import { InputGrey } from '../Inputs/InputGrey';
-import { SliderBlue } from '../Sliders/SliderBlue';
+import { SliderBlue, SliderThumbWithTooltip } from '../Sliders/SliderBlue';
 import { TextRegular } from '../Texts/TextRegular';
 import { CalculatorFooter } from './CalculatorFooter';
 
@@ -33,7 +33,8 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
           flexWrap="nowrap"
           style={{ gap: 16 }}
         >
-          <SliderBlue
+          <SliderThumbWithTooltip />
+          {/* <SliderBlue
             sliderValue={months}
             defaultValue={months}
             showMarks
@@ -43,7 +44,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
             onChange={(val) => setMonths(val)}
             flex={['1', '0']}
             flexBasis={[null, '60%', '67%']}
-          />
+          /> */}
           <TextRegular textAlign="end" minW="96px" wordBreak="keep-all">
             ( {months} Months)
           </TextRegular>

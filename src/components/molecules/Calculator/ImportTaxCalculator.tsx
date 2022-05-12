@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { safeSum } from '../../../utils/functions/safeOperations';
 import { Flex, RadioGroup, VStack } from '@chakra-ui/react';
@@ -8,6 +8,7 @@ import { CalculatorFooter } from './CalculatorFooter';
 import './styles.css';
 import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
 import { useAppSelector } from 'src/redux/app/hook';
+import { converCurrencyPrice } from 'src/utils/functions/getCurrencyPrice';
 
 interface ImportTaxCalculatroProps {}
 
@@ -44,9 +45,8 @@ function getSaaqcizoGanakveti(age: number) {
 export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
   const [year, setYear] = useState<string>('');
   const [engine, setEngine] = useState<string>('');
-  const currencyPrice = useAppSelector(
-    (state) => state.globalAppState.currencyPrice
-  );
+  const [total, setTotal] = useState(0);
+  const currency = useAppSelector((state) => state.globalAppState.currency);
 
   function handleYearChange(e: React.ChangeEvent<HTMLInputElement>) {
     setYear(e.currentTarget.value);
@@ -55,7 +55,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
     setEngine(e.currentTarget.value);
   }
 
-  function calculateImportTax(engine: number, year: number) {
+  async function calculateImportTax(engine: number, year: number) {
     if (!engine || !year) {
       return 0;
     }
@@ -65,12 +65,23 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
       engine * 1000 * age * 0.0025
     );
     const aqcizi = engine * 1000 * getSaaqcizoGanakveti(age);
+    const companyInterest = await converCurrencyPrice({
+      from: 'GEL',
+      to: currency,
+      amount: 200,
+    });
     const customsClearance = safeSum(
       safeSum(aqcizi, importTax),
-      200 * currencyPrice
+      companyInterest
     );
     return roundFloatTo(customsClearance, 3);
   }
+
+  useEffect(() => {
+    calculateImportTax(+engine, +year)
+      .then(setTotal)
+      .catch(console.log);
+  }, [engine, year]);
 
   return (
     <VStack w="full" h="full" spacing="25px">
@@ -116,7 +127,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
           onChange={handleEngineChange}
         />
       </VStack>
-      <CalculatorFooter total={calculateImportTax(+engine, +year)} />
+      <CalculatorFooter total={total} />
     </VStack>
   );
 };

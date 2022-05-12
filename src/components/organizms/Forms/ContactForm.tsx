@@ -30,8 +30,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
   const toast = useToast();
 
   const initialValues: IMessageBody = {
-    name: isAuth && fullName ? fullName : '',
-    phone: isAuth && phone ? phone : '',
+    name: isAuth && fullName ? fullName : 'aaa',
+    phone: isAuth && phone ? phone : '123123123',
     message: '',
     link: window.location.toString(),
   };
@@ -76,25 +76,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
     >
       {({ isSubmitting }) => (
         <Form>
-          <HeadingSecondary> Write you message here</HeadingSecondary>
-          <FormikInput name="name" placeholder="Name" />
+          <FormikInput name="name" placeholder="Your Name" />
           <FormikInput name="phone" placeholder="Phone" type="number" />
-          <Field name="message" vali>
-            {({ field, form }) => (
-              <>
-                <Textarea
-                  mt="2"
-                  {...field}
-                  placeholder="Message..."
-                  size="sm"
-                  as={TextareaAutosize}
-                  maxRows={10}
-                  isInvalid={form.errors.message}
-                />
-                <TextRegular color="red">{form.errors.message}</TextRegular>
-              </>
-            )}
-          </Field>
           <ButtonRegular type="submit" mt="4" isLoading={isSubmitting}>
             Ask for call
           </ButtonRegular>

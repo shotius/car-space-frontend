@@ -1,7 +1,7 @@
 import { Button, IconButton } from '@chakra-ui/button';
 import Icon from '@chakra-ui/icon';
 import { Flex, HStack, StackDivider } from '@chakra-ui/layout';
-import { Center } from '@chakra-ui/react';
+import { Center, useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CarSpaceLogo } from 'src/components/atoms/CarSpaceLogo';
@@ -9,6 +9,8 @@ import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BurgerIcon } from 'src/components/atoms/Icons/BurgerIcon';
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
 import { PersonIcon } from 'src/components/atoms/Icons/PersonIcon';
+import { TelephoneIcon } from 'src/components/atoms/Icons/TelephoneIcon';
+import { ButtonGreen } from 'src/components/molecules/Buttons/ButtonGreen';
 import { ButtonOutline } from 'src/components/molecules/Buttons/ButtonOutline';
 import { MenuLink } from 'src/components/molecules/Links/MenuLink';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
@@ -22,6 +24,7 @@ import {
 } from 'src/redux/features/global/gloabalSlice';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { Roles } from '../../../../../server/shared_with_front/contants';
+import { ContactModal } from '../Modals/ContactModal';
 import { CurrencyPopover } from '../PopOvers/CurrencyPopover';
 import { LanguagePopover } from '../PopOvers/LanguagePopover';
 
@@ -46,6 +49,9 @@ export const Header: React.FC<HeaderProps> = () => {
   );
   const role = useAppSelector((state) => state.userInfoSlice.role);
   const fullName = useAppSelector((state) => state.userInfoSlice.fullName);
+
+  const { isOpen: isContactModalOpen, onToggle: toggleContactModal } =
+    useDisclosure();
 
   // Toggle mobile menu
   const toggleMenu = () => dispatch(toggleMobileMenu());
@@ -107,56 +113,65 @@ export const Header: React.FC<HeaderProps> = () => {
             </HStack>
 
             {/* if user is authenticated login and register buttons are not shown */}
-            {isAuthenticated ? (
-              <ButtonOutline
-                px="0"
-                onClick={() => {
-                  // if USER is deleted from localstorage logout
-                  if (!USER) {
-                    dispatch(logoutUser());
-                  } else {
-                    history.push(
-                      `/${
-                        role === Roles.ADMIN ? Roles.ADMIN : Roles.USER
-                      }/dashboard`
-                    );
-                  }
-                }}
-              >
-                <Icon as={PersonIcon} boxSize="4" mr="2" />
-                <TextRegular
-                  fontSize="16px"
-                  w="55px"
-                  isTruncated
-                >{`${fullName}`}</TextRegular>
-              </ButtonOutline>
-            ) : (
-              <HStack spacing={[null, null, '0', '2', null, '4']} ml="-15px">
-                {/* Login Button  */}
-                <Button
-                  variant="ghost"
-                  fontWeight="light"
-                  fontSize="16px"
-                  ml="1"
-                  onClick={() => dispatch(openLoginModal())}
-                  _hover={{
-                    bg: 'autoGrey.200',
+            <HStack>
+              {isAuthenticated ? (
+                <ButtonOutline
+                  px="0"
+                  onClick={() => {
+                    // if USER is deleted from localstorage logout
+                    if (!USER) {
+                      dispatch(logoutUser());
+                    } else {
+                      history.push(
+                        `/${
+                          role === Roles.ADMIN ? Roles.ADMIN : Roles.USER
+                        }/dashboard`
+                      );
+                    }
                   }}
                 >
-                  <TextRegular>Log in</TextRegular>
-                </Button>
-                {/* Register Button  */}
-                <ButtonOutline
-                  onClick={() => dispatch(openRegisterModal())}
-                  transition="all 0.5s"
-                >
-                  <Icon as={PersonIcon} boxSize="4" />
-                  <TextRegular ml="2" mt="1">
-                    Register
-                  </TextRegular>
+                  <Icon as={PersonIcon} boxSize="4" mr="2" />
+                  <TextRegular
+                    fontSize="16px"
+                    w="55px"
+                    isTruncated
+                  >{`${fullName}`}</TextRegular>
                 </ButtonOutline>
-              </HStack>
-            )}
+              ) : (
+                <HStack spacing={[null, null, '0', '2', null, '4']} ml="-15px">
+                  {/* Login Button  */}
+                  <Button
+                    variant="ghost"
+                    fontWeight="light"
+                    fontSize="16px"
+                    ml="1"
+                    onClick={() => dispatch(openLoginModal())}
+                    _hover={{
+                      bg: 'autoGrey.200',
+                    }}
+                  >
+                    <TextRegular>Log in</TextRegular>
+                  </Button>
+                  {/* Register Button  */}
+                  <ButtonOutline
+                    onClick={() => dispatch(openRegisterModal())}
+                    transition="all 0.5s"
+                    w="100px"
+                  >
+                    <Icon as={PersonIcon} boxSize="4" />
+                    <TextRegular ml="2" mt="1">
+                      Register
+                    </TextRegular>
+                  </ButtonOutline>
+                </HStack>
+              )}
+              <ButtonGreen px="6" onClick={toggleContactModal}>
+                <Icon as={TelephoneIcon} fill="white" boxSize="4" />
+                <TextRegular ml="2" color="white" fontWeight={'light'}>
+                  Contact
+                </TextRegular>
+              </ButtonGreen>
+            </HStack>
           </HStack>
         )}
 
@@ -205,7 +220,7 @@ export const Header: React.FC<HeaderProps> = () => {
           </HStack>
         ) : null}
       </Flex>
-      {/* menu navigation menu*/}
+      <ContactModal isOpen={isContactModalOpen} onClose={toggleContactModal} />
     </ContainerOuter>
   );
 };

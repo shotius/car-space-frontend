@@ -4,6 +4,7 @@ interface ButtonOutlineProps {}
 
 export const ButtonOutline: React.FC<ButtonOutlineProps & ButtonProps> = ({
   children,
+  padding="0", 
   ...rest
 }) => {
   return (
@@ -12,8 +13,7 @@ export const ButtonOutline: React.FC<ButtonOutlineProps & ButtonProps> = ({
       fontWeight="light"
       border="1px solid #565656"
       borderRadius="8px"
-      w="100px"
-      padding="0"
+      padding={padding}
       minW="0"
       transition="all 0.2s"
       _hover={{
