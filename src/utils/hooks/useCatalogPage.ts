@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
+import { getFilters } from 'src/redux/features/auth/carsSlice';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import { setFetchingCars } from 'src/redux/features/auth/carsSlice';
 import { getFavouriteCarIds } from 'src/redux/features/auth/userSlice';
 import { closeCatalogBanner } from 'src/redux/features/banners/CatalogBannerSlice';
@@ -23,7 +23,7 @@ export const useCatalogPage = () => {
 
   const cars = useAppSelector((state) => state.carsReducer.dealerCars);
 
-  const totalPages = useAppSelector((state) => state.carsPagination.totalPages);
+  const totalPages = useAppSelector((state) => state.carsReducer.totalPages);
 
   const fethingCars = useAppSelector(
     (state) => state.carsReducer.fetchingDealerCars
@@ -38,6 +38,15 @@ export const useCatalogPage = () => {
     (state) => state.globalAppState.catalogQuery
   );
   const filters = useAppSelector((state) => state.selectedCarFilters);
+
+  const brands = useAppSelector((state) => state.carsReducer.brands);
+
+  // Get car filters
+  useEffect(() => {
+    if (!brands.length && cars.length) {
+      dispatch(getFilters());
+    }
+  }, [brands, cars]);
 
   useEffect(() => {
     checkForNetworkError();
@@ -65,7 +74,6 @@ export const useCatalogPage = () => {
   useEffect(() => {
     if (catalogQuery !== query.toString()) {
       onSubmit(filters);
-      dispatch(setActivePage(query.get('page')));
     }
   }, [page, catalogQuery]);
 

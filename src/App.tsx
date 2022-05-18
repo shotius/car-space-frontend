@@ -14,6 +14,8 @@ import { PrivateRoute } from 'src/utils/HOC/PrivateRoute';
 import { PublicRoute } from 'src/utils/HOC/PublicRoute';
 import { Roles } from '../../server/shared_with_front/contants';
 import { PublicLayout } from './components/templates/Layouts/PublicLayout';
+
+// lazy routes
 const AccountActivation = lazy(() => import('./pages/AccountActivation'));
 const ChangePassword = lazy(() => import('./pages/ChangePassword'));
 const CarDetailPageDealer = lazy(
@@ -53,7 +55,7 @@ function App() {
               exact
             />
 
-            <PublicRoute path="/catalog" component={CatalogPage} exact />
+            <PublicRoute path="/catalog" component={CatalogPage} />
             <PublicRoute
               path="/catalog/car/:carId"
               component={CarDetailPageDealer}

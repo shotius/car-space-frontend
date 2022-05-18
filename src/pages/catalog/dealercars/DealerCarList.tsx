@@ -6,9 +6,9 @@ import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { CatalogListWrap } from 'src/components/molecules/Wrappers/CatalogListWrap';
 import { useCatalogPage } from 'src/utils/hooks/useCatalogPage';
 
-interface CatalogLIstProps {}
+interface DealerCarListProps {}
 
-export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
+const DealerCarList: React.FC<DealerCarListProps> = () => {
   const { fethingCars, cars, totalPages, page, changePage } = useCatalogPage();
 
   if (fethingCars) {
@@ -44,3 +44,5 @@ export const CarListOnCatalogPage: React.FC<CatalogLIstProps> = () => {
     </VStack>
   );
 };
+
+export default DealerCarList;

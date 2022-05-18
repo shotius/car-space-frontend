@@ -95,9 +95,10 @@ export const Header: React.FC<HeaderProps> = () => {
           >
             <HStack spacing={[null, null, '16px', '24px', '32px']}>
               <MenuLink
-                to={`/catalog${catalogQuery ? `?${catalogQuery}` : ''}`}
+                to={`/catalog/dealers${catalogQuery ? `?${catalogQuery}` : ''}`}
                 label="Catalog"
               />
+              <MenuLink to="/catalog/copart" label="Copart" />
               <MenuLink to="/services" label="Services" />
               <MenuLink to="/blog" label="Blog" activeOnlyWhenExact={true} />
             </HStack>
@@ -117,6 +118,7 @@ export const Header: React.FC<HeaderProps> = () => {
               {isAuthenticated ? (
                 <ButtonOutline
                   px="0"
+                  w="100px"
                   onClick={() => {
                     // if USER is deleted from localstorage logout
                     if (!USER) {

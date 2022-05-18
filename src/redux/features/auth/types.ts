@@ -24,6 +24,7 @@ export interface CarsSliceState {
   cars: ICarCopart[];
   fethingCars: boolean;
   fetchingCarsError: string | undefined;
+  totalPages: number; 
 
   dealerCars: ICarDealer[];
   fetchingDealerCars: boolean;

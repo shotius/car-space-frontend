@@ -1,22 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { authReducer } from 'src/redux/features/auth/authSlice';
+import { carImages } from '../features/auth/carImagesSlice';
 import { carsReducer } from '../features/auth/carsSlice';
 import { selectedCarFilters } from '../features/auth/selectedCarFilterSlice';
-import { carsPagination } from '../features/auth/carPaginationSlice';
-import { carImages } from '../features/auth/carImagesSlice';
-import { globalAppState } from '../features/global/gloabalSlice';
 import { UserInfo } from '../features/auth/userSlice';
-import { customersReducer } from '../features/customer/customerSlice';
-import { orderedCarReducer } from '../features/orders/orderedCarSlice';
-import { miniCategoryReducer } from '../features/miniCategory/miniCategorySlice';
 import { bannerReducer } from '../features/banners/bannerSlice';
 import CatalogBannerSlice from '../features/banners/CatalogBannerSlice';
+import { customersReducer } from '../features/customer/customerSlice';
+import { globalAppState } from '../features/global/gloabalSlice';
+import { miniCategoryReducer } from '../features/miniCategory/miniCategorySlice';
+import { orderedCarReducer } from '../features/orders/orderedCarSlice';
 
 const reducer = {
   authReducer,
   carsReducer,
   selectedCarFilters,
-  carsPagination,
   carImages,
   globalAppState,
   userInfoSlice: UserInfo,

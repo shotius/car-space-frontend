@@ -1,23 +1,23 @@
-import { useAppSelector, useAppDispatch } from 'src/redux/app/hook';
-import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
+import { useState } from 'react';
 import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import { useQueryParams } from './useQueryParams';
 
 export const useCatalogActivePage = () => {
-  const activePage = useAppSelector((state) => state.carsPagination.activePage);
+  const [activePage, setActivePage] = useState<number | null>(null);
   const query = useQueryParams();
-  const dispatch = useAppDispatch();
 
-  const page = Number(query.get('page')) || 1;
+  function getPageFromUrl() {
+    return Number(query.get('page')) || 1;
+  }
 
-  const setActiveCatalogPage = () => {
+  function setActiveCatalogPage() {
     activePage
       ? query.set('page', activePage.toString())
-      : query.set('page', page.toString());
+      : query.set('page', getPageFromUrl().toString());
 
-    dispatch(setActivePage(query.get('page')));
-    dispatch(setCatalogQuery(query.toString()));
-  };
+    setActivePage(getPageFromUrl());
+    setCatalogQuery(query.toString());
+  }
 
   return { setActiveCatalogPage };
 };

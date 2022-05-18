@@ -8,6 +8,11 @@ import {
 
 const baseURL = '/api/dealers/cars';
 
+export interface GetCarsReturnType {
+  cars: ICarDealer[];
+  pagesTotal: number;
+}
+
 const searchCars = async () => {
   return await axios.get(`${baseURL}`);
 };
@@ -24,7 +29,7 @@ const getRecentCars = async () => {
 
 const getDealerCars = async (params: URLSearchParams) => {
   const { data } = await axios.get(`${baseURL}`, { params });
-  return data as ApiSuccessResponse<{ cars: ICarDealer[]; pagesTotal: number }>;
+  return data as ApiSuccessResponse<GetCarsReturnType>;
 };
 
 const getDealerCarsCount = async (params: URLSearchParams) => {

@@ -30,8 +30,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
   const toast = useToast();
 
   const initialValues: IMessageBody = {
-    name: isAuth && fullName ? fullName : 'aaa',
-    phone: isAuth && phone ? phone : '123123123',
+    name: isAuth && fullName ? fullName : '',
+    phone: isAuth && phone ? phone : '',
     message: '',
     link: window.location.toString(),
   };

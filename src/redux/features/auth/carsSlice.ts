@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import carsService from 'src/services/carsService';
+import { number } from 'prop-types';
+import carsService, { GetCarsReturnType } from 'src/services/carsService';
 import {
   ApiValidationError,
   ICarCopart,
   ICarDealer,
 } from '../../../../../server/shared_with_front/types/types-shared';
 import { isApiValidationError } from './../../../utils/functions/typeChecker';
-import { setTotalPages } from './carPaginationSlice';
 import { CarsSliceState, ICarCopartModel, IFilters } from './types';
 
 const initialState: CarsSliceState = {
@@ -15,6 +15,7 @@ const initialState: CarsSliceState = {
   cars: [],
   fethingCars: false,
   fetchingCarsError: undefined,
+  totalPages: 0,
 
   // single car
   fetchingSingleCar: false,
@@ -67,16 +68,15 @@ export const getFilters = createAsyncThunk(
  * @returns dealer cars or rejects with value
  */
 export const getDealerCars = createAsyncThunk<
-  ICarDealer[],
+  GetCarsReturnType,
   URLSearchParams,
   {
     rejectValue: string;
   }
->('cars/getDealerCars', async (params, { rejectWithValue, dispatch }) => {
+>('cars/getDealerCars', async (params, { rejectWithValue }) => {
   try {
     const { results } = await carsService.getDealerCars(params);
-    dispatch(setTotalPages(results.pagesTotal));
-    return results.cars;
+    return results;
   } catch (error) {
     return rejectWithValue('could not get dealer cars');
   }
@@ -268,7 +268,8 @@ const carsSlice = createSlice({
       state.fetchingDealerCars = true;
     });
     builder.addCase(getDealerCars.fulfilled, (state, action) => {
-      state.dealerCars = action.payload;
+      state.dealerCars = action.payload.cars;
+      state.totalPages = action.payload.pagesTotal;
       state.fetchingDealerCars = false;
     });
     builder.addCase(getDealerCars.rejected, (state) => {

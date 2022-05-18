@@ -1,16 +1,12 @@
-import { ContactForm } from 'src/components/organizms/Forms/ContactForm';
-
 import {
-  useDisclosure,
   Modal,
-  ModalOverlay,
+  ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Button,
+  ModalOverlay,
 } from '@chakra-ui/react';
+import { ContactForm } from 'src/components/organizms/Forms/ContactForm';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -26,7 +22,8 @@ export const ContactModal: React.FC<ContactModalProps> = ({
       <ModalOverlay />
       <ModalContent p="32px 48px">
         <ModalHeader p="0" w="80%">
-          Need help? We’re here to answer any questions.
+          Need help?
+          <br /> We’re here to answer any questions.
         </ModalHeader>
         <ModalCloseButton top="32px" right="48px" />
         <ModalBody p="0" mt="48px">

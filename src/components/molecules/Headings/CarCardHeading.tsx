@@ -3,10 +3,9 @@ import { Link, useHistory } from 'react-router-dom';
 import { CloseIcon } from 'src/components/atoms/Icons/CloseIcon';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
-import { setActivePage } from 'src/redux/features/auth/carPaginationSlice';
 import {
   getDealerCars,
-  removeSingleCar,
+  removeSingleCar
 } from 'src/redux/features/auth/carsSlice';
 import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
@@ -68,10 +67,10 @@ export const CarCardHeading: React.FC<CarCardHeadingProps> = ({
                   .then((data) => {
                     // if there are not more cards on the page fetch previos page
                     const currPage = query.get('page');
-                    if (!!!data.length && currPage && currPage !== '1') {
+                    if (!!!data.cars.length && currPage && currPage !== '1') {
                       const previousPage = parseInt(currPage) - 1 || '1';
                       query.set('page', previousPage.toString());
-                      dispatch(setActivePage(previousPage));
+                      // dispatch(setActivePage(previousPage));
                       dispatch(setCatalogQuery(query.toString()));
                       history.push({
                         pathname: '/catalog',
