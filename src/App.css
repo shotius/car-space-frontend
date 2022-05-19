@@ -24,5 +24,8 @@ input[type='radio']:checked:before {
   gap: 8px;
 }
 .LoanSliderTrack {
-  width: 120% !important; 
+  width: 105% !important; 
+}
+.loanSliderMark {
+  bottom: 27%;
 }

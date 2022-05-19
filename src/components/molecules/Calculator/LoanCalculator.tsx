@@ -1,7 +1,16 @@
-import { Flex, InputGroup, InputRightElement, VStack } from '@chakra-ui/react';
-import { useState } from 'react';
+import {
+  Flex,
+  HStack,
+  InputGroup,
+  InputRightElement,
+  VStack,
+} from '@chakra-ui/react';
+import { useMemo, useState } from 'react';
 import { useAppSelector } from 'src/redux/app/hook';
-import { safeSum } from '../../../utils/functions/safeOperations';
+import {
+  safeSum,
+  safeSubtraction,
+} from '../../../utils/functions/safeOperations';
 import { InputGrey } from '../Inputs/InputGrey';
 import { SliderBlue } from '../Sliders/SliderBlue';
 import { TextRegular } from '../Texts/TextRegular';
@@ -23,6 +32,9 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
       )
     : 0;
 
+  const companyInterest = useMemo(() => {
+    return safeSubtraction(total, +loanAmount);
+  }, [total]);
   return (
     <VStack w="full" spacing={['24px', null, '32px']}>
       <VStack w="full" align="flex-start">
@@ -39,7 +51,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
             showMarks
             min={1}
             max={6}
-            step={0.98}
+            step={1}
             onChange={(val) => setMonths(val)}
             flex={['1', '0']}
             flexBasis={[null, '60%', '67%']}
@@ -64,10 +76,17 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
           />
         </InputGroup>
 
-        <TextRegular>
-          <b>Loan Amount * months * 2.7 / 100</b>+<b>Loan Amount</b>+
-          <b>50 * price</b>
-        </TextRegular>
+        {/* <HStack w="full" justify={'space-between'}>
+          <TextRegular>Loan Amount</TextRegular>
+          <TextRegular>{loanAmount || '-'}</TextRegular>
+        </HStack> */}
+        <HStack w="full" justify="space-between">
+          <TextRegular>Company Interest</TextRegular>
+          <TextRegular>{companyInterest || '-'}</TextRegular>
+        </HStack>
+        {/* <HStack>
+          <TextRegular>Monthly</TextRegular>
+        </HStack> */}
       </VStack>
 
       <CalculatorFooter total={total} />

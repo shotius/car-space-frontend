@@ -1,4 +1,4 @@
-import { Box, SliderMark, Tooltip } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import {
   Slider,
   SliderFilledTrack,
@@ -25,7 +25,10 @@ export const SliderBlue: React.FC<SliderBlueProps & SliderProps> = ({
   const [showTooltip, setShowTooltip] = useState(false);
   const numberForMarks = useMemo(() => (rest.max ? rest.max : 1), [rest.max]);
 
-  const thumbPosition = Math.round(((sliderValue! - 1) / (rest.max! - 1)) * 94);
+  const thumbPosition = useMemo(
+    () => ((sliderValue! - 1) / (rest.max! - 1)) * 100,
+    [sliderValue]
+  );
 
   return (
     <Slider
@@ -38,15 +41,15 @@ export const SliderBlue: React.FC<SliderBlueProps & SliderProps> = ({
         ? range(1, numberForMarks).map((value) => (
             <CustomSliderMark
               className="loanSliderMark"
-              value={(value * 96) / 100}
+              value={value}
               key={value}
             />
           ))
         : null}
       {/* Track  */}
-      <SliderTrack bg="#77798c" className="LoanSliderTrack_" h="3px">
+      <SliderTrack bg="#77798c" className="LoanSliderTrack" h="3px">
         <Box position="relative" right={10} />
-        <SliderFilledTrack bg="#77798c" />
+        <SliderFilledTrack bg="#77798c" w="10px" />
       </SliderTrack>
 
       <SliderToolptip
