@@ -1,3 +1,4 @@
+import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
 import {
   Flex,
   HStack,
@@ -7,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { useMemo, useState } from 'react';
 import { useAppSelector } from 'src/redux/app/hook';
+import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import {
   safeSum,
   safeSubtraction,
@@ -35,6 +37,11 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
   const companyInterest = useMemo(() => {
     return safeSubtraction(total, +loanAmount);
   }, [total]);
+
+  const monthlyPayment = useMemo(() => {
+    return roundFloatTo(+total / months, 2);
+  }, [total]);
+
   return (
     <VStack w="full" spacing={['24px', null, '32px']}>
       <VStack w="full" align="flex-start">
@@ -76,17 +83,31 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
           />
         </InputGroup>
 
-        {/* <HStack w="full" justify={'space-between'}>
-          <TextRegular>Loan Amount</TextRegular>
-          <TextRegular>{loanAmount || '-'}</TextRegular>
-        </HStack> */}
         <HStack w="full" justify="space-between">
           <TextRegular>Company Interest</TextRegular>
-          <TextRegular>{companyInterest || '-'}</TextRegular>
+          <TextRegular>
+            {companyInterest ? (
+              <>
+                {companyInterest} {currency}
+              </>
+            ) : (
+              '-'
+            )}{' '}
+          </TextRegular>
         </HStack>
-        {/* <HStack>
+
+        <HStack w="full" justify={'space-between'}>
           <TextRegular>Monthly</TextRegular>
-        </HStack> */}
+          <TextRegular>
+            {loanAmount ? (
+              <>
+                {monthlyPayment} {currency}
+              </>
+            ) : (
+              '-'
+            )}
+          </TextRegular>
+        </HStack>
       </VStack>
 
       <CalculatorFooter total={total} />

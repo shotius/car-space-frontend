@@ -39,7 +39,7 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps & TabsProps> =
           w={w}
           maxW={size === 'regular' ? '441px' : '640px'}
           boxShadow={boxShadow}
-          h={size === 'regular' ? '340px' : '400px'}
+          h={size === 'regular' ? '340px' : '415px'}
           borderRadius="8px"
           {...rest}
         >
