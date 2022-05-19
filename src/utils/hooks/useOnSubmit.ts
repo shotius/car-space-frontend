@@ -1,3 +1,4 @@
+import { useQueryOperations } from './useQueryOperations';
 import { useHistory } from 'react-router-dom';
 import { FilterQueries } from 'src/constants';
 import { useAppDispatch } from 'src/redux/app/hook';
@@ -11,42 +12,45 @@ import { deleteQueryFromURL } from '../functions/deleteQueryFromUrl';
 import { useAppSelector } from './../../redux/app/hook';
 import { useQueryParams } from './useQueryParams';
 
+const {
+  BRAND,
+  MODEL,
+  YEAR_FROM,
+  YEAR_TO,
+  CONDITION,
+  TYPE,
+  LOCATION,
+  TRANSMISSION,
+  KEYS,
+  DRIVE,
+  SALES_STATUS,
+  FUEL_TYPE,
+  CYLINDER,
+  PRICE_FROM,
+  PRICE_TO,
+  ENGINE_FROM,
+  ENGINE_TO,
+  CURRENCY_PRICE,
+  MOST_DEMAND,
+  DEALER_ID,
+} = FilterQueries;
+
 export const useOnSubmit = () => {
-  const query = useQueryParams();
   const dispatch = useAppDispatch();
   const history = useHistory();
-
-  const startQuery = query.toString();
+  const startQuery = useQueryParams().toString();
+  const query = useQueryParams();
+  const {
+    updatedBrandsInQuery,
+    clearAllFiltersFromQuery,
+    updateModelsInQuery,
+  } = useQueryOperations();
 
   const currPrice = useAppSelector(
     (state) => state.globalAppState.currencyPrice
   );
 
-  const {
-    BRAND,
-    MODEL,
-    YEAR_FROM,
-    YEAR_TO,
-    CONDITION,
-    TYPE,
-    LOCATION,
-    TRANSMISSION,
-    KEYS,
-    DRIVE,
-    SALES_STATUS,
-    FUEL_TYPE,
-    CYLINDER,
-    PRICE_FROM,
-    PRICE_TO,
-    ENGINE_FROM,
-    ENGINE_TO,
-    CURRENCY_PRICE,
-    MOST_DEMAND,
-    DEALER_ID,
-  } = FilterQueries;
-
-  // this function clears the url and fills with new query strings
-  async function onSubmit(filters: SelectedCarFilters) {
+  function updateQueryString(filters: SelectedCarFilters) {
     const {
       brands: selectedBrands,
       models: selectedModels,
@@ -70,47 +74,14 @@ export const useOnSubmit = () => {
     } = filters;
 
     // before creating query, i delete all query filters in the url
-    query.delete(BRAND);
-    query.delete(YEAR_FROM);
-    query.delete(PRICE_FROM);
-    query.delete(PRICE_TO);
-    query.delete(YEAR_TO);
-    query.delete(CONDITION);
-    query.delete(TYPE);
-    query.delete(LOCATION);
-    query.delete(TRANSMISSION);
-    query.delete(KEYS);
-    query.delete(DRIVE);
-    query.delete(SALES_STATUS);
-    query.delete(FUEL_TYPE);
-    query.delete(CYLINDER);
-    query.delete(ENGINE_FROM);
-    query.delete(ENGINE_TO);
-    query.delete(MOST_DEMAND);
-    query.delete(DEALER_ID);
+    clearAllFiltersFromQuery();
 
-    deleteQueryFromURL({ query, queryName: MODEL }); // remote models
     // clear if there was network error
     dispatch(setNetworkError());
 
-    // put brand values from redux in the url
-    if (selectedBrands.length) {
-      selectedBrands.map((brand) => {
-        query.append(BRAND, brand);
-      });
-    } else {
-      // if there no brand selected remove models from the query
-      deleteQueryFromURL({ query, queryName: MODEL }); // remote models
-    }
-
-    // if brands exists put model in the url
-    if (selectedModels.length) {
-      selectedModels.map((item) => {
-        item.models.map((model) => {
-          query.append(`${MODEL}[${item.brand}]`, model);
-        });
-      });
-    }
+    // update query string by filters
+    updatedBrandsInQuery(selectedBrands);
+    updateModelsInQuery(selectedModels);
 
     // set year from
     if (yearFrom) {
@@ -193,19 +164,27 @@ export const useOnSubmit = () => {
 
     // we need to see first page on search
     query.set('page', '1');
+    return query;
+  }
+
+  // this function clears the url and fills with new query strings
+  async function onSubmit(filters: SelectedCarFilters) {
+    const updatedQuery = updateQueryString(filters);
+
+    console.log('udaptedQuery: ', updatedQuery.toString());
 
     // if query changed redirect
-    if (startQuery !== query.toString()) {
-      history.push({ pathname: '/catalog', search: query.toString() });
+    if (startQuery !== updatedQuery.toString()) {
+      history.push({
+        pathname: '/catalog/dealers',
+        search: updatedQuery.toString(),
+      });
     }
 
-    dispatch(getDealerCars(query));
+    dispatch(getDealerCars(updatedQuery));
 
     // save catalog query in redux for caching purpose
-    dispatch(setCatalogQuery(query.toString()));
-
-    // save catalog query in redux for caching purpose
-    dispatch(setCatalogQuery(query.toString()));
+    dispatch(setCatalogQuery(updatedQuery.toString()));
   }
 
   return onSubmit;

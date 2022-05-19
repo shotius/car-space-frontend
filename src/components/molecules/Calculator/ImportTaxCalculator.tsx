@@ -64,16 +64,19 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
       engine * 1000 * 0.05,
       engine * 1000 * age * 0.0025
     );
+
     const aqcizi = engine * 1000 * getSaaqcizoGanakveti(age);
     const companyInterest = await converCurrencyPrice({
       from: 'GEL',
       to: currency,
-      amount: 200,
+      amount: 272,
     });
+
     const customsClearance = safeSum(
       safeSum(aqcizi, importTax),
       companyInterest
     );
+
     return roundFloatTo(customsClearance, 3);
   }
 
@@ -81,7 +84,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
     calculateImportTax(+engine, +year)
       .then(setTotal)
       .catch(console.log);
-  }, [engine, year]);
+  }, [engine, year, currency]);
 
   return (
     <VStack w="full" h="full" spacing="25px">

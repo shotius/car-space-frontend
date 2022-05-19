@@ -72,10 +72,12 @@ export const useCatalogPage = () => {
 
   // when page number changes, get cars and scroll to top and save active page in redux
   useEffect(() => {
-    if (catalogQuery !== query.toString()) {
-      onSubmit(filters);
-    }
+    onSubmit(filters);
   }, [page, catalogQuery]);
+
+  useEffect(() => {
+    console.log('foo queryChanged: ', query.toString());
+  }, [query]);
 
   // on pagin number press
   const changePage = (page: number) => {
