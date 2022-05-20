@@ -8,7 +8,6 @@ import {
 } from '@chakra-ui/react';
 import { useMemo, useState } from 'react';
 import { useAppSelector } from 'src/redux/app/hook';
-import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import {
   safeSum,
   safeSubtraction,
