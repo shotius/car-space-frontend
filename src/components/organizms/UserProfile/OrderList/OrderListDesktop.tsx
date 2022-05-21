@@ -51,7 +51,7 @@ export const OrderListDesktop: React.FC<OrderListDesktopProps> = ({
                 <TextRegular textTransform="capitalize">Name</TextRegular>
               </Th>
               <Th fontWeight="light" px="2">
-                <TextRegular textTransform="capitalize">Created</TextRegular>
+                <TextRegular textTransform="capitalize">Purchase date</TextRegular>
               </Th>
               <Th isTruncated fontWeight="light">
                 <TextRegular textTransform="capitalize">

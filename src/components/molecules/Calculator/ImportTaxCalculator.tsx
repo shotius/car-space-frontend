@@ -9,6 +9,13 @@ import './styles.css';
 import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
 import { useAppSelector } from 'src/redux/app/hook';
 import { converCurrencyPrice } from 'src/utils/functions/getCurrencyPrice';
+import { ScrollableList } from '../ScrollableList';
+import { range } from 'src/utils/functions/range';
+import { YearSelectScrollable } from '../YearSelectScrollable';
+import { SelectOptions } from '../Wrappers/SelectOptions';
+import { YearSelect } from '../FilterSelects/desktop/YearSelect';
+import { SingleYearSelect } from '../selects/SingleYearSelect';
+import { capitalize } from 'src/utils/functions/capitalize';
 
 interface ImportTaxCalculatroProps {}
 
@@ -42,17 +49,22 @@ function getSaaqcizoGanakveti(age: number) {
   }
   return ganakveTebi[age];
 }
+
+const options = ['electric', 'hybrid', 'right wheel'] as const;
 export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
-  const [year, setYear] = useState<string>('');
+  const [year, setYear] = useState(0);
   const [engine, setEngine] = useState<string>('');
   const [total, setTotal] = useState(0);
+  const [engineType, setEngineType] = useState<typeof options[number] | null>(
+    null
+  );
   const currency = useAppSelector((state) => state.globalAppState.currency);
 
-  function handleYearChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setYear(e.currentTarget.value);
-  }
   function handleEngineChange(e: React.ChangeEvent<HTMLInputElement>) {
     setEngine(e.currentTarget.value);
+  }
+  function handleYearSelect(year: number) {
+    setYear(year);
   }
 
   async function calculateImportTax(engine: number, year: number) {
@@ -88,41 +100,23 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
 
   return (
     <VStack w="full" h="full" spacing="25px">
-      <RadioGroup w="full">
+      <RadioGroup w="full" name="car_type">
         <Flex w="full" gridGap={'4'}>
-          <label htmlFor="electric" className="radio-label">
-            <input
-              type="radio"
-              id="electric"
-              name="car_type"
-              value="electric"
-            />
-            <TextRegular opacity="0.4">Electric</TextRegular>
-          </label>
-
-          <label htmlFor="Some Spec" className="radio-label">
-            <input
-              type="radio"
-              id="Some Spec"
-              name="car_type"
-              value="Some Spec"
-            />
-            <TextRegular opacity="0.4">Some Spec</TextRegular>
-          </label>
-
-          <label htmlFor="hybrid" className="radio-label">
-            <input type="radio" id="hybrid" name="car_type" value="hybrid" />
-            <TextRegular opacity="0.4">Hybrid</TextRegular>
-          </label>
+          {options.map((value) => (
+            <label
+              key={value}
+              htmlFor={value}
+              className="radio-label"
+              onClick={() => setEngineType(value)}
+            >
+              <input type="radio" checked={engineType === value} />
+              <TextRegular opacity="0.4">{capitalize(value)}</TextRegular>
+            </label>
+          ))}
         </Flex>
       </RadioGroup>
       <VStack w="full">
-        <InputGrey
-          placeholder="Year"
-          type="number"
-          value={year}
-          onChange={handleYearChange}
-        />
+        <SingleYearSelect value={year} onChange={handleYearSelect} />
         <InputGrey
           placeholder="Engine"
           type="number"

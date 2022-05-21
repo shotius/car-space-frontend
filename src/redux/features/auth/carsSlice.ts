@@ -13,7 +13,7 @@ import { CarsSliceState, ICarCopartModel, IFilters } from './types';
 const initialState: CarsSliceState = {
   // cars
   cars: [],
-  fethingCars: false,
+  fethingCars: true,
   fetchingCarsError: undefined,
   totalPages: 0,
 
