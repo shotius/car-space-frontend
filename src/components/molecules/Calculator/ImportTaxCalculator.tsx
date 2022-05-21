@@ -1,21 +1,19 @@
-import { useEffect, useState } from 'react';
-
-import { safeSum } from '../../../utils/functions/safeOperations';
 import { Flex, RadioGroup, VStack } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from 'src/redux/app/hook';
+import { capitalize } from 'src/utils/functions/capitalize';
+import { converCurrencyPrice } from 'src/utils/functions/getCurrencyPrice';
+import { range } from 'src/utils/functions/range';
+// import { range } from 'src/utils/functions/range';
+import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
+import { useEngineSelect } from 'src/utils/hooks/useEngineSelect';
+import { safeSum } from '../../../utils/functions/safeOperations';
 import { InputGrey } from '../Inputs/InputGrey';
+import { SingleSelectDemo } from '../selects/SingleSelectDemo';
+// import { SingleSelectDemo } from '../selects/SingleSelect';
 import { TextRegular } from '../Texts/TextRegular';
 import { CalculatorFooter } from './CalculatorFooter';
 import './styles.css';
-import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
-import { useAppSelector } from 'src/redux/app/hook';
-import { converCurrencyPrice } from 'src/utils/functions/getCurrencyPrice';
-import { ScrollableList } from '../ScrollableList';
-import { range } from 'src/utils/functions/range';
-import { YearSelectScrollable } from '../YearSelectScrollable';
-import { SelectOptions } from '../Wrappers/SelectOptions';
-import { YearSelect } from '../FilterSelects/desktop/YearSelect';
-import { SingleYearSelect } from '../selects/SingleYearSelect';
-import { capitalize } from 'src/utils/functions/capitalize';
 
 interface ImportTaxCalculatroProps {}
 
@@ -59,12 +57,13 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
     null
   );
   const currency = useAppSelector((state) => state.globalAppState.currency);
+  const { generatedEngines } = useEngineSelect();
 
-  function handleEngineChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setEngine(e.currentTarget.value);
+  function handleEngineSelect(engine: string) {
+    setEngine(engine);
   }
-  function handleYearSelect(year: number) {
-    setYear(year);
+  function handleYearSelect(year: string) {
+    setYear(+year);
   }
 
   async function calculateImportTax(engine: number, year: number) {
@@ -116,12 +115,19 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
         </Flex>
       </RadioGroup>
       <VStack w="full">
-        <SingleYearSelect value={year} onChange={handleYearSelect} />
-        <InputGrey
-          placeholder="Engine"
-          type="number"
+        <SingleSelectDemo
+          value={year.toString()}
+          onChange={handleYearSelect}
+          placeholder="Year"
+          options={range(1960, new Date().getFullYear())
+            .map((value) => value.toString())
+            .reverse()}
+        />
+        <SingleSelectDemo
           value={engine}
-          onChange={handleEngineChange}
+          placeholder="Engine"
+          onChange={handleEngineSelect}
+          options={generatedEngines(0.3, 9).map((value) => value.toString())}
         />
       </VStack>
       <CalculatorFooter total={total} />

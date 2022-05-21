@@ -7,6 +7,7 @@ import { LoanCalculator } from 'src/components/molecules/Calculator/LoanCalculat
 import { TransportCalculator } from 'src/components/molecules/Calculator/TransportCalculator';
 import { Card } from 'src/components/molecules/Cards/Card';
 import { CurrencySwitcherButtons } from 'src/components/molecules/CurrencySwitcherButtons';
+// @ts-ignore
 import { SingleSelect } from 'src/components/molecules/Selects/SingleSelect';
 import './styles.css';
 
@@ -45,7 +46,7 @@ export const CalculatorMobile: React.FC<CalculatorMobileProps> = ({}) => {
             <VStack m="auto" align="flex-start" spacing="4" p="3" zIndex={"10000"}>
               {options
                 .filter((opt) => opt !== calcType)
-                .map((opt) => (
+                .map((opt) =>   (
                   <TextButton key={opt} onClick={() => setCalcType(opt)}>
                     {opt}
                   </TextButton>
