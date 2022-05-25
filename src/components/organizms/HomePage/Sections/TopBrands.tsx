@@ -12,6 +12,7 @@ import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHea
 import { ScrollableDiv } from 'src/components/molecules/Wrappers/ScrollableDiv';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectBrand } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { baseCatalogQuerySelector } from 'src/redux/features/global/gloabalSlice';
 import { DEALER_CARS_CATALOG_URL } from 'src/utils/config/contants';
 import { TopBrandCard } from '../../../molecules/Cards/TopBrandCard';
 
@@ -24,10 +25,11 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
   const currencyPrice = useAppSelector(
     (state) => state.globalAppState.currencyPrice
   );
+  const baseCatalogQuery = useAppSelector(state => baseCatalogQuerySelector(state)) 
 
   const redirect = (brand: string) =>
     history.push(
-      `${DEALER_CARS_CATALOG_URL}?CURRENCY_PRICE=${currencyPrice}&page=1&brand=${brand}`
+      `${DEALER_CARS_CATALOG_URL}?${baseCatalogQuery}&brand=${brand}`
     );
 
   return (

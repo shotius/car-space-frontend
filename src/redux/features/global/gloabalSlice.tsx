@@ -69,7 +69,6 @@ const globalStateSlice = createSlice({
     },
     setCatalogQuery: (state, action: PayloadAction<string | undefined>) => {
       state.catalogQuery = action.payload;
-      return state
     },
     setUserError: (state, action: PayloadAction<string | undefined>) => {
       state.userError = action.payload;
@@ -134,5 +133,8 @@ export const {
   setCurrencyPrice,
 } = globalStateSlice.actions;
 
+export const baseCatalogQuerySelector = (state: RootState) => {
+  return `CURRENCY_PRICE=${state.globalAppState.currencyPrice}&page=1`;
+};
 
 export const { reducer: globalAppState } = globalStateSlice;

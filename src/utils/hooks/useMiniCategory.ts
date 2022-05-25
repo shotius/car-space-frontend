@@ -21,6 +21,7 @@ import {
 } from 'src/redux/features/miniCategory/miniCategorySlice';
 import useCurrencyIcon from './useCurrencyIcon';
 import { useQueryParams } from './useQueryParams';
+import { baseCatalogQuerySelector } from 'src/redux/features/global/gloabalSlice';
 
 interface PriceRange {
   from?: number;
@@ -44,7 +45,9 @@ export const useMiniCategory = () => {
   const fourToSix_k = useAppSelector((state) => state.miniCategory.fourToSix_k);
   const sixToTen_k = useAppSelector((state) => state.miniCategory.sixToTen_k);
   const mostDemands = useAppSelector((state) => state.miniCategory.mostDemands);
-  const catalogQuery = useAppSelector(state => state.globalAppState.catalogQuery)
+  const catalogQuery = useAppSelector(
+    (state) => state.globalAppState.catalogQuery
+  );
   const icon = useCurrencyIcon();
 
   const getSuvs = () => {
@@ -114,14 +117,14 @@ export const useMiniCategory = () => {
     getMostDemands();
   }, []);
 
+  const baseCatalogQuery = useAppSelector(baseCatalogQuerySelector);
   const redirect = (q: string) => {
     history.push(
-      `${DEALER_CARS_CATALOG_URL}?CURRENCY_PRICE=${currencyPrice}&page=1&${q}`
+      `${DEALER_CARS_CATALOG_URL}?${baseCatalogQuery}&${q}`
     );
   };
 
   const redirectCarType = (type: string[]) => {
-    console.log('clicked');
     dispatch(selectTypes(type));
     redirect(`type=${type}`);
   };

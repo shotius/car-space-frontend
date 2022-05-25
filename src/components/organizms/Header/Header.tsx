@@ -17,11 +17,13 @@ import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { logoutUser } from 'src/redux/features/auth/authSlice';
 import {
+  baseCatalogQuerySelector,
   openLoginModal,
   openRegisterModal,
   toggleAuthModal,
   toggleMobileMenu,
 } from 'src/redux/features/global/gloabalSlice';
+import { DEALER_CARS_CATALOG_URL } from 'src/utils/config/contants';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { Roles } from '../../../../../server/shared_with_front/contants';
 import { ContactModal } from '../Modals/ContactModal';
@@ -32,6 +34,8 @@ interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = () => {
   const USER = localStorage.getItem('USER_ROLE');
+
+  const baseCatalogQuery = useAppSelector(baseCatalogQuerySelector);
 
   const [safeDocument, setSafeDocument] = useState<Document | null>(document);
   const dispatch = useAppDispatch();
@@ -95,7 +99,7 @@ export const Header: React.FC<HeaderProps> = () => {
           >
             <HStack spacing={[null, null, '16px', '24px', '32px']}>
               <MenuLink
-                to={`/catalog/dealers${catalogQuery ? `?${catalogQuery}` : ''}`}
+                to={`${DEALER_CARS_CATALOG_URL}?${baseCatalogQuery}`}
                 label="Catalog"
               />
               {/* <MenuLink to="/catalog/copart" label="Copart" /> */}
