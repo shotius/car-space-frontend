@@ -7,6 +7,7 @@ import { MobileYearSelect } from 'src/components/molecules/FilterSelects/mobile/
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { getFilters } from 'src/redux/features/auth/carsSlice';
 import { openAdvancedFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { DEALER_CARS_CATALOG_URL } from 'src/utils/config/contants';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import { SearchButton } from '../../../molecules/Buttons/SearchButton';
 import { Card } from '../../../molecules/Cards/Card';
@@ -58,7 +59,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           {!isDesktop ? (
             <MobileBrandSelect
               w={['100%', '30%', '23%']}
-              searchOnClear = {false}
+              searchOnClear={false}
               onClick={() => {
                 if (!brands.length) {
                   dispatch(getFilters());
@@ -110,7 +111,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
             onClick={() => {
               // since we have onSubmit function when catalog page loads
               // it is enough to just redirect
-              history.push({ pathname: '/catalog' });
+              history.push({ pathname: DEALER_CARS_CATALOG_URL });
             }}
           />
         </Flex>
@@ -122,7 +123,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           onClick={() => {
             // since we have onSubmit function when catalog page loads
             // it is enough to just redirect
-            history.push({ pathname: '/catalog' });
+            history.push({ pathname: DEALER_CARS_CATALOG_URL });
           }}
         />
         <TextButton
@@ -132,7 +133,7 @@ export const HomeFilters: React.FC<SearchProps> = () => {
           pt="4"
           display={[null, null, 'none', 'none']}
           onClick={() => {
-            history.push('/catalog');
+            history.push(DEALER_CARS_CATALOG_URL)
             dispatch(openAdvancedFilters());
           }}
         >

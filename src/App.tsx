@@ -55,12 +55,12 @@ function App() {
               exact
             />
 
-            <PublicRoute path="/catalog" component={CatalogPage} />
             <PublicRoute
               path="/catalog/car/:carId"
               component={CarDetailPageDealer}
               exact
             />
+            <PublicRoute path="/catalog" component={CatalogPage} />
 
             <PublicRoute path="/services" component={ServicesPage} />
 

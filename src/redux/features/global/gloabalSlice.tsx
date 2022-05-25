@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrencyType, Languages } from 'src/constants';
+import { RootState } from 'src/redux/app/store';
 import localStorageServise from 'src/services/localStorage.service';
 import getCurrencyPrice from 'src/utils/functions/getCurrencyPrice';
 import { AuthForm, GlobalStateSliceState, ScreenSizes } from '../auth/types';
@@ -68,6 +69,7 @@ const globalStateSlice = createSlice({
     },
     setCatalogQuery: (state, action: PayloadAction<string | undefined>) => {
       state.catalogQuery = action.payload;
+      return state
     },
     setUserError: (state, action: PayloadAction<string | undefined>) => {
       state.userError = action.payload;
@@ -131,5 +133,6 @@ export const {
   toggleCarDetailModal,
   setCurrencyPrice,
 } = globalStateSlice.actions;
+
 
 export const { reducer: globalAppState } = globalStateSlice;

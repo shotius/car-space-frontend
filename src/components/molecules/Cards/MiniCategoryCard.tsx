@@ -2,26 +2,33 @@ import { BoxProps, Center, Heading, Icon, VStack } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { CarIcon } from 'src/components/atoms/Icons/CarIcon';
 import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
+import { DEALER_CARS_CATALOG_URL } from 'src/utils/config/contants';
 import { Card } from './Card';
 
 interface MiniCategoryCardProps {
   categoryTitle: string;
   carCount: number;
+  onClick: () => void;
 }
 
 export const MiniCategoryCard: React.FC<MiniCategoryCardProps & BoxProps> = ({
   categoryTitle,
   carCount,
+  onClick,
   ...rest
 }) => {
   const history = useHistory();
+  const handleClick = () => {
+    onClick ? onClick() : history.push(DEALER_CARS_CATALOG_URL);
+  };
+
   return (
     <Card
       className="hoverable"
       cursor="pointer"
       w={['137px', null, null, '143px']}
       h={['130px', null, null, '132px']}
-      onClick={() => history.push('/catalog')}
+      onClick={handleClick}
       {...rest}
     >
       <Center h="full">

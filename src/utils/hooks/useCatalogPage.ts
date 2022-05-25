@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getFilters } from 'src/redux/features/auth/carsSlice';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
@@ -41,7 +41,7 @@ export const useCatalogPage = () => {
 
   const brands = useAppSelector((state) => state.carsReducer.brands);
 
-  // Get car filters
+  // Fetch car filters
   useEffect(() => {
     if (!brands.length && cars.length) {
       dispatch(getFilters());
@@ -72,12 +72,10 @@ export const useCatalogPage = () => {
 
   // when page number changes, get cars and scroll to top and save active page in redux
   useEffect(() => {
-    onSubmit(filters);
+    if (window.location.search !== `?${catalogQuery}`) {
+      onSubmit(filters);
+    }
   }, [page, catalogQuery]);
-
-  useEffect(() => {
-    console.log('foo queryChanged: ', query.toString());
-  }, [query]);
 
   // on pagin number press
   const changePage = (page: number) => {
@@ -85,5 +83,5 @@ export const useCatalogPage = () => {
     history.push({ search: query.toString() });
   };
 
-  return { query, cars, fethingCars, totalPages, page, changePage };
+  return { query, cars, fethingCars, totalPages, page, changePage, catalogQuery };
 };

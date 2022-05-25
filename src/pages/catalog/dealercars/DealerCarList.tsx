@@ -19,7 +19,6 @@ const DealerCarList: React.FC<DealerCarListProps> = () => {
     );
   }
 
-  // debugger
 
   return (
     <VStack spacing="90px" w="full">

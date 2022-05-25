@@ -108,7 +108,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
               className="radio-label"
               onClick={() => setEngineType(value)}
             >
-              <input type="radio" checked={engineType === value} />
+              <input type="radio" defaultChecked={engineType === value} />
               <TextRegular opacity="0.4">{capitalize(value)}</TextRegular>
             </label>
           ))}

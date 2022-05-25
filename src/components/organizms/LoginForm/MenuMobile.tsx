@@ -12,6 +12,7 @@ import {
   setAppLanguage,
   toggleMobileMenu,
 } from 'src/redux/features/global/gloabalSlice';
+import { DEALER_CARS_CATALOG_URL } from 'src/utils/config/contants';
 import { capitalize } from 'src/utils/functions/capitalize';
 
 interface MenuMobileProps {}
@@ -73,7 +74,7 @@ export const MenuMobile: React.FC<MenuMobileProps> = ({}) => {
         >
           <NavMenuLink
             heading="Catalog"
-            to={`/catalog?${catalogQuery || ''}`}
+            to={`${DEALER_CARS_CATALOG_URL}?${catalogQuery || ''}`}
             onClick={() => onToggle()}
           />
           <NavMenuLink

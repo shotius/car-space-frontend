@@ -8,6 +8,7 @@ import {
   removeSingleCar
 } from 'src/redux/features/auth/carsSlice';
 import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
+import { DEALER_CARS_CATALOG_URL } from 'src/utils/config/contants';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { isApiDefaultError } from 'src/utils/functions/typeChecker';
 import { Roles } from '../../../../../server/shared_with_front/contants';
@@ -73,7 +74,7 @@ export const CarCardHeading: React.FC<CarCardHeadingProps> = ({
                       // dispatch(setActivePage(previousPage));
                       dispatch(setCatalogQuery(query.toString()));
                       history.push({
-                        pathname: '/catalog',
+                        pathname: DEALER_CARS_CATALOG_URL,
                         search: query.toString(),
                       });
                       dispatch(getDealerCars(query));

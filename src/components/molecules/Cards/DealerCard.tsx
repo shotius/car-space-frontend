@@ -10,6 +10,7 @@ import {
   setCatalogBannerDealerImage,
   setCatalogBannerDealerName,
 } from 'src/redux/features/banners/CatalogBannerSlice';
+import { DEALER_CARS_CATALOG_URL } from 'src/utils/config/contants';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import {
   ICarDealer,
@@ -43,7 +44,7 @@ export const DealerCard: React.FC<DealerCardProps> = ({ dealer }) => {
         dispatch(setCatalogBannerDealerName(dealer.fullName));
         dispatch(setCatalogBannerDealerImage(dealer.avatar));
         dispatch(openCatalogBanner());
-        history.push('/catalog');
+        history.push(DEALER_CARS_CATALOG_URL);
       }}
     >
       <VStack w="full" spacing="12px">

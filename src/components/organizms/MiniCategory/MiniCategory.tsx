@@ -23,6 +23,7 @@ export const MiniCategory: React.FC<MiniCategoryProps> = () => {
     mostDemandRedict,
   } = useMiniCategory();
 
+
   return (
     <Box w="full">
       <ContainerOuter pl="4">

@@ -175,11 +175,11 @@ export const MobileBrandPopup: React.FC<BrandSelectProps> = ({
                 maxH={['38px', '50px']}
                 boxSize={20}
                 bg={
-                  selectedBrands.includes('SHEVROLET')
+                  selectedBrands.includes('CHEVROLET')
                     ? 'autoOrange.100'
                     : 'autoGrey.600'
                 }
-                onClick={() => handleSelect('SHEVROLET')}
+                onClick={() => handleSelect('CHEVROLET')}
               />
               <TopBrandCard
                 icon={FordIcon}

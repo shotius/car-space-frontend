@@ -10,8 +10,9 @@ import { ShevroletIcon } from 'src/components/atoms/Icons/ShevroletIcon';
 import { ToyotaIcon } from 'src/components/atoms/Icons/ToyotaIcon';
 import { SectionHeader } from 'src/components/molecules/SectionHeader/SectionHeader';
 import { ScrollableDiv } from 'src/components/molecules/Wrappers/ScrollableDiv';
-import { useAppDispatch } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { selectBrand } from 'src/redux/features/auth/selectedCarFilterSlice';
+import { DEALER_CARS_CATALOG_URL } from 'src/utils/config/contants';
 import { TopBrandCard } from '../../../molecules/Cards/TopBrandCard';
 
 interface TopBrandsProps {}
@@ -20,7 +21,14 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
 
-  const redirect = () => history.push('/catalog');
+  const currencyPrice = useAppSelector(
+    (state) => state.globalAppState.currencyPrice
+  );
+
+  const redirect = (brand: string) =>
+    history.push(
+      `${DEALER_CARS_CATALOG_URL}?CURRENCY_PRICE=${currencyPrice}&page=1&brand=${brand}`
+    );
 
   return (
     <Box w="full">
@@ -37,7 +45,7 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
           <TopBrandCard
             onClick={() => {
               dispatch(selectBrand(['BMW']));
-              redirect();
+              redirect('BMW');
             }}
             icon={BmwIcon}
           />
@@ -45,7 +53,7 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             icon={MercedesIcon}
             onClick={() => {
               dispatch(selectBrand(['MERCEDES']));
-              redirect();
+              redirect('MERCEDES');
             }}
           />
           <TopBrandCard
@@ -53,15 +61,15 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             mr="1px"
             onClick={() => {
               dispatch(selectBrand(['TOYOTA']));
-              redirect();
+              redirect('TOYOTA');
             }}
           />
           <TopBrandCard
             boxSize={[36, null, 48]}
             icon={ShevroletIcon}
             onClick={() => {
-              dispatch(selectBrand(['SHEVROLET']));
-              redirect();
+              dispatch(selectBrand(['CHEVROLET']));
+              redirect('CHEVROLET');
             }}
           />
           <TopBrandCard
@@ -69,7 +77,7 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             mr="1px"
             onClick={() => {
               dispatch(selectBrand(['HYUNDAI']));
-              redirect();
+              redirect('HYUNDAI');
             }}
           />
           {/**/}
@@ -79,7 +87,7 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             mr="1px"
             onClick={() => {
               dispatch(selectBrand(['FORD']));
-              redirect();
+              redirect('FORD');
             }}
           />
           <TopBrandCard
@@ -87,7 +95,7 @@ export const TopBrands: React.FC<TopBrandsProps> = () => {
             boxSize={[16, null, 20, null, 24]}
             onClick={() => {
               dispatch(selectBrand(['LEXUS']));
-              redirect();
+              redirect('LEXUS');
             }}
           />
         </ScrollableDiv>

@@ -98,7 +98,7 @@ export const Header: React.FC<HeaderProps> = () => {
                 to={`/catalog/dealers${catalogQuery ? `?${catalogQuery}` : ''}`}
                 label="Catalog"
               />
-              <MenuLink to="/catalog/copart" label="Copart" />
+              {/* <MenuLink to="/catalog/copart" label="Copart" /> */}
               <MenuLink to="/services" label="Services" />
               <MenuLink to="/blog" label="Blog" activeOnlyWhenExact={true} />
             </HStack>

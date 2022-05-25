@@ -7,16 +7,16 @@ import { FilterWrap } from 'src/components/molecules/Wrappers/FilterWrap';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { resetFilters } from 'src/redux/features/auth/selectedCarFilterSlice';
 import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
+import { useCatalogPage } from 'src/utils/hooks/useCatalogPage';
 import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { useParseCatalogQuery } from 'src/utils/hooks/useParseCatalogQuery';
-import { useQueryParams } from 'src/utils/hooks/useQueryParams';
 
 interface CatalogLIstProps {}
 
 export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
   const { isLargerThan: isLargerThen737 } = useMediaQueryMin(737);
-  const query = useQueryParams();
   const { parseQueries } = useParseCatalogQuery();
+  const { query } = useCatalogPage();
 
   // Parse query from url
   useEffect(() => {
@@ -39,6 +39,7 @@ export const FiltersOnCatalogPage: React.FC<CatalogLIstProps> = () => {
 
 const ResetButton = () => {
   const dispatch = useAppDispatch();
+
   return (
     <TextButton
       display={['none', null, 'block']}

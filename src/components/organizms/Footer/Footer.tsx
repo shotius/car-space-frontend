@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = () => {
           <CarSpaceLogo
             mb={['32px', null, '0px']}
             imgW={['100px', null, '167px']}
-            h={ ['20px', '25px', null, '30px']}
+            h={['20px', '25px', null, '30px']}
             onClick={() => {
               history.push('/home');
             }}
@@ -97,9 +97,7 @@ export const Footer: React.FC<FooterProps> = () => {
               spacing={0}
               mb="6"
             >
-              <TextRegular fontSize={'14px'}>
-                ქ. თბილისი, შროშის ქ. N1
-              </TextRegular>
+              <TextRegular fontSize={'14px'}>შალვა ნუცუბიძის 75ა</TextRegular>
               <TextRegular fontSize={'14px'}>
                 <a href="tel:032-2-988-687">Tel: 032 2 988 687</a>
               </TextRegular>

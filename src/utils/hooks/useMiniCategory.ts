@@ -1,3 +1,4 @@
+import { DEALER_CARS_CATALOG_URL } from './../config/contants';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FilterQueries } from 'src/constants';
@@ -43,7 +44,7 @@ export const useMiniCategory = () => {
   const fourToSix_k = useAppSelector((state) => state.miniCategory.fourToSix_k);
   const sixToTen_k = useAppSelector((state) => state.miniCategory.sixToTen_k);
   const mostDemands = useAppSelector((state) => state.miniCategory.mostDemands);
-
+  const catalogQuery = useAppSelector(state => state.globalAppState.catalogQuery)
   const icon = useCurrencyIcon();
 
   const getSuvs = () => {
@@ -114,10 +115,13 @@ export const useMiniCategory = () => {
   }, []);
 
   const redirect = (q: string) => {
-    history.push(`/catalog?CURRENCY_PRICE=${currencyPrice}&page=1&${q}`);
+    history.push(
+      `${DEALER_CARS_CATALOG_URL}?CURRENCY_PRICE=${currencyPrice}&page=1&${q}`
+    );
   };
 
   const redirectCarType = (type: string[]) => {
+    console.log('clicked');
     dispatch(selectTypes(type));
     redirect(`type=${type}`);
   };

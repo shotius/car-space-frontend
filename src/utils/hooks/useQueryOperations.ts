@@ -27,9 +27,7 @@ const {
 } = FilterQueries;
 
 export const useQueryOperations = () => {
-  const query = useQueryParams();
-
-  function updatedBrandsInQuery(brands: string[]) {
+  function updatedBrandsInQuery(query: URLSearchParams, brands: string[]) {
     if (brands.length) {
       brands.map((brand) => {
         query.append(BRAND, brand);
@@ -38,9 +36,13 @@ export const useQueryOperations = () => {
       // if there no brand selected remove models from the query
       deleteQueryFromURL({ query, queryName: MODEL }); // remote models
     }
+    return query;
   }
 
-  function updateModelsInQuery(models: SelectedCarModel[]) {
+  function updateModelsInQuery(
+    query: URLSearchParams,
+    models: SelectedCarModel[]
+  ) {
     // if brands exists put model in the url
     if (models.length) {
       models.map((item) => {
@@ -49,9 +51,10 @@ export const useQueryOperations = () => {
         });
       });
     }
+    return query
   }
 
-  function clearAllFiltersFromQuery() {
+  function clearAllFiltersFromQuery(query: URLSearchParams) {
     query.delete(BRAND);
     query.delete(YEAR_FROM);
     query.delete(PRICE_FROM);
@@ -71,6 +74,7 @@ export const useQueryOperations = () => {
     query.delete(MOST_DEMAND);
     query.delete(DEALER_ID);
     deleteQueryFromURL({ query, queryName: MODEL }); // remote models
+    return query
   }
 
   return {

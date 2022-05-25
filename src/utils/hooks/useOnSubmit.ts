@@ -1,3 +1,4 @@
+import { DEALER_CARS_CATALOG_URL } from './../config/contants';
 import { useQueryOperations } from './useQueryOperations';
 import { useHistory } from 'react-router-dom';
 import { FilterQueries } from 'src/constants';
@@ -74,14 +75,14 @@ export const useOnSubmit = () => {
     } = filters;
 
     // before creating query, i delete all query filters in the url
-    clearAllFiltersFromQuery();
+    const cleanQuery = clearAllFiltersFromQuery(query);
 
     // clear if there was network error
     dispatch(setNetworkError());
 
     // update query string by filters
-    updatedBrandsInQuery(selectedBrands);
-    updateModelsInQuery(selectedModels);
+    updatedBrandsInQuery(cleanQuery, selectedBrands);
+    updateModelsInQuery(cleanQuery, selectedModels);
 
     // set year from
     if (yearFrom) {
@@ -171,12 +172,10 @@ export const useOnSubmit = () => {
   async function onSubmit(filters: SelectedCarFilters) {
     const updatedQuery = updateQueryString(filters);
 
-    console.log('udaptedQuery: ', updatedQuery.toString());
-
     // if query changed redirect
     if (startQuery !== updatedQuery.toString()) {
       history.push({
-        pathname: '/catalog/dealers',
+        pathname: DEALER_CARS_CATALOG_URL,
         search: updatedQuery.toString(),
       });
     }

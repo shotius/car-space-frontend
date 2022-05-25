@@ -137,11 +137,11 @@ export const BrandSelect: React.FC<BrandSelectProps & StackProps> = ({
                 maxH="40px"
                 boxSize={20}
                 bg={
-                  selected.includes('SHEVROLET')
+                  selected.includes('CHEVROLET')
                     ? 'autoOrange.100'
                     : 'autoGrey.600'
                 }
-                onClick={() => handleSelect('SHEVROLET')}
+                onClick={() => handleSelect('CHEVROLET')}
               />
               <TopBrandCard
                 icon={FordIcon}
