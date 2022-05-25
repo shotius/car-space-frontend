@@ -9,6 +9,7 @@ import {
 } from 'src/constants/TransportData';
 import { useAppSelector } from 'src/redux/app/hook';
 import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
+import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
 import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
 import { Autocomplete } from '../Autocomplete';
@@ -86,6 +87,12 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
         .map((auction) => auction.auction)
     : uniqueAuctions;
 
+  const formatedPrice = useMemo(() => {
+    return price
+      ? toTrippleNumber(Math.ceil(roundFloatTo(price * currPrice, 4)))
+      : 0;
+  }, [price, currPrice]);
+
   return (
     <VStack h="full">
       <Autocomplete
@@ -121,7 +128,7 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
               color="autoOrange.500"
               fontSize={size === 'regular' ? '16px' : '20px'}
             >
-              {price ? roundFloatTo(price * currPrice, 4) : 0}
+              {formatedPrice}
             </HeadingSecondary>
           </HStack>
         </HStack>

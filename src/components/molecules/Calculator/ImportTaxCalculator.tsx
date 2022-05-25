@@ -1,11 +1,12 @@
 import { Flex, RadioGroup, VStack } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from 'src/redux/app/hook';
 import { capitalize } from 'src/utils/functions/capitalize';
 import { converCurrencyPrice } from 'src/utils/functions/getCurrencyPrice';
 import { range } from 'src/utils/functions/range';
 // import { range } from 'src/utils/functions/range';
 import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
+import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import { useEngineSelect } from 'src/utils/hooks/useEngineSelect';
 import { safeSum } from '../../../utils/functions/safeOperations';
 import { InputGrey } from '../Inputs/InputGrey';
@@ -48,15 +49,18 @@ function getSaaqcizoGanakveti(age: number) {
   return ganakveTebi[age];
 }
 
-const options = ['electric', 'hybrid', 'right wheel'] as const;
+const options = ['petrol', 'electric', 'hybrid'] as const;
+
 export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
   const [year, setYear] = useState(0);
   const [engine, setEngine] = useState<string>('');
   const [total, setTotal] = useState(0);
-  const [engineType, setEngineType] = useState<typeof options[number] | null>(
-    null
-  );
+  const [engineType, setEngineType] =
+    useState<typeof options[number]>('petrol');
   const currency = useAppSelector((state) => state.globalAppState.currency);
+  const currencyPrice = useAppSelector(
+    (state) => state.globalAppState.currencyPrice
+  );
   const { generatedEngines } = useEngineSelect();
 
   function handleEngineSelect(engine: string) {
@@ -70,6 +74,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
     if (!engine || !year) {
       return 0;
     }
+
     const age = getAge(year);
     const importTax = safeSum(
       engine * 1000 * 0.05,
@@ -77,22 +82,34 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
     );
 
     const aqcizi = engine * 1000 * getSaaqcizoGanakveti(age);
-    const companyInterest = await converCurrencyPrice({
+    const constantFee = await converCurrencyPrice({
       from: 'GEL',
       to: currency,
       amount: 272,
     });
 
-    const customsClearance = safeSum(
-      safeSum(aqcizi, importTax),
-      companyInterest
-    );
+    const customsClearance = safeSum(safeSum(aqcizi, importTax), constantFee);
 
     return roundFloatTo(customsClearance, 3);
   }
 
+  async function converTotal(total: number) {
+    try {
+      const result = await converCurrencyPrice({
+        from: 'GEL',
+        to: currency,
+        amount: total,
+      });
+      return result;
+    } catch (error) {
+      console.log(error);
+      return 0;
+    }
+  }
+
   useEffect(() => {
     calculateImportTax(+engine, +year)
+      .then(converTotal)
       .then(setTotal)
       .catch(console.log);
   }, [engine, year, currency]);
@@ -108,7 +125,11 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
               className="radio-label"
               onClick={() => setEngineType(value)}
             >
-              <input type="radio" defaultChecked={engineType === value} />
+              <input
+                type="radio"
+                checked={engineType === value}
+                onChange={() => {}}
+              />
               <TextRegular opacity="0.4">{capitalize(value)}</TextRegular>
             </label>
           ))}
@@ -127,7 +148,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
           value={engine}
           placeholder="Engine"
           onChange={handleEngineSelect}
-          options={generatedEngines(0.3, 9).map((value) => value.toString())}
+          options={generatedEngines(0.1, 9).map((value) => value.toString())}
         />
       </VStack>
       <CalculatorFooter total={total} />
