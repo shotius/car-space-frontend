@@ -3,13 +3,14 @@ import { AspectRatio, VStack } from '@chakra-ui/layout';
 import { HStack, SimpleGrid } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import { FALLBACK_IMG } from 'src/constants';
-import { useAppDispatch } from 'src/redux/app/hook';
+import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import { setDealerId } from 'src/redux/features/auth/selectedCarFilterSlice';
 import {
   openCatalogBanner,
   setCatalogBannerDealerImage,
   setCatalogBannerDealerName,
 } from 'src/redux/features/banners/CatalogBannerSlice';
+import { baseCatalogQuerySelector } from 'src/redux/features/global/gloabalSlice';
 import { DEALER_CARS_CATALOG_URL } from 'src/utils/config/contants';
 import { useDetectScreen } from 'src/utils/hooks/useDetectScreen';
 import {
@@ -31,6 +32,7 @@ export const DealerCard: React.FC<DealerCardProps> = ({ dealer }) => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { isDesktop } = useDetectScreen();
+  const baseCatalogQuery = useAppSelector(baseCatalogQuerySelector);
 
   return (
     <Card
@@ -44,7 +46,9 @@ export const DealerCard: React.FC<DealerCardProps> = ({ dealer }) => {
         dispatch(setCatalogBannerDealerName(dealer.fullName));
         dispatch(setCatalogBannerDealerImage(dealer.avatar));
         dispatch(openCatalogBanner());
-        history.push(DEALER_CARS_CATALOG_URL);
+        history.push(
+          `${DEALER_CARS_CATALOG_URL}?${baseCatalogQuery}&dealerId=${dealer.id}`
+        );
       }}
     >
       <VStack w="full" spacing="12px">

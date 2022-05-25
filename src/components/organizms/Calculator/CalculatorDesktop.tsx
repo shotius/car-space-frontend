@@ -76,7 +76,7 @@ export const CalculatorDesktop: React.FC<CalculatorDesktopProps & TabsProps> =
                 <TabBlue>
                   <TextRegular>Loan</TextRegular>
                 </TabBlue>
-                <TabBlue>
+                <TabBlue isDisabled={true}>
                   <TextRegular>Leasing</TextRegular>
                 </TabBlue>
                 {/* Calculator  */}
