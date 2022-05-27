@@ -2,10 +2,14 @@ import { VStack, Image, Heading } from '@chakra-ui/react';
 import { Card } from './Card';
 import { TextRegular } from '../Texts/TextRegular';
 import { useHistory } from 'react-router';
+import { IBlog } from '../../../../../server/shared_with_front/types/types-shared';
+import { FALLBACK_IMG } from 'src/constants';
 
-interface BlogCardProps {}
+interface BlogCardProps {
+  blog: IBlog;
+}
 
-export const BlogCard: React.FC<BlogCardProps> = () => {
+export const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
   const history = useHistory();
   return (
     <Card
@@ -15,10 +19,10 @@ export const BlogCard: React.FC<BlogCardProps> = () => {
         transition: 'all .3s',
       }}
       cursor="pointer"
-      onClick={() => history.push(`/blog/123`)}
+      onClick={() => history.push(`/blog/${blog.id}`)}
     >
       <Image
-        src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cm9hZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
+        src={blog.img || FALLBACK_IMG}
         borderTopRadius="8px"
         h="177px"
         w="full"
@@ -30,17 +34,10 @@ export const BlogCard: React.FC<BlogCardProps> = () => {
         alignItems="flex-start"
       >
         <Heading fontSize="16px" lineHeight="21px" noOfLines={2}>
-          Title
+          {blog.header}
         </Heading>
         <TextRegular lineHeight="24px" w="full" noOfLines={[3, null, null, 2]}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          AssumendaLorem ipsum dolor sit amet consectetur adipisicing elit.
-          AssumendaLorem ipsum dolor sit amet consectetur adipisicing elit.
-          Assumenda
+          {blog.body}
         </TextRegular>
       </VStack>
     </Card>

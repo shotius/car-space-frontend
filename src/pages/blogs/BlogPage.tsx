@@ -1,10 +1,21 @@
 import { Box, Heading, SimpleGrid } from '@chakra-ui/layout';
 import { Center } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BlogCard } from 'src/components/molecules/Cards/BlogCard';
+import { HeadTags } from 'src/components/molecules/MetaTags';
+import blogServices from 'src/services/blog.services';
+import { IBlog } from '../../../../server/shared_with_front/types/types-shared';
 interface BlogPageProps {}
 
 export const BlogPage: React.FC<BlogPageProps> = () => {
+  const [blogs, setBlogs] = useState<IBlog[]>([]);
+
+  useEffect(() => {
+    blogServices.getAllBlogs().then((data) => setBlogs(data.results));
+  }, []);
+
+  console.log('blogs: ', blogs);
   return (
     <>
       <ContainerOuter p="0" pt={[null, null, null, '48px']}>
@@ -32,15 +43,12 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
         <SimpleGrid
           w="full"
           templateColumns={['1fr', '1fr 1fr', null, 'repeat(3, 1fr)']}
-          spacing={["4", null, null, '32px']}
+          spacing={['4', null, null, '32px']}
           mt={['48px', null, null, '64px']}
         >
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
+          {blogs.map((blog) => (
+            <BlogCard blog={blog} key={blog.id} />
+          ))}
         </SimpleGrid>
       </ContainerOuter>
     </>

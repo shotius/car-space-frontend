@@ -3,10 +3,13 @@ import { CopyIcon } from 'src/components/atoms/Icons/CopyIcon';
 import { FbIconBlack } from 'src/components/atoms/Icons/FBIconBlack';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { IBlog } from '../../../../../../server/shared_with_front/types/types-shared';
 
-interface HeaderProps {}
+interface HeaderProps {
+  blog: IBlog;
+}
 
-export const BlogHeader: React.FC<HeaderProps> = ({}) => {
+export const BlogHeader: React.FC<HeaderProps> = ({ blog }) => {
   const toast = useToast();
   const url = window.location;
 
@@ -16,7 +19,7 @@ export const BlogHeader: React.FC<HeaderProps> = ({}) => {
         fontSize={['24px', '32px', null, '50px']}
         pt={['0px', '20px', '30px', '48px']}
       >
-        Title
+        {blog.header}
       </HeadingSecondary>
       <HStack w="full">
         <TextRegular opacity="0.5" fontSize="14px">
@@ -61,7 +64,7 @@ export const BlogHeader: React.FC<HeaderProps> = ({}) => {
               window.open(
                 `https://www.facebook.com/sharer/sharer.php?u=${window.location}`,
                 'share',
-                "left=100,top=100,width=320,height=320"
+                'left=100,top=100,width=320,height=320'
               );
             }}
             variant="link"
