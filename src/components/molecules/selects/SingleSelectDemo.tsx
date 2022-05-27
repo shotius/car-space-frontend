@@ -1,4 +1,4 @@
-import { HStack } from '@chakra-ui/react';
+import { HStack, StackProps } from '@chakra-ui/react';
 import { SyntheticEvent, useEffect, useReducer, useState } from 'react';
 import { TextButton } from '../Buttons/TextButton';
 import { CustomOverlay } from '../overlays/CustomOverlay';
@@ -10,7 +10,7 @@ import { SelectOptions } from '../Wrappers/SelectOptions';
 import { SelectWrapper } from '../Wrappers/SelectWrapper';
 
 type ValueType = string;
-export interface SingleSelectProps {
+export interface SingleSelectProps extends Omit<StackProps, 'onChange'> {
   value: ValueType;
   onChange: (value: ValueType) => void;
   options: ValueType[];
@@ -22,6 +22,7 @@ export const SingleSelectDemo: React.FC<SingleSelectProps> = ({
   onChange,
   options,
   placeholder,
+  ...rest
 }) => {
   const [areOptionsOpen, toggleOptions] = useReducer(
     (isOpen) => !isOpen,
@@ -31,7 +32,9 @@ export const SingleSelectDemo: React.FC<SingleSelectProps> = ({
 
   // when ever selected value changes, placeholder changes as well
   useEffect(() => {
-    +value ? setPlaceholder(value.toString()) : setPlaceholder(placeholder || '');
+    +value
+      ? setPlaceholder(value.toString())
+      : setPlaceholder(placeholder || '');
   }, [value]);
 
   const handleClose = () => {
@@ -52,7 +55,7 @@ export const SingleSelectDemo: React.FC<SingleSelectProps> = ({
   const isBlack = +value || areOptionsOpen;
 
   return (
-    <SelectWrapper areOptionsOpen={areOptionsOpen}>
+    <SelectWrapper areOptionsOpen={areOptionsOpen} {...rest}>
       <CustomOverlay isActive={areOptionsOpen} onClick={handleClose} />
       <SelectContent>
         <SelectTrigger

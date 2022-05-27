@@ -1,15 +1,13 @@
 import { Flex, RadioGroup, VStack } from '@chakra-ui/react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from 'src/redux/app/hook';
 import { capitalize } from 'src/utils/functions/capitalize';
 import { converCurrencyPrice } from 'src/utils/functions/getCurrencyPrice';
 import { range } from 'src/utils/functions/range';
 // import { range } from 'src/utils/functions/range';
 import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
-import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import { useEngineSelect } from 'src/utils/hooks/useEngineSelect';
 import { safeSum } from '../../../utils/functions/safeOperations';
-import { InputGrey } from '../Inputs/InputGrey';
 import { SingleSelectDemo } from '../selects/SingleSelectDemo';
 // import { SingleSelectDemo } from '../selects/SingleSelect';
 import { TextRegular } from '../Texts/TextRegular';
@@ -52,15 +50,12 @@ function getSaaqcizoGanakveti(age: number) {
 const options = ['petrol', 'electric', 'hybrid'] as const;
 
 export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
-  const [year, setYear] = useState(0);
-  const [engine, setEngine] = useState<string>('');
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [engine, setEngine] = useState<string>('0.1');
   const [total, setTotal] = useState(0);
   const [engineType, setEngineType] =
     useState<typeof options[number]>('petrol');
   const currency = useAppSelector((state) => state.globalAppState.currency);
-  const currencyPrice = useAppSelector(
-    (state) => state.globalAppState.currencyPrice
-  );
   const { generatedEngines } = useEngineSelect();
 
   function handleEngineSelect(engine: string) {
@@ -70,11 +65,12 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
     setYear(+year);
   }
 
-  async function calculateImportTax(engine: number, year: number) {
-    if (!engine || !year) {
-      return 0;
-    }
+  async function calculateElectroCarImportTax(year: number) {
+    const fee = await getImportTaxConstantFee();
+    return fee;
+  }
 
+  async function calculatePetrolCarImportTax(engine: number, year: number) {
     const age = getAge(year);
     const importTax = safeSum(
       engine * 1000 * 0.05,
@@ -82,15 +78,45 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
     );
 
     const aqcizi = engine * 1000 * getSaaqcizoGanakveti(age);
+    const constantFee = await getImportTaxConstantFee();
+
+    const customsClearance = safeSum(safeSum(aqcizi, importTax), constantFee);
+
+    const hybAqc = engine * 400 * getSaaqcizoGanakveti(age)
+    console.log('hybAqc: ', hybAqc)
+
+    // debugger
+    // console.log('aqcizi', aqcizi)
+    return roundFloatTo(customsClearance, 3);
+  }
+
+  async function getImportTaxConstantFee() {
     const constantFee = await converCurrencyPrice({
       from: 'GEL',
       to: currency,
       amount: 272,
     });
+    return constantFee;
+  }
 
-    const customsClearance = safeSum(safeSum(aqcizi, importTax), constantFee);
-
-    return roundFloatTo(customsClearance, 3);
+  async function calculateImportTax(engine: number, year: number) {
+    if (!engine || !year) {
+      return 0;
+    }
+    switch (engineType) {
+      case 'electric': {
+        const fee = await calculateElectroCarImportTax(year);
+        return fee;
+      }
+      case 'hybrid': {
+        const fee = 1;
+        return fee;
+      }
+      case 'petrol': {
+        const fee = await calculatePetrolCarImportTax(engine, year);
+        return fee;
+      }
+    }
   }
 
   async function converTotal(total: number) {
@@ -112,7 +138,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
       .then(converTotal)
       .then(setTotal)
       .catch(console.log);
-  }, [engine, year, currency]);
+  }, [engine, year, currency, engineType]);
 
   return (
     <VStack w="full" h="full" spacing="25px">
@@ -147,6 +173,7 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
         <SingleSelectDemo
           value={engine}
           placeholder="Engine"
+          display={engineType === 'electric' ? 'none' : undefined}
           onChange={handleEngineSelect}
           options={generatedEngines(0.1, 9).map((value) => value.toString())}
         />
