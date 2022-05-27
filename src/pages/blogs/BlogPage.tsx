@@ -23,7 +23,7 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
               fontSize={['36px', '45px', null, '50px', '60px', '81px']}
               isTruncated
             >
-              Blog
+              Blogs
             </Heading>
           </Center>
         </Box>
