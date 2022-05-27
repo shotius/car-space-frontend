@@ -1,16 +1,14 @@
-import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
 import {
   Flex,
   HStack,
   InputGroup,
   InputRightElement,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
 import { useMemo, useState } from 'react';
 import { useAppSelector } from 'src/redux/app/hook';
 import {
-  safeSum,
-  safeSubtraction,
+  safeSubtraction, safeSum
 } from '../../../utils/functions/safeOperations';
 import { InputGrey } from '../Inputs/InputGrey';
 import { SliderBlue } from '../Sliders/SliderBlue';
@@ -35,10 +33,6 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
 
   const companyInterest = useMemo(() => {
     return safeSubtraction(total, +loanAmount);
-  }, [total]);
-
-  const monthlyPayment = useMemo(() => {
-    return roundFloatTo(+total / months, 2);
   }, [total]);
 
   return (

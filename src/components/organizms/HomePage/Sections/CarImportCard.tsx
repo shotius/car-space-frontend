@@ -8,7 +8,7 @@ interface CarImportCardProps {}
 
 export const CarImportCard: React.FC<CarImportCardProps> = ({}) => {
   return (
-    <Card p="32px" w={['full', null, null, '417px']} h="407px">
+    <Card p="32px" w={['full', null, null, '417px']} h="427px">
       <VStack w="full" spacing="24px">
         <Icon as={CarImportIcon}/>
         <HeadingSecondary>Car Importing</HeadingSecondary>

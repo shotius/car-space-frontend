@@ -39,7 +39,7 @@ export const CalculatorMobile: React.FC<CalculatorMobileProps> = ({}) => {
   ];
 
   return (
-    <Card w="full" h="321px" position="relative" p="16px 32px">
+    <Card w="full" h="351px" position="relative" p="16px 32px">
       <HStack w="full" alignItems={"center"} mb="4" justify="space-between">
         <Flex w="100px">
           <SingleSelect selected={calcType} w="130px">
