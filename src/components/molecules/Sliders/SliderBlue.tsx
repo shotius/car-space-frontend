@@ -43,6 +43,7 @@ export const SliderBlue: React.FC<SliderBlueProps & SliderProps> = ({
               className="loanSliderMark"
               value={value}
               key={value}
+              isEnumerated
             />
           ))
         : null}

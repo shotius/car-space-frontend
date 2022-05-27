@@ -43,30 +43,6 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
 
   return (
     <VStack w="full" spacing={['24px', null, '32px']}>
-      <VStack w="full" align="flex-start">
-        <TextRegular opacity="0.5">Duration</TextRegular>
-        <Flex
-          w="full"
-          justify="space-between"
-          flexWrap="nowrap"
-          style={{ gap: 16 }}
-        >
-          <SliderBlue
-            sliderValue={months}
-            defaultValue={months}
-            showMarks
-            min={1}
-            max={6}
-            step={1}
-            onChange={(val) => setMonths(val)}
-            flex={['1', '0']}
-            flexBasis={[null, '60%', '67%']}
-          />
-          <TextRegular textAlign="end" minW="96px" wordBreak="keep-all">
-            ( {months} Months)
-          </TextRegular>
-        </Flex>
-      </VStack>
       <VStack w="full" spacing={4}>
         <InputGroup>
           <InputGrey
@@ -82,30 +58,39 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({}) => {
           />
         </InputGroup>
 
-        <HStack w="full" justify="space-between">
-          <TextRegular>Company Interest</TextRegular>
-          <TextRegular>
-            {companyInterest ? (
-              <>
-                {companyInterest} {currency}
-              </>
-            ) : (
-              '-'
-            )}{' '}
-          </TextRegular>
+        <VStack w="full" align="flex-start">
+          <TextRegular opacity="0.5">Duration</TextRegular>
+          <Flex
+            w="full"
+            justify="space-between"
+            flexWrap="nowrap"
+            style={{ gap: 16 }}
+          >
+            <SliderBlue
+              sliderValue={months}
+              defaultValue={months}
+              showMarks
+              min={1}
+              max={6}
+              step={1}
+              onChange={(val) => setMonths(val)}
+              flex={['1', '0']}
+              flexBasis={[null, '60%', '67%']}
+            />
+            <TextRegular textAlign="end" minW="96px" wordBreak="keep-all">
+              ( {months} Months)
+            </TextRegular>
+          </Flex>
+        </VStack>
+
+        <HStack w="full" justify="space-between" mt="32px">
+          <TextRegular mt="12px">Finance amount</TextRegular>
+          <TextRegular>{loanAmount}</TextRegular>
         </HStack>
 
-        <HStack w="full" justify={'space-between'}>
-          <TextRegular>Monthly</TextRegular>
-          <TextRegular>
-            {loanAmount ? (
-              <>
-                {monthlyPayment} {currency}
-              </>
-            ) : (
-              '-'
-            )}
-          </TextRegular>
+        <HStack w="full" justify={'space-between'} mt="-14px">
+          <TextRegular>Service fee</TextRegular>
+          <TextRegular>{companyInterest || '-'}</TextRegular>
         </HStack>
       </VStack>
 

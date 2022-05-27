@@ -1,9 +1,13 @@
 import { SliderMark, Box, SliderMarkProps } from '@chakra-ui/react';
+import { TextRegular } from '../Texts/TextRegular';
 
-export const CustomSliderMark: React.FC<SliderMarkProps & SliderMarkProps> = ({
-  value,
-  ...rest
-}) => {
+interface CustomProps {
+  isEnumerated?: boolean;
+}
+
+export const CustomSliderMark: React.FC<
+  CustomProps & SliderMarkProps & SliderMarkProps
+> = ({ value, isEnumerated, ...rest }) => {
   return (
     <SliderMark value={value} {...rest}>
       <Box
@@ -15,6 +19,12 @@ export const CustomSliderMark: React.FC<SliderMarkProps & SliderMarkProps> = ({
         mt="70%"
         mr="50%"
       ></Box>
+
+      {isEnumerated && (
+        <TextRegular position="absolute" ml="1px" mt="4px">
+          {value}
+        </TextRegular>
+      )}
     </SliderMark>
   );
 };
