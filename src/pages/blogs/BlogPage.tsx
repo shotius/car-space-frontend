@@ -11,11 +11,14 @@ interface BlogPageProps {}
 export const BlogPage: React.FC<BlogPageProps> = () => {
   const [blogs, setBlogs] = useState<IBlog[]>([]);
 
-  useEffect(() => {
+  function getAllBlogs() {
     blogServices.getAllBlogs().then((data) => setBlogs(data.results));
+  }
+
+  useEffect(() => {
+    getAllBlogs();
   }, []);
 
-  console.log('blogs: ', blogs);
   return (
     <>
       <ContainerOuter p="0" pt={[null, null, null, '48px']}>
@@ -47,7 +50,7 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
           mt={['48px', null, null, '64px']}
         >
           {blogs.map((blog) => (
-            <BlogCard blog={blog} key={blog.id} />
+            <BlogCard blog={blog} key={blog.id} getAllBlogs={getAllBlogs} />
           ))}
         </SimpleGrid>
       </ContainerOuter>

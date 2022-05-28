@@ -5,12 +5,13 @@ import { TextSecondary } from 'src/components/atoms/Texts/TextSecondary';
 import { useAppDispatch, useAppSelector } from 'src/redux/app/hook';
 import {
   getDealerCars,
-  removeSingleCar
+  removeSingleCar,
 } from 'src/redux/features/auth/carsSlice';
 import { setCatalogQuery } from 'src/redux/features/global/gloabalSlice';
 import { DEALER_CARS_CATALOG_URL } from 'src/utils/config/contants';
 import { capitalizeEach } from 'src/utils/functions/capitalizeEach';
 import { isApiDefaultError } from 'src/utils/functions/typeChecker';
+import { useRoles } from 'src/utils/hooks/useRoles';
 import { Roles } from '../../../../../server/shared_with_front/contants';
 import { ButtonHeart } from '../Buttons/ButtonHeart';
 import { TextRegular } from '../Texts/TextRegular';
@@ -26,7 +27,7 @@ export const CarCardHeading: React.FC<CarCardHeadingProps> = ({
   model,
   year,
 }) => {
-  const { role } = useAppSelector((state) => state.userInfoSlice);
+  const { isAdmin } = useRoles();
   const { catalogQuery } = useAppSelector((state) => state.globalAppState);
   const dispatch = useAppDispatch();
 
@@ -51,7 +52,7 @@ export const CarCardHeading: React.FC<CarCardHeadingProps> = ({
         <TextSecondary opacity="50%">{year || 'Year: -'}</TextSecondary>
       </VStack>
 
-      {role?.toLocaleLowerCase() === Roles.ADMIN.toLocaleLowerCase() ? (
+      {isAdmin ? (
         <IconButton
           icon={<CloseIcon />}
           aria-label="delete car"
@@ -59,50 +60,52 @@ export const CarCardHeading: React.FC<CarCardHeadingProps> = ({
             if (e.stopPropagation) {
               e.stopPropagation();
             }
-            dispatch(removeSingleCar(id))
-              .unwrap()
-              .then(() => {
-                const query = new URLSearchParams(catalogQuery);
-                dispatch(getDealerCars(query))
-                  .unwrap()
-                  .then((data) => {
-                    // if there are not more cards on the page fetch previos page
-                    const currPage = query.get('page');
-                    if (!!!data.cars.length && currPage && currPage !== '1') {
-                      const previousPage = parseInt(currPage) - 1 || '1';
-                      query.set('page', previousPage.toString());
-                      // dispatch(setActivePage(previousPage));
-                      dispatch(setCatalogQuery(query.toString()));
-                      history.push({
-                        pathname: DEALER_CARS_CATALOG_URL,
-                        search: query.toString(),
-                      });
-                      dispatch(getDealerCars(query));
-                    }
-                  });
-                toast({
-                  title: `Deleted successfully`,
-                  position: 'top',
-                  status: 'success',
-                  duration: 2000,
-                });
-              })
-              .catch((error) => {
-                if (isApiDefaultError(error)) {
+            const isConfirmed = confirm('Do you realy want to delete the car?');
+            isConfirmed &&
+              dispatch(removeSingleCar(id))
+                .unwrap()
+                .then(() => {
+                  const query = new URLSearchParams(catalogQuery);
+                  dispatch(getDealerCars(query))
+                    .unwrap()
+                    .then((data) => {
+                      // if there are not more cards on the page fetch previos page
+                      const currPage = query.get('page');
+                      if (!!!data.cars.length && currPage && currPage !== '1') {
+                        const previousPage = parseInt(currPage) - 1 || '1';
+                        query.set('page', previousPage.toString());
+                        // dispatch(setActivePage(previousPage));
+                        dispatch(setCatalogQuery(query.toString()));
+                        history.push({
+                          pathname: DEALER_CARS_CATALOG_URL,
+                          search: query.toString(),
+                        });
+                        dispatch(getDealerCars(query));
+                      }
+                    });
                   toast({
-                    title: error.message,
+                    title: `Deleted successfully`,
+                    position: 'top',
+                    status: 'success',
+                    duration: 2000,
+                  });
+                })
+                .catch((error) => {
+                  if (isApiDefaultError(error)) {
+                    toast({
+                      title: error.message,
+                      position: 'top',
+                      status: 'error',
+                      duration: 2000,
+                    });
+                  }
+                  toast({
+                    title: 'Could not delelete the card',
                     position: 'top',
                     status: 'error',
                     duration: 2000,
                   });
-                }
-                toast({
-                  title: 'Could not delelete the card',
-                  position: 'top',
-                  status: 'error',
-                  duration: 2000,
                 });
-              });
           }}
         />
       ) : (

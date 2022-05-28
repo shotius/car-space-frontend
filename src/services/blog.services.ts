@@ -21,10 +21,16 @@ const createBlog = async (blog: FormData) => {
   return result.data as ApiSuccessResponse<IBlog>;
 };
 
+const deleteBlogById = async (id: string) => {
+  const result = await axios.delete(`${baseUrl}/${id}`);
+  return result.data as ApiSuccessResponse<IBlog>;
+};
+
 const blogServices = {
   getAllBlogs,
   getBlogById,
   createBlog,
+  deleteBlogById,
 };
 
 export default blogServices;
