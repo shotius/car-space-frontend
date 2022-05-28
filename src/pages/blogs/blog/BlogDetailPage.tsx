@@ -1,4 +1,5 @@
 import { Image } from '@chakra-ui/image';
+import { HashLink } from 'react-router-hash-link';
 import { Box, Flex, HStack, VStack } from '@chakra-ui/layout';
 import { Center } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
@@ -10,16 +11,26 @@ import { HeadTags } from 'src/components/molecules/MetaTags';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { BlogContent } from 'src/components/organizms/BlogDetailPage/sections/BlogContent';
 import { BlogHeader } from 'src/components/organizms/BlogDetailPage/sections/BlogHeader';
+import {
+  carSpaceServices,
+  ICarSpaceService,
+} from 'src/constants/carSpaceServiceData';
 import blogServices from 'src/services/blog.services';
+import { getRandomInt } from 'src/utils/functions/getRandomInt';
 import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { IBlog } from '../../../../../server/shared_with_front/types/types-shared';
 
 interface BlogDetailPageProps {}
 
+function getCarSpaceService() {
+  return carSpaceServices[getRandomInt(4)];
+}
+
 export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
+  const [carSpaceService] = useState<ICarSpaceService>(getCarSpaceService);
+  const [isFetching, setIsFetching] = useState(true);
   const { isLargerThan: isLargerThan768 } = useMediaQueryMin(768);
   const [blog, setBlog] = useState<IBlog>();
-  const [isFetching, setIsFetching] = useState(true);
   const { blogId } = useParams<{ blogId: string }>();
 
   useEffect(() => {
@@ -56,24 +67,27 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
               <BlogCardLittle />
               <BlogCardLittle />
               <BlogCardLittle />
-              <Box pt="50px" cursor="pointer">
-                <HStack bg="white" p="4" borderRadius="8px">
-                  <Image
-                    w="82px"
-                    h="71px"
-                    src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"
-                    borderRadius="8px"
-                  />
-                  <VStack w="full" align="flex-start">
-                    <HeadingSecondary>Service Name</HeadingSecondary>
-                    <TextRegular noOfLines={2} fontSize="14px" opacity="0.5">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Quidem ratione doloribus neque ipsum amet, blanditiis iure
-                      voluptatem cum inventore mollitia{' '}
-                    </TextRegular>
-                  </VStack>
-                </HStack>
-              </Box>
+
+              <HashLink to={`/services#${carSpaceService.id}`} className="anchor">
+                <Box pt="50px" cursor="pointer">
+                  <HStack bg="white" p="4" spacing="4" borderRadius="8px">
+                    <Image
+                      w="82px"
+                      h="71px"
+                      src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"
+                      borderRadius="8px"
+                    />
+                    <VStack w="full" align="flex-start">
+                      <HeadingSecondary>
+                        {carSpaceService.heading}
+                      </HeadingSecondary>
+                      <TextRegular noOfLines={2} fontSize="14px" opacity="0.5">
+                        {carSpaceService.content}
+                      </TextRegular>
+                    </VStack>
+                  </HStack>
+                </Box>
+              </HashLink>
             </VStack>
           )}
         </Flex>

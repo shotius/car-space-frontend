@@ -9,14 +9,12 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
-import { CarLeftSideIcon } from 'src/components/atoms/Icons/CarLeftSideIcon';
-import { FilesStackIcon } from 'src/components/atoms/Icons/FilesStackIcon';
-import { FolersQueueIcon } from 'src/components/atoms/Icons/FoldersQueueIcon';
-import { ShipIcon } from 'src/components/atoms/Icons/ShipIcon';
 import { Card } from 'src/components/molecules/Cards/Card';
 import { ServiceCard } from 'src/components/molecules/Cards/ServiceCard';
 import { ScrollToTop } from 'src/components/molecules/ScrollToTop';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { carSpaceServices } from 'src/constants/carSpaceServiceData';
+import { carsReducer } from 'src/redux/features/auth/carsSlice';
 
 interface ServicesPageProps {}
 
@@ -66,40 +64,10 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
       </ContainerOuter>
       <ContainerOuter>
         <SimpleGrid columns={[1, null, 2]} spacing="4" mt="32px">
-          {/* Installment  */}
-          <ServiceCard
-            id="installment"
-            Icon={FilesStackIcon}
-            heading="შიდა განვადება"
-            content="მომხმარებლებს ვთავაზობთ მანქანის დაფინანსებას, მის საქართველოში
-            ჩამოსვლამდე. თუკი გსურთ ავტმობილის ჩამოყვანა და გჭირდებათ თანხა, რომ
-            დაფაროთ ავტომობილის ღირებულება, ჩვენ გაძლევთ შესაძლებლობას მარტივად
-            მოაგვაროთ ეს პრობლემა და დაიფინანსოთ მანქანის ღირებულების 80%-მდე
-            თანხა."
-          />
-
-          {/* Leasing  */}
-          <ServiceCard
-            id="leasing"
-            Icon={FolersQueueIcon}
-            heading="ლიზინგი"
-            content="მანქანის ჩამოყვანა რამდენიმი ტიპის კალკულაციასთანაა დაკავშირებული. გთავაზობთ ამერიკიდან ტრანსპორტირების, განბაჟების, შიდა დაფინანსებისა და ლიზინგის კალკულატორებს, რომელიც დაგეხმარებათ დეტალურად დაიანგარიშოთ ყველა შესაძლო ხარჯი, რაც მანქანის ჩამოყვანასთანაა დაკავშირებული."
-          />
-
-          {/* Car import  */}
-          <ServiceCard
-            id="carimport"
-            Icon={ShipIcon}
-            heading="მანქანის ჩამოყვანა"
-            content="ბაზარზე არსებული მრავალწლოვანი გამოცდილებიდან გამომდინარე, გვყავს საერთაშორისო პარტნიორები, რომელთა დახმარებითაც მანქანის ჩამოყვანის სერვისი ხდება საერთაშორისო ხარისხით. ავტომობილები ჩამოგვყავს უმოკლეს დროში და შესაძლო მინიმალურ ფასად."
-          />
-          {/* Choose a car  */}
-          <ServiceCard
-            id="choosingcar"
-            Icon={CarLeftSideIcon}
-            heading="მანქანის შერჩევა"
-            content="ჩვენი პროფესიონალი ავტო ასისტენტი დაგეხმარებათ თქვენთვის სასურველი ავტომობილის შერჩევაში. შეისწავლის ამ არჩეული ავტომობილის ისტორიას, დაზიანებებს და ზოგად მდგომარეობას. ამ ინფორმაციაზე დაყრდნობით დაგეხმარებათ კონკრეტული გადაწყვეტილების მიღებაში, რაზეც აიღებს შესაბამის პასუხისმგებლობას."
-          />
+          {/* Service list  */}
+          {carSpaceServices.map((service) => (
+            <ServiceCard {...service} key={service.id} />
+          ))}
         </SimpleGrid>
       </ContainerOuter>
 

@@ -112,6 +112,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ getAllBlogs, blog }) => {
             lineHeight="24px"
             w="full"
             noOfLines={[3, null, null, 2]}
+            whiteSpace={'pre-wrap'}
           >
             {blog.body}
           </TextRegular>

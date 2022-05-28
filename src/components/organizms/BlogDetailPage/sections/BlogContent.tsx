@@ -9,7 +9,6 @@ interface BlogContentProps {
 }
 
 export const BlogContent: React.FC<BlogContentProps> = ({ blog }) => {
-  console.log('body: ', blog.body);
   return (
     <>
       <AspectRatio ratio={[3 / 2, null, null, 712 / 390]} w="full">

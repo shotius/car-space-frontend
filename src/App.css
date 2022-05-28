@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 h1 {
@@ -8,14 +9,12 @@ h1 {
 
 .hoverable:hover {
   box-shadow: 0px 3px 10px #00000029;
-  transition: all .4s; 
+  transition: all 0.4s;
 }
-
 
 input[type='radio']:checked:before {
-  background-color: #3D405B;
+  background-color: #3d405b;
 }
-
 
 .radio-label {
   display: flex;
@@ -24,7 +23,7 @@ input[type='radio']:checked:before {
   gap: 8px;
 }
 .LoanSliderTrack {
-  width: 105% !important; 
+  width: 105% !important;
 }
 .loanSliderMark {
   bottom: 27%;

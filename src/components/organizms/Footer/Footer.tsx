@@ -69,7 +69,8 @@ export const Footer: React.FC<FooterProps> = () => {
             >
               <TextRegular fontSize={'14px'}>
                 {' '}
-                <HashLink to="/services#leasing">ლიზინგი</HashLink>
+                {/* <HashLink to="/services#leasing">ლიზინგი</HashLink> */}
+                <a href="/services#leasing">ლიზინგი</a>
               </TextRegular>
               <TextRegular fontSize={'14px'}>
                 {' '}
