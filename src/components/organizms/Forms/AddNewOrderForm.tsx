@@ -59,24 +59,22 @@ export const AddNewOrderForm: React.FC<AddNewOrderFormProps> = ({
               updateOrderCar({ carId: car.id, props: { ...values, userId } })
             )
               .unwrap()
-              .then(() => {
+              .catch((error) => {
+                toast({ title: error, status: 'error', position: 'top' });
+              })
+              .finally(() => {
                 setSubmitting(false);
                 closeDrawer();
-              })
-              .catch((error) => {
-                setSubmitting(false);
-                toast({ title: error, status: 'error', position: 'top' });
                 closeDrawer();
               })
           : dispatch(addOrder({ ...values, userId }))
               .unwrap()
-              .then(() => {
-                setSubmitting(false);
-                closeDrawer();
-              })
               .catch((error) => {
                 toast({ title: error, status: 'error', position: 'top' });
+              })
+              .finally(() => {
                 setSubmitting(false);
+                closeDrawer();
                 closeDrawer();
               });
       }}
@@ -110,7 +108,7 @@ export const AddNewOrderForm: React.FC<AddNewOrderFormProps> = ({
             label={`Delivery at:  dd/mm/yyyy`}
           />
           <ButtonRegular mt="4" type="submit" isLoading={isSubmitting}>
-            {operation === "modifying" ? "Update car" : "Add Car"}
+            {operation === 'modifying' ? 'Update car' : 'Add Car'}
           </ButtonRegular>
         </Form>
       )}

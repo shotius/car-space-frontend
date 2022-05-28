@@ -10,6 +10,8 @@ import blogServices from 'src/services/blog.services';
 interface AddBlogFormProps {
   initBlog?: Omit<InitState, 'cover'>;
   operation?: 'modifing' | 'adding';
+  closeForm?: () => void;
+  getAllBlogs?: () => void;
 }
 interface InitState {
   header: string;
@@ -26,6 +28,8 @@ const initState: InitState = {
 export const AddBlogForm: React.FC<AddBlogFormProps> = ({
   initBlog,
   operation = 'adding',
+  closeForm = () => {},
+  getAllBlogs = () => {},
 }) => {
   const toast = useToast();
 
@@ -34,40 +38,66 @@ export const AddBlogForm: React.FC<AddBlogFormProps> = ({
       ? { ...initBlog, cover: null }
       : initState;
 
+  async function handleAddBlog(blog: FormData) {
+    blogServices
+      .createBlog(blog)
+      .then(() => {
+        toast({
+          title: 'Blog created',
+          status: 'success',
+          position: 'top',
+        });
+      })
+      .catch(() => {
+        toast({
+          title: 'Something went wrong',
+          status: 'error',
+          position: 'top',
+        });
+      });
+  }
+  async function handleUpdateBlog(blog: FormData) {
+    return blogServices
+      .updateBlogById(blog)
+      .then(() => {
+        closeForm()
+        getAllBlogs()
+        toast({
+          title: 'blog has been upgaed',
+          status: 'success',
+          position: 'top',
+        });
+      })
+      .catch(() =>
+        toast({
+          title: 'Could not update blog',
+          status: 'error',
+          position: 'top',
+        })
+      );
+  }
+
+  function handleSubmit(values: InitState, { setSubmitting }) {
+    const { cover, ...restValues } = values;
+    const formdata = new FormData();
+    if (cover) {
+      formdata.append('cover', cover[0]);
+    }
+
+    // add rest of values
+    for (let [key, value] of Object.entries(restValues)) {
+      formdata.append(key, value);
+    }
+
+    const foo =
+      operation === 'adding'
+        ? handleAddBlog(formdata)
+        : handleUpdateBlog(formdata);
+
+    foo.finally(() => setSubmitting(false));
+  }
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={(values, { setSubmitting }) => {
-        const { cover, ...restValues } = values;
-        const formdata = new FormData();
-        if (cover) {
-          formdata.append('cover', cover[0]);
-        }
-
-        // add rest of values
-        for (let [key, value] of Object.entries(restValues)) {
-          formdata.append(key, value);
-        }
-
-        blogServices
-          .createBlog(formdata)
-          .then(() => {
-            toast({
-              title: 'Blog created',
-              status: 'success',
-              position: 'top',
-            });
-          })
-          .catch(() => {
-            toast({
-              title: 'Something went wrong',
-              status: 'error',
-              position: 'top',
-            });
-          })
-          .finally(() => setSubmitting(false));
-      }}
-    >
+    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       {({ isSubmitting }) => (
         <Form>
           <VStack spacing="4">
@@ -92,7 +122,7 @@ export const AddBlogForm: React.FC<AddBlogFormProps> = ({
               )}
             </Field>
             <ButtonRegular isLoading={isSubmitting} type={'submit'}>
-              Add new Blog
+              {operation === 'adding' ? ' Add new Blog' : 'Update blog'}
             </ButtonRegular>
           </VStack>
         </Form>

@@ -124,7 +124,12 @@ export const BlogCard: React.FC<BlogCardProps> = ({ getAllBlogs, blog }) => {
           <DrawerCloseButton />
           <DrawerHeader>Contact Form</DrawerHeader>
           <DrawerBody>
-            <AddBlogForm initBlog={blog} operation="modifing" />
+            <AddBlogForm
+              initBlog={blog}
+              operation="modifing"
+              closeForm={toggleEditingWindow}
+              getAllBlogs={getAllBlogs}
+            />
           </DrawerBody>
         </DrawerContent>
       </Drawer>

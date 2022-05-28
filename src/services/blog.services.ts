@@ -26,11 +26,18 @@ const deleteBlogById = async (id: string) => {
   return result.data as ApiSuccessResponse<IBlog>;
 };
 
+const updateBlogById = async (blog: FormData) => {
+  const id = blog.get('id');
+  const result = await axios.put(`${baseUrl}/${id}`, blog);
+  return result.data as ApiSuccessResponse<IBlog>;
+};
+
 const blogServices = {
   getAllBlogs,
   getBlogById,
   createBlog,
   deleteBlogById,
+  updateBlogById,
 };
 
 export default blogServices;
