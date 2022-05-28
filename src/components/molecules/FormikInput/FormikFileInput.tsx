@@ -1,3 +1,4 @@
+import { FormControl, FormLabel, Input } from '@chakra-ui/react';
 import { useField } from 'formik';
 
 interface InputFileProps {
@@ -12,22 +13,29 @@ export const FormikFileInput: React.FC<
   multiple = false,
   value = undefined,
   style = { marginTop: '10px' },
+  label,
   ...props
 }) => {
   const [field, _meta, { setValue }] = useField(name);
 
   return (
-    <input
-      type={type}
-      multiple={multiple}
-      {...field}
-      value={value}
-      style={style}
-      {...props}
-      onChange={(e) => {
-        const files = e.currentTarget.files;
-        setValue(files);
-      }}
-    />
+    <FormControl>
+      <FormLabel mb="0" htmlFor={label}>
+        {label}
+      </FormLabel>
+      <input
+        id={label}
+        type={type}
+        multiple={multiple}
+        {...field}
+        value={value}
+        style={style}
+        {...props}
+        onChange={(e) => {
+          const files = e.currentTarget.files;
+          setValue(files);
+        }}
+      />
+    </FormControl>
   );
 };

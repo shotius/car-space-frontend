@@ -6,6 +6,7 @@ import { ScrollToTop } from 'src/components/molecules/ScrollToTop';
 import { useAppDispatch } from 'src/redux/app/hook';
 import { logoutUser } from 'src/redux/features/auth/authSlice';
 import AddBanners from './AddBanners';
+import AddBlog from './AddBlog';
 import AddNewCar from './AddNewCar';
 import { AddNewReview } from './AddNewReview';
 import { AddOrderedCar } from './AddOrderedCar';
@@ -31,25 +32,52 @@ export const AdminPage: React.FC<AdminProps> = () => {
             Car
           </Link>
         </Button>
-        <DividerVertical height="20px" borderColor="black" display={['none', null, 'block']}/>
+        <DividerVertical
+          height="20px"
+          borderColor="black"
+          display={['none', null, 'block']}
+        />
         <Button variant="link">
           <Link style={{ color: 'black' }} to={`${path}/add-review`}>
             Review
           </Link>
         </Button>
-        <DividerVertical height="20px" borderColor="black" display={['none', null, 'block']}/>
+        <DividerVertical
+          height="20px"
+          borderColor="black"
+          display={['none', null, 'block']}
+        />
         <Button variant="link">
           <Link style={{ color: 'black' }} to={`${path}/add-order`}>
             Ordereds
           </Link>
         </Button>
-        <DividerVertical height="20px" borderColor="black" display={['none', null, 'block']}/>
+        <DividerVertical
+          height="20px"
+          borderColor="black"
+          display={['none', null, 'block']}
+        />
         <Button variant="link">
           <Link style={{ color: 'black' }} to={`${path}/banners`}>
             Banners
           </Link>
         </Button>
-        <DividerVertical height="20px" borderColor="black" display={['none', null, 'block']}/>
+        <DividerVertical
+          height="20px"
+          borderColor="black"
+          display={['none', null, 'block']}
+        />
+
+        <Button variant="link">
+          <Link style={{ color: 'black' }} to={`${path}/blog`}>
+            Blog
+          </Link>
+        </Button>
+        <DividerVertical
+          height="20px"
+          borderColor="black"
+          display={['none', null, 'block']}
+        />
         <Button
           color="red"
           border="1px solid"
@@ -73,11 +101,8 @@ export const AdminPage: React.FC<AdminProps> = () => {
           render={() => <AddOrderedCar />}
           exact
         />
-        <Route
-          path={`${path}/banners`}
-          render={() => <AddBanners />}
-          exact
-        />
+        <Route path={`${path}/banners`} render={() => <AddBanners />} exact />
+        <Route path={`${path}/blog`} render={() => <AddBlog />} exact />
       </Switch>
     </ContainerOuter>
   );

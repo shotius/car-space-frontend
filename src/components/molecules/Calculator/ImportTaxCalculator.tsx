@@ -82,11 +82,6 @@ export const ImportTaxCalculator: React.FC<ImportTaxCalculatroProps> = ({}) => {
 
     const customsClearance = safeSum(safeSum(aqcizi, importTax), constantFee);
 
-    const hybAqc = engine * 400 * getSaaqcizoGanakveti(age)
-    console.log('hybAqc: ', hybAqc)
-
-    // debugger
-    // console.log('aqcizi', aqcizi)
     return roundFloatTo(customsClearance, 3);
   }
 

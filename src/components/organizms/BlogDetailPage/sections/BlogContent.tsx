@@ -9,12 +9,18 @@ interface BlogContentProps {
 }
 
 export const BlogContent: React.FC<BlogContentProps> = ({ blog }) => {
+  console.log('body: ', blog.body);
   return (
     <>
       <AspectRatio ratio={[3 / 2, null, null, 712 / 390]} w="full">
         <Image src={blog.img || FALLBACK_IMG} borderRadius="8px" />
       </AspectRatio>
-      <TextRegular fontSize="16px" lineHeight={['25px', '33px']} pt="8px">
+      <TextRegular
+        fontSize="16px"
+        lineHeight={['25px', '33px']}
+        pt="8px"
+        whiteSpace={'pre-wrap'}
+      >
         {blog.body}
       </TextRegular>
     </>
