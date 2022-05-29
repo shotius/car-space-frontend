@@ -1,6 +1,16 @@
-import { Center, CloseButton, Divider, HStack, VStack } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import {
+  Center,
+  CloseButton,
+  HStack,
+  InputGroup,
+  InputProps,
+  InputRightElement,
+  VStack,
+} from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
+import { SearchIcon } from 'src/components/atoms/Icons/SearchIcon';
+import { EditButton } from 'src/components/molecules/Buttons/EditButton';
 import { Card } from 'src/components/molecules/Cards/Card';
 import { InputGrey } from 'src/components/molecules/Inputs/InputGrey';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
@@ -9,11 +19,38 @@ import { ITransportDataObject } from '../../../../../../server/shared_with_front
 
 interface ChangeTransportationProps {}
 
-const ChangeTransportation: React.FC<ChangeTransportationProps> = ({}) => {
+interface InputInterface {
+  onSubmit?: any;
+}
+
+const SearchComponent: React.FC<InputProps & InputInterface> = ({
+  onSubmit = (e: React.SyntheticEvent) => {},
+  ...rest
+}) => {
   const [searchWord, setSearchWord] = useState('');
+
+  return (
+    <InputGroup>
+      <InputGrey
+        value={searchWord}
+        onChange={(e) => setSearchWord(e.currentTarget.value)}
+        placeholder="Search"
+        {...rest}
+      />
+      <InputRightElement
+        children={<SearchIcon color="gray.300" />}
+        cursor="pointer"
+        onClick={onSubmit}
+      />
+    </InputGroup>
+  );
+};
+
+const ChangeTransportation: React.FC<ChangeTransportationProps> = ({}) => {
   const [transportationData, setTransportationData] = useState<
     ITransportDataObject[]
   >([]);
+
   useEffect(() => {
     transportaionService
       .getTransportationData()
@@ -24,11 +61,7 @@ const ChangeTransportation: React.FC<ChangeTransportationProps> = ({}) => {
     <ContainerOuter>
       <Center>
         <Card>
-          <InputGrey
-            value={searchWord}
-            onChange={(e) => setSearchWord(e.currentTarget.value)}
-            placeholder="Search"
-          />
+          <SearchComponent onSubmit={() => console.log('clicked and filter')}/>
           <VStack w="full" spacing="0">
             {transportationData.map((data) => (
               <VStack
@@ -41,6 +74,7 @@ const ChangeTransportation: React.FC<ChangeTransportationProps> = ({}) => {
                 position="relative"
               >
                 <HStack pos="absolute" right="14px">
+                  <EditButton boxSize={6} />
                   <CloseButton />
                 </HStack>
                 <TextRegular>

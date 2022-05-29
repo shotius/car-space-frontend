@@ -17,7 +17,7 @@ import blogServices from 'src/services/blog.services';
 import { useBlogEditDrawer } from 'src/utils/hooks/useBlogEditDrawer';
 import { useRoles } from 'src/utils/hooks/useRoles';
 import { IBlog } from '../../../../../server/shared_with_front/types/types-shared';
-import { EditButton } from '../Buttons/EditIcon';
+import { EditButton } from '../Buttons/EditButton';
 import { TextRegular } from '../Texts/TextRegular';
 import { Card } from './Card';
 

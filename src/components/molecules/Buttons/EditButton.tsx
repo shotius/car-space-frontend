@@ -7,7 +7,7 @@ interface Props extends Omit<IconButtonProps, 'aria-label'> {
 
 export const EditButton: React.FC<Props> = ({
   bg = 'transparent',
-  hoverBg = 'transparent',
+  hoverBg = 'autoGrey.200',
   ...rest
 }) => {
   return (
@@ -15,6 +15,7 @@ export const EditButton: React.FC<Props> = ({
       aria-label="edit"
       as={EditIcon}
       bg={bg}
+      minH="30px"
       _hover={{
         bg: hoverBg,
       }}
