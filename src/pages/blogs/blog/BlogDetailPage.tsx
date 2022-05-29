@@ -42,7 +42,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
       .catch(console.log);
   }
 
-  function getSingleBlog() {
+  function getSingleBlog(blogId: string) {
     blogServices
       .getBlogById(blogId)
       .then(({ results }) => setBlog(results))
@@ -54,7 +54,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
   }, []);
 
   useEffect(() => {
-    getSingleBlog();
+    getSingleBlog(blogId);
     scrollTo(0, 0);
   }, [blogId]);
 
@@ -72,7 +72,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
       <ContainerOuter pt={['32px', '10px']}>
         <Flex w="full" position="relative" css={{ gap: '80px' }}>
           <VStack w="full" align="flex-start" spacing="4" justify="baseline">
-            <BlogHeader blog={blog} />
+            <BlogHeader blog={blog} getBlogById={getSingleBlog} />
             <BlogContent blog={blog} />
           </VStack>
           {isLargerThan768 && (

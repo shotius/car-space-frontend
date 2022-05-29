@@ -12,7 +12,7 @@ import { IBlog } from '../../../../server/shared_with_front/types/types-shared';
 
 interface useBlogEditDrawerProps {
   blog?: IBlog;
-  getAllBlogs?: () => void;
+  refetchCb?: () => void;
   operation?: 'modifing' | 'adding';
 }
 
@@ -22,7 +22,7 @@ export const useBlogEditDrawer = () => {
 
   const EditBlogDrawer: React.FC<useBlogEditDrawerProps> = ({
     blog,
-    getAllBlogs = () => {},
+    refetchCb = () => {},
     operation = 'adding',
   }) => (
     <Drawer isOpen={isBlogEditing} onClose={toggleEditingDrawer} size="m">
@@ -34,7 +34,7 @@ export const useBlogEditDrawer = () => {
           <AddBlogForm
             initBlog={blog}
             operation={operation}
-            getAllBlogs={getAllBlogs}
+            refetchCb={refetchCb}
             closeForm={toggleEditingDrawer}
           />
         </DrawerBody>

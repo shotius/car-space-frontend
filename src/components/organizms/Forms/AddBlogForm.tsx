@@ -11,7 +11,7 @@ interface AddBlogFormProps {
   initBlog?: Omit<InitState, 'cover'>;
   operation?: 'modifing' | 'adding';
   closeForm?: () => void;
-  getAllBlogs?: () => void;
+  refetchCb?: () => void;
 }
 interface InitState {
   header: string;
@@ -29,7 +29,7 @@ export const AddBlogForm: React.FC<AddBlogFormProps> = ({
   initBlog,
   operation = 'adding',
   closeForm = () => {},
-  getAllBlogs = () => {},
+  refetchCb = () => {},
 }) => {
   const toast = useToast();
 
@@ -64,7 +64,7 @@ export const AddBlogForm: React.FC<AddBlogFormProps> = ({
         .updateBlogById(blog)
         .then(() => {
           closeForm();
-          getAllBlogs();
+          refetchCb();
           toast({
             title: 'blog has been updated',
             status: 'success',

@@ -114,7 +114,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ getAllBlogs, blog }) => {
       <EditBlogDrawer
         blog={blog}
         operation="modifing"
-        getAllBlogs={getAllBlogs}
+        refetchCb={getAllBlogs}
       />
     </>
   );

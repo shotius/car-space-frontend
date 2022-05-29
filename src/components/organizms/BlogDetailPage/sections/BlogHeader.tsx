@@ -1,29 +1,57 @@
-import { Box, Button, HStack, Icon, Spacer, useToast } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  HStack,
+  Icon,
+  IconButton,
+  Spacer,
+  useToast,
+} from '@chakra-ui/react';
 import { CopyIcon } from 'src/components/atoms/Icons/CopyIcon';
+import { EditIcon } from 'src/components/atoms/Icons/EditIcon';
 import { FbIconBlack } from 'src/components/atoms/Icons/FBIconBlack';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
 import { dateToDMY, dateToYMD } from 'src/utils/functions/dateToYMD';
+import { useBlogEditDrawer } from 'src/utils/hooks/useBlogEditDrawer';
+import { useRoles } from 'src/utils/hooks/useRoles';
 import { IBlog } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface HeaderProps {
   blog: IBlog;
+  getBlogById: (id: string) => void;
 }
 
-export const BlogHeader: React.FC<HeaderProps> = ({ blog }) => {
+export const BlogHeader: React.FC<HeaderProps> = ({ blog, getBlogById }) => {
   const toast = useToast();
   const url = window.location;
+  const { isAdmin } = useRoles();
+
+  const { toggleEditingDrawer, EditBlogDrawer } = useBlogEditDrawer();
+
+  function handleRefetchBlog() {
+    getBlogById(blog.id);
+  }
 
   const date = blog.createdAt ? dateToDMY(blog.createdAt) : 'created: -';
 
   return (
     <Box w="full">
-      <HeadingSecondary
-        fontSize={['24px', '32px', null, '50px']}
-        pt={['0px', '20px', '30px', '48px']}
-      >
-        {blog.header}
-      </HeadingSecondary>
+      <HStack align="baseline" justify={'space-between'}>
+        <HeadingSecondary
+          fontSize={['24px', '32px', null, '50px']}
+          pt={['0px', '20px', '30px', '48px']}
+        >
+          {blog.header}
+        </HeadingSecondary>
+        {isAdmin && (
+          <IconButton
+            aria-label="edit blog"
+            as={EditIcon}
+            onClick={toggleEditingDrawer}
+          />
+        )}
+      </HStack>
       <HStack w="full">
         <TextRegular opacity="0.5" fontSize="14px">
           {date}
@@ -82,6 +110,11 @@ export const BlogHeader: React.FC<HeaderProps> = ({ blog }) => {
           </Button>
         </HStack>
       </HStack>
+      <EditBlogDrawer
+        operation="modifing"
+        blog={blog}
+        refetchCb={handleRefetchBlog}
+      />
     </Box>
   );
 };
