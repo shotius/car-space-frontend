@@ -11,6 +11,7 @@ import { useAppSelector } from 'src/redux/app/hook';
 import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
+import { ITransportDataObject } from '../../../../../server/shared_with_front/types/types-shared';
 import { SizeContext } from '../../organizms/Calculator/CalculatorDesktop';
 import { Autocomplete } from '../Autocomplete';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
@@ -18,14 +19,6 @@ import { TextRegular } from '../Texts/TextRegular';
 import { CalculatorFooter } from './CalculatorFooter';
 
 interface TransportCalculatorProps {}
-
-interface IDataObject {
-  city: string;
-  auction: string;
-  price: number;
-  state: string;
-  zip: string;
-}
 
 export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
   const size = useContext(SizeContext);
@@ -38,7 +31,7 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
 
   // this is a dictionary with all info about auctions
   const auctionDictionary = useMemo(() => {
-    return cities.map<IDataObject>((city, i) => {
+    return cities.map<ITransportDataObject>((city, i) => {
       return {
         city,
         auction: auctions[i],
