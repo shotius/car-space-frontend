@@ -21,7 +21,6 @@ interface ServicesPageProps {}
 export const ServicesPage: React.FC<ServicesPageProps> = () => {
   return (
     <>
-      <ScrollToTop />
       <ContainerOuter
         p={['0', null, null, '4']}
         pt={[null, null, null, '42px']}

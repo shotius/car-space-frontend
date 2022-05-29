@@ -66,7 +66,7 @@ export const AddBlogForm: React.FC<AddBlogFormProps> = ({
           closeForm();
           getAllBlogs();
           toast({
-            title: 'blog has been upgaed',
+            title: 'blog has been updated',
             status: 'success',
             position: 'top',
           });

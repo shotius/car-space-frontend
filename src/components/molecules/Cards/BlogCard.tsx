@@ -1,11 +1,5 @@
 import {
   CloseButton,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
   Heading,
   HStack,
   IconButton,
@@ -15,13 +9,11 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { EditIcon } from 'src/components/atoms/Icons/EditIcon';
-import { AddBlogForm } from 'src/components/organizms/Forms/AddBlogForm';
-import { ContactForm } from 'src/components/organizms/Forms/ContactForm';
 import { FALLBACK_IMG } from 'src/constants';
 import blogServices from 'src/services/blog.services';
+import { useBlogEditDrawer } from 'src/utils/hooks/useBlogEditDrawer';
 import { useRoles } from 'src/utils/hooks/useRoles';
 import { IBlog } from '../../../../../server/shared_with_front/types/types-shared';
 import { TextRegular } from '../Texts/TextRegular';
@@ -36,17 +28,18 @@ export const BlogCard: React.FC<BlogCardProps> = ({ getAllBlogs, blog }) => {
   const history = useHistory();
   const { isAdmin } = useRoles();
   const toast = useToast();
-  const { isOpen: isBlogEditing, onToggle: toggleEditingWindow } =
-    useDisclosure();
+  
+  const { toggleEditingDrawer, EditBlogDrawer } = useBlogEditDrawer();
 
   function handleBlogEdit(e: React.SyntheticEvent) {
     e.stopPropagation();
-    toggleEditingWindow();
+    toggleEditingDrawer();
   }
 
   function deleteBlog(e: React.SyntheticEvent) {
     e.stopPropagation();
     const isConfirmed = confirm('Do you realy want to delete?');
+    
     isConfirmed &&
       blogServices
         .deleteBlogById(blog.id)
@@ -118,22 +111,11 @@ export const BlogCard: React.FC<BlogCardProps> = ({ getAllBlogs, blog }) => {
           </TextRegular>
         </VStack>
       </Card>
-
-      <Drawer isOpen={isBlogEditing} onClose={toggleEditingWindow} size="m">
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Contact Form</DrawerHeader>
-          <DrawerBody>
-            <AddBlogForm
-              initBlog={blog}
-              operation="modifing"
-              closeForm={toggleEditingWindow}
-              getAllBlogs={getAllBlogs}
-            />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <EditBlogDrawer
+        blog={blog}
+        operation="modifing"
+        getAllBlogs={getAllBlogs}
+      />
     </>
   );
 };
