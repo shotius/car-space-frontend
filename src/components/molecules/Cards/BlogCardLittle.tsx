@@ -29,7 +29,7 @@ export const BlogCardLittle: React.FC<BlogCardLittleProps & StackProps> = ({
         borderRadius="8px"
       />
       <VStack w="full" align="flex-start">
-        <HeadingSecondary>{blog.header}</HeadingSecondary>
+        <HeadingSecondary noOfLines={1}>{blog.header}</HeadingSecondary>
         <TextRegular noOfLines={2} fontSize="14px" opacity="0.5">
           {blog.body}
         </TextRegular>

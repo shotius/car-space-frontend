@@ -101,7 +101,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
                       borderRadius="8px"
                     />
                     <VStack w="full" align="flex-start">
-                      <HeadingSecondary>
+                      <HeadingSecondary noOfLines={1}>
                         {carSpaceService.heading}
                       </HeadingSecondary>
                       <TextRegular noOfLines={2} fontSize="14px" opacity="0.5">
