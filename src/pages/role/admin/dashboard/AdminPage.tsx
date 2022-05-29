@@ -10,6 +10,7 @@ import AddBlog from './AddBlog';
 import AddNewCar from './AddNewCar';
 import { AddNewReview } from './AddNewReview';
 import { AddOrderedCar } from './AddOrderedCar';
+import ChangeTransportation from './ChangeTransportation';
 
 interface AdminProps {}
 
@@ -78,6 +79,17 @@ export const AdminPage: React.FC<AdminProps> = () => {
           borderColor="black"
           display={['none', null, 'block']}
         />
+
+        <Button variant="link">
+          <Link style={{ color: 'black' }} to={`${path}/transportation`}>
+            Transportation
+          </Link>
+        </Button>
+        <DividerVertical
+          height="20px"
+          borderColor="black"
+          display={['none', null, 'block']}
+        />
         <Button
           color="red"
           border="1px solid"
@@ -103,6 +115,11 @@ export const AdminPage: React.FC<AdminProps> = () => {
         />
         <Route path={`${path}/banners`} render={() => <AddBanners />} exact />
         <Route path={`${path}/blog`} render={() => <AddBlog />} exact />
+        <Route
+          path={`${path}/transportation`}
+          render={() => <ChangeTransportation />}
+          exact
+        />
       </Switch>
     </ContainerOuter>
   );

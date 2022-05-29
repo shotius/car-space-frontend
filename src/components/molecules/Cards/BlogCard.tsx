@@ -17,6 +17,7 @@ import blogServices from 'src/services/blog.services';
 import { useBlogEditDrawer } from 'src/utils/hooks/useBlogEditDrawer';
 import { useRoles } from 'src/utils/hooks/useRoles';
 import { IBlog } from '../../../../../server/shared_with_front/types/types-shared';
+import { EditButton } from '../Buttons/EditIcon';
 import { TextRegular } from '../Texts/TextRegular';
 import { Card } from './Card';
 
@@ -74,16 +75,13 @@ export const BlogCard: React.FC<BlogCardProps> = ({ getAllBlogs, blog }) => {
         position="relative"
       >
         {isAdmin && (
-          <HStack pos="absolute" w="full" justifyContent={'end'} zIndex="banner">
-            <IconButton
-              aria-label="edit"
-              as={EditIcon}
-              bg="transparent"
-              _hover={{
-                bg: 'transparent',
-              }}
-              onClick={handleBlogEdit}
-            />
+          <HStack
+            pos="absolute"
+            w="full"
+            justifyContent={'end'}
+            zIndex="banner"
+          >
+            <EditButton onClick={handleBlogEdit} />
             <CloseButton onClick={deleteBlog} />
           </HStack>
         )}
