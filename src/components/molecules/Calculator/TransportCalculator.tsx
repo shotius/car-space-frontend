@@ -1,13 +1,7 @@
 import { HStack, VStack } from '@chakra-ui/react';
-import { useContext, useMemo, useState } from 'react';
-import {
-  auctions,
-  cities,
-  prices,
-  states,
-  zips,
-} from 'src/constants/TransportData';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from 'src/redux/app/hook';
+import transportaionService from 'src/services/transportation.service';
 import { roundFloatTo } from 'src/utils/functions/roundFloatTo';
 import { toTrippleNumber } from 'src/utils/functions/toTrippleNumber';
 import useCurrencyIcon from 'src/utils/hooks/useCurrencyIcon';
@@ -24,23 +18,41 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
   const size = useContext(SizeContext);
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedAuction, setSelectedAuction] = useState('');
+  const [auctionDictionary, setAuctionDictionary] = useState<
+    ITransportDataObject[]
+  >([]);
+  const [uniqueAuctions, setUniqueAuctions] = useState<string[]>([]);
+  const [uniqueCities, setUniqueCities] = useState<string[]>([]);
   const icon = useCurrencyIcon();
   const currPrice = useAppSelector(
     (state) => state.globalAppState.currencyPrice
   );
 
-  // this is a dictionary with all info about auctions
-  const auctionDictionary = useMemo(() => {
-    return cities.map<ITransportDataObject>((city, i) => {
-      return {
-        city,
-        auction: auctions[i],
-        price: prices[i],
-        state: states[i],
-        zip: zips[i],
-      };
-    });
-  }, [cities]);
+  function extractUniquAuctions(auctionDictionary: ITransportDataObject[]) {
+    const allAuctions = auctionDictionary.map((obj) => obj.auction);
+    setUniqueAuctions([...new Set(allAuctions)]);
+  }
+
+  function extractUniqueCities(auctionDictionary: ITransportDataObject[]) {
+    const allCities = auctionDictionary.map((obj) => obj.city);
+    setUniqueCities([...new Set(allCities)]);
+  }
+
+  useEffect(() => {
+    transportaionService
+      .getTransportationData()
+      .then(({ results }) => {
+        setAuctionDictionary(results);
+      })
+      .catch(console.log);
+  }, []);
+
+  useEffect(() => {
+    if (auctionDictionary.length) {
+      extractUniquAuctions(auctionDictionary);
+      extractUniqueCities(auctionDictionary);
+    }
+  }, [auctionDictionary]);
 
   // calculate state based on selected city
   const state =
@@ -59,10 +71,6 @@ export const TransportCalculator: React.FC<TransportCalculatorProps> = ({}) => {
             dict.city === selectedCity && dict.auction === selectedAuction
         )?.price
       : 0;
-
-  // get unique cities and auctions
-  const uniqueCities = [...new Set(cities)];
-  const uniqueAuctions = [...new Set(auctions)];
 
   // filter cities if auction is selected
   const citiesToShow = selectedAuction

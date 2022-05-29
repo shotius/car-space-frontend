@@ -37,7 +37,6 @@ export const CalculatorDesktop: React.FC<
   return (
     <SizeContext.Provider value={size}>
       <Tabs
-      defaultIndex={2}
         w={w}
         maxW={size === 'regular' ? '441px' : '640px'}
         boxShadow={boxShadow}
