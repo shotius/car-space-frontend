@@ -38,43 +38,46 @@ export const AddBlogForm: React.FC<AddBlogFormProps> = ({
       ? { ...initBlog, cover: null }
       : initState;
 
-  async function handleAddBlog(blog: FormData) {
-    blogServices
-      .createBlog(blog)
-      .then(() => {
-        toast({
-          title: 'Blog created',
-          status: 'success',
-          position: 'top',
-        });
-      })
-      .catch(() => {
-        toast({
-          title: 'Something went wrong',
-          status: 'error',
-          position: 'top',
-        });
-      });
-  }
-  async function handleUpdateBlog(blog: FormData) {
-    return blogServices
-      .updateBlogById(blog)
-      .then(() => {
-        closeForm()
-        getAllBlogs()
-        toast({
-          title: 'blog has been upgaed',
-          status: 'success',
-          position: 'top',
-        });
-      })
-      .catch(() =>
-        toast({
-          title: 'Could not update blog',
-          status: 'error',
-          position: 'top',
+  function handleAddBlog(blog: FormData) {
+    return () =>
+      blogServices
+        .createBlog(blog)
+        .then(() => {
+          toast({
+            title: 'Blog created',
+            status: 'success',
+            position: 'top',
+            duration: 3000,
+          });
         })
-      );
+        .catch(() => {
+          toast({
+            title: 'Something went wrong',
+            status: 'error',
+            position: 'top',
+          });
+        });
+  }
+  function handleUpdateBlog(blog: FormData) {
+    return () =>
+      blogServices
+        .updateBlogById(blog)
+        .then(() => {
+          closeForm();
+          getAllBlogs();
+          toast({
+            title: 'blog has been upgaed',
+            status: 'success',
+            position: 'top',
+          });
+        })
+        .catch(() =>
+          toast({
+            title: 'Could not update blog',
+            status: 'error',
+            position: 'top',
+          })
+        );
   }
 
   function handleSubmit(values: InitState, { setSubmitting }) {
@@ -93,8 +96,7 @@ export const AddBlogForm: React.FC<AddBlogFormProps> = ({
       operation === 'adding'
         ? handleAddBlog(formdata)
         : handleUpdateBlog(formdata);
-
-    foo.finally(() => setSubmitting(false));
+    foo().finally(() => setSubmitting(false));
   }
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>

@@ -3,6 +3,7 @@ import { CopyIcon } from 'src/components/atoms/Icons/CopyIcon';
 import { FbIconBlack } from 'src/components/atoms/Icons/FBIconBlack';
 import { HeadingSecondary } from 'src/components/molecules/Headings/HeadingSecondary';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { dateToDMY, dateToYMD } from 'src/utils/functions/dateToYMD';
 import { IBlog } from '../../../../../../server/shared_with_front/types/types-shared';
 
 interface HeaderProps {
@@ -12,6 +13,8 @@ interface HeaderProps {
 export const BlogHeader: React.FC<HeaderProps> = ({ blog }) => {
   const toast = useToast();
   const url = window.location;
+
+  const date = blog.createdAt ? dateToDMY(blog.createdAt) : 'created: -';
 
   return (
     <Box w="full">
@@ -23,7 +26,7 @@ export const BlogHeader: React.FC<HeaderProps> = ({ blog }) => {
       </HeadingSecondary>
       <HStack w="full">
         <TextRegular opacity="0.5" fontSize="14px">
-          01.02.2021
+          {date}
         </TextRegular>
         <Spacer />
         <Button

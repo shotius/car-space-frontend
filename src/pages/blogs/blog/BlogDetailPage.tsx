@@ -19,6 +19,7 @@ import blogServices from 'src/services/blog.services';
 import { getRandomInt } from 'src/utils/functions/getRandomInt';
 import { useMediaQueryMin } from 'src/utils/hooks/useMediaQueryMin';
 import { IBlog } from '../../../../../server/shared_with_front/types/types-shared';
+import { ScrollToTop } from 'src/components/molecules/ScrollToTop';
 
 interface BlogDetailPageProps {}
 
@@ -54,6 +55,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
 
   useEffect(() => {
     getSingleBlog();
+    scrollTo(0, 0);
   }, [blogId]);
 
   if (isFetching) return <Center>...laodidng</Center>;
@@ -61,6 +63,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
 
   return (
     <>
+      <ScrollToTop />
       <HeadTags
         title={blog.header}
         metaDescription={blog.body.slice(0, 25).concat('...')}
@@ -79,6 +82,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
               top={['184px', null, null, '215px', '220px']}
               h="full"
               spacing="0px"
+              align={'start'}
             >
               {randomBlogs.map((blog) => (
                 <BlogCardLittle blog={blog} key={blog.id} />
