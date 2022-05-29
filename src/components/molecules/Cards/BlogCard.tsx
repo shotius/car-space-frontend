@@ -1,4 +1,5 @@
 import {
+  AspectRatio,
   CloseButton,
   Heading,
   HStack,
@@ -28,7 +29,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ getAllBlogs, blog }) => {
   const history = useHistory();
   const { isAdmin } = useRoles();
   const toast = useToast();
-  
+
   const { toggleEditingDrawer, EditBlogDrawer } = useBlogEditDrawer();
 
   function handleBlogEdit(e: React.SyntheticEvent) {
@@ -39,7 +40,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ getAllBlogs, blog }) => {
   function deleteBlog(e: React.SyntheticEvent) {
     e.stopPropagation();
     const isConfirmed = confirm('Do you realy want to delete?');
-    
+
     isConfirmed &&
       blogServices
         .deleteBlogById(blog.id)
@@ -73,7 +74,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ getAllBlogs, blog }) => {
         position="relative"
       >
         {isAdmin && (
-          <HStack pos="absolute" w="full" justifyContent={'end'}>
+          <HStack pos="absolute" w="full" justifyContent={'end'} zIndex="banner">
             <IconButton
               aria-label="edit"
               as={EditIcon}
@@ -86,12 +87,14 @@ export const BlogCard: React.FC<BlogCardProps> = ({ getAllBlogs, blog }) => {
             <CloseButton onClick={deleteBlog} />
           </HStack>
         )}
-        <Image
-          src={blog.img || FALLBACK_IMG}
-          borderTopRadius="8px"
-          h="177px"
-          w="full"
-        />
+        <AspectRatio ratio={2 / 1}>
+          <Image
+            src={blog.img || FALLBACK_IMG}
+            borderTopRadius="8px"
+            h="177px"
+            w="full"
+          />
+        </AspectRatio>
         <VStack
           p="4"
           pb="37px"
