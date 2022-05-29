@@ -29,16 +29,32 @@ function getCarSpaceService() {
 export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
   const [carSpaceService] = useState<ICarSpaceService>(getCarSpaceService);
   const [isFetching, setIsFetching] = useState(true);
+  const [randomBlogs, setRandomBlogs] = useState<IBlog[]>([]);
   const { isLargerThan: isLargerThan768 } = useMediaQueryMin(768);
   const [blog, setBlog] = useState<IBlog>();
   const { blogId } = useParams<{ blogId: string }>();
 
-  useEffect(() => {
+  function getRandomBlogs(limit: number | void) {
+    blogServices
+      .getRandomBlogs()
+      .then(({ results }) => setRandomBlogs(results))
+      .catch(console.log);
+  }
+
+  function getSingleBlog() {
     blogServices
       .getBlogById(blogId)
       .then(({ results }) => setBlog(results))
       .finally(() => setIsFetching(false));
+  }
+
+  useEffect(() => {
+    getRandomBlogs();
   }, []);
+
+  useEffect(() => {
+    getSingleBlog();
+  }, [blogId]);
 
   if (isFetching) return <Center>...laodidng</Center>;
   if (!blog) return <Center>no blog found</Center>;
@@ -64,11 +80,14 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({}) => {
               h="full"
               spacing="0px"
             >
-              <BlogCardLittle />
-              <BlogCardLittle />
-              <BlogCardLittle />
+              {randomBlogs.map((blog) => (
+                <BlogCardLittle blog={blog} key={blog.id} />
+              ))}
 
-              <HashLink to={`/services#${carSpaceService.id}`} className="anchor">
+              <HashLink
+                to={`/services#${carSpaceService.id}`}
+                className="anchor"
+              >
                 <Box pt="50px" cursor="pointer">
                   <HStack bg="white" p="4" spacing="4" borderRadius="8px">
                     <Image

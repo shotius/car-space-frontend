@@ -16,6 +16,11 @@ const getBlogById = async (id: string) => {
   return result.data as ApiSuccessResponse<IBlog>;
 };
 
+const getRandomBlogs = async (limit: number | void) => {
+  const result = await axios.get(`${baseUrl}/random`, { params: { limit } });
+  return result.data as ApiSuccessResponse<IBlog[]>;
+};
+
 const createBlog = async (blog: FormData) => {
   const result = await axios.post(baseUrl, blog);
   return result.data as ApiSuccessResponse<IBlog>;
@@ -31,13 +36,13 @@ const updateBlogById = async (blog: FormData) => {
   const result = await axios.put(`${baseUrl}/${id}`, blog);
   return result.data as ApiSuccessResponse<IBlog>;
 };
-
 const blogServices = {
   getAllBlogs,
   getBlogById,
   createBlog,
   deleteBlogById,
   updateBlogById,
+  getRandomBlogs,
 };
 
 export default blogServices;

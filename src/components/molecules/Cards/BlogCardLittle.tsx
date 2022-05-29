@@ -1,19 +1,26 @@
 import { HStack, Image, StackProps, VStack } from '@chakra-ui/react';
+import { useHistory } from 'react-router-dom';
+import { IBlog } from '../../../../../server/shared_with_front/types/types-shared';
 import { HeadingSecondary } from '../Headings/HeadingSecondary';
 import { TextRegular } from '../Texts/TextRegular';
 
-interface BlogCardLittleProps {}
+interface BlogCardLittleProps {
+  blog: IBlog;
+}
 
 export const BlogCardLittle: React.FC<BlogCardLittleProps & StackProps> = ({
+  blog,
   ...rest
 }) => {
+  const history = useHistory();
   return (
     <HStack
-      {...rest}
       cursor="pointer"
       borderRadius="8px"
       p="2"
       spacing="4"
+      onClick={() => history.push(`/blog/${blog.id || blog._id}`)}
+      {...rest}
     >
       <Image
         w="103px"
@@ -22,11 +29,9 @@ export const BlogCardLittle: React.FC<BlogCardLittleProps & StackProps> = ({
         borderRadius="8px"
       />
       <VStack w="full" align="flex-start">
-        <HeadingSecondary>Title</HeadingSecondary>
+        <HeadingSecondary>{blog.header}</HeadingSecondary>
         <TextRegular noOfLines={2} fontSize="14px" opacity="0.5">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem
-          ratione doloribus neque ipsum amet, blanditiis iure voluptatem cum
-          inventore mollitia{' '}
+          {blog.body}
         </TextRegular>
       </VStack>
     </HStack>

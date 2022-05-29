@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ContainerOuter } from 'src/components/atoms/Containers/ContainerOuter';
 import { BlogCard } from 'src/components/molecules/Cards/BlogCard';
 import { HeadTags } from 'src/components/molecules/MetaTags';
+import { ScrollToTop } from 'src/components/molecules/ScrollToTop';
 import blogServices from 'src/services/blog.services';
 import { IBlog } from '../../../../server/shared_with_front/types/types-shared';
 interface BlogPageProps {}
@@ -21,6 +22,7 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
 
   return (
     <>
+      <ScrollToTop />
       <ContainerOuter p="0" pt={[null, null, null, '48px']}>
         <Box
           p="0"
