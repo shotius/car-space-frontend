@@ -12,6 +12,7 @@ export const EditButton: React.FC<Props> = ({
 }) => {
   return (
     <IconButton
+      cursor={'pointer'}
       aria-label="edit"
       as={EditIcon}
       bg={bg}
