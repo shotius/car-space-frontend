@@ -29,7 +29,7 @@ export const useBlogEditDrawer = () => {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>Contact Form</DrawerHeader>
+        <DrawerHeader>Edit blog</DrawerHeader>
         <DrawerBody>
           <AddBlogForm
             initBlog={blog}

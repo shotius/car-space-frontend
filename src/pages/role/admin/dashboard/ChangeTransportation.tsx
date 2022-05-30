@@ -9,7 +9,7 @@ import {
   Th,
   Thead,
   Tr,
-  VStack
+  VStack,
 } from '@chakra-ui/react';
 import { debounce } from 'lodash';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -19,6 +19,7 @@ import { Card } from 'src/components/molecules/Cards/Card';
 import { InputGrey } from 'src/components/molecules/Inputs/InputGrey';
 import { Pagination } from 'src/components/molecules/Pagination/Pagination';
 import { TextRegular } from 'src/components/molecules/Texts/TextRegular';
+import { useTransportationDrawer } from 'src/components/organizms/Drawers/useTransportationDrawer';
 import transportaionService from 'src/services/transportation.service';
 import { searchStringIn } from 'src/utils/functions/searchStringIn';
 import { ITransportDataObject } from '../../../../../../server/shared_with_front/types/types-shared';
@@ -34,6 +35,10 @@ const TransportationList: React.FC<ListProps> = ({ transportationData }) => {
 
   const [perPage, setPerPage] = useState(10);
   const [searchWord, setSearchWord] = useState('');
+  const { toggleTransportationDrawer, TransportationEditDrawer } =
+    useTransportationDrawer();
+  const [selectedTransportation, setSelectedTransportation] =
+    useState<ITransportDataObject>();
 
   function changeHandler(e: React.SyntheticEvent<HTMLInputElement>) {
     setSearchWord((e.target as HTMLInputElement).value);
@@ -42,6 +47,16 @@ const TransportationList: React.FC<ListProps> = ({ transportationData }) => {
 
   function handlePerPageSelect(e: React.SyntheticEvent<HTMLSelectElement>) {
     setPerPage(+e.currentTarget.value);
+  }
+
+  function hanleOpenTransportationDrawer(trans: ITransportDataObject) {
+    toggleTransportationDrawer();
+    setSelectedTransportation(trans);
+  }
+
+  function handleDeleteTransportation(trans: ITransportDataObject) {
+    const confirmation = confirm('Do you really want to delete?');
+    console.log('confirmation: ', confirmation);
   }
 
   const dataToShow = useMemo(() => {
@@ -116,14 +131,22 @@ const TransportationList: React.FC<ListProps> = ({ transportationData }) => {
               <Td isNumeric>{trans.price} $</Td>
               <Td>
                 <HStack>
-                  <EditButton boxSize={6} />
-                  <CloseButton />
+                  <EditButton
+                    boxSize={6}
+                    onClick={() => hanleOpenTransportationDrawer(trans)}
+                  />
+                  <CloseButton
+                    onClick={() => handleDeleteTransportation(trans)}
+                  />
                 </HStack>
               </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
+      <TransportationEditDrawer
+        transportationToChage={selectedTransportation}
+      />
     </Box>
   );
 };
