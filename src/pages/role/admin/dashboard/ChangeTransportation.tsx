@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Center,
   CloseButton,
   HStack,
@@ -59,6 +60,11 @@ const TransportationList: React.FC<ListProps> = ({ transportationData }) => {
     console.log('confirmation: ', confirmation);
   }
 
+  function handleOpenAddTransportationDrawer() {
+    toggleTransportationDrawer()
+    setSelectedTransportation(undefined)
+  }
+
   const dataToShow = useMemo(() => {
     if (searchWord && transportationData.length) {
       const filteredResult = transportationData.filter(
@@ -82,18 +88,26 @@ const TransportationList: React.FC<ListProps> = ({ transportationData }) => {
     () => debounce(changeHandler, 300),
     []
   );
+
   return (
     <Box minW="1000px">
       <VStack p="4" align="start">
-        <HStack>
-          <select onChange={handlePerPageSelect}>
-            {[10, 20, 30, 40, 50].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
-                Show: {pageSize}
-              </option>
-            ))}
-          </select>
-          <TextRegular>Page: {page}</TextRegular>
+        <HStack justify={'space-between'} w="full">
+          <HStack>
+            <select onChange={handlePerPageSelect}>
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Show: {pageSize}
+                </option>
+              ))}
+            </select>
+
+            <TextRegular>Page: {page}</TextRegular>
+          </HStack>
+          <Button onClick={handleOpenAddTransportationDrawer}>
+            {' '}
+            + Add new Transportation
+          </Button>
         </HStack>
         <HStack justify={'space-between'} w="full">
           <InputGrey

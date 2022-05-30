@@ -1,4 +1,5 @@
 import { Form, Formik } from 'formik';
+import { useMemo } from 'react';
 import { ButtonRegular } from 'src/components/molecules/Buttons/ButtonRegular';
 import { FormikInput } from 'src/components/molecules/FormikInput/FormikInput';
 import {
@@ -8,12 +9,11 @@ import {
 
 interface ChangeTransportationFormProps {
   initTransportation?: ITransportDataObject;
-  operation?: 'modifing' | 'adding';
 }
 
 export const ChangeTransportationForm: React.FC<
   ChangeTransportationFormProps
-> = ({ initTransportation, operation = 'adding' }) => {
+> = ({ initTransportation }) => {
   const initialValues: IBaseTransportationObject = {
     auction: '',
     city: '',
@@ -22,9 +22,15 @@ export const ChangeTransportationForm: React.FC<
     price: 0,
   };
 
+  const operation: 'modifing' | 'adding' = useMemo<'modifing' | 'adding'>(
+    () => (initTransportation ? 'modifing' : 'adding'),
+    [initTransportation]
+  );
+
   const onSubmit = (values: IBaseTransportationObject, {}) => {
     console.log(values);
   };
+
   return (
     <Formik
       initialValues={initTransportation || initialValues}
@@ -37,7 +43,9 @@ export const ChangeTransportationForm: React.FC<
           <FormikInput name="state" />
           <FormikInput name="zip" />
           <FormikInput name="price" type="number" />
-          <ButtonRegular type="submit">Change Transportation</ButtonRegular>
+          <ButtonRegular mt="4" type="submit">
+            {operation === 'adding' ? 'Add new ' : 'Update'} Transportation
+          </ButtonRegular>
         </Form>
       )}
     </Formik>
