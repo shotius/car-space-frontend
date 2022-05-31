@@ -28,11 +28,14 @@ import { ITransportDataObject } from '../../../../../../server/shared_with_front
 interface ChangeTransportationProps {}
 
 interface ListProps {
-  transportationData: ITransportDataObject[];
+  rawTransportationData: ITransportDataObject[];
 }
 
-const TransportationList: React.FC<ListProps> = ({ transportationData }) => {
+const TransportationList: React.FC<ListProps> = ({ rawTransportationData }) => {
   const [page, setPage] = useState(1);
+  const [transportationData, setTransportationData] = useState(
+    rawTransportationData
+  );
 
   const [perPage, setPerPage] = useState(10);
   const [searchWord, setSearchWord] = useState('');
@@ -61,8 +64,22 @@ const TransportationList: React.FC<ListProps> = ({ transportationData }) => {
   }
 
   function handleOpenAddTransportationDrawer() {
-    toggleTransportationDrawer()
-    setSelectedTransportation(undefined)
+    toggleTransportationDrawer();
+    setSelectedTransportation(undefined);
+  }
+
+  function handleAddTransportationLocal(transportation: ITransportDataObject) {
+    setTransportationData(transportationData.concat(transportation));
+  }
+
+  function handleUpdateTransportationByIdLocal(
+    transportation: ITransportDataObject
+  ) {
+    setTransportationData(
+      transportationData.map((trans) =>
+        trans.id === transportation.id ? transportation : trans
+      )
+    );
   }
 
   const dataToShow = useMemo(() => {
@@ -187,7 +204,7 @@ const ChangeTransportation: React.FC<ChangeTransportationProps> = ({}) => {
             <p>...fetching</p>
           ) : (
             <Box overflow={'auto'} w="full">
-              <TransportationList transportationData={transportationData} />
+              <TransportationList rawTransportationData={transportationData} />
             </Box>
           )}
         </Card>

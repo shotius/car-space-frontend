@@ -28,6 +28,9 @@ export const useTransportationDrawer = () => {
           <DrawerBody>
             <ChangeTransportationForm
               initTransportation={transportationToChage}
+              successCb={() => {
+                onToggle()
+              }}
             />
           </DrawerBody>
         </DrawerContent>
