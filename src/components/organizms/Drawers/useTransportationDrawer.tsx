@@ -13,12 +13,13 @@ import {
 import { ChangeTransportationForm } from '../Forms/ChangeTransportationForm';
 
 interface ComponentProps {
-  transportationToChage?: ITransportDataObject;
+  initTransportation?: ITransportDataObject;
+  successCb?: (trans: ITransportDataObject) => void; 
 }
 
 export const useTransportationDrawer = () => {
   const { isOpen, onToggle } = useDisclosure();
-  const Component: React.FC<ComponentProps> = ({ transportationToChage }) => {
+  const Component: React.FC<ComponentProps> = ({ initTransportation: transportationToChage, successCb = () => {} }) => {
     return (
       <Drawer isOpen={isOpen} onClose={onToggle}>
         <DrawerOverlay />
@@ -28,7 +29,8 @@ export const useTransportationDrawer = () => {
           <DrawerBody>
             <ChangeTransportationForm
               initTransportation={transportationToChage}
-              successCb={() => {
+              successCb={(trans: ITransportDataObject) => {
+                successCb(trans)
                 onToggle()
               }}
             />

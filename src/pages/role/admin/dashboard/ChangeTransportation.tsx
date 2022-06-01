@@ -10,6 +10,7 @@ import {
   Th,
   Thead,
   Tr,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { debounce } from 'lodash';
@@ -43,6 +44,7 @@ const TransportationList: React.FC<ListProps> = ({ rawTransportationData }) => {
     useTransportationDrawer();
   const [selectedTransportation, setSelectedTransportation] =
     useState<ITransportDataObject>();
+  const toast = useToast();
 
   function changeHandler(e: React.SyntheticEvent<HTMLInputElement>) {
     setSearchWord((e.target as HTMLInputElement).value);
@@ -60,7 +62,24 @@ const TransportationList: React.FC<ListProps> = ({ rawTransportationData }) => {
 
   function handleDeleteTransportation(trans: ITransportDataObject) {
     const confirmation = confirm('Do you really want to delete?');
-    console.log('confirmation: ', confirmation);
+    confirmation &&
+      transportaionService
+        .deleteById(trans.id)
+        .then(() => {
+          handleRemoveTranpsportationByIdLocal(trans.id);
+          toast({
+            title: 'Transportation deleted successfully',
+            position: 'top',
+            status: 'success',
+          });
+        })
+        .catch(() =>
+          toast({
+            title: 'Could not delete Transportation',
+            position: 'top',
+            status: 'error',
+          })
+        );
   }
 
   function handleOpenAddTransportationDrawer() {
@@ -80,6 +99,18 @@ const TransportationList: React.FC<ListProps> = ({ rawTransportationData }) => {
         trans.id === transportation.id ? transportation : trans
       )
     );
+  }
+
+  function handleRemoveTranpsportationByIdLocal(id: string) {
+    setTransportationData(
+      transportationData.filter((trans) => trans.id !== id)
+    );
+  }
+
+  function onSuccessCbAddUpdate(trans: ITransportDataObject) {
+    selectedTransportation
+      ? handleUpdateTransportationByIdLocal(trans)
+      : handleAddTransportationLocal(trans);
   }
 
   const dataToShow = useMemo(() => {
@@ -176,7 +207,8 @@ const TransportationList: React.FC<ListProps> = ({ rawTransportationData }) => {
         </Tbody>
       </Table>
       <TransportationEditDrawer
-        transportationToChage={selectedTransportation}
+        initTransportation={selectedTransportation}
+        successCb={onSuccessCbAddUpdate}
       />
     </Box>
   );

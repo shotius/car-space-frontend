@@ -11,7 +11,7 @@ import {
 
 interface ChangeTransportationFormProps {
   initTransportation?: ITransportDataObject;
-  successCb?: () => void;
+  successCb?: (trans: ITransportDataObject) => void;
   errorCb?: () => void;
 }
 
@@ -36,8 +36,8 @@ export const ChangeTransportationForm: React.FC<
     return () =>
       transportationService
         .addOne(transportation)
-        .then(() => {
-          successCb();
+        .then(({results}) => {
+          successCb(results);
           toast({
             title: 'Transportation added',
             position: 'top',
@@ -59,7 +59,7 @@ export const ChangeTransportationForm: React.FC<
       transportationService
         .updateById(transportation)
         .then(() => {
-          successCb();
+          successCb(transportation);
           toast({
             title: 'Transportation updated',
             position: 'top',
